@@ -1,0 +1,29 @@
+uuid: 96b1cbf0-84d6-45da-ad8b-d3c6295b2904
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.unit.unit_name
+    - field.storage.unit.field_shift
+    - taxonomy.vocabulary.shift
+id: unit.unit_name.field_shift
+field_name: field_shift
+entity_type: unit
+bundle: unit_name
+label: Shift
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      shift: shift
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

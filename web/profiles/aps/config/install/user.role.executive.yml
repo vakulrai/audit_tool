@@ -6,4 +6,7 @@ id: executive
 label: Executive
 weight: 2
 is_admin: null
-permissions: {  }
+permissions:
+  - 'access devel information'
+  - 'access user profiles'
+  - 'administer users'

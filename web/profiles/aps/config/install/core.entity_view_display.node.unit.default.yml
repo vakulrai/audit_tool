@@ -1,0 +1,117 @@
+uuid: f6ced362-bbcc-408c-8545-490856bc8ae8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.unit.body
+    - field.field.node.unit.field_address
+    - field.field.node.unit.field_remote_address
+    - field.field.node.unit.field_remote_location_name
+    - field.field.node.unit.field_shift
+    - field.field.node.unit.field_time_g
+    - field.field.node.unit.field_time_s1
+    - field.field.node.unit.field_time_s3
+    - field.field.node.unit.field_time_s4
+    - field.field.node.unit.field_unit_name
+    - node.type.unit
+  module:
+    - address
+    - datetime_range
+    - text
+    - user
+id: node.unit.default
+targetEntityType: node
+bundle: unit
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_address:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_remote_address:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_remote_location_name:
+    weight: 104
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_shift:
+    weight: 105
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_time_g:
+    weight: 107
+    label: above
+    settings:
+      separator: '-'
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_time_s1:
+    weight: 108
+    label: above
+    settings:
+      separator: '-'
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_time_s3:
+    weight: 109
+    label: above
+    settings:
+      separator: '-'
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_time_s4:
+    weight: 110
+    label: above
+    settings:
+      separator: '-'
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_unit_name:
+    weight: 106
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

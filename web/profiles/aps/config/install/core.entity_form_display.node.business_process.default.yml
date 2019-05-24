@@ -1,0 +1,78 @@
+uuid: c9691353-f04c-4300-884b-b33f3f1956aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.business_process.body
+    - field.field.node.business_process.field_business_head
+    - field.field.node.business_process.field_business_process_effective
+    - field.field.node.business_process.field_business_process_efficienc
+    - field.field.node.business_process.field_name
+    - field.field.node.business_process.field_refere
+    - node.type.business_process
+  module:
+    - paragraphs
+id: node.business_process.default
+targetEntityType: node
+bundle: business_process
+mode: default
+content:
+  field_business_head:
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_business_process_effective:
+    type: entity_reference_paragraphs
+    weight: 2
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_business_process_efficienc:
+    type: entity_reference_paragraphs
+    weight: 3
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_refere:
+    type: entity_reference_autocomplete
+    weight: 4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  field_name: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

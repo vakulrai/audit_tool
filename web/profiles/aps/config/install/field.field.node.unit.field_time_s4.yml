@@ -1,0 +1,21 @@
+uuid: 1749111c-5000-49de-aa89-546992c4c9e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_time_s4
+    - node.type.unit
+  module:
+    - datetime_range
+id: node.unit.field_time_s4
+field_name: field_time_s4
+entity_type: node
+bundle: unit
+label: 'Time S4'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

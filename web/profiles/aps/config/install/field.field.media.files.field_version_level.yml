@@ -1,0 +1,23 @@
+uuid: 116b9ec6-0188-439b-9b28-4e79b5878a82
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_version_level
+    - media.type.files
+id: media.files.field_version_level
+field_name: field_version_level
+entity_type: media
+bundle: files
+label: 'Version Level'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

@@ -1,0 +1,8 @@
+uuid: 7def9d3d-5427-4711-8033-00714a49d869
+langcode: en
+status: true
+dependencies: {  }
+name: Shift
+vid: shift
+description: 'Vocabulary for  unit shift'
+weight: 0

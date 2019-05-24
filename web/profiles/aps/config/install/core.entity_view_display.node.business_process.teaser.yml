@@ -1,0 +1,30 @@
+uuid: d85a4a0b-b1c8-409d-837f-aa11c0f800f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.business_process.body
+    - node.type.business_process
+  module:
+    - text
+    - user
+id: node.business_process.teaser
+targetEntityType: node
+bundle: business_process
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

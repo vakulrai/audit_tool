@@ -1,0 +1,21 @@
+uuid: 8f0f4041-2f92-414a-97c3-573e2240081c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_time_s3
+    - node.type.unit
+  module:
+    - datetime_range
+id: node.unit.field_time_s3
+field_name: field_time_s3
+entity_type: node
+bundle: unit
+label: 'Time S3'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

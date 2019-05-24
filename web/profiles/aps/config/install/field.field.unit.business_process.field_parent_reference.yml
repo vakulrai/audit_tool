@@ -1,0 +1,28 @@
+uuid: 40527201-bf5e-43d5-b15e-6b9f02074561
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.business_process_.business
+    - eck.eck_type.unit.business_process
+    - field.storage.unit.field_parent_reference
+id: unit.business_process.field_parent_reference
+field_name: field_parent_reference
+entity_type: unit
+bundle: business_process
+label: 'Parent Reference'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:business_process_'
+  handler_settings:
+    target_bundles:
+      business: business
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

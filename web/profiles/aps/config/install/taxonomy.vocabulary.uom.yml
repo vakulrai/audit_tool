@@ -1,0 +1,8 @@
+uuid: 3e8b7c32-380a-434a-9d13-536adaba8482
+langcode: en
+status: true
+dependencies: {  }
+name: UOM
+vid: uom
+description: ''
+weight: 0

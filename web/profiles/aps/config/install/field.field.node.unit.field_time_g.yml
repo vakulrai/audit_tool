@@ -1,0 +1,21 @@
+uuid: 20e39836-c9c8-4dc8-9bbd-c65f69ce2759
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_time_g
+    - node.type.unit
+  module:
+    - datetime_range
+id: node.unit.field_time_g
+field_name: field_time_g
+entity_type: node
+bundle: unit
+label: 'Time G'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

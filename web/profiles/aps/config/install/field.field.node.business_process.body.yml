@@ -1,0 +1,22 @@
+uuid: 5497831b-94e8-48cc-a417-30b2d1bbc9a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.business_process
+  module:
+    - text
+id: node.business_process.body
+field_name: body
+entity_type: node
+bundle: business_process
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

@@ -9,7 +9,7 @@ dependencies:
 id: mainpagecontent
 theme: seven
 region: content
-weight: 1
+weight: 0
 provider: null
 plugin: system_main_block
 settings:
@@ -17,4 +17,9 @@ settings:
   label: 'Main page content'
   provider: system
   label_display: '0'
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: true
+    context_mapping: {  }

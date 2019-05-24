@@ -1,0 +1,34 @@
+uuid: e11dec29-ef24-4d6f-994a-ed30cd4457de
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_business_process_efficienc
+    - node.type.business_process
+    - paragraphs.paragraphs_type.business_process_effieciency
+  module:
+    - entity_reference_revisions
+id: node.business_process.field_business_process_efficienc
+field_name: field_business_process_efficienc
+entity_type: node
+bundle: business_process
+label: 'Business process efficiency'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      business_process_effieciency: business_process_effieciency
+    target_bundles_drag_drop:
+      business_process_effectiveness:
+        weight: 3
+        enabled: false
+      business_process_effieciency:
+        enabled: true
+        weight: 4
+field_type: entity_reference_revisions

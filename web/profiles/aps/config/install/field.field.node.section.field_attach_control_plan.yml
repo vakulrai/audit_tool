@@ -1,0 +1,28 @@
+uuid: 66c7d2ca-3128-430c-9439-2e47b8507104
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_attach_control_plan
+    - media.type.files
+    - node.type.section
+id: node.section.field_attach_control_plan
+field_name: field_attach_control_plan
+entity_type: node
+bundle: section
+label: 'Attach Control Plan'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      files: files
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

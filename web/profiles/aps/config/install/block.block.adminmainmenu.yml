@@ -6,19 +6,21 @@ dependencies:
     - system.menu.admin-main-menu
   module:
     - superfish
+    - system
+    - user
   theme:
     - seven
 id: adminmainmenu
 theme: seven
-region: content
-weight: 0
+region: pre_content
+weight: -7
 provider: null
 plugin: 'superfish:admin-main-menu'
 settings:
   id: 'superfish:admin-main-menu'
   label: 'Admin main menu'
   provider: superfish
-  label_display: visible
+  label_display: '0'
   level: '1'
   depth: '0'
   expand_all_items: false
@@ -68,4 +70,18 @@ settings:
   custom_list_class: ''
   custom_item_class: ''
   custom_link_class: ''
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: /home
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      executive: executive
+      auditor: auditor
+      auditee: auditee
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

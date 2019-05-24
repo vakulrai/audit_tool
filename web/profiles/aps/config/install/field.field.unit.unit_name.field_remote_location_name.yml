@@ -1,0 +1,19 @@
+uuid: 6bb5f8dc-a360-4f51-b2ab-703a2a76160e
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.unit.unit_name
+    - field.storage.unit.field_remote_location_name
+id: unit.unit_name.field_remote_location_name
+field_name: field_remote_location_name
+entity_type: unit
+bundle: unit_name
+label: 'Remote Location Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

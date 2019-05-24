@@ -2,12 +2,14 @@ uuid: d7a082d7-7eb9-4c6c-b516-a0a4975110da
 langcode: en
 status: true
 dependencies:
+  module:
+    - system
   theme:
     - seven
 id: pagetitle
 theme: seven
 region: content
-weight: 0
+weight: -6
 provider: null
 plugin: page_title_block
 settings:
@@ -15,4 +17,9 @@ settings:
   label: 'Page title'
   provider: core
   label_display: '0'
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: /home
+    negate: true
+    context_mapping: {  }

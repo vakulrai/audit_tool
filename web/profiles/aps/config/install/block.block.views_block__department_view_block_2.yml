@@ -1,0 +1,40 @@
+uuid: 7f26e4ff-f78a-435d-b5ef-0b966ffcd428
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.department_view
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - seven
+id: views_block__department_view_block_2
+theme: seven
+region: content
+weight: 1
+provider: null
+plugin: 'views_block:department_view-block_2'
+settings:
+  id: 'views_block:department_view-block_2'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: "/node/add/department\r\n/node/add/department/*"
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      executive: executive
+      auditor: auditor
+      auditee: auditee
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

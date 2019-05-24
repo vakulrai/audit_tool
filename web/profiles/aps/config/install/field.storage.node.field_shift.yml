@@ -1,0 +1,20 @@
+uuid: 1e288a3e-df92-40f5-bc81-e60a7fe2d780
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_shift
+field_name: field_shift
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

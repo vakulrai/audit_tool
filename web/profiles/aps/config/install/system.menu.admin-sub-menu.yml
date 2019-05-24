@@ -1,0 +1,8 @@
+uuid: a5b68082-2514-4fc3-b830-18cfff4ea6fe
+langcode: en
+status: true
+dependencies: {  }
+id: admin-sub-menu
+label: 'Admin Sub Menu'
+description: 'Sub menu for admin panel'
+locked: false

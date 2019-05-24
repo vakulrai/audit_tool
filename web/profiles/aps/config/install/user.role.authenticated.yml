@@ -11,3 +11,4 @@ is_admin: false
 permissions:
   - 'access content'
   - 'create transitions workflow_transition'
+  - 'view media'
