@@ -1,0 +1,8 @@
+uuid: a1edcbec-d4e9-4695-bbf2-c7a815cfd6b0
+langcode: en
+status: true
+dependencies: {  }
+name: 'Functions Qualified'
+vid: functions_qualified
+description: ''
+weight: 0

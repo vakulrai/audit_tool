@@ -1,0 +1,19 @@
+uuid: b987497e-a71d-473c-9cfe-9f57be4b2464
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.procedures
+id: paragraph.procedures.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: procedures
+label: Title
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,37 @@
+uuid: 981398ad-50e5-4b33-8f22-76bdacc029f5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_create_procedure
+    - node.type.procedures
+    - paragraphs.paragraphs_type.procedures
+  module:
+    - entity_reference_revisions
+id: node.procedures.field_create_procedure
+field_name: field_create_procedure
+entity_type: node
+bundle: procedures
+label: 'Create Procedure'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      procedures: procedures
+    target_bundles_drag_drop:
+      business_process_effectiveness:
+        weight: 4
+        enabled: false
+      business_process_effieciency:
+        weight: 5
+        enabled: false
+      procedures:
+        enabled: true
+        weight: 6
+field_type: entity_reference_revisions

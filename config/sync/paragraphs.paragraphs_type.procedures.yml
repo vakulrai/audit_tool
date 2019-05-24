@@ -1,0 +1,9 @@
+uuid: 2495ea86-635d-404d-8d36-0fa3be6e0d51
+langcode: en
+status: true
+dependencies: {  }
+id: procedures
+label: Procedures
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

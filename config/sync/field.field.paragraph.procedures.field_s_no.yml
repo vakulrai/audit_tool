@@ -1,0 +1,23 @@
+uuid: 4c4c28a8-bbb2-4771-bbae-f876f6bb870c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_s_no
+    - paragraphs.paragraphs_type.procedures
+id: paragraph.procedures.field_s_no
+field_name: field_s_no
+entity_type: paragraph
+bundle: procedures
+label: 'S no.'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -1,0 +1,30 @@
+uuid: b8dad6a4-0a1d-4dee-ac0d-686f074fbaab
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.procedures.body
+    - node.type.procedures
+  module:
+    - text
+    - user
+id: node.procedures.teaser
+targetEntityType: node
+bundle: procedures
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

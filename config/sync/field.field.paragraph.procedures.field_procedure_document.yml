@@ -1,0 +1,28 @@
+uuid: 2e1722c7-9d3a-4bbb-a504-97e2ac87ccdd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_procedure_document
+    - media.type.files
+    - paragraphs.paragraphs_type.procedures
+id: paragraph.procedures.field_procedure_document
+field_name: field_procedure_document
+entity_type: paragraph
+bundle: procedures
+label: 'Procedure Document'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      files: files
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

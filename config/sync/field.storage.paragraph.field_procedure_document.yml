@@ -1,0 +1,20 @@
+uuid: ad3e0de6-ed10-4ee1-9ba1-bbf14aae6e00
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - paragraphs
+id: paragraph.field_procedure_document
+field_name: field_procedure_document
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

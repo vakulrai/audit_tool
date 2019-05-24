@@ -1,0 +1,21 @@
+uuid: 81db37a5-5768-4090-8b52-4c5f32ff645d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_revision_date
+    - paragraphs.paragraphs_type.procedures
+  module:
+    - datetime
+id: paragraph.procedures.field_revision_date
+field_name: field_revision_date
+entity_type: paragraph
+bundle: procedures
+label: 'Revision Date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

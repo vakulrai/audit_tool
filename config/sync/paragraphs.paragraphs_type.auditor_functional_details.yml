@@ -1,0 +1,9 @@
+uuid: 166c1e9f-1367-4822-a1d2-7851845cf10b
+langcode: en
+status: true
+dependencies: {  }
+id: auditor_functional_details
+label: 'Auditor Functional Details'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

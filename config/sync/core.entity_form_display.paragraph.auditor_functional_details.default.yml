@@ -1,0 +1,29 @@
+uuid: 0da7df7a-9f73-4c5e-83b4-88195718bb80
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.auditor_functional_details.field_functions_qualified
+    - field.field.paragraph.auditor_functional_details.field_score
+    - paragraphs.paragraphs_type.auditor_functional_details
+id: paragraph.auditor_functional_details.default
+targetEntityType: paragraph
+bundle: auditor_functional_details
+mode: default
+content:
+  field_functions_qualified:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_score:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+hidden:
+  created: true
+  status: true

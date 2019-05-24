@@ -1,0 +1,18 @@
+uuid: 93805f63-3870-4200-8a70-e05c3cde0ed0
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: Procedures
+type: procedures
+description: 'Add Procedures here'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

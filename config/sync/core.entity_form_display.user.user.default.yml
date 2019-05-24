@@ -5,9 +5,11 @@ dependencies:
   config:
     - field.field.user.user.field_department
     - field.field.user.user.field_employee_id
+    - field.field.user.user.field_functions
     - field.field.user.user.field_phone
   module:
     - mobile_number
+    - paragraphs
     - user
 id: user.user.default
 targetEntityType: user
@@ -32,6 +34,18 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_functions:
+    type: entity_reference_paragraphs
+    weight: 4
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: auditor_functional_details
+    third_party_settings: {  }
     region: content
   field_phone:
     weight: 3

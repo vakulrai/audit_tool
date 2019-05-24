@@ -1,0 +1,28 @@
+uuid: 338491ff-64d1-418b-8c39-61b5c25ee23e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_section_type
+    - node.type.procedures
+    - node.type.section
+id: node.procedures.field_section_type
+field_name: field_section_type
+entity_type: node
+bundle: procedures
+label: Section
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      section: section
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
