@@ -1,0 +1,47 @@
+uuid: 1384055a-de61-4997-8962-a59bfaa0de2f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.assembly.body
+    - field.field.node.assembly.field_mp_assembly_name
+    - field.field.node.assembly.field_refere
+    - field.field.node.assembly.field_shift
+    - node.type.assembly
+id: node.assembly.default
+targetEntityType: node
+bundle: assembly
+mode: default
+content:
+  field_refere:
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_shift:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  field_mp_assembly_name: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

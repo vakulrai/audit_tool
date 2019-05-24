@@ -1,0 +1,38 @@
+uuid: 542fc4ec-531b-4919-9787-cd7b475becaf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.business_process_effectiveness.field_effectiveness
+    - field.field.paragraph.business_process_effectiveness.field_target
+    - field.field.paragraph.business_process_effectiveness.field_uom
+    - paragraphs.paragraphs_type.business_process_effectiveness
+id: paragraph.business_process_effectiveness.default
+targetEntityType: paragraph
+bundle: business_process_effectiveness
+mode: default
+content:
+  field_effectiveness:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_target:
+    weight: 2
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_uom:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  status: true

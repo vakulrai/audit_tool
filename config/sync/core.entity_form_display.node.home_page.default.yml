@@ -1,0 +1,21 @@
+uuid: 0fafc294-d588-4cc6-a0b9-ef6c8a700677
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.home_page.body
+    - node.type.home_page
+id: node.home_page.default
+targetEntityType: node
+bundle: home_page
+mode: default
+content: {  }
+hidden:
+  body: true
+  created: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  title: true
+  uid: true

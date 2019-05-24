@@ -1,0 +1,22 @@
+uuid: 8cc3833b-316e-45b9-8d86-0d74f57f74db
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.assembly
+id: node.assembly.status
+field_name: status
+entity_type: node
+bundle: assembly
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

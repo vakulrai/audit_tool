@@ -4,6 +4,6 @@ status: true
 dependencies:
   config:
     - eck.eck_entity_type.unit
-name: 'Unit Name'
+name: Unit
 type: unit_name
-description: ''
+description: 'Add a unit'

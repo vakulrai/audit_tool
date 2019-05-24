@@ -1,0 +1,21 @@
+uuid: 2cc46ba2-d9a8-494c-9103-c6d5102361fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_time_s1
+    - node.type.unit
+  module:
+    - datetime_range
+id: node.unit.field_time_s1
+field_name: field_time_s1
+entity_type: node
+bundle: unit
+label: 'Time S1'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

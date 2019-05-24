@@ -1,0 +1,8 @@
+uuid: 502acca4-eeeb-44b5-99ba-6873b7cb9ba9
+langcode: en
+status: true
+dependencies: {  }
+name: 'Assembly Type'
+vid: assembly_type
+description: ''
+weight: 0

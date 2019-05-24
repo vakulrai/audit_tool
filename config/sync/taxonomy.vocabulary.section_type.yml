@@ -1,0 +1,8 @@
+uuid: a180c07f-17ab-47fe-91d1-3396770a3f49
+langcode: en
+status: true
+dependencies: {  }
+name: 'Section Type'
+vid: section_type
+description: ''
+weight: 0

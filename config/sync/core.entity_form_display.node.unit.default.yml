@@ -1,0 +1,161 @@
+uuid: fef6994c-d803-4de0-a42a-eaa4279bb884
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.unit.body
+    - field.field.node.unit.field_address
+    - field.field.node.unit.field_remote_address
+    - field.field.node.unit.field_remote_location_name
+    - field.field.node.unit.field_shift
+    - field.field.node.unit.field_time_g
+    - field.field.node.unit.field_time_s1
+    - field.field.node.unit.field_time_s3
+    - field.field.node.unit.field_time_s4
+    - field.field.node.unit.field_unit_name
+    - node.type.unit
+  module:
+    - address
+    - conditional_fields
+    - time_range
+id: node.unit.default
+targetEntityType: node
+bundle: unit
+mode: default
+content:
+  field_address:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_remote_address:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_remote_location_name:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_shift:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_time_g:
+    weight: 26
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        b8d010a1-c50a-4a64-a306-5bc7c6433a88:
+          dependee: field_shift
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 4
+            value: ''
+            values: '4'
+            value_form:
+              -
+                target_id: '4'
+            effect: show
+            effect_options: {  }
+            selector: '#edit-field-shift-4'
+            field_shift:
+              -
+                target_id: '4'
+          entity_type: node
+          bundle: unit
+    type: time_range
+    region: content
+  field_time_s1:
+    weight: 27
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        c14e5de1-f4af-4785-85d4-78ba5e90e044:
+          dependee: field_shift
+          settings:
+            state: visible
+            condition: checked
+            grouping: XOR
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: null
+            effect: show
+            effect_options: {  }
+            selector: '#edit-field-shift-1'
+          entity_type: node
+          bundle: unit
+    type: time_range
+    region: content
+  field_time_s3:
+    weight: 28
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        76be809d-77a7-4296-94d9-53511ef38aea:
+          dependee: field_shift
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: null
+            effect: show
+            effect_options: {  }
+            selector: '#edit-field-shift-2'
+          entity_type: node
+          bundle: unit
+    type: time_range
+    region: content
+  field_time_s4:
+    weight: 29
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        838c1c83-7262-4890-a9e6-0a7de4eec7dc:
+          dependee: field_shift
+          settings:
+            state: visible
+            condition: checked
+            grouping: XOR
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: null
+            effect: show
+            effect_options: {  }
+            selector: '#edit-field-shift-3'
+          entity_type: node
+          bundle: unit
+    type: time_range
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  field_unit_name: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

@@ -1,0 +1,24 @@
+uuid: c22572b2-35c6-4502-9906-9eb80f2b67fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_version_date
+    - media.type.files
+  module:
+    - datetime
+id: media.files.field_version_date
+field_name: field_version_date
+entity_type: media
+bundle: files
+label: 'Version Date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

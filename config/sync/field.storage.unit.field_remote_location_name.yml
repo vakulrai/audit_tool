@@ -1,0 +1,21 @@
+uuid: e593cf3d-026b-4c91-a3ec-40ef0a7a142e
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: unit.field_remote_location_name
+field_name: field_remote_location_name
+entity_type: unit
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,23 @@
+uuid: f4e2bc76-4088-45bc-9be0-810e69f23275
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_target
+    - paragraphs.paragraphs_type.business_process_effieciency
+id: paragraph.business_process_effieciency.field_target
+field_name: field_target
+entity_type: paragraph
+bundle: business_process_effieciency
+label: TARGET
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

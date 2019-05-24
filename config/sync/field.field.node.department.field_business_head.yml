@@ -1,0 +1,29 @@
+uuid: 8763b257-3804-425d-b491-c665fd0643af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_business_head
+    - node.type.department
+    - taxonomy.vocabulary.business_head
+id: node.department.field_business_head
+field_name: field_business_head
+entity_type: node
+bundle: department
+label: 'Business Head'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      business_head: business_head
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,20 @@
+uuid: a5b90647-a741-4b31-acbd-810bc5a435e7
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime_range
+    - node
+id: node.field_time_s4
+field_name: field_time_s4
+entity_type: node
+type: daterange
+settings:
+  datetime_type: datetime
+module: datetime_range
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

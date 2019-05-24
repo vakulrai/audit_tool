@@ -1,0 +1,20 @@
+uuid: da4a7f8b-f200-4ecc-bad8-c047a70600e0
+langcode: en
+status: true
+dependencies:
+  module:
+    - mobile_number
+    - user
+id: user.field_phone
+field_name: field_phone
+entity_type: user
+type: mobile_number
+settings:
+  unique: 1
+module: mobile_number
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

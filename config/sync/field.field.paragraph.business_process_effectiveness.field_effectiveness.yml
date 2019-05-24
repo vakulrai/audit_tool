@@ -1,0 +1,19 @@
+uuid: 5e3faa5a-4c1a-473e-884d-42b2f6fe7827
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_effectiveness
+    - paragraphs.paragraphs_type.business_process_effectiveness
+id: paragraph.business_process_effectiveness.field_effectiveness
+field_name: field_effectiveness
+entity_type: paragraph
+bundle: business_process_effectiveness
+label: Effectiveness
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

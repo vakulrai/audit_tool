@@ -1,0 +1,28 @@
+uuid: 5d1dfe21-d166-48c2-832c-86eb30baf95e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_refere
+    - node.type.assembly
+    - node.type.section
+id: node.assembly.field_refere
+field_name: field_refere
+entity_type: node
+bundle: assembly
+label: 'Reference id'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      section: section
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

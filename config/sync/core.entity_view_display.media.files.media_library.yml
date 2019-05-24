@@ -1,0 +1,30 @@
+uuid: 9365620b-09fe-482e-bc1f-aa70cc13dadb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.files.field_media_file
+    - image.style.medium
+    - media.type.files
+  module:
+    - image
+id: media.files.media_library
+targetEntityType: media
+bundle: files
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_style: medium
+      image_link: ''
+    weight: 0
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_media_file: true
+  name: true
+  uid: true

@@ -1,0 +1,72 @@
+uuid: 2ebaa95e-65b3-4cd0-a178-6aba78353804
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.unit.business_process
+    - field.field.unit.business_process.field_business_efficiency
+    - field.field.unit.business_process.field_business_head
+    - field.field.unit.business_process.field_business_process_effective
+    - field.field.unit.business_process.field_name
+    - field.field.unit.business_process.field_parent_reference
+  module:
+    - paragraphs
+id: unit.business_process.default
+targetEntityType: unit
+bundle: business_process
+mode: default
+content:
+  field_business_efficiency:
+    type: entity_reference_paragraphs
+    weight: 2
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_business_head:
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_business_process_effective:
+    type: entity_reference_paragraphs
+    weight: 3
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_name:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_parent_reference:
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden:
+  created: true
+  title: true
+  uid: true

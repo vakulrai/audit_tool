@@ -1,0 +1,48 @@
+uuid: f57b14c1-b6b7-4b3a-a862-58f9716fb013
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_department
+    - field.field.user.user.field_employee_id
+    - field.field.user.user.field_phone
+  module:
+    - mobile_number
+    - user
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  account:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_department:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_employee_id:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_phone:
+    weight: 3
+    settings:
+      default_country: US
+      countries: {  }
+      placeholder: null
+    third_party_settings: {  }
+    type: mobile_number_default
+    region: content
+hidden:
+  contact: true
+  language: true
+  timezone: true

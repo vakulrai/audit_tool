@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: unit
-label: Unit
+label: Registration
 created: true
 changed: true
 uid: true

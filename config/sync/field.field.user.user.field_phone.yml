@@ -1,0 +1,26 @@
+uuid: e5d036ee-5590-4acd-821b-f9db9c7aa02f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_phone
+  module:
+    - mobile_number
+    - user
+id: user.user.field_phone
+field_name: field_phone
+entity_type: user
+bundle: user
+label: Phone
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  countries:
+    IN: IN
+    US: US
+  verify: none
+  message: "Your verification code from !site_name:\n!code"
+field_type: mobile_number

@@ -1,0 +1,8 @@
+uuid: 7be5b409-b808-4e02-83b6-b4876980dccf
+langcode: en
+status: true
+dependencies: {  }
+id: logout
+label: Logout
+description: ''
+locked: false

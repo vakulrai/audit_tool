@@ -4,9 +4,13 @@ status: true
 dependencies:
   config:
     - eck.eck_type.unit.unit_name
-    - field.field.unit.unit_name.field_states
+    - field.field.unit.unit_name.field_address
+    - field.field.unit.unit_name.field_remote_address
+    - field.field.unit.unit_name.field_remote_location_name
+    - field.field.unit.unit_name.field_shift
+    - field.field.unit.unit_name.field_unit_name
   module:
-    - options
+    - address
     - user
 id: unit.unit_name.default
 targetEntityType: unit
@@ -23,12 +27,43 @@ content:
       custom_date_format: ''
       timezone: ''
     third_party_settings: {  }
-  field_states:
-    weight: 1
+  field_address:
+    weight: 2
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    type: address_default
+    region: content
+  field_remote_address:
+    weight: 4
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_remote_location_name:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_shift:
+    weight: 5
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_unit_name:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
   title:
     label: hidden

@@ -4,41 +4,84 @@ status: true
 dependencies:
   config:
     - eck.eck_type.unit.unit_name
-    - field.field.unit.unit_name.field_states
+    - field.field.unit.unit_name.field_address
+    - field.field.unit.unit_name.field_remote_address
+    - field.field.unit.unit_name.field_remote_location_name
+    - field.field.unit.unit_name.field_shift
+    - field.field.unit.unit_name.field_unit_name
   module:
-    - workflow
+    - address
+    - field_group
+third_party_settings:
+  field_group:
+    group_unit_group:
+      children:
+        - field_unit_name
+        - field_remote_address
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        label: ''
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: ''
+    group_unit_group_b:
+      children:
+        - field_remote_location_name
+        - field_address
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        label: ''
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: ''
 id: unit.unit_name.default
 targetEntityType: unit
 bundle: unit_name
 mode: default
 content:
-  created:
-    type: datetime_timestamp
-    weight: 10
-    region: content
+  field_address:
+    weight: 4
     settings: {  }
     third_party_settings: {  }
-  field_states:
-    weight: 11
-    settings: {  }
-    third_party_settings: {  }
-    type: workflow_default
+    type: address_default
     region: content
-  title:
-    type: string_textfield
-    weight: -5
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  uid:
-    type: entity_reference_autocomplete
+  field_remote_address:
     weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_remote_location_name:
+    weight: 3
     settings:
-      match_operator: CONTAINS
       size: 60
       placeholder: ''
-    region: content
     third_party_settings: {  }
-hidden: {  }
+    type: string_textfield
+    region: content
+  field_shift:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_unit_name:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  title: true
+  uid: true

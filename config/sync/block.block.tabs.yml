@@ -2,12 +2,14 @@ uuid: 7d4eb007-2a95-450a-9f63-3971d6939dc0
 langcode: en
 status: true
 dependencies:
+  module:
+    - system
   theme:
     - seven
 id: tabs
 theme: seven
 region: content
-weight: -1
+weight: -7
 provider: null
 plugin: local_tasks_block
 settings:
@@ -17,4 +19,9 @@ settings:
   label_display: '0'
   primary: true
   secondary: true
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: /home
+    negate: true
+    context_mapping: {  }

@@ -1,0 +1,9 @@
+uuid: 8ab79f54-76b3-4c7f-816b-38bd9fed05cd
+langcode: en
+status: true
+dependencies: {  }
+id: business_process_effectiveness
+label: 'Business Process Effectiveness'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

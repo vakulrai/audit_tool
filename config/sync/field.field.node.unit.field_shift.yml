@@ -1,0 +1,29 @@
+uuid: 221cf9ef-c295-4277-8d34-23f59c9eade4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_shift
+    - node.type.unit
+    - taxonomy.vocabulary.shift
+id: node.unit.field_shift
+field_name: field_shift
+entity_type: node
+bundle: unit
+label: Shift
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      shift: shift
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
