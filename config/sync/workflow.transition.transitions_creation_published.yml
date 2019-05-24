@@ -1,0 +1,10 @@
+uuid: c38fa798-352e-4422-a89a-c758f784c31d
+langcode: en
+status: true
+dependencies: {  }
+id: transitions_creation_published
+label: null
+module: workflow
+from_sid: transitions_creation
+to_sid: transitions_published
+roles: {  }

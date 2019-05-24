@@ -1,0 +1,20 @@
+uuid: ca1d0705-effc-4ad0-b395-1cb610858dd3
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - seven
+id: mainpagecontent
+theme: seven
+region: content
+weight: 1
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

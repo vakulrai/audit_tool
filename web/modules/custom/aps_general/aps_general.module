@@ -1,0 +1,209 @@
+<?php
+
+/**
+ * @file
+ * Contains aps_general.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+/**
+ * Implements hook_help().
+ */
+function aps_general_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the aps_general module.
+    case 'help.page.aps_general':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('General APS Functionality') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function aps_general_theme() {
+  return [
+    'aps_general' => [
+      'render element' => 'children',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  //Condition for Unit Add form
+  if($form_id == 'node_unit_form'){
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'aps_general_unit_page_redirect';
+      }
+    }
+  }
+  
+  //Condition for Business Add form
+  if($form_id == 'node_business_process_form'){
+    $form['field_refere']['#access'] = FALSE;
+    if($id = \Drupal::request()->query->get('id')){
+      $node_object = Node::load($id);
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
+    }
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'aps_business_process_page_redirect';
+      }
+    }
+  }
+  elseif ($form_id == 'node_business_process_edit_form') {//Edit form
+    $form['field_refere']['#access'] = FALSE;
+  }
+
+  //Condition for Department Add form
+  if($form_id == 'node_department_form'){
+    $form['field_refere']['#access'] = FALSE;
+    if($id = \Drupal::request()->query->get('id')){
+      $node_object = Node::load($id);
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
+    }
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'aps_department_page_redirect';
+      }
+    }
+  }
+  elseif ($form_id == 'node_department_edit_form') {//Edit form
+    $form['field_refere']['#access'] = FALSE;
+  }
+
+  //Condition for Section Add form
+  if($form_id == 'node_section_form'){
+    $form['field_refere']['#access'] = FALSE;
+    if($id= \Drupal::request()->query->get('id')){
+      $node_object = Node::load($id);
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
+    }
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'aps_section_page_redirect';
+      }
+    }
+  }
+  elseif ($form_id == 'node_section_edit_form') {//Edit form
+    $form['field_refere']['#access'] = FALSE;
+  }
+
+  //Condition for Assembly Add form
+  if($form_id == 'node_assembly_form'){
+    $form['field_refere']['#access'] = FALSE;
+    if($id= \Drupal::request()->query->get('id')){
+      $node_object = Node::load($id);
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
+    }
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'aps_assembly_page_redirect';
+      }
+    }
+  }
+  elseif ($form_id == 'node_assembly_edit_form') {//Edit form
+    $form['field_refere']['#access'] = FALSE;
+  }
+
+  if($form_id == 'user_register_form'){
+    // $form['account']['pass']['#access'] = FALSE;
+    $form['account']['status']['#access'] = FALSE;
+    $form['account']['name']['#weight'] = -1;
+    $form['account']['name']['#title'] = t('Name');
+    $value = [    
+      'value' => NULL,
+      'country' => "IN",
+      'local_number' => NULL,
+      'verified' => NULL,
+      'tfa' => NULL,
+    ];
+    $form['field_phone']['widget'][0]['#default_value'] = $value;
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'aps_assembly_user_redirect';
+      }
+    }
+  }
+}
+
+/**
+ * Implements  hook_entity_insert().
+ */
+function aps_general_node_insert(Node $node) {
+  $node->setPublished(TRUE);
+  $node->save();
+  if($node->bundle() == 'assembly'){
+    $title = $node->get('title')->value;
+    $term = Term::create([
+      'name' => $title, 
+      'vid' => 'assembly_type',
+    ])->save();
+  }
+}
+
+
+/**
+ * Callback method after unit form submits.
+ */
+function aps_general_unit_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $response = Url::fromUserInput('/unit-registration-view');
+  $form_state->setRedirectUrl($response);
+}
+
+/**
+ * Callback method after business process form submits.
+ */
+function aps_business_process_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $response = Url::fromUserInput('/business-process-listing-view');
+  $form_state->setRedirectUrl($response);
+}
+
+/**
+ * Callback method after department form submits.
+ */
+function aps_department_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $form_values = $form_state->getValues();
+  $nid = $form_values['nid'];
+  $response = Url::fromUserInput('/node/add/section?id='.$nid);
+  $form_state->setRedirectUrl($response);
+}
+
+/**
+ * Callback method after department form submits.
+ */
+function aps_section_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $form_values = $form_state->getValues();
+  $nid = $form_values['nid'];
+  $response = Url::fromUserInput('/node/add/assembly?id='.$nid);
+  $form_state->setRedirectUrl($response);
+}
+
+/**
+ * Callback method after assembly form submits.
+ */
+function aps_assembly_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $response = Url::fromUserInput('/unit-registration-view');
+  $form_state->setRedirectUrl($response);
+}
+
+/**
+ * Callback method after user form submits.
+ */
+function aps_assembly_user_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $response = Url::fromUserInput('/user-listing');
+  $form_state->setRedirectUrl($response);
+}

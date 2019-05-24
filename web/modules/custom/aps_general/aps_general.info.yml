@@ -1,0 +1,5 @@
+name: 'APS General'
+type: module
+description: 'General APS Functionality'
+core: 8.x
+package: 'Custom'

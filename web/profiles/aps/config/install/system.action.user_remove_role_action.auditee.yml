@@ -1,0 +1,14 @@
+uuid: 49a56d10-0586-4d94-b30c-bd160d9408b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.auditee
+  module:
+    - user
+id: user_remove_role_action.auditee
+label: 'Remove the Auditee role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: auditee

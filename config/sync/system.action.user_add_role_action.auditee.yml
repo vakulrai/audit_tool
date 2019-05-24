@@ -1,0 +1,14 @@
+uuid: 48183def-a620-4fc2-a341-3d1919adb150
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.auditee
+  module:
+    - user
+id: user_add_role_action.auditee
+label: 'Add the Auditee role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: auditee

@@ -1,0 +1,69 @@
+name: APS
+type: profile
+description: APS Application installer.
+core: 8.x
+
+distribution:
+  name: APS Distribution.
+  langcode: en
+
+dependencies:
+  - automated_cron
+  - block
+  - block_content
+  - breakpoint
+  - ckeditor
+  - color
+  - comment
+  - config
+  - contact
+  - contextual
+  - datetime
+  - dblog
+  - dynamic_page_cache
+  - editor
+  - field
+  - field_ui
+  - file
+  - filter
+  - help
+  - history
+  - image
+  - link
+  - menu_ui
+  - node
+  - options
+  - page_cache
+  - path
+  - quickedit
+  - rdf
+  - search
+  - shortcut
+  - system
+  - taxonomy
+  - text
+  - toolbar
+  - tour
+  - update
+  - user
+  - views_ui
+  - menu_link_content
+  - views
+  - eck
+  - menu_trail_by_path
+  - workflow
+  - field_group
+  - address
+  - mobile_number
+  - time_range
+
+dependencies:
+  - node
+  - block
+  - views
+
+themes:
+  - stable
+  - classy
+  - bartik
+  - seven

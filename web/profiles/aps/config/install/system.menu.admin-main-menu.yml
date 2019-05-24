@@ -1,0 +1,8 @@
+uuid: b5200c16-7573-4bad-9968-982563cef246
+langcode: en
+status: true
+dependencies: {  }
+id: admin-main-menu
+label: 'Admin main menu'
+description: 'Admin panel for APS'
+locked: false

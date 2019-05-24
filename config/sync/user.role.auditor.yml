@@ -1,0 +1,9 @@
+uuid: 20204267-feca-41b9-9c5a-cc947dd6d19c
+langcode: en
+status: true
+dependencies: {  }
+id: auditor
+label: Auditor
+weight: 3
+is_admin: null
+permissions: {  }

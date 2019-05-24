@@ -1,0 +1,10 @@
+uuid: fd7cacc8-1910-4f93-8bb3-5d7068f0fe52
+langcode: en
+status: true
+dependencies: {  }
+id: transitions_published
+label: Published
+module: workflow
+wid: transitions
+weight: -8
+sysid: 0

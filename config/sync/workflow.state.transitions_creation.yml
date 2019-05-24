@@ -1,0 +1,10 @@
+uuid: 22fd0a24-2ab8-424f-837f-4f78131d55b8
+langcode: en
+status: true
+dependencies: {  }
+id: transitions_creation
+label: Creation
+module: workflow
+wid: transitions
+weight: -11
+sysid: 1

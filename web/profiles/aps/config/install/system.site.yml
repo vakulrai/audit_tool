@@ -1,0 +1,14 @@
+uuid: 6e520db4-04ab-437a-b932-cb43abbb8410
+name: 'ANAGAT PROCESS AND SYSTEM PVT. LTD.'
+mail: vakul.r@gmail.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /user/login
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI

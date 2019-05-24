@@ -1,0 +1,14 @@
+uuid: ac46f046-b573-4a21-8b76-ad4f47686ec5
+langcode: en
+status: true
+dependencies: {  }
+id: transitions
+label: Transitions
+module: workflow
+options:
+  name_as_title: 0
+  fieldset: 0
+  options: radios
+  schedule_timezone: 1
+  comment_log_node: 1
+  watchdog_log: 0

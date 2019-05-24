@@ -1,0 +1,49 @@
+uuid: abdf5ce3-e426-42d2-9208-6d77e20f42d4
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.unit.unit_name
+    - field.field.unit.unit_name.field_states
+  module:
+    - options
+    - user
+id: unit.unit_name.default
+targetEntityType: unit
+bundle: unit_name
+mode: default
+content:
+  created:
+    label: hidden
+    type: timestamp
+    weight: 0
+    region: content
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+  field_states:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  title:
+    label: hidden
+    type: string
+    weight: -5
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  uid:
+    label: hidden
+    type: author
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  changed: true

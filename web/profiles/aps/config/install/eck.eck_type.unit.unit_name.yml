@@ -1,0 +1,9 @@
+uuid: 41dbde18-3123-4316-af00-79691a0f0b50
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.unit
+name: 'Unit Name'
+type: unit_name
+description: ''
