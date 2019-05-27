@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 name: Department
 type: department
-description: ''
+description: 'Add Department'
 help: ''
 new_revision: false
 preview_mode: 1

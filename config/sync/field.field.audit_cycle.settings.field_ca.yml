@@ -1,0 +1,21 @@
+uuid: 1b8e3b1d-9c9c-4075-93d5-e2e112574530
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_cycle.settings
+    - field.storage.audit_cycle.field_ca
+  module:
+    - datetime
+id: audit_cycle.settings.field_ca
+field_name: field_ca
+entity_type: audit_cycle
+bundle: settings
+label: 'Calendar Date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

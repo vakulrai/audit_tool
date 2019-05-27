@@ -1,0 +1,22 @@
+uuid: cf175064-8617-4c83-9a63-b066b85c9834
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.external_audit_
+  module:
+    - text
+id: node.external_audit_.body
+field_name: body
+entity_type: node
+bundle: external_audit_
+label: 'Certification Body'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

@@ -1,0 +1,19 @@
+uuid: 6ab2e8ca-ed83-4b43-9839-170ac0def1ea
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - range
+id: paragraph.field_level_range_100
+field_name: field_level_range_100
+entity_type: paragraph
+type: range_integer
+settings: {  }
+module: range
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

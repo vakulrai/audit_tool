@@ -1,0 +1,8 @@
+uuid: fc75f455-cd75-401d-8ad4-111b99e771c2
+langcode: en
+status: true
+dependencies: {  }
+name: 'Customer Audit Records'
+vid: customer_audit_records
+description: ''
+weight: 0

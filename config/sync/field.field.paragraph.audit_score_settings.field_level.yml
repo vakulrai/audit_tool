@@ -1,0 +1,23 @@
+uuid: 3128317e-89cf-4bb3-bbe5-fc1bb956fb52
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_level
+    - paragraphs.paragraphs_type.audit_score_settings
+id: paragraph.audit_score_settings.field_level
+field_name: field_level
+entity_type: paragraph
+bundle: audit_score_settings
+label: Level
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: 10
+  prefix: ''
+  suffix: ''
+field_type: integer

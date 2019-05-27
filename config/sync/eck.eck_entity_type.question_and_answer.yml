@@ -1,0 +1,10 @@
+uuid: baaa2bb6-f4ed-4f4b-afd4-7bd5f75d2f41
+langcode: en
+status: true
+dependencies: {  }
+id: question_and_answer
+label: 'Question and Answer'
+created: false
+changed: false
+uid: false
+title: false

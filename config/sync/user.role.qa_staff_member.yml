@@ -1,0 +1,14 @@
+uuid: f059b496-227b-4222-91db-29b8f27f3789
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - questions_answers
+_core:
+  default_config_hash: zOJ7vXSXXs0UY5VzYOZ22mjWjMjqDY0nLdeqwULtSuI
+id: qa_staff_member
+label: 'Questions and Answers Staff Member'
+weight: 1
+is_admin: false
+permissions: {  }

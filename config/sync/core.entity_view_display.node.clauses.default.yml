@@ -1,0 +1,37 @@
+uuid: 5ba13497-5f02-4e3f-bcba-f4eaf87b6234
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.clauses.body
+    - field.field.node.clauses.field_clause_no_
+    - node.type.clauses
+  module:
+    - text
+    - user
+id: node.clauses.default
+targetEntityType: node
+bundle: clauses
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_clause_no_:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

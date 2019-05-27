@@ -1,0 +1,14 @@
+uuid: b22897da-6a8a-4aab-90ec-1de2c4ea0976
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - questions_answers
+_core:
+  default_config_hash: iJ_7xGcKmhwla0ydKT42-Yt-IEbicN_0t6CSnJSWMx4
+id: qa_top_contributor
+label: 'Questions and Answers Top Contributor'
+weight: 1
+is_admin: false
+permissions: {  }

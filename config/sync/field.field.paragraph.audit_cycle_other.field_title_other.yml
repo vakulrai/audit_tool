@@ -1,0 +1,23 @@
+uuid: 8ab4a6dd-6c19-46a8-a90a-f0d416a031b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title_other
+    - paragraphs.paragraphs_type.audit_cycle_other
+id: paragraph.audit_cycle_other.field_title_other
+field_name: field_title_other
+entity_type: paragraph
+bundle: audit_cycle_other
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

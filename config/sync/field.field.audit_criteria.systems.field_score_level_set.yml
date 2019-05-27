@@ -1,0 +1,43 @@
+uuid: a06b7f64-de39-4935-8aea-1d277e9a6dee
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria.systems
+    - field.storage.audit_criteria.field_score_level_set
+    - paragraphs.paragraphs_type.audit_score_settings
+  module:
+    - entity_reference_revisions
+id: audit_criteria.systems.field_score_level_set
+field_name: field_score_level_set
+entity_type: audit_criteria
+bundle: systems
+label: 'Score Level Settings'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      audit_score_settings: audit_score_settings
+    target_bundles_drag_drop:
+      auditor_functional_details:
+        weight: 6
+        enabled: false
+      audit_score_settings:
+        enabled: true
+        weight: 7
+      business_process_effectiveness:
+        weight: 8
+        enabled: false
+      business_process_effieciency:
+        weight: 9
+        enabled: false
+      procedures:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions

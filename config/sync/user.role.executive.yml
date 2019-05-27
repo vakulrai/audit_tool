@@ -7,6 +7,5 @@ label: Executive
 weight: 2
 is_admin: null
 permissions:
-  - 'access devel information'
   - 'access user profiles'
   - 'administer users'

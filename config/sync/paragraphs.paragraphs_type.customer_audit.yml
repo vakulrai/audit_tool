@@ -1,0 +1,9 @@
+uuid: a45ae6ba-3b10-43ab-a03a-9bb978763309
+langcode: en
+status: true
+dependencies: {  }
+id: customer_audit
+label: 'CUSTOMER AUDIT'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

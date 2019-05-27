@@ -1,0 +1,21 @@
+uuid: 9d3a596d-1170-483e-b360-ae68582662ea
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - entity_reference_revisions
+    - paragraphs
+id: audit_cycle.field_schedule_release
+field_name: field_schedule_release
+entity_type: audit_cycle
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

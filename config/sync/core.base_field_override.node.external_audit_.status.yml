@@ -1,0 +1,22 @@
+uuid: ab96d840-7e6a-4d47-8c4f-63fd13965b6e
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.external_audit_
+id: node.external_audit_.status
+field_name: status
+entity_type: node
+bundle: external_audit_
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

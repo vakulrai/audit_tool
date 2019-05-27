@@ -10,7 +10,7 @@ dependencies:
 id: userlogin
 theme: seven
 region: content
-weight: 3
+weight: 5
 provider: null
 plugin: user_login_block
 settings:

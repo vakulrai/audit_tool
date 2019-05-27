@@ -1,0 +1,29 @@
+uuid: 5b9148e9-7043-482f-97d5-6350945817e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.new_answer.field_answers
+    - field.field.paragraph.new_answer.field_description_answer
+    - paragraphs.paragraphs_type.new_answer
+id: paragraph.new_answer.default
+targetEntityType: paragraph
+bundle: new_answer
+mode: default
+content:
+  field_answers:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_description_answer:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+hidden: {  }

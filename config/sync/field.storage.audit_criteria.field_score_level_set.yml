@@ -1,0 +1,21 @@
+uuid: c541a8d4-b360-429f-b8d3-28ae4a011623
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - entity_reference_revisions
+    - paragraphs
+id: audit_criteria.field_score_level_set
+field_name: field_score_level_set
+entity_type: audit_criteria
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

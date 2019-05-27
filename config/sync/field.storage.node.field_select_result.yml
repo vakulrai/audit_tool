@@ -1,0 +1,33 @@
+uuid: fc64eeb5-daa7-4821-81fb-d74dbf8f7ec6
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_select_result
+field_name: field_select_result
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 'Yes'
+      label: Yes/No/NA
+    -
+      value: Pass
+      label: Pass/Fail/NA
+    -
+      value: Pdef
+      label: 'Pre Defined'
+    -
+      value: Ival
+      label: 'Input Value'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

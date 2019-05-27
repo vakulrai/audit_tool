@@ -1,0 +1,21 @@
+uuid: d948cf9a-e586-4e49-a772-4013ed32cf98
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - entity_reference_revisions
+    - paragraphs
+id: audit_criteria.field_customer_audit
+field_name: field_customer_audit
+entity_type: audit_criteria
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

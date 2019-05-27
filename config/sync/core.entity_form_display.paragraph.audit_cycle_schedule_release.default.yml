@@ -1,0 +1,30 @@
+uuid: c5f94632-cc39-4973-b2a4-138e18427b60
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.audit_cycle_schedule_release.field_annual_calendar
+    - field.field.paragraph.audit_cycle_schedule_release.field_department
+    - paragraphs.paragraphs_type.audit_cycle_schedule_release
+id: paragraph.audit_cycle_schedule_release.default
+targetEntityType: paragraph
+bundle: audit_cycle_schedule_release
+mode: default
+content:
+  field_annual_calendar:
+    weight: 0
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_department:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+hidden:
+  created: true
+  status: true

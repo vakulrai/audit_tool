@@ -1,0 +1,100 @@
+uuid: 304b0441-ae7e-42c7-ba5d-aa5a90a47fb8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.external_audit_.body
+    - field.field.node.external_audit_.field_audit_cycle
+    - field.field.node.external_audit_.field_certification_std
+    - field.field.node.external_audit_.field_decision
+    - field.field.node.external_audit_.field_issue_date
+    - field.field.node.external_audit_.field_scope
+    - field.field.node.external_audit_.field_score
+    - field.field.node.external_audit_.field_validity
+    - node.type.external_audit_
+  module:
+    - datetime
+    - text
+    - yearonly
+id: node.external_audit_.default
+targetEntityType: node
+bundle: external_audit_
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 1
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_audit_cycle:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: yearonly_default
+    region: content
+  field_certification_std:
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_decision:
+    weight: 9
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_issue_date:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_scope:
+    weight: 7
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_score:
+    weight: 8
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_validity:
+    weight: 4
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

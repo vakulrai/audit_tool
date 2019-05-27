@@ -1,0 +1,19 @@
+uuid: 46a047c2-7e58-4f1c-a516-9067afcdf03a
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - questions_answers
+id: question_and_answer.field_qa
+field_name: field_qa
+entity_type: question_and_answer
+type: questions_answers
+settings: {  }
+module: questions_answers
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

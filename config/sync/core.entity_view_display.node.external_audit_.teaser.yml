@@ -1,0 +1,30 @@
+uuid: a957159e-71c8-4ce6-a161-e6c85bcf272f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.external_audit_.body
+    - node.type.external_audit_
+  module:
+    - text
+    - user
+id: node.external_audit_.teaser
+targetEntityType: node
+bundle: external_audit_
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

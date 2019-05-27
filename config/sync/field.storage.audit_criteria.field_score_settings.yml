@@ -1,0 +1,20 @@
+uuid: 318d7aa7-960e-4d55-abf3-9b4f764a14a7
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - taxonomy
+id: audit_criteria.field_score_settings
+field_name: field_score_settings
+entity_type: audit_criteria
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

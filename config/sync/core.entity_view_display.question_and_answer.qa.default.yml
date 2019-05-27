@@ -1,0 +1,27 @@
+uuid: 0620fc17-a06d-466e-9dda-a00544ebde6a
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.question_and_answer.qa
+    - field.field.question_and_answer.qa.field_qa
+  module:
+    - questions_answers
+id: question_and_answer.qa.default
+targetEntityType: question_and_answer
+bundle: qa
+mode: default
+content:
+  field_qa:
+    weight: 0
+    label: above
+    settings:
+      default_questions_status: '1'
+      default_answers_status: '1'
+      allow_helpful: '1'
+      date_display: fallback
+      notify_new_questions: ''
+    third_party_settings: {  }
+    type: questions_answers_formatter
+    region: content
+hidden: {  }

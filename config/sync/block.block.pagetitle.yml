@@ -9,7 +9,7 @@ dependencies:
 id: pagetitle
 theme: seven
 region: content
-weight: -6
+weight: -5
 provider: null
 plugin: page_title_block
 settings:

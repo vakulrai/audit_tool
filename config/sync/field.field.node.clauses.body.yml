@@ -1,0 +1,22 @@
+uuid: ac302e23-c13f-4ceb-b908-e6bf8c23f33a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.clauses
+  module:
+    - text
+id: node.clauses.body
+field_name: body
+entity_type: node
+bundle: clauses
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

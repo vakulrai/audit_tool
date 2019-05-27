@@ -1,0 +1,23 @@
+uuid: f8364f63-bc13-4a64-835f-866bf0a569a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_sub_s_no_
+    - paragraphs.paragraphs_type.internal_audit_qa
+id: paragraph.internal_audit_qa.field_sub_s_no_
+field_name: field_sub_s_no_
+entity_type: paragraph
+bundle: internal_audit_qa
+label: 'Sub S no.'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

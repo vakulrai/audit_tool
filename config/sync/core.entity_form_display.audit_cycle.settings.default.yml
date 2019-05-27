@@ -1,0 +1,63 @@
+uuid: ebb535b9-13dd-4a3b-b36b-c506c83c8109
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_cycle.settings
+    - field.field.audit_cycle.settings.field_ca
+    - field.field.audit_cycle.settings.field_cycle_type
+    - field.field.audit_cycle.settings.field_financial_dates
+    - field.field.audit_cycle.settings.field_other
+    - field.field.audit_cycle.settings.field_schedule_release
+  module:
+    - datetime
+    - datetime_range
+    - paragraphs
+id: audit_cycle.settings.default
+targetEntityType: audit_cycle
+bundle: settings
+mode: default
+content:
+  field_ca:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_cycle_type:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_financial_dates:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_other:
+    type: entity_reference_paragraphs
+    weight: 4
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_schedule_release:
+    type: entity_reference_paragraphs
+    weight: 3
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

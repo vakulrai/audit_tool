@@ -1,0 +1,31 @@
+uuid: 3e13fa7c-9505-450f-8efa-50b06465ad29
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.audit_score_settings.field_level
+    - field.field.paragraph.audit_score_settings.field_level_range
+    - paragraphs.paragraphs_type.audit_score_settings
+  module:
+    - range
+id: paragraph.audit_score_settings.default
+targetEntityType: paragraph
+bundle: audit_score_settings
+mode: default
+content:
+  field_level:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_level_range:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: range
+    region: content
+hidden:
+  created: true
+  status: true

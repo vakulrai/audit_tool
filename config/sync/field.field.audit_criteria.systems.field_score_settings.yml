@@ -1,0 +1,29 @@
+uuid: a8ed5b5a-9a3d-46a4-9917-662158be6864
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria.systems
+    - field.storage.audit_criteria.field_score_settings
+    - taxonomy.vocabulary.system_documents
+id: audit_criteria.systems.field_score_settings
+field_name: field_score_settings
+entity_type: audit_criteria
+bundle: systems
+label: 'Score Settings'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      system_documents: system_documents
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,19 @@
+uuid: 8b3ef43a-4ca8-4cdb-88e3-f981a19c3c68
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_answers
+    - paragraphs.paragraphs_type.new_answer
+id: paragraph.new_answer.field_answers
+field_name: field_answers
+entity_type: paragraph
+bundle: new_answer
+label: Answers
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

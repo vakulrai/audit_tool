@@ -1,0 +1,77 @@
+uuid: 7f5e3676-52c8-4340-94c2-7f3bdf00cb65
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria.systems
+    - field.field.audit_criteria.systems.field_customer_audit
+    - field.field.audit_criteria.systems.field_documents
+    - field.field.audit_criteria.systems.field_records
+    - field.field.audit_criteria.systems.field_score_level_set
+    - field.field.audit_criteria.systems.field_score_level_set_100
+    - field.field.audit_criteria.systems.field_score_settings
+  module:
+    - conditional_fields
+    - paragraphs
+id: audit_criteria.systems.default
+targetEntityType: audit_criteria
+bundle: systems
+mode: default
+content:
+  field_customer_audit:
+    type: entity_reference_paragraphs
+    weight: 4
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_documents:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_records:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_score_level_set:
+    type: entity_reference_paragraphs
+    weight: 3
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings:
+      conditional_fields: {  }
+    region: content
+  field_score_level_set_100:
+    type: entity_reference_paragraphs
+    weight: 5
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings:
+      conditional_fields: {  }
+    region: content
+  field_score_settings:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+hidden: {  }

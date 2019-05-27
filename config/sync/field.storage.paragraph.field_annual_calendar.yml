@@ -1,0 +1,20 @@
+uuid: faf616bf-be05-46f0-9bc6-2a9da2ce9cbf
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_annual_calendar
+field_name: field_annual_calendar
+entity_type: paragraph
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

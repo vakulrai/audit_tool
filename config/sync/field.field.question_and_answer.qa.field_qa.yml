@@ -1,0 +1,23 @@
+uuid: 0f1e091f-a063-420d-9f39-2c53697d1cfa
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.question_and_answer.qa
+    - field.storage.question_and_answer.field_qa
+  module:
+    - questions_answers
+id: question_and_answer.qa.field_qa
+field_name: field_qa
+entity_type: question_and_answer
+bundle: qa
+label: QA
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    question_id: null
+default_value_callback: ''
+settings: {  }
+field_type: questions_answers

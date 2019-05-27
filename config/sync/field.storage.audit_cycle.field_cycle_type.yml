@@ -1,0 +1,27 @@
+uuid: 630fae67-5046-42b1-a381-078191bbbf47
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - options
+id: audit_cycle.field_cycle_type
+field_name: field_cycle_type
+entity_type: audit_cycle
+type: list_integer
+settings:
+  allowed_values:
+    -
+      value: 0
+      label: Financial
+    -
+      value: 1
+      label: Calendar
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

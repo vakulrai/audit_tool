@@ -1,0 +1,78 @@
+uuid: 440608e1-f8b1-44f9-a8b4-c2cd8b80c1e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.internal_audit.body
+    - field.field.node.internal_audit.field_general_queries
+    - field.field.node.internal_audit.field_ia_department
+    - field.field.node.internal_audit.field_ia_section
+    - field.field.node.internal_audit.field_procedure_no
+    - field.field.node.internal_audit.field_select_result
+    - field.field.node.internal_audit.field_unit
+    - node.type.internal_audit
+  module:
+    - paragraphs
+id: node.internal_audit.default
+targetEntityType: node
+bundle: internal_audit
+mode: default
+content:
+  field_general_queries:
+    type: entity_reference_paragraphs
+    weight: 26
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_ia_department:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_ia_section:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_procedure_no:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_select_result:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_unit:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

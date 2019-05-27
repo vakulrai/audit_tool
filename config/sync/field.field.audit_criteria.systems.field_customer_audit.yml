@@ -1,0 +1,46 @@
+uuid: 1a37b194-1f93-4f15-b104-3c2433e57431
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria.systems
+    - field.storage.audit_criteria.field_customer_audit
+    - paragraphs.paragraphs_type.customer_audit
+  module:
+    - entity_reference_revisions
+id: audit_criteria.systems.field_customer_audit
+field_name: field_customer_audit
+entity_type: audit_criteria
+bundle: systems
+label: 'Customer Audit'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      customer_audit: customer_audit
+    target_bundles_drag_drop:
+      audit_score_settings:
+        weight: 7
+        enabled: false
+      auditor_functional_details:
+        weight: 8
+        enabled: false
+      business_process_effectiveness:
+        weight: 9
+        enabled: false
+      business_process_effieciency:
+        weight: 10
+        enabled: false
+      customer_audit:
+        enabled: true
+        weight: 11
+      procedures:
+        weight: 12
+        enabled: false
+field_type: entity_reference_revisions

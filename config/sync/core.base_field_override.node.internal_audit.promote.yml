@@ -1,0 +1,22 @@
+uuid: c72c8934-60db-4216-a89b-a4b134f3b254
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.internal_audit
+id: node.internal_audit.promote
+field_name: promote
+entity_type: node
+bundle: internal_audit
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

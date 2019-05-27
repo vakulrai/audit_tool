@@ -1,0 +1,29 @@
+uuid: 5badc4af-1cc4-4f1d-8aa4-24c0ff64b31f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_clause_no_
+    - node.type.clauses
+    - taxonomy.vocabulary.clause_number
+id: node.clauses.field_clause_no_
+field_name: field_clause_no_
+entity_type: node
+bundle: clauses
+label: 'Clause No.'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      clause_number: clause_number
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

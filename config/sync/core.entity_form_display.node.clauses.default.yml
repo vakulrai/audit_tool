@@ -1,0 +1,35 @@
+uuid: ab358fd1-1f9c-4079-a213-a845c6b1aae0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.clauses.body
+    - field.field.node.clauses.field_clause_no_
+    - node.type.clauses
+id: node.clauses.default
+targetEntityType: node
+bundle: clauses
+mode: default
+content:
+  field_clause_no_:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

@@ -1,0 +1,19 @@
+uuid: 3f1bdd3b-35c1-45a4-a73d-ab86ddaf9416
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_description_answer
+    - paragraphs.paragraphs_type.new_answer
+id: paragraph.new_answer.field_description_answer
+field_name: field_description_answer
+entity_type: paragraph
+bundle: new_answer
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

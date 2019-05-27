@@ -1,0 +1,9 @@
+uuid: 43d69b88-0680-46f7-9a4b-3cc8209f86a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.audit_cycle
+name: Settings
+type: settings
+description: ''

@@ -1,0 +1,8 @@
+uuid: 51b366c3-083c-4dfc-8018-4c220b963427
+langcode: en
+status: true
+dependencies: {  }
+name: Decision
+vid: decision
+description: ''
+weight: 0

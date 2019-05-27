@@ -1,0 +1,9 @@
+uuid: 73b505d5-3cde-4d12-a992-ec2808167148
+langcode: en
+status: true
+dependencies: {  }
+id: audit_score_settings
+label: 'Audit score settings Range 10'
+icon_uuid: null
+description: 'Provide score range settings'
+behavior_plugins: {  }

@@ -1,0 +1,23 @@
+uuid: db3d3b41-2a2f-41e9-bba9-5fd8e514dec5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_validity
+    - node.type.external_audit_
+id: node.external_audit_.field_validity
+field_name: field_validity
+entity_type: node
+bundle: external_audit_
+label: Validity
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

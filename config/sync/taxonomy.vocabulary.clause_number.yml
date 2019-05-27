@@ -1,0 +1,8 @@
+uuid: 3bfb2e8d-7b73-497f-9b7b-00a50cd27875
+langcode: en
+status: true
+dependencies: {  }
+name: 'Clause Number'
+vid: clause_number
+description: ''
+weight: 0

@@ -1,0 +1,29 @@
+uuid: 01371714-395c-4b7e-a6ab-84ad47867375
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_records
+    - paragraphs.paragraphs_type.customer_audit
+    - taxonomy.vocabulary.customer_audit_records
+id: paragraph.customer_audit.field_records
+field_name: field_records
+entity_type: paragraph
+bundle: customer_audit
+label: RECORDS
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      customer_audit_records: customer_audit_records
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

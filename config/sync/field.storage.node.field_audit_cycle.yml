@@ -1,0 +1,19 @@
+uuid: 16214d76-e283-40b4-935a-027bae2f1d13
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - yearonly
+id: node.field_audit_cycle
+field_name: field_audit_cycle
+entity_type: node
+type: yearonly
+settings: {  }
+module: yearonly
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
