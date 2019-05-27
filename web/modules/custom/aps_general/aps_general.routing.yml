@@ -1,0 +1,6 @@
+aps_general.node_add_clauses:
+  path: '/external-audit-standards-redirect'
+  defaults:  
+    _controller: '\Drupal\aps_general\Controller\RedirectFormController::redirect_form'
+  requirements:
+    _access: 'TRUE'

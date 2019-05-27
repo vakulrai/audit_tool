@@ -1,0 +1,11 @@
+
+aps_audit_criteria.systems_config_form:
+  path: '/admin/config/aps_audit_criteria/systemsconfig'
+  defaults:
+    _form: '\Drupal\aps_audit_criteria\Form\SystemsConfigForm'
+    _title: 'SystemsConfigForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+

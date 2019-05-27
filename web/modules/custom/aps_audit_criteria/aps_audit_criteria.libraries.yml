@@ -1,0 +1,6 @@
+aps_audit_criteria_js:
+  js:
+    js/aps_audit_criteria.js: { weight: -1 }
+  dependencies:
+    - core/jquery
+    - core/jquery.once

@@ -1,0 +1,6 @@
+# aps_audit_criteria.cycle_setting_ia:
+#   route_name : view.menu_tabs.internalaudit
+#   title: Standards
+#   base_route: view.menu_tabs.internalaudit
+#   weight: 0
+

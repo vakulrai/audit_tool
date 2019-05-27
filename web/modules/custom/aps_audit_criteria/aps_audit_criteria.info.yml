@@ -1,0 +1,5 @@
+name: 'aps_audit_criteria'
+type: module
+description: 'Contain geenral settings for audit criteria'
+core: 8.x
+package: 'Custom'

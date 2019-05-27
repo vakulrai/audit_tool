@@ -1,0 +1,153 @@
+<?php
+
+/**
+ * @file
+ * Contains aps_audit_criteria.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+/**
+ * Implements hook_help().
+ */
+function aps_audit_criteria_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the aps_audit_criteria module.
+    case 'help.page.aps_audit_criteria':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Contain geenral settings for audit criteria') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+	if($form_id == 'audit_criteria_systems_form' || $form_id == 'audit_criteria_systems_edit_form'){
+	  $options_document = getVids('system_documents', 27);
+	  $options_records = getVids('system_documents', 28);
+	  $options_score = getVids('system_documents', 31);
+	  if(count($options_document)){
+	  	 $form['field_documents']['widget']['#options'] = $options_document;
+	  }
+
+	  if(count($options_records)){
+	  	 $form['field_records']['widget']['#options'] = $options_records;
+	  } 
+
+	  if(count($options_score)){
+	  	 $form['field_score_settings']['widget']['#options'] = $options_score;
+	  } 
+
+	  $form['customer_audit'] = [
+      '#type' => 'fieldset',
+      '#title' => 'CUSTOMER AUDIT',
+      '#weight' => '20',
+      ];
+
+      $form['customer_audit'][] = $form['field_customer_audit'];
+
+      $form['field_score_level_set']['#states'] = [
+      'visible' => [
+        '#edit-field-score-settings-32' => ['checked' => TRUE],
+        ],
+      ];
+
+      $form['field_score_level_set']['#states'] = [
+      'invisible' => [
+        '#edit-field-score-settings-32' => ['checked' => FALSE],
+        ],
+      ];
+
+      $form['field_score_level_set_100']['#states'] = [
+      'visible' => [
+        '#edit-field-score-settings-33' => ['checked' => TRUE],
+        ],
+      ];
+
+      $form['field_score_level_set_100']['#states'] = [
+      'invisible' => [
+        '#edit-field-score-settings-33' => ['checked' => FALSE],
+        ],
+      ];
+      
+      unset($form['field_customer_audit']);
+      foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'audit_criteria_redirect';
+        }
+      }
+	}
+
+	if($form_id == 'audit_cycle_settings_form' || $form_id == 'audit_cycle_settings_edit_form'){
+	  $form['#attached']['library'][] = 'aps_audit_criteria/aps_audit_criteria_js';
+
+      $form['audit_cycle_year'] = [
+      '#type' => 'fieldset',
+      '#title' => 'YEAR',
+      '#weight' => '0',
+      ];
+
+      $form['audit_cycle_year_sr'] = [
+      '#type' => 'fieldset',
+      '#title' => 'SCHEDULE RELEASE',
+      '#weight' => '0',
+      ];
+
+      $form['audit_cycle_other'] = [
+      '#type' => 'fieldset',
+      '#title' => 'OTHER',
+      '#weight' => '0',
+      ];
+
+      $form['audit_cycle_year'][] = $form['field_cycle_type'];
+      $form['audit_cycle_year'][] = $form['field_financial_dates'];
+      $form['audit_cycle_year'][] = $form['field_ca'];
+      $form['audit_cycle_year_sr'][] = $form['field_schedule_release'];
+      $form['audit_cycle_other'][] = $form['field_other'];
+      unset($form['field_cycle_type']);
+      unset($form['field_financial_dates']);
+      unset($form['field_ca']);
+      unset($form['field_schedule_release']);
+      unset($form['field_other']);
+      foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'audit_cycle_redirect';
+        }
+      }
+
+	}
+  
+}
+
+/**
+ * Callback to get terms.
+ */
+function getVids($vid, $parent_id){
+  $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, $parent_id);
+  foreach ($terms as $term) {
+    $term_data[$term->tid] = $term->name;
+  }
+  return $term_data;
+}
+
+/**
+ * Callback method after audit criteria form submits.
+ */
+function audit_criteria_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $response = Url::fromUserInput('/');
+  $form_state->setRedirectUrl($response);
+}
+
+/**
+ * Callback method after audit cycle form submits.
+ */
+function audit_cycle_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $response = Url::fromUserInput('/');
+  $form_state->setRedirectUrl($response);
+}
