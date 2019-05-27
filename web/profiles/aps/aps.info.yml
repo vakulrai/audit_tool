@@ -57,6 +57,8 @@ dependencies:
   - mobile_number
   - time_range
   - conditional_fields
+  - range
+  - datetime_range
 
 dependencies:
   - node

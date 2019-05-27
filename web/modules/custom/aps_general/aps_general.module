@@ -111,6 +111,24 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $form['field_refere']['#access'] = FALSE;
   }
 
+  //Condition for External Audit Add form
+  if($form_id == 'node_external_audit__form'){
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'aps_ext_audit_page_redirect';
+      }
+    }
+  }
+
+  //Condition for Clauses Add form
+  if($form_id == 'node_clauses_form'){
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'aps_clauses_page_redirect';
+      }
+    }
+  }
+
   //Condition for Assembly Add form
   if($form_id == 'node_assembly_form'){
     $form['field_refere']['#access'] = FALSE;
@@ -168,6 +186,14 @@ function aps_general_node_insert(Node $node) {
       'vid' => 'assembly_type',
     ])->save();
   }
+}
+
+/**
+ * Implements  hook_preprocess_page().
+ */
+function aps_general_preprocess_page(&$variables) {
+// $route_name = \Drupal::routeMatch()->getRouteName();
+// kint($route_name);
 }
 
 /**
@@ -238,5 +264,21 @@ function aps_assembly_user_redirect(array $form, \Drupal\Core\Form\FormStateInte
  */
 function aps_general_procedures_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
   $response = Url::fromUserInput('/');
+  $form_state->setRedirectUrl($response);
+}
+
+/**
+ * Callback method after Ext. Audit form submits.
+ */
+function aps_ext_audit_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $response = Url::fromUserInput('/external-audit-standards');
+  $form_state->setRedirectUrl($response);
+}
+
+/**
+ * Callback method after Clauses form submits.
+ */
+function aps_clauses_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $response = Url::fromUserInput('/external-audit-standards');
   $form_state->setRedirectUrl($response);
 }
