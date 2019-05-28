@@ -1,5 +1,0 @@
-range.field-widget:
-  version: VERSION
-  css:
-    theme:
-      css/range.field-widget.css : {}
