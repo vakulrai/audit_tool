@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c3eed8c93d9d38bcc2971aa0119d463",
+    "content-hash": "065a978dd17dba3e6fd2c262c68f5a80",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3758,6 +3758,53 @@
             "homepage": "https://www.drupal.org/project/workflow",
             "support": {
                 "source": "https://git.drupalcode.org/project/workflow"
+            }
+        },
+        {
+            "name": "drupal/yearonly",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/yearonly.git",
+                "reference": "8.x-1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/yearonly-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "5d376c66b6c998a7befb65ae19b9ee7baf795316"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.3",
+                    "datestamp": "1508824145",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "sharma.amitt16",
+                    "homepage": "https://www.drupal.org/user/2629679"
+                }
+            ],
+            "description": "Provide field to collect year only.",
+            "homepage": "https://www.drupal.org/project/yearonly",
+            "support": {
+                "source": "https://git.drupalcode.org/project/yearonly"
             }
         },
         {
