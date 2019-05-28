@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f240e1786bb0fe9f49d2bb686fc62436",
+    "content-hash": "9c3eed8c93d9d38bcc2971aa0119d463",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3483,6 +3483,53 @@
             "homepage": "https://www.drupal.org/project/paragraphs",
             "support": {
                 "source": "https://git.drupalcode.org/project/paragraphs"
+            }
+        },
+        {
+            "name": "drupal/questions_answers",
+            "version": "1.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/questions_answers.git",
+                "reference": "8.x-1.10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/questions_answers-8.x-1.10.zip",
+                "reference": "8.x-1.10",
+                "shasum": "79c6c16557e15a35a0cf142fd85dbc5531f9c44b"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.10",
+                    "datestamp": "1556918581",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel.Moberly",
+                    "homepage": "https://www.drupal.org/user/1160788"
+                }
+            ],
+            "description": "Entity Questions and Answers.",
+            "homepage": "https://www.drupal.org/project/questions_answers",
+            "support": {
+                "source": "https://git.drupalcode.org/project/questions_answers"
             }
         },
         {
