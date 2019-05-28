@@ -4,3 +4,11 @@ aps_general.node_add_clauses:
     _controller: '\Drupal\aps_general\Controller\RedirectFormController::redirect_form'
   requirements:
     _access: 'TRUE'
+aps_general.csv_import:
+  path: '/aps_general/form/csv_import'
+  defaults:
+    _form: '\Drupal\aps_general\Form\CsvImport'
+    _title: 'CsvImport'
+  requirements:
+    _access: 'TRUE'
+  
