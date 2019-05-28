@@ -1,0 +1,8 @@
+
+aps_audit_planning.audit_planning_controller_build:
+  path: '/audit-planning'
+  defaults:
+    _controller: '\Drupal\aps_audit_planning\Controller\AuditPlanningController::build'
+    _title: 'Audit Planning'
+  requirements:
+    _permission: 'access content'

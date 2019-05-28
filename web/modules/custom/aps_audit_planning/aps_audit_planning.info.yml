@@ -1,0 +1,5 @@
+name: 'aps_audit_planning'
+type: module
+description: 'Contains Functionality of Audit Planning'
+core: 8.x
+package: 'Custom'

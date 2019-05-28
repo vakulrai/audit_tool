@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains aps_audit_planning.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function aps_audit_planning_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the aps_audit_planning module.
+    case 'help.page.aps_audit_planning':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Contain&#039;s Functionality of Audit Planning') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function aps_audit_planning_theme() {
+  return [
+    'aps_audit_planning' => [
+      'render element' => 'children',
+    ],
+  ];
+}

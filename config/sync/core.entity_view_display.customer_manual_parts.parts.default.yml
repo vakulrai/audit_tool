@@ -1,0 +1,24 @@
+uuid: 3318dd23-ddbe-4ed2-9cf9-17d84288ad47
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.customer_manual_parts.parts
+    - field.field.customer_manual_parts.parts.field_add_parts
+  module:
+    - entity_reference_revisions
+id: customer_manual_parts.parts.default
+targetEntityType: customer_manual_parts
+bundle: parts
+mode: default
+content:
+  field_add_parts:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

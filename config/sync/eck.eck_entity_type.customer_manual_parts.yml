@@ -1,0 +1,10 @@
+uuid: 7313f3ee-7e3a-4304-bc32-1d699ab6194c
+langcode: en
+status: true
+dependencies: {  }
+id: customer_manual_parts
+label: 'Customer Manual Parts'
+created: false
+changed: false
+uid: false
+title: false

@@ -1,0 +1,9 @@
+uuid: 6a18bade-8b91-4030-b66b-6c53f1664711
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.customer_manual_parts
+name: Parts
+type: parts
+description: 'Add customer manual parts'

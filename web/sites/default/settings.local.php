@@ -129,3 +129,15 @@ $settings['rebuild_access'] = TRUE;
  * directory.
  */
 $settings['skip_permissions_hardening'] = TRUE;
+
+
+$databases['default']['default'] = array (
+  'database' => 'audit_tool',
+  'username' => 'root',
+  'password' => '123321',
+  'prefix' => '',
+  'host' => 'localhost',
+  'port' => '3306',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+);

@@ -1,0 +1,9 @@
+uuid: 49a4d4cc-0ae9-4e93-8b0b-88bf0efd3c82
+langcode: en
+status: true
+dependencies: {  }
+id: customer_manual_parts
+label: 'Customer Manual Parts'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

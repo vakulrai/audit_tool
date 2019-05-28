@@ -1,0 +1,14 @@
+{
+  "name": "drupal/aps_audit_planning",
+  "type": "drupal-module",
+  "description": "Contain's Functionality of Audit Planning",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/aps_audit_planning",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/aps_audit_planning",
+    "source": "http://cgit.drupalcode.org/aps_audit_planning"
+  },
+  "require": { }
+}

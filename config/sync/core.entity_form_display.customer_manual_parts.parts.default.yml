@@ -1,0 +1,27 @@
+uuid: 1d532bcb-d0ce-4ecf-98f9-40fdc09f0f24
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.customer_manual_parts.parts
+    - field.field.customer_manual_parts.parts.field_add_parts
+  module:
+    - paragraphs
+id: customer_manual_parts.parts.default
+targetEntityType: customer_manual_parts
+bundle: parts
+mode: default
+content:
+  field_add_parts:
+    type: entity_reference_paragraphs
+    weight: 3
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

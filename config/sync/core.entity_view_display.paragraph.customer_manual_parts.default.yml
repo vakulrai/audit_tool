@@ -1,0 +1,31 @@
+uuid: 331b0a8c-c1c2-4f43-967e-2f4976967c55
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.customer_manual_parts.field_part_no
+    - field.field.paragraph.customer_manual_parts.field_s_no
+    - paragraphs.paragraphs_type.customer_manual_parts
+id: paragraph.customer_manual_parts.default
+targetEntityType: paragraph
+bundle: customer_manual_parts
+mode: default
+content:
+  field_part_no:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_s_no:
+    weight: 0
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+hidden: {  }
