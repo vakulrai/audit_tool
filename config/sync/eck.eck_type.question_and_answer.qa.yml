@@ -1,9 +1,0 @@
-uuid: 5c35b8ad-d982-4909-a5d9-78f31cfa4436
-langcode: en
-status: true
-dependencies:
-  config:
-    - eck.eck_entity_type.question_and_answer
-name: QA
-type: qa
-description: ''

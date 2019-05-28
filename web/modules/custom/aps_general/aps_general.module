@@ -10,6 +10,7 @@ use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
+use Drupal\Core\Link;
 
 /**
  * Implements hook_help().
@@ -194,6 +195,48 @@ function aps_general_node_insert(Node $node) {
 function aps_general_preprocess_page(&$variables) {
 // $route_name = \Drupal::routeMatch()->getRouteName();
 // kint($route_name);
+}
+
+/**
+ * Implements  hook_menu_local_tasks_alter().
+ */
+function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
+  $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+  $uri = explode('/', $current_uri);
+  if(isset($uri[2])){
+    if ($uri[2] == 'external_audit_') {
+      $link = Url::fromUserInput('/node/add/'.$uri[2]);
+      if ($link) {
+        unset($data['tabs']);
+      }
+    }
+    elseif ($uri[2] == 'unit') {
+      $link = Url::fromUserInput('/node/add/'.$uri[2]);
+      if ($link) {
+        unset($data['tabs']);
+      }
+    }
+    elseif ($uri[2] == 'internal_audit') {
+      $link = Url::fromUserInput('/node/add/'.$uri[2]);
+      if ($link) {
+        unset($data['tabs'][0]['aps_general.standards']);
+        unset($data['tabs'][0]['aps_general.clauses']); 
+        unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
+        unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
+      }
+    }
+    elseif ($uri[2] == 'customers_manual') {
+        unset($data['tabs']);
+    }
+  }
+  if ($current_uri == 'audit_criteria/1/edit') {
+    $data['tabs'][0]['eck.entity_content:audit_criteria.eck_edit_tab']['#link']['title'] = 'Systems';
+    unset($data['tabs'][0]['aps_general.systems_setting']);
+  }
+  if($current_uri == 'internal-audit-list'){
+    unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
+    unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
+  }
 }
 
 /**

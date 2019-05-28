@@ -1,7 +1,7 @@
-aps_audit_criteria.systems_config_form:
-  title: 'INTERNAL AUDIT'
-  route_name: aps_audit_criteria.systems_config_form
-  description: 'Audit systems criteria'
-  parent: system.admin_config_system
-  weight: 99
+# aps_audit_criteria.systems_config_form:
+#   title: 'INTERNAL AUDIT'
+#   route_name: aps_audit_criteria.systems_config_form
+#   description: 'Audit systems criteria'
+#   parent: system.admin_config_system
+#   weight: 99
 

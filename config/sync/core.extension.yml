@@ -24,7 +24,6 @@ module:
   entity_conditional_fields: 0
   entity_reference: 0
   entity_reference_revisions: 0
-  examples: 0
   field: 0
   field_group: 0
   field_ui: 0
@@ -48,7 +47,6 @@ module:
   quickedit: 0
   range: 0
   rdf: 0
-  render_example: 0
   search: 0
   shortcut: 0
   superfish: 0
@@ -58,7 +56,6 @@ module:
   time_range: 0
   toolbar: 0
   tour: 0
-  tour_example: 0
   update: 0
   user: 0
   views_ui: 0

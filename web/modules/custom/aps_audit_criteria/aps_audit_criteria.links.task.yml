@@ -1,6 +1,25 @@
-# aps_audit_criteria.cycle_setting_ia:
-#   route_name : view.menu_tabs.internalaudit
-#   title: Standards
-#   base_route: view.menu_tabs.internalaudit
-#   weight: 0
+aps_audit_criteria.audit_list:
+  route_name: view.internal_audit_systems.audit_listing
+  title: Audit List
+  base_route: view.internal_audit_systems.audit_listing
+  weight: 10
 
+aps_audit_criteria.systems_setting:
+  route_name: node.add
+  route_parameters:
+    node_type: 'internal_audit'
+  title: Systems
+  base_route: view.internal_audit_systems.audit_listing
+  weight: 20
+
+aps_audit_criteria.process_setting:
+  route_name: view.internal_audit_systems.audit_listing
+  title: Process
+  base_route: view.internal_audit_systems.audit_listing
+  weight: 20
+
+aps_audit_criteria.product_setting:
+  route_name: view.internal_audit_systems.audit_listing
+  title: Product
+  base_route: view.internal_audit_systems.audit_listing
+  weight: 30
