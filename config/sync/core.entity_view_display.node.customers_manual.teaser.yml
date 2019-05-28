@@ -1,0 +1,30 @@
+uuid: 9b13d76f-4e4b-4804-b6b0-b108f13d6c98
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.customers_manual.body
+    - node.type.customers_manual
+  module:
+    - text
+    - user
+id: node.customers_manual.teaser
+targetEntityType: node
+bundle: customers_manual
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

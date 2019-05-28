@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.external_audit_.body
     - field.field.node.external_audit_.field_audit_cycle
+    - field.field.node.external_audit_.field_audit_type
     - field.field.node.external_audit_.field_certification_std
     - field.field.node.external_audit_.field_decision
     - field.field.node.external_audit_.field_issue_date
@@ -35,6 +36,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: yearonly_default
+    region: content
+  field_audit_type:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_certification_std:
     weight: 2

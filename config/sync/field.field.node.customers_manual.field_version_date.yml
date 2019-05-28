@@ -1,0 +1,21 @@
+uuid: 546b9545-0050-4617-a0c3-17687e9d6e67
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_version_date
+    - node.type.customers_manual
+  module:
+    - datetime
+id: node.customers_manual.field_version_date
+field_name: field_version_date
+entity_type: node
+bundle: customers_manual
+label: 'Version Date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

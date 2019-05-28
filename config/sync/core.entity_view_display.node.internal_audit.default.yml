@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.internal_audit.body
+    - field.field.node.internal_audit.field_audit_type
     - field.field.node.internal_audit.field_general_queries
     - field.field.node.internal_audit.field_ia_department
     - field.field.node.internal_audit.field_ia_section
@@ -27,6 +28,13 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_audit_type:
+    weight: 108
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_general_queries:
     type: entity_reference_revisions_entity_view

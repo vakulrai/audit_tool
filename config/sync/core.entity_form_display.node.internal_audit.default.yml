@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.internal_audit.body
+    - field.field.node.internal_audit.field_audit_type
     - field.field.node.internal_audit.field_general_queries
     - field.field.node.internal_audit.field_ia_department
     - field.field.node.internal_audit.field_ia_section
@@ -18,9 +19,15 @@ targetEntityType: node
 bundle: internal_audit
 mode: default
 content:
+  field_audit_type:
+    type: options_select
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_general_queries:
     type: entity_reference_paragraphs
-    weight: 26
+    weight: 6
     settings:
       title: Paragraph
       title_plural: Paragraphs

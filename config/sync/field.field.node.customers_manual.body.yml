@@ -1,0 +1,22 @@
+uuid: 3ab60864-88d0-416f-8667-3be6af1ce91d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.customers_manual
+  module:
+    - text
+id: node.customers_manual.body
+field_name: body
+entity_type: node
+bundle: customers_manual
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

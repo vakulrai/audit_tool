@@ -1,0 +1,30 @@
+uuid: 5b161099-78e4-4d0b-847c-164973772f29
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.customer_manual_listing
+  module:
+    - system
+    - views
+  theme:
+    - seven
+id: views_block__customer_manual_listing_block_1
+theme: seven
+region: content
+weight: 1
+provider: null
+plugin: 'views_block:customer_manual_listing-block_1'
+settings:
+  id: 'views_block:customer_manual_listing-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: /node/add/customers_manual
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,22 @@
+uuid: 33622e17-2dfc-4620-8a8c-17d4b8e8fdcc
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.customers_manual
+id: node.customers_manual.status
+field_name: status
+entity_type: node
+bundle: customers_manual
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

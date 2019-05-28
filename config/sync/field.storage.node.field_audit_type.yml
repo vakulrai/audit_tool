@@ -1,0 +1,27 @@
+uuid: ed7a6a9b-68d4-45de-a259-1fef928b7688
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_audit_type
+field_name: field_audit_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: internal
+      label: Internal
+    -
+      value: external
+      label: External
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
