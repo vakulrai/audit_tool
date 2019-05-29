@@ -1,0 +1,18 @@
+uuid: d0b10aa4-0af0-4919-9069-53d019de6a83
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Planned Events'
+type: planned_events
+description: 'Lust all Events'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

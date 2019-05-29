@@ -1,0 +1,21 @@
+uuid: b5a963c1-8d3c-4d57-a618-d8e48e098df5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_time
+    - node.type.planned_events
+  module:
+    - datetime_range
+id: node.planned_events.field_time
+field_name: field_time
+entity_type: node
+bundle: planned_events
+label: Time
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

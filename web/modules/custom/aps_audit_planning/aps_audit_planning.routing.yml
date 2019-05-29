@@ -6,3 +6,11 @@ aps_audit_planning.audit_planning_controller_build:
     _title: 'Audit Planning'
   requirements:
     _permission: 'access content'
+
+aps_audit_planning.audit_planning_get_scheduled_events:
+  path: '/generate-events'
+  defaults:
+    _controller: '\Drupal\aps_audit_planning\Controller\AuditPlanningController::generateEvents'
+  methods: [POST]
+  requirements:
+    _access: 'TRUE'

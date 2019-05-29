@@ -1,0 +1,22 @@
+uuid: 1107d82a-33b9-4884-8d13-7a6fc5316f5a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.planned_events
+id: node.planned_events.status
+field_name: status
+entity_type: node
+bundle: planned_events
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,19 @@
+uuid: fd60c46d-761c-4865-b3d7-9f52899e01ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_remote_location_name
+    - node.type.planned_events
+id: node.planned_events.field_remote_location_name
+field_name: field_remote_location_name
+entity_type: node
+bundle: planned_events
+label: 'Employee Id'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

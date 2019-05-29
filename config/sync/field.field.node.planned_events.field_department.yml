@@ -1,0 +1,28 @@
+uuid: ac747ad1-6929-4049-8ea8-f4a7e5b9440b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_department
+    - node.type.department
+    - node.type.planned_events
+id: node.planned_events.field_department
+field_name: field_department
+entity_type: node
+bundle: planned_events
+label: Department
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      department: department
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

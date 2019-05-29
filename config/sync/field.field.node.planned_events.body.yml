@@ -1,0 +1,22 @@
+uuid: 0e3acaa9-31b6-4dec-a0ff-21f5558c09ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.planned_events
+  module:
+    - text
+id: node.planned_events.body
+field_name: body
+entity_type: node
+bundle: planned_events
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary
