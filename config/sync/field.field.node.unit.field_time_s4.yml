@@ -11,7 +11,7 @@ id: node.unit.field_time_s4
 field_name: field_time_s4
 entity_type: node
 bundle: unit
-label: 'Time S4'
+label: 'Time S3'
 description: ''
 required: false
 translatable: false
