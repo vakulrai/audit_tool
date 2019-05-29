@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Implements hook_help().
@@ -38,5 +39,18 @@ function aps_audit_planning_theme() {
  * Implements hook_form_alter().
  */
 function aps_audit_planning_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-   
-  }
+  if($form_id == 'node_planned_events_form'){
+    if($id= \Drupal::request()->query->get('current')){
+      $start_date = \Drupal::request()->query->get('field_start_date');
+      $end_date = \Drupal::request()->query->get('field_end_date');
+      $start_date_object = new DrupalDateTime($start_date);
+      $end_date_object = new DrupalDateTime($end_date);  
+      $form['field_time']['widget'][0]['value']['#default_value'] = $start_date_object;
+      $form['field_time']['widget'][0]['end_value']['#default_value'] = $end_date_object;
+      $form['field_start_date']['widget'][0]['value']['#default_value'] = $start_date_object;
+      $form['field_end_date']['widget'][0]['value']['#default_value'] = $end_date_object;
+      $form['field_start_date']['#access'] = FALSE;
+      $form['field_start_date']['#access'] = FALSE;
+    }
+  }   
+}

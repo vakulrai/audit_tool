@@ -7,10 +7,12 @@ dependencies:
     - field.field.node.planned_events.field_audit_type
     - field.field.node.planned_events.field_auditor
     - field.field.node.planned_events.field_department
+    - field.field.node.planned_events.field_end_date
     - field.field.node.planned_events.field_remote_location_name
     - field.field.node.planned_events.field_section
     - field.field.node.planned_events.field_select_audit
     - field.field.node.planned_events.field_shift
+    - field.field.node.planned_events.field_start_date
     - field.field.node.planned_events.field_time
     - field.field.node.planned_events.field_unit
     - node.type.planned_events
@@ -54,6 +56,16 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_end_date:
+    weight: 112
+    label: above
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+    type: timestamp
+    region: content
   field_remote_location_name:
     weight: 110
     label: above
@@ -85,6 +97,16 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_start_date:
+    weight: 111
+    label: above
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+    type: timestamp
     region: content
   field_time:
     weight: 104

@@ -1,0 +1,21 @@
+uuid: 6b599fcf-b531-4ce0-9145-b20d301b11aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_start_date
+    - node.type.planned_events
+id: node.planned_events.field_start_date
+field_name: field_start_date
+entity_type: node
+bundle: planned_events
+label: 'Start date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1559122576
+default_value_callback: ''
+settings: {  }
+field_type: timestamp

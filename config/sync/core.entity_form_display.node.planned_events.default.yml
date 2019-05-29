@@ -7,40 +7,117 @@ dependencies:
     - field.field.node.planned_events.field_audit_type
     - field.field.node.planned_events.field_auditor
     - field.field.node.planned_events.field_department
+    - field.field.node.planned_events.field_end_date
     - field.field.node.planned_events.field_remote_location_name
     - field.field.node.planned_events.field_section
     - field.field.node.planned_events.field_select_audit
     - field.field.node.planned_events.field_shift
+    - field.field.node.planned_events.field_start_date
     - field.field.node.planned_events.field_time
     - field.field.node.planned_events.field_unit
     - node.type.planned_events
   module:
     - datetime_range
+    - field_group
+third_party_settings:
+  field_group:
+    group_auditor:
+      children:
+        - field_remote_location_name
+        - field_auditor
+      parent_name: group_who
+      weight: 4
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Auditor
+    group_when:
+      children:
+        - title
+        - field_select_audit
+        - field_shift
+        - field_time
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: When
+    group_what:
+      children:
+        - field_audit_type
+        - field_unit
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: What
+    group_where:
+      children:
+        - field_department
+        - field_section
+      parent_name: ''
+      weight: 2
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Where
+    group_who:
+      children:
+        - group_auditor
+      parent_name: ''
+      weight: 3
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Who
 id: node.planned_events.default
 targetEntityType: node
 bundle: planned_events
 mode: default
 content:
   field_audit_type:
-    weight: 4
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_auditor:
-    weight: 8
+    weight: 11
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_department:
-    weight: 6
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_end_date:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_timestamp
+    region: content
   field_remote_location_name:
-    weight: 26
+    weight: 10
     settings:
       size: 60
       placeholder: ''
@@ -48,7 +125,7 @@ content:
     type: string_textfield
     region: content
   field_section:
-    weight: 7
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -65,6 +142,12 @@ content:
     third_party_settings: {  }
     type: options_buttons
     region: content
+  field_start_date:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_timestamp
+    region: content
   field_time:
     weight: 3
     settings: {  }
@@ -72,7 +155,7 @@ content:
     type: daterange_default
     region: content
   field_unit:
-    weight: 5
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: options_select

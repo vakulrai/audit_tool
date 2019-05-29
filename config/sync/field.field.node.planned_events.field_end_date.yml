@@ -1,0 +1,21 @@
+uuid: c61cd357-f140-47f3-914b-31a7fe886ded
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_end_date
+    - node.type.planned_events
+id: node.planned_events.field_end_date
+field_name: field_end_date
+entity_type: node
+bundle: planned_events
+label: 'End Date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1559122614
+default_value_callback: ''
+settings: {  }
+field_type: timestamp

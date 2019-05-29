@@ -15,8 +15,8 @@ configuration:
   methods:
     - GET
     - POST
-    - PATCH
     - DELETE
+    - PATCH
   formats:
     - hal_json
   authentication:

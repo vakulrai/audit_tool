@@ -11,6 +11,6 @@ aps_audit_planning.audit_planning_get_scheduled_events:
   path: '/generate-events'
   defaults:
     _controller: '\Drupal\aps_audit_planning\Controller\AuditPlanningController::generateEvents'
-  methods: [POST]
+  methods: [GET]
   requirements:
     _access: 'TRUE'
