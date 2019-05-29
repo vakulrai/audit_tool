@@ -44,13 +44,13 @@ function aps_general_theme() {
  */
 function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   //Condition for Unit Add form
-  if($form_id == 'node_unit_form'){
-    foreach (array_keys($form['actions']) as $action) {
-      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-        $form['actions'][$action]['#submit'][] = 'aps_general_unit_page_redirect';
-      }
-    }
-  }
+  // if($form_id == 'node_unit_form'){
+  //   foreach (array_keys($form['actions']) as $action) {
+  //     if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+  //       $form['actions'][$action]['#submit'][] = 'aps_general_unit_page_redirect';
+  //     }
+  //   }
+  // }
 
   //Condition for Procedure Add form
   if($form_id == 'node_procedures_form'){
@@ -222,11 +222,11 @@ function aps_general_preprocess_page(&$variables) {
     $config = [];
     $plugin_block = $block_manager->createInstance('csv_import_block', $config);
     $render_csv = $plugin_block->build();
-    $variables['page']['content']['csv'][] = $render_csv;
+    $variables['page']['content']['csv'] = $render_csv;
     
-    $variables['page']['content']['parts'][] = $the_title_render_array;
-    $variables['page']['content']['parts']['add_new'][] = '<a href="/admin/content/customer_manual_parts/add/parts">Add New</a>';
-    $variables['page']['content']['parts'][] = $render;
+    $variables['page']['content']['parts'] = $the_title_render_array;
+    $variables['page']['content']['parts']['add_new'] = '<a href="/admin/content/customer_manual_parts/add/parts">Add New</a>';
+    $variables['page']['content']['parts'] = $render;
   }
 }
 

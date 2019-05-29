@@ -19,8 +19,8 @@ class AuditPlanningBlock extends BlockBase {
    */
   public function build() {
     $build = [];
-    $build['audit_planning_block']['#markup'] = 'Implement AuditPlanningBlock.';
-
+    $build['audit_planning_block']['#markup'] = '<div id="demo"></div>';
+    $build['#attached']['library'][] = 'aps_audit_planning/aps_audit_planning_js';
     return $build;
   }
 
