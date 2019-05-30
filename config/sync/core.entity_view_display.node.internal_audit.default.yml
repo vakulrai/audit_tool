@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.internal_audit.body
+    - field.field.node.internal_audit.field_audit_date
     - field.field.node.internal_audit.field_audit_type
     - field.field.node.internal_audit.field_general_queries
     - field.field.node.internal_audit.field_ia_department
@@ -28,6 +29,16 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_audit_date:
+    weight: 109
+    label: above
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+    type: timestamp
     region: content
   field_audit_type:
     weight: 108

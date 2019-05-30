@@ -1,0 +1,19 @@
+uuid: 009ef0c1-0e91-4247-98b4-2867de9c26e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audit_date
+    - node.type.internal_audit
+id: node.internal_audit.field_audit_date
+field_name: field_audit_date
+entity_type: node
+bundle: internal_audit
+label: 'Audit date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: timestamp

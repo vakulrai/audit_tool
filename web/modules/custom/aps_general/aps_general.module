@@ -225,7 +225,6 @@ function aps_general_preprocess_page(&$variables) {
     $variables['page']['content']['csv'] = $render_csv;
     
     $variables['page']['content']['parts'] = $the_title_render_array;
-    $variables['page']['content']['parts']['add_new'] = '<a href="/admin/content/customer_manual_parts/add/parts">Add New</a>';
     $variables['page']['content']['parts'] = $render;
   }
 }
@@ -261,7 +260,13 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     elseif (stripos(strtolower($uri[2]), 'planned_events?') !== false) {
         unset($data['tabs']);
     }
-     elseif ($uri[2] == 'customers_manual') {
+    elseif ($uri[2] == 'customers_manual') {
+        unset($data['tabs']);
+    }
+    elseif (stripos(strtolower($uri[2]), 'section?') !== false) {
+        unset($data['tabs']);
+    }
+    elseif (stripos(strtolower($uri[2]), 'assembly?') !== false) {
         unset($data['tabs']);
     }
   }

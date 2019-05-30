@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.internal_audit.body
+    - field.field.node.internal_audit.field_audit_date
     - field.field.node.internal_audit.field_audit_type
     - field.field.node.internal_audit.field_general_queries
     - field.field.node.internal_audit.field_ia_department
@@ -19,6 +20,12 @@ targetEntityType: node
 bundle: internal_audit
 mode: default
 content:
+  field_audit_date:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_timestamp
+    region: content
   field_audit_type:
     type: options_select
     weight: 7
