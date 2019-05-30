@@ -60,11 +60,15 @@ function aps_audit_planning_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
   }
 
   //Condition for Calender planning Add form
-  if($form_id == 'node_planned_events_form'){
+  if($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form'){
     $route_name = \Drupal::routeMatch()->getRouteName();
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $uri = explode('/', $current_uri);
-    if($route_name == 'node.add' && stripos(strtolower($uri[2]), 'planned_events?') !== false){
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node instanceof \Drupal\node\NodeInterface) {
+      $nid_type = $node->bundle();
+    }
+    if(($route_name == 'node.add' && stripos(strtolower($uri[2]), 'planned_events?') !== false) || $route_name == 'entity.node.edit_form' && $nid_type == 'planned_events'){
       foreach (array_keys($form['actions']) as $action) {
         if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
           $form['actions'][$action]['#submit'][] = 'aps_planned_events_redirect';
