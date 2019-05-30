@@ -1,0 +1,8 @@
+uuid: 1753a2d7-6c10-4f08-b1d1-a73ec1135edd
+langcode: en
+status: true
+dependencies: {  }
+id: manage-users
+label: 'Manage Users'
+description: ''
+locked: false

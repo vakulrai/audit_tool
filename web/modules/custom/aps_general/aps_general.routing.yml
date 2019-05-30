@@ -12,3 +12,12 @@ aps_general.csv_import:
   requirements:
     _access: 'TRUE'
   
+
+aps_general.add_user_roles_form:
+  path: 'form/add-user-roles'
+  defaults:
+    _form: '\Drupal\aps_general\Form\AddUserRolesForm'
+    _title: 'AddUserRolesForm'
+  requirements:
+    _access: 'TRUE'
+  

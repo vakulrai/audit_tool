@@ -11,6 +11,7 @@ permissions:
   - 'access media overview'
   - 'access unit entity listing'
   - 'access user profiles'
+  - 'administer permissions'
   - 'administer users'
   - 'create assembly content'
   - 'create business_process content'

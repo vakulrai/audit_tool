@@ -3,6 +3,6 @@ langcode: en
 status: true
 dependencies: {  }
 id: add-user
-label: 'Add User'
+label: 'Add User Default'
 description: ''
 locked: false

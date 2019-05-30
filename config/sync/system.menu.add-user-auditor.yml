@@ -1,0 +1,8 @@
+uuid: 5a521e1b-7760-4e6a-aed9-41da2acd3799
+langcode: en
+status: true
+dependencies: {  }
+id: add-user-auditor
+label: 'Add User Auditor'
+description: ''
+locked: false

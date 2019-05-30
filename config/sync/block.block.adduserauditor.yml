@@ -1,23 +1,23 @@
-uuid: 01b8b1d2-4a29-4790-b915-25ccbf969eb1
+uuid: ef2a3009-ab09-485b-a154-da935bd636c3
 langcode: en
 status: true
 dependencies:
   config:
-    - system.menu.add-user
+    - system.menu.add-user-auditor
   module:
     - superfish
     - system
   theme:
     - seven
-id: adduser
+id: adduserauditor
 theme: seven
 region: content
-weight: -1
+weight: 0
 provider: null
-plugin: 'superfish:add-user'
+plugin: 'superfish:add-user-auditor'
 settings:
-  id: 'superfish:add-user'
-  label: 'Add User'
+  id: 'superfish:add-user-auditor'
+  label: 'Add User Auditor'
   provider: superfish
   label_display: '0'
   level: '1'
@@ -72,6 +72,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /user-listing
+    pages: /user-listing-auditor
     negate: false
     context_mapping: {  }

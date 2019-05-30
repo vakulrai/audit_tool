@@ -1,24 +1,24 @@
-uuid: e10146b0-b463-4ec7-99c4-838de4f955e0
+uuid: fd2f1315-1724-41cc-b616-6d4ec341f7df
 langcode: en
-status: true
+status: false
 dependencies:
   config:
-    - system.menu.admin-main-menu
+    - system.menu.manage-users
   module:
     - superfish
     - system
     - user
   theme:
     - seven
-id: adminmainmenu
+id: manageusers
 theme: seven
-region: pre_content
-weight: -11
+region: breadcrumb
+weight: -9
 provider: null
-plugin: 'superfish:admin-main-menu'
+plugin: 'superfish:manage-users'
 settings:
-  id: 'superfish:admin-main-menu'
-  label: 'Admin main menu'
+  id: 'superfish:manage-users'
+  label: 'Manage Users'
   provider: superfish
   label_display: '0'
   level: '1'
@@ -30,7 +30,7 @@ settings:
   shadow: 1
   speed: fast
   delay: '800'
-  slide: horizontal
+  slide: vertical
   supposition: 1
   hoverintent: 1
   touch: '0'
@@ -73,13 +73,12 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /home
+    pages: /admin/people/create
     negate: false
     context_mapping: {  }
   user_role:
     id: user_role
     roles:
-      executive: executive
       auditor: auditor
       auditee: auditee
     negate: false

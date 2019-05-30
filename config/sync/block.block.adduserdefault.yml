@@ -1,30 +1,30 @@
-uuid: df91826c-c332-46d6-87a2-326454b37a82
+uuid: b2cf3711-d1f6-43ad-bd46-d6a5ca965b10
 langcode: en
 status: true
 dependencies:
   config:
-    - system.menu.logout
+    - system.menu.add-user
   module:
     - superfish
-    - user
+    - system
   theme:
     - seven
-id: logout
+id: adduserdefault
 theme: seven
-region: header
-weight: -4
+region: content
+weight: 0
 provider: null
-plugin: 'superfish:logout'
+plugin: 'superfish:add-user'
 settings:
-  id: 'superfish:logout'
-  label: Logout
+  id: 'superfish:add-user'
+  label: 'Add User Default'
   provider: superfish
   label_display: '0'
   level: '1'
   depth: '0'
   expand_all_items: false
   menu_type: horizontal
-  style: none
+  style: white
   arrow: 1
   shadow: 1
   speed: fast
@@ -70,12 +70,8 @@ settings:
   custom_item_class: ''
   custom_link_class: ''
 visibility:
-  user_role:
-    id: user_role
-    roles:
-      executive: executive
-      auditor: auditor
-      auditee: auditee
+  request_path:
+    id: request_path
+    pages: /user-listing-all
     negate: false
-    context_mapping:
-      user: '@user.current_user_context:current_user'
+    context_mapping: {  }

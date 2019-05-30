@@ -1,0 +1,25 @@
+menus:
+  -
+    menu_name: add-user-auditor
+    title: 'Add New'
+    parent: null
+    uri: 'internal:/admin/people/create?type=auditor'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '0'
+    langcode: en
+    uuid: f2ef3e9f-fbe5-4ffd-a886-e4ea79d930eb
+  -
+    menu_name: add-user
+    title: 'Add New'
+    parent: null
+    uri: 'internal:/admin/people/create?type=default'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '0'
+    langcode: en
+    uuid: 1b8e3d6d-8cd3-4b14-9383-1a0f0f3ccfea
