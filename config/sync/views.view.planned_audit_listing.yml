@@ -1,17 +1,18 @@
-uuid: 19a3a746-adaf-4ad2-b89c-c089e69a0ffb
+uuid: dd4efaa5-730c-4a47-b265-fc7fffa2dbfb
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_end_date
+    - field.storage.node.field_audit_type
+    - field.storage.node.field_location
     - field.storage.node.field_start_date
     - node.type.planned_events
   module:
     - node
-    - rest
-    - serialization
-id: planned_audit_json
-label: 'Planned Audit JSON'
+    - options
+    - user
+id: planned_audit_listing
+label: 'Planned Audit Listing'
 module: views
 description: ''
 tag: ''
@@ -26,8 +27,9 @@ display:
     position: 0
     display_options:
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'access content'
       cache:
         type: tag
         options: {  }
@@ -68,67 +70,73 @@ display:
             previous: ‹‹
             next: ››
       style:
-        type: serializer
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          override: true
+          sticky: false
+          caption: ''
+          summary: ''
+          description: ''
+          columns:
+            title: title
+          info:
+            title:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          default: '-1'
+          empty_table: false
       row:
         type: fields
         options:
+          default_field_elements: true
           inline: {  }
           separator: ''
           hide_empty: false
-          default_field_elements: true
       fields:
         title:
           id: title
           table: node_field_data
           field: title
+          entity_type: node
+          entity_field: title
+          label: ''
+          alter:
+            alter_text: false
+            make_link: false
+            absolute: false
+            trim: false
+            word_boundary: false
+            ellipsis: false
+            strip_tags: false
+            html: false
+          hide_empty: false
+          empty_zero: false
+          settings:
+            link_to_entity: true
+          plugin_id: field
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
           exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: true
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: false
-            ellipsis: false
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: true
-            trim: false
-            preserve_tags: ''
-            html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
           empty: ''
-          hide_empty: false
-          empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
           type: string
-          settings:
-            link_to_entity: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -139,8 +147,130 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
+        field_audit_type:
+          id: field_audit_type
+          table: node__field_audit_type
+          field: field_audit_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Audit Type'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_location:
+          id: field_location
+          table: node__field_location
+          field: field_location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Location
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
           plugin_id: field
         field_start_date:
           id: field_start_date
@@ -149,7 +279,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
+          label: 'Start date'
           exclude: false
           alter:
             alter_text: false
@@ -160,7 +290,7 @@ display:
             external: false
             replace_spaces: false
             path_case: none
-            trim_whitespace: true
+            trim_whitespace: false
             alt: ''
             rel: ''
             link_class: ''
@@ -174,7 +304,7 @@ display:
             more_link: false
             more_link_text: ''
             more_link_path: ''
-            strip_tags: true
+            strip_tags: false
             trim: false
             preserve_tags: ''
             html: false
@@ -182,7 +312,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -193,7 +323,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: long
+            date_format: fallback
             custom_date_format: ''
             timezone: Asia/Kolkata
           group_column: value
@@ -207,10 +337,59 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_end_date:
-          id: field_end_date
-          table: node__field_end_date
-          field: field_end_date
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: Upload
+          label: 'Custom text'
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<a class="button">UPLOAD</a>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
           relationship: none
           group_type: group
           admin_label: ''
@@ -225,7 +404,7 @@ display:
             external: false
             replace_spaces: false
             path_case: none
-            trim_whitespace: true
+            trim_whitespace: false
             alt: ''
             rel: ''
             link_class: ''
@@ -239,7 +418,7 @@ display:
             more_link: false
             more_link_text: ''
             more_link_path: ''
-            strip_tags: true
+            strip_tags: false
             trim: false
             preserve_tags: ''
             html: false
@@ -255,23 +434,11 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: timestamp
-          settings:
-            date_format: long
-            custom_date_format: ''
-            timezone: Asia/Kolkata
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
+          text: RESCHEDULE
+          output_url_as_text: false
+          absolute: false
+          entity_type: node
+          plugin_id: entity_link_edit
       filters:
         status:
           value: '1'
@@ -340,6 +507,7 @@ display:
           expose:
             label: ''
           granularity: second
+      title: 'Planned Audit Listing'
       header: {  }
       footer: {  }
       empty: {  }
@@ -351,45 +519,30 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - request_format
         - url.query_args
         - 'user.node_grants:view'
+        - user.permissions
       tags:
-        - 'config:field.storage.node.field_end_date'
+        - 'config:field.storage.node.field_audit_type'
+        - 'config:field.storage.node.field_location'
         - 'config:field.storage.node.field_start_date'
-  rest_export_1:
-    display_plugin: rest_export
-    id: rest_export_1
-    display_title: 'REST export'
+  page_1:
+    display_plugin: page
+    id: page_1
+    display_title: Page
     position: 1
     display_options:
       display_extenders: {  }
-      path: get-events
-      pager:
-        type: some
-        options:
-          items_per_page: 10
-          offset: 0
-      style:
-        type: serializer
-        options:
-          grouping: {  }
-          uses_fields: false
-          formats: {  }
-      row:
-        type: data_field
-        options:
-          field_options:
-            title:
-              alias: ''
-              raw_output: false
+      path: planned-audit-listing
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - request_format
+        - url.query_args
         - 'user.node_grants:view'
+        - user.permissions
       tags:
-        - 'config:field.storage.node.field_end_date'
+        - 'config:field.storage.node.field_audit_type'
+        - 'config:field.storage.node.field_location'
         - 'config:field.storage.node.field_start_date'
