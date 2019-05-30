@@ -28,17 +28,23 @@ class AuditPlanningController extends ControllerBase {
     $query = \Drupal::database()->select('node_field_data', 'n');
     $query->join('node__field_start_date', 'st', 'n.nid = st.entity_id');
     $query->join('node__field_end_date', 'ed', 'st.entity_id = ed.entity_id');
-    $query->fields('n',['title']);
+    $query->fields('n',['title', 'nid']);
     $query->fields('st',['field_start_date_value']);
     $query->fields('ed',['field_end_date_value']);
     $query->condition('n.type', 'planned_events');
     $records = $query->execute()->fetchAll();
+    $list = [];
     foreach ($records as $key => $value) {
+      $list['id'] = $value->nid;
       $list['title'] = $value->title;
-      $list['start'] = date('Y-m-d', $value->field_start_date_value);
-      $list['end'] = date('Y-m-d', $value->field_end_date_value);
+      $list['start'] = date('Y-m-d h:m:i', $value->field_start_date_value);
+      $list['end'] = date('Y-m-d h:m:i', $value->field_end_date_value);
+      $list['url'] = '/node/'.$value->nid.'/edit';
+      $list['color'] = 'pink';
+      $list['textColor'] = 'black';
     }
-    return new JsonResponse($list);
+    $data[]  = $list;
+    return new JsonResponse($data);
   }
 
 }

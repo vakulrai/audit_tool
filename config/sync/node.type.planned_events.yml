@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 name: 'Planned Events'
 type: planned_events
-description: 'Lust all Events'
+description: 'List all Events'
 help: ''
 new_revision: false
 preview_mode: 1

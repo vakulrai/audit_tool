@@ -11,7 +11,6 @@
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
-      defaultDate: '2019-04-12',
       navLinks: true,
       selectable: true,
       selectMirror: true,

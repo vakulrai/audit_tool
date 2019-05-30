@@ -44,13 +44,13 @@ function aps_general_theme() {
  */
 function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   //Condition for Unit Add form
-  // if($form_id == 'node_unit_form'){
-  //   foreach (array_keys($form['actions']) as $action) {
-  //     if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-  //       $form['actions'][$action]['#submit'][] = 'aps_general_unit_page_redirect';
-  //     }
-  //   }
-  // }
+  if($form_id == 'node_unit_form'){
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'aps_general_unit_page_redirect';
+      }
+    }
+  }
 
   //Condition for Procedure Add form
   if($form_id == 'node_procedures_form'){
@@ -258,7 +258,10 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
         unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
       }
     }
-    elseif ($uri[2] == 'customers_manual') {
+    elseif (stripos(strtolower($uri[2]), 'planned_events?') !== false) {
+        unset($data['tabs']);
+    }
+     elseif ($uri[2] == 'customers_manual') {
         unset($data['tabs']);
     }
   }

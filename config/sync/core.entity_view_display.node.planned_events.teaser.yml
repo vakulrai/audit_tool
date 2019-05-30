@@ -27,4 +27,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-hidden: {  }
+hidden:
+  field_audit_type: true
+  field_auditor: true
+  field_department: true
+  field_end_date: true
+  field_remote_location_name: true
+  field_section: true
+  field_select_audit: true
+  field_shift: true
+  field_start_date: true
+  field_time: true
+  field_unit: true

@@ -50,7 +50,11 @@ function aps_audit_planning_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
       $form['field_start_date']['widget'][0]['value']['#default_value'] = $start_date_object;
       $form['field_end_date']['widget'][0]['value']['#default_value'] = $end_date_object;
       $form['field_start_date']['#access'] = FALSE;
-      $form['field_start_date']['#access'] = FALSE;
+      $form['field_end_date']['#access'] = FALSE;
     }
+  }
+  elseif ($form_id == 'node_planned_events_form') {
+    $form['field_start_date']['#access'] = FALSE;
+    $form['field_end_date']['#access'] = FALSE;  
   }   
 }
