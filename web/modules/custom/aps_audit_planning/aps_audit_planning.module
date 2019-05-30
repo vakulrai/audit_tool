@@ -7,6 +7,7 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_help().
@@ -56,5 +57,27 @@ function aps_audit_planning_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
   elseif ($form_id == 'node_planned_events_form') {
     $form['field_start_date']['#access'] = FALSE;
     $form['field_end_date']['#access'] = FALSE;  
+  }
+
+  //Condition for Calender planning Add form
+  if($form_id == 'node_planned_events_form'){
+    $route_name = \Drupal::routeMatch()->getRouteName();
+    $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+    $uri = explode('/', $current_uri);
+    if($route_name == 'node.add' && stripos(strtolower($uri[2]), 'planned_events?') !== false){
+      foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'aps_planned_events_redirect';
+        }
+      }
+    }
   }   
+}
+
+/**
+ * Callback method after Planned event form submits.
+ */
+function aps_planned_events_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $response = Url::fromUserInput('/planned-audit-listing');
+  $form_state->setRedirectUrl($response);
 }
