@@ -1,36 +1,35 @@
-uuid: e10146b0-b463-4ec7-99c4-838de4f955e0
+uuid: 3ef60591-3008-434f-906f-9bf01de01741
 langcode: en
 status: true
 dependencies:
   config:
-    - system.menu.admin-main-menu
+    - system.menu.manage-external-audit
   module:
     - superfish
     - system
-    - user
   theme:
     - seven
-id: adminmainmenu
+id: manageexternalaudit
 theme: seven
 region: pre_content
-weight: -11
+weight: -10
 provider: null
-plugin: 'superfish:admin-main-menu'
+plugin: 'superfish:manage-external-audit'
 settings:
-  id: 'superfish:admin-main-menu'
-  label: 'Admin main menu'
+  id: 'superfish:manage-external-audit'
+  label: 'Manage External Audit'
   provider: superfish
   label_display: '0'
   level: '1'
   depth: '0'
   expand_all_items: false
   menu_type: horizontal
-  style: none
+  style: white
   arrow: 1
   shadow: 1
   speed: fast
   delay: '800'
-  slide: horizontal
+  slide: vertical
   supposition: 1
   hoverintent: 1
   touch: '0'
@@ -71,17 +70,8 @@ settings:
   custom_item_class: ''
   custom_link_class: ''
 visibility:
-  user_role:
-    id: user_role
-    roles:
-      executive: executive
-      auditor: auditor
-      auditee: auditee
-    negate: false
-    context_mapping:
-      user: '@user.current_user_context:current_user'
   request_path:
     id: request_path
-    pages: /home
+    pages: /node/add/external_audit_
     negate: false
     context_mapping: {  }

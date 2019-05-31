@@ -9,3 +9,6 @@ is_admin: null
 permissions:
   - 'access user profiles'
   - 'administer users'
+  - 'create terms in certification_standard'
+  - 'create terms in decision'
+  - 'create terms in scope'

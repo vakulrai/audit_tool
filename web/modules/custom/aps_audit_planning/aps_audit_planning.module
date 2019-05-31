@@ -1,0 +1,47 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_form_alter().
+ */
+function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+	$form['field_section']['#attributes'] = ['id' => ['section']];
+	if($form_id == 'node_planned_events_form'){
+	  $form['field_department']['widget']['#ajax'] = [
+        'callback' => 'getSectionfromdepartment',
+        'wrapper' => 'section',
+        'event' => 'change',
+      ];
+	}
+
+}
+
+function getSectionfromdepartment(array $form, FormStateInterface $form_state) {
+  if(count($form_state->getValue('field_department')[0])){
+  	$department_array = $form_state->getValue('field_department')[0];
+  	$key = $department_array['target_id'];
+    $form['field_section']['widget']['#options'] = getSectionDropdownOptions($key);
+   }
+   return $form['field_section'];
+}
+
+function getSectionDropdownOptions($key = '') {
+	if($key){
+	  $query = \Drupal::database()->select('node_field_data', 'n');
+	  $query->join('node__field_refere', 'rf', 'n.nid = rf.field_refere_target_id');
+	  $query->fields('rf',['entity_id', 'bundle']);
+	  $query->condition('rf.bundle', 'section');
+	  $query->condition('rf.field_refere_target_id', $key);
+	  $nids = $query->execute()->fetchAll();
+	}
+    
+    $entity_title['_none'] = "- None -";
+    foreach ($nids as $entity) {
+      $node_object = Node::load($entity->entity_id);
+      $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
+    }  
+    return $entity_title;
+  }
+?>

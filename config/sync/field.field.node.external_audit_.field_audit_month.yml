@@ -1,0 +1,23 @@
+uuid: f582addf-efbf-490a-98cb-6ebd08b5d933
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audit_month
+    - node.type.external_audit_
+  module:
+    - aps_general
+id: node.external_audit_.field_audit_month
+field_name: field_audit_month
+entity_type: node
+bundle: external_audit_
+label: 'Audit Month'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '1'
+default_value_callback: ''
+settings: {  }
+field_type: month_only

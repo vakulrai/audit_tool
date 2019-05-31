@@ -1,0 +1,8 @@
+uuid: 7b4b10b5-a741-4f0e-a209-ff981145589f
+langcode: en
+status: true
+dependencies: {  }
+id: manage-external-audit
+label: 'Manage External Audit'
+description: ''
+locked: false

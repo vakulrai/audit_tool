@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.external_audit_.body
     - field.field.node.external_audit_.field_audit_cycle
+    - field.field.node.external_audit_.field_audit_month
     - field.field.node.external_audit_.field_audit_type
     - field.field.node.external_audit_.field_certification_std
     - field.field.node.external_audit_.field_decision
@@ -14,6 +15,7 @@ dependencies:
     - field.field.node.external_audit_.field_validity
     - node.type.external_audit_
   module:
+    - aps_general
     - datetime
     - text
     - yearonly
@@ -24,7 +26,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 1
+    weight: 2
     settings:
       rows: 9
       summary_rows: 3
@@ -32,28 +34,33 @@ content:
     third_party_settings: {  }
     region: content
   field_audit_cycle:
-    weight: 5
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     type: yearonly_default
     region: content
+  field_audit_month:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: month_only_widget
+    region: content
   field_audit_type:
-    weight: 26
+    weight: 10
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_certification_std:
-    weight: 2
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+    weight: 1
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_select
     region: content
   field_decision:
-    weight: 9
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60
@@ -68,13 +75,10 @@ content:
     type: datetime_default
     region: content
   field_scope:
-    weight: 7
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+    weight: 9
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_select
     region: content
   field_score:
     weight: 8
@@ -84,7 +88,7 @@ content:
     type: number
     region: content
   field_validity:
-    weight: 4
+    weight: 5
     settings:
       placeholder: ''
     third_party_settings: {  }

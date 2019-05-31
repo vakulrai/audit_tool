@@ -185,6 +185,10 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $form['field_version_level']['#access'] = FALSE;
   }
 
+  if($form_id == 'node_external_audit__form' || $form_id == 'node_external_audit__edit_form'){
+    $form['field_audit_type']['#access'] = FALSE;
+  }
+
 }
 
 /**
