@@ -279,6 +279,11 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
         unset($data['tabs']);
     }
   }
+
+  if($uri[0] = 'audit_criteria' && $uri[2] = 'edit'){
+    $data['tabs'][0]['aps_general.process_setting']['#link']['url'] = Url::fromUserInput('/audit_criteria_process/1/edit');
+    $data['tabs'][0]['aps_general.product_setting']['#link']['url'] = Url::fromUserInput('/audit_criteria_product/1/edit');
+  }
   if ($current_uri == 'audit_criteria/1/edit') {
     $data['tabs'][0]['eck.entity_content:audit_criteria.eck_edit_tab']['#link']['title'] = 'Systems';
     unset($data['tabs'][0]['aps_general.systems_setting']);

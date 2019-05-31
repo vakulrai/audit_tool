@@ -4,3 +4,10 @@ aps_audit_criteria_js:
   dependencies:
     - core/jquery
     - core/jquery.once
+
+audit_criteria_system_js:
+  js:
+    js/audit_criteria_system.js: { weight: -1 }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
