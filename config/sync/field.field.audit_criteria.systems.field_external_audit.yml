@@ -1,0 +1,29 @@
+uuid: 95d13e1f-3527-43bd-8fe4-3fe00ec4d21d
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria.systems
+    - field.storage.audit_criteria.field_external_audit
+    - taxonomy.vocabulary.external_audit
+id: audit_criteria.systems.field_external_audit
+field_name: field_external_audit
+entity_type: audit_criteria
+bundle: systems
+label: 'External Audit'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      external_audit: external_audit
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

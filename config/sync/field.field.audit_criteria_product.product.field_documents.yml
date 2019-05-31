@@ -1,0 +1,29 @@
+uuid: a053bb58-3301-4a08-a156-74363c1ec8e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_product.product
+    - field.storage.audit_criteria_product.field_documents
+    - taxonomy.vocabulary.internal_audit_product
+id: audit_criteria_product.product.field_documents
+field_name: field_documents
+entity_type: audit_criteria_product
+bundle: product
+label: DOCUMENTS
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      internal_audit_product: internal_audit_product
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

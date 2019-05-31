@@ -4,13 +4,12 @@ status: true
 dependencies:
   config:
     - eck.eck_type.audit_cycle.settings
-    - field.field.audit_cycle.settings.field_ca
+    - field.field.audit_cycle.settings.field_calendar_date
     - field.field.audit_cycle.settings.field_cycle_type
     - field.field.audit_cycle.settings.field_financial_dates
     - field.field.audit_cycle.settings.field_other
     - field.field.audit_cycle.settings.field_schedule_release
   module:
-    - datetime
     - datetime_range
     - paragraphs
 id: audit_cycle.settings.default
@@ -18,11 +17,11 @@ targetEntityType: audit_cycle
 bundle: settings
 mode: default
 content:
-  field_ca:
+  field_calendar_date:
     weight: 2
     settings: {  }
     third_party_settings: {  }
-    type: datetime_default
+    type: daterange_default
     region: content
   field_cycle_type:
     weight: 0

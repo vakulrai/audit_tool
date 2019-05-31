@@ -48,6 +48,8 @@ permissions:
   - 'delete own section content'
   - 'edit any assembly content'
   - 'edit any audit_criteria entities'
+  - 'edit any audit_criteria_process entities'
+  - 'edit any audit_criteria_product entities'
   - 'edit any audit_cycle entities'
   - 'edit any business_process content'
   - 'edit any customer_manual_parts entities'

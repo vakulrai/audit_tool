@@ -1,0 +1,9 @@
+uuid: 95308380-5b0f-41d3-b0ae-7833c9c41ed2
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.audit_criteria_process
+name: Process
+type: process
+description: ''

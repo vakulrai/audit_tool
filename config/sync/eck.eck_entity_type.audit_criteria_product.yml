@@ -1,0 +1,10 @@
+uuid: 265f15ab-8ef4-4bce-836e-485209adf89b
+langcode: en
+status: true
+dependencies: {  }
+id: audit_criteria_product
+label: 'Audit Criteria Product'
+created: false
+changed: false
+uid: false
+title: false

@@ -107,12 +107,12 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
 
       $form['audit_cycle_year'][] = $form['field_cycle_type'];
       $form['audit_cycle_year'][] = $form['field_financial_dates'];
-      $form['audit_cycle_year'][] = $form['field_ca'];
+      $form['audit_cycle_year'][] = $form['field_calendar_date'];
       $form['audit_cycle_year_sr'][] = $form['field_schedule_release'];
       $form['audit_cycle_other'][] = $form['field_other'];
       unset($form['field_cycle_type']);
       unset($form['field_financial_dates']);
-      unset($form['field_ca']);
+      unset($form['field_calendar_date']);
       unset($form['field_schedule_release']);
       unset($form['field_other']);
       foreach (array_keys($form['actions']) as $action) {

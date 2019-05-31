@@ -1,19 +1,19 @@
-uuid: 318d7aa7-960e-4d55-abf3-9b4f764a14a7
+uuid: fc9f9ccc-031f-4ce9-8a4a-38696a04fa69
 langcode: en
 status: true
 dependencies:
   module:
     - eck
     - taxonomy
-id: audit_criteria.field_score_settings
-field_name: field_score_settings
-entity_type: audit_criteria
+id: audit_criteria_product.field_documents
+field_name: field_documents
+entity_type: audit_criteria_product
 type: entity_reference
 settings:
   target_type: taxonomy_term
 module: core
 locked: false
-cardinality: 1
+cardinality: -1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

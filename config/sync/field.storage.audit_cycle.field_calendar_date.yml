@@ -1,17 +1,17 @@
-uuid: 8bcce58e-72e7-4435-8424-5432d63783b8
+uuid: ddc5d2ba-8b17-4670-8ab2-53528f10d310
 langcode: en
 status: true
 dependencies:
   module:
-    - datetime
+    - datetime_range
     - eck
-id: audit_cycle.field_ca
-field_name: field_ca
+id: audit_cycle.field_calendar_date
+field_name: field_calendar_date
 entity_type: audit_cycle
-type: datetime
+type: daterange
 settings:
   datetime_type: date
-module: datetime
+module: datetime_range
 locked: false
 cardinality: 1
 translatable: true

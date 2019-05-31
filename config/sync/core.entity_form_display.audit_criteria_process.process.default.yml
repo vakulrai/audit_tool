@@ -1,0 +1,19 @@
+uuid: bf7f2adf-32df-410c-b813-cdc137e7f5dd
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_process.process
+    - field.field.audit_criteria_process.process.field_documents
+id: audit_criteria_process.process.default
+targetEntityType: audit_criteria_process
+bundle: process
+mode: default
+content:
+  field_documents:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+hidden: {  }

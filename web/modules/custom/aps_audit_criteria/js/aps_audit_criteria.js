@@ -5,12 +5,12 @@
       $('input[name="field_cycle_type"]').click(function() {
         var id = $(this).val();
         if(id == '0'){
-          $("div.field--type-datetime").hide();
+          $("div.field--name-field-calendar-date").hide();
           $("#edit-field-financial-dates-wrapper").show();
         }
         else{
-          $("div.field--type-daterange").hide();
-          $("#edit-field-ca-wrapper").show();
+          $("div.field--name-field-financial-dates").hide();
+          $("#edit-field-calendar-date-wrapper").show();
         }
       });
     }

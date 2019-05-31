@@ -1,0 +1,9 @@
+uuid: 18c13156-371e-40ea-b5f9-46d65fb976a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.audit_criteria_product
+name: Product
+type: product
+description: ''

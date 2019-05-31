@@ -1,0 +1,29 @@
+uuid: 6ffc1e93-abf3-47ba-89e3-0f0e50f585d3
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria.systems
+    - field.storage.audit_criteria.field_supplier_audit
+    - taxonomy.vocabulary.supplier_audits
+id: audit_criteria.systems.field_supplier_audit
+field_name: field_supplier_audit
+entity_type: audit_criteria
+bundle: systems
+label: 'Supplier Audit'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      supplier_audits: supplier_audits
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

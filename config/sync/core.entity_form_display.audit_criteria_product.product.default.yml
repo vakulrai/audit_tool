@@ -1,0 +1,19 @@
+uuid: 3b5c2e6f-e113-440e-8306-a949ef2a6694
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_product.product
+    - field.field.audit_criteria_product.product.field_documents
+id: audit_criteria_product.product.default
+targetEntityType: audit_criteria_product
+bundle: product
+mode: default
+content:
+  field_documents:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+hidden: {  }
