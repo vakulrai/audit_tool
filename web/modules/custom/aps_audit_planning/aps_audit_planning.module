@@ -2,29 +2,115 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\user\Entity\User;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Implements hook_form_alter().
  */
 function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#cache']['max-age'] = 0;
 	$form['field_section']['#attributes'] = ['id' => ['section']];
-	if($form_id == 'node_planned_events_form'){
+	if($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form'){
 	  $form['field_department']['widget']['#ajax'] = [
-        'callback' => 'getSectionfromdepartment',
-        'wrapper' => 'section',
-        'event' => 'change',
-      ];
-	}
+      'callback' => 'getSectionfromdepartment',
+      'wrapper' => 'section',
+      'event' => 'change',
+    ];
 
+    $form['field_auditor']['widget']['#ajax'] = [
+      'callback' => 'getUserINfo',
+      'wrapper' => 'user-details',
+      'event' => 'change',
+    ];
+
+    $form['field_auditor']['user_details'] = [
+       '#attributes' => ['id' => 'user-details'],
+      '#markup' => '',
+      '#type' => 'container',
+    ];
+	}
+  // kint($form);
 }
 
 function getSectionfromdepartment(array $form, FormStateInterface $form_state) {
-  if(count($form_state->getValue('field_department')[0])){
+  if(count($form_state->getValue('field_department'))){
   	$department_array = $form_state->getValue('field_department')[0];
   	$key = $department_array['target_id'];
-    $form['field_section']['widget']['#options'] = getSectionDropdownOptions($key);
+    $form['field_sections']['widget']['#options'] = getSectionDropdownOptions($key);
    }
-   return $form['field_section'];
+   return $form['field_sections'];
+}
+
+function getUserINfo(array $form, FormStateInterface $form_state) {
+  // $ajax_response = new AjaxResponse();
+  if($form_state->getValue('field_auditor')[0]){
+    $user_array = $form_state->getValue('field_auditor')[0];
+    $uid = $user_array['target_id'];
+    $user_object = User::load($uid);
+    $fields = $user_object->toArray();
+    foreach ($fields as $key => $value) {
+      $count_values = count($value);
+      $property = isset($value[0]['value']) ? 'value' : 'target_id';
+      if (!empty($value[0][$property])) {
+        if($count_values > 1){
+          foreach ($value as $no => $name) {
+            $profile[$key][$no] = $value[$no][$property];
+          }
+        }
+        else{
+          $profile[$key] = $value[0][$property];
+        }
+      }
+    }
+    
+    if($user_function = Paragraph::load($profile['field_functions'])){
+      $score = $user_function->get('field_score')->value;
+      $user_score = $score;
+    }
+    else{
+      $user_score = "Not Available";
+    }
+
+    $form['user_details'] = array(
+      '#type' => 'fieldset', 
+      '#title' => t('User Details'), 
+       '#attributes' => ['id' => 'user-details'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    );
+
+    $form['user_details']['data'] = array(
+      '#type' => 'table',
+      '#header' => array(
+          t('Name'),
+          t('Score'),
+          t('Verify'),
+      ),
+    );
+
+   $form['user_details']['data'][0]['name'] = array(
+      '#type' => 'item',
+      '#title' => t('Name'),
+      '#markup' => $profile['name'],
+    );
+    $form['user_details']['data'][0]['score'] = array(
+      '#type' => 'item',
+      '#title' => t('Score'),
+      '#markup' => $user_score,
+    );
+    $form['user_details']['data'][0]['verify'] = array(
+      '#type' => 'checkbox',
+      '#required' => TRUE,
+      '#title' => t('Verify'),
+      '#title_display' => 'invisible',
+    );
+   }
+   return $form['user_details'];
+   // return $ajax_response;
 }
 
 function getSectionDropdownOptions($key = '') {

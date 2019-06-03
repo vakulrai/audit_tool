@@ -9,7 +9,7 @@ dependencies:
     - field.field.node.planned_events.field_department
     - field.field.node.planned_events.field_end_date
     - field.field.node.planned_events.field_remote_location_name
-    - field.field.node.planned_events.field_section
+    - field.field.node.planned_events.field_sections
     - field.field.node.planned_events.field_select_audit
     - field.field.node.planned_events.field_shift
     - field.field.node.planned_events.field_start_date
@@ -74,8 +74,8 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_section:
-    weight: 108
+  field_sections:
+    weight: 113
     label: above
     settings:
       link: true

@@ -9,7 +9,7 @@ dependencies:
     - field.field.node.planned_events.field_department
     - field.field.node.planned_events.field_end_date
     - field.field.node.planned_events.field_remote_location_name
-    - field.field.node.planned_events.field_section
+    - field.field.node.planned_events.field_sections
     - field.field.node.planned_events.field_select_audit
     - field.field.node.planned_events.field_shift
     - field.field.node.planned_events.field_start_date
@@ -65,7 +65,7 @@ third_party_settings:
     group_where:
       children:
         - field_department
-        - field_section
+        - field_sections
       parent_name: ''
       weight: 2
       format_type: fieldset
@@ -124,7 +124,7 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_section:
+  field_sections:
     weight: 4
     settings: {  }
     third_party_settings: {  }

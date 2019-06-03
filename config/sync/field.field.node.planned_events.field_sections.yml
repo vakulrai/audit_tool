@@ -1,29 +1,28 @@
-uuid: 7fe50192-8efa-4363-9d52-a4901fd5c50b
+uuid: 51bdafc1-5e4a-44fe-a50a-9b3cc21dc5e4
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_section
+    - field.storage.node.field_sections
     - node.type.planned_events
-    - taxonomy.vocabulary.section_type
-id: node.planned_events.field_section
-field_name: field_section
+    - node.type.section
+id: node.planned_events.field_sections
+field_name: field_sections
 entity_type: node
 bundle: planned_events
 label: Section
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:taxonomy_term'
+  handler: 'default:node'
   handler_settings:
     target_bundles:
-      section_type: section_type
+      section: section
     sort:
-      field: name
-      direction: asc
+      field: _none
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
