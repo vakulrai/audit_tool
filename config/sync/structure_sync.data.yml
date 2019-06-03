@@ -23,3 +23,634 @@ menus:
     weight: '0'
     langcode: en
     uuid: 1b8e3d6d-8cd3-4b14-9383-1a0f0f3ccfea
+taxonomies:
+  assembly_type:
+    -
+      vid: assembly_type
+      tid: '15'
+      langcode: en
+      name: abc
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 756ff237-6782-4e35-b0aa-3cebe1ffca0b
+    -
+      vid: assembly_type
+      tid: '14'
+      langcode: en
+      name: test
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: aaff70ca-1a99-4e6b-a5df-ab2a84c82af8
+  business_head:
+    -
+      vid: business_head
+      tid: '5'
+      langcode: en
+      name: 'Section A'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 173c9051-34a2-4594-a3bc-91d7744a367d
+  certification_standard:
+    -
+      vid: certification_standard
+      tid: '19'
+      langcode: en
+      name: 'ISO 26000'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: f42ce7fe-4daa-49fa-b91b-fc7144e423e6
+    -
+      vid: certification_standard
+      tid: '18'
+      langcode: en
+      name: 'ISO 9001 FD'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 8faa4054-3e33-4718-b2c8-5050d7462242
+    -
+      vid: certification_standard
+      tid: '49'
+      langcode: en
+      name: test
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 5b8f0aa3-7d42-427a-9563-b6a8141afa0d
+  clause_number:
+    -
+      vid: clause_number
+      tid: '23'
+      langcode: en
+      name: 'Clause A'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 3467525a-47c1-4ede-8683-535fbc289184
+  customer_audit_docuents:
+    -
+      vid: customer_audit_docuents
+      tid: '45'
+      langcode: en
+      name: Checklist
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 0e88c553-f6b7-48ba-987e-3359a2130f98
+    -
+      vid: customer_audit_docuents
+      tid: '44'
+      langcode: en
+      name: 'Customer Provided Audit Checklist'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 1a3bb518-716b-4bbb-80a0-ceca8f186aef
+    -
+      vid: customer_audit_docuents
+      tid: '43'
+      langcode: en
+      name: 'Customer Quality Assurance Manual'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 769b63be-92fb-48bc-a60e-2c060d0b9e82
+  customer_audit_records:
+    -
+      vid: customer_audit_records
+      tid: '46'
+      langcode: en
+      name: 'Customer Related KPI'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 6687b371-eabd-4f7e-9618-f2da2fd6e214
+    -
+      vid: customer_audit_records
+      tid: '47'
+      langcode: en
+      name: 'Customer Score Cards'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: d633d4a9-4a02-483b-90bf-e8668e06462b
+    -
+      vid: customer_audit_records
+      tid: '48'
+      langcode: en
+      name: 'PPAP PSW - Customer Specific'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 8bfc8b2c-9fc4-4d39-9d2c-660f12e26aaf
+  decision:
+    -
+      vid: decision
+      tid: '22'
+      langcode: en
+      name: Fail
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: e5f0a39d-8d2e-42e0-8fc6-278f57b353b0
+    -
+      vid: decision
+      tid: '21'
+      langcode: en
+      name: Pass
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 6f177e01-4d49-4b3a-927e-5a1a4b10793f
+  department_type:
+    -
+      vid: department_type
+      tid: '7'
+      langcode: en
+      name: Packaging
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 2c3756b0-8aac-4455-a456-60a151c989b8
+    -
+      vid: department_type
+      tid: '8'
+      langcode: en
+      name: Production
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 6eed24ad-981f-4cb3-928d-50afe7a4bafe
+    -
+      vid: department_type
+      tid: '9'
+      langcode: en
+      name: 'Sales and Marketing'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 4951a006-1f4a-4429-87f7-01e59c9aa852
+  external_audit:
+    -
+      vid: external_audit
+      tid: '50'
+      langcode: en
+      name: 'Third Party Certification'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 48a99008-268e-4392-9829-7213b0e4ef6c
+  functions_qualified:
+    -
+      vid: functions_qualified
+      tid: '17'
+      langcode: en
+      name: Dummy
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 4c05a99e-d63f-4d8f-801f-7382181a1b42
+  internal_audit_process:
+    -
+      vid: internal_audit_process
+      tid: '63'
+      langcode: en
+      name: 'Audit checklist'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 1f413589-f586-4e21-b065-96fdb19abdc8
+    -
+      vid: internal_audit_process
+      tid: '60'
+      langcode: en
+      name: 'Control Plan'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 6dfe993b-b4a3-466d-b6b3-fd3abed6af2b
+    -
+      vid: internal_audit_process
+      tid: '58'
+      langcode: en
+      name: 'PFD''s Process Flow Diagram'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 3a1d8d33-7052-42fa-bf6a-bed6172fbc43
+    -
+      vid: internal_audit_process
+      tid: '59'
+      langcode: en
+      name: PFMEA
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: c3255083-460f-48b2-a90d-df11e952d808
+    -
+      vid: internal_audit_process
+      tid: '61'
+      langcode: en
+      name: 'Process Performance KPI'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 5a9db264-eb4f-486a-9eb5-b44c0e08a464
+    -
+      vid: internal_audit_process
+      tid: '62'
+      langcode: en
+      name: 'SPC results'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: a1c01267-7241-469b-be50-9bc461df78b1
+  internal_audit_product:
+    -
+      vid: internal_audit_product
+      tid: '69'
+      langcode: en
+      name: 'Audit checklist'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: b9ff0f45-9daa-4695-bd86-209651d8ab86
+    -
+      vid: internal_audit_product
+      tid: '67'
+      langcode: en
+      name: DFMEA
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: d44a0ed3-4bee-4785-aeda-cfed56a5a07b
+    -
+      vid: internal_audit_product
+      tid: '64'
+      langcode: en
+      name: 'Engineering drawing for the customer supplied Part Numbers'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 275fc22f-601f-46c8-9546-830f127bdb9e
+    -
+      vid: internal_audit_product
+      tid: '68'
+      langcode: en
+      name: 'Layout Inspection reports'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: a80b42f7-646d-4ac8-a4fe-9e5f17384bff
+    -
+      vid: internal_audit_product
+      tid: '66'
+      langcode: en
+      name: 'Limit samples'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: b0086854-8243-41b1-b8a3-3fb55aabaa64
+    -
+      vid: internal_audit_product
+      tid: '65'
+      langcode: en
+      name: 'Master Sample'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: f74e9c71-05bc-40db-8f7a-295610730d3e
+  issue_number:
+    -
+      vid: issue_number
+      tid: '16'
+      langcode: en
+      name: APS-001
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 18879f76-0718-467a-8b2c-a522eaa0f75c
+  location:
+    -
+      vid: location
+      tid: '11'
+      langcode: en
+      name: Banglore
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: ca70706d-0bfa-4805-89d5-6107dad3e655
+    -
+      vid: location
+      tid: '10'
+      langcode: en
+      name: Delhi
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 69a8c1ac-c76b-4566-b9ac-ddc860c162ab
+  scope:
+    -
+      vid: scope
+      tid: '20'
+      langcode: en
+      name: Demand
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 9c974084-7537-42cb-8f47-906b3ae5a34d
+  section_type:
+    -
+      vid: section_type
+      tid: '12'
+      langcode: en
+      name: Inhouse
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: edd859cd-ce6f-40dc-a871-a93654559695
+    -
+      vid: section_type
+      tid: '13'
+      langcode: en
+      name: Manufacture
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: b912a84a-cae4-44a4-afe5-5da34e15245f
+  shift:
+    -
+      vid: shift
+      tid: '4'
+      langcode: en
+      name: G
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 797c4910-ba6f-482c-ac14-901bf68587ca
+    -
+      vid: shift
+      tid: '1'
+      langcode: en
+      name: S1
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 6ca835a2-da0b-43dd-90a3-03b441e92b5c
+    -
+      vid: shift
+      tid: '2'
+      langcode: en
+      name: S2
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 357d7e42-8c22-46e2-a504-0e9d02b5753e
+    -
+      vid: shift
+      tid: '3'
+      langcode: en
+      name: S3
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: ea6279dd-0604-4eaf-8cc4-8f5effa8833e
+  supplier_audits:
+    -
+      vid: supplier_audits
+      tid: '57'
+      langcode: en
+      name: 'Audit checklist'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 88ae7da1-b32e-4045-b95f-379c48b89031
+    -
+      vid: supplier_audits
+      tid: '54'
+      langcode: en
+      name: 'Capacity Calculation sheet'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 74f49b84-92f7-4044-b09b-0546534dd093
+    -
+      vid: supplier_audits
+      tid: '53'
+      langcode: en
+      name: 'PPAP PSW - Supplier  Specific'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: d0f66e18-81ed-4083-9460-54b221caa1f8
+    -
+      vid: supplier_audits
+      tid: '56'
+      langcode: en
+      name: 'Premium Freight trends'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: ce3649ec-fde9-4f35-8531-f26715eef54e
+    -
+      vid: supplier_audits
+      tid: '51'
+      langcode: en
+      name: 'Quality Assurance Manual applicable for Supplier'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: d9afcf5c-3ac5-4508-b7d2-e78a96720c1a
+    -
+      vid: supplier_audits
+      tid: '55'
+      langcode: en
+      name: 'SPC trends'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 6df5f6b9-79a5-4dd7-9926-83fa15f5accb
+    -
+      vid: supplier_audits
+      tid: '52'
+      langcode: en
+      name: 'Supplier rating'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 7e9ad9ed-4396-4606-abf3-67421c713e0d
+  system_documents:
+    -
+      vid: system_documents
+      tid: '32'
+      langcode: en
+      name: '10'
+      description__value: null
+      description__format: null
+      weight: '1'
+      parent: '31'
+      uuid: 7ff58f00-3e56-4164-bebc-21bc3a5f3f55
+    -
+      vid: system_documents
+      tid: '33'
+      langcode: en
+      name: '100'
+      description__value: null
+      description__format: null
+      weight: '2'
+      parent: '31'
+      uuid: 3405fe3f-c006-4ca8-a0ea-11c74e0bbc16
+    -
+      vid: system_documents
+      tid: '25'
+      langcode: en
+      name: 'Business process defined Effeciency and Effectiveness'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '27'
+      uuid: 0f6d8898-58ca-4fbf-a29c-c50af007f2b0
+    -
+      vid: system_documents
+      tid: '26'
+      langcode: en
+      name: Checklist
+      description__value: null
+      description__format: null
+      weight: '1'
+      parent: '27'
+      uuid: 0ce6b249-e815-4719-907b-905a0b258241
+    -
+      vid: system_documents
+      tid: '24'
+      langcode: en
+      name: 'Company defined procedures'
+      description__value: null
+      description__format: null
+      weight: '2'
+      parent: '27'
+      uuid: b6d73c59-d1ce-45dd-8371-b3fd1def00b2
+    -
+      vid: system_documents
+      tid: '27'
+      langcode: en
+      name: DOCUMENT
+      description__value: null
+      description__format: null
+      weight: '8'
+      parent: '0'
+      uuid: ebd43035-beeb-449f-b0ec-656432a878f3
+    -
+      vid: system_documents
+      tid: '29'
+      langcode: en
+      name: 'KPI of Departments'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '28'
+      uuid: 3e103568-816f-43f1-b94f-5ec96a227a1d
+    -
+      vid: system_documents
+      tid: '30'
+      langcode: en
+      name: 'KPI of Sections'
+      description__value: null
+      description__format: null
+      weight: '1'
+      parent: '28'
+      uuid: 75315df3-e9b4-4ece-aafc-3c4f8730bba3
+    -
+      vid: system_documents
+      tid: '34'
+      langcode: en
+      name: Other
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '31'
+      uuid: 551711fb-a119-4603-a08f-1c298a118a83
+    -
+      vid: system_documents
+      tid: '28'
+      langcode: en
+      name: RECORDS
+      description__value: null
+      description__format: null
+      weight: '9'
+      parent: '0'
+      uuid: 4b152ef2-f523-4ff7-9387-e4b9e6947a11
+    -
+      vid: system_documents
+      tid: '31'
+      langcode: en
+      name: 'SCORE SETTINGS'
+      description__value: null
+      description__format: null
+      weight: '10'
+      parent: '0'
+      uuid: 4658e2ff-6eb1-4739-a65d-1179d6aa73fb
+  uom:
+    -
+      vid: uom
+      tid: '6'
+      langcode: en
+      name: INR
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: e07affe4-9d5e-475a-b538-3325f126b66b
