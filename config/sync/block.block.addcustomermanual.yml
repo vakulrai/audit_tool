@@ -1,30 +1,31 @@
-uuid: 336aad87-258c-460b-8c9f-20b5b015c634
+uuid: 37cd717d-0e0a-4603-a32b-0df7a149202a
 langcode: en
 status: true
 dependencies:
   config:
-    - system.menu.audit-planning-sub-menu
+    - system.menu.add-customer-manual
   module:
+    - node
     - superfish
     - system
   theme:
     - seven
-id: auditplanningsubmenu
+id: addcustomermanual
 theme: seven
 region: content
-weight: -7
+weight: -12
 provider: null
-plugin: 'superfish:audit-planning-sub-menu'
+plugin: 'superfish:add-customer-manual'
 settings:
-  id: 'superfish:audit-planning-sub-menu'
-  label: 'Audit Planning Sub Menu'
+  id: 'superfish:add-customer-manual'
+  label: 'Add customer manual'
   provider: superfish
   label_display: '0'
   level: '1'
   depth: '0'
   expand_all_items: false
-  menu_type: vertical
-  style: none
+  menu_type: horizontal
+  style: white
   arrow: 1
   shadow: 1
   speed: fast
@@ -70,8 +71,15 @@ settings:
   custom_item_class: ''
   custom_link_class: ''
 visibility:
+  node_type:
+    id: node_type
+    bundles:
+      customers_manual: customers_manual
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
   request_path:
     id: request_path
-    pages: /audit-planning
+    pages: '/node/*/edit'
     negate: false
     context_mapping: {  }

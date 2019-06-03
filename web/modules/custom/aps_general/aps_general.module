@@ -11,6 +11,9 @@ use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
 use Drupal\Core\Link;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+
 
 /**
  * Implements hook_help().
@@ -188,6 +191,17 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   if($form_id == 'node_external_audit__form' || $form_id == 'node_external_audit__edit_form'){
     $form['field_audit_type']['#access'] = FALSE;
   }
+  
+  if($form_id == 'customer_manual_parts_parts_form'){
+    if($nid = \Drupal::request()->query->get('id')){
+      $form['field_reference_id']['widget'][0]['target_id']['#default_value'] = Node::load($nid);
+      foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'parts_redirect';
+      }
+    }
+    }
+  }
 
 }
 
@@ -207,12 +221,19 @@ function aps_general_node_insert(Node $node) {
 }
 
 /**
+ * Implements  hook_entity_insert().
+ */
+function aps_general_customer_manual_parts_insert(Drupal\eck\Entity\EckEntity $entity) {
+  
+}
+
+/**
  * Implements  hook_preprocess_page().
  */
 function aps_general_preprocess_page(&$variables) {
   $route_name = \Drupal::routeMatch()->getRouteName();
   $node = \Drupal::routeMatch()->getParameter('node');
-  if ($node instanceof \Drupal\node\NodeInterface) {
+  if ($node instanceof  \Drupal\node\NodeInterface) {
     $nid_type = $node->bundle();
   }
   if($route_name == 'entity.node.edit_form' && $nid_type == 'customers_manual'){
@@ -233,7 +254,7 @@ function aps_general_preprocess_page(&$variables) {
     $render_csv = $plugin_block->build();
     $variables['page']['content']['csv'] = $render_csv;
     
-    $variables['page']['content']['parts'] = $the_title_render_array;
+    $variables['page']['content'][] = $the_title_render_array;
     $variables['page']['content']['parts'] = $render;
   }
 }
@@ -307,6 +328,31 @@ function aps_general_user_insert(User $user) {
   }
 }
 
+/**
+ * Implements hook_views_query_alter().
+ */
+function aps_general_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  
+}
+
+/**
+ * Implements hook_link_alter().
+ */
+function aps_general_link_alter(&$variables) {
+  
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof \Drupal\node\NodeInterface) {
+    $nid_type = $node->bundle();
+  }
+  if($route_name == 'entity.node.edit_form' && $nid_type == 'customers_manual'){
+    $linkText = $variables['text'];
+    $cleanLinkText = rtrim(strip_tags($linkText));
+    if ($cleanLinkText == 'Add Manual Parts') {
+      $variables['options']['query'] = ['id' => $node->id()];
+    }
+  }
+}
 
 /**
  * Callback method after unit form submits.
@@ -389,5 +435,10 @@ function aps_ext_audit_page_redirect(array $form, \Drupal\Core\Form\FormStateInt
  */
 function aps_clauses_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
   $response = Url::fromUserInput('/external-audit-standards');
+  $form_state->setRedirectUrl($response);
+}
+
+function parts_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $response = Url::fromUserInput('/node/add/customers_manual');
   $form_state->setRedirectUrl($response);
 }

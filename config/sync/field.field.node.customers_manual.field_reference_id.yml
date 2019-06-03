@@ -1,0 +1,28 @@
+uuid: 86e34084-f46d-4aa6-b4f6-fac0dfa2d986
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.customer_manual_parts.parts
+    - field.storage.node.field_reference_id
+    - node.type.customers_manual
+id: node.customers_manual.field_reference_id
+field_name: field_reference_id
+entity_type: node
+bundle: customers_manual
+label: 'Reference id'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:customer_manual_parts'
+  handler_settings:
+    target_bundles:
+      parts: parts
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

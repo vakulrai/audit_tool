@@ -34,7 +34,6 @@ permissions:
   - 'delete any assembly content'
   - 'delete any business_process content'
   - 'delete any customer_manual_parts entities'
-  - 'delete any customers_manual content'
   - 'delete any files media'
   - 'delete any internal_audit content'
   - 'delete any media'

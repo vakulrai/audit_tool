@@ -1,0 +1,20 @@
+uuid: 6d2bebe2-0a8e-4ecf-b17f-59b5579867e3
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - node
+id: customer_manual_parts.field_reference_id
+field_name: field_reference_id
+entity_type: customer_manual_parts
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

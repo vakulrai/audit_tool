@@ -23,3 +23,21 @@ aps_audit_criteria.product_setting:
   title: Product
   base_route: view.internal_audit_systems.audit_listing
   weight: 30
+
+aps_audit_criteria.ia_systems_setting:
+  route_name: view.internal_audit_systems.ia_systems
+  title: Systems
+  base_route: entity.audit_cycle.edit_form
+  weight: 20
+
+aps_audit_criteria.ia_process_setting:
+  route_name: view.internal_audit_systems.ia_process
+  title: Process
+  base_route: entity.audit_cycle.edit_form
+  weight: 25
+
+aps_audit_criteria.ia_product_setting:
+  route_name: view.customer_manual_parts.product_internal_audit_list
+  title: Product
+  base_route: entity.audit_cycle.edit_form
+  weight: 30

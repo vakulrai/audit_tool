@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.customers_manual.body
     - field.field.node.customers_manual.field_document
     - field.field.node.customers_manual.field_qam
+    - field.field.node.customers_manual.field_reference_id
     - field.field.node.customers_manual.field_sr_no
     - field.field.node.customers_manual.field_version_date
     - field.field.node.customers_manual.field_version_level
@@ -47,6 +48,14 @@ content:
       target: ''
     third_party_settings: {  }
     type: link
+    region: content
+  field_reference_id:
+    weight: 107
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_sr_no:
     weight: 102

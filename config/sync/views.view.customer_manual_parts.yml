@@ -8,6 +8,7 @@ dependencies:
     - field.storage.paragraph.field_s_no
   module:
     - eck
+    - node
     - paragraphs
 id: customer_manual_parts
 label: 'Customer Manual Parts'
@@ -316,13 +317,57 @@ display:
           admin_label: 'field_add_parts: Paragraph'
           required: false
           plugin_id: standard
-      arguments: {  }
+        field_reference_id:
+          id: field_reference_id
+          table: customer_manual_parts__field_reference_id
+          field: field_reference_id
+          relationship: none
+          group_type: group
+          admin_label: 'field_reference_id: Content'
+          required: false
+          plugin_id: standard
+      arguments:
+        field_reference_id_target_id:
+          id: field_reference_id_target_id
+          table: customer_manual_parts__field_reference_id
+          field: field_reference_id_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: node
+          default_argument_options: {  }
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+          plugin_id: numeric
       display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
       tags:
         - 'config:field.storage.paragraph.field_part_no'
         - 'config:field.storage.paragraph.field_s_no'
@@ -333,6 +378,27 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+      tags:
+        - 'config:field.storage.paragraph.field_part_no'
+        - 'config:field.storage.paragraph.field_s_no'
+  product_internal_audit_list:
+    display_plugin: page
+    id: product_internal_audit_list
+    display_title: 'Customer Product parts'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      arguments: {  }
+      defaults:
+        arguments: false
+      path: customer-products
     cache_metadata:
       max-age: -1
       contexts:
