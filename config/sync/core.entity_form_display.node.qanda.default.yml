@@ -1,0 +1,43 @@
+uuid: 2c14dc0c-9ede-471b-b7b4-a28def0bb6ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.qanda.body
+    - field.field.node.qanda.field_qanda
+    - node.type.qanda
+  module:
+    - paragraphs
+id: node.qanda.default
+targetEntityType: node
+bundle: qanda
+mode: default
+content:
+  field_qanda:
+    type: entity_reference_paragraphs
+    weight: 1
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

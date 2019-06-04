@@ -1,0 +1,64 @@
+uuid: 8736efa7-560e-496d-a807-77eb329f7818
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_qanda
+    - node.type.qanda
+    - paragraphs.paragraphs_type.internal_audit_qa
+  module:
+    - entity_reference_revisions
+id: node.qanda.field_qanda
+field_name: field_qanda
+entity_type: node
+bundle: qanda
+label: QandA
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      internal_audit_qa: internal_audit_qa
+    target_bundles_drag_drop:
+      audit_cycle_other:
+        weight: 13
+        enabled: false
+      audit_cycle_schedule_release:
+        weight: 14
+        enabled: false
+      audit_score_settings:
+        weight: 15
+        enabled: false
+      audit_score_settings_range_100:
+        weight: 16
+        enabled: false
+      auditor_functional_details:
+        weight: 17
+        enabled: false
+      business_process_effectiveness:
+        weight: 18
+        enabled: false
+      business_process_effieciency:
+        weight: 19
+        enabled: false
+      customer_audit:
+        weight: 20
+        enabled: false
+      customer_manual_parts:
+        weight: 21
+        enabled: false
+      internal_audit_qa:
+        enabled: true
+        weight: 22
+      new_answer:
+        weight: 23
+        enabled: false
+      procedures:
+        weight: 24
+        enabled: false
+field_type: entity_reference_revisions

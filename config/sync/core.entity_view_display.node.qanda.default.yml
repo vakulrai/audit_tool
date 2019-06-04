@@ -1,0 +1,39 @@
+uuid: 09075c55-f2e7-4d2c-bb57-aa1cfbed1e1d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.qanda.body
+    - field.field.node.qanda.field_qanda
+    - node.type.qanda
+  module:
+    - entity_reference_revisions
+    - text
+    - user
+id: node.qanda.default
+targetEntityType: node
+bundle: qanda
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_qanda:
+    type: entity_reference_revisions_entity_view
+    weight: 102
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

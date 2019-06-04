@@ -10,40 +10,29 @@ dependencies:
     - field.field.node.internal_audit.field_ia_department
     - field.field.node.internal_audit.field_ia_section
     - field.field.node.internal_audit.field_procedure_no
+    - field.field.node.internal_audit.field_queries
     - field.field.node.internal_audit.field_select_result
     - field.field.node.internal_audit.field_unit
     - node.type.internal_audit
   module:
-    - paragraphs
+    - inline_entity_form
 id: node.internal_audit.default
 targetEntityType: node
 bundle: internal_audit
 mode: default
 content:
   field_audit_date:
-    weight: 26
+    weight: 7
     settings: {  }
     third_party_settings: {  }
     type: datetime_timestamp
     region: content
   field_audit_type:
     type: options_select
-    weight: 7
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_general_queries:
-    type: entity_reference_paragraphs
-    weight: 6
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-    region: content
   field_ia_department:
     weight: 2
     settings: {  }
@@ -61,6 +50,18 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_queries:
+    weight: 26
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      collapsible: false
+      collapsed: false
+    third_party_settings: {  }
+    type: inline_entity_form_simple
     region: content
   field_select_result:
     weight: 5
@@ -85,6 +86,7 @@ content:
 hidden:
   body: true
   created: true
+  field_general_queries: true
   path: true
   promote: true
   status: true

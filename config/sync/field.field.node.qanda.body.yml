@@ -1,0 +1,22 @@
+uuid: 5f77d03d-116a-4f2e-8b53-545fcc00e60a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.qanda
+  module:
+    - text
+id: node.qanda.body
+field_name: body
+entity_type: node
+bundle: qanda
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary
