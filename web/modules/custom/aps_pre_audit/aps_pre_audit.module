@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * @file
+ * Contains aps_pre_audit.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_help().
+ */
+function aps_pre_audit_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the aps_pre_audit module.
+    case 'help.page.aps_pre_audit':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Contain general functionality of pre Audit') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function aps_pre_audit_theme() {
+  return [
+    'aps_pre_audit' => [
+      'render element' => 'children',
+    ],
+  ];
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function aps_pre_audit_get_node_value($nid, $field_name) {
+  if($nid){
+    $user_object = Node::load($nid);
+      $fields = $user_object->toArray();
+      foreach ($fields as $key => $value) {
+        $count_values = count($value);
+        $property = isset($value[0]['value']) ? 'value' : 'target_id';
+        if (!empty($value[0][$property])) {
+          if($count_values > 1){
+            foreach ($value as $no => $name) {
+              $profile[$key][$no] = $value[$no][$property];
+            }
+          }
+          else{
+            $profile[$key] = $value[0][$property];
+          }
+        }
+      }
+    return $profile[$field_name];
+  }
+}

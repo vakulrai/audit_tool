@@ -1,0 +1,5 @@
+name: 'aps_pre_audit'
+type: module
+description: 'Contain general functionality of pre Audit'
+core: 8.x
+package: 'Custom'

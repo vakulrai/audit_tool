@@ -331,15 +331,19 @@ function aps_general_user_insert(User $user) {
 /**
  * Implements hook_views_query_alter().
  */
-function aps_general_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+// function aps_general_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
   
+// }
+
+function aps_general_views_pre_render(ViewExecutable $view) {
+  if($view->id() == "planned_audit_listing" && $view->current_display == 'planned_audit'){
+  }
 }
 
 /**
  * Implements hook_link_alter().
  */
-function aps_general_link_alter(&$variables) {
-  
+function aps_general_link_alter(&$variables) { 
   $route_name = \Drupal::routeMatch()->getRouteName();
   $node = \Drupal::routeMatch()->getParameter('node');
   if ($node instanceof \Drupal\node\NodeInterface) {
