@@ -28,7 +28,7 @@ class PreAuditForm extends FormBase {
     $nid = \Drupal::request()->query->get('ref');
     $procedure_no = aps_pre_audit_get_node_value($nid, 'field_procedure_no');
     $procedure_title = aps_pre_audit_get_node_value($procedure_no, 'title');
-  // echo '<pre>';print_r($details);
+
     $form['procedure_no'] = array(
       '#type' => 'item',
       '#title' => t('Procedure NO: '.$procedure_title),
@@ -36,9 +36,9 @@ class PreAuditForm extends FormBase {
  
     foreach ($details as $key => $value) {
       $form['audit_qa_'.$key] = array(
-        '#type' => 'fieldset', 
+        '#type' => 'details', 
         '#title' => 'Q.no.'.$value['sno'], 
-        '#attributes' => ['id' => 'qa-details'], 
+        '#attributes' => ['id' => 'tab-'.$key], 
         '#collapsible' => TRUE, 
         '#collapsed' => FALSE,
       ); 
@@ -114,7 +114,7 @@ class PreAuditForm extends FormBase {
 
   }
 
-  public function getAuditDetails() {
+  static function getAuditDetails() {
     $output = [];
     if($nid = \Drupal::request()->query->get('ref')){
       $query = \Drupal::database()->select('node_revision__field_queries', 'n');

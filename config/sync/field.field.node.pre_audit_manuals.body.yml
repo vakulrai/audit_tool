@@ -1,0 +1,22 @@
+uuid: c72969f8-b8e5-444a-bd43-e7e3f5bf923b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.pre_audit_manuals
+  module:
+    - text
+id: node.pre_audit_manuals.body
+field_name: body
+entity_type: node
+bundle: pre_audit_manuals
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

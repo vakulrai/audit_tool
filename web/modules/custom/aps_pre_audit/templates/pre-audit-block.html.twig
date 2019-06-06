@@ -1,0 +1,11 @@
+<nav class="navbar nav-pills nav-fill">
+  <ul class="navbar-nav">
+  	{% for key, qa in data %}
+	    <li class="nav-item">
+	      <a class="nav-link active" href="#tab-{{key}}">Q. {{qa}}</a>
+	    </li>
+    {% endfor %}
+  </ul>
+</nav>
+
+{{ form }}

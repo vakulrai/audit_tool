@@ -1,0 +1,51 @@
+uuid: 5ef473b1-4c77-4be5-b4f1-d2fa2050b69b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pre_audit_manuals.body
+    - field.field.node.pre_audit_manuals.field_description
+    - field.field.node.pre_audit_manuals.field_qam
+    - node.type.pre_audit_manuals
+  module:
+    - link
+    - text
+    - user
+id: node.pre_audit_manuals.default
+targetEntityType: node
+bundle: pre_audit_manuals
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_description:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_qam:
+    weight: 103
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

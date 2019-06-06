@@ -1,0 +1,77 @@
+uuid: 4be5fc1e-9107-4888-aa2e-55b3a2aac5dd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pre_audit_records.body
+    - field.field.node.pre_audit_records.field_files
+    - field.field.node.pre_audit_records.field_qam
+    - field.field.node.pre_audit_records.field_reasons_data
+    - field.field.node.pre_audit_records.field_valid_upto
+    - field.field.node.pre_audit_records.field_verified
+    - node.type.pre_audit_records
+  module:
+    - datetime_range
+    - link
+    - media_library
+    - paragraphs
+id: node.pre_audit_records.default
+targetEntityType: node
+bundle: pre_audit_records
+mode: default
+content:
+  field_files:
+    weight: 1
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    type: media_library_widget
+    region: content
+  field_qam:
+    weight: 3
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_reasons_data:
+    weight: 5
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    type: entity_reference_paragraphs
+    region: content
+  field_valid_upto:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_verified:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

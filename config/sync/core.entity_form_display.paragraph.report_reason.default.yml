@@ -1,0 +1,33 @@
+uuid: 674fb935-2512-4c5c-9164-ba759f803516
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.report_reason.field_others
+    - field.field.paragraph.report_reason.field_reason
+    - paragraphs.paragraphs_type.report_reason
+id: paragraph.report_reason.default
+targetEntityType: paragraph
+bundle: report_reason
+mode: default
+content:
+  field_others:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_reason:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden:
+  created: true
+  status: true

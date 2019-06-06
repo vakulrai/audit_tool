@@ -1,0 +1,18 @@
+uuid: 626548ed-11e3-466e-95f1-c9aab2c2e758
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Pre-Audit Internal documents'
+type: internal_documents
+description: 'Internal Documents for Auditor'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

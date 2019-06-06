@@ -1,0 +1,21 @@
+uuid: 88c8faf5-f872-421f-b26f-1678e2f27b1f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_verified
+    - node.type.pre_audit_records
+  module:
+    - options
+id: node.pre_audit_records.field_verified
+field_name: field_verified
+entity_type: node
+bundle: pre_audit_records
+label: Verified
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

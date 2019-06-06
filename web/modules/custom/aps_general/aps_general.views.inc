@@ -33,5 +33,21 @@ function aps_general_views_data() {
         ],
     ];
 
+    $data['views']['delta_qa'] = [
+        'title' => t('Return entity button to add question'),
+        'help' => t('Field plugin to display the Delta Q page'),
+        'field' => [
+            'id' => 'delta_qa',
+        ],
+    ];
+
+    $data['views']['pre_audit_report'] = [
+        'title' => t('Return entity button to report a document'),
+        'help' => t('Return entity button to report a document'),
+        'field' => [
+            'id' => 'pre_audit_report',
+        ],
+    ];
+
     return $data;
 }

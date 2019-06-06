@@ -1,0 +1,18 @@
+uuid: b284f2ec-41c9-4e68-ac02-41f1d2c97143
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Pre-Audit Manuals'
+type: pre_audit_manuals
+description: ''
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

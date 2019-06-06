@@ -1,0 +1,30 @@
+uuid: dc8c58db-4003-4a5f-9e4b-0a8dcd87951f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pre_audit_manuals.body
+    - node.type.pre_audit_manuals
+  module:
+    - text
+    - user
+id: node.pre_audit_manuals.teaser
+targetEntityType: node
+bundle: pre_audit_manuals
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

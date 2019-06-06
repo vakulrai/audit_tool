@@ -1,0 +1,3 @@
+aps_pre_audit.manuals:
+ class: \Drupal\Core\Menu\LocalTaskDefault
+ deriver: \Drupal\aps_pre_audit\Plugin\Derivative\PreauditDerivative

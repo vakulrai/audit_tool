@@ -27,10 +27,15 @@ function aps_pre_audit_help($route_name, RouteMatchInterface $route_match) {
 /**
  * Implements hook_theme().
  */
-function aps_pre_audit_theme() {
+function aps_pre_audit_theme($existing, $type, $theme, $path) {
   return [
-    'aps_pre_audit' => [
-      'render element' => 'children',
+   'pre_audit_block' => [
+      'path' => $path . '/templates',
+      'template' => 'pre-audit-block',
+        'variables' => [
+          'form' => NULL,
+          'data' => NULL,
+        ],
     ],
   ];
 }

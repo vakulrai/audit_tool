@@ -1,0 +1,23 @@
+uuid: df3d1c3e-d324-46d4-94e3-189678b9a419
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_qam
+    - node.type.pre_audit_records
+  module:
+    - link
+id: node.pre_audit_records.field_qam
+field_name: field_qam
+entity_type: node
+bundle: pre_audit_records
+label: QAM
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

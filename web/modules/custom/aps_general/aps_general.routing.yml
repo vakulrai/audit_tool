@@ -1,9 +1,10 @@
-aps_general.node_add_clauses:
+aps_general.create_reports:
   path: '/external-audit-standards-redirect'
   defaults:  
-    _controller: '\Drupal\aps_general\Controller\RedirectFormController::redirect_form'
+    _controller: '\Drupal\aps_general\Controller\RedirectFormController::openModalForm'
   requirements:
     _access: 'TRUE'
+
 aps_general.csv_import:
   path: '/aps_general/form/csv_import'
   defaults:
@@ -12,11 +13,10 @@ aps_general.csv_import:
   requirements:
     _access: 'TRUE'
   
-
 aps_general.add_user_roles_form:
-  path: 'form/add-user-roles'
+  path: '/form/report-document'
   defaults:
-    _form: '\Drupal\aps_general\Form\AddUserRolesForm'
+    _form: '\Drupal\aps_general\Form\ReportDocument'
     _title: 'AddUserRolesForm'
   requirements:
     _access: 'TRUE'

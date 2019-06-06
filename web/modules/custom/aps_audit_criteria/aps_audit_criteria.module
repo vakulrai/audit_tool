@@ -164,6 +164,7 @@ function aps_audit_criteria_preprocess_page(&$variables) {
  */
 function getVids($vid, $parent_id){
   $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, $parent_id);
+  $term_data = [];
   foreach ($terms as $term) {
     $term_data[$term->tid] = $term->name;
   }

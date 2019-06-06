@@ -1,16 +1,136 @@
 menus:
   -
-    menu_name: add-user-auditor
-    title: 'Add New'
+    menu_name: pre-audit-
+    title: Documents
     parent: null
-    uri: 'internal:/admin/people/create?type=auditor'
+    uri: 'internal:/pre-audit/documents'
     link_title: ''
     description: null
     enabled: '1'
     expanded: '0'
     weight: '0'
     langcode: en
-    uuid: f2ef3e9f-fbe5-4ffd-a886-e4ea79d930eb
+    uuid: 9aafb1ef-7ca3-4bdf-85d9-c7326760cf1b
+  -
+    menu_name: add-customer-manual
+    title: 'Add Manual Parts'
+    parent: null
+    uri: 'internal:/admin/content/customer_manual_parts/add/parts'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '0'
+    langcode: en
+    uuid: 8665b5be-91a2-4fc8-b4f4-ad7e2531217a
+  -
+    menu_name: manage-external-audit
+    title: 'Add Cert. Standard'
+    parent: null
+    uri: 'internal:/admin/structure/taxonomy/manage/certification_standard/add'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '0'
+    langcode: en
+    uuid: 76c2921f-47b5-41cf-ac8a-c091229f6cd3
+  -
+    menu_name: manage-external-audit
+    title: 'Add Decision'
+    parent: null
+    uri: 'internal:/admin/structure/taxonomy/manage/decision/add'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '0'
+    langcode: en
+    uuid: 047cb3c0-2290-4140-abaa-7eb57e59edb3
+  -
+    menu_name: manage-external-audit
+    title: 'Add Scope'
+    parent: null
+    uri: 'internal:/admin/structure/taxonomy/manage/scope/add'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '0'
+    langcode: en
+    uuid: 349bcdad-9cb0-4746-9599-5bd87582ea93
+  -
+    menu_name: audit-planning-sub-menu
+    title: Calendar
+    parent: null
+    uri: 'internal:/audit-planning'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-50'
+    langcode: en
+    uuid: 16588839-f8fb-412c-9188-2be57991b5d3
+  -
+    menu_name: audit-planning-sub-menu
+    title: 'Audit Listing'
+    parent: null
+    uri: 'internal:/planned-audit-listing'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-49'
+    langcode: en
+    uuid: 452cc0fa-56c3-48f5-909d-466372393193
+  -
+    menu_name: audit-planning-sub-menu
+    title: Statistics
+    parent: null
+    uri: 'internal:#'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-48'
+    langcode: en
+    uuid: f46d366b-d805-4a6c-9b98-da2436fb7a92
+  -
+    menu_name: audit-planning-sub-menu
+    title: Settings
+    parent: null
+    uri: 'internal:#'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-47'
+    langcode: en
+    uuid: c999419b-46ea-42a2-b52e-201534bae910
+  -
+    menu_name: add-clauses
+    title: 'Add New'
+    parent: null
+    uri: 'internal:/node/add/clauses'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '0'
+    langcode: en
+    uuid: 9c0b81fc-5941-4913-ac69-1660fc82cf29
+  -
+    menu_name: add-standards
+    title: 'Add New'
+    parent: null
+    uri: 'internal:/node/add/external_audit_'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '0'
+    langcode: en
+    uuid: 56b408ab-3ebd-4997-a836-efc32064f175
   -
     menu_name: add-user
     title: 'Add New'
@@ -23,6 +143,246 @@ menus:
     weight: '0'
     langcode: en
     uuid: 1b8e3d6d-8cd3-4b14-9383-1a0f0f3ccfea
+  -
+    menu_name: add-user
+    title: 'Add roles'
+    parent: null
+    uri: 'internal:/admin/people/roles'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '0'
+    langcode: en
+    uuid: 5eb44b7a-ecc9-46ad-bba8-4d27d3a47639
+  -
+    menu_name: logout
+    title: Logout
+    parent: null
+    uri: 'internal:/user/logout'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '0'
+    langcode: en
+    uuid: 8254d202-62e8-48ad-ac09-3fff5f41fc01
+  -
+    menu_name: admin-sub-menu
+    title: UNIT
+    parent: null
+    uri: 'internal:#'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '1'
+    weight: '-50'
+    langcode: en
+    uuid: efc675fe-2723-4df0-bb76-246ef34007cd
+  -
+    menu_name: admin-sub-menu
+    title: AUDIT
+    parent: null
+    uri: 'internal:#'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '1'
+    weight: '-48'
+    langcode: en
+    uuid: 30b3f803-be41-4d87-9ca7-2cbae4adea43
+  -
+    menu_name: admin-sub-menu
+    title: CUSTOMERS
+    parent: null
+    uri: 'internal:/node/add/customers_manual'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-47'
+    langcode: en
+    uuid: 03dd749f-6308-4a94-8be0-0f66e581772e
+  -
+    menu_name: admin-sub-menu
+    title: SUPPLIERS
+    parent: null
+    uri: 'internal:#'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-46'
+    langcode: en
+    uuid: 38ac39a8-e81e-4e41-af8f-77794a20c4ee
+  -
+    menu_name: admin-sub-menu
+    title: INFRASTRUCTURE
+    parent: null
+    uri: 'internal:/node/add/procedures'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-49'
+    langcode: en
+    uuid: c0645561-66fb-4ff1-8800-a9a41e5015c0
+  -
+    menu_name: admin-sub-menu
+    title: 'Unit Registration'
+    parent: 'menu_link_content:efc675fe-2723-4df0-bb76-246ef34007cd'
+    uri: 'internal:/node/add/unit'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-50'
+    langcode: en
+    uuid: 567d25ef-303b-4e03-94c1-1404d89381c1
+  -
+    menu_name: admin-sub-menu
+    title: 'Role Registartion'
+    parent: 'menu_link_content:efc675fe-2723-4df0-bb76-246ef34007cd'
+    uri: 'internal:/admin/people/create?type=default'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-49'
+    langcode: en
+    uuid: 88993e2a-8212-422a-8190-d52bb62d20b2
+  -
+    menu_name: admin-sub-menu
+    title: Auditors
+    parent: 'menu_link_content:30b3f803-be41-4d87-9ca7-2cbae4adea43'
+    uri: 'internal:/admin/people/create?type=auditor'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-50'
+    langcode: en
+    uuid: c544f55c-f06c-44fe-9233-26dbefd45729
+  -
+    menu_name: admin-sub-menu
+    title: 'External Audit Details'
+    parent: 'menu_link_content:30b3f803-be41-4d87-9ca7-2cbae4adea43'
+    uri: 'internal:/node/add/external_audit_'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-49'
+    langcode: en
+    uuid: 2eeec5a3-6cfa-4c46-af62-b77a745cfb16
+  -
+    menu_name: admin-sub-menu
+    title: 'Audit Criteria Settings'
+    parent: 'menu_link_content:30b3f803-be41-4d87-9ca7-2cbae4adea43'
+    uri: 'internal:/audit_criteria/1/edit'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-48'
+    langcode: en
+    uuid: e0b585a0-8c67-4c82-8e12-4598ff98c028
+  -
+    menu_name: admin-sub-menu
+    title: 'Time Cycle Settings'
+    parent: 'menu_link_content:30b3f803-be41-4d87-9ca7-2cbae4adea43'
+    uri: 'internal:/audit_cycle/1/edit'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-47'
+    langcode: en
+    uuid: 8d1aa00e-fa24-433b-ba11-dd401f16eea0
+  -
+    menu_name: admin-sub-menu
+    title: 'Audit Checklist'
+    parent: 'menu_link_content:30b3f803-be41-4d87-9ca7-2cbae4adea43'
+    uri: 'internal:#'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-46'
+    langcode: en
+    uuid: 51cce440-0657-4ca8-83d5-f7fc105d0c5a
+  -
+    menu_name: admin-sub-menu
+    title: 'Internal Audit'
+    parent: 'menu_link_content:30b3f803-be41-4d87-9ca7-2cbae4adea43'
+    uri: 'internal:/internal-audit-list'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '1'
+    weight: '0'
+    langcode: en
+    uuid: 41f80673-1f29-4678-a0ee-6c5c36b6d493
+  -
+    menu_name: admin-sub-menu
+    title: 'Internal Audit Process'
+    parent: 'menu_link_content:41f80673-1f29-4678-a0ee-6c5c36b6d493'
+    uri: 'internal:/internal-audit-systems'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '-50'
+    langcode: en
+    uuid: 4651f765-8d22-4983-a9e4-b74b91b14661
+  -
+    menu_name: admin-main-menu
+    title: Home
+    parent: null
+    uri: 'internal:/'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '1'
+    weight: '-46'
+    langcode: en
+    uuid: d106c6b7-c218-40b6-84c0-fb8f76860fbd
+  -
+    menu_name: admin-main-menu
+    title: 'Audit Planning'
+    parent: null
+    uri: 'internal:/audit-planning'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '1'
+    weight: '-48'
+    langcode: en
+    uuid: c90bb9bc-011d-4153-be95-e1abe5166ee1
+  -
+    menu_name: admin-main-menu
+    title: Notification
+    parent: null
+    uri: 'internal:#'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '1'
+    weight: '-44'
+    langcode: en
+    uuid: e7d2bba6-b43d-4e9e-a527-a6dbf423e019
+  -
+    menu_name: admin-main-menu
+    title: Admin
+    parent: null
+    uri: 'internal:/home'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '1'
+    weight: '-50'
+    langcode: en
+    uuid: 1d3af0d8-c7cf-492c-b986-31e3813f4422
 taxonomies:
   assembly_type:
     -
@@ -388,6 +748,17 @@ taxonomies:
       weight: '0'
       parent: '0'
       uuid: 69a8c1ac-c76b-4566-b9ac-ddc860c162ab
+  reasons:
+    -
+      vid: reasons
+      tid: '70'
+      langcode: en
+      name: 'Rquirements Didn''t Match'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 3847af29-0dfb-4888-8b4b-f025b8b72621
   scope:
     -
       vid: scope

@@ -1,0 +1,22 @@
+uuid: 64f59138-ebcb-442e-98ef-7b3ddb9c97a4
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.pre_audit_manuals
+id: node.pre_audit_manuals.status
+field_name: status
+entity_type: node
+bundle: pre_audit_manuals
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

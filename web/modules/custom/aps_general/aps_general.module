@@ -346,6 +346,8 @@ function aps_general_views_pre_render(ViewExecutable $view) {
 function aps_general_link_alter(&$variables) { 
   $route_name = \Drupal::routeMatch()->getRouteName();
   $node = \Drupal::routeMatch()->getParameter('node');
+  $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+  $uri = explode('/', $current_uri);
   if ($node instanceof \Drupal\node\NodeInterface) {
     $nid_type = $node->bundle();
   }
@@ -354,6 +356,17 @@ function aps_general_link_alter(&$variables) {
     $cleanLinkText = rtrim(strip_tags($linkText));
     if ($cleanLinkText == 'Add Manual Parts') {
       $variables['options']['query'] = ['id' => $node->id()];
+    }
+  }
+
+  if ($route_name == 'view.planned_audit_listing.page_1') {
+    $linkText = $variables['text'];
+    $cleanLinkText = rtrim(strip_tags($linkText));
+    if ($cleanLinkText == 'Documents') { 
+      $get_nid = explode('?', $uri[1]);
+      $url = Url::fromRoute('view.planned_audit_listing.document_list_ia',['nid' => $get_nid[0]]);
+      unset($variables['url']);
+      $variables['url'] = $url;
     }
   }
 }
