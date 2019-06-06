@@ -96,11 +96,13 @@ function getUserINfo(array $form, FormStateInterface $form_state) {
       '#type' => 'item',
       '#title' => t('Name'),
       '#markup' => $profile['name'],
+      '#title_display' => 'invisible',
     );
     $form['user_details']['data'][0]['score'] = array(
       '#type' => 'item',
       '#title' => t('Score'),
       '#markup' => $user_score,
+      '#title_display' => 'invisible',
     );
     $form['user_details']['data'][0]['verify'] = array(
       '#type' => 'checkbox',

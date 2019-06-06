@@ -7,3 +7,10 @@ aps_pre_audit.pre_audit_form:
   requirements:
     _access: 'TRUE'
   
+aps_pre_audit.title_list:
+  path: '/get-title'
+  defaults:
+    _controller: '\Drupal\aps_pre_audit\Controller\GetTitleList::getTitle'
+    _format: json
+  requirements:
+    _access: 'TRUE'
