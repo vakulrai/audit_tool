@@ -1,0 +1,27 @@
+uuid: 1d79ef71-df40-4c76-b027-af61fc90099b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_evidence
+    - paragraphs.paragraphs_type.internal_audit_qa
+  module:
+    - file
+id: paragraph.internal_audit_qa.field_evidence
+field_name: field_evidence
+entity_type: paragraph
+bundle: internal_audit_qa
+label: Evidence
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: evidence
+  file_extensions: 'mp4 png jpeg doc pdf'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

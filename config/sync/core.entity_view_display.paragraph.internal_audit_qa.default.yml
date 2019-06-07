@@ -5,11 +5,13 @@ dependencies:
   config:
     - field.field.paragraph.internal_audit_qa.field_answers_n
     - field.field.paragraph.internal_audit_qa.field_description
+    - field.field.paragraph.internal_audit_qa.field_evidence
     - field.field.paragraph.internal_audit_qa.field_question
     - field.field.paragraph.internal_audit_qa.field_sub_s_no_
     - paragraphs.paragraphs_type.internal_audit_qa
   module:
     - entity_reference_revisions
+    - file
 id: paragraph.internal_audit_qa.default
 targetEntityType: paragraph
 bundle: internal_audit_qa
@@ -31,6 +33,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_evidence:
+    weight: 5
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
     region: content
   field_question:
     weight: 3

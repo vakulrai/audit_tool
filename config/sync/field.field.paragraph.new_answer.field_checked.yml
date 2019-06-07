@@ -1,0 +1,21 @@
+uuid: 7bcda0f9-6ae7-466d-8a95-a0d88bcb53f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_checked
+    - paragraphs.paragraphs_type.new_answer
+  module:
+    - options
+id: paragraph.new_answer.field_checked
+field_name: field_checked
+entity_type: paragraph
+bundle: new_answer
+label: Checked
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

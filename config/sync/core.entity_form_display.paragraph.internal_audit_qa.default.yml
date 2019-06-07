@@ -5,10 +5,12 @@ dependencies:
   config:
     - field.field.paragraph.internal_audit_qa.field_answers_n
     - field.field.paragraph.internal_audit_qa.field_description
+    - field.field.paragraph.internal_audit_qa.field_evidence
     - field.field.paragraph.internal_audit_qa.field_question
     - field.field.paragraph.internal_audit_qa.field_sub_s_no_
     - paragraphs.paragraphs_type.internal_audit_qa
   module:
+    - file
     - paragraphs
 id: paragraph.internal_audit_qa.default
 targetEntityType: paragraph
@@ -34,6 +36,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_evidence:
+    weight: 5
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
     region: content
   field_question:
     weight: 3
