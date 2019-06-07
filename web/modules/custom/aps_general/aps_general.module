@@ -299,6 +299,15 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     elseif (stripos(strtolower($uri[2]), 'assembly?') !== false) {
         unset($data['tabs']);
     }
+    elseif (stripos(strtolower($uri[2]), 'internal_documents?') !== false) {
+        unset($data['tabs']);
+    }
+    elseif (stripos(strtolower($uri[2]), 'pre_audit_records?') !== false) {
+        unset($data['tabs']);
+    }
+    elseif (stripos(strtolower($uri[2]), 'pre_audit_manuals?') !== false) {
+        unset($data['tabs']);
+    }
     elseif ($uri[2] == 'procedures') {
       unset($data['tabs']);
     }
@@ -371,6 +380,10 @@ function aps_general_link_alter(&$variables) {
   }
 }
 
+function get_user_roles(){
+  $roles = user_role_names(TRUE);
+  return $roles;
+}
 /**
  * Callback method after unit form submits.
  */

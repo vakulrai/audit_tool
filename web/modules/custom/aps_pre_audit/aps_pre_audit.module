@@ -73,4 +73,13 @@ function aps_pre_audit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
   if($form['#id'] == 'views-exposed-form-planned-audit-listing-planned-audit'){
     $form['title']['#autocomplete_route_name'] = 'aps_pre_audit.title_list';
   }
+  if($form_id == 'node_pre_audit_records_form' || $form_id == 'node_pre_audit_records_edit_form'){
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    foreach ($roles as $key => $value) {
+      $user_role = $value;
+    }
+    $form['field_submitted_by']['widget']['#default_value'] = $user_role;
+    $form['field_submitted_by']['#access'] = FALSE;
+  }
 }

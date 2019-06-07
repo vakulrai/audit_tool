@@ -1,0 +1,21 @@
+uuid: 4e894d65-510a-4258-863a-8e340918c0ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_submitted_by
+    - node.type.pre_audit_records
+  module:
+    - options
+id: node.pre_audit_records.field_submitted_by
+field_name: field_submitted_by
+entity_type: node
+bundle: pre_audit_records
+label: 'Submitted By'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

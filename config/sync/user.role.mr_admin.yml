@@ -1,0 +1,9 @@
+uuid: 27f7d62c-272f-49a3-8c36-a02a7fcd398c
+langcode: en
+status: true
+dependencies: {  }
+id: mr_admin
+label: 'MR Admin'
+weight: 5
+is_admin: null
+permissions: {  }

@@ -1,0 +1,21 @@
+uuid: 83834aee-004c-4055-a0a3-6b1d561e600f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_submitted_by
+field_name: field_submitted_by
+entity_type: node
+type: list_string
+settings:
+  allowed_values: {  }
+  allowed_values_function: get_user_roles
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
