@@ -14,3 +14,19 @@ aps_pre_audit.title_list:
     _format: json
   requirements:
     _access: 'TRUE'
+
+aps_pre_audit.get_info:
+  path: '/get-more-info'
+  defaults:
+    _controller: '\Drupal\aps_pre_audit\Controller\GetTitleList::askForInfo'
+  requirements:
+    _access: 'TRUE'
+    
+aps_pre_audit.get_more_info_form:
+  path: '/aps_pre_audit/form/get_more_info'
+  defaults:
+    _form: '\Drupal\aps_pre_audit\Form\GetMoreInfoForm'
+    _title: 'GetMoreInfoForm'
+  requirements:
+    _access: 'TRUE'
+  

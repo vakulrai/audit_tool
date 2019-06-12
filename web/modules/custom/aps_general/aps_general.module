@@ -13,6 +13,7 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Link;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\paragraphs\Entity\Paragraph;
 
 
 /**
@@ -151,6 +152,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   }
 
   if($form_id == 'user_register_form'){
+    $form['#title'] = 'Add Roles';
     if($form['account']['roles']){
       $form['account']['roles']['#type'] = 'select';
     }
@@ -221,10 +223,36 @@ function aps_general_node_insert(Node $node) {
 }
 
 /**
- * Implements  hook_entity_insert().
+ * Implements  hook_entity_create().
  */
-function aps_general_customer_manual_parts_insert(Drupal\eck\Entity\EckEntity $entity) {
-  
+function aps_general_node_create(Node $entity) {
+  if ($entity->bundle() == 'procedures') {
+    $config = \Drupal::service('config.factory')->getEditable('aps_general.adduserroles');
+    $current_count = $config->get('current_count');
+    if($current_count == 0){
+      $count = $config->get('default_count');
+    }
+    elseif ($current_count > 0) {
+      $count = $config->get('current_count');
+    }
+    if($entity->isNew()){
+      $paragraph = Paragraph::create([
+        'field_s_no' => $count,
+        'type' => 'procedures',
+      ]);
+      $paragraph->save();
+      $paragraphp_version = [
+        [
+          'target_id' => $paragraph->id(),
+          'target_revision_id' => $paragraph->getRevisionId(),
+        ],
+      ];
+      $entity->set('field_create_procedure', $paragraphp_version);
+      $config->set('previous_count', $count);
+      $config->set('current_count', $count + 1);
+      $config->save();
+    }
+  }
 }
 
 /**
@@ -269,7 +297,19 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     if ($uri[2] == 'external_audit_') {
       $link = Url::fromUserInput('/node/add/'.$uri[2]);
       if ($link) {
-        unset($data['tabs']);
+        unset($data['tabs'][0]['aps_audit_criteria.audit_list']);
+        unset($data['tabs'][0]['aps_audit_criteria.systems_setting']);
+        unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
+        unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
+      }
+    }
+    if ($uri[2] == 'clauses') {
+      $link = Url::fromUserInput('/node/add/'.$uri[2]);
+      if ($link) {
+        unset($data['tabs'][0]['aps_audit_criteria.audit_list']);
+        unset($data['tabs'][0]['aps_audit_criteria.systems_setting']);
+        unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
+        unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
       }
     }
     elseif ($uri[2] == 'unit') {
@@ -309,7 +349,13 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
         unset($data['tabs']);
     }
     elseif ($uri[2] == 'procedures') {
-      unset($data['tabs']);
+      unset($data['tabs'][0]['aps_general.clauses']); 
+      unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
+      unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
+      unset($data['tabs'][0]['aps_audit_criteria.audit_list']);
+      unset($data['tabs'][0]['aps_audit_criteria.systems_setting']);
+      $data['tabs'][0]['aps_general.standards']['#link']['title'] = 'Procedure Listing';
+      $data['tabs'][0]['aps_general.standards']['#link']['url'] = Url::fromUserInput('/procedure-listing');
     }
   }
 
@@ -324,6 +370,9 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   if($current_uri == 'internal-audit-list'){
     unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
     unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
+  }
+  if($current_uri == 'procedure-listing'){
+   
   }
 }
 
@@ -369,13 +418,15 @@ function aps_general_link_alter(&$variables) {
   }
 
   if ($route_name == 'view.planned_audit_listing.page_1') {
+    $config = \Drupal::service('config.factory')->getEditable('aps_pre_audit.getmoreinfo');
     $linkText = $variables['text'];
     $cleanLinkText = rtrim(strip_tags($linkText));
-    if ($cleanLinkText == 'Documents') { 
+    if ($cleanLinkText == 'Documents') {
       $get_nid = explode('?', $uri[1]);
       $url = Url::fromRoute('view.planned_audit_listing.document_list_ia',['nid' => $get_nid[0]]);
       unset($variables['url']);
       $variables['url'] = $url;
+      $config->set('nid', $get_nid[0])->save();
     }
   }
 }

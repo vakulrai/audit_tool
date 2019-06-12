@@ -7,6 +7,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Component\Datetime\DateTimePlus;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Class PreAuditForm.
@@ -25,8 +27,26 @@ class PreAuditForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $form['#cache']['max-age'] = 0;
     $details = $this->getAuditDetails();
     $nid = \Drupal::request()->query->get('ref');
+    $current_path = trim(\Drupal::service('path.current')->getPath(), '/');
+    $path_args = explode('/', $current_path);
+    if(isset($path_args[1])){
+      $node_object = Node::load($path_args[1]);
+      $event_timestamp = $node_object->get('field_start_date')->value;
+    }
+    $user_timezone =  drupal_get_user_timezone();
+    $event_timestamp = $this->getTimezoneofEventDate($event_timestamp, $user_timezone, $format = 'd/m/Y H:i:s');
+    $get_current_timestamp = $this->getCurrentTimestamp($user_timezone);
+    $diff = $event_timestamp - $get_current_timestamp;
+    $diff = 0;
+    if($diff == 0) {
+      $disable_fields = 'TRUE';
+    }
+    else{
+      $disable_fields = 'FALSE';
+    }
     $procedure_no = aps_pre_audit_get_node_value($nid, 'field_procedure_no');
     $procedure_title = aps_pre_audit_get_node_value($procedure_no, 'title');
 
@@ -38,7 +58,6 @@ class PreAuditForm extends FormBase {
     $validators = array(
       'file_validate_extensions' => ['jpg mp4 pdf'],
     );
-
     foreach ($details as $key => $value) {
       $count_value = count($value['evidence_value']);
       if($count_value == 2){
@@ -86,6 +105,7 @@ class PreAuditForm extends FormBase {
        '#options' => $answer_options,
        '#weight' => 15,
        '#default_value' => $this->getAnswersDefaultValue($value['answers']),
+       '#disabled' => $disable_fields,
       );
       
       $form['audit_qa_'.$key]['finding_img_'.$key] = [
@@ -98,6 +118,7 @@ class PreAuditForm extends FormBase {
         '#upload_validators' => $validators,
         '#upload_location' => 'public://',
         '#default_value' => $key_1,
+        '#disabled' => $disable_fields,
       ];
 
       $form['audit_qa_'.$key]['finding_audio_'.$key] = [
@@ -110,18 +131,21 @@ class PreAuditForm extends FormBase {
         '#upload_validators' => $validators,
         '#upload_location' => 'public://',
         '#default_value' => $key_2,
+        '#disabled' => $disable_fields,
       ];
 
       $form['audit_qa_'.$key]['clause_cat'.$key]= array(
        '#type' => 'textfield',
        '#title' => 'Clause Category',
        '#weight' => 20,
+       '#disabled' => $disable_fields,
       );
 
       $form['audit_qa_'.$key]['clause_find'.$key] = array(
        '#type' => 'textfield',
        '#title' => 'Clause Finding',
        '#weight' => 20,
+       '#disabled' => $disable_fields,
       );
     }
 
@@ -138,6 +162,7 @@ class PreAuditForm extends FormBase {
         'callback' => [$this, 'getDetails'],
         'event' => 'click',
       ],
+      '#disabled' => $disable_fields,
     ];
 
     return $form;
@@ -281,6 +306,21 @@ class PreAuditForm extends FormBase {
     }
 
     return $response;
+  }
+
+  public function getTimezoneofEventDate($timestamp, $user_timezone, $format = 'd/m/Y H:i:s'){
+    $db_timezone = 'UTC';
+    $date_object = DateTimePlus::createFromTimestamp($timestamp, $db_timezone);
+    $date_object->setTimezone(new \DateTimeZone($user_timezone));
+    return $date_object->getTimestamp();
+  }
+
+  public function getCurrentTimestamp($user_timezone){
+    $db_timezone = 'UTC';
+    $get_current_timestamp =  \Drupal::time()->getCurrentTime();
+    $current_date_object = DateTimePlus::createFromTimestamp($get_current_timestamp, $db_timezone);
+    $current_date_object->setTimezone(new \DateTimeZone($user_timezone));
+    return $current_date_object->getTimestamp();
   }
 
 }

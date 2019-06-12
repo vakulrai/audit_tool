@@ -5,7 +5,8 @@
     	var calendarEl = document.getElementById('demo');
       var base_url = drupalSettings.siteBaseUrl;
       var calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
+      plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'googleCalendar'],
+      googleCalendarApiKey: 'AIzaSyDAhieDD1LZNmnuFROsxhJQAGZP6amv-cg',
       header: {
         left: 'prev,next today',
         center: 'title',
@@ -14,13 +15,17 @@
       navLinks: true,
       selectable: true,
       selectMirror: true,
-      events: {
-        url: base_url+'/generate-events',
-        failure: function() {
+      eventSources: [
+        {
+          url: base_url+'/generate-events',
+        },
+        {
+          googleCalendarId: 'en.indian#holiday@group.v.calendar.google.com',
+          color: 'blue',
+          textColor: 'white',
         }
-      },
+      ],
       select: function(arg) {
-        console.log(arg);
         var title = prompt('Enter A Title:');
         if (title) {
           var current = formatDate(arg.start);
@@ -36,7 +41,6 @@
             editable: false,
           })
         }
-        // calendar.unselect()
       },
       eventLimit: true,
     });

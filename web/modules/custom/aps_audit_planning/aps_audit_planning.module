@@ -7,6 +7,8 @@ use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\user\Entity\User;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\Component\Datetime\DateTimePlus;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Implements hook_form_alter().
@@ -33,7 +35,25 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       '#type' => 'container',
     ];
 	}
-  // kint($form);
+  if($form_id == 'node_planned_events_form'){
+    if($start_date = \Drupal::request()->query->get('field_start_date') && $end_date = \Drupal::request()->query->get('field_end_date')){
+      $start_date = \Drupal::request()->query->get('field_start_date');
+      $end_date = \Drupal::request()->query->get('field_end_date');
+      $get_user_timezone =  drupal_get_user_timezone();
+      
+      $start_date_obj = new \DateTime($start_date , new \DateTimeZone('UTC'));
+      $start_date_obj->setTimezone(new \DateTimeZone($get_user_timezone));
+      $start_date_timestamp = $start_date_obj->getTimestamp();
+      $start_date_timestamp_object = DrupalDateTime::createFromTimestamp($start_date_timestamp, $get_user_timezone);
+
+      $end_date_obj = new \DateTime($end_date , new \DateTimeZone('UTC'));
+      $end_date_obj->setTimezone(new \DateTimeZone($get_user_timezone));
+      $end_date_timestamp = $end_date_obj->getTimestamp();
+      $end_date_timestamp_object = DrupalDateTime::createFromTimestamp($end_date_timestamp, $get_user_timezone);
+      $form['field_start_date']['widget'][0]['#default_value'] = $start_date_timestamp_object;
+      $form['field_end_date']['widget'][0]['#default_value'] = $end_date_timestamp_object;
+    }
+  }
 }
 
 function getSectionfromdepartment(array $form, FormStateInterface $form_state) {

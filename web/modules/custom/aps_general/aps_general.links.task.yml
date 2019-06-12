@@ -1,15 +1,17 @@
 aps_general.standards:
-  route_name : view.external_audit_listing.standards
-  title: Standards
-  base_route: view.external_audit_listing.standards
+  route_name: node.add
+  route_parameters:
+    node_type: 'external_audit_'
+  title: External Audit Details
+  base_route: node.add
   weight: 10
 
 aps_general.clauses:
   route_name: node.add
   route_parameters:
     node_type: 'clauses'
-  title: Clauses
-  base_route: view.external_audit_listing.standards
+  title: External Audit Standards
+  base_route: node.add
   weight: 20
 
 aps_general.systems_setting:

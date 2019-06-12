@@ -4,6 +4,7 @@ aps_audit_planning_js:
     js/fullcalendar/packages/interaction/main.js: {}
     js/fullcalendar/packages/daygrid/main.js: {}
     js/fullcalendar/packages/timegrid/main.js: {}
+    js/fullcalendar/packages/google-calendar/main.js: {}
     js/aps_audit_planning.js: {}
   
   css:

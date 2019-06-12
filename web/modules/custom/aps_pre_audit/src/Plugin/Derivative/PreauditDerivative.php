@@ -63,6 +63,20 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       'base_route' => 'view.planned_audit_listing.document_list_ia',
     ] + $base_plugin_definition;
 
+    $links[3] = [
+      'title' => 'Add Procedures',
+      'route_name' => 'node.add',
+      'base_route' => 'node.add',
+      'parameters' => ['node_type' => 'procedures'],
+    ] + $base_plugin_definition;
+
+    $links[4] = [
+      'title' => 'Procedure Listing',
+      'route_name' => 'view.procedure_listing.procedures_list',
+      'base_route' => 'view.procedure_listing.procedures_list',
+      'query' => ['node_type' => 'procedures'],
+    ] + $base_plugin_definition;
+
     return $links;
   }
 }
