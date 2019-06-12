@@ -730,24 +730,24 @@ taxonomies:
   location:
     -
       vid: location
-      tid: '11'
+      tid: '72'
       langcode: en
-      name: Banglore
+      name: Remote
       description__value: null
       description__format: null
       weight: '0'
       parent: '0'
-      uuid: ca70706d-0bfa-4805-89d5-6107dad3e655
+      uuid: eac0c5a7-22aa-4d95-91eb-37be5cd70172
     -
       vid: location
-      tid: '10'
+      tid: '71'
       langcode: en
-      name: Delhi
+      name: Unit
       description__value: null
       description__format: null
       weight: '0'
       parent: '0'
-      uuid: 69a8c1ac-c76b-4566-b9ac-ddc860c162ab
+      uuid: 3867adc4-d8b8-4ea4-af20-6abba3fb8f44
   reasons:
     -
       vid: reasons
