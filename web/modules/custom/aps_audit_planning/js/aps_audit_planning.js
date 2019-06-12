@@ -15,6 +15,11 @@
       navLinks: true,
       selectable: true,
       selectMirror: true,
+      selectOverlap: function(event) {
+        if (event._def.url.indexOf('google') > -1){
+           return event.rendering === 'background';
+        }
+      },
       eventSources: [
         {
           url: base_url+'/generate-events',
@@ -23,6 +28,9 @@
           googleCalendarId: 'en.indian#holiday@group.v.calendar.google.com',
           color: 'blue',
           textColor: 'white',
+          className: 'gcal-event',
+          rendering: 'background',
+          overlap: true,
         }
       ],
       select: function(arg) {

@@ -35,15 +35,15 @@ class AuditPlanningController extends ControllerBase {
     $records = $query->execute()->fetchAll();
     $list = [];
     foreach ($records as $key => $value) {
-      $list['id'] = $value->nid;
-      $list['title'] = $value->title;
-      $list['start'] = date('Y-m-d h:m:i', $value->field_start_date_value);
-      $list['end'] = date('Y-m-d h:m:i', $value->field_end_date_value);
-      $list['url'] = '/node/'.$value->nid.'/edit';
-      $list['color'] = 'pink';
-      $list['textColor'] = 'black';
+      $list[$key]['id'] = $value->nid;
+      $list[$key]['title'] = $value->title;
+      $list[$key]['start'] = date('Y-m-d h:m:i', $value->field_start_date_value);
+      $list[$key]['end'] = date('Y-m-d h:m:i', $value->field_end_date_value);
+      $list[$key]['url'] = '/node/'.$value->nid.'/edit';
+      $list[$key]['color'] = 'pink';
+      $list[$key]['textColor'] = 'black';
     }
-    $data[]  = $list;
+    $data  = $list;
     return new JsonResponse($data);
   }
 

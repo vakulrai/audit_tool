@@ -9,13 +9,15 @@ use Drupal\user\Entity\User;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Component\Datetime\DateTimePlus;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Field\FieldFilteredMarkup;
 
 /**
  * Implements hook_form_alter().
  */
 function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['#cache']['max-age'] = 0;
-	$form['field_section']['#attributes'] = ['id' => ['section']];
+	$form['field_sections']['#attributes'] = ['id' => ['section']];
+  $form['field_shift']['#attributes'] = ['id' => ['title_test']];
 	if($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form'){
 	  $form['field_department']['widget']['#ajax'] = [
       'callback' => 'getSectionfromdepartment',
@@ -39,8 +41,9 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     if($start_date = \Drupal::request()->query->get('field_start_date') && $end_date = \Drupal::request()->query->get('field_end_date')){
       $start_date = \Drupal::request()->query->get('field_start_date');
       $end_date = \Drupal::request()->query->get('field_end_date');
+      $title = \Drupal::request()->query->get('title');
       $get_user_timezone =  drupal_get_user_timezone();
-      
+
       $start_date_obj = new \DateTime($start_date , new \DateTimeZone('UTC'));
       $start_date_obj->setTimezone(new \DateTimeZone($get_user_timezone));
       $start_date_timestamp = $start_date_obj->getTimestamp();
@@ -50,8 +53,23 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       $end_date_obj->setTimezone(new \DateTimeZone($get_user_timezone));
       $end_date_timestamp = $end_date_obj->getTimestamp();
       $end_date_timestamp_object = DrupalDateTime::createFromTimestamp($end_date_timestamp, $get_user_timezone);
-      $form['field_start_date']['widget'][0]['#default_value'] = $start_date_timestamp_object;
-      $form['field_end_date']['widget'][0]['#default_value'] = $end_date_timestamp_object;
+
+      //Alter the start and end date.
+      $form['field_start_date']['widget'][0]['value']['#default_value'] = $start_date_timestamp_object;
+      $form['field_end_date']['widget'][0]['value']['#default_value'] = $end_date_timestamp_object;
+      $form['field_time']['widget'][0]['value']['#default_value'] = $start_date_timestamp_object;
+      $form['field_time']['widget'][0]['end_value']['#default_value'] = $end_date_timestamp_object;
+      $form['title']['widget'][0]['value']['#title'] = t('Audit Reference');
+      $form['title']['widget'][0]['value']['#default_value'] = $title;
+      $form['title']['#disabled'] = TRUE;
+
+      //Alter for shift field.
+      $form['field_select_audit']['widget']['#ajax'] = [
+        'callback' => 'getShift',
+        'wrapper' => 'title_test',
+        'event' => 'change',
+      ];
+      $form['field_shift']['widget']['#default_value'] = [4, 1];
     }
   }
 }
@@ -63,6 +81,22 @@ function getSectionfromdepartment(array $form, FormStateInterface $form_state) {
     $form['field_sections']['widget']['#options'] = getSectionDropdownOptions($key);
    }
    return $form['field_sections'];
+}
+
+function getShift(array $form, FormStateInterface $form_state) {
+  if(count($form_state->getValue('field_select_audit'))){
+    $department_array = $form_state->getValue('field_select_audit')[0];
+    $key = $department_array['target_id'];
+    $node_object_event = Node::load($key);
+    $get_unit = $node_object_event->get('field_unit')->target_id;
+    $node_object_unit = Node::load($get_unit);
+    $get_shift_option = $node_object_unit->get('field_shift')->getValue();
+    foreach ($get_shift_option as $key => $value) {
+       $options[$value['target_id']] = FieldFilteredMarkup::create($value['target_id']);
+     }
+    $form['field_shift']['widget']['#default_value'] = [4, 1];
+   }
+   return $form['field_shift'];
 }
 
 function getUserINfo(array $form, FormStateInterface $form_state) {
@@ -149,7 +183,7 @@ function getSectionDropdownOptions($key = '') {
     foreach ($nids as $entity) {
       $node_object = Node::load($entity->entity_id);
       $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
-    }  
+    }
     return $entity_title;
   }
 ?>

@@ -318,6 +318,18 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
         unset($data['tabs']);
       }
     }
+    elseif ($uri[2] == 'department') {
+      $link = Url::fromUserInput('/node/add/'.$uri[2]);
+      if ($link) {
+        unset($data['tabs']);
+      }
+    }
+     elseif (stripos(strtolower($uri[2]), 'department?') !== false) {
+        unset($data['tabs']);
+    }
+     elseif (stripos(strtolower($uri[2]), 'business_process?') !== false) {
+        unset($data['tabs']);
+    }
     elseif ($uri[2] == 'internal_audit') {
       $link = Url::fromUserInput('/node/add/'.$uri[2]);
       if ($link) {
