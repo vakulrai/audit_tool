@@ -1,28 +1,25 @@
-uuid: ed7a6a9b-68d4-45de-a259-1fef928b7688
+uuid: 71432a0e-9d01-43be-a0e3-f35d62db27ce
 langcode: en
 status: true
 dependencies:
   module:
     - node
     - options
-id: node.field_audit_type
-field_name: field_audit_type
+id: node.field_internal_audit_type
+field_name: field_internal_audit_type
 entity_type: node
 type: list_string
 settings:
   allowed_values:
     -
-      value: internal
-      label: Internal
+      value: systems
+      label: Systems
     -
-      value: external
-      label: External
+      value: process
+      label: Process
     -
-      value: supplier
-      label: Supplier
-    -
-      value: customer
-      label: Customer
+      value: product
+      label: Product
   allowed_values_function: ''
 module: options
 locked: false

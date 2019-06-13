@@ -1,0 +1,19 @@
+uuid: 4ffc528e-4423-40fc-aa7b-471a9a756441
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_available_procedures
+field_name: field_available_procedures
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

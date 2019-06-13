@@ -10,15 +10,20 @@ use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Component\Datetime\DateTimePlus;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Field\FieldFilteredMarkup;
+use Drupal\Core\Ajax\ChangedCommand;
+use Drupal\Core\Ajax\InvokeCommand;
 
 /**
  * Implements hook_form_alter().
  */
 function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $form['#cache']['max-age'] = 0;
-	$form['field_sections']['#attributes'] = ['id' => ['section']];
-  $form['field_shift']['#attributes'] = ['id' => ['title_test']];
+  global $base_url;
 	if($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form'){
+    $form['#cache']['max-age'] = 0;
+    $form['field_sections']['#attributes'] = ['id' => ['section']];
+    $form['field_shift']['#attributes'] = ['id' => ['shift']];
+    $form['field_internal_audit_type']['#attributes'] = ['id' => ['audit-type']];
+    $form['field_available_procedures']['#attributes'] = ['id' => ['procedure-type']];
 	  $form['field_department']['widget']['#ajax'] = [
       'callback' => 'getSectionfromdepartment',
       'wrapper' => 'section',
@@ -32,11 +37,12 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     ];
 
     $form['field_auditor']['user_details'] = [
-       '#attributes' => ['id' => 'user-details'],
+      '#attributes' => ['id' => 'user-details'],
       '#markup' => '',
       '#type' => 'container',
     ];
 	}
+
   if($form_id == 'node_planned_events_form'){
     if($start_date = \Drupal::request()->query->get('field_start_date') && $end_date = \Drupal::request()->query->get('field_end_date')){
       $start_date = \Drupal::request()->query->get('field_start_date');
@@ -62,14 +68,34 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       $form['title']['widget'][0]['value']['#title'] = t('Audit Reference');
       $form['title']['widget'][0]['value']['#default_value'] = $title;
       $form['title']['#disabled'] = TRUE;
+      
+      //Alter the internal audit field
+       $form['field_audit_type']['widget']['#ajax'] = [
+        'callback' => 'getAuditSubCategory',
+        'wrapper' => 'audit-type',
+        'event' => 'change',
+      ];
 
       //Alter for shift field.
       $form['field_select_audit']['widget']['#ajax'] = [
         'callback' => 'getShift',
-        'wrapper' => 'title_test',
+        'wrapper' => 'shift',
         'event' => 'change',
       ];
-      $form['field_shift']['widget']['#default_value'] = [4, 1];
+
+      //Alter if = system is selected
+       $form['field_internal_audit_type']['widget']['#ajax'] = [
+        'callback' => 'getProcedures',
+        'wrapper' => 'type-details',
+        'event' => 'change',
+      ];
+      // $form['field_internal_audit_type']['widget']['#access'] = FALSE;
+
+      $form['field_internal_audit_type']['type'] = [
+        '#attributes' => ['id' => 'type-details'],
+        '#markup' => '',
+        '#type' => 'container',
+      ];
     }
   }
 }
@@ -83,20 +109,79 @@ function getSectionfromdepartment(array $form, FormStateInterface $form_state) {
    return $form['field_sections'];
 }
 
+function getAuditSubCategory(array $form, FormStateInterface $form_state) {
+  if(count($form_state->getValue('field_audit_type'))){
+    if($form_state->getValue('field_audit_type')[0]['value'] == 'internal'){
+      // $form['field_internal_audit_type']['widget']['#access'] = TRUE;
+    }
+  }
+  return $form['field_internal_audit_type']['widget'];
+}
+
+function getProcedures(array $form, FormStateInterface $form_state) {
+  if(count($form_state->getValue('field_internal_audit_type'))){
+    $type = $form_state->getValue('field_internal_audit_type')[0]['value'];
+    switch ($type) {
+      case 'systems':
+        $url = '/internal-audit-systems-export';
+        $options = getAuditOPtions($type, $url);
+        break;
+
+      case 'process':
+        $url = '/internal-audit-process-export';
+        $options = getAuditOPtions($type, $url);
+        break;
+
+      case 'product':
+        $url = '/internal-audit-product-export';
+        $options = getAuditOPtions($type, $url);
+        break;
+      
+      default:
+
+        break;
+    }
+
+    $form['type'] = array(
+        '#type' => 'fieldset', 
+        '#title' => t('Audit Details'), 
+        '#attributes' => ['id' => 'type-details'], 
+        '#collapsible' => TRUE, 
+        '#collapsed' => FALSE,
+      );
+
+    $form['type']['details'] = array(
+      '#type' => 'select',
+      '#options' => $options,
+      '#required' => TRUE,
+      '#title' => t('List of '. $type),
+      );
+  }
+
+  return $form['type'];
+}
+
 function getShift(array $form, FormStateInterface $form_state) {
+  $ajax_response = new AjaxResponse();
+  $vid = 'shift';
+  $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid);
+  foreach ($terms as $term) {
+   $term_id = 'edit-field-shift-'.$term->tid;
+   $ajax_response->addCommand(new InvokeCommand('#'.$term_id, 'attr', array('checked', false)));
+  }
   if(count($form_state->getValue('field_select_audit'))){
     $department_array = $form_state->getValue('field_select_audit')[0];
     $key = $department_array['target_id'];
     $node_object_event = Node::load($key);
-    $get_unit = $node_object_event->get('field_unit')->target_id;
+    $get_unit = $node_object_event->get('field_unit')->target_id ? $node_object_event->get('field_unit')->target_id : '';
     $node_object_unit = Node::load($get_unit);
-    $get_shift_option = $node_object_unit->get('field_shift')->getValue();
+    $get_shift_option = $node_object_unit->get('field_shift')->getValue() ? $node_object_unit->get('field_shift')->getValue() : '';
     foreach ($get_shift_option as $key => $value) {
-       $options[$value['target_id']] = FieldFilteredMarkup::create($value['target_id']);
+      $id = 'edit-field-shift-'.$value['target_id'];
+      $ajax_response->addCommand(new InvokeCommand('#'.$id, 'attr', array('checked', true)));
      }
-    $form['field_shift']['widget']['#default_value'] = [4, 1];
    }
-   return $form['field_shift'];
+   return $ajax_response;
 }
 
 function getUserINfo(array $form, FormStateInterface $form_state) {
@@ -186,4 +271,18 @@ function getSectionDropdownOptions($key = '') {
     }
     return $entity_title;
   }
+
+function getAuditOPtions($type, $url) {
+  global $base_url;
+  if($type){
+    $client = \Drupal::httpClient();
+    $request = $client->get($base_url.$url);
+    $response = $request->getBody();
+    $data = json_decode($response);
+    foreach ($data as $key => $value) {
+      $options[$value->nid] = $value->title;
+    }
+  }
+  return $options;
+}
 ?>
