@@ -102,7 +102,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
      $form['title']['#autocomplete_route_name'] = 'aps_audit_planning.title_list';
   }
   if($form['#id'] == 'views-customer-manual-listing-manual'){
-     $form['title']['#autocomplete_route_name'] = 'aps_audit_planning.title_list';
+     // $form['title']['#autocomplete_route_name'] = 'aps_audit_planning.title_list';
   }
 }
 
