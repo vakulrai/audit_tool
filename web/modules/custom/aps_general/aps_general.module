@@ -189,6 +189,9 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $form['title']['#access'] = FALSE;
     $form['field_version_level']['#access'] = FALSE;
   }
+  elseif ($form_id == 'node_customers_manual_form') {
+    $form['field_reference_id']['#access'] = FALSE;
+  }
 
   if($form_id == 'node_external_audit__form' || $form_id == 'node_external_audit__edit_form'){
     $form['field_audit_type']['#access'] = FALSE;
@@ -340,6 +343,9 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
       }
     }
     elseif (stripos(strtolower($uri[2]), 'planned_events?') !== false) {
+        unset($data['tabs']);
+    }
+    elseif ($uri[2] == 'customers_manual?destination=node') {
         unset($data['tabs']);
     }
     elseif ($uri[2] == 'customers_manual') {
