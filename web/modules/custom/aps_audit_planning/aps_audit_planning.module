@@ -84,18 +84,18 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       ];
 
       //Alter if = system is selected
-       $form['field_internal_audit_type']['widget']['#ajax'] = [
-        'callback' => 'getProcedures',
-        'wrapper' => 'type-details',
-        'event' => 'change',
-      ];
-      $form['field_internal_audit_type']['widget']['#disabled'] = TRUE;
+      // $form['field_internal_audit_type']['widget']['#ajax'] = [
+      //   'callback' => 'getProcedures',
+      //   'wrapper' => 'details',
+      //   'event' => 'change',
+      // ];
+      // // $form['field_internal_audit_type']['widget']['#disabled'] = TRUE;
 
-      $form['field_internal_audit_type']['type'] = [
-        '#attributes' => ['id' => 'type-details'],
-        '#markup' => '',
-        '#type' => 'container',
-      ];
+      // $form['field_internal_audit_type']['audit_type_details'] = [
+      //   '#attributes' => ['id' => 'details'],
+      //   '#markup' => '',
+      //   '#type' => 'container',
+      // ];
     }
   }
 }
@@ -146,15 +146,15 @@ function getProcedures(array $form, FormStateInterface $form_state) {
         break;
     }
 
-    $form['type'] = array(
+    $form['audit_type_details'] = array(
         '#type' => 'fieldset', 
         '#title' => t('Audit Details'), 
-        '#attributes' => ['id' => 'type-details'], 
+        '#attributes' => ['id' => 'details'], 
         '#collapsible' => TRUE, 
         '#collapsed' => FALSE,
       );
 
-    $form['type']['details'] = array(
+    $form['audit_type_details']['details'] = array(
       '#type' => 'select',
       '#options' => $options,
       '#required' => TRUE,
@@ -162,7 +162,7 @@ function getProcedures(array $form, FormStateInterface $form_state) {
       );
   }
 
-  return $form['type'];
+  return $form['audit_type_details'];
 }
 
 function getShift(array $form, FormStateInterface $form_state) {

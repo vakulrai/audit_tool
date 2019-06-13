@@ -1,11 +1,11 @@
-uuid: 4ffc528e-4423-40fc-aa7b-471a9a756441
+uuid: 542fde6d-a373-456d-8667-1a152f6dbdce
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_available_procedures
-field_name: field_available_procedures
+id: node.field_list_of_product
+field_name: field_list_of_product
 entity_type: node
 type: entity_reference
 settings:

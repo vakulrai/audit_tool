@@ -6,10 +6,12 @@ dependencies:
     - field.field.node.planned_events.body
     - field.field.node.planned_events.field_audit_type
     - field.field.node.planned_events.field_auditor
-    - field.field.node.planned_events.field_available_procedures
     - field.field.node.planned_events.field_department
     - field.field.node.planned_events.field_end_date
     - field.field.node.planned_events.field_internal_audit_type
+    - field.field.node.planned_events.field_list_of_process
+    - field.field.node.planned_events.field_list_of_product
+    - field.field.node.planned_events.field_list_of_systems
     - field.field.node.planned_events.field_remote_location_name
     - field.field.node.planned_events.field_sections
     - field.field.node.planned_events.field_select_audit
@@ -28,7 +30,7 @@ third_party_settings:
         - field_remote_location_name
         - field_auditor
       parent_name: group_who
-      weight: 4
+      weight: 33
       format_type: fieldset
       format_settings:
         id: ''
@@ -55,6 +57,9 @@ third_party_settings:
       children:
         - field_audit_type
         - field_internal_audit_type
+        - field_list_of_systems
+        - field_list_of_process
+        - field_list_of_product
         - field_unit
       parent_name: ''
       weight: 1
@@ -123,7 +128,96 @@ content:
     weight: 4
     settings: {  }
     third_party_settings:
-      conditional_fields: {  }
+      conditional_fields:
+        59122d7f-2dd2-4a90-a7bc-33ed6ebbf788:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: internal
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: options_select
+    region: content
+  field_list_of_process:
+    weight: 6
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        ac4dfc15-afba-45df-a9b0-dc3bbbd1de3b:
+          dependee: field_internal_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: process
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: options_select
+    region: content
+  field_list_of_product:
+    weight: 7
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        3b56dfc7-439f-472f-bc43-9bbf2b1e3cd3:
+          dependee: field_internal_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: product
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: options_select
+    region: content
+  field_list_of_systems:
+    weight: 5
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        54b90eb7-3538-4aea-895e-404c5006c47f:
+          dependee: field_internal_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: systems
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
     type: options_select
     region: content
   field_remote_location_name:
@@ -165,7 +259,7 @@ content:
     type: daterange_default
     region: content
   field_unit:
-    weight: 6
+    weight: 8
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -181,7 +275,6 @@ content:
 hidden:
   body: true
   created: true
-  field_available_procedures: true
   path: true
   promote: true
   status: true

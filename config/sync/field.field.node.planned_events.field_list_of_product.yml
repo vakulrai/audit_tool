@@ -1,0 +1,25 @@
+uuid: 0c9b8c9c-ee5f-4092-b45a-7de6399cd197
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_list_of_product
+    - node.type.planned_events
+id: node.planned_events.field_list_of_product
+field_name: field_list_of_product
+entity_type: node
+bundle: planned_events
+label: 'List of Product'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: internal_audit_systems
+      display_name: entity_reference_product
+      arguments: {  }
+field_type: entity_reference
