@@ -1,0 +1,19 @@
+uuid: d82bb8ac-f158-4cae-876a-3eb65d6bafc5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_business_head_name
+    - node.type.business_process
+id: node.business_process.field_business_head_name
+field_name: field_business_head_name
+entity_type: node
+bundle: business_process
+label: 'Business Head'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

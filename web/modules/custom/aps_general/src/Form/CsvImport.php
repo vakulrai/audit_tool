@@ -31,7 +31,7 @@ class CsvImport extends FormBase {
       '#name' => 'users_upload',
       '#title' => t('Upload a File'),
       '#size' => 20,
-      '#weight' => 0,
+      '#weight' => 200,
       '#description' => t('Select the CSV file to be imported'),
       '#upload_validators' => $validators,
       '#upload_location' => 'public://',
@@ -41,7 +41,7 @@ class CsvImport extends FormBase {
     $form['submit'] = [
       '#type' => 'submit',
       '#button_type' => 'primary',
-      '#weight' => 105,
+      '#weight' => 200,
       '#value' => t('Import CSV'),
     ];
 

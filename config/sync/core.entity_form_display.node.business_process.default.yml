@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.business_process.body
-    - field.field.node.business_process.field_business_head
+    - field.field.node.business_process.field_business_head_name
     - field.field.node.business_process.field_business_process_effective
     - field.field.node.business_process.field_business_process_efficienc
     - field.field.node.business_process.field_name
@@ -17,14 +17,13 @@ targetEntityType: node
 bundle: business_process
 mode: default
 content:
-  field_business_head:
+  field_business_head_name:
     weight: 1
     settings:
-      match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: string_textfield
     region: content
   field_business_process_effective:
     type: entity_reference_paragraphs

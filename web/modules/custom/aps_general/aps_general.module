@@ -268,7 +268,7 @@ function aps_general_preprocess_page(&$variables) {
   if ($node instanceof  \Drupal\node\NodeInterface) {
     $nid_type = $node->bundle();
   }
-  if($route_name == 'entity.node.edit_form' && $nid_type == 'customers_manual'){
+  if($route_name == 'view.customer_manual_parts.product_listing'){
     //*** Rendering parts block ***//
     $view = \Drupal\views\Views::getView('customer_manual_parts');
     $view->setDisplay('parts');
@@ -284,7 +284,8 @@ function aps_general_preprocess_page(&$variables) {
     $config = [];
     $plugin_block = $block_manager->createInstance('csv_import_block', $config);
     $render_csv = $plugin_block->build();
-    // $variables['page']['content']['csv'] = $render_csv;
+    $variables['page']['content']['csv'] = $render_csv;
+    // kint($variables['page']['content']['csv']['entity_upload']);
     
     // $variables['page']['content'][] = $the_title_render_array;
     // $variables['page']['content']['parts'] = $render;
