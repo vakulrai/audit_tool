@@ -43,7 +43,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     ];
 	}
 
-  if($form_id == 'node_planned_events_form'){
+  if($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form'){
     if($start_date = \Drupal::request()->query->get('field_start_date') && $end_date = \Drupal::request()->query->get('field_end_date')){
       $start_date = \Drupal::request()->query->get('field_start_date');
       $end_date = \Drupal::request()->query->get('field_end_date');
@@ -89,7 +89,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
         'wrapper' => 'type-details',
         'event' => 'change',
       ];
-      // $form['field_internal_audit_type']['widget']['#access'] = FALSE;
+      $form['field_internal_audit_type']['widget']['#disabled'] = TRUE;
 
       $form['field_internal_audit_type']['type'] = [
         '#attributes' => ['id' => 'type-details'],
@@ -110,12 +110,16 @@ function getSectionfromdepartment(array $form, FormStateInterface $form_state) {
 }
 
 function getAuditSubCategory(array $form, FormStateInterface $form_state) {
+  $ajax_response = new AjaxResponse();
   if(count($form_state->getValue('field_audit_type'))){
     if($form_state->getValue('field_audit_type')[0]['value'] == 'internal'){
-      // $form['field_internal_audit_type']['widget']['#access'] = TRUE;
+       $ajax_response->addCommand(new InvokeCommand('#edit-field-internal-audit-type', 'attr', array('disabled', false)));
     }
   }
-  return $form['field_internal_audit_type']['widget'];
+  if($form_state->getValue('field_audit_type')[0]['value'] == ''){
+     $ajax_response->addCommand(new InvokeCommand('#edit-field-internal-audit-type', 'attr', array('disabled', true)));
+  }
+  return $ajax_response;
 }
 
 function getProcedures(array $form, FormStateInterface $form_state) {
