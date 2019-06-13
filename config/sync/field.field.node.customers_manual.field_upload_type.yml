@@ -1,0 +1,23 @@
+uuid: b2b811e8-5deb-414f-8622-991f30229d01
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_upload_type
+    - node.type.customers_manual
+  module:
+    - options
+id: node.customers_manual.field_upload_type
+field_name: field_upload_type
+entity_type: node
+bundle: customers_manual
+label: 'Upload Type'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: both
+default_value_callback: ''
+settings: {  }
+field_type: list_string

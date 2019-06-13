@@ -8,12 +8,14 @@ dependencies:
     - field.field.node.customers_manual.field_qam
     - field.field.node.customers_manual.field_reference_id
     - field.field.node.customers_manual.field_sr_no
+    - field.field.node.customers_manual.field_upload_type
     - field.field.node.customers_manual.field_version_date
     - field.field.node.customers_manual.field_version_level
     - node.type.customers_manual
   module:
     - datetime
     - link
+    - options
     - text
     - user
 id: node.customers_manual.default
@@ -65,6 +67,13 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     type: number_integer
+    region: content
+  field_upload_type:
+    weight: 108
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_version_date:
     weight: 104

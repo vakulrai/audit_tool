@@ -1,4 +1,4 @@
-uuid: 5b161099-78e4-4d0b-847c-164973772f29
+uuid: bbdbdbe4-eda9-4d55-8271-93930926ac7e
 langcode: en
 status: true
 dependencies:
@@ -9,17 +9,17 @@ dependencies:
     - views
   theme:
     - seven
-id: views_block__customer_manual_listing_block_1
+id: views_block__customer_manual_listing_manual
 theme: seven
 region: content
 weight: 8
 provider: null
-plugin: 'views_block:customer_manual_listing-block_1'
+plugin: 'views_block:customer_manual_listing-manual'
 settings:
-  id: 'views_block:customer_manual_listing-block_1'
+  id: 'views_block:customer_manual_listing-manual'
   label: ''
   provider: views
-  label_display: visible
+  label_display: '0'
   views_label: ''
   items_per_page: none
 visibility:

@@ -201,11 +201,12 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     if($nid = \Drupal::request()->query->get('id')){
       $form['field_reference_id']['widget'][0]['target_id']['#default_value'] = Node::load($nid);
       foreach (array_keys($form['actions']) as $action) {
-      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-        $form['actions'][$action]['#submit'][] = 'parts_redirect';
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'parts_redirect';
+        }
       }
     }
-    }
+    $form['field_reference_id']['#access'] = FALSE;
   }
 
 }
@@ -283,10 +284,10 @@ function aps_general_preprocess_page(&$variables) {
     $config = [];
     $plugin_block = $block_manager->createInstance('csv_import_block', $config);
     $render_csv = $plugin_block->build();
-    $variables['page']['content']['csv'] = $render_csv;
+    // $variables['page']['content']['csv'] = $render_csv;
     
-    $variables['page']['content'][] = $the_title_render_array;
-    $variables['page']['content']['parts'] = $render;
+    // $variables['page']['content'][] = $the_title_render_array;
+    // $variables['page']['content']['parts'] = $render;
   }
 }
 
@@ -346,7 +347,13 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
         unset($data['tabs']);
     }
     elseif ($uri[2] == 'customers_manual?destination=node') {
-        unset($data['tabs']);
+        unset($data['tabs'][0]['aps_general.standards']);
+        unset($data['tabs'][0]['aps_general.clauses']); 
+        unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
+        unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
+        unset($data['tabs'][0]['aps_audit_criteria.audit_list']);
+        unset($data['tabs'][0]['aps_audit_criteria.systems_setting']);
+        unset($data['tabs'][0]['aps_pre_audit.manuals:3']);
     }
     elseif ($uri[2] == 'customers_manual') {
         unset($data['tabs']);
@@ -389,7 +396,7 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
     unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
   }
-  if($current_uri == 'procedure-listing'){
+  if($current_uri == 'product-listing'){
    
   }
 }

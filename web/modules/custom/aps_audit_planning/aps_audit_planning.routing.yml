@@ -14,3 +14,11 @@ aps_audit_planning.audit_planning_get_scheduled_events:
   methods: [GET]
   requirements:
     _access: 'TRUE'
+
+aps_audit_planning.title_list:
+  path: '/get-title'
+  defaults:
+    _controller: '\Drupal\aps_audit_planning\Controller\AuditPlanningController::getTitle'
+    _format: json
+  requirements:
+    _access: 'TRUE'

@@ -7,7 +7,8 @@ dependencies:
   module:
     - system
     - views
-  theme: seven
+  theme:
+    - seven
 id: views_block__planned_audit_listing_remaining_days
 theme: seven
 region: content
