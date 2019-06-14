@@ -101,9 +101,22 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
   if($form['#id'] == 'views-exposed-form-customer-manual-parts-product-listing'){
      $form['title']['#autocomplete_route_name'] = 'aps_audit_planning.title_list';
   }
-  if($form['#id'] == 'views-customer-manual-listing-manual'){
-     // $form['title']['#autocomplete_route_name'] = 'aps_audit_planning.title_list';
+  if($form_id == 'node_procedures_form'){
+    $form['field_section_type']['#attributes'] = ['id' => ['sections']];
+    $form['field_department']['#attributes'] = ['id' => ['department']];
+    $form['field_business_process']['widget']['#ajax'] = [
+      'callback' => 'getSectionfromdepartmentDept',
+      'wrapper' => 'department',
+      'event' => 'change',
+    ];
+
+    $form['field_department']['widget']['#ajax'] = [
+      'callback' => 'getSectionfromdepartmentProcedure',
+      'wrapper' => 'sections',
+      'event' => 'change',
+    ];
   }
+  // print_r($form_id);die;
 }
 
 function getSectionfromdepartment(array $form, FormStateInterface $form_state) {
@@ -113,6 +126,24 @@ function getSectionfromdepartment(array $form, FormStateInterface $form_state) {
     $form['field_sections']['widget']['#options'] = getSectionDropdownOptions($key);
    }
    return $form['field_sections'];
+}
+
+function getSectionfromdepartmentProcedure(array $form, FormStateInterface $form_state) {
+  if(count($form_state->getValue('field_department'))){
+    $department_array = $form_state->getValue('field_department')[0];
+    $key = $department_array['target_id'];
+    $form['field_section_type']['widget']['#options'] = getSectionDropdownOptions($key);
+   }
+   return $form['field_section_type'];
+}
+
+function getSectionfromdepartmentDept(array $form, FormStateInterface $form_state) {
+  if(count($form_state->getValue('field_business_process'))){
+    $department_array = $form_state->getValue('field_business_process')[0];
+    $key = $department_array['target_id'];
+    $form['field_department']['widget']['#options'] = getDeptDropdownOptions($key);
+   }
+   return $form['field_department'];
 }
 
 function getAuditSubCategory(array $form, FormStateInterface $form_state) {
@@ -281,6 +312,24 @@ function getSectionDropdownOptions($key = '') {
     }
     return $entity_title;
   }
+
+function getDeptDropdownOptions($key = '') {
+  if($key){
+    $query = \Drupal::database()->select('node_field_data', 'n');
+    $query->join('node__field_refere', 'rf', 'n.nid = rf.field_refere_target_id');
+    $query->fields('rf',['entity_id', 'bundle']);
+    $query->condition('rf.bundle', 'department');
+    $query->condition('rf.field_refere_target_id', $key);
+    $nids = $query->execute()->fetchAll();
+  }
+    
+    $entity_title['_none'] = "- None -";
+    foreach ($nids as $entity) {
+      $node_object = Node::load($entity->entity_id);
+      $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
+    }
+    return $entity_title;
+}
 
 function getAuditOPtions($type, $url) {
   global $base_url;

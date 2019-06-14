@@ -1,4 +1,4 @@
-uuid: 336aad87-258c-460b-8c9f-20b5b015c634
+uuid: e82a2ed3-38c5-416f-9985-6acb2510f673
 langcode: en
 status: true
 dependencies:
@@ -7,24 +7,25 @@ dependencies:
   module:
     - superfish
     - system
+    - user
   theme:
     - seven
-id: auditplanningsubmenu
+id: auditplanningsubmenuformr
 theme: seven
 region: content
-weight: -6
+weight: -7
 provider: null
 plugin: 'superfish:audit-planning-sub-menu'
 settings:
   id: 'superfish:audit-planning-sub-menu'
-  label: 'Audit Planning Sub Menu'
+  label: 'Audit Planning Sub Menu for MR'
   provider: superfish
-  label_display: '0'
+  label_display: visible
   level: '1'
   depth: '0'
   expand_all_items: false
   menu_type: vertical
-  style: none
+  style: white
   arrow: 1
   shadow: 1
   speed: fast
@@ -75,3 +76,10 @@ visibility:
     pages: /audit-planning
     negate: false
     context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

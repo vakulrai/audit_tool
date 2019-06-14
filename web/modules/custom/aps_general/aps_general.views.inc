@@ -25,27 +25,11 @@ function aps_general_views_data() {
     ];
 
 
-    $data['views']['remainingday_event'] = [
-        'title' => t('Remainingday event'),
-        'help' => t('Field plugin to display the event remining days'),
+    $data['views']['upload_audit_documents'] = [
+        'title' => t('Upload audit documents'),
+        'help' => t('Upload button to upload doc. duing audit'),
         'field' => [
-            'id' => 'remainingday_event',
-        ],
-    ];
-
-    $data['views']['delta_qa'] = [
-        'title' => t('Return entity button to add question'),
-        'help' => t('Field plugin to display the Delta Q page'),
-        'field' => [
-            'id' => 'delta_qa',
-        ],
-    ];
-
-    $data['views']['pre_audit_report'] = [
-        'title' => t('Return entity button to report a document'),
-        'help' => t('Return entity button to report a document'),
-        'field' => [
-            'id' => 'pre_audit_report',
+            'id' => 'upload_audit_documents',
         ],
     ];
 

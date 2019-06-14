@@ -74,9 +74,8 @@ visibility:
   user_role:
     id: user_role
     roles:
-      executive: executive
       auditor: auditor
-      auditee: auditee
+      mr_admin: mr_admin
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'

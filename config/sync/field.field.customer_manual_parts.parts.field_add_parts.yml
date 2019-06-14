@@ -12,7 +12,7 @@ id: customer_manual_parts.parts.field_add_parts
 field_name: field_add_parts
 entity_type: customer_manual_parts
 bundle: parts
-label: 'Add Parts'
+label: 'Add Products'
 description: ''
 required: false
 translatable: false
@@ -60,5 +60,8 @@ settings:
         enabled: false
       procedures:
         weight: 24
+        enabled: false
+      report_reason:
+        weight: 26
         enabled: false
 field_type: entity_reference_revisions

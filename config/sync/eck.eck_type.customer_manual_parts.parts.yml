@@ -6,4 +6,4 @@ dependencies:
     - eck.eck_entity_type.customer_manual_parts
 name: Parts
 type: parts
-description: 'Add customer manual parts'
+description: 'Add More Product'

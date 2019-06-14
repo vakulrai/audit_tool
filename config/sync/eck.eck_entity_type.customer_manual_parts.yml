@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: customer_manual_parts
-label: 'Customer Manual Parts'
+label: 'Customer Product'
 created: false
 changed: false
 uid: false

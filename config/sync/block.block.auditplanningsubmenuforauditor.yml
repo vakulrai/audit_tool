@@ -1,31 +1,31 @@
-uuid: 635c0cd0-438a-4f1a-98c8-dc7dd65a3b1c
+uuid: 96bf8b6b-be8c-41d7-9d86-ba470bd51874
 langcode: en
 status: true
 dependencies:
   config:
-    - system.menu.admin-sub-menu
+    - system.menu.audit-planning-sub-menu-for
   module:
     - superfish
     - system
     - user
   theme:
     - seven
-id: adminsubmenu
+id: auditplanningsubmenuforauditor
 theme: seven
 region: content
-weight: -8
+weight: -6
 provider: null
-plugin: 'superfish:admin-sub-menu'
+plugin: 'superfish:audit-planning-sub-menu-for'
 settings:
-  id: 'superfish:admin-sub-menu'
-  label: 'Admin Sub Menu'
+  id: 'superfish:audit-planning-sub-menu-for'
+  label: 'Audit Planning Sub Menu for Auditor'
   provider: superfish
-  label_display: '0'
+  label_display: visible
   level: '1'
   depth: '0'
   expand_all_items: false
   menu_type: vertical
-  style: none
+  style: white
   arrow: 1
   shadow: 1
   speed: fast
@@ -71,18 +71,15 @@ settings:
   custom_item_class: ''
   custom_link_class: ''
 visibility:
+  request_path:
+    id: request_path
+    pages: /audit-planning
+    negate: false
+    context_mapping: {  }
   user_role:
     id: user_role
     roles:
-      executive: executive
       auditor: auditor
-      auditee: auditee
-      mr_admin: mr_admin
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'
-  request_path:
-    id: request_path
-    pages: /home
-    negate: false
-    context_mapping: {  }
