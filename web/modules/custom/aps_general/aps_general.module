@@ -490,7 +490,9 @@ function aps_general_unit_page_redirect(array $form, \Drupal\Core\Form\FormState
  * Callback method after business process form submits.
  */
 function aps_business_process_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
-  $response = Url::fromUserInput('/business-process-listing-view');
+  $form_values = $form_state->getValues();
+  $nid = $form_values['nid'];
+  $response = Url::fromUserInput('/node/add/department?id='.$nid);
   $form_state->setRedirectUrl($response);
 }
 
