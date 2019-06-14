@@ -4,9 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.business_process_effieciency.field_efficiency
+    - field.field.paragraph.business_process_effieciency.field_other
     - field.field.paragraph.business_process_effieciency.field_target
     - field.field.paragraph.business_process_effieciency.field_uom
     - paragraphs.paragraphs_type.business_process_effieciency
+  module:
+    - conditional_fields
 id: paragraph.business_process_effieciency.default
 targetEntityType: paragraph
 bundle: business_process_effieciency
@@ -20,8 +23,17 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_target:
+  field_other:
     weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields: {  }
+    type: string_textfield
+    region: content
+  field_target:
+    weight: 3
     settings:
       placeholder: ''
     third_party_settings: {  }

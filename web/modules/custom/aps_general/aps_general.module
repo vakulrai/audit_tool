@@ -208,7 +208,19 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
     $form['field_reference_id']['#access'] = FALSE;
   }
+  if($form_id == 'node_business_process_form'){
+    $form['field_business_process_efficienc']['widget'][0]['subform']['field_other']['#states'] = [
+      'visible' => [
+        'select[name="field_business_process_efficienc[0][subform][field_uom]"]' => ['value' => '73']
+      ],
+    ];
 
+    $form['field_business_process_effective']['widget'][0]['subform']['field_other']['#states'] = [
+      'visible' => [
+        'select[name="field_business_process_effective[0][subform][field_uom]"]' => ['value' => '73']
+      ],
+    ];
+  }
 }
 
 /**
@@ -460,6 +472,11 @@ function aps_general_link_alter(&$variables) {
 function get_user_roles(){
   $roles = user_role_names(TRUE);
   return $roles;
+}
+
+function test(){
+ $form['field_business_process_efficienc']['widget'][0]['subform']['field_other']['widget']['#access'] = TRUE;
+ return $form['field_business_process_efficienc'];
 }
 /**
  * Callback method after unit form submits.

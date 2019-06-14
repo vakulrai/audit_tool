@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.planned_events.body
     - field.field.node.planned_events.field_audit_type
     - field.field.node.planned_events.field_auditor
+    - field.field.node.planned_events.field_customer_type
     - field.field.node.planned_events.field_department
     - field.field.node.planned_events.field_end_date
     - field.field.node.planned_events.field_internal_audit_type
@@ -51,6 +52,13 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_customer_type:
+    weight: 118
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_department:
     weight: 107

@@ -1,0 +1,19 @@
+uuid: 49ca6813-3349-4ad9-99fc-296ab77153bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_other
+    - paragraphs.paragraphs_type.business_process_effectiveness
+id: paragraph.business_process_effectiveness.field_other
+field_name: field_other
+entity_type: paragraph
+bundle: business_process_effectiveness
+label: Other
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

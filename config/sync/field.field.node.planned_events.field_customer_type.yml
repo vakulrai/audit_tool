@@ -1,0 +1,21 @@
+uuid: 56fe6ea1-52fd-4ab2-a53a-612babd671e6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_customer_type
+    - node.type.planned_events
+  module:
+    - options
+id: node.planned_events.field_customer_type
+field_name: field_customer_type
+entity_type: node
+bundle: planned_events
+label: 'Customer Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

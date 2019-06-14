@@ -27,7 +27,7 @@ content:
     region: content
   field_business_process_effective:
     type: entity_reference_paragraphs
-    weight: 2
+    weight: 3
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -39,7 +39,7 @@ content:
     region: content
   field_business_process_efficienc:
     type: entity_reference_paragraphs
-    weight: 3
+    weight: 2
     settings:
       title: Paragraph
       title_plural: Paragraphs
