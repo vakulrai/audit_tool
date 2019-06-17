@@ -53,12 +53,10 @@ class UploadAuditDocuments extends FieldPluginBase {
    */
   public function render(ResultRow $values) {
     $node = $values->_entity;
-    $config = \Drupal::service('config.factory')->getEditable('aps_general.adduserroles');
-    $current_count = $config->get('current_count');
     $form['doc'] = [
         '#type' => 'link',
         '#title' => t('Upload'),
-        '#url' => Url::fromRoute('aps_pre_audit.get_info',['id' => $node->id()]),
+        '#url' => Url::fromUserInput('/planned-audit-documents',['query' => ['id' => $node->id()],'absolute' => TRUE]),
         '#attributes' => [
           'class' => [
             'use-ajax',

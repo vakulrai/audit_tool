@@ -31,6 +31,7 @@ class AskMoreInformationBlock extends BlockBase {
           ],
         ],
       ];
+    $build['#attached']['library'][] = 'core/drupal.dialog.ajax';
     return $build;
   }
 

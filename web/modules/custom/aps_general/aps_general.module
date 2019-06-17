@@ -376,6 +376,9 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
         unset($data['tabs'][0]['aps_general.clauses']); 
         unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
         unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
+        unset($data['tabs'][0]['aps_pre_audit.manuals:3']);
+        unset($data['tabs'][0]['aps_general.manual']);
+        unset($data['tabs'][0]['aps_general.manual_product']);
       }
     }
     elseif (stripos(strtolower($uri[2]), 'planned_events?') !== false) {
@@ -433,8 +436,12 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
     unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
   }
-  if($current_uri == 'product-listing'){
-   
+  if($route_name == 'view.planned_audit_listing.document_list_ia'){
+    $config = \Drupal::service('config.factory')->getEditable('aps_general.adduserroles');
+    if($config->get('doc_id')){
+      $id = $config->get('doc_id');
+    }
+    $data['tabs'][0]['aps_pre_audit.manuals:2']['#link']['url']->setRouteParameters(['arg_0' => $id]);
   }
 }
 
@@ -456,8 +463,6 @@ function aps_general_user_insert(User $user) {
 // }
 
 function aps_general_views_pre_render(ViewExecutable $view) {
-  if($view->id() == "planned_audit_listing" && $view->current_display == 'planned_audit'){
-  }
 }
 
 /**
@@ -485,12 +490,22 @@ function aps_general_link_alter(&$variables) {
     $cleanLinkText = rtrim(strip_tags($linkText));
     if ($cleanLinkText == 'Documents') {
       $get_nid = explode('?', $uri[1]);
-      $url = Url::fromRoute('view.planned_audit_listing.document_list_ia',['nid' => $get_nid[0]]);
+      $url = Url::fromRoute('view.planned_audit_listing.document_list_ia',['arg_0' => $get_nid[0]]);
       unset($variables['url']);
       $variables['url'] = $url;
       $config->set('nid', $get_nid[0])->save();
     }
   }
+  $linkText = $variables['text'];
+  $cleanLinkText = rtrim(strip_tags($linkText));
+  if ($cleanLinkText == 'Notification') {
+    $count = 0;
+    $title = new TranslatableMarkup("@text", array(
+       '@text' => 'Notification'.'('.$count.')',
+    ));
+    $variables['text'] = $title;
+  }
+  
 }
 
 function get_user_roles(){

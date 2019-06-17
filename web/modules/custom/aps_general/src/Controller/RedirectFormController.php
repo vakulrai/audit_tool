@@ -8,6 +8,7 @@ use Drupal\Core\Form\FormBuilder;
 use Drupal\aps_general\Form\ReportDocument;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Ajax\RedirectCommand;
 
 /**
  * Class RedirectForm.
@@ -55,7 +56,17 @@ class RedirectFormController extends ControllerBase {
   }
 
   public function redirect_form() {
-    return new RedirectResponse('/node/add/clauses');
+    $response = new AjaxResponse();
+    $id = \Drupal::request()->query->get('id');
+    $config = \Drupal::service('config.factory')->getEditable('aps_general.adduserroles');
+    $config_info = \Drupal::service('config.factory')->getEditable('aps_pre_audit.getmoreinfo');
+    $config_info->set('nid', $id)->save();
+    $config->set('doc_id', $id);
+    $config->save();
+    if($config->get('doc_id') == $id){
+      $response->addCommand(new RedirectCommand('/documentinternalrecords/'.$id));
+    }  
+    return $response;
   }
 }	
 ?>

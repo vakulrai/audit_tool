@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.pre_audit_records.field_files
     - field.field.node.pre_audit_records.field_qam
     - field.field.node.pre_audit_records.field_reasons_data
+    - field.field.node.pre_audit_records.field_refere
     - field.field.node.pre_audit_records.field_submitted_by
     - field.field.node.pre_audit_records.field_valid_upto
     - field.field.node.pre_audit_records.field_verified
@@ -47,6 +48,15 @@ content:
       default_paragraph_type: ''
     third_party_settings: {  }
     type: entity_reference_paragraphs
+    region: content
+  field_refere:
+    weight: 27
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_submitted_by:
     weight: 26

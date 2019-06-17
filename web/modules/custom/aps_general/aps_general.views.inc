@@ -25,6 +25,30 @@ function aps_general_views_data() {
     ];
 
 
+    $data['views']['delta_qa'] = [
+        'title' => t('Upload audit documents'),
+        'help' => t('Add delta Q'),
+        'field' => [
+            'id' => 'delta_qa',
+        ],
+    ];
+
+    $data['views']['pre_audit_report'] = [
+        'title' => t('Document Report'),
+        'help' => t('Upload button to upload doc. duing audit'),
+        'field' => [
+            'id' => 'pre_audit_report',
+        ],
+    ];
+
+    $data['views']['remainingday_event'] = [
+        'title' => t('Remaining Days for event'),
+        'help' => t('Upload button to upload doc. duing audit'),
+        'field' => [
+            'id' => 'remainingday_event',
+        ],
+    ];
+    
     $data['views']['upload_audit_documents'] = [
         'title' => t('Upload audit documents'),
         'help' => t('Upload button to upload doc. duing audit'),

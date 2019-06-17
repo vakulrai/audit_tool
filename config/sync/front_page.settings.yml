@@ -1,0 +1,20 @@
+enable: 1
+rid_anonymous:
+  weigth: '0'
+  path: ''
+rid_authenticated:
+  weigth: '0'
+  path: ''
+rid_executive:
+  weigth: '0'
+  path: ''
+rid_auditor:
+  enabled: '1'
+  weigth: '0'
+  path: /planned-audit-listing
+rid_auditee:
+  weigth: '0'
+  path: ''
+rid_mr_admin:
+  weigth: '0'
+  path: ''

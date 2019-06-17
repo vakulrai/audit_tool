@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.internal_documents.body
     - field.field.node.internal_documents.field_files
     - field.field.node.internal_documents.field_reasons_data
+    - field.field.node.internal_documents.field_refere
     - field.field.node.internal_documents.field_verified
     - node.type.internal_documents
   module:
@@ -34,6 +35,15 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
+    region: content
+  field_refere:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_verified:
     weight: 2

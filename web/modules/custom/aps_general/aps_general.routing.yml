@@ -21,3 +21,9 @@ aps_general.add_user_roles_form:
   requirements:
     _access: 'TRUE'
   
+aps_general.add_documents:
+  path: '/planned-audit-documents'
+  defaults:  
+    _controller: '\Drupal\aps_general\Controller\RedirectFormController::redirect_form'
+  requirements:
+    _access: 'TRUE'

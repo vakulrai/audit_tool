@@ -1,31 +1,31 @@
-uuid: 635c0cd0-438a-4f1a-98c8-dc7dd65a3b1c
+uuid: c2a4d8da-4c1f-4ec6-86b3-1f5ce981570e
 langcode: en
 status: true
 dependencies:
   config:
-    - system.menu.admin-sub-menu
+    - system.menu.admin-main-menu-for-auditor
   module:
     - superfish
     - system
     - user
   theme:
     - seven
-id: adminsubmenu
+id: adminmainmenuforauditor
 theme: seven
-region: content
-weight: -8
+region: pre_content
+weight: 0
 provider: null
-plugin: 'superfish:admin-sub-menu'
+plugin: 'superfish:admin-main-menu-for-auditor'
 settings:
-  id: 'superfish:admin-sub-menu'
-  label: 'Admin Sub Menu'
+  id: 'superfish:admin-main-menu-for-auditor'
+  label: 'Admin main menu for Auditor'
   provider: superfish
   label_display: '0'
   level: '1'
   depth: '0'
   expand_all_items: false
-  menu_type: vertical
-  style: none
+  menu_type: horizontal
+  style: white
   arrow: 1
   shadow: 1
   speed: fast
@@ -71,15 +71,15 @@ settings:
   custom_item_class: ''
   custom_link_class: ''
 visibility:
+  request_path:
+    id: request_path
+    pages: /planned-audit-listing
+    negate: false
+    context_mapping: {  }
   user_role:
     id: user_role
     roles:
-      mr_admin: mr_admin
+      auditor: auditor
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'
-  request_path:
-    id: request_path
-    pages: /home
-    negate: false
-    context_mapping: {  }

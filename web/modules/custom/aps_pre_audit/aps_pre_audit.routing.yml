@@ -8,7 +8,7 @@ aps_pre_audit.pre_audit_form:
     _access: 'TRUE'
   
 aps_pre_audit.title_list:
-  path: '/get-title'
+  path: '/get-planned-audit-title'
   defaults:
     _controller: '\Drupal\aps_pre_audit\Controller\GetTitleList::getTitle'
     _format: json

@@ -22,13 +22,14 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/documentrecords\r\n/documentmanuals\r\n/documentinternalrecords"
+    pages: "/documentrecords/*\r\n/documentmanuals/*\r\n/documentinternalrecords/*"
     negate: false
     context_mapping: {  }
   user_role:
     id: user_role
     roles:
       auditor: auditor
+      mr_admin: mr_admin
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'
