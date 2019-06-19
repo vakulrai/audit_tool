@@ -1,0 +1,21 @@
+uuid: b7335e08-36d5-4b48-a289-690d1e5f9367
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_answer_optimised
+    - node.type.answers
+id: node.answers.field_answer_optimised
+field_name: field_answer_optimised
+entity_type: node
+bundle: answers
+label: 'Answer Optimised'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: Optimised
+default_value_callback: ''
+settings: {  }
+field_type: string

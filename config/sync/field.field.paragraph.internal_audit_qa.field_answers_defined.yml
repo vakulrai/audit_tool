@@ -1,0 +1,21 @@
+uuid: 0f65e5d4-2b85-4cdd-9b3e-77a438b2df7a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_answers_defined
+    - paragraphs.paragraphs_type.internal_audit_qa
+id: paragraph.internal_audit_qa.field_answers_defined
+field_name: field_answers_defined
+entity_type: paragraph
+bundle: internal_audit_qa
+label: 'Answers Defined'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: Defined
+default_value_callback: ''
+settings: {  }
+field_type: string

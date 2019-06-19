@@ -1,0 +1,19 @@
+uuid: c75fbb64-7091-4cd9-ae52-29c6ea47733d
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_description_optimised
+field_name: field_description_optimised
+entity_type: paragraph
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

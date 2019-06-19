@@ -1,0 +1,20 @@
+uuid: 58e35eba-097a-45c6-8dc5-c93ac7a280ed
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_suggested_date
+field_name: field_suggested_date
+entity_type: node
+type: datetime
+settings:
+  datetime_type: datetime
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

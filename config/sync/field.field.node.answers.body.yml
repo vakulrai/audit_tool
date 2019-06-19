@@ -1,0 +1,22 @@
+uuid: 6fe60b11-ced7-4e0a-9b56-7bf0703c224e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.answers
+  module:
+    - text
+id: node.answers.body
+field_name: body
+entity_type: node
+bundle: answers
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

@@ -58,6 +58,7 @@ class PreAuditForm extends FormBase {
     $validators = array(
       'file_validate_extensions' => ['jpg mp4 pdf'],
     );
+
     foreach ($details as $key => $value) {
       $count_value = count($value['evidence_value']);
       if($count_value == 2){
@@ -83,7 +84,7 @@ class PreAuditForm extends FormBase {
       $form['audit_qa_'.$key]['question_desc'] = array(
         '#type' => 'item',
         '#weight' => 0,
-        '#markup' => 'Description : '.$value['desc'],
+        '#markup' => 'Description : '.$value['question'],
       );
 
       $form['audit_qa_'.$key]['question_sr_no'] = array(
@@ -97,17 +98,29 @@ class PreAuditForm extends FormBase {
         '#weight' => 10,
         '#title' => 'Question: '.$value['question'],
       );
-
-      $answer_options = $this->getAnswers($value['answers']);
-      $form['audit_qa_'.$key]['answers'.$key] = array(
-       '#type' => 'radios',
-       '#title' => 'Choose One',
-       '#options' => $answer_options,
-       '#weight' => 15,
-       '#default_value' => $this->getAnswersDefaultValue($value['answers']),
-       '#disabled' => $disable_fields,
-      );
       
+      $answer_options = $this->getAnswers($value['answers'], $value['type']);
+      if($value['type'] == 'defined'){
+        $form['audit_qa_'.$key]['answers'.$key] = array(
+         '#type' => 'radios',
+         '#title' => $value['option'],
+         '#options' => $answer_options,
+         '#weight' => 15,
+         '#default_value' => $value['default_checked'],
+         '#disabled' => $disable_fields,
+        );
+      }
+      elseif ($value['type'] == 'predefined') {
+         $form['audit_qa_'.$key]['answers'.$key] = array(
+         '#type' => 'radios',
+         '#title' => 'Choose One',
+         '#options' => $answer_options,
+         '#weight' => 15,
+         '#default_value' => $value['default_checked'],
+         '#disabled' => $disable_fields,
+        );
+      }
+
       $form['audit_qa_'.$key]['finding_img_'.$key] = [
         '#type' => 'managed_file',
         '#name' => 'users_upload',
@@ -191,24 +204,62 @@ class PreAuditForm extends FormBase {
       $query->condition('n.entity_id', $nid);
       $qa_ref_id = $query->execute()->fetchAll();
       $answers = [];
+      $qa_object = Node::load($nid);
+      $selection = $qa_object->get('field_select_result')->value;
       foreach ($qa_ref_id as $key_qa => $value_qa) {
         $qa_ref_nid = $value_qa->field_queries_target_id;
-        $qa_object = Node::load($qa_ref_nid);
-        if($target_id = $qa_object->get('field_qanda')->target_id){
-          $paragraph_object = Paragraph::load($target_id);
-          $questions_array = $paragraph_object->toArray();
-        }
-        $output[$key_qa]['qid'] = $target_id;
-        $output[$key_qa]['sno'] = $paragraph_object->get('field_sub_s_no_')->value;
-        $output[$key_qa]['desc'] = $paragraph_object->get('field_description')->value;
-        $output[$key_qa]['question'] = $paragraph_object->get('field_question')->value;
-        $output[$key_qa]['evidence_value'] = $paragraph_object->get('field_evidence')->getValue();
+        if($target_id = $qa_object->get('field_queries')->target_id){
+          $answer_node_object = Node::load($qa_ref_nid);
+          // $data = $answer_node_object->toArray();
+          if($selection == 'Pdef'){
+            $get_question_id = $answer_node_object->get('field_defined_options_default')->getValue();
+            foreach ($get_question_id as $k => $val) {
+              $ref_id = $val['target_id'];
+              $predefined_question_object = Paragraph::load($ref_id);
+              $predefined_question_object_array = $predefined_question_object->toArray();
+              $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
+              $output[$ref_id]['type'] = 'predefined';
+              $output[$ref_id]['qid'] = $ref_id;
+              $output[$ref_id]['sno'] = count($predefined_question_object_array['field_sub_s_no_']) ? $predefined_question_object->get('field_sub_s_no_')->value : '';
+              $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_optimised')->value] = $predefined_question_object_array['field_answer_optimised'][0]['value'];
+              $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_qualified')->value] = $predefined_question_object_array['field_answer_qualified'][0]['value'];
+              $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_defined')->value] = $predefined_question_object_array['field_answers_defined'][0]['value'];
+              $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_poor')->value] = $predefined_question_object_array['field_answers_poor'][0]['value'];
+              $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
+              $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
 
-        if(count($questions_array['field_answers_n'])){
-          foreach ($questions_array['field_answers_n'] as $key => $value) {
-             $paragraphs_answer_object = Paragraph::load($value['target_id']);
-             $output[$key_qa]['answers'][$value['target_id']] = ['aid' => $value['target_id'],'answer' => $paragraphs_answer_object->get('field_answers')->value, 'desc' => $paragraphs_answer_object->get('field_description_answer')->value, 'checked_value' => $paragraphs_answer_object->get('field_checked')->value];
+              if(count($output[$ref_id]['desc'])){
+                foreach ($output[$ref_id]['desc'] as $key => $value) {
+                   $paragraphs_answer_object = Paragraph::load($ref_id);
+                   $output[$ref_id]['answers'][$value] = ['aid' => $ref_id,'answer' => $paragraphs_answer_object->get('field_description_'.strtolower($key))->value,'checked_value' => $selection];
+                   $output[$ref_id]['question'] = $predefined_question_object->get('field_questions')->value;
+                }
+              }
+            }
           }
+          elseif ($selection == 'Yes') {
+            $get_question_id = $answer_node_object->get('field_defined_option_yes_no')->getValue();
+            foreach ($get_question_id as $k => $val) {
+               $ref_id = $val['target_id'];
+               $predefined_question_object = Paragraph::load($ref_id);
+              $predefined_question_object_array = $predefined_question_object->toArray();
+              $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
+              $output[$ref_id]['type'] = 'defined';
+              $output[$ref_id]['qid'] = $val['target_id'];
+              $output[$ref_id]['sno'] = count($predefined_question_object_array['field_s_no']) ? $predefined_question_object->get('field_s_no')->value : '';
+              $output[$ref_id]['question'] = count($predefined_question_object_array['title']) ? $predefined_question_object->get('title')->value : '';
+              $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
+              $output[$ref_id]['desc'][$predefined_question_object->get('field_description')->value] = $predefined_question_object->get('field_description')->value;
+              $output[$ref_id]['option'] = $predefined_question_object->get('field_description')->value;
+              if(count($output[$ref_id]['desc'])){
+                foreach ($output[$ref_id]['desc'] as $key => $value) {
+                   $paragraphs_answer_object = Paragraph::load($ref_id);
+                   $output[$ref_id]['answers'][$value] = ['aid' => $ref_id,'answer' => $paragraphs_answer_object->get('field_description')->value,'checked_value' => $selection];
+                }
+              }
+            }
+          }
+          // echo '<pre>';print_r($output);
         }
       }
       
@@ -216,9 +267,17 @@ class PreAuditForm extends FormBase {
     return $output;
   }
 
-  public function getAnswers($data){
-    foreach ($data as $key => $value) {
-      $answers[$value['aid']] = $value['answer'].' : '. $value['desc'];
+  public function getAnswers($data, $type){
+    if($type == 'predefined'){
+       foreach ($data as $key => $value) {
+        $answers[$key] = $key.' : '. $value['answer'];
+      }
+    }
+
+    if($type == 'defined'){
+      $answers['yes'] = 'Yes';
+      $answers['no'] = 'No';
+      $answers['na'] = 'Yes';
     }
     return $answers;
   }
@@ -229,20 +288,20 @@ class PreAuditForm extends FormBase {
       $count = count($data);
       if($count > 1){
         foreach ($data as $i => $j) {
-          if($j['checked_value'] == 1){
+          if($j['checked_value'] == 'Pdef'){
             $default_value = $i;
           }
         }
         
       }
-      else{
-        if($value['checked_value'] == 1){
-          $default_value = $key;
-        }
-        else{
-          $default_value = '';
-        }
-      }
+      // else{
+      //   if($value['checked_value'] == 'Yes'){
+      //     $default_value = $key;
+      //   }
+      //   else{
+      //     $default_value = '';
+      //   }
+      // }
     }
     return $default_value;
   }
@@ -270,27 +329,20 @@ class PreAuditForm extends FormBase {
     $response = new AjaxResponse();
     $details = $this->getAuditDetails();
     foreach ($details as $key => $value) {
-      $form_data['answer'][$form_state->getValue('answers'.$key)][] = $form_state->getValue('answers'.$key);
+      $form_data['answer'][$value['qid']][] = $form_state->getValue('answers'.$key);
       $form_data['question'][$value['qid']][] = $form_state->getValue('finding_img_'.$key)[0];
       $form_data['question'][$value['qid']][] = $form_state->getValue('finding_audio_'.$key)[0];
     }
-
+ 
     if(count($form_data['answer'])){
       $id = $this->getQandAid('answers');
       foreach ($form_data['answer'] as $i=>$j) {
-        unset($id[$j[0]]);
+        unset($id[$i]);
         if(isset($i)){
-          unset($details['answers'][$key][$j[0]]);
-          $paragraph_object =  Paragraph::load($j[0]);  
-          $paragraph_object->set('field_checked', 1);
+          $paragraph_object =  Paragraph::load($i);
+          $paragraph_object->set('field_checked', $j[0]);
           $paragraph_object->save();
         }
-      }
-      $remaining_id = $id;
-      foreach ($remaining_id as $key => $value) {
-        $paragraph_object_rem =  Paragraph::load($value);  
-        $paragraph_object_rem->set('field_checked', 0);
-        $paragraph_object_rem->save();
       }
     }
 

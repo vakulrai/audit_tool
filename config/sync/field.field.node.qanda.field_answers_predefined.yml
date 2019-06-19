@@ -1,0 +1,28 @@
+uuid: 4b492d89-a120-4825-b1ea-047a1b99167c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_answers_predefined
+    - node.type.answers
+    - node.type.qanda
+id: node.qanda.field_answers_predefined
+field_name: field_answers_predefined
+entity_type: node
+bundle: qanda
+label: 'Answers Predefined'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      answers: answers
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

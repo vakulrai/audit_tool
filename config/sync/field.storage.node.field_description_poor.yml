@@ -1,0 +1,19 @@
+uuid: b1f729a4-df33-4aeb-a2f2-4468521c677c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_description_poor
+field_name: field_description_poor
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

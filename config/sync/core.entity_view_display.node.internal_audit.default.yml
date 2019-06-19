@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.internal_audit.field_general_queries
     - field.field.node.internal_audit.field_ia_department
     - field.field.node.internal_audit.field_ia_section
+    - field.field.node.internal_audit.field_predefined_queries_yes_no
     - field.field.node.internal_audit.field_procedure_no
     - field.field.node.internal_audit.field_queries
     - field.field.node.internal_audit.field_select_result
@@ -72,6 +73,15 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_predefined_queries_yes_no:
+    type: entity_reference_revisions_entity_view
+    weight: 111
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
     region: content
   field_procedure_no:
     weight: 105

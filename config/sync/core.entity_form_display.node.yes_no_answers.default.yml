@@ -1,0 +1,42 @@
+uuid: 965d087b-094a-4eff-8551-e835217390cb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.yes_no_answers.field_description
+    - field.field.node.yes_no_answers.field_selection
+    - node.type.yes_no_answers
+id: node.yes_no_answers.default
+targetEntityType: node
+bundle: yes_no_answers
+mode: default
+content:
+  field_description:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_selection:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

@@ -1,0 +1,8 @@
+uuid: b2598552-38b1-400d-bdd4-915518774b18
+langcode: en
+status: true
+dependencies: {  }
+name: 'Vocabulary for My Gai'
+vid: my_gai
+description: 'Vocabluary for My Gai'
+weight: 0

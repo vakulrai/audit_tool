@@ -1,0 +1,59 @@
+uuid: b0ea58ba-6818-461b-af68-74e3926beb81
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.new_sub_question_yes_no.field_checked
+    - field.field.paragraph.new_sub_question_yes_no.field_description
+    - field.field.paragraph.new_sub_question_yes_no.field_evidence
+    - field.field.paragraph.new_sub_question_yes_no.field_question
+    - field.field.paragraph.new_sub_question_yes_no.field_s_no
+    - paragraphs.paragraphs_type.new_sub_question_yes_no
+  module:
+    - file
+id: paragraph.new_sub_question_yes_no.default
+targetEntityType: paragraph
+bundle: new_sub_question_yes_no
+mode: default
+content:
+  field_checked:
+    weight: 4
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_description:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_evidence:
+    weight: 6
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_question:
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_s_no:
+    weight: 5
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+hidden: {  }

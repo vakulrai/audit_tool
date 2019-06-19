@@ -1,0 +1,21 @@
+uuid: 1c24c05d-9f63-47fc-88f2-95a256978100
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_answers_poor
+    - node.type.answers
+id: node.answers.field_answers_poor
+field_name: field_answers_poor
+entity_type: node
+bundle: answers
+label: 'Answers Poor'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: Poor
+default_value_callback: ''
+settings: {  }
+field_type: string

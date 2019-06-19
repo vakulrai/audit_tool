@@ -1,4 +1,4 @@
-uuid: 1d79ef71-df40-4c76-b027-af61fc90099b
+uuid: 25bee3aa-39d9-465e-9cb2-56166e5e346c
 langcode: en
 status: true
 dependencies:
@@ -13,13 +13,13 @@ entity_type: paragraph
 bundle: internal_audit_qa
 label: Evidence
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: evidence
-  file_extensions: 'mp4 png jpeg doc pdf'
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: txt
   max_filesize: ''
   description_field: false
   handler: 'default:file'

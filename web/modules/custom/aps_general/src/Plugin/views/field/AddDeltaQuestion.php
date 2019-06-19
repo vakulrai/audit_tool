@@ -60,7 +60,7 @@ class AddDeltaQuestion extends FieldPluginBase {
     $form['add_delta_qa'] = [
 	      '#type' => 'link',
 	      '#title' => t('ADD DELTA Q'),
-	      '#url' => Url::fromUserInput('/node/'.$nid.'/edit',['query' => ['destination' => $current_uri_destination],'absolute' => TRUE]),
+	      '#url' => Url::fromRoute('node.add',['node_type' => 'answers', 'destination' => $current_uri_destination]),
         ];
     return $form;
   }

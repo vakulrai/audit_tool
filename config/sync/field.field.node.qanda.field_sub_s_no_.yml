@@ -1,0 +1,23 @@
+uuid: d2173e62-5a56-4345-ac29-17c2a6604469
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sub_s_no_
+    - node.type.qanda
+id: node.qanda.field_sub_s_no_
+field_name: field_sub_s_no_
+entity_type: node
+bundle: qanda
+label: 'Sub S no.'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

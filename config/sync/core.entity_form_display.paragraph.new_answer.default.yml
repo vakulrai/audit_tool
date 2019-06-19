@@ -3,8 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.new_answer.field_answers
-    - field.field.paragraph.new_answer.field_checked
+    - field.field.paragraph.new_answer.field_answer_poor
     - field.field.paragraph.new_answer.field_description_answer
     - paragraphs.paragraphs_type.new_answer
 id: paragraph.new_answer.default
@@ -12,19 +11,13 @@ targetEntityType: paragraph
 bundle: new_answer
 mode: default
 content:
-  field_answers:
-    weight: 0
+  field_answer_poor:
+    weight: 2
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
-    region: content
-  field_checked:
-    weight: 2
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
     region: content
   field_description_answer:
     weight: 1

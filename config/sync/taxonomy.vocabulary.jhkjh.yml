@@ -1,0 +1,8 @@
+uuid: d056c6cc-5e8d-4ebb-af99-a694d7946299
+langcode: en
+status: true
+dependencies: {  }
+name: 'Vocabulary for jhkjh'
+vid: jhkjh
+description: 'Vocabluary for jhkjh'
+weight: 0

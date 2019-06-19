@@ -1,0 +1,25 @@
+uuid: e9c6c213-63e0-4c6c-882b-de477e3ace6e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_business_head_dept
+    - node.type.section
+id: node.section.field_business_head_dept
+field_name: field_business_head_dept
+entity_type: node
+bundle: section
+label: 'Business Head'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: registration_entity_reference
+      display_name: entity_reference_2
+      arguments: {  }
+field_type: entity_reference

@@ -1,0 +1,19 @@
+uuid: 57c278b7-92a0-45b6-b9ef-cd58a7951b2e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_question
+    - node.type.qanda
+id: node.qanda.field_question
+field_name: field_question
+entity_type: node
+bundle: qanda
+label: Question
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

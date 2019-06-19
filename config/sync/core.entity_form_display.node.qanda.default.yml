@@ -4,26 +4,53 @@ status: true
 dependencies:
   config:
     - field.field.node.qanda.body
+    - field.field.node.qanda.field_answers_predefined
+    - field.field.node.qanda.field_evidence
     - field.field.node.qanda.field_qanda
+    - field.field.node.qanda.field_question
+    - field.field.node.qanda.field_sub_s_no_
     - node.type.qanda
   module:
-    - paragraphs
+    - file
+    - inline_entity_form
 id: node.qanda.default
 targetEntityType: node
 bundle: qanda
 mode: default
 content:
-  field_qanda:
-    type: entity_reference_paragraphs
+  field_answers_predefined:
+    weight: 3
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      collapsible: false
+      collapsed: false
+    third_party_settings: {  }
+    type: inline_entity_form_simple
+    region: content
+  field_evidence:
+    weight: 4
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_question:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_sub_s_no_:
     weight: 1
     settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
+      placeholder: ''
     third_party_settings: {  }
+    type: number
     region: content
   title:
     type: string_textfield
@@ -36,6 +63,7 @@ content:
 hidden:
   body: true
   created: true
+  field_qanda: true
   path: true
   promote: true
   status: true

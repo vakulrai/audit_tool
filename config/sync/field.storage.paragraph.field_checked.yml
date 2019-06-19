@@ -1,24 +1,18 @@
-uuid: e0e71108-7ec7-48a9-88a6-f8d944a9ea72
+uuid: 518e5743-5084-408f-8afa-8e1e394c1e9b
 langcode: en
 status: true
 dependencies:
   module:
-    - options
     - paragraphs
 id: paragraph.field_checked
 field_name: field_checked
 entity_type: paragraph
-type: list_integer
+type: string
 settings:
-  allowed_values:
-    -
-      value: 1
-      label: Checked
-    -
-      value: 0
-      label: Unchecked
-  allowed_values_function: ''
-module: options
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true

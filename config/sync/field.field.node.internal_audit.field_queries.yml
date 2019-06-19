@@ -4,13 +4,13 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_queries
+    - node.type.answers
     - node.type.internal_audit
-    - node.type.qanda
 id: node.internal_audit.field_queries
 field_name: field_queries
 entity_type: node
 bundle: internal_audit
-label: Queries
+label: 'Predefined Queries'
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
-      qanda: qanda
+      answers: answers
     sort:
       field: _none
     auto_create: false

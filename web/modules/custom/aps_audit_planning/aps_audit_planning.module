@@ -97,6 +97,25 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       //   '#type' => 'container',
       // ];
     }
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    if(in_array('auditor', $roles)){
+      $entity_type_id = 'node';
+      $bundle = 'planned_events';
+      foreach (\Drupal::entityManager()->getFieldDefinitions($entity_type_id, $bundle) as $field_name => $field_definition) {
+        if (!empty($field_definition->getTargetBundle())) {
+          $bundleFields[$field_name]['type'] = $field_definition->getType();
+          $bundleFields[$field_name]['label'] = $field_definition->getLabel();
+          $form[$field_name]['#disabled'] = TRUE;
+          if($field_name == 'field_suggested_date'){
+            $form[$field_name]['#disabled'] = FALSE;
+          }
+        }
+      }
+    }
+  }
+  if($form_id == 'node_planned_events_form'){
+    $form['field_suggested_date']['#access'] = FALSE;
   }
   if($form['#id'] == 'views-exposed-form-customer-manual-parts-product-listing'){
      $form['title']['#autocomplete_route_name'] = 'aps_audit_planning.title_list';

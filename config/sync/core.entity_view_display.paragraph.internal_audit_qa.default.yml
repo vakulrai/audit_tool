@@ -3,30 +3,27 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.internal_audit_qa.field_answers_n
-    - field.field.paragraph.internal_audit_qa.field_description
+    - field.field.paragraph.internal_audit_qa.field_answer_optimised
+    - field.field.paragraph.internal_audit_qa.field_answer_qualified
+    - field.field.paragraph.internal_audit_qa.field_answers_defined
+    - field.field.paragraph.internal_audit_qa.field_answers_poor
+    - field.field.paragraph.internal_audit_qa.field_checked
+    - field.field.paragraph.internal_audit_qa.field_description_defined
+    - field.field.paragraph.internal_audit_qa.field_description_optimised
+    - field.field.paragraph.internal_audit_qa.field_description_poor
+    - field.field.paragraph.internal_audit_qa.field_description_qualified
     - field.field.paragraph.internal_audit_qa.field_evidence
-    - field.field.paragraph.internal_audit_qa.field_question
+    - field.field.paragraph.internal_audit_qa.field_questions
     - field.field.paragraph.internal_audit_qa.field_sub_s_no_
     - paragraphs.paragraphs_type.internal_audit_qa
   module:
-    - entity_reference_revisions
     - file
 id: paragraph.internal_audit_qa.default
 targetEntityType: paragraph
 bundle: internal_audit_qa
 mode: default
 content:
-  field_answers_n:
-    type: entity_reference_revisions_entity_view
-    weight: 4
-    label: above
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    region: content
-  field_description:
+  field_answer_optimised:
     weight: 0
     label: above
     settings:
@@ -34,23 +31,84 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_evidence:
+  field_answer_qualified:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_answers_defined:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_answers_poor:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_checked:
+    weight: 11
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_description_defined:
+    weight: 4
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_description_optimised:
     weight: 5
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_description_poor:
+    weight: 6
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_description_qualified:
+    weight: 7
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_evidence:
+    weight: 8
     label: above
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
     type: file_default
     region: content
-  field_question:
-    weight: 3
+  field_questions:
+    weight: 9
     label: above
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    type: basic_string
+    type: string
     region: content
   field_sub_s_no_:
-    weight: 2
+    weight: 10
     label: above
     settings:
       thousand_separator: ''

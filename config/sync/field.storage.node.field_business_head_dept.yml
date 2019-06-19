@@ -1,0 +1,19 @@
+uuid: f4d253e0-ea15-4e40-b3fb-d6892a9292f1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_business_head_dept
+field_name: field_business_head_dept
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

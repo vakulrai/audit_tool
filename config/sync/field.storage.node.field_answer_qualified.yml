@@ -1,0 +1,21 @@
+uuid: 4bf81210-18aa-4f67-bc19-c1ed63ee73db
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_answer_qualified
+field_name: field_answer_qualified
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

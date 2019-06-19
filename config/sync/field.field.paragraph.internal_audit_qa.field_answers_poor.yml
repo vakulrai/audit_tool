@@ -1,0 +1,21 @@
+uuid: 0a09b0ba-9e86-45a0-9014-ccee71d2768f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_answers_poor
+    - paragraphs.paragraphs_type.internal_audit_qa
+id: paragraph.internal_audit_qa.field_answers_poor
+field_name: field_answers_poor
+entity_type: paragraph
+bundle: internal_audit_qa
+label: 'Answers Poor'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: Poor
+default_value_callback: ''
+settings: {  }
+field_type: string

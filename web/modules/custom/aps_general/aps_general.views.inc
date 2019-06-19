@@ -57,5 +57,13 @@ function aps_general_views_data() {
         ],
     ];
 
+    $data['views']['remainingday_event_validate'] = [
+        'title' => t('Check user can start Pre-audit'),
+        'help' => t('Validate Pre-Audit'),
+        'field' => [
+            'id' => 'remainingday_event_validate',
+        ],
+    ];
+
     return $data;
 }

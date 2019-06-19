@@ -1,0 +1,23 @@
+uuid: 81887f6c-2887-4f98-96a1-49f5b174753e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sub_s_no_
+    - node.type.answers
+id: node.answers.field_sub_s_no_
+field_name: field_sub_s_no_
+entity_type: node
+bundle: answers
+label: 'Sub S no.'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

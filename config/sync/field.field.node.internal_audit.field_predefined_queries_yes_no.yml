@@ -1,0 +1,70 @@
+uuid: 32fc9042-f42c-4ba3-ba91-43b5d670cf1f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_predefined_queries_yes_no
+    - node.type.internal_audit
+    - paragraphs.paragraphs_type.new_sub_question_yes_no
+  module:
+    - entity_reference_revisions
+id: node.internal_audit.field_predefined_queries_yes_no
+field_name: field_predefined_queries_yes_no
+entity_type: node
+bundle: internal_audit
+label: 'Predefined Queries Yes/No'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      new_sub_question_yes_no: new_sub_question_yes_no
+    target_bundles_drag_drop:
+      auditor_functional_details:
+        weight: 15
+        enabled: false
+      audit_cycle_other:
+        weight: 16
+        enabled: false
+      audit_cycle_schedule_release:
+        weight: 17
+        enabled: false
+      audit_score_settings:
+        weight: 18
+        enabled: false
+      audit_score_settings_range_100:
+        weight: 19
+        enabled: false
+      business_process_effectiveness:
+        weight: 20
+        enabled: false
+      business_process_effieciency:
+        weight: 21
+        enabled: false
+      customer_audit:
+        weight: 22
+        enabled: false
+      customer_manual_parts:
+        weight: 23
+        enabled: false
+      internal_audit_qa:
+        weight: 24
+        enabled: false
+      new_answer:
+        weight: 25
+        enabled: false
+      new_sub_question_yes_no:
+        enabled: true
+        weight: 26
+      procedures:
+        weight: 27
+        enabled: false
+      report_reason:
+        weight: 28
+        enabled: false
+field_type: entity_reference_revisions

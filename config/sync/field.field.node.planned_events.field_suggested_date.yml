@@ -1,0 +1,21 @@
+uuid: 0d79de3b-2282-4b43-b8b3-ead02a662f53
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_suggested_date
+    - node.type.planned_events
+  module:
+    - datetime
+id: node.planned_events.field_suggested_date
+field_name: field_suggested_date
+entity_type: node
+bundle: planned_events
+label: 'Suggested Date For reschedule'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

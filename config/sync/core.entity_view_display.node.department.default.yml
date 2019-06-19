@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.department.body
-    - field.field.node.department.field_business_head
+    - field.field.node.department.field_business_head_dept
     - field.field.node.department.field_department_type
     - field.field.node.department.field_file
     - field.field.node.department.field_location
@@ -25,7 +25,7 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-  field_business_head:
+  field_business_head_dept:
     weight: 106
     label: above
     settings:
@@ -51,7 +51,7 @@ content:
     third_party_settings: {  }
     region: content
   field_location:
-    weight: 103
+    weight: 107
     label: above
     settings:
       link: true

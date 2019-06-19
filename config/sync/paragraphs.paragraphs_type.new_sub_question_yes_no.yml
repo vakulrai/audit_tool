@@ -1,0 +1,9 @@
+uuid: 769916dc-90d8-44e3-bac9-309b00500c89
+langcode: en
+status: true
+dependencies: {  }
+id: new_sub_question_yes_no
+label: 'New Sub Question Yes/no'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

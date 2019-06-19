@@ -9,12 +9,23 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\user\Entity\User;
 use Drupal\Core\Link;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\RemoveCommand;
+use Drupal\Component\Datetime\DateTimePlus;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\field\Entity\FieldStorageConfig;
+use \Drupal\field\Entity\FieldConfig;
 
 
 /**
@@ -68,6 +79,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   
   //Condition for Business Add form
   if($form_id == 'node_business_process_form'){
+    // $del = Vocabulary::load('gia_tech')->delete();die;
     $form['field_refere']['#access'] = FALSE;
     if($id = \Drupal::request()->query->get('id')){
       $node_object = Node::load($id);
@@ -88,6 +100,21 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $form['field_refere']['#access'] = FALSE;
     if($id = \Drupal::request()->query->get('id')){
       $node_object = Node::load($id);
+      // $vid_to_check = \Drupal::request()->query->get('unit_ref');
+      // $properties['vid'] = $vid_to_check;
+      // $properties['name'] = 'Location';
+      // $parent_term = getTidByName('Location', $vid_to_check);
+      // $load_children = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadChildren($parent_term);
+      // $term_data['_none'] = '- None -';
+      // foreach ($load_children as $term) {
+      //  $term_data[$term->get('tid')->value] = $term->get('name')->value;
+      // }
+      // $config_factory = \Drupal::configFactory();
+      // $config = $config_factory->getEditable('field.field.node.department.field_business_head');
+      // $config->set('settings.handler_settings.target_bundles.business_head', 'gai_tech');
+      // $config->save(TRUE);
+      // $form['field_business_head']['widget']['#default_value'] = ['_none'];
+      // $form['field_business_head']['widget']['#options'] = $term_data;
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
     foreach (array_keys($form['actions']) as $action) {
@@ -230,8 +257,11 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
        '@type' => 'Add Product',
     ));
   }
-}
 
+  if($form_id == 'node_internal_audit_form'){
+
+  }
+}
 /**
  * Implements  hook_entity_insert().
  */
@@ -246,17 +276,90 @@ function aps_general_node_insert(Node $node) {
     ])->save();
   }
   if($node->bundle() == 'unit'){
+    $title = $node->get('title')->value;
     $field_address = $node->get('field_address')->locality;
     $field_remote_location = $node->get('field_remote_address')->locality;
-    $term = Term::create([
-      'name' => $field_address, 
-      'vid' => 'location',
-    ])->save();
+    
+    $vid_to_check = strtolower(preg_replace('/\s+/', '_', $title));
+    $vocabularies = \Drupal\taxonomy\Entity\Vocabulary::loadMultiple();
+    if(!isset($vocabularies[$vid_to_check])){
+      $vocabulary = Vocabulary::create([
+        'vid' => $vid_to_check,
+        'description' => 'Vocabluary for '.$title,
+        'name' => 'Vocabulary for ' .$title,
+      ])->save();
+    }
 
     $term = Term::create([
+      'name' => 'Location', 
+      'vid' => $vid_to_check,
+    ]);
+    $inserted_or_updated = $term->save();
+    $tid = $term->id();
+
+    $term_location = Term::create([
+    'name' => $field_address, 
+    'vid' => $vid_to_check,
+    'parent' => [$tid],
+    ]);
+    $inserted_or_updated_location = $term_location->save();
+    $tid_location = $term_location->id();
+
+    $term_location_remote = Term::create([
       'name' => $field_remote_location, 
-      'vid' => 'location',
+      'vid' => $vid_to_check,
+      'parent' => [$tid],
     ])->save();
+
+  }
+  if($node->bundle() == 'business_process'){
+    $bp_title = $node->get('title')->value;
+    $vid_bp = preg_replace('/\s+/', '_', $bp_title);
+    //UNit reference
+    $unit_id = \Drupal::request()->query->get('id');
+    $unit_object = Node::load($unit_id);
+    $unit_title = $unit_object->get('title')->value;
+    $vid_unit = strtolower(preg_replace('/\s+/', '_', $unit_title));
+    $head_name = $node->get('field_business_head_name')->value;
+    $term = Term::create([
+      'name' => 'Business Process', 
+      'vid' => $vid_unit,
+    ]);
+
+    $inserted_or_updated = $term->save();
+    $tid = $term->id();
+
+    $term = Term::create([
+      'name' => $head_name, 
+      'vid' => $vid_unit,
+      'parent' => [$tid],
+    ])->save();
+  }
+}
+
+/**
+ * Implements  hook_entity_presave().
+ */
+function aps_general_node_presave(Node $node) {
+ if($node->bundle() == 'planned_events'){
+    if($suggested_date = $node->get('field_suggested_date')->value){
+      $current_user = \Drupal::currentUser();
+      $roles = $current_user->getRoles();
+      $user_timezone =  drupal_get_user_timezone();
+      $get_current_timestamp = getCurrentTimestamp($user_timezone);
+      if(in_array('auditor', $roles)){
+        $notifictaion_insert = \Drupal::database()->insert('notifications');
+        $message = 'Reschedule the audit to '.$suggested_date;
+        $notifictaion_insert->fields([
+          'nid' => $node->id(),
+          'uid' => $current_user->id(),
+          'message' => $message,
+          'timestamp' => $get_current_timestamp,
+          'status' => 0,
+        ]);
+        $notifictaion_insert->execute();
+      }
+    }
   }
 }
 
@@ -529,9 +632,13 @@ function aps_general_unit_page_redirect(array $form, \Drupal\Core\Form\FormState
  * Callback method after business process form submits.
  */
 function aps_business_process_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $id = \Drupal::request()->query->get('id');
+  $node_object = Node::load($id);
+  $title = $node_object->get('title')->value;
+  $vid_to_check = strtolower(preg_replace('/\s+/', '_', $title));
   $form_values = $form_state->getValues();
   $nid = $form_values['nid'];
-  $response = Url::fromUserInput('/node/add/department?id='.$nid);
+  $response = Url::fromUserInput('/node/add/department?id='.$nid.'&unit_ref='.$id.'&business_ref='.$nid);
   $form_state->setRedirectUrl($response);
 }
 
@@ -539,9 +646,12 @@ function aps_business_process_page_redirect(array $form, \Drupal\Core\Form\FormS
  * Callback method after department form submits.
  */
 function aps_department_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $business_id = \Drupal::request()->query->get('id');
+  $unit_ref = \Drupal::request()->query->get('unit_ref');
+  $business_ref = \Drupal::request()->query->get('business_ref');
   $form_values = $form_state->getValues();
   $nid = $form_values['nid'];
-  $response = Url::fromUserInput('/node/add/section?id='.$nid);
+  $response = Url::fromUserInput('/node/add/section?id='.$nid.'&unit_ref='.$unit_ref.'&business_ref='.$business_ref);
   $form_state->setRedirectUrl($response);
 }
 
@@ -549,9 +659,10 @@ function aps_department_page_redirect(array $form, \Drupal\Core\Form\FormStateIn
  * Callback method after department form submits.
  */
 function aps_section_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $unit_ref = \Drupal::request()->query->get('unit_ref');
   $form_values = $form_state->getValues();
   $nid = $form_values['nid'];
-  $response = Url::fromUserInput('/node/add/assembly?id='.$nid);
+  $response = Url::fromUserInput('/node/add/assembly?id='.$nid.'&unit_ref='.$unit_ref);
   $form_state->setRedirectUrl($response);
 }
 
@@ -606,4 +717,29 @@ function aps_clauses_page_redirect(array $form, \Drupal\Core\Form\FormStateInter
 function parts_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
   $response = Url::fromUserInput('/node/add/customers_manual');
   $form_state->setRedirectUrl($response);
+}
+
+/**
+ * Callback to get Current timestamp.
+ */
+function getCurrentTimestamp($user_timezone){
+  $db_timezone = 'UTC';
+  $get_current_timestamp =  \Drupal::time()->getCurrentTime();
+  $current_date_object = DateTimePlus::createFromTimestamp($get_current_timestamp, $db_timezone);
+  $current_date_object->setTimezone(new \DateTimeZone($user_timezone));
+  return $current_date_object->getTimestamp();
+}
+
+function getTidByName($name = NULL, $vid = NULL) {
+  $properties = [];
+  if (!empty($name)) {
+    $properties['name'] = $name;
+  }
+  if (!empty($vid)) {
+    $properties['vid'] = $vid;
+  }
+  $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+  $term = reset($terms);
+
+  return !empty($term) ? $term->id() : 0;
 }

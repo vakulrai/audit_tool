@@ -1,0 +1,70 @@
+uuid: 1036a2f7-8f23-4419-a32f-972ceaa9fd54
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_defined_options_default
+    - node.type.answers
+    - paragraphs.paragraphs_type.internal_audit_qa
+  module:
+    - entity_reference_revisions
+id: node.answers.field_defined_options_default
+field_name: field_defined_options_default
+entity_type: node
+bundle: answers
+label: 'Defined options default'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      internal_audit_qa: internal_audit_qa
+    target_bundles_drag_drop:
+      audit_cycle_other:
+        weight: 15
+        enabled: false
+      audit_cycle_schedule_release:
+        weight: 16
+        enabled: false
+      audit_score_settings:
+        weight: 17
+        enabled: false
+      audit_score_settings_range_100:
+        weight: 18
+        enabled: false
+      auditor_functional_details:
+        weight: 19
+        enabled: false
+      business_process_effectiveness:
+        weight: 20
+        enabled: false
+      business_process_effieciency:
+        weight: 21
+        enabled: false
+      customer_audit:
+        weight: 22
+        enabled: false
+      customer_manual_parts:
+        weight: 23
+        enabled: false
+      internal_audit_qa:
+        enabled: true
+        weight: 24
+      new_answer:
+        weight: 25
+        enabled: false
+      new_sub_question_yes_no:
+        weight: 26
+        enabled: false
+      procedures:
+        weight: 27
+        enabled: false
+      report_reason:
+        weight: 28
+        enabled: false
+field_type: entity_reference_revisions

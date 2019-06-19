@@ -7,6 +7,8 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+
 /**
  * Implements hook_help().
  */
@@ -156,6 +158,27 @@ function aps_audit_criteria_preprocess_page(&$variables) {
   $uri = explode('/', $current_uri);
   if ($current_uri == 'audit_criteria/1/edit') {
     $variables['#attached']['library'][] = 'aps_audit_criteria/audit_criteria_system_js';
+  }
+}
+
+function aps_audit_criteria_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) { 
+  $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answers_poor']['#disabled'] = TRUE;
+  $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answer_optimised']['#disabled'] = TRUE;
+  $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answer_qualified']['#disabled'] = TRUE;
+  $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answers_defined']['#disabled'] = TRUE;
+  
+  if($entity_form['#bundle'] == 'answers'){
+    $entity_form['field_defined_options_default']['#states'] = [
+      'visible' => [
+        'input[name="field_select_result"]' => ['value' => 'Pdef']
+      ],
+    ];
+
+    $entity_form['field_defined_option_yes_no']['#states'] = [
+      'visible' => [
+        'input[name="field_select_result"]' => ['value' => 'Yes']
+      ],
+    ];
   }
 }
 

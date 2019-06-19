@@ -18,10 +18,12 @@ dependencies:
     - field.field.node.planned_events.field_select_audit
     - field.field.node.planned_events.field_shift
     - field.field.node.planned_events.field_start_date
+    - field.field.node.planned_events.field_suggested_date
     - field.field.node.planned_events.field_time
     - field.field.node.planned_events.field_unit
     - node.type.planned_events
   module:
+    - datetime
     - datetime_range
     - options
     - text
@@ -150,6 +152,15 @@ content:
       timezone: ''
     third_party_settings: {  }
     type: timestamp
+    region: content
+  field_suggested_date:
+    weight: 119
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_time:
     weight: 104
