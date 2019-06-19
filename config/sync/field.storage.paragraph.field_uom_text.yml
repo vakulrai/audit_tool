@@ -1,16 +1,17 @@
-uuid: 1a125b23-8265-4b43-994f-399dd16df553
+uuid: cbdf3933-67a0-468e-9f12-57a2dc2a5c3a
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
-    - taxonomy
-id: paragraph.field_uom
-field_name: field_uom
+id: paragraph.field_uom_text
+field_name: field_uom_text
 entity_type: paragraph
-type: entity_reference
+type: string
 settings:
-  target_type: taxonomy_term
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
 module: core
 locked: false
 cardinality: 1

@@ -6,7 +6,7 @@ dependencies:
     - field.field.paragraph.business_process_effectiveness.field_effectiveness
     - field.field.paragraph.business_process_effectiveness.field_other
     - field.field.paragraph.business_process_effectiveness.field_target
-    - field.field.paragraph.business_process_effectiveness.field_uom
+    - field.field.paragraph.business_process_effectiveness.field_uom_text
     - paragraphs.paragraphs_type.business_process_effectiveness
 id: paragraph.business_process_effectiveness.default
 targetEntityType: paragraph
@@ -38,12 +38,12 @@ content:
     third_party_settings: {  }
     type: number_integer
     region: content
-  field_uom:
-    weight: 1
+  field_uom_text:
+    weight: 4
     label: above
     settings:
-      link: true
+      link_to_entity: false
     third_party_settings: {  }
-    type: entity_reference_label
+    type: string
     region: content
 hidden: {  }
