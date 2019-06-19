@@ -130,6 +130,14 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   //Condition for Section Add form
   if($form_id == 'node_section_form'){
     $form['field_refere']['#access'] = FALSE;
+    if($unit_ref= \Drupal::request()->query->get('unit_ref')){
+      $unit_ref_object = Node::load($unit_ref);
+      $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
+      foreach ($unit_refernced_shift as $key => $value) {
+        $def_values[$value['target_id']] = $value['target_id'];
+      }
+      $form['field_shift']['widget']['#default_value'] = $def_values;
+    }
     if($id= \Drupal::request()->query->get('id')){
       $node_object = Node::load($id);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
@@ -165,6 +173,14 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   //Condition for Assembly Add form
   if($form_id == 'node_assembly_form'){
     $form['field_refere']['#access'] = FALSE;
+    if($unit_ref= \Drupal::request()->query->get('unit_ref')){
+      $unit_ref_object = Node::load($unit_ref);
+      $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
+      foreach ($unit_refernced_shift as $key => $value) {
+        $def_values[$value['target_id']] = $value['target_id'];
+      }
+      $form['field_shift']['widget']['#default_value'] = $def_values;
+    }
     if($id= \Drupal::request()->query->get('id')){
       $node_object = Node::load($id);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
@@ -310,6 +326,11 @@ function aps_general_node_insert(Node $node) {
       'vid' => $vid_to_check,
       'parent' => [$tid],
     ])->save();
+
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('aps_general.unitregistration');
+    $config->set('unit_registered', $node->id());
+    $config->save(TRUE);
 
   }
   if($node->bundle() == 'business_process'){
@@ -561,9 +582,40 @@ function aps_general_user_insert(User $user) {
 /**
  * Implements hook_views_query_alter().
  */
-// function aps_general_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
-  
-// }
+function aps_general_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  if($view->id() === 'registered_unit_listing'){
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('aps_general.unitregistration');
+    $registered_unit = $config->get('unit_registered');
+    if($view->getDisplay()->display['id'] == 'bp'){
+      $definition = [
+        'table' => 'node__field_refere',
+        'field' => 'entity_id',
+        'left_table' => 'node_field_data',
+        'left_field' => 'nid',
+      ];
+      $join = Drupal::service('plugin.manager.views.join')->createInstance('standard', $definition);
+      $query->addRelationship('node__field_refere', $join, 'node');
+      $query->addWhere('AND', 'node__field_refere.bundle', 'business_process');
+      $query->addWhere('AND', 'node__field_refere.field_refere_target_id', $registered_unit);
+    }
+    if($view->getDisplay()->display['id'] == 'section_list'){
+      $config_factory = \Drupal::configFactory();
+      $config = $config_factory->getEditable('aps_general.unitregistration');
+      $registered_unit = $config->get('unit_registered');
+      $definition = [
+        'table' => 'node__field_refere',
+        'field' => 'entity_id',
+        'left_table' => 'node_field_data',
+        'left_field' => 'nid',
+      ];
+      $join = Drupal::service('plugin.manager.views.join')->createInstance('standard', $definition);
+      $query->addRelationship('node__field_refere', $join, 'node');
+      $query->addWhere('AND', 'node__field_refere.field_refere_target_id', $registered_unit);
+      $query->addWhere('AND', 'node__field_refere.bundle', 'section');
+    }
+  }
+}
 
 function aps_general_views_pre_render(ViewExecutable $view) {
 }
@@ -651,7 +703,12 @@ function aps_department_page_redirect(array $form, \Drupal\Core\Form\FormStateIn
   $business_ref = \Drupal::request()->query->get('business_ref');
   $form_values = $form_state->getValues();
   $nid = $form_values['nid'];
-  $response = Url::fromUserInput('/node/add/section?id='.$nid.'&unit_ref='.$unit_ref.'&business_ref='.$business_ref);
+  if($business_ref == ''){
+    $response = Url::fromUserInput('/node/add/section?id='.$nid.'&unit_ref='.$unit_ref);
+  }
+  else{
+    $response = Url::fromUserInput('/node/add/section?id='.$nid.'&unit_ref='.$unit_ref.'&business_ref='.$business_ref);
+  } 
   $form_state->setRedirectUrl($response);
 }
 

@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.section.field_file
     - field.field.node.section.field_location
     - field.field.node.section.field_refere
+    - field.field.node.section.field_section_head
     - field.field.node.section.field_shift
     - node.type.section
   module:
@@ -31,12 +32,6 @@ content:
     settings:
       media_types: {  }
     third_party_settings: {  }
-    region: content
-  field_business_head_dept:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
     region: content
   field_file:
     weight: 5
@@ -60,6 +55,14 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_section_head:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_shift:
     weight: 4
     settings: {  }
@@ -77,6 +80,7 @@ content:
 hidden:
   body: true
   created: true
+  field_business_head_dept: true
   path: true
   promote: true
   status: true

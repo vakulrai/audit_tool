@@ -6,6 +6,8 @@ dependencies:
     - field.storage.node.field_shift
     - node.type.assembly
     - taxonomy.vocabulary.shift
+  content:
+    - 'taxonomy_term:shift:797c4910-ba6f-482c-ac14-901bf68587ca'
 id: node.assembly.field_shift
 field_name: field_shift
 entity_type: node
@@ -14,7 +16,9 @@ label: Shift
 description: ''
 required: false
 translatable: true
-default_value: {  }
+default_value:
+  -
+    target_uuid: 797c4910-ba6f-482c-ac14-901bf68587ca
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'

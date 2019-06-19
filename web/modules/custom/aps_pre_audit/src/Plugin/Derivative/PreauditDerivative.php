@@ -77,6 +77,24 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       'query' => ['node_type' => 'procedures'],
     ] + $base_plugin_definition;
 
+    $links[5] = [
+      'title' => 'Unit',
+      'route_name' => 'view.user_registration_view.registration',
+      'base_route' => 'view.user_registration_view.registration',
+    ] + $base_plugin_definition;
+
+    $links[6] = [
+      'title' => 'Business Processes',
+      'route_name' => 'view.registered_unit_listing.bp',
+      'base_route' => 'view.user_registration_view.registration',
+    ] + $base_plugin_definition;
+
+    $links[7] = [
+      'title' => 'Sections',
+      'route_name' => 'view.registered_unit_listing.section_list',
+      'base_route' => 'view.user_registration_view.registration',
+    ] + $base_plugin_definition;
+
     return $links;
   }
 }

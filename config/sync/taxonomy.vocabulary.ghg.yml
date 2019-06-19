@@ -1,0 +1,8 @@
+uuid: ce5ab250-b39f-433e-a457-c577c2298745
+langcode: en
+status: true
+dependencies: {  }
+name: 'Vocabulary for ghg'
+vid: ghg
+description: 'Vocabluary for ghg'
+weight: 0

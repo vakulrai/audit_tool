@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.department.body
     - field.field.node.department.field_business_head_dept
+    - field.field.node.department.field_department_head
     - field.field.node.department.field_department_type
     - field.field.node.department.field_file
     - field.field.node.department.field_location
@@ -17,11 +18,13 @@ targetEntityType: node
 bundle: department
 mode: default
 content:
-  field_business_head_dept:
-    weight: 2
-    settings: {  }
+  field_department_head:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: options_select
+    type: string_textfield
     region: content
   field_file:
     type: media_library_widget
@@ -31,7 +34,7 @@ content:
     third_party_settings: {  }
     region: content
   field_location:
-    weight: 1
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -56,6 +59,7 @@ content:
 hidden:
   body: true
   created: true
+  field_business_head_dept: true
   field_department_type: true
   path: true
   promote: true
