@@ -1,6 +1,6 @@
 uuid: d7a082d7-7eb9-4c6c-b516-a0a4975110da
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - system
@@ -9,7 +9,7 @@ dependencies:
 id: pagetitle
 theme: seven
 region: content
-weight: -1
+weight: 10
 provider: null
 plugin: page_title_block
 settings:
