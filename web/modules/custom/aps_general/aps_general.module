@@ -654,7 +654,10 @@ function aps_general_link_alter(&$variables) {
   $linkText = $variables['text'];
   $cleanLinkText = rtrim(strip_tags($linkText));
   if ($cleanLinkText == 'Notification') {
-    $count = 0;
+    $query = \Drupal::database()->select('notifications', 'n');
+    $query->fields('n');
+    $nids = $query->execute()->fetchAll();
+    $count = count($nids);
     $title = new TranslatableMarkup("@text", array(
        '@text' => 'Notification'.'('.$count.')',
     ));
