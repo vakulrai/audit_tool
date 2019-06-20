@@ -12,7 +12,7 @@ dependencies:
 id: preaudit
 theme: seven
 region: content
-weight: -12
+weight: -11
 provider: null
 plugin: 'superfish:pre-audit-'
 settings:

@@ -13,7 +13,7 @@ dependencies:
 id: adminmainmenu
 theme: seven
 region: pre_content
-weight: -11
+weight: -19
 provider: null
 plugin: 'superfish:admin-main-menu'
 settings:

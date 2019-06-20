@@ -1,0 +1,8 @@
+uuid: 6186acec-c31b-468c-b466-480f29b8ab12
+langcode: en
+status: true
+dependencies: {  }
+id: go-to-unit-detail-page
+label: 'Go to Unit Detail Page'
+description: 'The menu is added to registration flow pages'
+locked: false

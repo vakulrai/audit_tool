@@ -1238,11 +1238,13 @@ display:
         filters: false
         filter_groups: false
         fields: false
+        arguments: false
+        relationships: false
       filter_groups:
         operator: AND
         groups:
           1: AND
-      path: business-process-listing-all
+      path: business-process-listing-all/%
       fields:
         title:
           id: title
@@ -1295,7 +1297,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: true
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1425,11 +1427,61 @@ display:
           absolute: false
           entity_type: node
           plugin_id: entity_link_edit
+      arguments:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: field_refere
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: raw
+          default_argument_options:
+            index: 1
+            use_alias: false
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+          entity_type: node
+          entity_field: nid
+          plugin_id: node_nid
+      relationships:
+        field_refere:
+          id: field_refere
+          table: node__field_refere
+          field: field_refere
+          relationship: none
+          group_type: group
+          admin_label: 'field_refere: Content'
+          required: false
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
         - 'user.node_grants:view'
         - user.permissions
@@ -1669,7 +1721,7 @@ display:
     position: 3
     display_options:
       display_extenders: {  }
-      path: section-listing-all
+      path: section-listing-all/%
       filters:
         status:
           value: '1'
@@ -1726,6 +1778,8 @@ display:
         filters: false
         filter_groups: false
         fields: false
+        relationships: false
+        arguments: false
       filter_groups:
         operator: AND
         groups:
@@ -1976,11 +2030,61 @@ display:
           entity_type: node
           plugin_id: entity_link_edit
       display_description: ''
+      relationships:
+        field_refere:
+          id: field_refere
+          table: node__field_refere
+          field: field_refere
+          relationship: none
+          group_type: group
+          admin_label: 'field_refere: Content'
+          required: false
+          plugin_id: standard
+      arguments:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: field_refere
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: raw
+          default_argument_options:
+            index: 1
+            use_alias: false
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+          entity_type: node
+          entity_field: nid
+          plugin_id: node_nid
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
         - 'user.node_grants:view'
         - user.permissions

@@ -13,7 +13,7 @@ dependencies:
 id: adminmainmenuforauditor
 theme: seven
 region: pre_content
-weight: 0
+weight: -17
 provider: null
 plugin: 'superfish:admin-main-menu-for-auditor'
 settings:

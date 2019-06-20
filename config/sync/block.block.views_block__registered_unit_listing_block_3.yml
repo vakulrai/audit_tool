@@ -13,7 +13,7 @@ dependencies:
 id: views_block__registered_unit_listing_block_3
 theme: seven
 region: content
-weight: -16
+weight: -15
 provider: null
 plugin: 'views_block:registered_unit_listing-block_3'
 settings:

@@ -613,38 +613,38 @@ function aps_general_user_insert(User $user) {
  * Implements hook_views_query_alter().
  */
 function aps_general_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
-  if($view->id() === 'registered_unit_listing'){
-    $config_factory = \Drupal::configFactory();
-    $config = $config_factory->getEditable('aps_general.unitregistration');
-    $registered_unit = $config->get('unit_registered');
-    if($view->getDisplay()->display['id'] == 'bp'){
-      $definition = [
-        'table' => 'node__field_refere',
-        'field' => 'entity_id',
-        'left_table' => 'node_field_data',
-        'left_field' => 'nid',
-      ];
-      $join = Drupal::service('plugin.manager.views.join')->createInstance('standard', $definition);
-      $query->addRelationship('node__field_refere', $join, 'node');
-      $query->addWhere('AND', 'node__field_refere.bundle', 'business_process');
-      $query->addWhere('AND', 'node__field_refere.field_refere_target_id', $registered_unit);
-    }
-    if($view->getDisplay()->display['id'] == 'section_list'){
-      $config_factory = \Drupal::configFactory();
-      $config = $config_factory->getEditable('aps_general.unitregistration');
-      $registered_unit = $config->get('unit_registered');
-      $definition = [
-        'table' => 'node__field_refere',
-        'field' => 'entity_id',
-        'left_table' => 'node_field_data',
-        'left_field' => 'nid',
-      ];
-      $join = Drupal::service('plugin.manager.views.join')->createInstance('standard', $definition);
-      $query->addRelationship('node__field_refere', $join, 'node');
-      $query->addWhere('AND', 'node__field_refere.field_refere_target_id', $registered_unit);
-      $query->addWhere('AND', 'node__field_refere.bundle', 'section');
-    }
-  }
+  // if($view->id() === 'registered_unit_listing'){
+  //   $config_factory = \Drupal::configFactory();
+  //   $config = $config_factory->getEditable('aps_general.unitregistration');
+  //   $registered_unit = $config->get('unit_registered');
+  //   if($view->getDisplay()->display['id'] == 'bp'){
+  //     $definition = [
+  //       'table' => 'node__field_refere',
+  //       'field' => 'entity_id',
+  //       'left_table' => 'node_field_data',
+  //       'left_field' => 'nid',
+  //     ];
+  //     $join = Drupal::service('plugin.manager.views.join')->createInstance('standard', $definition);
+  //     $query->addRelationship('node__field_refere', $join, 'node');
+  //     $query->addWhere('AND', 'node__field_refere.bundle', 'business_process');
+  //     $query->addWhere('AND', 'node__field_refere.field_refere_target_id', $registered_unit);
+  //   }
+  //   if($view->getDisplay()->display['id'] == 'section_list'){
+  //     $config_factory = \Drupal::configFactory();
+  //     $config = $config_factory->getEditable('aps_general.unitregistration');
+  //     $registered_unit = $config->get('unit_registered');
+  //     $definition = [
+  //       'table' => 'node__field_refere',
+  //       'field' => 'entity_id',
+  //       'left_table' => 'node_field_data',
+  //       'left_field' => 'nid',
+  //     ];
+  //     $join = Drupal::service('plugin.manager.views.join')->createInstance('standard', $definition);
+  //     $query->addRelationship('node__field_refere', $join, 'node');
+  //     $query->addWhere('AND', 'node__field_refere.field_refere_target_id', $registered_unit);
+  //     $query->addWhere('AND', 'node__field_refere.bundle', 'section');
+  //   }
+  // }
 }
 
 function aps_general_views_pre_render(ViewExecutable $view) {
@@ -692,6 +692,14 @@ function aps_general_link_alter(&$variables) {
        '@text' => 'Notification'.'('.$count.')',
     ));
     $variables['text'] = $title;
+  }
+  if ($cleanLinkText == 'Go To Unit Page') {
+    $id = \Drupal::request()->query->get('id');
+    if($id){
+      $url = Url::fromRoute('view.user_registration_view.registration',['arg_0' => $id]);
+      unset($variables['url']);
+      $variables['url'] = $url;
+    }
   }
   
 }

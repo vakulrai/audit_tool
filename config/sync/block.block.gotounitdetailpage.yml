@@ -1,30 +1,30 @@
-uuid: 0cc40dbb-fb48-43e0-997d-c43eb875e4dc
+uuid: 74cbaa75-405c-45db-82d3-584a88156a72
 langcode: en
 status: true
 dependencies:
   config:
-    - system.menu.add-standards
+    - system.menu.go-to-unit-detail-page
   module:
+    - node
     - superfish
-    - system
   theme:
     - seven
-id: addstandards
+id: gotounitdetailpage
 theme: seven
 region: content
-weight: -9
+weight: -18
 provider: null
-plugin: 'superfish:add-standards'
+plugin: 'superfish:go-to-unit-detail-page'
 settings:
-  id: 'superfish:add-standards'
-  label: 'Add Standards'
+  id: 'superfish:go-to-unit-detail-page'
+  label: 'Go to Unit Detail Page'
   provider: superfish
   label_display: '0'
   level: '1'
   depth: '0'
   expand_all_items: false
   menu_type: horizontal
-  style: white
+  style: blue
   arrow: 1
   shadow: 1
   speed: fast
@@ -70,8 +70,13 @@ settings:
   custom_item_class: ''
   custom_link_class: ''
 visibility:
-  request_path:
-    id: request_path
-    pages: /external-audit-standards
+  node_type:
+    id: node_type
+    bundles:
+      assembly: assembly
+      business_process: business_process
+      department: department
+      section: section
     negate: false
-    context_mapping: {  }
+    context_mapping:
+      node: '@node.node_route_context:node'

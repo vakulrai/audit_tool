@@ -12,7 +12,7 @@ dependencies:
 id: manageexternalaudit
 theme: seven
 region: pre_content
-weight: -10
+weight: -18
 provider: null
 plugin: 'superfish:manage-external-audit'
 settings:
