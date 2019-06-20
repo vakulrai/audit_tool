@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.section.field_location
     - field.field.node.section.field_refere
     - field.field.node.section.field_section_head
+    - field.field.node.section.field_select_department_type
     - field.field.node.section.field_shift
     - node.type.section
   module:
@@ -21,33 +22,33 @@ bundle: section
 mode: default
 content:
   field_assembly:
-    weight: 3
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_attach_control_plan:
     type: media_library_widget
-    weight: 6
+    weight: 7
     settings:
       media_types: {  }
     third_party_settings: {  }
     region: content
   field_file:
-    weight: 5
+    weight: 6
     settings:
       media_types: {  }
     third_party_settings: {  }
     type: media_library_widget
     region: content
   field_location:
-    weight: 2
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_refere:
-    weight: 7
+    weight: 8
     settings:
       match_operator: CONTAINS
       size: 60
@@ -63,8 +64,14 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_select_department_type:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_shift:
-    weight: 4
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     type: options_buttons

@@ -79,7 +79,6 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   
   //Condition for Business Add form
   if($form_id == 'node_business_process_form'){
-    // $del = Vocabulary::load('gia_tech')->delete();die;
     $form['field_refere']['#access'] = FALSE;
     if($id = \Drupal::request()->query->get('id')){
       $node_object = Node::load($id);
@@ -87,9 +86,20 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-        $form['actions'][$action]['#submit'][] = 'aps_business_process_page_redirect';
+        $form['actions'][$action]['#submit'][] = 'add_department';
       }
     }
+    $form['actions']['continue_dept'] = array(
+      '#type' => 'submit',
+      '#weight' => 999,
+      '#limit_validation_errors' => array() ,
+      '#button_type' => 'submit',
+      '#submit' => array(
+        'aps_business_process_page_redirect'
+      ) ,
+      '#value' => t('Continue to Department') ,
+    );
+
   }
   elseif ($form_id == 'node_business_process_edit_form') {//Edit form
     $form['field_refere']['#access'] = FALSE;
@@ -119,9 +129,19 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-        $form['actions'][$action]['#submit'][] = 'aps_department_page_redirect';
+        $form['actions'][$action]['#submit'][] = 'add_section';
       }
     }
+    $form['actions']['continue_dept'] = array(
+      '#type' => 'submit',
+      '#weight' => 999,
+      '#limit_validation_errors' => array() ,
+      '#button_type' => 'submit',
+      '#submit' => array(
+        'aps_department_page_redirect'
+      ) ,
+      '#value' => t('Continue to Section') ,
+    );
   }
   elseif ($form_id == 'node_department_edit_form') {//Edit form
     $form['field_refere']['#access'] = FALSE;
@@ -144,9 +164,19 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-        $form['actions'][$action]['#submit'][] = 'aps_section_page_redirect';
+        $form['actions'][$action]['#submit'][] = 'create_assembly';
       }
     }
+    $form['actions']['continue_dept'] = array(
+      '#type' => 'submit',
+      '#weight' => 999,
+      '#limit_validation_errors' => array() ,
+      '#button_type' => 'submit',
+      '#submit' => array(
+        'aps_section_page_redirect'
+      ) ,
+      '#value' => t('Continue to Assembly') ,
+    );
   }
   elseif ($form_id == 'node_section_edit_form') {//Edit form
     $form['field_refere']['#access'] = FALSE;
@@ -679,7 +709,9 @@ function test(){
  * Callback method after unit form submits.
  */
 function aps_general_unit_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
-  $response = Url::fromUserInput('/unit-registration-view');
+  $form_values = $form_state->getValues();
+  $nid = $form_values['nid'];
+  $response = Url::fromUserInput('/unit-registration-view/'.$nid);
   $form_state->setRedirectUrl($response);
 }
 
@@ -693,7 +725,14 @@ function aps_business_process_page_redirect(array $form, \Drupal\Core\Form\FormS
   $vid_to_check = strtolower(preg_replace('/\s+/', '_', $title));
   $form_values = $form_state->getValues();
   $nid = $form_values['nid'];
-  $response = Url::fromUserInput('/node/add/department?id='.$nid.'&unit_ref='.$id.'&business_ref='.$nid);
+  $response = Url::fromUserInput('/node/add/department?id='.$id);
+  $form_state->setRedirectUrl($response);
+}
+
+function add_department(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
+  $id = \Drupal::request()->query->get('id');
+  $response = Url::fromRoute('node.add',['node_type' => 'business_process', 'id' => $id]);
   $form_state->setRedirectUrl($response);
 }
 
@@ -701,17 +740,17 @@ function aps_business_process_page_redirect(array $form, \Drupal\Core\Form\FormS
  * Callback method after department form submits.
  */
 function aps_department_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
-  $business_id = \Drupal::request()->query->get('id');
-  $unit_ref = \Drupal::request()->query->get('unit_ref');
-  $business_ref = \Drupal::request()->query->get('business_ref');
+  $unit_ref = \Drupal::request()->query->get('id');
   $form_values = $form_state->getValues();
   $nid = $form_values['nid'];
-  if($business_ref == ''){
-    $response = Url::fromUserInput('/node/add/section?id='.$nid.'&unit_ref='.$unit_ref);
-  }
-  else{
-    $response = Url::fromUserInput('/node/add/section?id='.$nid.'&unit_ref='.$unit_ref.'&business_ref='.$business_ref);
-  } 
+  $response = Url::fromUserInput('/node/add/section?id='.$unit_ref);
+  $form_state->setRedirectUrl($response);
+}
+
+function add_section(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
+  $id = \Drupal::request()->query->get('id');
+  $response = Url::fromRoute('node.add',['node_type' => 'department', 'id' => $id]);
   $form_state->setRedirectUrl($response);
 }
 
@@ -719,12 +758,20 @@ function aps_department_page_redirect(array $form, \Drupal\Core\Form\FormStateIn
  * Callback method after department form submits.
  */
 function aps_section_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
-  $unit_ref = \Drupal::request()->query->get('unit_ref');
+  $unit_ref = \Drupal::request()->query->get('id');
   $form_values = $form_state->getValues();
   $nid = $form_values['nid'];
-  $response = Url::fromUserInput('/node/add/assembly?id='.$nid.'&unit_ref='.$unit_ref);
+  $response = Url::fromUserInput('/node/add/assembly?id='.$unit_ref);
   $form_state->setRedirectUrl($response);
 }
+
+function create_assembly(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
+  $id = \Drupal::request()->query->get('id');
+  $response = Url::fromRoute('node.add',['node_type' => 'section', 'id' => $id]);
+  $form_state->setRedirectUrl($response);
+}
+
 
 /**
  * Callback method after assembly form submits.

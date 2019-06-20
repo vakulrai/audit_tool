@@ -1,0 +1,25 @@
+uuid: ff436624-e00a-489c-afbc-5927c0240213
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_select_department_type
+    - node.type.section
+id: node.section.field_select_department_type
+field_name: field_select_department_type
+entity_type: node
+bundle: section
+label: 'Select Department Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: registration_entity_reference
+      display_name: entity_reference_4
+      arguments: {  }
+field_type: entity_reference

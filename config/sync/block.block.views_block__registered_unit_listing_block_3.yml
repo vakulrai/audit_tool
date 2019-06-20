@@ -1,37 +1,39 @@
-uuid: 7f26e4ff-f78a-435d-b5ef-0b966ffcd428
+uuid: 8602c2f1-7821-40b4-a5f9-e85a33e24c98
 langcode: en
-status: false
+status: true
 dependencies:
+  config:
+    - views.view.registered_unit_listing
   module:
     - system
     - user
+    - views
   theme:
     - seven
-id: views_block__department_view_block_2
+id: views_block__registered_unit_listing_block_3
 theme: seven
 region: content
-weight: 10
+weight: -16
 provider: null
-plugin: 'views_block:department_view-block_2'
+plugin: 'views_block:registered_unit_listing-block_3'
 settings:
-  id: 'views_block:department_view-block_2'
+  id: 'views_block:registered_unit_listing-block_3'
   label: ''
   provider: views
-  label_display: visible
+  label_display: '0'
   views_label: ''
   items_per_page: none
+  context_mapping: {  }
 visibility:
   request_path:
     id: request_path
-    pages: "/node/add/department\r\n/node/add/department/*"
+    pages: "/node/add/assembly/*\r\n/node/add/assembly"
     negate: false
     context_mapping: {  }
   user_role:
     id: user_role
     roles:
-      executive: executive
-      auditor: auditor
-      auditee: auditee
+      mr_admin: mr_admin
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'

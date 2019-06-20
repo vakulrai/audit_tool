@@ -1,30 +1,31 @@
-uuid: bbdbdbe4-eda9-4d55-8271-93930926ac7e
+uuid: 618322cf-eec9-4734-b944-82bef195ceca
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.customer_manual_listing
+    - views.view.user_registration_view
   module:
     - system
     - views
   theme:
     - seven
-id: views_block__customer_manual_listing_manual
+id: views_block__user_registration_view_details
 theme: seven
 region: content
-weight: 8
+weight: 0
 provider: null
-plugin: 'views_block:customer_manual_listing-manual'
+plugin: 'views_block:user_registration_view-details'
 settings:
-  id: 'views_block:customer_manual_listing-manual'
+  id: 'views_block:user_registration_view-details'
   label: ''
   provider: views
   label_display: '0'
   views_label: ''
   items_per_page: none
+  context_mapping: {  }
 visibility:
   request_path:
     id: request_path
-    pages: /node/add/customers_manual
+    pages: '/unit-registration-view/*'
     negate: false
     context_mapping: {  }

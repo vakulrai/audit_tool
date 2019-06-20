@@ -1,0 +1,19 @@
+uuid: 902d12da-1984-49a4-9d36-95443d6f8745
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_select_section
+field_name: field_select_section
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

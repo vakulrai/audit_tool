@@ -1,30 +1,31 @@
-uuid: bbdbdbe4-eda9-4d55-8271-93930926ac7e
+uuid: 3f10abaf-0743-40bf-91f8-797270bc2f84
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.customer_manual_listing
+    - views.view.registered_unit_listing
   module:
     - system
     - views
   theme:
     - seven
-id: views_block__customer_manual_listing_manual
+id: views_block__registered_unit_listing_block_2
 theme: seven
 region: content
-weight: 8
+weight: -17
 provider: null
-plugin: 'views_block:customer_manual_listing-manual'
+plugin: 'views_block:registered_unit_listing-block_2'
 settings:
-  id: 'views_block:customer_manual_listing-manual'
+  id: 'views_block:registered_unit_listing-block_2'
   label: ''
   provider: views
   label_display: '0'
   views_label: ''
   items_per_page: none
+  context_mapping: {  }
 visibility:
   request_path:
     id: request_path
-    pages: /node/add/customers_manual
+    pages: "/node/add/section/*\r\n/node/add/section"
     negate: false
     context_mapping: {  }

@@ -1,0 +1,8 @@
+uuid: bbb88d24-e7b5-4322-8b1c-67ef2be64b4b
+langcode: en
+status: true
+dependencies: {  }
+name: 'Vocabulary for jgjda'
+vid: jgjda
+description: 'Vocabluary for jgjda'
+weight: 0

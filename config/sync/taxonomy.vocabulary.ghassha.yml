@@ -1,0 +1,8 @@
+uuid: 7944e9d2-67e6-47bc-a390-b4832c663eb5
+langcode: en
+status: true
+dependencies: {  }
+name: 'Vocabulary for ghassha'
+vid: ghassha
+description: 'Vocabluary for ghassha'
+weight: 0

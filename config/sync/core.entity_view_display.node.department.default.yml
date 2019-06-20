@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.department.field_file
     - field.field.node.department.field_location
     - field.field.node.department.field_refere
+    - field.field.node.department.field_select_business_process
     - node.type.department
   module:
     - text
@@ -69,6 +70,14 @@ content:
     region: content
   field_refere:
     weight: 105
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_select_business_process:
+    weight: 109
     label: above
     settings:
       link: true
