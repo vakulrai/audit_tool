@@ -1,21 +1,21 @@
-uuid: 03b3ad32-b841-4352-b410-1d3e434c259e
+uuid: d71d2bef-36a2-4351-88eb-e2c20749ba35
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_assembly
+    - field.storage.node.field_location_address
     - node.type.section
   module:
     - options
-id: node.section.field_assembly
-field_name: field_assembly
+id: node.section.field_location_address
+field_name: field_location_address
 entity_type: node
 bundle: section
-label: Assembly
+label: Location
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: list_string
+field_type: list_integer

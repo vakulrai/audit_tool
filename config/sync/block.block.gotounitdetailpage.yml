@@ -12,7 +12,7 @@ dependencies:
 id: gotounitdetailpage
 theme: seven
 region: content
-weight: -18
+weight: -19
 provider: null
 plugin: 'superfish:go-to-unit-detail-page'
 settings:
@@ -76,6 +76,7 @@ visibility:
       assembly: assembly
       business_process: business_process
       department: department
+      manufacturing_process: manufacturing_process
       section: section
     negate: false
     context_mapping:

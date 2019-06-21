@@ -8,11 +8,12 @@ dependencies:
     - field.field.node.department.field_department_head
     - field.field.node.department.field_department_type
     - field.field.node.department.field_file
-    - field.field.node.department.field_location
+    - field.field.node.department.field_location_address
     - field.field.node.department.field_refere
     - field.field.node.department.field_select_business_process
     - node.type.department
   module:
+    - options
     - text
     - user
 id: node.department.default
@@ -60,13 +61,12 @@ content:
       link: false
     third_party_settings: {  }
     region: content
-  field_location:
-    weight: 107
+  field_location_address:
+    weight: 110
     label: above
-    settings:
-      link: true
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_label
+    type: list_default
     region: content
   field_refere:
     weight: 105

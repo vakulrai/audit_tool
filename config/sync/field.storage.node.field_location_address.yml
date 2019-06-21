@@ -1,23 +1,20 @@
-uuid: 2f5acf8d-1ef8-4f34-a11f-7f72feb7249e
+uuid: 1b8bd32a-500c-4859-917a-ea5bb90ae7bb
 langcode: en
 status: true
 dependencies:
   module:
     - node
     - options
-id: node.field_assembly
-field_name: field_assembly
+id: node.field_location_address
+field_name: field_location_address
 entity_type: node
-type: list_string
+type: list_integer
 settings:
   allowed_values:
     -
-      value: assembly
-      label: Assembly
-    -
-      value: manufacturing
-      label: 'Manufacturing Process'
-  allowed_values_function: ''
+      value: 0
+      label: None
+  allowed_values_function: get_location_from_unit
 module: options
 locked: false
 cardinality: 1

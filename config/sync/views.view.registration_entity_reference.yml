@@ -1159,3 +1159,33 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+  entity_reference_6:
+    display_plugin: entity_reference
+    id: entity_reference_6
+    display_title: 'Address Details'
+    position: 6
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      style:
+        type: entity_reference
+        options:
+          search_fields:
+            field_address_locality: field_address_locality
+            field_remote_address_locality: field_remote_address_locality
+      row:
+        type: entity_reference
+        options:
+          default_field_elements: true
+          inline:
+            field_address_locality: field_address_locality
+          separator: '-'
+          hide_empty: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }

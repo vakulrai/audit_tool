@@ -13,7 +13,7 @@ dependencies:
 id: adminmainmenu
 theme: seven
 region: pre_content
-weight: -19
+weight: -18
 provider: null
 plugin: 'superfish:admin-main-menu'
 settings:
@@ -25,7 +25,7 @@ settings:
   depth: '0'
   expand_all_items: false
   menu_type: horizontal
-  style: none
+  style: blue
   arrow: 1
   shadow: 1
   speed: fast

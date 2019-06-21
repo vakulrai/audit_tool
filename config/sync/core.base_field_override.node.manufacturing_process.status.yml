@@ -1,0 +1,22 @@
+uuid: 58d296f5-2095-422f-86b4-070e3e51b4de
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.manufacturing_process
+id: node.manufacturing_process.status
+field_name: status
+entity_type: node
+bundle: manufacturing_process
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

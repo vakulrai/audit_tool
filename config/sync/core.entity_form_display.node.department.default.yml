@@ -8,7 +8,7 @@ dependencies:
     - field.field.node.department.field_department_head
     - field.field.node.department.field_department_type
     - field.field.node.department.field_file
-    - field.field.node.department.field_location
+    - field.field.node.department.field_location_address
     - field.field.node.department.field_refere
     - field.field.node.department.field_select_business_process
     - node.type.department
@@ -34,7 +34,7 @@ content:
       media_types: {  }
     third_party_settings: {  }
     region: content
-  field_location:
+  field_location_address:
     weight: 3
     settings: {  }
     third_party_settings: {  }

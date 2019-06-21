@@ -1,0 +1,30 @@
+uuid: 24141857-aab1-4d15-94b7-4fd0de834f9b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.manufacturing_process.body
+    - node.type.manufacturing_process
+  module:
+    - text
+    - user
+id: node.manufacturing_process.teaser
+targetEntityType: node
+bundle: manufacturing_process
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

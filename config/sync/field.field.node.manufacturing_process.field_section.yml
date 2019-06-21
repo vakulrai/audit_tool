@@ -1,15 +1,15 @@
-uuid: df44bd7e-ab7a-4942-ad02-8f433f6e7f11
+uuid: 165a0776-4ef6-4c03-827f-f624cffa6391
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_location
-    - node.type.department
-id: node.department.field_location
-field_name: field_location
+    - field.storage.node.field_section
+    - node.type.manufacturing_process
+id: node.manufacturing_process.field_section
+field_name: field_section
 entity_type: node
-bundle: department
-label: Location
+bundle: manufacturing_process
+label: 'Select Section'
 description: ''
 required: false
 translatable: false
@@ -20,6 +20,6 @@ settings:
   handler_settings:
     view:
       view_name: registration_entity_reference
-      display_name: entity_reference_1
+      display_name: entity_reference_5
       arguments: {  }
 field_type: entity_reference

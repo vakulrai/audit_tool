@@ -2,12 +2,9 @@ uuid: fef09df7-573e-44f7-a786-f7aed9e64bd8
 langcode: en
 status: true
 dependencies:
-  config:
-    - views.view.assembly_view
   module:
     - system
     - user
-    - views
   theme:
     - seven
 id: views_block__assembly_view_block_2

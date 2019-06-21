@@ -1,0 +1,8 @@
+uuid: edd2282b-99a4-482e-9d87-e9647e2389cb
+langcode: en
+status: true
+dependencies: {  }
+name: 'Vocabulary for Honda'
+vid: honda
+description: 'Vocabluary for Honda'
+weight: 0

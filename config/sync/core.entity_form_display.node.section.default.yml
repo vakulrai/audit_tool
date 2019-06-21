@@ -8,7 +8,7 @@ dependencies:
     - field.field.node.section.field_attach_control_plan
     - field.field.node.section.field_business_head_dept
     - field.field.node.section.field_file
-    - field.field.node.section.field_location
+    - field.field.node.section.field_location_address
     - field.field.node.section.field_refere
     - field.field.node.section.field_section_head
     - field.field.node.section.field_select_department_type
@@ -22,7 +22,7 @@ bundle: section
 mode: default
 content:
   field_assembly:
-    weight: 4
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -41,8 +41,8 @@ content:
     third_party_settings: {  }
     type: media_library_widget
     region: content
-  field_location:
-    weight: 3
+  field_location_address:
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: options_select

@@ -12,8 +12,8 @@ dependencies:
     - seven
 id: adminsubmenu
 theme: seven
-region: content
-weight: -6
+region: pre_content
+weight: -15
 provider: null
 plugin: 'superfish:admin-sub-menu'
 settings:
@@ -24,8 +24,8 @@ settings:
   level: '1'
   depth: '0'
   expand_all_items: false
-  menu_type: vertical
-  style: none
+  menu_type: horizontal
+  style: blue
   arrow: 1
   shadow: 1
   speed: fast
@@ -80,6 +80,6 @@ visibility:
       user: '@user.current_user_context:current_user'
   request_path:
     id: request_path
-    pages: /home
+    pages: '/unit-registration-view/*'
     negate: false
     context_mapping: {  }
