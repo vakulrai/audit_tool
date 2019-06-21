@@ -19,6 +19,7 @@ use Drupal\Core\Ajax\InvokeCommand;
 function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   global $base_url;
 	if($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form'){
+    $id = \Drupal::request()->query->get('unit_reference');
     $form['#cache']['max-age'] = 0;
     $form['field_sections']['#attributes'] = ['id' => ['section']];
     $form['field_shift']['#attributes'] = ['id' => ['shift']];
@@ -41,6 +42,15 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       '#markup' => '',
       '#type' => 'container',
     ];
+    
+    if($id){
+      $unit_ref_object = Node::load($id);
+      $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
+      foreach ($unit_refernced_shift as $key => $value) {
+        $def_values[$value['target_id']] = $value['target_id'];
+      }
+      $form['field_shift']['widget']['#default_value'] = $def_values;
+    }
 	}
 
   if($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form'){
@@ -77,11 +87,11 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       ];
 
       //Alter for shift field.
-      $form['field_select_audit']['widget']['#ajax'] = [
-        'callback' => 'getShift',
-        'wrapper' => 'shift',
-        'event' => 'change',
-      ];
+      // $form['field_select_audit']['widget']['#ajax'] = [
+      //   'callback' => 'getShift',
+      //   'wrapper' => 'shift',
+      //   'event' => 'change',
+      // ];
 
       //Alter if = system is selected
       // $form['field_internal_audit_type']['widget']['#ajax'] = [
@@ -222,26 +232,27 @@ function getProcedures(array $form, FormStateInterface $form_state) {
 }
 
 function getShift(array $form, FormStateInterface $form_state) {
-  $ajax_response = new AjaxResponse();
-  $vid = 'shift';
-  $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid);
-  foreach ($terms as $term) {
-   $term_id = 'edit-field-shift-'.$term->tid;
-   $ajax_response->addCommand(new InvokeCommand('#'.$term_id, 'attr', array('checked', false)));
-  }
-  if(count($form_state->getValue('field_select_audit'))){
-    $department_array = $form_state->getValue('field_select_audit')[0];
-    $key = $department_array['target_id'];
-    $node_object_event = Node::load($key);
-    $get_unit = $node_object_event->get('field_unit')->target_id ? $node_object_event->get('field_unit')->target_id : '';
-    $node_object_unit = Node::load($get_unit);
-    $get_shift_option = $node_object_unit->get('field_shift')->getValue() ? $node_object_unit->get('field_shift')->getValue() : '';
-    foreach ($get_shift_option as $key => $value) {
-      $id = 'edit-field-shift-'.$value['target_id'];
-      $ajax_response->addCommand(new InvokeCommand('#'.$id, 'attr', array('checked', true)));
-     }
-   }
-   return $ajax_response;
+  // $ajax_response = new AjaxResponse();
+  // $vid = 'shift';
+  // $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid);
+  // foreach ($terms as $term) {
+  //  $term_id = 'edit-field-shift-'.$term->tid;
+  //  $ajax_response->addCommand(new InvokeCommand('#'.$term_id, 'attr', array('checked', false)));
+  // }
+  // if(count($form_state->getValue('field_select_audit'))){
+  //   // $department_array = $form_state->getValue('field_select_audit')[0];
+  //   // $key = $department_array['target_id'];
+  //   $id = \Drupal::request()->query->get('unit_reference');
+  //   $node_object_event = Node::load($id);
+  //   $get_unit = $node_object_event->get('field_unit')->target_id ? $node_object_event->get('field_unit')->target_id : '';
+  //   $node_object_unit = Node::load($get_unit);
+  //   $get_shift_option = $node_object_unit->get('field_shift')->getValue() ? $node_object_unit->get('field_shift')->getValue() : '';
+  //   foreach ($get_shift_option as $key => $value) {
+  //     $id = 'edit-field-shift-'.$value['target_id'];
+  //     $ajax_response->addCommand(new InvokeCommand('#'.$id, 'attr', array('checked', true)));
+  //    }
+  //  }
+  //  return $ajax_response;
 }
 
 function getUserINfo(array $form, FormStateInterface $form_state) {

@@ -45,54 +45,76 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
    */
   public function getDerivativeDefinitions($base_plugin_definition) {
     $links = [];
-    $links[0] = [
+    $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+    $uri = explode('/', $current_uri);
+    if($ref = \Drupal::request()->query->get('unit_reference')){
+      $id = $ref;
+    }
+    else{
+      $id = 0;
+    }
+    $links['records'] = [
       'title' => 'Records',
       'route_name' => 'view.planned_audit_listing.document_list_records',
       'base_route' => 'view.planned_audit_listing.document_list_ia',
     ] + $base_plugin_definition;
 
-    $links[1] = [
+    $links['manuals'] = [
       'title' => 'Manuals',
       'route_name' => 'view.planned_audit_listing.document_list_manuals',
       'base_route' => 'view.planned_audit_listing.document_list_ia',
     ] + $base_plugin_definition;
     
-    $links[2] = [
+    $links['internal_documents'] = [
       'title' => 'Internal Documents',
       'route_name' => 'view.planned_audit_listing.document_list_ia',
       'base_route' => 'view.planned_audit_listing.document_list_ia',
     ] + $base_plugin_definition;
-
-    $links[3] = [
+  
+    $links['add_procedures'] = [
       'title' => 'Add Procedures',
       'route_name' => 'node.add',
       'base_route' => 'node.add',
-      'parameters' => ['node_type' => 'procedures'],
+      'route_parameters' => ['node_type' => 'procedures', 'unit_reference' => $id],
     ] + $base_plugin_definition;
 
-    $links[4] = [
+    $links['procedure_listing'] = [
       'title' => 'Procedure Listing',
-      'route_name' => 'view.procedure_listing.procedures_list',
-      'base_route' => 'view.procedure_listing.procedures_list',
-      'query' => ['node_type' => 'procedures'],
+      'route_name' => 'view.procedure_listing.procedures_listing',
+      'base_route' => 'node.add',
+      'route_parameters' => ['unit_reference' => $id],
     ] + $base_plugin_definition;
 
-    $links[5] = [
+    $links['unit'] = [
       'title' => 'Unit',
       'route_name' => 'view.user_registration_view.registration',
       'base_route' => 'view.user_registration_view.registration',
     ] + $base_plugin_definition;
 
-    $links[6] = [
+    $links['business_process'] = [
       'title' => 'Business Processes',
       'route_name' => 'view.registered_unit_listing.bp',
       'base_route' => 'view.user_registration_view.registration',
     ] + $base_plugin_definition;
 
-    $links[7] = [
+    $links['sections'] = [
       'title' => 'Sections',
       'route_name' => 'view.registered_unit_listing.section_list',
       'base_route' => 'view.user_registration_view.registration',
+    ] + $base_plugin_definition;
+    
+    $links['audit_list'] = [
+      'title' => 'Audit List',
+      'route_name' => 'view.internal_audit_systems.audit_listing',
+      'base_route' => 'view.internal_audit_systems.audit_listing',
+      'route_parameters' => ['unit_reference' => $id],
+    ] + $base_plugin_definition;
+
+    $links['systems'] = [
+      'title' => 'Systems',
+      'route_name' => 'node.add',
+      'base_route' => 'view.internal_audit_systems.audit_listing',
+      'route_parameters' => ['unit_reference' => $id, 'node_type' => 'internal_audit'],
     ] + $base_plugin_definition;
 
     return $links;

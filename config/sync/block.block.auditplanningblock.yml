@@ -17,10 +17,10 @@ settings:
   id: audit_planning_block
   label: 'Audit planning block'
   provider: aps_audit_planning
-  label_display: visible
+  label_display: '0'
 visibility:
   request_path:
     id: request_path
-    pages: /audit-planning
+    pages: '/audit-planning/*'
     negate: false
     context_mapping: {  }

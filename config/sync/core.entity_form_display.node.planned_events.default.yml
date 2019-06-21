@@ -44,7 +44,6 @@ third_party_settings:
     group_when:
       children:
         - title
-        - field_select_audit
         - field_time
         - field_shift
       parent_name: ''
@@ -262,12 +261,6 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
-  field_select_audit:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   field_shift:
     weight: 3
     settings: {  }
@@ -281,7 +274,7 @@ content:
     type: datetime_timestamp
     region: content
   field_suggested_date:
-    weight: 34
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -309,6 +302,7 @@ content:
 hidden:
   body: true
   created: true
+  field_select_audit: true
   path: true
   promote: true
   status: true

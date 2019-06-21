@@ -20,17 +20,17 @@ settings:
   id: 'superfish:audit-planning-sub-menu'
   label: 'Audit Planning Sub Menu for MR'
   provider: superfish
-  label_display: visible
+  label_display: '0'
   level: '1'
   depth: '0'
   expand_all_items: false
-  menu_type: vertical
-  style: white
+  menu_type: horizontal
+  style: blue
   arrow: 1
   shadow: 1
   speed: fast
   delay: '800'
-  slide: vertical
+  slide: horizontal
   supposition: 1
   hoverintent: 1
   touch: '0'
@@ -73,7 +73,7 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /audit-planning
+    pages: '/audit-planning/*'
     negate: false
     context_mapping: {  }
   user_role:

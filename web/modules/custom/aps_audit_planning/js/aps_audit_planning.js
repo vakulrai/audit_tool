@@ -2,6 +2,8 @@
   'use strict';
   Drupal.behaviors.aps_audit_planning = {
     attach: function (context, settings) {
+      var pathname = window.location.pathname;
+      var url_param = pathname.split("/");
     	var calendarEl = document.getElementById('demo');
       var base_url = drupalSettings.siteBaseUrl;
       var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -39,7 +41,7 @@
           var current = formatDate(arg.start);
           var start = formatDate(arg.start);
           var end = formatDate(arg.end);
-          var url = base_url + '/node/add/planned_events?field_start_date='+start+'&field_end_date='+end+'&current='+current+'&title='+title;
+          var url = base_url + '/node/add/planned_events?field_start_date='+start+'&field_end_date='+end+'&current='+current+'&title='+title+'&unit_reference='+url_param[2];
           calendar.addEvent({
             title: title,
             start: arg.start,
