@@ -12,20 +12,20 @@ dependencies:
     - seven
 id: auditplanningsubmenuforauditor
 theme: seven
-region: content
-weight: -5
+region: pre_content
+weight: -15
 provider: null
 plugin: 'superfish:audit-planning-sub-menu-for'
 settings:
   id: 'superfish:audit-planning-sub-menu-for'
   label: 'Audit Planning Sub Menu for Auditor'
   provider: superfish
-  label_display: visible
+  label_display: '0'
   level: '1'
   depth: '0'
   expand_all_items: false
-  menu_type: vertical
-  style: white
+  menu_type: horizontal
+  style: blue
   arrow: 1
   shadow: 1
   speed: fast
@@ -73,7 +73,7 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /audit-planning
+    pages: '/planned-audit-listing/*'
     negate: false
     context_mapping: {  }
   user_role:

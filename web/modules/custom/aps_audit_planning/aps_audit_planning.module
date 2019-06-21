@@ -51,6 +51,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       }
       $form['field_shift']['widget']['#default_value'] = $def_values;
     }
+    $form['field_refere']['#access'] = FALSE;
 	}
 
   if($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form'){
@@ -125,6 +126,10 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     }
   }
   if($form_id == 'node_planned_events_form'){
+    if($id = \Drupal::request()->query->get('unit_reference')){
+      $node_object = Node::load($id);
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
+    }
     $form['field_suggested_date']['#access'] = FALSE;
   }
   if($form['#id'] == 'views-exposed-form-customer-manual-parts-product-listing'){

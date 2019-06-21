@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.planned_events.field_list_of_process
     - field.field.node.planned_events.field_list_of_product
     - field.field.node.planned_events.field_list_of_systems
+    - field.field.node.planned_events.field_refere
     - field.field.node.planned_events.field_remote_location_name
     - field.field.node.planned_events.field_sections
     - field.field.node.planned_events.field_select_audit
@@ -105,6 +106,14 @@ content:
     region: content
   field_list_of_systems:
     weight: 115
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_refere:
+    weight: 120
     label: above
     settings:
       link: true

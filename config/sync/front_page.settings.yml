@@ -1,4 +1,4 @@
-enable: 1
+enable: 0
 rid_anonymous:
   weigth: '0'
   path: ''
@@ -11,10 +11,11 @@ rid_executive:
 rid_auditor:
   enabled: '1'
   weigth: '0'
-  path: /planned-audit-listing
+  path: /home
 rid_auditee:
   weigth: '0'
   path: ''
 rid_mr_admin:
   weigth: '0'
   path: ''
+home_link_path: home

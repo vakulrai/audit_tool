@@ -558,6 +558,8 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
         unset($data['tabs'][0]['aps_pre_audit.manuals:add_procedures']);
         unset($data['tabs'][0]['aps_general.manual']);
         unset($data['tabs'][0]['aps_general.manual_product']);
+        unset($data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']);
+        $data['tabs'][0]['aps_pre_audit.manuals:systems']['#active'] = TRUE;
       }
     }
     elseif (stripos(strtolower($uri[2]), 'planned_events?') !== false) {
@@ -618,8 +620,7 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   if(stripos(strtolower($current_uri), 'internal-audit-list?') !== false){
     unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
     unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
-    if($id = \Drupal::request()->query->get('unit_reference')){
-    }
+    $data['tabs'][0]['aps_pre_audit.manuals:audit_list']['#active'] = TRUE;
   }
   if($current_uri == 'internal-audit-list'){
     unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
@@ -817,7 +818,23 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
-  
+  if ($cleanLinkText == 'Calendar') {
+    $id = $uri[1];
+    if($id){
+      $url =Url::fromUserInput('/audit-planning/'.$id);
+      unset($variables['url']);
+      $variables['url'] = $url;
+    }
+  }
+
+  if ($cleanLinkText == 'Audit') {
+    $id = $uri[1];
+    if($id){
+      $url =Url::fromUserInput('/planned-audit-listing/'.$id);
+      unset($variables['url']);
+      $variables['url'] = $url;
+    }
+  }
 }
 
 function get_user_roles(){
