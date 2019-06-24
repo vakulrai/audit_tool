@@ -17,7 +17,7 @@ bundle: new_sub_question_yes_no
 mode: default
 content:
   field_checked:
-    weight: 2
+    weight: 3
     settings:
       size: 60
       placeholder: ''
@@ -25,7 +25,7 @@ content:
     type: string_textfield
     region: content
   field_description:
-    weight: 1
+    weight: 2
     settings:
       size: 60
       placeholder: ''
@@ -33,14 +33,14 @@ content:
     type: string_textfield
     region: content
   field_evidence:
-    weight: 3
+    weight: 4
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
     region: content
   field_s_no:
-    weight: 0
+    weight: 1
     settings:
       placeholder: ''
     third_party_settings: {  }

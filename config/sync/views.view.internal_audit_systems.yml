@@ -1719,6 +1719,7 @@ display:
           admin_label: ''
           operator: in
           value:
+            internal_audit: internal_audit
             procedures: procedures
           group: 1
           exposed: false

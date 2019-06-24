@@ -16,9 +16,11 @@ dependencies:
     - field.field.node.answers.field_description_qualified
     - field.field.node.answers.field_evidence
     - field.field.node.answers.field_question
+    - field.field.node.answers.field_select_query_type
     - field.field.node.answers.field_sub_s_no_
     - node.type.answers
   module:
+    - conditional_fields
     - paragraphs
 id: node.answers.default
 targetEntityType: node
@@ -27,7 +29,7 @@ mode: default
 content:
   field_defined_option_yes_no:
     type: entity_reference_paragraphs
-    weight: 1
+    weight: 2
     region: content
     settings:
       title: Paragraph
@@ -36,10 +38,28 @@ content:
       add_mode: dropdown
       form_display_mode: default
       default_paragraph_type: ''
-    third_party_settings: {  }
+    third_party_settings:
+      conditional_fields:
+        e1b072d3-bbf2-4ad1-86fc-dfb9daf9ae7a:
+          dependee: field_select_query_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: 'Yes'
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: answers
   field_defined_options_default:
     type: entity_reference_paragraphs
-    weight: 2
+    weight: 3
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -47,8 +67,15 @@ content:
       add_mode: dropdown
       form_display_mode: default
       default_paragraph_type: ''
-    third_party_settings: {  }
+    third_party_settings:
+      conditional_fields: {  }
     region: content
+  field_select_query_type:
+    type: options_buttons
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0

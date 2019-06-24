@@ -205,12 +205,12 @@ class PreAuditForm extends FormBase {
       $qa_ref_id = $query->execute()->fetchAll();
       $answers = [];
       $qa_object = Node::load($nid);
-      $selection = $qa_object->get('field_select_result')->value;
       foreach ($qa_ref_id as $key_qa => $value_qa) {
         $qa_ref_nid = $value_qa->field_queries_target_id;
         if($target_id = $qa_object->get('field_queries')->target_id){
           $answer_node_object = Node::load($qa_ref_nid);
           // $data = $answer_node_object->toArray();
+          $selection = $answer_node_object->get('field_select_query_type')->value;
           if($selection == 'Pdef'){
             $get_question_id = $answer_node_object->get('field_defined_options_default')->getValue();
             foreach ($get_question_id as $k => $val) {
@@ -259,10 +259,8 @@ class PreAuditForm extends FormBase {
               }
             }
           }
-          // echo '<pre>';print_r($output);
         }
       }
-      
     }
     return $output;
   }

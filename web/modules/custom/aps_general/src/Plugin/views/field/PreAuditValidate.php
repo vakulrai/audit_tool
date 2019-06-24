@@ -58,6 +58,26 @@ class PreAuditValidate extends FieldPluginBase {
     $node = $values->_entity;
     $select_audit = $node->get('field_select_audit')->target_id;
     $event_start_date_timestamp = $node->get('field_start_date')->value;
+    if($node->get('field_audit_type')->value === 'internal'){
+      $internal_audit_type = $node->get('field_internal_audit_type')->value;
+      switch ($internal_audit_type) {
+        case 'systems':
+          $audit_reference =  $node->get('field_list_of_systems')->value;
+          break;
+
+        case 'process':
+          $audit_reference =  $node->get('field_list_of_systems')->value;
+          break;
+
+        case 'product':
+          $audit_reference =  $node->get('field_list_of_product')->value;
+          break;
+        
+        default:
+          # code...
+          break;
+      }
+    }
     $diff = $event_start_date_timestamp - time();
     $days = floor($diff/(60*60*24));
     $hours = round(($diff-$days*60*60*24)/(60*60));
@@ -66,7 +86,7 @@ class PreAuditValidate extends FieldPluginBase {
       $form['add_delta_qa'] = [
         '#type' => 'link',
         '#title' => t('Pre Audit'),
-        '#url' => Url::fromUserInput('/preaudit/'.$node->id().'?ref='.$select_audit),
+        '#url' => Url::fromUserInput('/preaudit/'.$node->id().'?ref='.$node->get('field_list_of_systems')->target_id),
         ];
     }
     return $form;

@@ -631,7 +631,9 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     if($config->get('doc_id')){
       $id = $config->get('doc_id');
     }
-    $data['tabs'][0]['aps_pre_audit.manuals:2']['#link']['url']->setRouteParameters(['arg_0' => $id]);
+    if($id){
+      $data['tabs'][0]['aps_pre_audit.manuals:internal_documents']['#link']['url']->setRouteParameters(['arg_0' => $id]);
+    }
   }
   if(stripos(strtolower($current_uri), 'procedure-listing?') !== false){
     unset($data['tabs'][0]['aps_audit_criteria.process_setting']);

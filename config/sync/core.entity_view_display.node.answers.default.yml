@@ -16,11 +16,13 @@ dependencies:
     - field.field.node.answers.field_description_qualified
     - field.field.node.answers.field_evidence
     - field.field.node.answers.field_question
+    - field.field.node.answers.field_select_query_type
     - field.field.node.answers.field_sub_s_no_
     - node.type.answers
   module:
     - entity_reference_revisions
     - file
+    - options
     - text
     - user
 id: node.answers.default
@@ -128,6 +130,13 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_select_query_type:
+    weight: 115
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_sub_s_no_:
     weight: 110

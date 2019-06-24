@@ -56,25 +56,33 @@ class DocumentReport extends FieldPluginBase {
     // Include any namespace required to call the method required to generate
     // the desired output.
     $node = $values->_entity;
-    if($node->get('field_verified')->value == 1){
-      $report = 1;
-    }else{
-      $report = 0;
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    foreach ($roles as $key => $value) {
+      $user_role = $value;
     }
-    if($report == 0){
-      $form['report'] = [
-        '#type' => 'link',
-        '#title' => t('Report'),
-        '#url' => Url::fromRoute('aps_general.create_reports',['id' => $node->id()]),
-        '#attributes' => [
-          'class' => [
-            'use-ajax',
-            'button',
+    if($user_role === 'auditor'){
+      if($node->get('field_verified')->value == 1){
+        $report = 1;
+      }else{
+        $report = 0;
+      }
+      if($report == 0){
+        $form['report'] = [
+          '#type' => 'link',
+          '#title' => t('Report'),
+          '#url' => Url::fromRoute('aps_general.create_reports',['id' => $node->id()]),
+          '#attributes' => [
+            'class' => [
+              'use-ajax',
+              'button',
+            ],
           ],
-        ],
-      ];
+        ];
+      }
+      $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
     }
-    $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
+    
     return $form;
   }
 

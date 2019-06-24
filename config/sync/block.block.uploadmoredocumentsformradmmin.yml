@@ -1,4 +1,4 @@
-uuid: 2f6f28dd6b4f4f3eaa4dc94f55cb7109
+uuid: 7e8ad346-ea75-4be3-955f-8d954d8e5f8f
 langcode: en
 status: true
 dependencies:
@@ -8,28 +8,27 @@ dependencies:
     - user
   theme:
     - seven
-id: preauditblock
+id: uploadmoredocumentsformradmmin
 theme: seven
 region: content
-weight: 2
+weight: 6
 provider: null
-plugin: pre_audit_block
+plugin: upload_more_documents_for_mradmmin
 settings:
-  id: pre_audit_block
-  label: 'PRE AUDIT'
+  id: upload_more_documents_for_mradmmin
+  label: 'Upload more documents for mradmmin'
   provider: aps_pre_audit
   label_display: '0'
 visibility:
   request_path:
     id: request_path
-    pages: "/preaudit/\r\n/preaudit/*"
+    pages: "/documentinternalrecords/*\r\n/documentrecords/*\r\n/documentmanuals/*"
     negate: false
     context_mapping: {  }
   user_role:
     id: user_role
     roles:
-      auditor: auditor
-      auditee: auditee
+      mr_admin: mr_admin
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'

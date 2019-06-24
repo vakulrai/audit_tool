@@ -1037,6 +1037,7 @@ display:
         filter_groups: false
         access: false
         footer: false
+        empty: false
       fields:
         title:
           id: title
@@ -1470,18 +1471,8 @@ display:
         options: {  }
       exposed_block: false
       path: documentinternalrecords/%
-      footer:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content: '<a href="/node/add/internal_documents?destination=/documentinternalrecords">Ask for Additional Information</a>'
-          plugin_id: text_custom
+      footer: {  }
+      empty: {  }
     cache_metadata:
       maxage: 1
       contexts:
@@ -1548,6 +1539,7 @@ display:
         filter_groups: false
         access: false
         footer: false
+        empty: false
       fields:
         title:
           id: title
@@ -1805,18 +1797,8 @@ display:
         options: {  }
       exposed_block: false
       path: documentmanuals/%
-      footer:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content: '<a href="/node/add/pre_audit_manuals?destination=/documentmanuals">Ask for Additional Information</a>'
-          plugin_id: text_custom
+      footer: {  }
+      empty: {  }
     cache_metadata:
       maxage: 1
       contexts:
@@ -1881,6 +1863,7 @@ display:
         filter_groups: false
         access: false
         footer: false
+        empty: false
       fields:
         title:
           id: title
@@ -2314,18 +2297,8 @@ display:
         options: {  }
       exposed_block: false
       path: documentrecords/%
-      footer:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content: '<a href="/node/add/pre_audit_records?destination=/documentrecords">Ask for Additional Information</a>'
-          plugin_id: text_custom
+      footer: {  }
+      empty: {  }
     cache_metadata:
       maxage: 1
       contexts:
@@ -2826,6 +2799,7 @@ display:
         filters: false
         filter_groups: false
         access: false
+        footer: false
       filters:
         status:
           value: '1'
@@ -2979,6 +2953,12 @@ display:
         options:
           role:
             mr_admin: mr_admin
+      footer:
+        area:
+          id: area
+          table: views
+          field: area
+          plugin_id: text
     cache_metadata:
       maxage: 1
       contexts:

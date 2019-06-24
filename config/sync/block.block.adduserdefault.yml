@@ -12,7 +12,7 @@ dependencies:
 id: adduserdefault
 theme: seven
 region: content
-weight: 2
+weight: 0
 provider: null
 plugin: 'superfish:add-user'
 settings:

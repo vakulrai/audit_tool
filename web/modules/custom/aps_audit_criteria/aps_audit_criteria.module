@@ -161,24 +161,76 @@ function aps_audit_criteria_preprocess_page(&$variables) {
   }
 }
 
-function aps_audit_criteria_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) { 
-  $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answers_poor']['#disabled'] = TRUE;
-  $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answer_optimised']['#disabled'] = TRUE;
-  $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answer_qualified']['#disabled'] = TRUE;
-  $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answers_defined']['#disabled'] = TRUE;
-  
-  if($entity_form['#bundle'] == 'answers'){
-    $entity_form['field_defined_options_default']['#states'] = [
-      'visible' => [
-        'input[name="field_select_result"]' => ['value' => 'Pdef']
-      ],
-    ];
+function aps_audit_criteria_inline_entity_form_entity_form_alter(&$entity_form, &$form_state, $context) { 
+  // $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answer_optimised']['#disabled'] = TRUE;
+  // $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answer_qualified']['#disabled'] = TRUE;
+  // $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answers_defined']['#disabled'] = TRUE;
+  $entity_form['title']['widget'][0]['value']['#default_value'] = 'Add a title Here';
+  // if($entity_form['#bundle'] == 'answers'){
+  //   // $entity_form['title']['#states'] = [
+  //   //   'visible' => [
+  //   //     ['input[name="field_queries[0][inline_entity_form][field_select_query_type]"]' => ['value' => 'Pdef']],
+  //   //     ['input[name="field_queries[0][inline_entity_form][field_select_query_type]"]' => ['value' => 'Yes']],
+  //   //     ['input[name="field_queries[0][inline_entity_form][field_select_query_type]"]' => ['value' => 'Ival']],
+  //   //   ],
+  //   // ];
 
-    $entity_form['field_defined_option_yes_no']['#states'] = [
-      'visible' => [
-        'input[name="field_select_result"]' => ['value' => 'Yes']
-      ],
-    ];
+  //   $entity_form['field_defined_options_default']['#states'] = [
+  //     'visible' => [
+  //       'input[name="field_queries[0][inline_entity_form][field_select_query_type]"]' => ['value' => 'Pdef'],
+  //     ],
+  //   ];
+
+  //   $entity_form['field_defined_option_yes_no']['#states'] = [
+  //     'visible' => [
+  //       'input[name="field_queries[0][inline_entity_form][field_select_query_type]"]' => ['value' => 'Yes']
+  //     ],
+  //   ];
+
+}
+
+function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+
+  $field_definition = $context['items']->getFieldDefinition();
+  if($field_definition->getName() == 'field_defined_option_yes_no'){
+     $key_yes_no = $context['form']['#parents'][1];
+     $widget_state_yes_no = \Drupal\Core\Field\WidgetBase::getWidgetState($element['#field_parents'], $field_definition->getName(), $form_state);
+     $paragraph_instance_yes_no = $widget_state_yes_no['paragraphs'][$element['#delta']]['entity'];
+     $paragraph_type_yes_no = $paragraph_instance_yes_no->bundle();
+      if($paragraph_type_yes_no == 'new_sub_question_yes_no'){
+        $element['subform']['#states'] = [
+          'visible' => [
+            'input[name="field_queries['.$key_yes_no.'][inline_entity_form][field_select_query_type]"]' => ['value' => 'Yes']
+          ],
+        ];
+        $element['subform']['field_s_no']['widget'][0]['value']['#default_value'] = $key_yes_no;
+      }
+  }
+
+  if($field_definition->getName() == 'field_defined_options_default'){
+    $key_pdef = $context['form']['#parents'][1];
+    $widget_state_pdef = \Drupal\Core\Field\WidgetBase::getWidgetState($element['#field_parents'], $field_definition->getName(), $form_state);
+    $paragraph_instance_pdef = $widget_state_pdef['paragraphs'][$element['#delta']]['entity'];
+    $paragraph_type_pdef = $paragraph_instance_pdef->bundle();
+    if($paragraph_type_pdef == 'internal_audit_qa'){
+      $element['#states'] = [
+        'visible' => [
+          'input[name="field_queries['.$key_pdef.'][inline_entity_form][field_select_query_type]"]' => ['value' => 'Pdef']
+        ],
+      ];
+       $element['subform']['field_sub_s_no_']['widget'][0]['value']['#default_value'] = $key_pdef;
+    }
+  }
+}
+
+function aps_audit_criteria_form_paragraphs_subform_alter(array &$subform, \Drupal\Core\Form\FormStateInterface &$form_state, $delta) {
+  $paragraph = $form_state->get('paragraph');
+  $paragraph_type = $paragraph->getType();
+  if($paragraph_type == 'internal_audit_qa'){
+    $subform['field_answers_poor']['#disabled'] = TRUE;
+    $subform['field_answer_optimised']['#disabled'] = TRUE;
+    $subform['field_answer_qualified']['#disabled'] = TRUE;
+    $subform['field_answers_defined']['#disabled'] = TRUE;
   }
 }
 
