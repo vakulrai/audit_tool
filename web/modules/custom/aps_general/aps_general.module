@@ -502,6 +502,11 @@ function aps_general_preprocess_page(&$variables) {
 function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $uri = explode('/', $current_uri);
+  $current_user = \Drupal::currentUser();
+  $roles = $current_user->getRoles();
+  foreach ($roles as $key => $value) {
+    $user_role = $value;
+  }
   if(isset($uri[2])){
     if (stripos(strtolower($uri[2]), 'external_audit_?') !== false) {
       // unset($data['tabs'][0]['aps_audit_criteria.audit_list']);
@@ -627,12 +632,14 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
   }
   if($route_name == 'view.planned_audit_listing.document_list_ia'){
-    $config = \Drupal::service('config.factory')->getEditable('aps_general.adduserroles');
-    if($config->get('doc_id')){
-      $id = $config->get('doc_id');
-    }
-    if($id){
-      $data['tabs'][0]['aps_pre_audit.manuals:internal_documents']['#link']['url']->setRouteParameters(['arg_0' => $id]);
+    if($user_role == 'auditor'){
+      $config = \Drupal::service('config.factory')->getEditable('aps_general.adduserroles');
+      if($config->get('doc_id')){
+        $id = $config->get('doc_id');
+      }
+      if($id){
+        $data['tabs'][0]['aps_pre_audit.manuals:internal_documents']['#link']['url']->setRouteParameters(['arg_0' => $id]);
+      }
     }
   }
   if(stripos(strtolower($current_uri), 'procedure-listing?') !== false){

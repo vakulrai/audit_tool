@@ -1,38 +1,37 @@
-uuid: e62a8f07-48b7-49f1-9214-2f749f657ce5
+uuid: 80e5e315-5fc6-40bb-9a38-1c29599eb4bd
 langcode: en
-status: false
+status: true
 dependencies:
+  config:
+    - views.view.registered_unit_listing
   module:
     - system
     - user
+    - views
   theme:
     - seven
-id: views_block__department_view_block_1
+id: views_block__registered_unit_listing_block_6
 theme: seven
 region: content
-weight: 10
+weight: -2
 provider: null
-plugin: 'views_block:department_view-block_1'
+plugin: 'views_block:registered_unit_listing-block_6'
 settings:
-  id: 'views_block:department_view-block_1'
+  id: 'views_block:registered_unit_listing-block_6'
   label: ''
   provider: views
   label_display: '0'
   views_label: ''
   items_per_page: none
-  context_mapping: {  }
 visibility:
   request_path:
     id: request_path
-    pages: "/node/add/department\r\n/node/add/department/*"
+    pages: '<front>'
     negate: false
     context_mapping: {  }
   user_role:
     id: user_role
     roles:
-      authenticated: authenticated
-      executive: executive
-      auditor: auditor
       auditee: auditee
     negate: false
     context_mapping:

@@ -6,6 +6,7 @@ dependencies:
     - views.view.registered_unit_listing
   module:
     - system
+    - user
     - views
   theme:
     - seven
@@ -28,3 +29,10 @@ visibility:
     pages: '<front>'
     negate: false
     context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      auditor: auditor
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

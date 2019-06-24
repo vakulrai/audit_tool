@@ -10,7 +10,7 @@ dependencies:
 id: views_block__department_view_block_2
 theme: seven
 region: content
-weight: 10
+weight: 11
 provider: null
 plugin: 'views_block:department_view-block_2'
 settings:

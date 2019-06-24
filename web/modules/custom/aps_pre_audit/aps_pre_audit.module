@@ -102,7 +102,7 @@ function aps_pre_audit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
     }
   }
   elseif($form_id == 'node_pre_audit_records_edit_form'){
-    $form['field_refere']['#access'] = FALSE;
+    // $form['field_refere']['#access'] = FALSE;
   }
 
   if($form_id == 'node_pre_audit_manuals_form'){

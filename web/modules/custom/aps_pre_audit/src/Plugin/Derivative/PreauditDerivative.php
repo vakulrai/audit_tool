@@ -45,6 +45,11 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
    */
   public function getDerivativeDefinitions($base_plugin_definition) {
     $links = [];
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    foreach ($roles as $key => $value) {
+      $user_role = $value;
+    }
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $uri = explode('/', $current_uri);
     if($ref = \Drupal::request()->query->get('unit_reference')){
@@ -53,24 +58,32 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
     else{
       $id = 0;
     }
-    $links['records'] = [
-      'title' => 'Records',
-      'route_name' => 'view.planned_audit_listing.document_list_records',
-      'base_route' => 'view.planned_audit_listing.document_list_ia',
-    ] + $base_plugin_definition;
+    if($user_role == 'auditor' || $user_role == 'mr_admin'){
+      $links['records'] = [
+        'title' => 'Records',
+        'route_name' => 'view.planned_audit_listing.document_list_records',
+        'base_route' => 'view.planned_audit_listing.document_list_ia',
+      ] + $base_plugin_definition;
 
-    $links['manuals'] = [
-      'title' => 'Manuals',
-      'route_name' => 'view.planned_audit_listing.document_list_manuals',
-      'base_route' => 'view.planned_audit_listing.document_list_ia',
-    ] + $base_plugin_definition;
-    
-    $links['internal_documents'] = [
-      'title' => 'Internal Documents',
-      'route_name' => 'view.planned_audit_listing.document_list_ia',
-      'base_route' => 'view.planned_audit_listing.document_list_ia',
-    ] + $base_plugin_definition;
-  
+      $links['manuals'] = [
+        'title' => 'Manuals',
+        'route_name' => 'view.planned_audit_listing.document_list_manuals',
+        'base_route' => 'view.planned_audit_listing.document_list_ia',
+      ] + $base_plugin_definition;
+      
+      $links['internal_documents'] = [
+        'title' => 'Internal Documents',
+        'route_name' => 'view.planned_audit_listing.document_list_ia',
+        'base_route' => 'view.planned_audit_listing.document_list_ia',
+      ] + $base_plugin_definition;
+    }
+    elseif ($user_role == 'auditee') {
+      $links['records'] = [
+        'title' => 'Records',
+        'route_name' => 'view.planned_audit_listing.document_list_records',
+        'base_route' => 'view.planned_audit_listing.document_list_records',
+      ] + $base_plugin_definition;
+    }
     $links['add_procedures'] = [
       'title' => 'Add Procedures',
       'route_name' => 'node.add',

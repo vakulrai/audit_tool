@@ -12,7 +12,7 @@ dependencies:
 id: views_block__user_registration_view_details
 theme: seven
 region: content
-weight: -1
+weight: 0
 provider: null
 plugin: 'views_block:user_registration_view-details'
 settings:

@@ -80,6 +80,7 @@ visibility:
     id: user_role
     roles:
       auditor: auditor
+      auditee: auditee
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'

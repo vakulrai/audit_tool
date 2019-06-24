@@ -56,21 +56,26 @@ class PreAuditValidate extends FieldPluginBase {
     // Include any namespace required to call the method required to generate
     // the desired output.
     $node = $values->_entity;
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    foreach ($roles as $key => $value) {
+      $user_role = $value;
+    }
     $select_audit = $node->get('field_select_audit')->target_id;
     $event_start_date_timestamp = $node->get('field_start_date')->value;
     if($node->get('field_audit_type')->value === 'internal'){
       $internal_audit_type = $node->get('field_internal_audit_type')->value;
       switch ($internal_audit_type) {
         case 'systems':
-          $audit_reference =  $node->get('field_list_of_systems')->value;
+          $audit_reference =  $node->get('field_list_of_systems')->target_id;
           break;
 
         case 'process':
-          $audit_reference =  $node->get('field_list_of_systems')->value;
+          $audit_reference =  $node->get('field_list_of_systems')->target_id;
           break;
 
         case 'product':
-          $audit_reference =  $node->get('field_list_of_product')->value;
+          $audit_reference =  $node->get('field_list_of_product')->target_id;
           break;
         
         default:
@@ -83,11 +88,20 @@ class PreAuditValidate extends FieldPluginBase {
     $hours = round(($diff-$days*60*60*24)/(60*60));
     $time_remaining = $days .' Days '. $hours . ' Hour';
     if ($days > 0) {
-      $form['add_delta_qa'] = [
-        '#type' => 'link',
-        '#title' => t('Pre Audit'),
-        '#url' => Url::fromUserInput('/preaudit/'.$node->id().'?ref='.$node->get('field_list_of_systems')->target_id),
+      if($user_role == 'auditor'){
+        $form['add_delta_qa'] = [
+          '#type' => 'link',
+          '#title' => t('Pre Audit'),
+          '#url' => Url::fromUserInput('/preaudit/'.$node->id().'?ref='.$audit_reference),
         ];
+      }
+      elseif ($user_role == 'auditee') {
+        $form['add_delta_qa'] = [
+          '#type' => 'link',
+          '#title' => t('UPLOAD'),
+          '#url' => Url::fromUserInput('/documentrecords/'.$node->id()),
+        ];
+      }
     }
     return $form;
   }
