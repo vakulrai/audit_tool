@@ -6,16 +6,25 @@ dependencies:
     - field.field.node.internal_audit.body
     - field.field.node.internal_audit.field_audit_date
     - field.field.node.internal_audit.field_audit_type
+    - field.field.node.internal_audit.field_further_actions
     - field.field.node.internal_audit.field_general_queries
     - field.field.node.internal_audit.field_ia_department
     - field.field.node.internal_audit.field_ia_section
     - field.field.node.internal_audit.field_predefined_queries_yes_no
     - field.field.node.internal_audit.field_procedure_no
     - field.field.node.internal_audit.field_queries
+    - field.field.node.internal_audit.field_root_cause_analysis
     - field.field.node.internal_audit.field_select_result
+    - field.field.node.internal_audit.field_significant_findings
+    - field.field.node.internal_audit.field_summary
     - field.field.node.internal_audit.field_unit
+    - field.field.node.internal_audit.field_upload_auditee_signatures
+    - field.field.node.internal_audit.field_upload_auditor_signatures
+    - field.field.node.internal_audit.field_upload_hod_signatures
+    - field.field.node.internal_audit.field_upload_qms_signatures
     - node.type.internal_audit
   module:
+    - file
     - inline_entity_form
 id: node.internal_audit.default
 targetEntityType: node
@@ -34,6 +43,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_further_actions:
+    weight: 28
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
   field_ia_department:
     weight: 2
     settings: {  }
@@ -64,11 +81,63 @@ content:
     third_party_settings: {  }
     type: inline_entity_form_simple
     region: content
+  field_root_cause_analysis:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_significant_findings:
+    weight: 26
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_summary:
+    weight: 29
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
   field_unit:
     weight: 1
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_upload_auditee_signatures:
+    weight: 30
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_upload_auditor_signatures:
+    weight: 31
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_upload_hod_signatures:
+    weight: 32
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_upload_qms_signatures:
+    weight: 33
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
     region: content
   title:
     type: string_textfield

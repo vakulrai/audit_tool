@@ -128,11 +128,31 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
 	}
 
   if($form_id == 'node_internal_audit_form'){
+    $form['field_further_actions']['#access'] = FALSE;
+    $form['field_root_cause_analysis']['#access'] = FALSE;
+    $form['field_significant_findings']['#access'] = FALSE;
+    $form['field_summary']['#access'] = FALSE;
+
+    $form['field_upload_auditee_signatures']['#access'] = FALSE;
+    $form['field_upload_auditor_signatures']['#access'] = FALSE;
+    $form['field_upload_hod_signatures']['#access'] = FALSE;
+    $form['field_upload_qms_signatures']['#access'] = FALSE;
     foreach (array_keys($form['actions']) as $action) {
         if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
           $form['actions'][$action]['#submit'][] = 'internal_audit_redirect';
         }
       }
+  }
+  elseif ($form_id == 'node_internal_audit_edit_form') {
+    $form['field_further_actions']['#access'] = FALSE;
+    $form['field_root_cause_analysis']['#access'] = FALSE;
+    $form['field_significant_findings']['#access'] = FALSE;
+    $form['field_summary']['#access'] = FALSE;
+
+    // $form['field_upload_auditee_signatures']['#access'] = FALSE;
+    // $form['field_upload_auditor_signatures']['#access'] = FALSE;
+    // $form['field_upload_hod_signatures']['#access'] = FALSE;
+    // $form['field_upload_qms_signatures']['#access'] = FALSE;
   }
 
   if($form_id == 'audit_criteria_process_process_edit_form'){

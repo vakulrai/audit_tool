@@ -326,6 +326,7 @@ class PreAuditForm extends FormBase {
 
   public function getDetails(array $form, FormStateInterface $form_state){
     $response = new AjaxResponse();
+    $nid = \Drupal::request()->query->get('ref');
     $details = $this->getAuditDetails();
     foreach ($details as $key => $value) {
       $form_data['answer'][$value['qid']][] = $form_state->getValue('answers'.$key);
@@ -360,7 +361,9 @@ class PreAuditForm extends FormBase {
         }
       }
     }
-    $command = new RedirectCommand('https://example.com');
+    if($nid){
+      $command = new RedirectCommand('/aps_pre_audit/form/update_audit_findings?audit_reference='.$nid);
+    }
     return $response->addCommand($command);
   }
 

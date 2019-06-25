@@ -6,17 +6,26 @@ dependencies:
     - field.field.node.internal_audit.body
     - field.field.node.internal_audit.field_audit_date
     - field.field.node.internal_audit.field_audit_type
+    - field.field.node.internal_audit.field_further_actions
     - field.field.node.internal_audit.field_general_queries
     - field.field.node.internal_audit.field_ia_department
     - field.field.node.internal_audit.field_ia_section
     - field.field.node.internal_audit.field_predefined_queries_yes_no
     - field.field.node.internal_audit.field_procedure_no
     - field.field.node.internal_audit.field_queries
+    - field.field.node.internal_audit.field_root_cause_analysis
     - field.field.node.internal_audit.field_select_result
+    - field.field.node.internal_audit.field_significant_findings
+    - field.field.node.internal_audit.field_summary
     - field.field.node.internal_audit.field_unit
+    - field.field.node.internal_audit.field_upload_auditee_signatures
+    - field.field.node.internal_audit.field_upload_auditor_signatures
+    - field.field.node.internal_audit.field_upload_hod_signatures
+    - field.field.node.internal_audit.field_upload_qms_signatures
     - node.type.internal_audit
   module:
     - entity_reference_revisions
+    - file
     - options
     - text
     - user
@@ -48,6 +57,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: list_default
+    region: content
+  field_further_actions:
+    weight: 114
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
     region: content
   field_general_queries:
     type: entity_reference_revisions_entity_view
@@ -99,12 +115,34 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_root_cause_analysis:
+    weight: 113
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_select_result:
     weight: 106
     label: above
     settings: {  }
     third_party_settings: {  }
     type: list_default
+    region: content
+  field_significant_findings:
+    weight: 112
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_summary:
+    weight: 115
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
     region: content
   field_unit:
     weight: 102
@@ -113,6 +151,38 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_upload_auditee_signatures:
+    weight: 116
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_upload_auditor_signatures:
+    weight: 117
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_upload_hod_signatures:
+    weight: 118
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_upload_qms_signatures:
+    weight: 119
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
     region: content
   links:
     weight: 100

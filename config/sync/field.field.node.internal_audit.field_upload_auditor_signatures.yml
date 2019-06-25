@@ -1,0 +1,27 @@
+uuid: caed029e-7d01-4040-b084-d398a21e0d7b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_upload_auditor_signatures
+    - node.type.internal_audit
+  module:
+    - file
+id: node.internal_audit.field_upload_auditor_signatures
+field_name: field_upload_auditor_signatures
+entity_type: node
+bundle: internal_audit
+label: 'Upload auditor Signatures'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png jpg pdf'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file
