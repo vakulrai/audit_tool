@@ -1,0 +1,21 @@
+uuid: 9dfad1ce-4b62-472a-afdc-0ef2071df633
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_selected_value
+    - paragraphs.paragraphs_type.new_sub_question_yes_no
+  module:
+    - options
+id: paragraph.new_sub_question_yes_no.field_selected_value
+field_name: field_selected_value
+entity_type: paragraph
+bundle: new_sub_question_yes_no
+label: 'Selected Value'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

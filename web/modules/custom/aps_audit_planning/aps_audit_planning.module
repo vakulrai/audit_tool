@@ -110,7 +110,10 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     }
     $current_user = \Drupal::currentUser();
     $roles = $current_user->getRoles();
-    if(in_array('auditor', $roles)){
+    foreach ($roles as $key => $value) {
+      $user_role = $value;
+    }
+    if($user_role == 'auditor' || $user_role == 'auditee'){
       $entity_type_id = 'node';
       $bundle = 'planned_events';
       foreach (\Drupal::entityManager()->getFieldDefinitions($entity_type_id, $bundle) as $field_name => $field_definition) {

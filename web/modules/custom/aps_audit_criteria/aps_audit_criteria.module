@@ -8,6 +8,8 @@
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\node\Entity\Node;
+use Drupal\Component\Utility\UrlHelper;
 
 /**
  * Implements hook_help().
@@ -146,8 +148,18 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
         if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
           $form['actions'][$action]['#submit'][] = 'product_redirect';
         }
-      }
-  }  
+    }
+  }
+
+  if($form_id == 'node_answers_form'){
+    unset($form['field_defined_option_yes_no']['widget']['add_more']);
+    unset($form['field_defined_options_default']['widget']['add_more']);
+    foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'submit_delta_q';
+        }
+    }
+  } 
 }
 
 /**
@@ -161,36 +173,11 @@ function aps_audit_criteria_preprocess_page(&$variables) {
   }
 }
 
-function aps_audit_criteria_inline_entity_form_entity_form_alter(&$entity_form, &$form_state, $context) { 
-  // $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answer_optimised']['#disabled'] = TRUE;
-  // $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answer_qualified']['#disabled'] = TRUE;
-  // $entity_form['field_defined_options_default']['widget'][0]['subform']['field_answers_defined']['#disabled'] = TRUE;
+function aps_audit_criteria_inline_entity_form_entity_form_alter(&$entity_form, &$form_state, $context) {
   $entity_form['title']['widget'][0]['value']['#default_value'] = 'Add a title Here';
-  // if($entity_form['#bundle'] == 'answers'){
-  //   // $entity_form['title']['#states'] = [
-  //   //   'visible' => [
-  //   //     ['input[name="field_queries[0][inline_entity_form][field_select_query_type]"]' => ['value' => 'Pdef']],
-  //   //     ['input[name="field_queries[0][inline_entity_form][field_select_query_type]"]' => ['value' => 'Yes']],
-  //   //     ['input[name="field_queries[0][inline_entity_form][field_select_query_type]"]' => ['value' => 'Ival']],
-  //   //   ],
-  //   // ];
-
-  //   $entity_form['field_defined_options_default']['#states'] = [
-  //     'visible' => [
-  //       'input[name="field_queries[0][inline_entity_form][field_select_query_type]"]' => ['value' => 'Pdef'],
-  //     ],
-  //   ];
-
-  //   $entity_form['field_defined_option_yes_no']['#states'] = [
-  //     'visible' => [
-  //       'input[name="field_queries[0][inline_entity_form][field_select_query_type]"]' => ['value' => 'Yes']
-  //     ],
-  //   ];
-
 }
 
 function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
-
   $field_definition = $context['items']->getFieldDefinition();
   if($field_definition->getName() == 'field_defined_option_yes_no'){
      $key_yes_no = $context['form']['#parents'][1];
@@ -283,5 +270,28 @@ function process_redirect(array $form, \Drupal\Core\Form\FormStateInterface $for
  */
 function product_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
   $response = Url::fromUserInput('/audit_criteria/1/edit');
+  $form_state->setRedirectUrl($response);
+}
+
+/**
+ * Callback method after Add delta Q form submits.
+ */
+function submit_delta_q(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+  $query_parameters = UrlHelper::parse($current_uri);
+  $uri = explode('=', $query_parameters['query']['destination']);
+  $id = $uri[1];
+  $node_object = Node::load($id);
+  $form_values = $form_state->getValues();
+  $nid = $form_values['nid'];
+  $get_stored_entity = [];
+  if(count($node_object->get('field_queries')->target_id)){
+    $get_stored_entity = $node_object->get('field_queries')->getValue();
+    $get_stored_entity[] = ['target_id' => $nid];
+    $node_object->set('field_queries', $get_stored_entity);
+    $node_object->save();
+  }
+  $destination = \Drupal::request()->query->get('destination');
+  $response = Url::fromUserInput('/'.$destination);
   $form_state->setRedirectUrl($response);
 }

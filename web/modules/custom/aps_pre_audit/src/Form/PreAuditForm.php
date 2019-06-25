@@ -40,13 +40,13 @@ class PreAuditForm extends FormBase {
     $event_timestamp = $this->getTimezoneofEventDate($event_timestamp, $user_timezone, $format = 'd/m/Y H:i:s');
     $get_current_timestamp = $this->getCurrentTimestamp($user_timezone);
     $diff = $event_timestamp - $get_current_timestamp;
-    $diff = 0;
-    if($diff == 0) {
-      $disable_fields = 'TRUE';
-    }
-    else{
-      $disable_fields = 'FALSE';
-    }
+    // $diff = 1;
+    // if($diff == 0) {
+    //   $disable_fields = 'TRUE';
+    // }
+    // else{
+    //   $disable_fields = 'FALSE';
+    // }
     $procedure_no = aps_pre_audit_get_node_value($nid, 'field_procedure_no');
     $procedure_title = aps_pre_audit_get_node_value($procedure_no, 'title');
 
@@ -75,28 +75,28 @@ class PreAuditForm extends FormBase {
 
       $form['audit_qa_'.$key] = array(
         '#type' => 'details', 
-        '#title' => 'Q.no.'.$value['sno'], 
+        '#title' => 'Q.no.'.$value['sno'].' '.$value['question'], 
         '#attributes' => ['id' => 'tab-'.$key], 
         '#collapsible' => TRUE, 
         '#collapsed' => FALSE,
       ); 
-     
-      $form['audit_qa_'.$key]['question_desc'] = array(
-        '#type' => 'item',
-        '#weight' => 0,
-        '#markup' => 'Description : '.$value['question'],
-      );
 
       $form['audit_qa_'.$key]['question_sr_no'] = array(
         '#type' => 'item',
-        '#weight' => 5,
+        '#weight' => 1,
         '#markup' => 'S. no : '.$value['sno'],
       );
-
+      
       $form['audit_qa_'.$key]['question'.$key] = array(
         '#type' => 'item',
-        '#weight' => 10,
+        '#weight' => 5,
         '#title' => 'Question: '.$value['question'],
+      );
+
+      $form['audit_qa_'.$key]['question_desc'] = array(
+        '#type' => 'item',
+        '#weight' => 10,
+        '#markup' => 'Description : '.$value['question'],
       );
       
       $answer_options = $this->getAnswers($value['answers'], $value['type']);
@@ -247,7 +247,7 @@ class PreAuditForm extends FormBase {
               $output[$ref_id]['type'] = 'defined';
               $output[$ref_id]['qid'] = $val['target_id'];
               $output[$ref_id]['sno'] = count($predefined_question_object_array['field_s_no']) ? $predefined_question_object->get('field_s_no')->value : '';
-              $output[$ref_id]['question'] = count($predefined_question_object_array['title']) ? $predefined_question_object->get('title')->value : '';
+              $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
               $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
               $output[$ref_id]['desc'][$predefined_question_object->get('field_description')->value] = $predefined_question_object->get('field_description')->value;
               $output[$ref_id]['option'] = $predefined_question_object->get('field_description')->value;
@@ -275,7 +275,7 @@ class PreAuditForm extends FormBase {
     if($type == 'defined'){
       $answers['yes'] = 'Yes';
       $answers['no'] = 'No';
-      $answers['na'] = 'Yes';
+      $answers['na'] = 'N/A';
     }
     return $answers;
   }
@@ -338,7 +338,12 @@ class PreAuditForm extends FormBase {
         unset($id[$i]);
         if(isset($i)){
           $paragraph_object =  Paragraph::load($i);
-          $paragraph_object->set('field_checked', $j[0]);
+          if($paragraph_object->bundle() == 'new_sub_question_yes_no'){
+            $paragraph_object->set('field_selected_value', $j[0]);
+            $paragraph_object->set('field_checked', $j[0]);
+          }else{
+            $paragraph_object->set('field_checked', $j[0]);
+          }
           $paragraph_object->save();
         }
       }

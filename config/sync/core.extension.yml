@@ -17,6 +17,7 @@ module:
   conditional_fields: 0
   config: 0
   contact: 0
+  content_moderation: 0
   contextual: 0
   datetime: 0
   datetime_range: 0
@@ -73,12 +74,7 @@ module:
   user: 0
   views_autocomplete_filters: 0
   views_ui: 0
-  workflow: 0
-  workflow_access: 0
-  workflow_cleanup: 0
-  workflow_devel: 0
-  workflow_operations: 0
-  workflow_ui: 0
+  workflows: 0
   yearonly: 0
   menu_link_content: 1
   views: 10

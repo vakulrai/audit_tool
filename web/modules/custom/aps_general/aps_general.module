@@ -413,9 +413,12 @@ function aps_general_node_presave(Node $node) {
     if($suggested_date = $node->get('field_suggested_date')->value){
       $current_user = \Drupal::currentUser();
       $roles = $current_user->getRoles();
+      foreach ($roles as $key => $value) {
+        $user_role = $value;
+      }
       $user_timezone =  drupal_get_user_timezone();
       $get_current_timestamp = getCurrentTimestamp($user_timezone);
-      if(in_array('auditor', $roles)){
+      if($user_role == 'auditor' || $user_role == 'auditee'){
         $notifictaion_insert = \Drupal::database()->insert('notifications');
         $message = 'Reschedule the audit to '.$suggested_date;
         $notifictaion_insert->fields([
@@ -509,10 +512,6 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   }
   if(isset($uri[2])){
     if (stripos(strtolower($uri[2]), 'external_audit_?') !== false) {
-      // unset($data['tabs'][0]['aps_audit_criteria.audit_list']);
-      // unset($data['tabs'][0]['aps_audit_criteria.systems_setting']);
-      // unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
-      // unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
     }
     if ($uri[2] == 'clauses') {
       $link = Url::fromUserInput('/node/add/'.$uri[2]);
@@ -583,6 +582,9 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
         unset($data['tabs']);
     }
     elseif (stripos(strtolower($uri[2]), 'section?') !== false) {
+        unset($data['tabs']);
+    }
+    elseif (stripos(strtolower($uri[2]), 'answers?') !== false) {
         unset($data['tabs']);
     }
     elseif (stripos(strtolower($uri[2]), 'assembly?') !== false) {

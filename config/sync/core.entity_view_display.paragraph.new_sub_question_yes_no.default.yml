@@ -8,9 +8,11 @@ dependencies:
     - field.field.paragraph.new_sub_question_yes_no.field_evidence
     - field.field.paragraph.new_sub_question_yes_no.field_question
     - field.field.paragraph.new_sub_question_yes_no.field_s_no
+    - field.field.paragraph.new_sub_question_yes_no.field_selected_value
     - paragraphs.paragraphs_type.new_sub_question_yes_no
   module:
     - file
+    - options
 id: paragraph.new_sub_question_yes_no.default
 targetEntityType: paragraph
 bundle: new_sub_question_yes_no
@@ -55,5 +57,12 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     type: number_integer
+    region: content
+  field_selected_value:
+    weight: 7
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
 hidden: {  }
