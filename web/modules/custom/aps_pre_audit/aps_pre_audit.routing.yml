@@ -30,3 +30,12 @@ aps_pre_audit.get_more_info_form:
   requirements:
     _access: 'TRUE'
   
+
+aps_pre_audit.update_audit_findings:
+  path: '/aps_pre_audit/form/update_audit_findings'
+  defaults:
+    _form: '\Drupal\aps_pre_audit\Form\UpdateAuditFindings'
+    _title: 'UpdateAuditFindings'
+  requirements:
+    _access: 'TRUE'
+  

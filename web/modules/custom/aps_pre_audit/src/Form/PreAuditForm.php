@@ -9,6 +9,7 @@ use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Component\Datetime\DateTimePlus;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Ajax\RedirectCommand;
 
 /**
  * Class PreAuditForm.
@@ -359,8 +360,8 @@ class PreAuditForm extends FormBase {
         }
       }
     }
-
-    return $response;
+    $command = new RedirectCommand('https://example.com');
+    return $response->addCommand($command);
   }
 
   public function getTimezoneofEventDate($timestamp, $user_timezone, $format = 'd/m/Y H:i:s'){
