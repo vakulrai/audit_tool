@@ -42,12 +42,12 @@ class PreAuditForm extends FormBase {
     $get_current_timestamp = $this->getCurrentTimestamp($user_timezone);
     $diff = $event_timestamp - $get_current_timestamp;
     // $diff = 1;
-    // if($diff == 0) {
-    //   $disable_fields = 'TRUE';
-    // }
-    // else{
-    //   $disable_fields = 'FALSE';
-    // }
+    if($diff == 0) {
+      $disable_fields = 'TRUE';
+    }
+    else{
+      $disable_fields = 'FALSE';
+    }
     $procedure_no = aps_pre_audit_get_node_value($nid, 'field_procedure_no');
     $procedure_title = aps_pre_audit_get_node_value($procedure_no, 'title');
 
