@@ -71,7 +71,7 @@ class PreAuditValidate extends FieldPluginBase {
           break;
 
         case 'process':
-          $audit_reference =  $node->get('field_list_of_systems')->target_id;
+          $audit_reference =  $node->get('field_list_of_process')->target_id;
           break;
 
         case 'product':

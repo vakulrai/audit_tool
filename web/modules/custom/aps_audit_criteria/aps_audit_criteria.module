@@ -149,10 +149,10 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
     $form['field_significant_findings']['#access'] = FALSE;
     $form['field_summary']['#access'] = FALSE;
 
-    // $form['field_upload_auditee_signatures']['#access'] = FALSE;
-    // $form['field_upload_auditor_signatures']['#access'] = FALSE;
-    // $form['field_upload_hod_signatures']['#access'] = FALSE;
-    // $form['field_upload_qms_signatures']['#access'] = FALSE;
+    $form['field_upload_auditee_signatures']['#access'] = FALSE;
+    $form['field_upload_auditor_signatures']['#access'] = FALSE;
+    $form['field_upload_hod_signatures']['#access'] = FALSE;
+    $form['field_upload_qms_signatures']['#access'] = FALSE;
   }
 
   if($form_id == 'audit_criteria_process_process_edit_form'){
@@ -172,6 +172,8 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
   }
 
   if($form_id == 'node_answers_form'){
+    $form['field_answer_type']['#access'] = FALSE;
+    $form['field_add_to_checklist']['#access'] = FALSE;
     unset($form['field_defined_option_yes_no']['widget']['add_more']);
     unset($form['field_defined_options_default']['widget']['add_more']);
     foreach (array_keys($form['actions']) as $action) {
@@ -179,7 +181,11 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
           $form['actions'][$action]['#submit'][] = 'submit_delta_q';
         }
     }
-  } 
+  }
+  else{
+    $form['field_answer_type']['#access'] = FALSE;
+    $form['field_add_to_checklist']['#access'] = FALSE;
+  }
 }
 
 /**
@@ -195,6 +201,8 @@ function aps_audit_criteria_preprocess_page(&$variables) {
 
 function aps_audit_criteria_inline_entity_form_entity_form_alter(&$entity_form, &$form_state, $context) {
   $entity_form['title']['widget'][0]['value']['#default_value'] = 'Add a title Here';
+  $entity_form['field_answer_type']['#access'] = FALSE;
+  $entity_form['field_add_to_checklist']['#access'] = FALSE;
 }
 
 function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
@@ -309,6 +317,8 @@ function submit_delta_q(array $form, \Drupal\Core\Form\FormStateInterface $form_
     $get_stored_entity = $node_object->get('field_queries')->getValue();
     $get_stored_entity[] = ['target_id' => $nid];
     $node_object->set('field_queries', $get_stored_entity);
+    $node_object->set('field_answer_type', 'delta');
+    $node_object->set('field_add_to_checklist', 'no');
     $node_object->save();
   }
   $destination = \Drupal::request()->query->get('destination');

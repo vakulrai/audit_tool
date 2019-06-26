@@ -1,0 +1,86 @@
+uuid: e3bdbebb-12d9-4a37-9d43-4f42ba7fed1b
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.internal_audit
+    - node.type.planned_events
+  module:
+    - content_moderation
+id: workflow_for_audit_planning
+label: 'Workflow for Audit Planning'
+type: content_moderation
+type_settings:
+  states:
+    draft:
+      label: Draft
+      published: false
+      default_revision: false
+      weight: 0
+    post_audit:
+      published: false
+      default_revision: false
+      label: 'Post Audit'
+      weight: 6
+    pre_audit:
+      published: false
+      default_revision: false
+      label: 'Pre Audit'
+      weight: 2
+    published:
+      label: Published
+      published: true
+      default_revision: true
+      weight: 1
+    reschedule:
+      published: false
+      default_revision: false
+      label: Reschedule
+      weight: 4
+    scheduled:
+      published: true
+      default_revision: false
+      label: Scheduled
+      weight: 5
+    unpublished:
+      published: false
+      default_revision: false
+      label: Unpublished
+      weight: 3
+  transitions:
+    create_new_draft:
+      label: 'Create New Draft'
+      to: draft
+      weight: 0
+      from:
+        - draft
+        - published
+    post_audit:
+      label: 'Post Audit'
+      from:
+        - scheduled
+      to: post_audit
+      weight: 3
+    pre_audit:
+      label: 'Pre Audit'
+      from:
+        - draft
+      to: pre_audit
+      weight: 4
+    rescheduled:
+      label: Rescheduled
+      from:
+        - scheduled
+      to: reschedule
+      weight: 2
+    scheduled:
+      label: Scheduled
+      from:
+        - pre_audit
+      to: scheduled
+      weight: 1
+  entity_types:
+    node:
+      - internal_audit
+      - planned_events
+  default_moderation_state: draft

@@ -1,0 +1,14 @@
+uuid: 74ad84e4-def8-4988-aa10-447afefd5733
+langcode: en
+status: true
+dependencies: {  }
+id: audits
+label: Audits
+module: workflow
+options:
+  name_as_title: 0
+  fieldset: 0
+  options: radios
+  schedule_timezone: 1
+  comment_log_node: 1
+  watchdog_log: 0

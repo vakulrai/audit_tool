@@ -5,6 +5,7 @@ namespace Drupal\aps_pre_audit\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
+use Drupal\user\Entity\User;
 /**
  * Class UpdateAuditFindings.
  */
@@ -99,6 +100,15 @@ class UpdateAuditFindings extends FormBase {
       '#collapsible' => TRUE, 
       '#collapsed' => FALSE,
     ];
+    
+    $user_list = $this->getUserByRole();
+    $form['signatures']['auditee_user'] = [
+      '#type' => 'select',
+      '#options' => $user_list['auditee'],
+      '#required' => TRUE,
+      '#weight' => 20,
+      '#title' => t('List of Auditee'),
+    ];
 
     $form['signatures']['auditee'] = [
       '#type' => 'managed_file',
@@ -109,6 +119,14 @@ class UpdateAuditFindings extends FormBase {
       '#description' => t('Upload files'),
       '#upload_validators' => $validators,
       '#upload_location' => 'public://',
+    ];
+    
+    $form['signatures']['auditor_user'] = [
+      '#type' => 'select',
+      '#options' => $user_list['auditor'],
+      '#required' => TRUE,
+      '#weight' => 20,
+      '#title' => t('List of Auditor'),
     ];
 
     $form['signatures']['auditor'] = [
@@ -219,4 +237,22 @@ class UpdateAuditFindings extends FormBase {
     $this->messenger()->addMessage($output);
   }
 
+  public function getUserByRole(){
+    $query = \Drupal::database()->select('user__roles', 'u');
+    $query->fields('u',['entity_id', 'roles_target_id']);
+    $nids = $query->execute()->fetchAll();
+    foreach ($nids as $key => $value) {
+      $user_object = User::load($value->entity_id);
+      if($value->roles_target_id == 'auditor'){
+        $user_list['auditor'][$user_object->get('uid')->value] = $user_object->get('name')->value;
+      }
+      if($value->roles_target_id == 'auditee'){
+        $user_list['auditee'][$user_object->get('uid')->value] = $user_object->get('name')->value;
+      }
+      if($value->roles_target_id == 'mr_admin'){
+        $user_list['mr_admin'][$user_object->get('uid')->value] = $user_object->get('name')->value;
+      }
+    } 
+    return $user_list; 
+  }
 }

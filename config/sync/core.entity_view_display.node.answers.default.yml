@@ -4,8 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.node.answers.body
+    - field.field.node.answers.field_add_to_checklist
     - field.field.node.answers.field_answer_optimised
     - field.field.node.answers.field_answer_qualified
+    - field.field.node.answers.field_answer_type
     - field.field.node.answers.field_answers_defined
     - field.field.node.answers.field_answers_poor
     - field.field.node.answers.field_defined_option_yes_no
@@ -37,6 +39,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  field_add_to_checklist:
+    weight: 117
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
   field_answer_optimised:
     weight: 105
     label: above
@@ -52,6 +61,13 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_answer_type:
+    weight: 116
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_answers_defined:
     weight: 103

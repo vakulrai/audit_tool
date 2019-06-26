@@ -1,0 +1,23 @@
+uuid: b9978439-9da8-4c15-8a64-e33291b89354
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_add_to_checklist
+    - node.type.answers
+  module:
+    - options
+id: node.answers.field_add_to_checklist
+field_name: field_add_to_checklist
+entity_type: node
+bundle: answers
+label: 'Add to Checklist'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 'yes'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

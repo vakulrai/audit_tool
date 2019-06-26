@@ -1,0 +1,10 @@
+uuid: 64825555-aeb8-438c-91d1-3715ab4dac00
+langcode: en
+status: true
+dependencies: {  }
+id: audits_creation
+label: Creation
+module: workflow
+wid: audits
+weight: -50
+sysid: 1

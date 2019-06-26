@@ -21,7 +21,9 @@ dependencies:
     - node.type.procedures
     - node.type.section
     - node.type.unit
+    - workflows.workflow.workflow_for_audit_planning
   module:
+    - content_moderation
     - entity_reference_revisions
     - node
     - options
@@ -1699,17 +1701,6 @@ display:
       display_extenders: {  }
       display_description: 'List of procedures'
       filters:
-        status:
-          value: '1'
-          table: node_field_data
-          field: status
-          plugin_id: boolean
-          entity_type: node
-          entity_field: status
-          id: status
-          expose:
-            operator: ''
-          group: 1
         type:
           id: type
           table: node_field_data
@@ -1751,6 +1742,45 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        moderation_state:
+          id: moderation_state
+          table: node_field_revision
+          field: moderation_state
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            workflow_for_audit_planning-pre_audit: workflow_for_audit_planning-pre_audit
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          plugin_id: moderation_state_filter
       defaults:
         filters: false
         filter_groups: false
@@ -1841,7 +1871,8 @@ display:
         - 'languages:language_interface'
         - 'user.node_grants:view'
         - user.permissions
-      tags: {  }
+      tags:
+        - 'config:workflow_list'
   ia_process:
     display_plugin: page
     id: ia_process

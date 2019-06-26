@@ -1,0 +1,27 @@
+uuid: 93a1e1df-ef11-4e81-a67a-a593dc0f2ee5
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_answer_type
+field_name: field_answer_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: delta
+      label: DeltaQ
+    -
+      value: non-delta
+      label: Non-DeltaQ
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

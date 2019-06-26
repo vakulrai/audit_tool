@@ -4,8 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.node.answers.body
+    - field.field.node.answers.field_add_to_checklist
     - field.field.node.answers.field_answer_optimised
     - field.field.node.answers.field_answer_qualified
+    - field.field.node.answers.field_answer_type
     - field.field.node.answers.field_answers_defined
     - field.field.node.answers.field_answers_poor
     - field.field.node.answers.field_defined_option_yes_no
@@ -27,6 +29,18 @@ targetEntityType: node
 bundle: answers
 mode: default
 content:
+  field_add_to_checklist:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_answer_type:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_defined_option_yes_no:
     type: entity_reference_paragraphs
     weight: 2

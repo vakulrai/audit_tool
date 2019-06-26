@@ -50,6 +50,16 @@ class PreAuditForm extends FormBase {
     // }
     $procedure_no = aps_pre_audit_get_node_value($nid, 'field_procedure_no');
     $procedure_title = aps_pre_audit_get_node_value($procedure_no, 'title');
+    
+    $options_to_select[0] = 'Checklist';
+    $options_to_select[1] = 'Form Submission';
+    $form['select_type'] = array(
+       '#type' => 'radios',
+       '#title' => 'Select Checklist Type',
+       '#options' => $options_to_select,
+       '#weight' => 0,
+       '#default_value' => 0,
+    );
 
     $form['procedure_no'] = array(
       '#type' => 'item',
@@ -58,6 +68,19 @@ class PreAuditForm extends FormBase {
 
     $validators = array(
       'file_validate_extensions' => ['jpg mp4 pdf'],
+    );
+    
+    $form['display'] = array(
+      '#type' => 'fieldset', 
+      '#title' => t('Checklist'), 
+      '#attributes' => ['id' => 'display'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+      '#states' => [
+      'visible' => [
+        'input[name="select_type"]' => ['value' => '0']
+        ],
+      ],
     );
 
     foreach ($details as $key => $value) {
@@ -73,8 +96,8 @@ class PreAuditForm extends FormBase {
         $key_1 = '';
         $key_2 = '';
       }
-
-      $form['audit_qa_'.$key] = array(
+      
+      $form['display']['audit_qa_'.$key] = array(
         '#type' => 'details', 
         '#title' => 'Q.no.'.$value['sno'].' '.$value['question'], 
         '#attributes' => ['id' => 'tab-'.$key], 
@@ -82,19 +105,19 @@ class PreAuditForm extends FormBase {
         '#collapsed' => FALSE,
       ); 
 
-      $form['audit_qa_'.$key]['question_sr_no'] = array(
+      $form['display']['audit_qa_'.$key]['question_sr_no'] = array(
         '#type' => 'item',
         '#weight' => 1,
         '#markup' => 'S. no : '.$value['sno'],
       );
       
-      $form['audit_qa_'.$key]['question'.$key] = array(
+      $form['display']['audit_qa_'.$key]['question'.$key] = array(
         '#type' => 'item',
         '#weight' => 5,
         '#title' => 'Question: '.$value['question'],
       );
 
-      $form['audit_qa_'.$key]['question_desc'] = array(
+      $form['display']['audit_qa_'.$key]['question_desc'] = array(
         '#type' => 'item',
         '#weight' => 10,
         '#markup' => 'Description : '.$value['question'],
@@ -102,7 +125,7 @@ class PreAuditForm extends FormBase {
       
       $answer_options = $this->getAnswers($value['answers'], $value['type']);
       if($value['type'] == 'defined'){
-        $form['audit_qa_'.$key]['answers'.$key] = array(
+        $form['display']['audit_qa_'.$key]['answers'.$key] = array(
          '#type' => 'radios',
          '#title' => $value['option'],
          '#options' => $answer_options,
@@ -112,7 +135,7 @@ class PreAuditForm extends FormBase {
         );
       }
       elseif ($value['type'] == 'predefined') {
-         $form['audit_qa_'.$key]['answers'.$key] = array(
+         $form['display']['audit_qa_'.$key]['answers'.$key] = array(
          '#type' => 'radios',
          '#title' => 'Choose One',
          '#options' => $answer_options,
@@ -122,7 +145,7 @@ class PreAuditForm extends FormBase {
         );
       }
 
-      $form['audit_qa_'.$key]['finding_img_'.$key] = [
+      $form['display']['audit_qa_'.$key]['finding_img_'.$key] = [
         '#type' => 'managed_file',
         '#name' => 'users_upload',
         '#title' => t('Upload a File'),
@@ -135,7 +158,7 @@ class PreAuditForm extends FormBase {
         '#disabled' => $disable_fields,
       ];
 
-      $form['audit_qa_'.$key]['finding_audio_'.$key] = [
+      $form['display']['audit_qa_'.$key]['finding_audio_'.$key] = [
         '#type' => 'managed_file',
         '#name' => 'users_upload',
         '#title' => t('Upload a File'),
@@ -148,14 +171,14 @@ class PreAuditForm extends FormBase {
         '#disabled' => $disable_fields,
       ];
 
-      $form['audit_qa_'.$key]['clause_cat'.$key]= array(
+      $form['display']['audit_qa_'.$key]['clause_cat'.$key]= array(
        '#type' => 'textfield',
        '#title' => 'Clause Category',
        '#weight' => 20,
        '#disabled' => $disable_fields,
       );
 
-      $form['audit_qa_'.$key]['clause_find'.$key] = array(
+      $form['display']['audit_qa_'.$key]['clause_find'.$key] = array(
        '#type' => 'textfield',
        '#title' => 'Clause Finding',
        '#weight' => 20,
@@ -163,7 +186,7 @@ class PreAuditForm extends FormBase {
       );
     }
 
-    $form['actions']['submit'] = [
+    $form['display']['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Next'),
       '#button_type' => 'primary',
@@ -212,54 +235,56 @@ class PreAuditForm extends FormBase {
           $answer_node_object = Node::load($qa_ref_nid);
           // $data = $answer_node_object->toArray();
           $selection = $answer_node_object->get('field_select_query_type')->value;
-          if($selection == 'Pdef'){
-            $get_question_id = $answer_node_object->get('field_defined_options_default')->getValue();
-            foreach ($get_question_id as $k => $val) {
-              $ref_id = $val['target_id'];
-              $predefined_question_object = Paragraph::load($ref_id);
-              $predefined_question_object_array = $predefined_question_object->toArray();
-              $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
-              $output[$ref_id]['type'] = 'predefined';
-              $output[$ref_id]['qid'] = $ref_id;
-              $output[$ref_id]['sno'] = count($predefined_question_object_array['field_sub_s_no_']) ? $predefined_question_object->get('field_sub_s_no_')->value : '';
-              $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_optimised')->value] = $predefined_question_object_array['field_answer_optimised'][0]['value'];
-              $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_qualified')->value] = $predefined_question_object_array['field_answer_qualified'][0]['value'];
-              $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_defined')->value] = $predefined_question_object_array['field_answers_defined'][0]['value'];
-              $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_poor')->value] = $predefined_question_object_array['field_answers_poor'][0]['value'];
-              $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
-              $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
+          // if($answer_node_object->get('field_select_query_type')->value == 'yes'){
+            if($selection == 'Pdef'){
+              $get_question_id = $answer_node_object->get('field_defined_options_default')->getValue();
+              foreach ($get_question_id as $k => $val) {
+                $ref_id = $val['target_id'];
+                $predefined_question_object = Paragraph::load($ref_id);
+                $predefined_question_object_array = $predefined_question_object->toArray();
+                $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
+                $output[$ref_id]['type'] = 'predefined';
+                $output[$ref_id]['qid'] = $ref_id;
+                $output[$ref_id]['sno'] = count($predefined_question_object_array['field_sub_s_no_']) ? $predefined_question_object->get('field_sub_s_no_')->value : '';
+                $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_optimised')->value] = $predefined_question_object_array['field_answer_optimised'][0]['value'];
+                $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_qualified')->value] = $predefined_question_object_array['field_answer_qualified'][0]['value'];
+                $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_defined')->value] = $predefined_question_object_array['field_answers_defined'][0]['value'];
+                $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_poor')->value] = $predefined_question_object_array['field_answers_poor'][0]['value'];
+                $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
+                $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
 
-              if(count($output[$ref_id]['desc'])){
-                foreach ($output[$ref_id]['desc'] as $key => $value) {
-                   $paragraphs_answer_object = Paragraph::load($ref_id);
-                   $output[$ref_id]['answers'][$value] = ['aid' => $ref_id,'answer' => $paragraphs_answer_object->get('field_description_'.strtolower($key))->value,'checked_value' => $selection];
-                   $output[$ref_id]['question'] = $predefined_question_object->get('field_questions')->value;
+                if(count($output[$ref_id]['desc'])){
+                  foreach ($output[$ref_id]['desc'] as $key => $value) {
+                     $paragraphs_answer_object = Paragraph::load($ref_id);
+                     $output[$ref_id]['answers'][$value] = ['aid' => $ref_id,'answer' => $paragraphs_answer_object->get('field_description_'.strtolower($key))->value,'checked_value' => $selection];
+                     $output[$ref_id]['question'] = $predefined_question_object->get('field_questions')->value;
+                  }
                 }
               }
             }
-          }
-          elseif ($selection == 'Yes') {
-            $get_question_id = $answer_node_object->get('field_defined_option_yes_no')->getValue();
-            foreach ($get_question_id as $k => $val) {
-               $ref_id = $val['target_id'];
-               $predefined_question_object = Paragraph::load($ref_id);
-              $predefined_question_object_array = $predefined_question_object->toArray();
-              $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
-              $output[$ref_id]['type'] = 'defined';
-              $output[$ref_id]['qid'] = $val['target_id'];
-              $output[$ref_id]['sno'] = count($predefined_question_object_array['field_s_no']) ? $predefined_question_object->get('field_s_no')->value : '';
-              $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
-              $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
-              $output[$ref_id]['desc'][$predefined_question_object->get('field_description')->value] = $predefined_question_object->get('field_description')->value;
-              $output[$ref_id]['option'] = $predefined_question_object->get('field_description')->value;
-              if(count($output[$ref_id]['desc'])){
-                foreach ($output[$ref_id]['desc'] as $key => $value) {
-                   $paragraphs_answer_object = Paragraph::load($ref_id);
-                   $output[$ref_id]['answers'][$value] = ['aid' => $ref_id,'answer' => $paragraphs_answer_object->get('field_description')->value,'checked_value' => $selection];
+            elseif ($selection == 'Yes') {
+              $get_question_id = $answer_node_object->get('field_defined_option_yes_no')->getValue();
+              foreach ($get_question_id as $k => $val) {
+                 $ref_id = $val['target_id'];
+                 $predefined_question_object = Paragraph::load($ref_id);
+                $predefined_question_object_array = $predefined_question_object->toArray();
+                $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
+                $output[$ref_id]['type'] = 'defined';
+                $output[$ref_id]['qid'] = $val['target_id'];
+                $output[$ref_id]['sno'] = count($predefined_question_object_array['field_s_no']) ? $predefined_question_object->get('field_s_no')->value : '';
+                $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
+                $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
+                $output[$ref_id]['desc'][$predefined_question_object->get('field_description')->value] = $predefined_question_object->get('field_description')->value;
+                $output[$ref_id]['option'] = $predefined_question_object->get('field_description')->value;
+                if(count($output[$ref_id]['desc'])){
+                  foreach ($output[$ref_id]['desc'] as $key => $value) {
+                     $paragraphs_answer_object = Paragraph::load($ref_id);
+                     $output[$ref_id]['answers'][$value] = ['aid' => $ref_id,'answer' => $paragraphs_answer_object->get('field_description')->value,'checked_value' => $selection];
+                  }
                 }
               }
             }
-          }
+          // }
         }
       }
     }
@@ -362,7 +387,10 @@ class PreAuditForm extends FormBase {
       }
     }
     if($nid){
-      $command = new RedirectCommand('/aps_pre_audit/form/update_audit_findings?audit_reference='.$nid);
+      $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+      $uri = explode('/', $current_uri);
+      $event_id = explode('?', $uri[1]);
+      $command = new RedirectCommand('/aps_pre_audit/form/update_audit_findings?audit_reference='.$nid.'&event_reference='.$event_id[0]);
     }
     return $response->addCommand($command);
   }

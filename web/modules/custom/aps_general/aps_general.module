@@ -403,6 +403,14 @@ function aps_general_node_insert(Node $node) {
       'parent' => [$tid],
     ])->save();
   }
+  if($node->bundle() == 'internal_audit'){
+    $node->set('moderation_state', 'pre_audit');
+    $node->save();
+  }
+  if($node->bundle() == 'planned_events'){
+    $node->set('moderation_state', 'scheduled');
+    $node->save();
+  }
 }
 
 /**
