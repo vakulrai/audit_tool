@@ -29,7 +29,8 @@ class PreAuditForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['#cache']['max-age'] = 0;
-    $details = $this->getAuditDetails();
+    $reference_id = \Drupal::request()->query->get('ref');
+    $details = $this->getAuditDetails($reference_id);
     $nid = \Drupal::request()->query->get('ref');
     $current_path = trim(\Drupal::service('path.current')->getPath(), '/');
     $path_args = explode('/', $current_path);
@@ -50,16 +51,6 @@ class PreAuditForm extends FormBase {
     // }
     $procedure_no = aps_pre_audit_get_node_value($nid, 'field_procedure_no');
     $procedure_title = aps_pre_audit_get_node_value($procedure_no, 'title');
-    
-    $options_to_select[0] = 'Checklist';
-    $options_to_select[1] = 'Form Submission';
-    $form['select_type'] = array(
-       '#type' => 'radios',
-       '#title' => 'Select Checklist Type',
-       '#options' => $options_to_select,
-       '#weight' => 0,
-       '#default_value' => 0,
-    );
 
     $form['procedure_no'] = array(
       '#type' => 'item',
@@ -76,11 +67,6 @@ class PreAuditForm extends FormBase {
       '#attributes' => ['id' => 'display'], 
       '#collapsible' => TRUE, 
       '#collapsed' => FALSE,
-      '#states' => [
-      'visible' => [
-        'input[name="select_type"]' => ['value' => '0']
-        ],
-      ],
     );
 
     foreach ($details as $key => $value) {
@@ -170,22 +156,73 @@ class PreAuditForm extends FormBase {
         '#default_value' => $key_2,
         '#disabled' => $disable_fields,
       ];
+      
+      if($value['type'] == 'predefined'){
+        $options_poor = getVids('finding_categories', 203);
+        $options_qualified = getVids('finding_categories', 204);
+        $options_optimised = getVids('finding_categories', 205);
+        $options_effecient = getVids('finding_categories', 206);
+        $form['display']['audit_qa_'.$key]['finding_category_poor'.$key] = [
+          '#type' => 'select',
+          '#options' => $options_poor,
+          '#title' => t('Finding Categories'),
+          '#required' => TRUE,
+          '#weight' => 20,
+          '#states' => [
+            'visible' => [
+              'input[name="answers'.$key.'"]' => ['value' => 'Poor']
+              ],
+          ],
+        ];
 
-      $form['display']['audit_qa_'.$key]['clause_cat'.$key]= array(
-       '#type' => 'textfield',
-       '#title' => 'Clause Category',
-       '#weight' => 20,
-       '#disabled' => $disable_fields,
-      );
+        $form['display']['audit_qa_'.$key]['finding_category_qualified'.$key] = [
+          '#type' => 'select',
+          '#options' => $options_qualified,
+          '#title' => t('Finding Categories'),
+          '#required' => TRUE,
+          '#weight' => 20,
+          '#states' => [
+            'visible' => [
+              'input[name="answers'.$key.'"]' => ['value' => 'Qualified']
+              ],
+          ],
+        ];
 
-      $form['display']['audit_qa_'.$key]['clause_find'.$key] = array(
+        $form['display']['audit_qa_'.$key]['finding_category_optimised'.$key] = [
+          '#type' => 'select',
+          '#options' => $options_optimised,
+          '#title' => t('Finding Categories'),
+          '#required' => TRUE,
+          '#weight' => 20,
+          '#states' => [
+            'visible' => [
+              'input[name="answers'.$key.'"]' => ['value' => 'Optimised']
+              ],
+          ],
+        ];
+
+        $form['display']['audit_qa_'.$key]['finding_category_effecient'.$key] = [
+          '#type' => 'select',
+          '#options' => $options_effecient,
+          '#title' => t('Finding Categories'),
+          '#required' => TRUE,
+          '#weight' => 20,
+          '#states' => [
+            'visible' => [
+              'input[name="answers'.$key.'"]' => ['value' => 'Defined']
+              ],
+          ],
+        ];
+      }
+
+      $form['display']['audit_qa_'.$key]['clause_number'.$key] = array(
        '#type' => 'textfield',
-       '#title' => 'Clause Finding',
+       '#title' => 'Clause Number',
        '#weight' => 20,
        '#disabled' => $disable_fields,
       );
     }
-
+   
     $form['display']['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Next'),
@@ -219,9 +256,13 @@ class PreAuditForm extends FormBase {
 
   }
 
-  static function getAuditDetails() {
+  static function getAuditDetails($reference_id=NULL) {
     $output = [];
-    if($nid = \Drupal::request()->query->get('ref')){
+    if($reference_id){
+      $nid = $reference_id;
+    }
+
+    if($nid){
       $query = \Drupal::database()->select('node_revision__field_queries', 'n');
       $query->fields('n',['field_queries_target_id']);
       $query->condition('n.bundle', 'internal_audit');
@@ -352,13 +393,17 @@ class PreAuditForm extends FormBase {
   public function getDetails(array $form, FormStateInterface $form_state){
     $response = new AjaxResponse();
     $nid = \Drupal::request()->query->get('ref');
-    $details = $this->getAuditDetails();
+    $details = $this->getAuditDetails($nid);
     foreach ($details as $key => $value) {
       $form_data['answer'][$value['qid']][] = $form_state->getValue('answers'.$key);
+      $form_data['answer'][$value['qid']]['poor'] = $form_state->getValue( 'finding_category_poor'.$key);
+      $form_data['answer'][$value['qid']]['qualified'] = $form_state->getValue('finding_category_qualified'.$key);
+      $form_data['answer'][$value['qid']]['optimised'] = $form_state->getValue('finding_category_optimised'.$key);
+      $form_data['answer'][$value['qid']]['effecient'] = $form_state->getValue('finding_category_effecient'.$key);
       $form_data['question'][$value['qid']][] = $form_state->getValue('finding_img_'.$key)[0];
       $form_data['question'][$value['qid']][] = $form_state->getValue('finding_audio_'.$key)[0];
     }
- 
+
     if(count($form_data['answer'])){
       $id = $this->getQandAid('answers');
       foreach ($form_data['answer'] as $i=>$j) {
@@ -370,6 +415,18 @@ class PreAuditForm extends FormBase {
             $paragraph_object->set('field_checked', $j[0]);
           }else{
             $paragraph_object->set('field_checked', $j[0]);
+            if(isset($j['poor'])){
+              $paragraph_object->set('field_finding_categories', $j['poor']); 
+            }
+            elseif (isset($j['qualified'])) {
+              $paragraph_object->set('field_finding_categories', $j['qualified']);
+            }
+            elseif (isset($j['optimised'])) {
+              $paragraph_object->set('field_finding_categories', $j['optimised']);
+            }
+            elseif (isset($j['effecient'])) {
+              $paragraph_object->set('field_finding_categories', $j['effecient']);
+            }
           }
           $paragraph_object->save();
         }

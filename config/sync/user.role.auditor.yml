@@ -75,3 +75,6 @@ permissions:
   - 'edit own procedures content'
   - 'edit own unit entities'
   - 'update any media'
+  - 'use workflow_for_audit_planning transition post_audit'
+  - 'use workflow_for_audit_planning transition rescheduled'
+  - 'use workflow_for_audit_planning transition scheduled'

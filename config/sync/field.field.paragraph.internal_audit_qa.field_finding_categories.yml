@@ -1,0 +1,29 @@
+uuid: 53b1d9f1-1f52-4bad-989f-a11174c3030c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_finding_categories
+    - paragraphs.paragraphs_type.internal_audit_qa
+    - taxonomy.vocabulary.finding_categories
+id: paragraph.internal_audit_qa.field_finding_categories
+field_name: field_finding_categories
+entity_type: paragraph
+bundle: internal_audit_qa
+label: 'Finding Categories'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      finding_categories: finding_categories
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

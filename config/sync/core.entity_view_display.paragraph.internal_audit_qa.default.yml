@@ -13,6 +13,7 @@ dependencies:
     - field.field.paragraph.internal_audit_qa.field_description_poor
     - field.field.paragraph.internal_audit_qa.field_description_qualified
     - field.field.paragraph.internal_audit_qa.field_evidence
+    - field.field.paragraph.internal_audit_qa.field_finding_categories
     - field.field.paragraph.internal_audit_qa.field_questions
     - field.field.paragraph.internal_audit_qa.field_sub_s_no_
     - paragraphs.paragraphs_type.internal_audit_qa
@@ -98,6 +99,14 @@ content:
       use_description_as_link_text: true
     third_party_settings: {  }
     type: file_default
+    region: content
+  field_finding_categories:
+    weight: 12
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_questions:
     weight: 9

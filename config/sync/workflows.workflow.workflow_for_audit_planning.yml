@@ -67,6 +67,12 @@ type_settings:
         - draft
       to: pre_audit
       weight: 4
+    reschedule_to_schedule:
+      label: 'Reschedule to Schedule'
+      from:
+        - reschedule
+      to: scheduled
+      weight: 5
     rescheduled:
       label: Rescheduled
       from:

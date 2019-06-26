@@ -121,7 +121,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
           $bundleFields[$field_name]['type'] = $field_definition->getType();
           $bundleFields[$field_name]['label'] = $field_definition->getLabel();
           $form[$field_name]['#disabled'] = TRUE;
-          if($field_name == 'field_suggested_date'){
+          if($field_name == 'field_suggested_date' || $field_name == 'moderation_state'){
             $form[$field_name]['#disabled'] = FALSE;
           }
         }
