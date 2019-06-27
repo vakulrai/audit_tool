@@ -31,7 +31,8 @@ class UpdateAuditFindings extends PreAuditForm {
      $validators = array(
         'file_validate_extensions' => ['jpg mp4 pdf'],
      );
-
+    
+    // echo '<pre>';print_r($details);
      $header = [
         $this->t('Step'),
         $this-> t('Question'),
@@ -121,12 +122,18 @@ class UpdateAuditFindings extends PreAuditForm {
         ];
 
         if($value['type'] == 'predefined'){
-          $term = Term::load($value['field_finding_categories']);
-          $name = $term->getName();
+          foreach ($value['field_finding_categories'] as $finding => $val) {
+            if($term = Term::load($val['target_id'])){
+              $name .= $term->getName().'<br>';
+            }
+            else{
+              $name = 'Not Found.';
+            }
+          }
           $form['display']['tableselect_element'][$sr]['findings_category'] = [
-          '#markup' => $name,
-          '#title' => $this->t('Finding Categories'),
-          '#title_display' => 'invisible',
+            '#markup' => $name,
+            '#title' => $this->t('Finding Categories'),
+            '#title_display' => 'invisible',
           ];
         }
 
@@ -138,66 +145,73 @@ class UpdateAuditFindings extends PreAuditForm {
     if(count($details)){
         $srq = 1;
         foreach ($details as $keyq=>$valueq) {
-          $form['display_d_q']['tableselect_element_dq'][$srq]['srno'] = [
-            '#markup' =>$valueq['sno'] ,
-            '#title' => $this->t('Step'),
-            '#title_display' => 'invisible',
-          ];
+          if($valueq['field_answer_type'] == 'delta'){
+            $form['display_d_q']['tableselect_element_dq'][$srq]['srno'] = [
+              '#markup' =>$valueq['sno'] ,
+              '#title' => $this->t('Step'),
+              '#title_display' => 'invisible',
+            ];
 
-          $form['display_d_q']['tableselect_element_dq'][$srq]['question'] = [
-            '#markup' => $valueq['question'],
-            '#title' => $this->t('Question'),
-            '#title_display' => 'invisible',
-          ];
-          
-        if(count($valueq['evidence_value']) > 1){
-          foreach ($valueq['evidence_value'] as $iq => $jq) {
-            $form['display_d_q']['tableselect_element_dq'][$srq][$iq]['evidence'] = [
-              '#type' => 'managed_file',
-              '#name' => 'users_upload',
-              '#title' => t('Upload a File'),
-              '#size' => 20,
-              '#weight' => 20,
-              '#description' => t('Upload files'),
-              '#upload_validators' => $validators,
-              '#upload_location' => 'public://',
-              '#default_value' => [$jq['target_id']],
+            $form['display_d_q']['tableselect_element_dq'][$srq]['question'] = [
+              '#markup' => $valueq['question'],
+              '#title' => $this->t('Question'),
+              '#title_display' => 'invisible',
+            ];
+            
+          if(count($valueq['evidence_value']) > 1){
+            foreach ($valueq['evidence_value'] as $iq => $jq) {
+              $form['display_d_q']['tableselect_element_dq'][$srq][$iq]['evidence'] = [
+                '#type' => 'managed_file',
+                '#name' => 'users_upload',
+                '#title' => t('Upload a File'),
+                '#size' => 20,
+                '#weight' => 20,
+                '#description' => t('Upload files'),
+                '#upload_validators' => $validators,
+                '#upload_location' => 'public://',
+                '#default_value' => [$jq['target_id']],
+              ];
+            }
+          }
+          else{
+            $form['display_d_q']['tableselect_element_dq'][$srq]['evidence'] = [
+            '#type' => 'managed_file',
+            '#name' => 'users_upload',
+            '#title' => t('Upload a File'),
+            '#size' => 20,
+            '#weight' => 20,
+            '#description' => t('Upload files'),
+            '#upload_validators' => $validators,
+            '#upload_location' => 'public://',
+            '#default_value' => [$valueq['evidence_value'][0]['target_id']],
             ];
           }
-        }
-        else{
-          $form['display_d_q']['tableselect_element_dq'][$srq]['evidence'] = [
-          '#type' => 'managed_file',
-          '#name' => 'users_upload',
-          '#title' => t('Upload a File'),
-          '#size' => 20,
-          '#weight' => 20,
-          '#description' => t('Upload files'),
-          '#upload_validators' => $validators,
-          '#upload_location' => 'public://',
-          '#default_value' => [$valueq['evidence_value'][0]['target_id']],
+
+          $form['display_d_q']['tableselect_element_dq'][$srq]['result'] = [
+            '#markup' => $valueq['default_checked'],
+            '#title' => $this->t('Result'),
+            '#title_display' => 'invisible',
           ];
+
+          if($valueq['type'] == 'predefined'){
+            foreach ($value['field_finding_categories'] as $findingq => $valq) {
+              if($termq = Term::load($valq['target_id'])){
+                $nameq .= $termq->getName().'<br>';
+              }
+              else{
+                $nameq = 'Not Found.';
+              }
+            }
+            $form['display_d_q']['tableselect_element_dq'][$sr]['findings_category'] = [
+              '#markup' => $nameq,
+              '#title' => $this->t('Finding Categories'),
+              '#title_display' => 'invisible',
+            ];
+          }
+
+          $srq++;
         }
-
-        $form['display_d_q']['tableselect_element_dq'][$srq]['result'] = [
-          '#markup' => $valueq['default_checked'],
-          '#title' => $this->t('Result'),
-          '#title_display' => 'invisible',
-        ];
-
-        if($valueq['type'] == 'predefined'){
-          $termq = Term::load($valueq['field_finding_categories']);
-          $nameq = $termq->getName();
-          $form['display_d_q']['tableselect_element_dq'][$sr]['findings_category'] = [
-          '#markup' => $nameq,
-          '#title' => $this->t('Finding Categories'),
-          '#title_display' => 'invisible',
-          ];
-        }
-
-        $srq++;
-
-        }
+      }
     }
 
     $form['actions']['submit'] = [
@@ -323,8 +337,9 @@ class UpdateAuditFindings extends PreAuditForm {
                 $predefined_question_object_array = $predefined_question_object->toArray();
                 $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
                 $output[$ref_id]['type'] = 'predefined';
+                $output[$ref_id]['field_answer_type'] = $answer_node_object->get('field_answer_type')->value;
                 $output[$ref_id]['qid'] = $ref_id;
-                $output[$ref_id]['field_finding_categories'] = $predefined_question_object->get('field_finding_categories')->target_id;
+                $output[$ref_id]['field_finding_categories'] = $predefined_question_object->get('field_finding_categories')->getValue();
                 $output[$ref_id]['sno'] = count($predefined_question_object_array['field_sub_s_no_']) ? $predefined_question_object->get('field_sub_s_no_')->value : '';
                 $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_optimised')->value] = $predefined_question_object_array['field_answer_optimised'][0]['value'];
                 $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_qualified')->value] = $predefined_question_object_array['field_answer_qualified'][0]['value'];
@@ -350,6 +365,7 @@ class UpdateAuditFindings extends PreAuditForm {
                 $predefined_question_object_array = $predefined_question_object->toArray();
                 $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
                 $output[$ref_id]['type'] = 'defined';
+                 $output[$ref_id]['field_answer_type'] = $answer_node_object->get('field_answer_type')->value;
                 $output[$ref_id]['qid'] = $val['target_id'];
                 $output[$ref_id]['sno'] = count($predefined_question_object_array['field_s_no']) ? $predefined_question_object->get('field_s_no')->value : '';
                 $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';

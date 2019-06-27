@@ -26,7 +26,7 @@ function aps_general_views_data() {
 
 
     $data['views']['delta_qa'] = [
-        'title' => t('Upload audit documents'),
+        'title' => t('Add Delta Q'),
         'help' => t('Add delta Q'),
         'field' => [
             'id' => 'delta_qa',

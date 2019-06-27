@@ -315,11 +315,13 @@ function submit_delta_q(array $form, \Drupal\Core\Form\FormStateInterface $form_
   $get_stored_entity = [];
   if(count($node_object->get('field_queries')->target_id)){
     $get_stored_entity = $node_object->get('field_queries')->getValue();
+    $target_node = Node::load($nid);
     $get_stored_entity[] = ['target_id' => $nid];
     $node_object->set('field_queries', $get_stored_entity);
-    $node_object->set('field_answer_type', 'delta');
-    $node_object->set('field_add_to_checklist', 'no');
+    $target_node->set('field_answer_type', 'delta');
+    $target_node->set('field_add_to_checklist', 'no');
     $node_object->save();
+    $target_node->save();
   }
   $destination = \Drupal::request()->query->get('destination');
   $response = Url::fromUserInput('/'.$destination);

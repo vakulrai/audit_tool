@@ -199,6 +199,7 @@ class PreAuditForm extends FormBase {
               'input[name="answers'.$key.'"]' => ['value' => 'Optimised']
               ],
           ],
+          '#multiple' => TRUE,
         ];
 
         $form['display']['audit_qa_'.$key]['finding_category_effecient'.$key] = [
@@ -212,6 +213,7 @@ class PreAuditForm extends FormBase {
               'input[name="answers'.$key.'"]' => ['value' => 'Defined']
               ],
           ],
+          '#multiple' => TRUE,
         ];
       }
 
@@ -296,6 +298,7 @@ class PreAuditForm extends FormBase {
 
                 if(count($output[$ref_id]['desc'])){
                   foreach ($output[$ref_id]['desc'] as $key => $value) {
+                    echo '<pre>';print_r($key);
                      $paragraphs_answer_object = Paragraph::load($ref_id);
                      $output[$ref_id]['answers'][$value] = ['aid' => $ref_id,'answer' => $paragraphs_answer_object->get('field_description_'.strtolower($key))->value,'checked_value' => $selection];
                      $output[$ref_id]['question'] = $predefined_question_object->get('field_questions')->value;
@@ -415,17 +418,23 @@ class PreAuditForm extends FormBase {
             $paragraph_object->set('field_checked', $j[0]);
           }else{
             $paragraph_object->set('field_checked', $j[0]);
-            if(isset($j['poor'])){
+            if(count($j['poor']) > 0){
               $paragraph_object->set('field_finding_categories', $j['poor']); 
             }
-            elseif (isset($j['qualified'])) {
+            elseif (count($j['qualified']) > 0) {
               $paragraph_object->set('field_finding_categories', $j['qualified']);
             }
-            elseif (isset($j['optimised'])) {
-              $paragraph_object->set('field_finding_categories', $j['optimised']);
+            elseif (count($j['optimised']) > 0) {
+              foreach ($j['optimised'] as $keys_optimised => $val_optimised) {
+                $options_op[$keys_optimised] = $val_optimised;
+              }
+              $paragraph_object->set('field_finding_categories', $options_op);
             }
-            elseif (isset($j['effecient'])) {
-              $paragraph_object->set('field_finding_categories', $j['effecient']);
+            elseif (count($j['effecient']) > 0) {
+              foreach ($j['effecient'] as $keys_eff => $val_eff) {
+                $options_eff[$keys_eff] = $val_eff;
+              }
+              $paragraph_object->set('field_finding_categories', $options_eff);
             }
           }
           $paragraph_object->save();
