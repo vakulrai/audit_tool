@@ -32,7 +32,6 @@ class UpdateAuditFindings extends PreAuditForm {
         'file_validate_extensions' => ['jpg mp4 pdf'],
      );
     
-    // echo '<pre>';print_r($details);
      $header = [
         $this->t('Step'),
         $this-> t('Question'),
@@ -74,72 +73,74 @@ class UpdateAuditFindings extends PreAuditForm {
       if(count($details)){
         $sr = 1;
         foreach ($details as $key=>$value) {
-          $form['display']['tableselect_element'][$sr]['srno'] = [
-            '#markup' =>$value['sno'] ,
-            '#title' => $this->t('Step'),
-            '#title_display' => 'invisible',
-          ];
+          if($value['field_answer_type'] == 'non-delta'){
+            $form['display']['tableselect_element'][$sr]['srno'] = [
+              '#markup' =>$value['sno'] ,
+              '#title' => $this->t('Step'),
+              '#title_display' => 'invisible',
+            ];
 
-          $form['display']['tableselect_element'][$sr]['question'] = [
-            '#markup' => $value['question'],
-            '#title' => $this->t('Question'),
-            '#title_display' => 'invisible',
-          ];
-          
-        if(count($value['evidence_value']) > 1){
-          foreach ($value['evidence_value'] as $i => $j) {
-            $form['display']['tableselect_element'][$sr][$i]['evidence'] = [
-              '#type' => 'managed_file',
-              '#name' => 'users_upload',
-              '#title' => t('Upload a File'),
-              '#size' => 20,
-              '#weight' => 20,
-              '#description' => t('Upload files'),
-              '#upload_validators' => $validators,
-              '#upload_location' => 'public://',
-              '#default_value' => [$j['target_id']],
+            $form['display']['tableselect_element'][$sr]['question'] = [
+              '#markup' => $value['question'],
+              '#title' => $this->t('Question'),
+              '#title_display' => 'invisible',
+            ];
+            
+          if(count($value['evidence_value']) > 1){
+            foreach ($value['evidence_value'] as $i => $j) {
+              $form['display']['tableselect_element'][$sr][$i]['evidence'] = [
+                '#type' => 'managed_file',
+                '#name' => 'users_upload',
+                '#title' => t('Upload a File'),
+                '#size' => 20,
+                '#weight' => 20,
+                '#description' => t('Upload files'),
+                '#upload_validators' => $validators,
+                '#upload_location' => 'public://',
+                '#default_value' => [$j['target_id']],
+              ];
+            }
+          }
+          else{
+            $form['display']['tableselect_element'][$sr]['evidence'] = [
+            '#type' => 'managed_file',
+            '#name' => 'users_upload',
+            '#title' => t('Upload a File'),
+            '#size' => 20,
+            '#weight' => 20,
+            '#description' => t('Upload files'),
+            '#upload_validators' => $validators,
+            '#upload_location' => 'public://',
+            '#default_value' => [$value['evidence_value'][0]['target_id']],
             ];
           }
-        }
-        else{
-          $form['display']['tableselect_element'][$sr]['evidence'] = [
-          '#type' => 'managed_file',
-          '#name' => 'users_upload',
-          '#title' => t('Upload a File'),
-          '#size' => 20,
-          '#weight' => 20,
-          '#description' => t('Upload files'),
-          '#upload_validators' => $validators,
-          '#upload_location' => 'public://',
-          '#default_value' => [$value['evidence_value'][0]['target_id']],
-          ];
-        }
 
-        $form['display']['tableselect_element'][$sr]['result'] = [
-          '#markup' => $value['default_checked'],
-          '#title' => $this->t('Result'),
-          '#title_display' => 'invisible',
-        ];
-
-        if($value['type'] == 'predefined'){
-          foreach ($value['field_finding_categories'] as $finding => $val) {
-            if($term = Term::load($val['target_id'])){
-              $name .= $term->getName().'<br>';
-            }
-            else{
-              $name = 'Not Found.';
-            }
-          }
-          $form['display']['tableselect_element'][$sr]['findings_category'] = [
-            '#markup' => $name,
-            '#title' => $this->t('Finding Categories'),
+          $form['display']['tableselect_element'][$sr]['result'] = [
+            '#markup' => $value['default_checked'],
+            '#title' => $this->t('Result'),
             '#title_display' => 'invisible',
           ];
-        }
 
-        $sr++;
+          if($value['type'] == 'predefined'){
+            foreach ($value['field_finding_categories'] as $finding => $val) {
+              if($term = Term::load($val['target_id'])){
+                $name .= $term->getName().'<br>';
+              }
+              else{
+                $name = 'Not Found.';
+              }
+            }
+            $form['display']['tableselect_element'][$sr]['findings_category'] = [
+              '#markup' => $name,
+              '#title' => $this->t('Finding Categories'),
+              '#title_display' => 'invisible',
+            ];
+          }
+
+          $sr++;
 
         }
+      }
     }
 
     if(count($details)){

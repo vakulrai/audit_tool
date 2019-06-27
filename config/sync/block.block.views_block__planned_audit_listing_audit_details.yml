@@ -1,39 +1,39 @@
-uuid: b4f3f3f2-d5c5-4ca0-b70b-e0d120f9a561
+uuid: a72f58d4-b644-4ec1-b745-d27931f61e9f
 langcode: en
-status: true
+status: false
 dependencies:
   config:
-    - views.view.registered_unit_listing
+    - views.view.planned_audit_listing
   module:
     - system
     - user
     - views
   theme:
     - seven
-id: views_block__registered_unit_listing_detail_unit
+id: views_block__planned_audit_listing_audit_details
 theme: seven
 region: content
-weight: -17
+weight: -13
 provider: null
-plugin: 'views_block:registered_unit_listing-detail_unit'
+plugin: 'views_block:planned_audit_listing-audit_details'
 settings:
-  id: 'views_block:registered_unit_listing-detail_unit'
+  id: 'views_block:planned_audit_listing-audit_details'
   label: ''
   provider: views
-  label_display: '0'
+  label_display: visible
   views_label: ''
   items_per_page: none
   context_mapping: {  }
 visibility:
   request_path:
     id: request_path
-    pages: "/node/add/business_process/*\r\n/node/add/business_process"
+    pages: '/preaudit/*'
     negate: false
     context_mapping: {  }
   user_role:
     id: user_role
     roles:
-      mr_admin: mr_admin
+      auditor: auditor
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'

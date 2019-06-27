@@ -38,7 +38,7 @@ type_settings:
       label: Reschedule
       weight: 4
     scheduled:
-      published: true
+      published: false
       default_revision: false
       label: Scheduled
       weight: 5
@@ -48,43 +48,54 @@ type_settings:
       label: Unpublished
       weight: 3
   transitions:
-    create_new_draft:
-      label: 'Create New Draft'
-      to: draft
-      weight: 0
-      from:
-        - draft
-        - published
     post_audit:
       label: 'Post Audit'
       from:
+        - draft
+        - post_audit
+        - pre_audit
+        - published
+        - reschedule
         - scheduled
+        - unpublished
       to: post_audit
-      weight: 3
+      weight: 7
     pre_audit:
       label: 'Pre Audit'
       from:
         - draft
+        - post_audit
+        - pre_audit
+        - published
+        - reschedule
+        - scheduled
+        - unpublished
       to: pre_audit
       weight: 4
-    reschedule_to_schedule:
-      label: 'Reschedule to Schedule'
+    reschedule:
+      label: Reschedule
       from:
+        - draft
+        - post_audit
+        - pre_audit
+        - published
         - reschedule
-      to: scheduled
-      weight: 5
-    rescheduled:
-      label: Rescheduled
-      from:
         - scheduled
+        - unpublished
       to: reschedule
-      weight: 2
+      weight: 5
     scheduled:
       label: Scheduled
       from:
+        - draft
+        - post_audit
         - pre_audit
+        - published
+        - reschedule
+        - scheduled
+        - unpublished
       to: scheduled
-      weight: 1
+      weight: 6
   entity_types:
     node:
       - internal_audit

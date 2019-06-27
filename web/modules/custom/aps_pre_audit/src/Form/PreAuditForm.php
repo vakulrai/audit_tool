@@ -298,7 +298,6 @@ class PreAuditForm extends FormBase {
 
                 if(count($output[$ref_id]['desc'])){
                   foreach ($output[$ref_id]['desc'] as $key => $value) {
-                    echo '<pre>';print_r($key);
                      $paragraphs_answer_object = Paragraph::load($ref_id);
                      $output[$ref_id]['answers'][$value] = ['aid' => $ref_id,'answer' => $paragraphs_answer_object->get('field_description_'.strtolower($key))->value,'checked_value' => $selection];
                      $output[$ref_id]['question'] = $predefined_question_object->get('field_questions')->value;
