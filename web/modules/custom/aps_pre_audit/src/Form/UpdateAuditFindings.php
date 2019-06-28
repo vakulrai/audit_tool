@@ -81,7 +81,8 @@ class UpdateAuditFindings extends PreAuditForm {
       '#type' => 'table', 
       '#caption' => $this->t('Checklist'),
       '#header' => $header, 
-      '#empty' => t('No content available.'), 
+      '#empty' => t('No content available.'),
+      '#tree' => TRUE, 
       );
 
       $form['display_d_q']['tableselect_element_dq'] = array( 
@@ -131,7 +132,7 @@ class UpdateAuditFindings extends PreAuditForm {
 
 
       if(count($details)){
-        $sr = 1;
+        $sr = 0;
         foreach ($details as $key=>$value) {
           if($value['field_answer_type'] == 'non-delta'){
             $form['display']['tableselect_element'][$sr]['srno'] = [
@@ -397,6 +398,7 @@ class UpdateAuditFindings extends PreAuditForm {
  *
  */
   public function submitPreAuditDetails(array $form, FormStateInterface $form_state){
+    print_r($form_state->getValue('question'));die;
     $reference_id = \Drupal::request()->query->get('event_reference');
     $node_object = Node::load($reference_id);
     $node_object->set('moderation_state', 'post_audit');
