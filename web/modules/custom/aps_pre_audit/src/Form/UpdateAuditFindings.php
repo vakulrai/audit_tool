@@ -40,6 +40,12 @@ class UpdateAuditFindings extends PreAuditForm {
         $this-> t('Finding Categories'),
         $this-> t('Clause'),
       ];
+
+      $header_report = [
+        $this->t('Occurence'),
+        $this-> t('Standard'),
+      ];
+
       $table_options = [$options];
       $form['display'] = array(
         '#type' => 'fieldset', 
@@ -57,6 +63,20 @@ class UpdateAuditFindings extends PreAuditForm {
         '#collapsed' => FALSE,
       );
 
+      $form['report_standards'] = array(
+        '#type' => 'fieldset',  
+        '#attributes' => ['id' => 'report-standards'], 
+        '#collapsible' => TRUE, 
+        '#collapsed' => FALSE,
+        '#weight' => -1,
+      );
+
+      $form['report_standards']['header_report'] = array( 
+      '#type' => 'table',
+      '#header' => $header_report, 
+      '#empty' => t('No content available.'), 
+      );
+
       $form['display']['tableselect_element'] = array( 
       '#type' => 'table', 
       '#caption' => $this->t('Checklist'),
@@ -70,6 +90,45 @@ class UpdateAuditFindings extends PreAuditForm {
       '#header' => $header, 
       '#empty' => t('No content available.'), 
       );
+      
+      $occurence_options = [
+        'first_time' => 'First Time',
+        'repetitive' => 'Repetitive',
+        'other' => 'Other',
+      ];
+
+      $form['report_standards']['header_report'][0]['occurence'] = array(
+         '#type' => 'radios',
+         '#title' => 'Occurence',
+         '#options' => $occurence_options,
+         '#default_value' => 'first_time',
+      );
+      $form['report_standards']['header_report'][0]['other'] = array(
+         '#type' => 'textfield',
+         '#maxlength' => 5,
+         '#size' => 5,
+         '#title' => 'Other',
+         '#states' => [
+            'visible' => [
+              'input[name="header_report[0][occurence]"]' => ['value' => 'other']
+              ],
+          ],
+      );
+
+      $standard_options = [
+        'iatf' => 'IATF',
+        'ehs' => 'EHS',
+        'isms' => 'ISMS',
+        'lpa' => 'LPA',
+      ];
+
+      $form['report_standards']['header_report'][0]['standards'] = array(
+         '#type' => 'radios',
+         '#title' => 'Standards',
+         '#options' => $standard_options,
+         '#default_value' =>  'iatf',
+      );
+
 
       if(count($details)){
         $sr = 1;
@@ -224,8 +283,96 @@ class UpdateAuditFindings extends PreAuditForm {
         }
       }
     }
+    
+    $form['signoff'] = array(
+      '#type' => 'details', 
+      '#title' => 'Signatures', 
+      '#attributes' => ['id' => 'signoff'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    );
+    
+    $options_auditee = $this->getUserByRole();
+    $form['signoff']['signature_auditee'] = [
+      '#type' => 'select',
+      '#options' => $options_auditee['auditee'],
+      '#title' => t('Finding Categories'),
+      '#required' => TRUE,
+      '#weight' => 20,
+    ];
 
-     $form['actions']['submit'] = [
+    $form['signoff']['upload_signature_auditee'] = [
+      '#type' => 'managed_file',
+      '#name' => 'users_upload',
+      '#title' => t('Upload a File'),
+      '#size' => 20,
+      '#weight' => 20,
+      '#description' => t('Upload files'),
+      '#upload_validators' => $validators,
+      '#upload_location' => 'public://',
+    ];
+
+    $options_auditor = $this->getUserByRole();
+    $form['signoff']['signature_auditor'] = [
+      '#type' => 'select',
+      '#options' => $options_auditor['auditor'],
+      '#title' => t('Finding Categories'),
+      '#required' => TRUE,
+      '#weight' => 20,
+    ];
+
+    $form['signoff']['upload_signature_auditor'] = [
+      '#type' => 'managed_file',
+      '#name' => 'users_upload',
+      '#title' => t('Upload a File'),
+      '#size' => 20,
+      '#weight' => 20,
+      '#description' => t('Upload files'),
+      '#upload_validators' => $validators,
+      '#upload_location' => 'public://',
+    ];
+
+    $options_hod = $this->getUserByRole();
+    $form['signoff']['signature_hod'] = [
+      '#type' => 'select',
+      '#options' => $options_hod['mr_admin'],
+      '#title' => t('Finding Categories'),
+      '#required' => TRUE,
+      '#weight' => 20,
+    ];
+
+    $form['signoff']['upload_signature_hod'] = [
+      '#type' => 'managed_file',
+      '#name' => 'users_upload',
+      '#title' => t('Upload a File'),
+      '#size' => 20,
+      '#weight' => 20,
+      '#description' => t('Upload files'),
+      '#upload_validators' => $validators,
+      '#upload_location' => 'public://',
+    ];
+
+    $options_qms = $this->getUserByRole('qms');
+    $form['signoff']['signature_qms'] = [
+      '#type' => 'select',
+      '#options' => $options_qms,
+      '#title' => t('Finding Categories'),
+      '#required' => TRUE,
+      '#weight' => 20,
+    ];
+
+    $form['signoff']['upload_signature_qms'] = [
+      '#type' => 'managed_file',
+      '#name' => 'users_upload',
+      '#title' => t('Upload a File'),
+      '#size' => 20,
+      '#weight' => 20,
+      '#description' => t('Upload files'),
+      '#upload_validators' => $validators,
+      '#upload_location' => 'public://',
+    ];
+
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
       '#button_type' => 'primary',
@@ -249,6 +396,7 @@ class UpdateAuditFindings extends PreAuditForm {
  *
  */
   public function submitPreAuditDetails(array $form, FormStateInterface $form_state){
+    echo '<pre>';print_r($form_state->getValues());die;
     $reference_id = \Drupal::request()->query->get('event_reference');
     $node_object = Node::load($reference_id);
     $node_object->set('moderation_state', 'post_audit');

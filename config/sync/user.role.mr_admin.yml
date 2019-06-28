@@ -14,6 +14,7 @@ permissions:
   - 'administer users'
   - 'create answers content'
   - 'create assembly content'
+  - 'create audits workflow_transition'
   - 'create business_process content'
   - 'create clauses content'
   - 'create customer_manual_parts entities'

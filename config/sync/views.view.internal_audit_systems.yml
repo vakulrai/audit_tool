@@ -1401,6 +1401,90 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        moderation_state:
+          id: moderation_state
+          table: node_field_revision
+          field: moderation_state
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            workflow_for_audit_planning-draft: workflow_for_audit_planning-draft
+            workflow_for_audit_planning-published: workflow_for_audit_planning-published
+            workflow_for_audit_planning-pre_audit: workflow_for_audit_planning-pre_audit
+            workflow_for_audit_planning-unpublished: workflow_for_audit_planning-unpublished
+            workflow_for_audit_planning-reschedule: workflow_for_audit_planning-reschedule
+            workflow_for_audit_planning-scheduled: workflow_for_audit_planning-scheduled
+            workflow_for_audit_planning-post_audit: workflow_for_audit_planning-post_audit
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          plugin_id: moderation_state_filter
+        field_audit_type_value:
+          id: field_audit_type_value
+          table: node__field_audit_type
+          field: field_audit_type_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            internal: internal
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: list_field
       defaults:
         filters: false
         filter_groups: false
@@ -1544,7 +1628,8 @@ display:
         - url
         - 'user.node_grants:view'
         - user.permissions
-      tags: {  }
+      tags:
+        - 'config:workflow_list'
   entity_reference_product:
     display_plugin: entity_reference
     id: entity_reference_product
@@ -1605,6 +1690,90 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        moderation_state:
+          id: moderation_state
+          table: node_field_revision
+          field: moderation_state
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            workflow_for_audit_planning-draft: workflow_for_audit_planning-draft
+            workflow_for_audit_planning-published: workflow_for_audit_planning-published
+            workflow_for_audit_planning-pre_audit: workflow_for_audit_planning-pre_audit
+            workflow_for_audit_planning-unpublished: workflow_for_audit_planning-unpublished
+            workflow_for_audit_planning-reschedule: workflow_for_audit_planning-reschedule
+            workflow_for_audit_planning-scheduled: workflow_for_audit_planning-scheduled
+            workflow_for_audit_planning-post_audit: workflow_for_audit_planning-post_audit
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          plugin_id: moderation_state_filter
+        field_audit_type_value:
+          id: field_audit_type_value
+          table: node__field_audit_type
+          field: field_audit_type_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            internal: internal
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: list_field
       defaults:
         filters: false
         filter_groups: false
@@ -1691,7 +1860,8 @@ display:
         - 'languages:language_interface'
         - 'user.node_grants:view'
         - user.permissions
-      tags: {  }
+      tags:
+        - 'config:workflow_list'
   entity_reference_system:
     display_plugin: entity_reference
     id: entity_reference_system
@@ -1781,6 +1951,45 @@ display:
             group_items: {  }
           entity_type: node
           plugin_id: moderation_state_filter
+        field_audit_type_value:
+          id: field_audit_type_value
+          table: node__field_audit_type
+          field: field_audit_type_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            internal: internal
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: list_field
       defaults:
         filters: false
         filter_groups: false

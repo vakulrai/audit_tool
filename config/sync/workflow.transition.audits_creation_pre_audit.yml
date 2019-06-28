@@ -1,0 +1,14 @@
+uuid: cdbd93f2-22f3-4592-a70e-0d481df903bb
+langcode: en
+status: true
+dependencies: {  }
+id: audits_creation_pre_audit
+label: 'Pre audit'
+module: workflow
+from_sid: audits_creation
+to_sid: audits_pre_audit
+roles:
+  workflow_author: workflow_author
+  auditor: auditor
+  auditee: '0'
+  mr_admin: '0'
