@@ -1,16 +1,14 @@
-uuid: 20e34085-f18e-40ee-87fe-996772aa1aa3
+uuid: 72deab40-2ef7-4289-8796-d356f69a234e
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
-id: paragraph.field_answers_defined
-field_name: field_answers_defined
+id: paragraph.field_description_effecient
+field_name: field_description_effecient
 entity_type: paragraph
-type: string
+type: string_long
 settings:
-  max_length: 255
-  is_ascii: false
   case_sensitive: false
 module: core
 locked: false

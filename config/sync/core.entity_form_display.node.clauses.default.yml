@@ -5,7 +5,10 @@ dependencies:
   config:
     - field.field.node.clauses.body
     - field.field.node.clauses.field_clause_no_
+    - field.field.node.clauses.field_refere
     - node.type.clauses
+  module:
+    - content_moderation
 id: node.clauses.default
 targetEntityType: node
 bundle: clauses
@@ -17,6 +20,21 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_refere:
+    weight: 101
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0

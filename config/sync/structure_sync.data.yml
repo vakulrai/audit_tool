@@ -722,7 +722,7 @@ taxonomies:
       vid: finding_categories
       tid: '211'
       langcode: en
-      name: 'Improvement - Cost Saving Opportunities'
+      name: 'Improvement - Cost'
       description__value: null
       description__format: null
       weight: '1'
@@ -732,7 +732,7 @@ taxonomies:
       vid: finding_categories
       tid: '216'
       langcode: en
-      name: 'Improvement - Cost Saving Opportunities'
+      name: 'Improvement - Cost'
       description__value: null
       description__format: null
       weight: '1'
@@ -740,19 +740,9 @@ taxonomies:
       uuid: cd9dd7b8-6ab7-46ab-bfed-259e2126da9f
     -
       vid: finding_categories
-      tid: '209'
-      langcode: en
-      name: 'Improvement - Procedural Related'
-      description__value: null
-      description__format: null
-      weight: '0'
-      parent: '204'
-      uuid: f3083e68-8455-4d58-b8c9-362dac660e8f
-    -
-      vid: finding_categories
       tid: '212'
       langcode: en
-      name: 'Improvement - Productivity Improvement'
+      name: 'Improvement - Productivity'
       description__value: null
       description__format: null
       weight: '2'
@@ -762,7 +752,7 @@ taxonomies:
       vid: finding_categories
       tid: '217'
       langcode: en
-      name: 'Improvement - Productivity Improvement'
+      name: 'Improvement - Productivity'
       description__value: null
       description__format: null
       weight: '2'
@@ -772,7 +762,7 @@ taxonomies:
       vid: finding_categories
       tid: '210'
       langcode: en
-      name: 'Improvement - Quality Improvement'
+      name: 'Improvement - Quality'
       description__value: null
       description__format: null
       weight: '0'
@@ -782,7 +772,7 @@ taxonomies:
       vid: finding_categories
       tid: '215'
       langcode: en
-      name: 'Improvement - Quality Improvement'
+      name: 'Improvement - Quality'
       description__value: null
       description__format: null
       weight: '0'
@@ -858,6 +848,16 @@ taxonomies:
       weight: '12'
       parent: '0'
       uuid: 05185bb2-7a92-46be-8a78-80e9ae34bccc
+    -
+      vid: finding_categories
+      tid: '209'
+      langcode: en
+      name: 'Procedural Related'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '204'
+      uuid: f3083e68-8455-4d58-b8c9-362dac660e8f
     -
       vid: finding_categories
       tid: '204'

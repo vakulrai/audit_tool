@@ -210,19 +210,21 @@ class PreAuditForm extends FormBase {
           '#weight' => 20,
           '#states' => [
             'visible' => [
-              'input[name="answers'.$key.'"]' => ['value' => 'Defined']
+              'input[name="answers'.$key.'"]' => ['value' => 'Effecient']
               ],
           ],
           '#multiple' => TRUE,
         ];
-      }
 
-      $form['display']['audit_qa_'.$key]['clause_number'.$key] = array(
-       '#type' => 'textfield',
-       '#title' => 'Clause Number',
-       '#weight' => 20,
-       '#disabled' => $disable_fields,
-      );
+        $form['display']['audit_qa_'.$key]['clause_number'.$key] = array(
+           '#type' => 'textfield',
+           '#autocomplete_route_name' => 'aps_pre_audit.clause_autocomplete',
+           '#autocomplete_route_parameters' => array('unit_reference' => $path_args[1]),
+           '#title' => 'Clause Number',
+           '#weight' => 20,
+           '#disabled' => $disable_fields,
+        );
+      }
     }
    
     $form['display']['actions']['submit'] = [
@@ -402,6 +404,7 @@ class PreAuditForm extends FormBase {
       $form_data['answer'][$value['qid']]['qualified'] = $form_state->getValue('finding_category_qualified'.$key);
       $form_data['answer'][$value['qid']]['optimised'] = $form_state->getValue('finding_category_optimised'.$key);
       $form_data['answer'][$value['qid']]['effecient'] = $form_state->getValue('finding_category_effecient'.$key);
+      $form_data['answer'][$value['qid']]['clause'] = $form_state->getValue('clause_number'.$key);
       $form_data['question'][$value['qid']][] = $form_state->getValue('finding_img_'.$key)[0];
       $form_data['question'][$value['qid']][] = $form_state->getValue('finding_audio_'.$key)[0];
     }
@@ -434,6 +437,13 @@ class PreAuditForm extends FormBase {
                 $options_eff[$keys_eff] = $val_eff;
               }
               $paragraph_object->set('field_finding_categories', $options_eff);
+            }
+            elseif (isset($j['clause'])) {
+              $query = \Drupal::database()->select('node_field_data', 'n');
+              $query->fields('n', ['title','nid', 'type']);
+              $query->condition('n.title', db_like($j['clause']) . '%', 'LIKE');
+              $nids = $query->execute()->fetchAll();
+              $paragraph_object->set('field_clause_no', $nids[0]->nid);
             }
           }
           $paragraph_object->save();

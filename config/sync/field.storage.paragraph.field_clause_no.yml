@@ -1,15 +1,16 @@
-uuid: 450e0bbf-3785-41e7-8887-0b01111ae7f4
+uuid: ab1407e4-5bda-4ce9-bee5-f1e7e2391db5
 langcode: en
 status: true
 dependencies:
   module:
+    - node
     - paragraphs
-id: paragraph.field_description_defined
-field_name: field_description_defined
+id: paragraph.field_clause_no
+field_name: field_clause_no
 entity_type: paragraph
-type: string_long
+type: entity_reference
 settings:
-  case_sensitive: false
+  target_type: node
 module: core
 locked: false
 cardinality: 1

@@ -1,0 +1,5 @@
+name: 'aps_auditee_pre_audit'
+type: module
+description: 'Contain functionlity for auditee pre audit'
+core: 8.x
+package: 'Custom'

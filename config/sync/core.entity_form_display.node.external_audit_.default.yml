@@ -10,12 +10,14 @@ dependencies:
     - field.field.node.external_audit_.field_certification_std
     - field.field.node.external_audit_.field_decision
     - field.field.node.external_audit_.field_issue_date
+    - field.field.node.external_audit_.field_refere
     - field.field.node.external_audit_.field_scope
     - field.field.node.external_audit_.field_score
     - field.field.node.external_audit_.field_validity
     - node.type.external_audit_
   module:
     - aps_general
+    - content_moderation
     - datetime
     - text
     - yearonly
@@ -74,6 +76,15 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
+  field_refere:
+    weight: 101
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_scope:
     weight: 9
     settings: {  }
@@ -94,6 +105,12 @@ content:
     third_party_settings: {  }
     type: number
     region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0

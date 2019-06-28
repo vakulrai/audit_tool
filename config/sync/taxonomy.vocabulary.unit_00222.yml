@@ -1,8 +1,0 @@
-uuid: 44e9f9b3-2345-441a-b242-43cd39386899
-langcode: en
-status: true
-dependencies: {  }
-name: 'Vocabulary for Unit 00222'
-vid: unit_00222
-description: 'Vocabluary for Unit 00222'
-weight: 0

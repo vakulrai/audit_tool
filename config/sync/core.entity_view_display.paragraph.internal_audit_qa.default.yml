@@ -8,7 +8,8 @@ dependencies:
     - field.field.paragraph.internal_audit_qa.field_answers_defined
     - field.field.paragraph.internal_audit_qa.field_answers_poor
     - field.field.paragraph.internal_audit_qa.field_checked
-    - field.field.paragraph.internal_audit_qa.field_description_defined
+    - field.field.paragraph.internal_audit_qa.field_clause_no
+    - field.field.paragraph.internal_audit_qa.field_description_effecient
     - field.field.paragraph.internal_audit_qa.field_description_optimised
     - field.field.paragraph.internal_audit_qa.field_description_poor
     - field.field.paragraph.internal_audit_qa.field_description_qualified
@@ -41,7 +42,7 @@ content:
     type: string
     region: content
   field_answers_defined:
-    weight: 2
+    weight: 15
     label: above
     settings:
       link_to_entity: false
@@ -64,8 +65,16 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_description_defined:
-    weight: 4
+  field_clause_no:
+    weight: 13
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_description_effecient:
+    weight: 14
     label: above
     settings: {  }
     third_party_settings: {  }

@@ -31,13 +31,14 @@ class UpdateAuditFindings extends PreAuditForm {
      $validators = array(
         'file_validate_extensions' => ['jpg mp4 pdf'],
      );
-    
+
      $header = [
         $this->t('Step'),
         $this-> t('Question'),
         $this->t('Evidence'),
         $this-> t('Result'),
         $this-> t('Finding Categories'),
+        $this-> t('Clause'),
       ];
       $table_options = [$options];
       $form['display'] = array(
@@ -136,6 +137,15 @@ class UpdateAuditFindings extends PreAuditForm {
               '#title_display' => 'invisible',
             ];
           }
+          
+          if(isset($value['clause_no'])){
+            $clause_object = Node::load($value['clause_no']);
+            $form['display']['tableselect_element'][$sr]['clause'] = [
+              '#markup' => $clause_object->get('title')->value,
+              '#title' => $this->t('Finding Categories'),
+              '#title_display' => 'invisible',
+            ];
+          }
 
           $sr++;
 
@@ -215,12 +225,34 @@ class UpdateAuditFindings extends PreAuditForm {
       }
     }
 
-    $form['actions']['submit'] = [
+     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
+      '#button_type' => 'primary',
+      '#attributes' => [
+        'class' => [
+          'use-ajax',
+        ],
+      ],
+      '#ajax' => [
+        'callback' => [$this, 'submitPreAuditDetails'],
+        'event' => 'click',
+      ],
+      '#disabled' => $disable_fields,
     ];
 
     return $form;
+  }
+  
+ /**
+ * Submit Callback.
+ *
+ */
+  public function submitPreAuditDetails(array $form, FormStateInterface $form_state){
+    $reference_id = \Drupal::request()->query->get('event_reference');
+    $node_object = Node::load($reference_id);
+    $node_object->set('moderation_state', 'post_audit');
+    $node_object->save();
   }
 
   /**
@@ -264,30 +296,9 @@ class UpdateAuditFindings extends PreAuditForm {
    * Reports what values were finally set.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $values = $form_state->getValues([ 'name', 'field_significant_findings', 'field_further_actions', 'field_summary']); 
-    $data['field_significant_findings'] = $values['field_significant_findings'];
-    $data['field_further_actions'] = $values['field_significant_findings'];
-    $data['field_summary'] = $values['field_significant_findings'];
-    $data['field_root_cause_analysis'] = $values['names_fieldset']['name'];
-
-    $data['field_upload_auditee_signatures'] = $values['signatures']['auditee'];
-    $data['field_upload_auditor_signatures'] = $values['signatures']['auditor'];
-    $data['field_upload_hod_signatures'] = $values['signatures']['hod'];
-    $data['field_upload_qms_signatures'] = $values['signatures']['qms'];
-    if($nid = \Drupal::request()->query->get('audit_reference')){
-      $node_object = Node::load($nid);
-      foreach ($data as $key => $value) {
-        if($value){
-          $node_object->set($key, $value);
-        }
-      }
-      $node_object->save();
-    }
-    $output = $this->t('Details has Been Submitted Successfuly to: @names', [
-      '@names' => implode(', ', $node_object->get('title')->value),
-    ]
-    );
-    $this->messenger()->addMessage($output);
+    // $reference_id = \Drupal::request()->query->get('audit_reference');
+    // $details = $this->getAuditDetails($reference_id);
+    // echo '<pre>';print_r($details);die;
   }
 
   public function getUserByRole(){
@@ -327,7 +338,6 @@ class UpdateAuditFindings extends PreAuditForm {
         $qa_ref_nid = $value_qa->field_queries_target_id;
         if($target_id = $qa_object->get('field_queries')->target_id){
           $answer_node_object = Node::load($qa_ref_nid);
-          // $data = $answer_node_object->toArray();
           $selection = $answer_node_object->get('field_select_query_type')->value;
           // if($answer_node_object->get('field_select_query_type')->value == 'yes'){
             if($selection == 'Pdef'){
@@ -340,6 +350,7 @@ class UpdateAuditFindings extends PreAuditForm {
                 $output[$ref_id]['type'] = 'predefined';
                 $output[$ref_id]['field_answer_type'] = $answer_node_object->get('field_answer_type')->value;
                 $output[$ref_id]['qid'] = $ref_id;
+                $output[$ref_id]['clause_no'] = $predefined_question_object->get('field_clause_no')->target_id;
                 $output[$ref_id]['field_finding_categories'] = $predefined_question_object->get('field_finding_categories')->getValue();
                 $output[$ref_id]['sno'] = count($predefined_question_object_array['field_sub_s_no_']) ? $predefined_question_object->get('field_sub_s_no_')->value : '';
                 $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_optimised')->value] = $predefined_question_object_array['field_answer_optimised'][0]['value'];

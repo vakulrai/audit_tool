@@ -1,0 +1,28 @@
+uuid: d94dd03f-9004-4fe3-87a1-cae5c1abdb0e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_clause_no
+    - node.type.clauses
+    - paragraphs.paragraphs_type.internal_audit_qa
+id: paragraph.internal_audit_qa.field_clause_no
+field_name: field_clause_no
+entity_type: paragraph
+bundle: internal_audit_qa
+label: 'Clause No'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      clauses: clauses
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

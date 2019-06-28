@@ -1,0 +1,14 @@
+{
+  "name": "drupal/aps_auditee_pre_audit",
+  "type": "drupal-module",
+  "description": "Contain functionlity for auditee pre audit",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/aps_auditee_pre_audit",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/aps_auditee_pre_audit",
+    "source": "http://cgit.drupalcode.org/aps_auditee_pre_audit"
+  },
+  "require": { }
+}

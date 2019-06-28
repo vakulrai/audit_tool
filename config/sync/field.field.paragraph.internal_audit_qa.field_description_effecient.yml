@@ -1,12 +1,12 @@
-uuid: 4fb01053-c088-4fd5-97db-280f074a7c5a
+uuid: 508f2298-8c05-4fe9-9c7d-19faed098143
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_description_defined
+    - field.storage.paragraph.field_description_effecient
     - paragraphs.paragraphs_type.internal_audit_qa
-id: paragraph.internal_audit_qa.field_description_defined
-field_name: field_description_defined
+id: paragraph.internal_audit_qa.field_description_effecient
+field_name: field_description_effecient
 entity_type: paragraph
 bundle: internal_audit_qa
 label: Description

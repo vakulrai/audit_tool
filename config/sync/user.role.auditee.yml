@@ -64,3 +64,7 @@ permissions:
   - 'edit own home_page content'
   - 'edit own procedures content'
   - 'update any media'
+  - 'use workflow_for_audit_planning transition post_audit'
+  - 'use workflow_for_audit_planning transition pre_audit'
+  - 'use workflow_for_audit_planning transition reschedule'
+  - 'use workflow_for_audit_planning transition scheduled'

@@ -1,8 +1,0 @@
-uuid: 689c6af5-74bf-41cf-b544-97e477cc80c0
-langcode: en
-status: true
-dependencies: {  }
-name: 'Vocabulary for Gai tech'
-vid: gai_tech
-description: 'Vocabluary for Gai tech'
-weight: 0

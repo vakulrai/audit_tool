@@ -246,6 +246,7 @@ function aps_audit_criteria_form_paragraphs_subform_alter(array &$subform, \Drup
     $subform['field_answer_optimised']['#disabled'] = TRUE;
     $subform['field_answer_qualified']['#disabled'] = TRUE;
     $subform['field_answers_defined']['#disabled'] = TRUE;
+    // $subform['field_clause_no']['#access'] = FALSE;
   }
 }
 

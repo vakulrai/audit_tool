@@ -178,20 +178,44 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
 
   //Condition for External Audit Add form
   if($form_id == 'node_external_audit__form'){
+    $form['field_refere']['#access'] = FALSE;
+    if($unit_ref= \Drupal::request()->query->get('unit_reference')){
+      $unit_ref_object = Node::load($unit_ref);
+      $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
+      foreach ($unit_refernced_shift as $key => $value) {
+        $def_values[$value['target_id']] = $value['target_id'];
+      }
+      $form['field_shift']['widget']['#default_value'] = $def_values;
+    }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'aps_ext_audit_page_redirect';
       }
     }
   }
+  elseif ($form_id == 'node_external_audit__edit_form') {
+    // $form['field_refere']['#access'] = FALSE;
+  }
 
   //Condition for Clauses Add form
   if($form_id == 'node_clauses_form'){
+    $form['field_refere']['#access'] = FALSE;
+    if($unit_ref= \Drupal::request()->query->get('unit_reference')){
+      $unit_ref_object = Node::load($unit_ref);
+      $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
+      foreach ($unit_refernced_shift as $key => $value) {
+        $def_values[$value['target_id']] = $value['target_id'];
+      }
+      $form['field_shift']['widget']['#default_value'] = $def_values;
+    }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'aps_clauses_page_redirect';
       }
     }
+  }
+  elseif ($form_id == 'node_clauses_edit_form') {
+    // $form['field_refere']['#access'] = FALSE;
   }
 
   //Condition for Assembly Add form
@@ -520,14 +544,28 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   }
   if(isset($uri[2])){
     if (stripos(strtolower($uri[2]), 'external_audit_?') !== false) {
+      unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
+      unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:add_procedures']);
+      unset($data['tabs'][0]['aps_general.manual']);
+      unset($data['tabs'][0]['aps_general.manual_product']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:audit_list']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:systems']);
+      $data['tabs'][0]['aps_pre_audit.manuals:external_audit_systems']['#active'] = TRUE;
     }
-    if ($uri[2] == 'clauses') {
+    if (stripos(strtolower($uri[2]), 'clauses?') !== false) {
       $link = Url::fromUserInput('/node/add/'.$uri[2]);
       if ($link) {
-        unset($data['tabs'][0]['aps_audit_criteria.audit_list']);
-        unset($data['tabs'][0]['aps_audit_criteria.systems_setting']);
         unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
         unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
+        unset($data['tabs'][0]['aps_pre_audit.manuals:add_procedures']);
+        unset($data['tabs'][0]['aps_general.manual']);
+        unset($data['tabs'][0]['aps_general.manual_product']);
+        unset($data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']);
+        unset($data['tabs'][0]['aps_pre_audit.manuals:audit_list']);
+        unset($data['tabs'][0]['aps_pre_audit.manuals:systems']);
+        $data['tabs'][0]['aps_pre_audit.manuals:external_audit_clauses']['#active'] = TRUE;
       }
     }
     elseif ($uri[2] == 'unit') {

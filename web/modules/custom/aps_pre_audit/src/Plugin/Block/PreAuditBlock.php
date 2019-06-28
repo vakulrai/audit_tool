@@ -20,7 +20,8 @@ class PreAuditBlock extends BlockBase {
    */
   public function build() {
     $form = \Drupal::formBuilder()->getForm(PreAuditForm::class);
-    $data = PreAuditForm::getAuditDetails();
+    $reference_id = \Drupal::request()->query->get('ref');
+    $data = PreAuditForm::getAuditDetails($reference_id);
     foreach ($data as $key => $value) {
       $data_qa[$key] = $value['sno'];
     }

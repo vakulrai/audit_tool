@@ -38,4 +38,12 @@ aps_pre_audit.update_audit_findings:
     _title: 'UpdateAuditFindings'
   requirements:
     _access: 'TRUE'
+
+aps_pre_audit.clause_autocomplete:
+  path: '/clause_autocomplete/{unit_reference}'
+  defaults:
+    _controller: '\Drupal\aps_pre_audit\Controller\GetTitleList::getClause'
+    _format: json
+  requirements:
+    _access: 'TRUE'
   

@@ -50,8 +50,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
     foreach ($roles as $key => $value) {
       $user_role = $value;
     }
-    $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
-    $uri = explode('/', $current_uri);
+    
     if($ref = \Drupal::request()->query->get('unit_reference')){
       $id = $ref;
     }
@@ -128,6 +127,20 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       'route_name' => 'node.add',
       'base_route' => 'view.internal_audit_systems.audit_listing',
       'route_parameters' => ['unit_reference' => $id, 'node_type' => 'internal_audit'],
+    ] + $base_plugin_definition;
+
+    $links['external_audit_systems'] = [
+      'title' => 'External Audit System',
+      'route_name' => 'node.add',
+      'base_route' => 'node.add',
+      'route_parameters' => ['unit_reference' => $id, 'node_type' => 'external_audit_'],
+    ] + $base_plugin_definition;
+
+    $links['external_audit_clauses'] = [
+      'title' => 'External Audit Standards',
+      'route_name' => 'node.add',
+      'base_route' => 'node.add',
+      'route_parameters' => ['unit_reference' => $id, 'node_type' => 'clauses'],
     ] + $base_plugin_definition;
 
     return $links;

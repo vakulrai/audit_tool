@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains aps_auditee_pre_audit.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function aps_auditee_pre_audit_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the aps_auditee_pre_audit module.
+    case 'help.page.aps_auditee_pre_audit':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Contain functionlity for auditee pre audit') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function aps_auditee_pre_audit_theme() {
+  return [
+    'aps_auditee_pre_audit' => [
+      'render element' => 'children',
+    ],
+  ];
+}

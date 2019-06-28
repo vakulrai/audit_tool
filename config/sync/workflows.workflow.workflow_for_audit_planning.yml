@@ -51,13 +51,7 @@ type_settings:
     post_audit:
       label: 'Post Audit'
       from:
-        - draft
-        - post_audit
-        - pre_audit
-        - published
-        - reschedule
         - scheduled
-        - unpublished
       to: post_audit
       weight: 7
     pre_audit:

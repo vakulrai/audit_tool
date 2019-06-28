@@ -1,8 +1,0 @@
-uuid: 13374011-d8be-465b-b462-8589dd3f60f1
-langcode: en
-status: true
-dependencies: {  }
-name: 'Vocabulary for Unit Abs'
-vid: unit_abs
-description: 'Vocabluary for Unit Abs'
-weight: 0

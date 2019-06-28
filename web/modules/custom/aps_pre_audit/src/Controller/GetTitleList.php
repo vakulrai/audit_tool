@@ -75,5 +75,30 @@ class GetTitleList extends ControllerBase {
     return $response;
   }
 
+   public function getClause(Request $request, $unit_reference='') {
+    $results = [];
+    if ($input = $request->query->get('q')) {
+      $typed_string = Tags::explode($input);
+      $typed_string = Unicode::strtolower(array_pop($typed_string));
+      if(isset($unit_reference)){
+        $node_object = Node::load($unit_reference);
+        $get_unit_id = $node_object->get('field_refere')->target_id;
+        $query = \Drupal::database()->select('node_field_data', 'n');
+        $query->join('node__field_refere', 'rf', 'n.nid = rf.field_refere_target_id');
+        $query->fields('n', ['title','nid', 'type']);
+        $query->fields('rf',['field_refere_target_id', 'entity_id']);
+        $query->condition('rf.bundle', 'clauses');
+        $query->condition('rf.field_refere_target_id', $get_unit_id);
+        // $query->condition('n.title', db_like($typed_string) . '%', 'LIKE');
+        $nids = $query->execute()->fetchAll();
+        foreach ($nids as $entity) {
+          $node_object = Node::load($entity->entity_id);
+          $results[$node_object->get('nid')->value] = $node_object->get('title')->value;
+        }
+      }
+    }
+    return new JsonResponse(array_values(array_unique($results)));
+  }
+
 }	
 ?>
