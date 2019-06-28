@@ -158,10 +158,10 @@ class PreAuditForm extends FormBase {
       ];
       
       if($value['type'] == 'predefined'){
-        $options_poor = getVids('finding_categories', 203);
-        $options_qualified = getVids('finding_categories', 204);
-        $options_optimised = getVids('finding_categories', 205);
-        $options_effecient = getVids('finding_categories', 206);
+        $options_poor = getVids('finding_categories', 220);
+        $options_qualified = getVids('finding_categories', 221);
+        $options_optimised = getVids('finding_categories', 222);
+        $options_effecient = getVids('finding_categories', 223);
         $form['display']['audit_qa_'.$key]['finding_category_poor'.$key] = [
           '#type' => 'select',
           '#options' => $options_poor,
