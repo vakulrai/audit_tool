@@ -396,7 +396,6 @@ class UpdateAuditFindings extends PreAuditForm {
  *
  */
   public function submitPreAuditDetails(array $form, FormStateInterface $form_state){
-    echo '<pre>';print_r($form_state->getValues());die;
     $reference_id = \Drupal::request()->query->get('event_reference');
     $node_object = Node::load($reference_id);
     $node_object->set('moderation_state', 'post_audit');
