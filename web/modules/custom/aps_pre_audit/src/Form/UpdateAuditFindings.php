@@ -290,13 +290,14 @@ class UpdateAuditFindings extends PreAuditForm {
       '#attributes' => ['id' => 'signoff'], 
       '#collapsible' => TRUE, 
       '#collapsed' => FALSE,
+      '#required' => TRUE,
     );
     
     $options_auditee = $this->getUserByRole();
     $form['signoff']['signature_auditee'] = [
       '#type' => 'select',
       '#options' => $options_auditee['auditee'],
-      '#title' => t('Finding Categories'),
+      '#title' => t('Select Auditee'),
       '#required' => TRUE,
       '#weight' => 20,
     ];
@@ -316,7 +317,7 @@ class UpdateAuditFindings extends PreAuditForm {
     $form['signoff']['signature_auditor'] = [
       '#type' => 'select',
       '#options' => $options_auditor['auditor'],
-      '#title' => t('Finding Categories'),
+      '#title' => t('Select Auditor'),
       '#required' => TRUE,
       '#weight' => 20,
     ];
@@ -336,7 +337,7 @@ class UpdateAuditFindings extends PreAuditForm {
     $form['signoff']['signature_hod'] = [
       '#type' => 'select',
       '#options' => $options_hod['mr_admin'],
-      '#title' => t('Finding Categories'),
+      '#title' => t('Select HOD'),
       '#required' => TRUE,
       '#weight' => 20,
     ];
@@ -356,7 +357,7 @@ class UpdateAuditFindings extends PreAuditForm {
     $form['signoff']['signature_qms'] = [
       '#type' => 'select',
       '#options' => $options_qms,
-      '#title' => t('Finding Categories'),
+      '#title' => t('Select QMS Head'),
       '#required' => TRUE,
       '#weight' => 20,
     ];
