@@ -1,0 +1,97 @@
+uuid: a3888edd-5a04-4650-a86f-e6d68101ceef
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.audit_report.field_clause
+    - field.field.paragraph.audit_report.field_corrective_action
+    - field.field.paragraph.audit_report.field_evidence
+    - field.field.paragraph.audit_report.field_finding_categories
+    - field.field.paragraph.audit_report.field_interim_action
+    - field.field.paragraph.audit_report.field_question
+    - field.field.paragraph.audit_report.field_result
+    - field.field.paragraph.audit_report.field_step
+    - paragraphs.paragraphs_type.audit_report
+  module:
+    - file
+    - paragraphs
+id: paragraph.audit_report.default
+targetEntityType: paragraph
+bundle: audit_report
+mode: default
+content:
+  field_clause:
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_corrective_action:
+    type: entity_reference_paragraphs
+    weight: 8
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_evidence:
+    weight: 2
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_finding_categories:
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_interim_action:
+    type: entity_reference_paragraphs
+    weight: 6
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_question:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_result:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_step:
+    weight: 0
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+hidden:
+  created: true
+  status: true

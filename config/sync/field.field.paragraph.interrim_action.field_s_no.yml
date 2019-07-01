@@ -1,0 +1,23 @@
+uuid: 1d3b4b4e-4e7e-46f7-99d1-a62bf6b0fc6c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_s_no
+    - paragraphs.paragraphs_type.interrim_action
+id: paragraph.interrim_action.field_s_no
+field_name: field_s_no
+entity_type: paragraph
+bundle: interrim_action
+label: 'S no.'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

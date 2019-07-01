@@ -1,0 +1,33 @@
+uuid: 6b38d43b-7755-41f4-81c4-c96ab98f0c61
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_standards
+field_name: field_standards
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: iatf
+      label: IATF
+    -
+      value: ehs
+      label: EHS
+    -
+      value: isms
+      label: ISMS
+    -
+      value: lpa
+      label: LPA
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

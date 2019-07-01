@@ -1,0 +1,21 @@
+uuid: 1621eb94-ba0d-4a3d-9b38-9b7d6d87a4a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_occurence
+    - node.type.auditor_report
+  module:
+    - options
+id: node.auditor_report.field_occurence
+field_name: field_occurence
+entity_type: node
+bundle: auditor_report
+label: Occurence
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

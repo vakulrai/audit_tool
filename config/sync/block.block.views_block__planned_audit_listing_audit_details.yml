@@ -1,6 +1,6 @@
 uuid: a72f58d4-b644-4ec1-b745-d27931f61e9f
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - views.view.planned_audit_listing
@@ -27,7 +27,7 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '/preaudit/*'
+    pages: "/preaudit/*\r\n"
     negate: false
     context_mapping: {  }
   user_role:

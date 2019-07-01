@@ -1,0 +1,204 @@
+uuid: 79b87e32-ea79-4eed-b13c-d68b9f05bc48
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.auditor_report.body
+    - field.field.node.auditor_report.field_assigned_user
+    - field.field.node.auditor_report.field_audit_list
+    - field.field.node.auditor_report.field_auditee_name
+    - field.field.node.auditor_report.field_auditee_signature
+    - field.field.node.auditor_report.field_auditor_name
+    - field.field.node.auditor_report.field_auditor_signature
+    - field.field.node.auditor_report.field_hod_name
+    - field.field.node.auditor_report.field_hod_signature
+    - field.field.node.auditor_report.field_occurence
+    - field.field.node.auditor_report.field_qms_head_name
+    - field.field.node.auditor_report.field_qms_signature
+    - field.field.node.auditor_report.field_refere
+    - field.field.node.auditor_report.field_standards
+    - node.type.auditor_report
+    - workflows.workflow.workflow_for_audit_planning
+  module:
+    - content_moderation
+    - file
+    - paragraphs
+    - path
+    - text
+id: node.auditor_report.default
+targetEntityType: node
+bundle: auditor_report
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 121
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_assigned_user:
+    weight: 134
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_audit_list:
+    type: entity_reference_paragraphs
+    weight: 132
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_auditee_name:
+    weight: 124
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_auditee_signature:
+    weight: 128
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_auditor_name:
+    weight: 125
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_auditor_signature:
+    weight: 129
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_hod_name:
+    weight: 126
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_hod_signature:
+    weight: 130
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_occurence:
+    weight: 122
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_qms_head_name:
+    weight: 127
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_qms_signature:
+    weight: 131
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_refere:
+    weight: 133
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_standards:
+    weight: 123
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 15
+    region: content
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 120
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 16
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden: {  }

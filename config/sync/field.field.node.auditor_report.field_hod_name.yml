@@ -1,0 +1,28 @@
+uuid: 3bb8aa7d-4e62-4c23-a964-4dec88c24774
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hod_name
+    - node.type.auditor_report
+id: node.auditor_report.field_hod_name
+field_name: field_hod_name
+entity_type: node
+bundle: auditor_report
+label: 'HOD Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

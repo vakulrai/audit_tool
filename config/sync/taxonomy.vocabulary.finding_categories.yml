@@ -2,7 +2,7 @@ uuid: 0a8c37aa-c1e9-4e98-8f7a-960c72ab4894
 langcode: en
 status: true
 dependencies: {  }
-name: 'Finding Categories'
+name: 'Finding Categories For Predefined options'
 vid: finding_categories
 description: 'Finding categories for Checklist'
 weight: 0

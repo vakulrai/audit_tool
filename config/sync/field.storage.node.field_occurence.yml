@@ -1,0 +1,30 @@
+uuid: bc435c3e-7373-466c-bb79-90700abc02c4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_occurence
+field_name: field_occurence
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: first
+      label: 'First Time'
+    -
+      value: repetitive
+      label: Repetitive
+    -
+      value: other
+      label: Other
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

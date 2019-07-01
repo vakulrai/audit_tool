@@ -60,6 +60,7 @@ permissions:
   - 'edit any audit_criteria_process entities'
   - 'edit any audit_criteria_product entities'
   - 'edit any audit_cycle entities'
+  - 'edit any auditor_report content'
   - 'edit any business_process content'
   - 'edit any clauses content'
   - 'edit any customer_manual_parts entities'

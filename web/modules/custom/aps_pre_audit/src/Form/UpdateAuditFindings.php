@@ -8,6 +8,8 @@ use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InvokeCommand;
 
 /**
  * Class UpdateAuditFindings.
@@ -31,6 +33,7 @@ class UpdateAuditFindings extends PreAuditForm {
      $validators = array(
         'file_validate_extensions' => ['jpg mp4 pdf'],
      );
+     // echo '<pre>';print_r($details);
 
      $header = [
         $this->t('Step'),
@@ -71,6 +74,7 @@ class UpdateAuditFindings extends PreAuditForm {
         '#weight' => -1,
       );
 
+      //*** Table Headers ***//
       $form['report_standards']['header_report'] = array( 
       '#type' => 'table',
       '#header' => $header_report, 
@@ -82,7 +86,7 @@ class UpdateAuditFindings extends PreAuditForm {
       '#caption' => $this->t('Checklist'),
       '#header' => $header, 
       '#empty' => t('No content available.'),
-      '#tree' => TRUE, 
+      '#tree' => TRUE,
       );
 
       $form['display_d_q']['tableselect_element_dq'] = array( 
@@ -105,9 +109,9 @@ class UpdateAuditFindings extends PreAuditForm {
          '#default_value' => 'first_time',
       );
       $form['report_standards']['header_report'][0]['other'] = array(
-         '#type' => 'textfield',
-         '#maxlength' => 5,
-         '#size' => 5,
+         '#type' => 'number',
+         '#min' => 0,
+         '#size' => 1,
          '#title' => 'Other',
          '#states' => [
             'visible' => [
@@ -136,13 +140,17 @@ class UpdateAuditFindings extends PreAuditForm {
         foreach ($details as $key=>$value) {
           if($value['field_answer_type'] == 'non-delta'){
             $form['display']['tableselect_element'][$sr]['srno'] = [
-              '#markup' =>$value['sno'] ,
+              '#type' => 'value',
+              '#markup' => $value['sno'],
+              '#value' =>  $value['sno'],
               '#title' => $this->t('Step'),
               '#title_display' => 'invisible',
             ];
 
             $form['display']['tableselect_element'][$sr]['question'] = [
-              '#markup' => $value['question'],
+              '#type' => 'value',
+              '#value' =>  $value['question'],
+              '#markup' =>  $value['question'],
               '#title' => $this->t('Question'),
               '#title_display' => 'invisible',
             ];
@@ -177,7 +185,9 @@ class UpdateAuditFindings extends PreAuditForm {
           }
 
           $form['display']['tableselect_element'][$sr]['result'] = [
-            '#markup' => $value['default_checked'],
+            '#type' => 'value',
+            '#value' =>  $value['default_checked'],
+            '#markup' =>  $value['default_checked'],
             '#title' => $this->t('Result'),
             '#title_display' => 'invisible',
           ];
@@ -192,7 +202,9 @@ class UpdateAuditFindings extends PreAuditForm {
               }
             }
             $form['display']['tableselect_element'][$sr]['findings_category'] = [
-              '#markup' => $name,
+              '#type' => 'value',
+              '#value' =>  $name,
+              '#markup' =>  $name,
               '#title' => $this->t('Finding Categories'),
               '#title_display' => 'invisible',
             ];
@@ -201,7 +213,9 @@ class UpdateAuditFindings extends PreAuditForm {
           if(isset($value['clause_no'])){
             $clause_object = Node::load($value['clause_no']);
             $form['display']['tableselect_element'][$sr]['clause'] = [
-              '#markup' => $clause_object->get('title')->value,
+              '#type' => 'value',
+              '#value' =>  $clause_object->get('title')->value,
+              '#markup' =>  $clause_object->get('title')->value,
               '#title' => $this->t('Finding Categories'),
               '#title_display' => 'invisible',
             ];
@@ -218,13 +232,17 @@ class UpdateAuditFindings extends PreAuditForm {
         foreach ($details as $keyq=>$valueq) {
           if($valueq['field_answer_type'] == 'delta'){
             $form['display_d_q']['tableselect_element_dq'][$srq]['srno'] = [
-              '#markup' =>$valueq['sno'] ,
+              '#type' => 'value',
+              '#value' =>  $valueq['sno'],
+              '#markup' =>  $valueq['sno'],
               '#title' => $this->t('Step'),
               '#title_display' => 'invisible',
             ];
 
             $form['display_d_q']['tableselect_element_dq'][$srq]['question'] = [
-              '#markup' => $valueq['question'],
+              '#type' => 'value',
+              '#value' =>  $valueq['question'],
+              '#markup' =>  $valueq['question'],
               '#title' => $this->t('Question'),
               '#title_display' => 'invisible',
             ];
@@ -259,7 +277,9 @@ class UpdateAuditFindings extends PreAuditForm {
           }
 
           $form['display_d_q']['tableselect_element_dq'][$srq]['result'] = [
-            '#markup' => $valueq['default_checked'],
+            '#type' => 'value',
+            '#value' =>  $valueq['default_checked'],
+            '#markup' =>  $valueq['default_checked'],
             '#title' => $this->t('Result'),
             '#title_display' => 'invisible',
           ];
@@ -274,7 +294,9 @@ class UpdateAuditFindings extends PreAuditForm {
               }
             }
             $form['display_d_q']['tableselect_element_dq'][$sr]['findings_category'] = [
-              '#markup' => $nameq,
+              '#type' => 'value',
+              '#value' =>  $nameq,
+              '#markup' =>  $nameq,
               '#title' => $this->t('Finding Categories'),
               '#title_display' => 'invisible',
             ];
@@ -354,7 +376,7 @@ class UpdateAuditFindings extends PreAuditForm {
       '#upload_location' => 'public://',
     ];
 
-    $options_qms = $this->getUserByRole('qms');
+    $options_qms = $this->getUserByRole();
     $form['signoff']['signature_qms'] = [
       '#type' => 'select',
       '#options' => $options_qms,
@@ -397,12 +419,86 @@ class UpdateAuditFindings extends PreAuditForm {
  * Submit Callback.
  *
  */
-  public function submitPreAuditDetails(array $form, FormStateInterface $form_state){
-    print_r($form_state->getValue('question'));die;
+  public function submitPreAuditDetails( &$form, FormStateInterface $form_state){
+    $response = new AjaxResponse();
     $reference_id = \Drupal::request()->query->get('event_reference');
     $node_object = Node::load($reference_id);
     $node_object->set('moderation_state', 'post_audit');
     $node_object->save();
+    $data_array = $node_object->toArray();
+    $form_values = $form_state->getValues();
+    unset($form_values['submit']);
+    unset($form_values['form_build_id']);
+    unset($form_values['form_token']);
+    unset($form_values['form_id']);
+    unset($form_values['op']);
+    $count = 0;
+    foreach ($form_values as $i => $j) {
+      if($i == 'tableselect_element' || $i == 'tableselect_element_dq'){
+        foreach ($j as $key) {
+          $list[$count]['field_step'] = $key['srno'];
+          $list[$count]['field_question'] = $key['question'];
+          $list[$count]['field_evidence'] = $key['evidence'];
+          $list[$count]['field_result'] = $key['result'];
+          $list[$count]['field_finding_categories'] = strip_tags($key['findings_category']);
+          $list[$count]['field_clause'] = $key['clause'];
+        }
+      }
+      $count++;
+    }
+    if(count($form_values['header_report'])){
+      if($form_values['header_report'][0]['occurence']){
+        $data['field_occurence'] = $form_values['header_report'][0]['occurence']; 
+      }
+      else{
+        $data['field_occurence'] = $form_values['header_report'][0]['other']; 
+      }
+      $data['field_standards'] = $form_values['header_report'][0]['standards']; 
+    }
+    $data['paragraph_data'] = $list;
+    foreach ($data['paragraph_data'] as $q => $a) {
+      $paragraph = Paragraph::create([
+        'field_step' => $a['field_step'],
+        'field_question' => $a['field_question'],
+        'field_evidence' => $a['field_evidence'],
+        'field_result' => $a['field_result'],
+        'field_finding_categories' => $a['field_finding_categories'],
+        'field_clause' => $a['field_clause'],
+        'type' => 'audit_report',
+      ]);
+      $paragraph->save();
+      $paragraphp_version[] = [
+        'target_id' => $paragraph->id(),
+        'target_revision_id' => $paragraph->getRevisionId(),
+      ];
+
+    }
+    // $data['field_audit_list'] = $paragraphp_version;
+    $data['field_auditee_name'] = $form_values['signature_auditee'];
+    $data['field_auditee_signature'] = $form_values['upload_signature_auditee'];
+    $data['field_auditor_name'] = $form_values['signature_auditor'];
+    $data['field_auditor_signature'] = $form_values['upload_signature_auditor'];
+    $data['field_hod_name'] = $form_values['signature_hod'];
+    $data['field_hod_signature'] = $form_values['upload_signature_hod'];
+    $data['field_qms_head_name'] = $form_values['signature_qms'];
+    $data['field_qms_signature'] = $form_values['upload_signature_qms'];
+    $data['type'] = 'auditor_report';
+    $data['title'] = 'Submission for '.$data_array['title'][0]['value'] . ' on '. date('Y-m-d ');
+
+    $save_submission = entity_create('node', $data);
+    foreach ($paragraphp_version as $key => $value) {
+      $save_submission->field_audit_list[] = [
+          'target_id' => $value['target_id'],
+          'target_revision_id' => $value['target_revision_id'],
+      ];
+    }
+    $save_submission->field_refere = $reference_id;
+    $save_submission->save();
+    $save_refence_to_event = Node::load($reference_id);
+    $save_refence_to_event->field_report_reference = $save_submission->id();
+    $save_refence_to_event->save();
+    $response->addCommand(new InvokeCommand('#edit-submit', 'attr', ['disabled', 'disabled']));
+    return $response;
   }
 
   /**

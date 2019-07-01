@@ -248,6 +248,10 @@ function aps_audit_criteria_form_paragraphs_subform_alter(array &$subform, \Drup
     $subform['field_answers_defined']['#disabled'] = TRUE;
     // $subform['field_clause_no']['#access'] = FALSE;
   }
+  if($paragraph_type == 'audit_report'){
+    $subform['field_clause']['#access'] = FALSE;
+    $subform['field_clause_no']['#access'] = FALSE;
+  }
 }
 
 /**

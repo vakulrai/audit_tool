@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - node.type.auditor_report
     - node.type.internal_audit
     - node.type.planned_events
   module:
@@ -75,6 +76,7 @@ type_settings:
       weight: 6
   entity_types:
     node:
+      - auditor_report
       - internal_audit
       - planned_events
   default_moderation_state: draft

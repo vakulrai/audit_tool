@@ -1,15 +1,16 @@
-uuid: ca91db08-7c67-41f6-9249-8b6c25d35d87
+uuid: 95987c7d-7a4e-4ec0-9477-34f18defb167
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_significant_findings
-field_name: field_significant_findings
+    - user
+id: node.field_hod_name
+field_name: field_hod_name
 entity_type: node
-type: string_long
+type: entity_reference
 settings:
-  case_sensitive: false
+  target_type: user
 module: core
 locked: false
 cardinality: 1

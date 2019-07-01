@@ -1,0 +1,19 @@
+uuid: e3aacbe7-5232-4212-b95b-19a9409e4237
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_result
+    - paragraphs.paragraphs_type.audit_report
+id: paragraph.audit_report.field_result
+field_name: field_result
+entity_type: paragraph
+bundle: audit_report
+label: Result
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

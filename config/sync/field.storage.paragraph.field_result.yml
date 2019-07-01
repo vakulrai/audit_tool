@@ -1,12 +1,12 @@
-uuid: 172b798b-ae9c-4845-a2f1-828eb0bfd6d1
+uuid: 1ce54b34-a5c6-45ab-873e-bf31ebe4ad7d
 langcode: en
 status: true
 dependencies:
   module:
-    - node
-id: node.field_root_cause_analysis
-field_name: field_root_cause_analysis
-entity_type: node
+    - paragraphs
+id: paragraph.field_result
+field_name: field_result
+entity_type: paragraph
 type: string
 settings:
   max_length: 255
@@ -14,7 +14,7 @@ settings:
   case_sensitive: false
 module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

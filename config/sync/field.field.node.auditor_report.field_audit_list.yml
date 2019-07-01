@@ -1,0 +1,73 @@
+uuid: 8c758929-0ab4-45f6-bd74-c79156482453
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audit_list
+    - node.type.auditor_report
+    - paragraphs.paragraphs_type.audit_report
+  module:
+    - entity_reference_revisions
+id: node.auditor_report.field_audit_list
+field_name: field_audit_list
+entity_type: node
+bundle: auditor_report
+label: 'Audit List'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      audit_report: audit_report
+    target_bundles_drag_drop:
+      audit_cycle_other:
+        weight: 16
+        enabled: false
+      audit_cycle_schedule_release:
+        weight: 17
+        enabled: false
+      audit_report:
+        enabled: true
+        weight: 18
+      audit_score_settings:
+        weight: 19
+        enabled: false
+      audit_score_settings_range_100:
+        weight: 20
+        enabled: false
+      auditor_functional_details:
+        weight: 21
+        enabled: false
+      business_process_effectiveness:
+        weight: 22
+        enabled: false
+      business_process_effieciency:
+        weight: 23
+        enabled: false
+      customer_audit:
+        weight: 24
+        enabled: false
+      customer_manual_parts:
+        weight: 25
+        enabled: false
+      internal_audit_qa:
+        weight: 26
+        enabled: false
+      new_answer:
+        weight: 27
+        enabled: false
+      new_sub_question_yes_no:
+        weight: 28
+        enabled: false
+      procedures:
+        weight: 29
+        enabled: false
+      report_reason:
+        weight: 30
+        enabled: false
+field_type: entity_reference_revisions

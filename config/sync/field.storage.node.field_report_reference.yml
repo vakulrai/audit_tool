@@ -1,16 +1,15 @@
-uuid: 25166adf-086f-4505-b204-fcf4b107e98a
+uuid: 781000d8-f416-4d5b-9ee2-7dac5ba8e01a
 langcode: en
 status: true
 dependencies:
   module:
-    - paragraphs
-    - taxonomy
-id: paragraph.field_finding_categories
-field_name: field_finding_categories
-entity_type: paragraph
+    - node
+id: node.field_report_reference
+field_name: field_report_reference
+entity_type: node
 type: entity_reference
 settings:
-  target_type: taxonomy_term
+  target_type: node
 module: core
 locked: false
 cardinality: 1

@@ -1,12 +1,12 @@
-uuid: d40906d3-7d93-4b1d-83a4-35f76fd9111f
+uuid: 13b9cec9-08bb-4ec3-9e40-bcded985b108
 langcode: en
 status: true
 dependencies:
   module:
     - file
     - node
-id: node.field_upload_qms_signatures
-field_name: field_upload_qms_signatures
+id: node.field_qms_signature
+field_name: field_qms_signature
 entity_type: node
 type: file
 settings:

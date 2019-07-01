@@ -1,17 +1,17 @@
-uuid: 6eb80632-1314-46a2-9bb8-a6630efa0661
+uuid: 9da7f6cf-f59b-4d6c-8f07-a3bd68174036
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_upload_qms_signatures
-    - node.type.internal_audit
+    - field.storage.node.field_qms_signature
+    - node.type.auditor_report
   module:
     - file
-id: node.internal_audit.field_upload_qms_signatures
-field_name: field_upload_qms_signatures
+id: node.auditor_report.field_qms_signature
+field_name: field_qms_signature
 entity_type: node
-bundle: internal_audit
-label: 'Upload QMS Signatures'
+bundle: auditor_report
+label: 'QMS Signature'
 description: ''
 required: false
 translatable: false
@@ -19,7 +19,7 @@ default_value: {  }
 default_value_callback: ''
 settings:
   file_directory: '[date:custom:Y]-[date:custom:m]'
-  file_extensions: 'png jpg pdf'
+  file_extensions: 'txt png jpg pdf'
   max_filesize: ''
   description_field: false
   handler: 'default:file'

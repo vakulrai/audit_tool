@@ -1,0 +1,28 @@
+uuid: fbcf0c03-837c-4d58-8181-4c85a5fa5f54
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_clause
+    - node.type.clauses
+    - paragraphs.paragraphs_type.audit_report
+id: paragraph.audit_report.field_clause
+field_name: field_clause
+entity_type: paragraph
+bundle: audit_report
+label: Clause
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      clauses: clauses
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

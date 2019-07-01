@@ -348,6 +348,22 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
    
   }
+  elseif ($form_id == 'node_internal_audit_edit_form') {
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    foreach ($roles as $key => $value) {
+      $user_role = $value;
+    }
+    if($user_role == 'auditee'){
+      $form['field_unit']['#access'] = FALSE;
+      $form['field_ia_section']['#access'] = FALSE;
+      $form['field_ia_department']['#access'] = FALSE;
+      $form['field_procedure_no']['#access'] = FALSE;
+      $form['field_audit_type']['#access'] = FALSE;
+      $form['field_audit_date']['#access'] = FALSE;
+      $form['title']['#access'] = FALSE;
+    }
+  }
 }
 /**
  * Implements  hook_entity_insert().

@@ -1,12 +1,12 @@
-uuid: ecde2f7b-9644-4f57-b8c8-9d36bf292816
+uuid: a7d88f64-6e89-4f67-86e4-93f94e9eefe3
 langcode: en
 status: true
 dependencies:
   module:
     - file
     - node
-id: node.field_upload_auditor_signatures
-field_name: field_upload_auditor_signatures
+id: node.field_auditee_signature
+field_name: field_auditee_signature
 entity_type: node
 type: file
 settings:

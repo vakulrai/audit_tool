@@ -1,0 +1,9 @@
+uuid: f1ca50da-6c5a-4e10-8f92-28acad97bdc7
+langcode: en
+status: true
+dependencies: {  }
+id: corrective_action
+label: 'Corrective Action'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

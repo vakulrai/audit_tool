@@ -1,0 +1,9 @@
+uuid: c3e17488-b065-4e08-b5a4-92054ad0bcc9
+langcode: en
+status: true
+dependencies: {  }
+id: interrim_action
+label: 'Interrim Action'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

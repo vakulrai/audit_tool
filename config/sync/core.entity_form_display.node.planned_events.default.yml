@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.planned_events.field_list_of_systems
     - field.field.node.planned_events.field_refere
     - field.field.node.planned_events.field_remote_location_name
+    - field.field.node.planned_events.field_report_reference
     - field.field.node.planned_events.field_sections
     - field.field.node.planned_events.field_select_audit
     - field.field.node.planned_events.field_shift
@@ -23,7 +24,9 @@ dependencies:
     - field.field.node.planned_events.field_time
     - field.field.node.planned_events.field_unit
     - node.type.planned_events
+    - workflows.workflow.workflow_for_audit_planning
   module:
+    - content_moderation
     - datetime
     - datetime_range
     - field_group
@@ -265,6 +268,15 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_report_reference:
+    weight: 101
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_sections:
     weight: 28
     settings: {  }
@@ -301,6 +313,12 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0

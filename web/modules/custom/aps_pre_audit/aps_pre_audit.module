@@ -70,6 +70,33 @@ function aps_pre_audit_get_node_value($nid, $field_name) {
  * Implements hook_form_alter().
  */
 function aps_pre_audit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if($form_id == 'node_auditor_report_form'){
+    $form['field_refere']['#access'] = FALSE;
+    $form['field_assigned_user']['#access'] = FALSE;
+  }
+  elseif ($form_id == 'node_auditor_report_edit_form') {
+    $form['field_refere']['#access'] = FALSE;
+    $form['field_assigned_user']['#access'] = FALSE;
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    foreach ($roles as $key => $value) {
+      $user_role = $value;
+    }
+    if($user_role == 'auditor' || $user_role == 'auditee'){
+      $entity_type_id = 'node';
+      $bundle = 'auditor_report';
+      foreach (\Drupal::entityManager()->getFieldDefinitions($entity_type_id, $bundle) as $field_name => $field_definition) {
+        if (!empty($field_definition->getTargetBundle())) {
+          $bundleFields[$field_name]['type'] = $field_definition->getType();
+          $bundleFields[$field_name]['label'] = $field_definition->getLabel();
+          $form[$field_name]['#access'] = FALSE;
+          if($field_name == 'field_audit_list'){
+            $form[$field_name]['#access'] = TRUE;
+          }
+        }
+      }
+    }
+  }
   if($form['#id'] == 'views-exposed-form-planned-audit-listing-planned-audit' || $form['#id'] == 'views-exposed-form-planned-audit-listing-mr-page'){
     $form['title']['#autocomplete_route_name'] = 'aps_pre_audit.title_list';
   }
