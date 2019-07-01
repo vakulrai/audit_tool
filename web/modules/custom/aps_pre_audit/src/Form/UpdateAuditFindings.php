@@ -10,6 +10,8 @@ use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\HtmlCommand;
+
 
 /**
  * Class UpdateAuditFindings.
@@ -407,22 +409,37 @@ class UpdateAuditFindings extends PreAuditForm {
       '#upload_validators' => $validators,
       '#upload_location' => 'public://',
     ];
-
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Submit'),
-      '#button_type' => 'primary',
-      '#attributes' => [
-        'class' => [
-          'use-ajax',
+    
+    $reference_id = \Drupal::request()->query->get('event_reference');
+    $node_object = Node::load($reference_id);
+    //*** Display only if not submitted ***//
+    if($node_object->field_report_reference->target_id == ''){
+      $form['actions']['submit'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Submit'),
+        '#button_type' => 'primary',
+        '#attributes' => [
+          'class' => [
+            'use-ajax',
+          ],
         ],
-      ],
-      '#ajax' => [
-        'callback' => [$this, 'submitPreAuditDetails'],
-        'event' => 'click',
-      ],
-      '#disabled' => $disable_fields,
-    ];
+        '#ajax' => [
+          'callback' => [$this, 'submitPreAuditDetails'],
+          'event' => 'click',
+        ],
+        '#disabled' => $disable_fields,
+        '#prefix' =>'<p id="display-status-report">',
+        '#suffix' =>'</p>',
+      ];
+    }
+    else{
+      $form['actions']['submit'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Report Already Submitted'),
+        '#button_type' => 'primary',
+        '#disabled' => TRUE,
+      ];
+    }
 
     return $form;
   }
@@ -511,22 +528,28 @@ class UpdateAuditFindings extends PreAuditForm {
     $data['field_qms_signature'] = $form_values['upload_signature_qms'];
     $data['type'] = 'auditor_report';
     $data['title'] = 'Submission for '.$data_array['title'][0]['value'] . ' on '. date('Y-m-d ');
-
-    $save_submission = entity_create('node', $data);
-    if(count($paragraphp_version) > 0){
-      foreach ($paragraphp_version as $key => $value) {
-        $save_submission->field_audit_list[] = [
-          'target_id' => $value['target_id'],
-          'target_revision_id' => $value['target_revision_id'],
-        ];
+    
+    //***Save Only once***//
+    if($node_object->field_report_reference->target_id == ''){
+      $save_submission = entity_create('node', $data);
+      if(count($paragraphp_version) > 0){
+        foreach ($paragraphp_version as $key => $value) {
+          $save_submission->field_audit_list[] = [
+            'target_id' => $value['target_id'],
+            'target_revision_id' => $value['target_revision_id'],
+          ];
+        }
       }
+      $save_submission->field_refere = $reference_id;
+      $save_submission->save();
+      $save_refence_to_event = Node::load($reference_id);
+      $save_refence_to_event->field_report_reference = $save_submission->id();
+      $save_refence_to_event->save();
+      $response->addCommand(new HtmlCommand('#display-status-report', t('Report Submitted Successfully.')));
     }
-    $save_submission->field_refere = $reference_id;
-    $save_submission->save();
-    $save_refence_to_event = Node::load($reference_id);
-    $save_refence_to_event->field_report_reference = $save_submission->id();
-    $save_refence_to_event->save();
-    $response->addCommand(new InvokeCommand('#edit-submit', 'attr', ['disabled', 'disabled']));
+    else{
+      $response->addCommand(new HtmlCommand('#display-status-report', t('Report Already Submitted.')));
+    }
     return $response;
   }
 
