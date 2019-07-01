@@ -134,7 +134,6 @@ class UpdateAuditFindings extends PreAuditForm {
          '#default_value' =>  'iatf',
       );
 
-
       if(count($details)){
         $sr = 0;
         foreach ($details as $key=>$value) {
@@ -221,6 +220,13 @@ class UpdateAuditFindings extends PreAuditForm {
             ];
           }
 
+          $form['display']['tableselect_element'][$sr]['evidence_values'] = [
+              '#type' => 'value',
+              '#value' =>  $value['evidence_value'],
+              '#title' => $this->t('Finding Categories'),
+              '#title_display' => 'invisible',
+            ];
+
           $sr++;
 
         }
@@ -285,7 +291,7 @@ class UpdateAuditFindings extends PreAuditForm {
           ];
 
           if($valueq['type'] == 'predefined'){
-            foreach ($value['field_finding_categories'] as $findingq => $valq) {
+            foreach ($valueq['field_finding_categories'] as $findingq => $valq) {
               if($termq = Term::load($valq['target_id'])){
                 $nameq .= $termq->getName().'<br>';
               }
@@ -301,7 +307,13 @@ class UpdateAuditFindings extends PreAuditForm {
               '#title_display' => 'invisible',
             ];
           }
-
+          
+          $form['display_d_q']['tableselect_element_dq'][$sr]['evidence_values'] = [
+              '#type' => 'value',
+              '#value' =>  $valueq['evidence_value'],
+              '#title' => $this->t('Finding Categories'),
+              '#title_display' => 'invisible',
+            ];
           $srq++;
         }
       }
@@ -438,7 +450,7 @@ class UpdateAuditFindings extends PreAuditForm {
         foreach ($j as $key) {
           $list[$count]['field_step'] = $key['srno'];
           $list[$count]['field_question'] = $key['question'];
-          $list[$count]['field_evidence'] = $key['evidence'];
+          $list[$count]['field_evidence'] = $key['evidence_values'];
           $list[$count]['field_result'] = $key['result'];
           $list[$count]['field_finding_categories'] = strip_tags($key['findings_category']);
           $list[$count]['field_clause'] = $key['clause'];
@@ -456,22 +468,37 @@ class UpdateAuditFindings extends PreAuditForm {
       $data['field_standards'] = $form_values['header_report'][0]['standards']; 
     }
     $data['paragraph_data'] = $list;
-    foreach ($data['paragraph_data'] as $q => $a) {
-      $paragraph = Paragraph::create([
-        'field_step' => $a['field_step'],
-        'field_question' => $a['field_question'],
-        'field_evidence' => $a['field_evidence'],
-        'field_result' => $a['field_result'],
-        'field_finding_categories' => $a['field_finding_categories'],
-        'field_clause' => $a['field_clause'],
-        'type' => 'audit_report',
-      ]);
-      $paragraph->save();
-      $paragraphp_version[] = [
-        'target_id' => $paragraph->id(),
-        'target_revision_id' => $paragraph->getRevisionId(),
-      ];
 
+    foreach ($data['paragraph_data'] as $q => $a) {
+      if($a['field_finding_categories'] != ''){
+        $properties['name'] = $a['field_finding_categories'];
+        $terms = array_values(\Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties));
+        $tid = $terms[0]->id();
+        $parent_tid = $terms[0]->get('parent')->target_id;
+      }
+      else{
+        $tid = '';
+      }
+      
+      if($tid){
+        $term_object_parent = Term::load($parent_tid);
+        if($term_object_parent->get('name')->value == 'Poor'){
+          $paragraph = Paragraph::create([
+            'field_step' => $a['field_step'],
+            'field_question' => $a['field_question'],
+            'field_evidence' => $a['field_evidence'],
+            'field_result' => $a['field_result'],
+            'field_finding_categories' => ['target_id' => $tid],
+            'field_clause' => $a['field_clause'],
+            'type' => 'audit_report',
+          ]);
+          $paragraph->save();
+          $paragraphp_version[] = [
+            'target_id' => $paragraph->id(),
+            'target_revision_id' => $paragraph->getRevisionId(),
+          ];
+        }
+      }
     }
     // $data['field_audit_list'] = $paragraphp_version;
     $data['field_auditee_name'] = $form_values['signature_auditee'];
@@ -486,11 +513,13 @@ class UpdateAuditFindings extends PreAuditForm {
     $data['title'] = 'Submission for '.$data_array['title'][0]['value'] . ' on '. date('Y-m-d ');
 
     $save_submission = entity_create('node', $data);
-    foreach ($paragraphp_version as $key => $value) {
-      $save_submission->field_audit_list[] = [
+    if(count($paragraphp_version) > 0){
+      foreach ($paragraphp_version as $key => $value) {
+        $save_submission->field_audit_list[] = [
           'target_id' => $value['target_id'],
           'target_revision_id' => $value['target_revision_id'],
-      ];
+        ];
+      }
     }
     $save_submission->field_refere = $reference_id;
     $save_submission->save();
