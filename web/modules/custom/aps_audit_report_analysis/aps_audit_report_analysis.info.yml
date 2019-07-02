@@ -1,0 +1,5 @@
+name: 'aps_audit_report_analysis'
+type: module
+description: 'Contain functionality related to audit reports'
+core: 8.x
+package: 'Custom'

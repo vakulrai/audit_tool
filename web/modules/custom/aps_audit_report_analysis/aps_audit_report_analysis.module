@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Contains aps_audit_report_analysis.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function aps_audit_report_analysis_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the aps_audit_report_analysis module.
+    case 'help.page.aps_audit_report_analysis':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Contain functionality related to audit reports') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function aps_audit_report_analysis_theme($existing, $type, $theme, $path) {
+  return [
+    'time_analysis_block' => [
+      'path' => $path . '/templates',
+      'template' => 'time-analysis-block',
+        'variables' => [
+          'audit_effeciency' => NULL,
+          'car_effeciency' => NULL,
+          'audit_hours' => NULL,
+          'car_hours' => NULL,
+          'audit_cycle_effeciency' => NULL,
+        ],
+    ],
+  ];
+}

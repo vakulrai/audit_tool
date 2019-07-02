@@ -1,0 +1,39 @@
+uuid: 64976b88-0013-4d82-a375-5f25b266d3b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.ncr
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - seven
+id: views_block__ncr_signatures_roles
+theme: seven
+region: highlighted
+weight: -21
+provider: null
+plugin: 'views_block:ncr-signatures_roles'
+settings:
+  id: 'views_block:ncr-signatures_roles'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '/planned-audit-listing-auditee/*/ncr/*'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      auditee: auditee
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

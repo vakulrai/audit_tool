@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\aps_auditee_pre_audit\Functional;
+namespace Drupal\Tests\aps_audit_report_analysis\Functional;
 
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
@@ -8,7 +8,7 @@ use Drupal\Tests\BrowserTestBase;
 /**
  * Simple test to ensure that main page loads with module enabled.
  *
- * @group aps_auditee_pre_audit
+ * @group aps_audit_report_analysis
  */
 class LoadTest extends BrowserTestBase {
 
@@ -17,7 +17,7 @@ class LoadTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['aps_auditee_pre_audit'];
+  public static $modules = ['aps_audit_report_analysis'];
 
   /**
    * A user with permission to administer site configuration.

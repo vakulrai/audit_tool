@@ -90,7 +90,7 @@ function aps_pre_audit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
           $bundleFields[$field_name]['type'] = $field_definition->getType();
           $bundleFields[$field_name]['label'] = $field_definition->getLabel();
           $form[$field_name]['#access'] = FALSE;
-          if($field_name == 'field_audit_list'){
+          if($field_name == 'field_audit_list' || $field_name == 'field_auditor_signature' || $field_name == 'field_auditee_signature' || $field_name == 'field_hod_signature' || $field_name == 'field_qms_signature'){
             $form[$field_name]['#access'] = TRUE;
           }
         }

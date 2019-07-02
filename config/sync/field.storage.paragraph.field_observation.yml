@@ -1,0 +1,19 @@
+uuid: b4c9a73d-242f-4bcd-88c7-8392ee35ea12
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_observation
+field_name: field_observation
+entity_type: paragraph
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

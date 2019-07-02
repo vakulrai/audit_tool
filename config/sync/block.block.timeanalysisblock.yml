@@ -1,0 +1,28 @@
+uuid: e2c10d2f-64f6-4a4c-965b-4d7df8237650
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_audit_report_analysis
+    - user
+  theme:
+    - seven
+id: timeanalysisblock
+theme: seven
+region: highlighted
+weight: -22
+provider: null
+plugin: time_analysis_block
+settings:
+  id: time_analysis_block
+  label: 'Time analysis block'
+  provider: aps_audit_report_analysis
+  label_display: '0'
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      auditee: auditee
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

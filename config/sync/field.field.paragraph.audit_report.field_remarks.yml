@@ -1,0 +1,19 @@
+uuid: 3877b063-25d3-4dff-b961-695ac4b964f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_remarks
+    - paragraphs.paragraphs_type.audit_report
+id: paragraph.audit_report.field_remarks
+field_name: field_remarks
+entity_type: paragraph
+bundle: audit_report
+label: Remarks
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

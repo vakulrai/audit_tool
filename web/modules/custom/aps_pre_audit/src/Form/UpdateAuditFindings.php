@@ -35,7 +35,6 @@ class UpdateAuditFindings extends PreAuditForm {
      $validators = array(
         'file_validate_extensions' => ['jpg mp4 pdf'],
      );
-     // echo '<pre>';print_r($details);
 
      $header = [
         $this->t('Step'),
@@ -223,11 +222,18 @@ class UpdateAuditFindings extends PreAuditForm {
           }
 
           $form['display']['tableselect_element'][$sr]['evidence_values'] = [
-              '#type' => 'value',
-              '#value' =>  $value['evidence_value'],
-              '#title' => $this->t('Finding Categories'),
-              '#title_display' => 'invisible',
-            ];
+            '#type' => 'value',
+            '#value' =>  $value['evidence_value'],
+            '#title' => $this->t('Finding Categories'),
+            '#title_display' => 'invisible',
+          ];
+
+           $form['display']['tableselect_element'][$sr]['question_type'] = [
+            '#type' => 'value',
+            '#value' =>  $value['field_answer_type'],
+            '#title' => $this->t('Finding Categories'),
+            '#title_display' => 'invisible',
+          ];
 
           $sr++;
 
@@ -301,7 +307,7 @@ class UpdateAuditFindings extends PreAuditForm {
                 $nameq = 'Not Found.';
               }
             }
-            $form['display_d_q']['tableselect_element_dq'][$sr]['findings_category'] = [
+            $form['display_d_q']['tableselect_element_dq'][$srq]['findings_category'] = [
               '#type' => 'value',
               '#value' =>  $nameq,
               '#markup' =>  $nameq,
@@ -309,13 +315,21 @@ class UpdateAuditFindings extends PreAuditForm {
               '#title_display' => 'invisible',
             ];
           }
-          
-          $form['display_d_q']['tableselect_element_dq'][$sr]['evidence_values'] = [
+          //Extra Detail fields for evidence.
+          $form['display_d_q']['tableselect_element_dq'][$srq]['evidence_values'] = [
               '#type' => 'value',
               '#value' =>  $valueq['evidence_value'],
               '#title' => $this->t('Finding Categories'),
               '#title_display' => 'invisible',
             ];
+
+          $form['display_d_q']['tableselect_element_dq'][$srq]['question_type'] = [
+            '#type' => 'value',
+            '#value' =>  $valueq['field_answer_type'],
+            '#title' => $this->t('Finding Categories'),
+            '#title_display' => 'invisible',
+          ];
+
           $srq++;
         }
       }
@@ -471,6 +485,7 @@ class UpdateAuditFindings extends PreAuditForm {
           $list[$count]['field_result'] = $key['result'];
           $list[$count]['field_finding_categories'] = strip_tags($key['findings_category']);
           $list[$count]['field_clause'] = $key['clause'];
+          $list[$count]['question_type'] = $key['question_type'];
         }
       }
       $count++;
@@ -496,31 +511,29 @@ class UpdateAuditFindings extends PreAuditForm {
       else{
         $tid = '';
       }
-      
-      if($tid){
-        $term_object_parent = Term::load($parent_tid);
-        if($term_object_parent->get('name')->value == 'Poor'){
-          $paragraph = Paragraph::create([
-            'field_step' => $a['field_step'],
-            'field_question' => $a['field_question'],
-            'field_evidence' => $a['field_evidence'],
-            'field_result' => $a['field_result'],
-            'field_finding_categories' => ['target_id' => $tid],
-            'field_clause' => $a['field_clause'],
-            'type' => 'audit_report',
-          ]);
-          $paragraph->save();
-          $paragraphp_version[] = [
-            'target_id' => $paragraph->id(),
-            'target_revision_id' => $paragraph->getRevisionId(),
-          ];
-        }
+ 
+      $term_object_parent = Term::load($parent_tid);
+      if($term_object_parent->get('name')->value == 'Poor' && $a['question_type'] == 'non-delta' || $a['question_type'] == 'delta'){
+        $paragraph = Paragraph::create([
+          'field_step' => $a['field_step'],
+          'field_question' => $a['field_question'],
+          'field_evidence' => $a['field_evidence'],
+          'field_result' => $a['field_result'],
+          'field_finding_categories' => ['target_id' => $tid],
+          'field_clause' => $a['field_clause'],
+          'type' => 'audit_report',
+        ]);
+        $paragraph->save();
+        $paragraphp_version[] = [
+          'target_id' => $paragraph->id(),
+          'target_revision_id' => $paragraph->getRevisionId(),
+        ];
       }
     }
     // $data['field_audit_list'] = $paragraphp_version;
-    $data['field_auditee_name'] = $form_values['signature_auditee'];
+    $data['field_auditee_name'] = ['target_id' => $form_values['signature_auditee']];
     $data['field_auditee_signature'] = $form_values['upload_signature_auditee'];
-    $data['field_auditor_name'] = $form_values['signature_auditor'];
+    $data['field_auditor_name'] = ['target_id' => $form_values['signature_auditor']];
     $data['field_auditor_signature'] = $form_values['upload_signature_auditor'];
     $data['field_hod_name'] = $form_values['signature_hod'];
     $data['field_hod_signature'] = $form_values['upload_signature_hod'];

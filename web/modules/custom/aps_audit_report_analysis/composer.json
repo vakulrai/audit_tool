@@ -1,0 +1,14 @@
+{
+  "name": "drupal/aps_audit_report_analysis",
+  "type": "drupal-module",
+  "description": "Contain functionality related to audit reports",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/aps_audit_report_analysis",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/aps_audit_report_analysis",
+    "source": "http://cgit.drupalcode.org/aps_audit_report_analysis"
+  },
+  "require": { }
+}
