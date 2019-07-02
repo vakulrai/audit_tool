@@ -43,6 +43,11 @@ type_settings:
       default_revision: true
       label: Scheduled
       weight: 5
+    submit_audit:
+      published: true
+      default_revision: true
+      label: 'Submit Audit'
+      weight: 7
   transitions:
     post_audit:
       label: 'Post Audit'
@@ -74,6 +79,13 @@ type_settings:
         - scheduled
       to: scheduled
       weight: 6
+    submit:
+      label: submit
+      from:
+        - post_audit
+        - scheduled
+      to: submit_audit
+      weight: 8
   entity_types:
     node:
       - auditor_report

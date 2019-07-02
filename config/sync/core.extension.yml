@@ -53,6 +53,7 @@ module:
   node: 0
   options: 0
   page_cache: 0
+  paragraphs_type_permissions: 0
   path: 0
   questions_answers: 0
   quickedit: 0

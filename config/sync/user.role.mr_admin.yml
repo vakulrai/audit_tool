@@ -92,3 +92,6 @@ permissions:
   - 'use workflow_for_audit_planning transition scheduled'
   - 'view any unpublished content'
   - 'view latest version'
+  - 'view paragraph content audit_report'
+  - 'view paragraph content corrective_action'
+  - 'view paragraph content interrim_action'

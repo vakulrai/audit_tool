@@ -74,3 +74,7 @@ permissions:
   - 'use workflow_for_audit_planning transition pre_audit'
   - 'use workflow_for_audit_planning transition reschedule'
   - 'use workflow_for_audit_planning transition scheduled'
+  - 'view auditor_report revisions'
+  - 'view paragraph content audit_report'
+  - 'view paragraph content corrective_action'
+  - 'view paragraph content interrim_action'

@@ -18,6 +18,9 @@ dependencies:
     - field.storage.paragraph.field_step
     - node.type.auditor_report
     - node.type.planned_events
+    - user.role.auditee
+    - user.role.auditor
+    - user.role.mr_admin
   module:
     - entity_reference_revisions
     - file
@@ -1604,8 +1607,12 @@ display:
       path: planned-audit-listing-auditee/%/ncr/%
       display_description: ''
       access:
-        type: none
-        options: {  }
+        type: role
+        options:
+          role:
+            auditor: auditor
+            auditee: auditee
+            mr_admin: mr_admin
     cache_metadata:
       max-age: -1
       contexts:
@@ -1614,6 +1621,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
+        - user.roles
       tags:
         - 'config:field.storage.paragraph.field_casualty_number'
         - 'config:field.storage.paragraph.field_corrective_action'

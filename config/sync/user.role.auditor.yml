@@ -85,3 +85,6 @@ permissions:
   - 'use workflow_for_audit_planning transition reschedule_to_schedule'
   - 'use workflow_for_audit_planning transition rescheduled'
   - 'use workflow_for_audit_planning transition scheduled'
+  - 'view paragraph content audit_report'
+  - 'view paragraph content corrective_action'
+  - 'view paragraph content interrim_action'
