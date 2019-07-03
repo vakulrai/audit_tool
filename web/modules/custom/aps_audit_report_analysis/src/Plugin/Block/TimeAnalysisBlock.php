@@ -3,7 +3,7 @@
 namespace Drupal\aps_audit_report_analysis\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-
+use Drupal\node\Entity\Node;
 /**
  * Provides a 'TimeAnalysisBlock' block.
  *
@@ -24,24 +24,46 @@ class TimeAnalysisBlock extends BlockBase {
     $uri = explode('/', $current_uri);
     $event_id = $uri[1];
     $report_id = $uri[3];
+    $node_object = Node::load($report_id);
+    $timestamp_CAR = $node_object->changed->value;
     $ids_to_fetch = [$event_id, $report_id];
     foreach ($ids_to_fetch as $key) {
       $get_planned_event_created_time[] = $this->getCreationDate($key);
     }
     $diff = $get_planned_event_created_time[1][0]->created - $get_planned_event_created_time[0][0]->created;
-    $years = floor($diff / (365*60*60*24)); 
-    $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
-    $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));  
-    $hours = floor(($diff - $years * 365*60*60*24  - $months*30*60*60*24 - $days*60*60*24) / (60*60));  
+    $days = floor($diff/(60*60*24));
+    $hours = round($diff/3600, 1);
 
+    $diff_car = $timestamp_CAR - $get_planned_event_created_time[1][0]->created;
+    $days_car = floor($diff_car/(60*60*24));
+    $hours_car = round($diff_car/3600, 1);
     /*Effeciecy Logic 
      * Considering current Turnover is > 10 cr. so, no of mandays = 4 * 8.
      */
-    $audit_TIME = $days;
-    $audit_EFFECIENCY = round((32 / $audit_TIME * 8), 2);
-    $car_EFFECIENCY = round((32 / $audit_TIME * 8), 2);
-    $audit_HOURS = $hours;
-    $car_HOURS = $hours;
+
+    $man_DAYS = 4;
+    $audit_day = round($hours / 8);
+    $car_day = round($hours_car / 8); 
+
+    if($man_DAYS > $audit_day){
+      $audit_TIME = $audit_day/$man_DAYS *100;
+    }
+    elseif($man_DAYS < $audit_day){
+      $audit_TIME = 100 - $man_DAYS/$audit_day * 100;
+    }
+    if($man_DAYS > $car_day){
+      $car_TIME =  $car_day/$man_DAYS  * 100;
+    }
+    elseif($man_DAYS < $car_day){
+      $car_TIME = $car_day/$man_DAYS * 100 - 100;
+    }
+
+    $audit_EFFECIENCY = round($audit_TIME, 2);
+    $car_EFFECIENCY = round($car_TIME, 2);
+
+    $audit_HOURS = $audit_day;
+    $car_HOURS = $car_day;
+
     $build['#audit_effeciency'] = $audit_EFFECIENCY;
     $build['#car_effeciency'] = $car_EFFECIENCY;
     $build['#car_hours'] = $car_HOURS;

@@ -6,7 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
-
+use Drupal\node\Entity\Node;
 /**
  * Implements hook_help().
  */
@@ -40,4 +40,38 @@ function aps_audit_report_analysis_theme($existing, $type, $theme, $path) {
         ],
     ],
   ];
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function aps_audit_report_analysis_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if($form_id == 'node_auditor_report_edit_form'){
+    $form['actions']['submit_report'] = array(
+      '#type' => 'submit',
+      '#weight' => 999,
+      '#limit_validation_errors' => array() ,
+      '#button_type' => 'submit',
+      '#submit' => array(
+        'submit_auditee_audit'
+      ) ,
+      '#value' => t('Submit Report') ,
+    );
+  }
+}
+
+function submit_auditee_audit(array$form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+  $uri = explode('/', $current_uri);
+  if($id = \Drupal::request()->query->get('event_reference')){
+    $node_object = Node::load($id);
+    $node_object->set('moderation_state', 'submit_audit');
+    $node_object->save();
+  }
+  if($uri[1]){
+    $node_object_report = Node::load($uri[1]);
+    $node_object_report->set('moderation_state', 'submit_audit');
+    $node_object_report->save();
+  }
+
 }

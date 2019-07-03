@@ -9,6 +9,7 @@ dependencies:
     - field.storage.node.field_files
     - field.storage.node.field_list_of_systems
     - field.storage.node.field_qam
+    - field.storage.node.field_report_reference
     - field.storage.node.field_sections
     - field.storage.node.field_select_audit
     - field.storage.node.field_start_date
@@ -3539,6 +3540,69 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        moderation_state:
+          id: moderation_state
+          table: node_field_revision
+          field: moderation_state
+          relationship: vid
+          group_type: group
+          admin_label: ''
+          label: 'Moderation state'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: content_moderation_state
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          plugin_id: field
         nid_1:
           id: nid_1
           table: node_field_data
@@ -3616,7 +3680,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a class="button" href="/node/{{nid_1}}/edit">NCR</a>'
+            text: '<a class="button" href="/node/{{nid_1}}/edit?event_reference={{nid}}">NCR</a>'
             make_link: false
             path: ''
             absolute: false
@@ -3665,7 +3729,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a class="button" href="{{nid}}/ncr/{{nid_1}}">View Report</a>'
+            text: "{% if moderation_state == \"Submit Audit\" %}\r\n<a class=\"button\" href=\"{{nid}}/ncr/{{nid_1}}\">View Report</a>\r\n{% else %}\r\n<a class=\"button\" href=\"#\">Report Not submitted</a>\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -3853,6 +3917,7 @@ display:
           operator: in
           value:
             workflow_for_audit_planning-post_audit: workflow_for_audit_planning-post_audit
+            workflow_for_audit_planning-submit_audit: workflow_for_audit_planning-submit_audit
           group: 1
           exposed: false
           expose:
@@ -4310,6 +4375,131 @@ display:
           empty_zero: false
           hide_alter_empty: false
           plugin_id: remainingday_event
+        field_report_reference:
+          id: field_report_reference
+          table: node__field_report_reference
+          field: field_report_reference
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Report Reference'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_entity_id
+          settings: {  }
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        moderation_state:
+          id: moderation_state
+          table: node_field_revision
+          field: moderation_state
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Moderation state'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: content_moderation_state
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          plugin_id: field
         upload_audit_documents:
           id: upload_audit_documents
           table: views
@@ -4474,12 +4664,62 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Custom text'
+          exclude: false
+          alter:
+            alter_text: true
+            text: "{% if moderation_state == \"Submit Audit\" %}\r\n<a class=\"button\" href=\"planned-mr-audit-listing/{{nid}}/ncr/{{field_report_reference}}\">View Report</a>\r\n{% else %}\r\n<a class=\"button\" href=\"#\">Report Not submitted</a>\r\n{% endif %}"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
       defaults:
         fields: false
         filters: false
         filter_groups: false
         access: false
         footer: false
+        relationships: false
       filters:
         type:
           id: type
@@ -4622,7 +4862,13 @@ display:
           admin_label: ''
           operator: in
           value:
+            workflow_for_audit_planning-draft: workflow_for_audit_planning-draft
+            workflow_for_audit_planning-published: workflow_for_audit_planning-published
             workflow_for_audit_planning-pre_audit: workflow_for_audit_planning-pre_audit
+            workflow_for_audit_planning-reschedule: workflow_for_audit_planning-reschedule
+            workflow_for_audit_planning-scheduled: workflow_for_audit_planning-scheduled
+            workflow_for_audit_planning-post_audit: workflow_for_audit_planning-post_audit
+            workflow_for_audit_planning-submit_audit: workflow_for_audit_planning-submit_audit
           group: 1
           exposed: false
           expose:
@@ -4667,6 +4913,18 @@ display:
           table: views
           field: area
           plugin_id: text
+      relationships:
+        nid:
+          id: nid
+          table: node_field_revision
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: 'Get the actual content from a content revision.'
+          required: false
+          entity_type: node
+          entity_field: nid
+          plugin_id: standard
     cache_metadata:
       maxage: 1
       contexts:
@@ -4678,6 +4936,7 @@ display:
         - user.roles
       tags:
         - 'config:field.storage.node.field_audit_type'
+        - 'config:field.storage.node.field_report_reference'
         - 'config:field.storage.node.field_select_audit'
         - 'config:field.storage.node.field_start_date'
         - 'config:workflow_list'
@@ -5473,6 +5732,68 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        field_report_reference:
+          id: field_report_reference
+          table: node__field_report_reference
+          field: field_report_reference
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_entity_id
+          settings: {  }
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         nid:
           id: nid
           table: node_field_data
@@ -5651,6 +5972,55 @@ display:
           field_api_classes: false
           entity_type: node
           plugin_id: field
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "{% if moderation_state == \"Submit Audit\" %}\r\n<a class=\"button\" href=\"{{nid}}/ncr/{{field_report_reference}}\">View Report</a>\r\n{% else %}\r\n<a class=\"button\" href=\"#\">Report Not submitted</a>\r\n{% endif %}"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
       defaults:
         fields: false
         filters: false
@@ -5710,6 +6080,7 @@ display:
           value:
             workflow_for_audit_planning-scheduled: workflow_for_audit_planning-scheduled
             workflow_for_audit_planning-post_audit: workflow_for_audit_planning-post_audit
+            workflow_for_audit_planning-submit_audit: workflow_for_audit_planning-submit_audit
           group: 1
           exposed: false
           expose:
@@ -5918,6 +6289,7 @@ display:
         - user.roles
       tags:
         - 'config:field.storage.node.field_audit_type'
+        - 'config:field.storage.node.field_report_reference'
         - 'config:field.storage.node.field_select_audit'
         - 'config:field.storage.node.field_start_date'
         - 'config:workflow_list'

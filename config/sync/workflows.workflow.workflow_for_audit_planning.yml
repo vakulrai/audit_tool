@@ -54,6 +54,7 @@ type_settings:
       from:
         - pre_audit
         - scheduled
+        - submit_audit
       to: post_audit
       weight: 7
     pre_audit:
@@ -80,7 +81,7 @@ type_settings:
       to: scheduled
       weight: 6
     submit:
-      label: submit
+      label: Submit
       from:
         - post_audit
         - scheduled
