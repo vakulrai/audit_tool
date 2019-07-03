@@ -19,13 +19,55 @@ class MradminDashboardCoverage extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-  	$data = $this->getAuditDetails();
   	// echo '<pre>';print_r($data);
     $build = [];
     $build['#markup'] = 'Coverage';
-    $build['#data'] = $audit_HOURS;
-    $build['#theme'] = 'mradmin_dashboard_coverage';
+   //  $build['#data'] = $data;
+   //  $build['#theme'] = 'mradmin_dashboard_coverage';
+    $header = [
+      $this->t('Audit.'),
+      $this->t('Audit Type'),
+      $this->t('Completed'),
+      $this->t('on-going'),
+      $this->t('Total'),
+    ];
+    $build['tableselect_element'] = [
+      '#type' => 'table',
+      '#header' => $header,
+      '#empty' => t('No content available.'),
+    ];
+    $data = $this->getAuditDetails();
 
+    if (count($data)) {
+    	$sr = 1;
+	    foreach ($data as $key => $value) {
+	        $build['tableselect_element'][$sr]['audit_type'] = [
+	          '#markup' => strtoupper($key),
+	          '#title_display' => 'invisible',
+	        ];
+
+	        $build['tableselect_element'][$sr]['type'] = [
+	          '#markup' => $value['type'] ? $value['type'] : 'Not Available',
+	          '#title_display' => 'invisible',
+	        ];
+
+	        $build['tableselect_element'][$sr]['completed'] = [
+	          '#markup' => $value['completed']? $value['completed'] : 'Not Available',
+	          '#title_display' => 'invisible',
+	        ];
+
+	        $build['tableselect_element'][$sr]['on_going'] = [
+	          '#markup' => $value['on-going']? $value['on-going'] : 'Not Available',
+	          '#title_display' => 'invisible',
+	        ];
+
+	        $build['tableselect_element'][$sr]['count'] = [
+	          '#markup' => $value['count']? $value['count'] : 'Not Available',
+	          '#title_display' => 'invisible',
+	        ];
+	        $sr++;
+      }
+	}
     return $build;
   }
 
@@ -37,48 +79,113 @@ class MradminDashboardCoverage extends BlockBase {
     $query->condition('n.type', 'planned_events');
     $data = $query->execute()->fetchAll();
     $audit_data = [];
-    $count_complete = 1;
-    $count_ongoing = 1;
+    $count_complete_system = 1;
+    $count_ongoing_system = 1;
+    $count_complete_process = 1;
+    $count_ongoing_process = 1;
+    $count_complete_product = 1;
+    $count_ongoing_product = 1;
+    $count_complete_external = 1;
+    $count_ongoing_external = 1;
+    $count_complete_supplier = 1;
+    $count_ongoing_supplier = 1;
+    $count_complete_ia = 1;
+    $count_ongoing_ia = 1;
+    $count_complete_ea = 1;
+    $count_ongoing_ea = 1;
     foreach ($data as $key => $value) {
       $node_object = Node::load($value->nid);
-      if($node_object->field_internal_audit_type->value == 'systems'){
-        $audit_data['internal']['system']['type'] = $node_object->field_internal_audit_type->value;
+      if($node_object->field_audit_type->value == 'internal' && $node_object->field_internal_audit_type->value == 'systems'){
+        $audit_data['internal']['type'] = $node_object->field_internal_audit_type->value;
         if($value->moderation_state == 'submit_audit'){
-          $audit_data['internal']['system']['completed'] = $count_complete;
-          $count_complete++;
+          $audit_data['internal']['completed'] = $count_complete_system;
+          $count_complete_system++;
         }
         elseif ($value->moderation_state == 'scheduled') {
-          $audit_data['internal']['system']['on-going'] = $count_ongoing;
-          $count_ongoing++;
+          $audit_data['internal']['on-going'] = $count_ongoing_system;
+          $count_ongoing_system++;
         }
         $count_system[] = $value->nid;
-        $audit_data['internal']['system']['count'] = count($count_system);
+        $audit_data['internal']['count'] = count($count_system);
       }
-      elseif ($node_object->field_internal_audit_type->value == 'process') {
-        $audit_data['internal']['process']['type'] = $node_object->field_internal_audit_type->value;
+      elseif ($node_object->field_audit_type->value == 'internal' && $node_object->field_internal_audit_type->value == 'process') {
+        $audit_data['internal']['type'] = $node_object->field_internal_audit_type->value;
         if($value->moderation_state == 'submit_audit'){
-          $audit_data['internal']['process']['completed'] = $count;
-          $count_complete++;
+          $audit_data['internal']['completed'] = $count_complete_process;
+          $count_complete_process++;
         }
         elseif ($value->moderation_state == 'scheduled') {
-          $audit_data['internal']['process']['on-going'] = $count_ongoing;
-          $count_ongoing++;
+          $audit_data['internal']['on-going'] = $count_ongoing_process;
+          $count_ongoing_process++;
         }
         $count_process[] = $value->nid;
-        $audit_data['internal']['process']['count'] = count($count_process);
+        $audit_data['internal']['count'] = count($count_process);
       }
-      elseif ($node_object->field_internal_audit_type->value == 'product') {
-      	$audit_data['internal']['product']['type'] = $node_object->field_internal_audit_type->value;
+      elseif ($node_object->field_audit_type->value == 'internal' && $node_object->field_internal_audit_type->value == 'product') {
+      	$audit_data['internal']['type'] = $node_object->field_internal_audit_type->value;
       	if($value->moderation_state == 'submit_audit'){
-          $audit_data['internal']['product']['completed'] = $count;
-          $count_complete++;
+          $audit_data['internal']['completed'] = $count_complete_product;
+          $count_complete_product++;
         }
         elseif ($value->moderation_state == 'scheduled') {
-          $audit_data['internal']['product']['on-going'] = $count_ongoing;
-          $count_ongoing++;
+          $audit_data['internal']['on-going'] = $count_ongoing_product;
+          $count_ongoing_product++;
         }
         $count_product[] = $value->nid;
-        $audit_data['internal']['product']['count'] = count($count_product);
+        $audit_data['internal']['count'] = count($count_product);
+      }
+      elseif ($node_object->field_audit_type->value == 'external') {
+      	$ids_[] = $value->nid;
+      	$audit_data['external']['type'] = $node_object->field_internal_audit_type->value;
+      	if($value->moderation_state == 'submit_audit'){
+          $audit_data['external']['completed'] = $count_complete_external;
+          $count_complete_external++;
+        }
+        elseif ($value->moderation_state == 'scheduled') {
+          $audit_data['external']['on-going'] = $count_ongoing_external;
+          $count_ongoing_external++;
+        }
+        $count_external[] = $value->nid;
+        $audit_data['external']['count'] = count($count_external);
+      }
+      elseif ($node_object->field_audit_type->value == 'supplier') {
+      	$audit_data['supplier']['type'] = $node_object->field_internal_audit_type->value;
+      	if($value->moderation_state == 'submit_audit'){
+          $audit_data['supplier']['completed'] = $count_complete_supplier;
+          $count_complete_supplier++;
+        }
+        elseif ($value->moderation_state == 'scheduled') {
+          $audit_data['supplier']['on-going'] = $count_ongoing_supplier;
+          $count_ongoing_supplier++;
+        }
+        $count_supplier[] = $value->nid;
+        $audit_data['supplier']['count'] = count($count_supplier);
+      }
+      elseif ($node_object->field_audit_type->value == 'customer' && $node_object->field_customer_type->value == 'internal_assessment') {
+      	$audit_data['customer']['type'] = $node_object->field_customer_type->value;
+      	if($value->moderation_state == 'submit_audit'){
+          $audit_data['customer']['completed'] = $count_complete_ia;
+          $count_complete_ia++;
+        }
+        elseif ($value->moderation_state == 'scheduled') {
+          $audit_data['customer']['on-going'] = $count_ongoing_ia;
+          $count_ongoing_ia++;
+        }
+        $count_product[] = $value->nid;
+        $audit_data['customer']['count'] = count($count_product);
+      }
+      elseif ($node_object->field_audit_type->value == 'customer' && $node_object->field_customer_type->value == 'external_assessment') {
+      	$audit_data['customer']['type'] = $node_object->field_customer_type->value;
+      	if($value->moderation_state == 'submit_audit'){
+          $audit_data['customer']['completed'] = $count_complete_ea;
+          $count_complete_ea++;
+        }
+        elseif ($value->moderation_state == 'scheduled') {
+          $audit_data['customer']['on-going'] = $count_ongoing_ea;
+          $count_ongoing_ea++;
+        }
+        $count_product[] = $value->nid;
+        $audit_data['customer']['count'] = count($count_product);
       }
     }
     return $audit_data;

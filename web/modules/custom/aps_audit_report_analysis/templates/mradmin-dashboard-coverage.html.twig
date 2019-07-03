@@ -1,0 +1,18 @@
+<table style="width:100%">
+  <tr>
+    <th>{% trans %}Audit{% endtrans %}</th>
+    <th>{% trans %}Audit Type{% endtrans %}</th>
+    <th>{% trans %}Completed{% endtrans %}</th>
+    <th>{% trans %}on-going{% endtrans %}</th>
+    <th>{% trans %}Total{% endtrans %}</th>
+  </tr>
+  {% for key,value in data %}
+    <tr>
+	  <td>{{ value['internal']['system'] }}</td>
+	  <td>{{ key }}</td>
+	  <td>{{ key }}</td>
+	  <td>{{ key }}</td>
+	  <td>{{ key }}</td>
+    </tr>
+    {% endfor %}
+</table> 
