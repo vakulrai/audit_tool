@@ -9,6 +9,8 @@ dependencies:
     - field.field.node.assembly.field_select_section
     - field.field.node.assembly.field_shift
     - node.type.assembly
+  module:
+    - content_moderation
 id: node.assembly.default
 targetEntityType: node
 bundle: assembly
@@ -21,7 +23,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: entity_reference_autocomplete_tags
     region: content
   field_select_section:
     weight: 1
@@ -35,6 +37,12 @@ content:
     third_party_settings: {  }
     type: options_buttons
     region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0

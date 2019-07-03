@@ -220,7 +220,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
 
   //Condition for Assembly Add form
   if($form_id == 'node_assembly_form'){
-    // $form['field_refere']['#access'] = FALSE;
+    $form['field_refere']['#access'] = FALSE;
     if($unit_ref= \Drupal::request()->query->get('unit_ref')){
       $unit_ref_object = Node::load($unit_ref);
       $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
@@ -229,9 +229,12 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       }
       $form['field_shift']['widget']['#default_value'] = $def_values;
     }
-    if($id= \Drupal::request()->query->get('id')){
-      $node_object = Node::load($id);
-      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
+    if(\Drupal::request()->query->get('section_reference') && \Drupal::request()->query->get('id')){
+      $section_reference= \Drupal::request()->query->get('section_reference');
+      $unit_reference= \Drupal::request()->query->get('id');
+      $node_referenced = [$section_reference, $unit_reference];
+      $node_object= node_load_multiple($node_referenced);
+      $form['field_refere']['widget']['target_id']['#default_value'] = $node_object;
     }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
@@ -246,9 +249,12 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   //Condition for Manufacturing Process
   if($form_id == 'node_manufacturing_process_form'){
     $form['field_refere']['#access'] = FALSE;
-    if($id= \Drupal::request()->query->get('id')){
-      $node_object = Node::load($id);
-      $form['field_refere']['widget']['#default_value'] = $id;
+    if(\Drupal::request()->query->get('section_reference') && \Drupal::request()->query->get('id')){
+      $section_reference= \Drupal::request()->query->get('section_reference');
+      $unit_reference= \Drupal::request()->query->get('id');
+      $node_referenced = [$section_reference, $unit_reference];
+      $node_object= node_load_multiple($node_referenced);
+      $form['field_refere']['widget']['target_id']['#default_value'] = $node_object;
     }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
@@ -448,9 +454,102 @@ function aps_general_node_insert(Node $node) {
     $node->save();
   }
   if($node->bundle() == 'planned_events'){
+    $entity = getPlannedEventCount();
+    $node_load_multiple = Node::loadMultiple($entity);
+    $count_systems = 0;
+    $count_process = 0;
+    $count_product = 0;
+    $count_external = 0;
+    $count_supplier = 0;
+    $count_ia = 0;
+    $count_ea = 0;
+    foreach ($node_load_multiple as $key => $value) {
+      if($value->field_audit_type->value == 'internal' && $value->field_internal_audit_type->value == 'systems'){
+        $id_system[] = $key; 
+        $count_systems = count($id_system);
+      }
+      elseif ($value->field_audit_type->value == 'internal' && $value->field_internal_audit_type->value == 'process') {
+        $id_process[] = $key; 
+        $count_process = count($id_process);
+      }
+      elseif ($value->field_audit_type->value == 'internal' && $value->field_internal_audit_type->value == 'product') {
+        $id_product[] = $key; 
+        $count_product = count($id_product);
+      }
+      elseif ($value->field_audit_type->value == 'external') {
+        $id_external[] = $key; 
+        $count_external = count($id_external);
+      }
+      elseif ($value->field_audit_type->value == 'supplier') {
+        $id_supplier[] = $key; 
+        $count_supplier = count($id_supplier);
+      }
+      elseif ($value->field_audit_type->value == 'customer' && $value->field_customer_type->value == 'internal_assessment') {
+        $id_ia[] = $key; 
+        $count_ia = count($id_ia);
+      }
+      elseif ($value->field_audit_type->value == 'customer' && $value->field_customer_type->value == 'external_assessment') {
+        $id_ea[] = $key; 
+        $count_ea = count($id_ea);
+      }
+      else{
+        $title_val = 'Systems Audit';
+      }
+    }
+    
+    if($node->field_audit_type->value == 'internal'){
+      if($node->field_internal_audit_type->value == 'systems'){
+        $val = $count_systems;
+        $title_val = 'IS'.$val;
+      }
+      elseif ($node->field_internal_audit_type->value == 'process') {
+        $val = $count_process;
+        $title_val = 'IP'.$val;
+      }
+      elseif ($node->field_internal_audit_type->value == 'product') {
+        $val = $count_product;
+        $title_val = 'IPR'.$val;
+      }
+      else{
+        $title_val = 'Systems Audit';
+      }
+    }
+    elseif ($node->field_audit_type->value == 'external') {
+      $val = $count_external;
+      $title_val = 'EA'.$val;
+    }
+    elseif ($node->field_audit_type->value == 'supplier') {
+      $val = $count_supplier;
+      $title_val = 'S'.$val;
+    }
+    elseif ($node->field_audit_type->value == 'customer') {
+      if($node->field_customer_type->value == 'internal_assessment'){
+        $val = $count_ia;
+        $title_val = 'ICA'.$val;
+      }
+      elseif ($node->field_customer_type->value == 'external_assessment') {
+        $val = $count_ea;
+        $title_val = 'ECA'.$val;
+      }
+    }
+    else{
+        $title_val = 'Systems Audit';
+      }
+    $node->set('title', $title_val);
     $node->set('moderation_state', 'scheduled');
     $node->save();
   }
+}
+
+/**
+ * Method to get count of Planned events.
+ */
+function getPlannedEventCount(){
+  $query = \Drupal::entityQuery('node');
+  $query->condition('status', 1);
+  $query->condition('type', 'planned_events');
+  $entity_ids = $query->execute();
+  return $entity_ids;
 }
 
 /**
@@ -976,10 +1075,10 @@ function aps_section_page_redirect(array $form, \Drupal\Core\Form\FormStateInter
   $form_values = $form_state->getValues();
   $nid = $form_values['nid'];
   if($form_values['field_assembly'][0]['value'] == 'assembly'){
-    $response = Url::fromRoute('node.add',['node_type' => 'assembly', 'id' => $unit_ref]);
+    $response = Url::fromRoute('node.add',['node_type' => 'assembly', 'id' => $unit_ref, 'section_reference' => $nid]);
   }
   elseif ($form_values['field_assembly'][0]['value'] == 'manufacturing') {
-    $response = Url::fromRoute('node.add',['node_type' => 'manufacturing_process', 'id' => $unit_ref]);
+    $response = Url::fromRoute('node.add',['node_type' => 'manufacturing_process', 'id' => $unit_ref, 'section_reference' => $nid]);
   }
   else{
     $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
