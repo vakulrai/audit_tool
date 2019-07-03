@@ -21,9 +21,7 @@ class MradminDashboardCoverage extends BlockBase {
   public function build() {
   	// echo '<pre>';print_r($data);
     $build = [];
-    $build['#markup'] = 'Coverage';
-   //  $build['#data'] = $data;
-   //  $build['#theme'] = 'mradmin_dashboard_coverage';
+    $build['#markup'] = '<h1>Coverage</h1>';
     $header = [
       $this->t('Audit.'),
       $this->t('Audit Type'),
@@ -47,22 +45,22 @@ class MradminDashboardCoverage extends BlockBase {
 	        ];
 
 	        $build['tableselect_element'][$sr]['type'] = [
-	          '#markup' => $value['type'] ? $value['type'] : 'Not Available',
+	          '#markup' => $value['type'] ? $value['type'] : '-',
 	          '#title_display' => 'invisible',
 	        ];
 
 	        $build['tableselect_element'][$sr]['completed'] = [
-	          '#markup' => $value['completed']? $value['completed'] : 'Not Available',
+	          '#markup' => $value['completed']? $value['completed'] : '-',
 	          '#title_display' => 'invisible',
 	        ];
 
 	        $build['tableselect_element'][$sr]['on_going'] = [
-	          '#markup' => $value['on-going']? $value['on-going'] : 'Not Available',
+	          '#markup' => $value['on-going']? $value['on-going'] : '-',
 	          '#title_display' => 'invisible',
 	        ];
 
 	        $build['tableselect_element'][$sr]['count'] = [
-	          '#markup' => $value['count']? $value['count'] : 'Not Available',
+	          '#markup' => $value['count']? $value['count'] : '-',
 	          '#title_display' => 'invisible',
 	        ];
 	        $sr++;
