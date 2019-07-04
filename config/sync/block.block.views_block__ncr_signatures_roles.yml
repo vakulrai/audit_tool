@@ -13,7 +13,7 @@ dependencies:
 id: views_block__ncr_signatures_roles
 theme: seven
 region: highlighted
-weight: -21
+weight: -23
 provider: null
 plugin: 'views_block:ncr-signatures_roles'
 settings:

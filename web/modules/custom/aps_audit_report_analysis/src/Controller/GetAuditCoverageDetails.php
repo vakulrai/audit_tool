@@ -1,97 +1,61 @@
 <?php
 
-namespace Drupal\aps_audit_report_analysis\Plugin\Block;
+namespace Drupal\aps_audit_report_analysis\Controller;
 
-use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\user\Entity\User;
 use Drupal\node\Entity\Node;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * Provides a 'MradminDashboardCoverage' block.
- *
- * @Block(
- *  id = "mradmin_dashboard_coverage",
- *  admin_label = @Translation("Mradmin dashboard coverage"),
- * )
+ * Controller routines for aps_audit_report_analysis routes.
  */
-class MradminDashboardCoverage extends BlockBase {
+class GetAuditCoverageDetails extends ControllerBase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function build() {
-  	// echo '<pre>';print_r($data);
-    $build = [];
-    $build['#markup'] = '<h1>Coverage</h1>';
-    $header = [
-      $this->t('Audit.'),
-      $this->t('Audit Type'),
-      $this->t('Completed'),
-      $this->t('on-going'),
-      $this->t('Total'),
-    ];
-    $build['tableselect_element'] = [
-      '#type' => 'table',
-      '#header' => $header,
-      '#empty' => t('No content available.'),
-    ];
-    $data = $this->getAuditDetails();
-
-    if (count($data)) {
-    	$sr = 1;
-	    foreach ($data as $key => $value) {
-	        $build['tableselect_element'][$sr]['audit_type'] = [
-	          '#markup' => strtoupper($key),
-	          '#title_display' => 'invisible',
-	        ];
-
-	        $build['tableselect_element'][$sr]['type'] = [
-	          '#markup' => $value['type'] ? $value['type'] : '-',
-	          '#title_display' => 'invisible',
-	        ];
-
-	        $build['tableselect_element'][$sr]['completed'] = [
-	          '#markup' => $value['completed']? $value['completed'] : '-',
-	          '#title_display' => 'invisible',
-	        ];
-
-	        $build['tableselect_element'][$sr]['on_going'] = [
-	          '#markup' => $value['on-going']? $value['on-going'] : '-',
-	          '#title_display' => 'invisible',
-	        ];
-
-	        $build['tableselect_element'][$sr]['count'] = [
-	          '#markup' => $value['count']? $value['count'] : '-',
-	          '#title_display' => 'invisible',
-	        ];
-	        $sr++;
-      }
-	}
-    $build['#cache']['max-age'] = 0;
-    return $build;
-  }
-
-  public function getAuditDetails(){
+  public function getAuditDetails() {
     $query = \Drupal::database()->select('node_field_data', 'n');
     $query->join('content_moderation_state_field_data', 'cm', 'n.nid = cm.content_entity_id');
+    if(isset($_REQUEST['audit_type'])){
+      $check = $_REQUEST['audit_type'];
+      $query->join('node__field_audit_type', 'at', 'cm.content_entity_id = at.entity_id');
+      $query->fields('at',['field_audit_type_value']);
+    }
     $query->fields('n',['nid', 'title', 'created']);
     $query->fields('cm',['revision_id', 'moderation_state']);
+    if(isset($check)){
+      $query->condition('at.field_audit_type_value', $check);
+    }
     $query->condition('n.type', 'planned_events');
     $data = $query->execute()->fetchAll();
     $audit_data = [];
     $count_complete_system = 1;
     $count_ongoing_system = 1;
+    $count_rescheduled_system = 1;
+
     $count_complete_process = 1;
     $count_ongoing_process = 1;
+    $count_rescheduled_process = 1;
+
     $count_complete_product = 1;
     $count_ongoing_product = 1;
+    $count_rescheduled_product = 1;
+
     $count_complete_external = 1;
     $count_ongoing_external = 1;
+    $count_rescheduled_external = 1;
+
     $count_complete_supplier = 1;
     $count_ongoing_supplier = 1;
+    $count_rescheduled_supplier = 1;
+
     $count_complete_ia = 1;
     $count_ongoing_ia = 1;
+    $count_rescheduled_ia = 1;
+
     $count_complete_ea = 1;
     $count_ongoing_ea = 1;
+    $count_rescheduled_ea = 1;
     foreach ($data as $key => $value) {
       $node_object = Node::load($value->nid);
       if($node_object->field_audit_type->value == 'internal' && $node_object->field_internal_audit_type->value == 'systems'){
@@ -103,6 +67,10 @@ class MradminDashboardCoverage extends BlockBase {
         elseif ($value->moderation_state == 'scheduled') {
           $audit_data['internal']['on-going'] = $count_ongoing_system;
           $count_ongoing_system++;
+        }
+        elseif ($value->moderation_state == 'reschedule') {
+          $audit_data['internal']['reschedule'] = $count_rescheduled_system;
+          $count_rescheduled_system++;
         }
         $count_system[] = $value->nid;
         $audit_data['internal']['count'] = count($count_system);
@@ -117,12 +85,16 @@ class MradminDashboardCoverage extends BlockBase {
           $audit_data['internal']['on-going'] = $count_ongoing_process;
           $count_ongoing_process++;
         }
+        elseif ($value->moderation_state == 'reschedule') {
+          $audit_data['internal']['reschedule'] = $count_rescheduled_process;
+          $count_rescheduled_process++;
+        }
         $count_process[] = $value->nid;
         $audit_data['internal']['count'] = count($count_process);
       }
       elseif ($node_object->field_audit_type->value == 'internal' && $node_object->field_internal_audit_type->value == 'product') {
-      	$audit_data['internal']['type'] = $node_object->field_internal_audit_type->value;
-      	if($value->moderation_state == 'submit_audit'){
+        $audit_data['internal']['type'] = $node_object->field_internal_audit_type->value;
+        if($value->moderation_state == 'submit_audit'){
           $audit_data['internal']['completed'] = $count_complete_product;
           $count_complete_product++;
         }
@@ -130,13 +102,17 @@ class MradminDashboardCoverage extends BlockBase {
           $audit_data['internal']['on-going'] = $count_ongoing_product;
           $count_ongoing_product++;
         }
+        elseif ($value->moderation_state == 'reschedule') {
+          $audit_data['internal']['reschedule'] = $count_rescheduled_product;
+          $count_rescheduled_product++;
+        }
         $count_product[] = $value->nid;
         $audit_data['internal']['count'] = count($count_product);
       }
       elseif ($node_object->field_audit_type->value == 'external') {
-      	$ids_[] = $value->nid;
-      	$audit_data['external']['type'] = $node_object->field_internal_audit_type->value;
-      	if($value->moderation_state == 'submit_audit'){
+        $ids_[] = $value->nid;
+        $audit_data['external']['type'] = $node_object->field_internal_audit_type->value;
+        if($value->moderation_state == 'submit_audit'){
           $audit_data['external']['completed'] = $count_complete_external;
           $count_complete_external++;
         }
@@ -144,12 +120,16 @@ class MradminDashboardCoverage extends BlockBase {
           $audit_data['external']['on-going'] = $count_ongoing_external;
           $count_ongoing_external++;
         }
+        elseif ($value->moderation_state == 'reschedule') {
+          $audit_data['external']['reschedule'] = $count_rescheduled_external;
+          $count_rescheduled_external++;
+        }
         $count_external[] = $value->nid;
         $audit_data['external']['count'] = count($count_external);
       }
       elseif ($node_object->field_audit_type->value == 'supplier') {
-      	$audit_data['supplier']['type'] = $node_object->field_internal_audit_type->value;
-      	if($value->moderation_state == 'submit_audit'){
+        $audit_data['supplier']['type'] = $node_object->field_internal_audit_type->value;
+        if($value->moderation_state == 'submit_audit'){
           $audit_data['supplier']['completed'] = $count_complete_supplier;
           $count_complete_supplier++;
         }
@@ -157,12 +137,16 @@ class MradminDashboardCoverage extends BlockBase {
           $audit_data['supplier']['on-going'] = $count_ongoing_supplier;
           $count_ongoing_supplier++;
         }
+        elseif ($value->moderation_state == 'reschedule') {
+          $audit_data['supplier']['reschedule'] = $count_rescheduled_supplier;
+          $count_rescheduled_supplier++;
+        }
         $count_supplier[] = $value->nid;
         $audit_data['supplier']['count'] = count($count_supplier);
       }
       elseif ($node_object->field_audit_type->value == 'customer' && $node_object->field_customer_type->value == 'internal_assessment') {
-      	$audit_data['customer']['type'] = $node_object->field_customer_type->value;
-      	if($value->moderation_state == 'submit_audit'){
+        $audit_data['customer']['type'] = $node_object->field_customer_type->value;
+        if($value->moderation_state == 'submit_audit'){
           $audit_data['customer']['completed'] = $count_complete_ia;
           $count_complete_ia++;
         }
@@ -170,12 +154,16 @@ class MradminDashboardCoverage extends BlockBase {
           $audit_data['customer']['on-going'] = $count_ongoing_ia;
           $count_ongoing_ia++;
         }
+        elseif ($value->moderation_state == 'reschedule') {
+          $audit_data['customer']['reschedule'] = $count_rescheduled_ia;
+          $count_rescheduled_ia++;
+        }
         $count_product[] = $value->nid;
         $audit_data['customer']['count'] = count($count_product);
       }
       elseif ($node_object->field_audit_type->value == 'customer' && $node_object->field_customer_type->value == 'external_assessment') {
-      	$audit_data['customer']['type'] = $node_object->field_customer_type->value;
-      	if($value->moderation_state == 'submit_audit'){
+        $audit_data['customer']['type'] = $node_object->field_customer_type->value;
+        if($value->moderation_state == 'submit_audit'){
           $audit_data['customer']['completed'] = $count_complete_ea;
           $count_complete_ea++;
         }
@@ -183,11 +171,40 @@ class MradminDashboardCoverage extends BlockBase {
           $audit_data['customer']['on-going'] = $count_ongoing_ea;
           $count_ongoing_ea++;
         }
+        elseif ($value->moderation_state == 'reschedule') {
+          $audit_data['customer']['reschedule'] = $count_rescheduled_ea;
+          $count_rescheduled_ea++;
+        }
         $count_product[] = $value->nid;
         $audit_data['customer']['count'] = count($count_product);
       }
     }
-    return $audit_data;
-  }
 
+    $count_result = 0;
+    $count_completed = 0;
+    $count_pending = 0;
+    $count_reschedule = 0;
+    $plannig_report_json = [];
+    foreach ($audit_data as $i => $j) {
+      if($j['reschedule']){  
+        $count_reschedule += $j['reschedule'];   
+      }
+      if($j['on-going']){
+        $count_pending += $j['on-going'];
+      }
+      if($j['completed']){ 
+        $count_completed += $j['completed'];
+      }
+      $count_result++;
+    }
+    $plannig_report_json[0]['name'] = strtoupper('reschedule');
+    $plannig_report_json[0]['y'] = $count_reschedule;
+    $plannig_report_json[0]['color'] = 'red';
+    $plannig_report_json[1]['name'] = strtoupper('on going');
+    $plannig_report_json[1]['y'] = $count_pending;
+    $plannig_report_json[2]['name'] = strtoupper('completed');
+    $plannig_report_json[2]['y'] = $count_completed;
+
+    return new JsonResponse( $plannig_report_json );
+  }
 }

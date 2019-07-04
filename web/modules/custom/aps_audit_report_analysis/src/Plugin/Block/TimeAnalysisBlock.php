@@ -69,6 +69,7 @@ class TimeAnalysisBlock extends BlockBase {
     $build['#car_hours'] = $car_HOURS;
     $build['#audit_hours'] = $audit_HOURS;
     $build['#theme'] = 'time_analysis_block';
+    $build['#cache']['max-age'] = 0;
     return $build;
   }
 

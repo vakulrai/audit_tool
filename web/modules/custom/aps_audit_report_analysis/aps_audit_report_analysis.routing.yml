@@ -1,0 +1,15 @@
+aps_audit_report_analysis.get_audit_details:
+  path: 'audit-coverage-details/get.json'
+  defaults: 
+    _controller: '\Drupal\aps_audit_report_analysis\Controller\GetAuditCoverageDetails::getAuditDetails'
+  methods:  [GET]
+  requirements:
+    _access: 'TRUE'
+aps_audit_report_analysis.planning_control_form:
+  path: '/aps_audit_report_analysis/form/planning_control'
+  defaults:
+    _form: '\Drupal\aps_audit_report_analysis\Form\PlanningControlForm'
+    _title: 'PlanningControlForm'
+  requirements:
+    _access: 'TRUE'
+  

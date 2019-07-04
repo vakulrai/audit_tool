@@ -11,7 +11,7 @@ dependencies:
 id: timeanalysisblock
 theme: seven
 region: highlighted
-weight: -22
+weight: -24
 provider: null
 plugin: time_analysis_block
 settings:

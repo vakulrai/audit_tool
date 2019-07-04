@@ -1,28 +1,24 @@
-uuid: 84f22135-09b6-4c6d-b564-bce2820df969
+uuid: a418b01c-2282-4a9a-8f0e-db43476050a1
 langcode: en
 status: true
 dependencies:
-  config:
-    - views.view.registered_unit_listing
   module:
+    - aps_audit_report_analysis
     - system
     - user
-    - views
   theme:
     - seven
-id: views_block__registered_unit_listing_block_4
+id: mradmindashboardplanningcontrol
 theme: seven
 region: content
-weight: -3
+weight: -1
 provider: null
-plugin: 'views_block:registered_unit_listing-block_4'
+plugin: mradmin_dashboard_planning_control
 settings:
-  id: 'views_block:registered_unit_listing-block_4'
-  label: ''
-  provider: views
-  label_display: visible
-  views_label: ''
-  items_per_page: none
+  id: mradmin_dashboard_planning_control
+  label: 'Mradmin dashboard planning control'
+  provider: aps_audit_report_analysis
+  label_display: '0'
 visibility:
   request_path:
     id: request_path
@@ -32,8 +28,6 @@ visibility:
   user_role:
     id: user_role
     roles:
-      auditor: auditor
-      auditee: auditee
       mr_admin: mr_admin
     negate: false
     context_mapping:
