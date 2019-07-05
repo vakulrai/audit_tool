@@ -5,6 +5,7 @@ namespace Drupal\aps_audit_report_analysis\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\aps_audit_report_analysis\Controller\GetAuditCoverageDetails;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * Provides a 'MradminDashboardPlanningControl' block.
  *
@@ -27,6 +28,7 @@ class MradminDashboardPlanningControl extends BlockBase {
     $form_class = '\Drupal\aps_audit_report_analysis\Form\PlanningControlForm';
     $form_builder_class = \Drupal::formBuilder()->getForm($form_class);
     $response = json_decode($response);
+    $build['#attached']['drupalSettings']['auditDetail'] = $response;
     $total = 0;
     foreach ($response as $key => $value) {
       $total += $value->y;

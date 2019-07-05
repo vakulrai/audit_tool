@@ -16,7 +16,7 @@ class GetAuditCoverageDetails extends ControllerBase {
   public function getAuditDetails() {
     $query = \Drupal::database()->select('node_field_data', 'n');
     $query->join('content_moderation_state_field_data', 'cm', 'n.nid = cm.content_entity_id');
-    if(isset($_REQUEST['audit_type'])){
+    if(isset($_REQUEST['audit_type']) && $_REQUEST['audit_type'] != 'all'){
       $check = $_REQUEST['audit_type'];
       $query->join('node__field_audit_type', 'at', 'cm.content_entity_id = at.entity_id');
       $query->fields('at',['field_audit_type_value']);

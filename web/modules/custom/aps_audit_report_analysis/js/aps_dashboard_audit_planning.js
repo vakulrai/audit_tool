@@ -3,7 +3,8 @@
   Drupal.behaviors.aps_dashboard_audit_planning_js = {
     attach: function (context, settings) {
       var base_url = drupalSettings.siteBaseUrl;
-      var options = {
+      var audit_detail = drupalSettings.auditDetail;
+      var chart = new Highcharts.Chart('container', { 
         chart: {
           plotBackgroundColor: null,
           plotBorderWidth: null,
@@ -29,22 +30,20 @@
         series: [{
           name: 'Audit Type',
           colorByPoint: true,
+          data: audit_detail
         }]
-    };
-    
-    var url =  base_url + "/audit-coverage-details/get.json";
-    $.getJSON(url,  function(data) {
-        options.series[0].data = data;
-        var chart = new Highcharts.Chart('container',options);
     });
 
     //Check if filter is applied.
-     $('#planning-submit').click(function(event) {
+     $('#planning-submit').click(function() {
         var audit_type = $("#audit-type").val();
         var start_date = $("#start-date").val();
         var end_date = $("#end-date").val();
-        // console.log(audit_type + start_date  + end_date);
-         event.preventDefault();
+        var url =  base_url + "/audit-coverage-details/get.json?audit_type="+audit_type;
+        $.getJSON(url,  function(data) {
+          chart.series[0].setData(data);
+        });
+        event.preventDefault();
      });
     }
   };
