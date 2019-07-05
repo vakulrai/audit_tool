@@ -7,9 +7,6 @@ dependencies:
     - node.type.assembly
     - node.type.section
     - node.type.unit
-  content:
-    - 'node:section:ee4d3461-b465-405c-9afd-3d690665d8b6'
-    - 'node:unit:7398f87e-4e9f-4982-8b7e-d1557056c55c'
 id: node.assembly.field_refere
 field_name: field_refere
 entity_type: node
@@ -18,11 +15,7 @@ label: 'Reference id'
 description: ''
 required: false
 translatable: true
-default_value:
-  -
-    target_uuid: 7398f87e-4e9f-4982-8b7e-d1557056c55c
-  -
-    target_uuid: ee4d3461-b465-405c-9afd-3d690665d8b6
+default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:node'

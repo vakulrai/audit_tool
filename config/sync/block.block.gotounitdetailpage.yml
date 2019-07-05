@@ -12,7 +12,7 @@ dependencies:
 id: gotounitdetailpage
 theme: seven
 region: content
-weight: -23
+weight: -24
 provider: null
 plugin: 'superfish:go-to-unit-detail-page'
 settings:

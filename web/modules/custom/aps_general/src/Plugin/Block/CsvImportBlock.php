@@ -3,7 +3,7 @@
 namespace Drupal\aps_general\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\aps_general\Form\CsvImport;
+use Drupal\aps_general\Form\CsvEntityImport;
 
 /**
  * Provides a 'CsvImportBlock' block.
@@ -19,7 +19,7 @@ class CsvImportBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    return $form = \Drupal::formBuilder()->getForm(CsvImport::class);
+    return $form = \Drupal::formBuilder()->getForm(CsvEntityImport::class);
   }
 
 }

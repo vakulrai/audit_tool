@@ -1,4 +1,4 @@
-uuid: 082cbd17-e0c3-4825-99f6-e44fdae80ef7
+uuid: 3c9a1c1e-3801-4c91-b7b4-158a6ffa5d49
 langcode: en
 status: true
 dependencies:
@@ -10,7 +10,7 @@ dependencies:
 id: csvimportblock
 theme: seven
 region: content
-weight: -24
+weight: 12
 provider: null
 plugin: csv_import_block
 settings:

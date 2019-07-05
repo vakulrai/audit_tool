@@ -27,3 +27,11 @@ aps_general.add_documents:
     _controller: '\Drupal\aps_general\Controller\RedirectFormController::redirect_form'
   requirements:
     _access: 'TRUE'
+aps_general.csv_entity_import:
+  path: '/aps_general/form/csv_entity_import'
+  defaults:
+    _form: '\Drupal\aps_general\Form\CsvEntityImport'
+    _title: 'CsvEntityImport'
+  requirements:
+    _access: 'TRUE'
+  
