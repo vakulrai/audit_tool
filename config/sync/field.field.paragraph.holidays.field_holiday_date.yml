@@ -1,0 +1,21 @@
+uuid: 2fec6ffd-ac0f-40f9-95dd-10ccfbcfeda8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_holiday_date
+    - paragraphs.paragraphs_type.holidays
+  module:
+    - datetime
+id: paragraph.holidays.field_holiday_date
+field_name: field_holiday_date
+entity_type: paragraph
+bundle: holidays
+label: Date
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,9 @@
+uuid: 99213c5d-a7aa-4a74-b248-7ea8e7538b16
+langcode: en
+status: true
+dependencies: {  }
+id: holidays
+label: Holidays
+icon_uuid: null
+description: 'Paragraph for unit holidays'
+behavior_plugins: {  }

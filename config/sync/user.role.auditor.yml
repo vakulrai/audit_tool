@@ -7,6 +7,7 @@ label: Auditor
 weight: 3
 is_admin: null
 permissions:
+  - 'access holidays entity listing'
   - 'access kint'
   - 'access media overview'
   - 'access unit entity listing'
@@ -97,6 +98,7 @@ permissions:
   - 'edit any customer_manual_parts entities'
   - 'edit any customers_manual content'
   - 'edit any files media'
+  - 'edit any holidays entities'
   - 'edit any internal_audit content'
   - 'edit any internal_documents content'
   - 'edit any planned_events content'
@@ -137,6 +139,7 @@ permissions:
   - 'use workflow_for_audit_planning transition reschedule_to_schedule'
   - 'use workflow_for_audit_planning transition rescheduled'
   - 'use workflow_for_audit_planning transition scheduled'
+  - 'view any holidays entities'
   - 'view paragraph content audit_cycle_other'
   - 'view paragraph content audit_cycle_schedule_release'
   - 'view paragraph content audit_report'
@@ -148,6 +151,7 @@ permissions:
   - 'view paragraph content corrective_action'
   - 'view paragraph content customer_audit'
   - 'view paragraph content customer_manual_parts'
+  - 'view paragraph content holidays'
   - 'view paragraph content internal_audit_qa'
   - 'view paragraph content interrim_action'
   - 'view paragraph content new_answer'

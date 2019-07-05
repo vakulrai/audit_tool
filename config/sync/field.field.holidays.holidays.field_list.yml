@@ -1,0 +1,82 @@
+uuid: 1f99de7b-f452-4076-b3ee-3d1369a23082
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.holidays.holidays
+    - field.storage.holidays.field_list
+    - paragraphs.paragraphs_type.holidays
+  module:
+    - entity_reference_revisions
+id: holidays.holidays.field_list
+field_name: field_list
+entity_type: holidays
+bundle: holidays
+label: List
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      holidays: holidays
+    target_bundles_drag_drop:
+      audit_cycle_other:
+        weight: 19
+        enabled: false
+      audit_cycle_schedule_release:
+        weight: 20
+        enabled: false
+      audit_report:
+        weight: 21
+        enabled: false
+      audit_score_settings:
+        weight: 22
+        enabled: false
+      audit_score_settings_range_100:
+        weight: 23
+        enabled: false
+      auditor_functional_details:
+        weight: 24
+        enabled: false
+      business_process_effectiveness:
+        weight: 25
+        enabled: false
+      business_process_effieciency:
+        weight: 26
+        enabled: false
+      corrective_action:
+        weight: 27
+        enabled: false
+      customer_audit:
+        weight: 28
+        enabled: false
+      customer_manual_parts:
+        weight: 29
+        enabled: false
+      holidays:
+        enabled: true
+        weight: 30
+      internal_audit_qa:
+        weight: 31
+        enabled: false
+      interrim_action:
+        weight: 32
+        enabled: false
+      new_answer:
+        weight: 33
+        enabled: false
+      new_sub_question_yes_no:
+        weight: 34
+        enabled: false
+      procedures:
+        weight: 35
+        enabled: false
+      report_reason:
+        weight: 36
+        enabled: false
+field_type: entity_reference_revisions

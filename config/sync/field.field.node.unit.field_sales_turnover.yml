@@ -1,0 +1,23 @@
+uuid: fd780099-94bb-4e9c-842d-c317ea1f92c1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sales_turnover
+    - node.type.unit
+id: node.unit.field_sales_turnover
+field_name: field_sales_turnover
+entity_type: node
+bundle: unit
+label: 'Sales Turnover (INR)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -1,0 +1,20 @@
+uuid: 740627e8-5936-44ff-99e0-f2d17c5a060c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_sales_turnover
+field_name: field_sales_turnover
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

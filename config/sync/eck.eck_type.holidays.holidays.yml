@@ -1,0 +1,9 @@
+uuid: e909c69c-475e-4cbd-80e8-bf02d7e389c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.holidays
+name: holidays
+type: holidays
+description: 'List of holidays'

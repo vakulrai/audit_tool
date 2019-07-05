@@ -1,0 +1,20 @@
+uuid: fdd85169-c6de-4770-a198-bc984e37887a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_contributed_sales
+field_name: field_contributed_sales
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

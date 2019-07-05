@@ -5,17 +5,23 @@ dependencies:
   config:
     - field.field.node.unit.body
     - field.field.node.unit.field_address
+    - field.field.node.unit.field_contributed_sales
+    - field.field.node.unit.field_frequency
+    - field.field.node.unit.field_months_for_the_audit
     - field.field.node.unit.field_remote_address
     - field.field.node.unit.field_remote_location_name
+    - field.field.node.unit.field_sales_turnover
     - field.field.node.unit.field_shift
     - field.field.node.unit.field_time_g
     - field.field.node.unit.field_time_s1
     - field.field.node.unit.field_time_s3
     - field.field.node.unit.field_time_s4
+    - field.field.node.unit.field_total_members
     - field.field.node.unit.field_unit_name
     - node.type.unit
   module:
     - address
+    - aps_general
     - datetime_range
     - text
     - user
@@ -38,6 +44,31 @@ content:
     third_party_settings: {  }
     type: address_default
     region: content
+  field_contributed_sales:
+    weight: 112
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_frequency:
+    weight: 114
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_months_for_the_audit:
+    weight: 115
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: month_only_formatter
+    region: content
   field_remote_address:
     weight: 103
     label: above
@@ -52,6 +83,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_sales_turnover:
+    weight: 111
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   field_shift:
     weight: 105
@@ -100,6 +140,15 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: daterange_default
+    region: content
+  field_total_members:
+    weight: 113
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   field_unit_name:
     weight: 106

@@ -1,0 +1,29 @@
+uuid: 082cbd17-e0c3-4825-99f6-e44fdae80ef7
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_general
+    - node
+  theme:
+    - seven
+id: csvimportblock
+theme: seven
+region: content
+weight: -24
+provider: null
+plugin: csv_import_block
+settings:
+  id: csv_import_block
+  label: 'Csv import block'
+  provider: aps_general
+  label_display: '0'
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      assembly: assembly
+      manufacturing_process: manufacturing_process
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

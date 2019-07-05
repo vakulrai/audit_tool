@@ -1,0 +1,23 @@
+uuid: 12bf291f-1a72-4abc-878e-72a030491372
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contributed_sales
+    - node.type.unit
+id: node.unit.field_contributed_sales
+field_name: field_contributed_sales
+entity_type: node
+bundle: unit
+label: 'Number of Customers covered by 75% of Sales Turnover '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

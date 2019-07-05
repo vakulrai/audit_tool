@@ -6,6 +6,7 @@
       var url_param = pathname.split("/");
     	var calendarEl = document.getElementById('demo');
       var base_url = drupalSettings.siteBaseUrl;
+      var unit_id = drupalSettings.unitId;
       var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'googleCalendar'],
       googleCalendarApiKey: 'AIzaSyDAhieDD1LZNmnuFROsxhJQAGZP6amv-cg',
@@ -25,6 +26,7 @@
       eventSources: [
         {
           url: base_url+'/generate-events',
+          url: base_url+'/list-of-unit-holidays/'+unit_id,
         },
         {
           googleCalendarId: 'en.indian#holiday@group.v.calendar.google.com',

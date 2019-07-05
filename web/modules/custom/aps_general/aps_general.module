@@ -1007,6 +1007,34 @@ function aps_general_link_alter(&$variables) {
       $variables['url'] = $url;
     }
   }
+
+  if ($cleanLinkText == 'HOLIDAY LIST') {
+    $id = $uri[1];
+    if($id){
+      $url =Url::fromUserInput('/holidays-listing/'.$id);
+      unset($variables['url']);
+      $variables['url'] = $url;
+    }
+  }
+
+  if ($cleanLinkText == 'Add Holidays') {
+    $id = $uri[1];
+    if($id){
+      $query = \Drupal::database()->select('holidays__field_unit_reference', 'h');
+      $query->fields('h',['entity_id']);
+      $query->condition('h.field_unit_reference_target_id', $id);
+      $query->range(0, 1);
+      $nids = $query->execute()->fetchAll();
+      if(isset($nids[0]->entity_id)){
+        $url =Url::fromUserInput('/holidays/'.$nids[0]->entity_id.'/edit',['query' => ['destination' => $current_uri],'absolute' => TRUE]);
+      }
+      else{
+        $url =Url::fromUserInput('/admin/content/holidays/add/holidays',['query' => ['destination' => $current_uri],'absolute' => TRUE]);
+      }
+      unset($variables['url']);
+      $variables['url'] = $url;
+    }
+  }
 }
 
 function get_user_roles(){
