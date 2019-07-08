@@ -1,21 +1,3 @@
-aps_general.systems_setting:
-  route_name: entity.audit_criteria.edit_form
-  title: Systems
-  base_route: entity.audit_criteria.canonical
-  weight: 10
-
-aps_general.process_setting:
-  route_name: entity.audit_criteria.edit_form
-  title: Process
-  base_route: entity.audit_criteria.edit_form
-  weight: 20
-
-aps_general.product_setting:
-  route_name: entity.audit_criteria.edit_form
-  title: Product
-  base_route: entity.audit_criteria.edit_form
-  weight: 30
-
 aps_general.manual:
   route_name: node.add
   route_parameters:

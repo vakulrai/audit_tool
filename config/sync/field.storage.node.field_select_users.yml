@@ -1,0 +1,27 @@
+uuid: af509c56-ab78-40a9-a8b9-8a55a8de5c3e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_select_users
+field_name: field_select_users
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: heads-only
+      label: 'Section/Department Head'
+    -
+      value: manual
+      label: 'Select Form Available users'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

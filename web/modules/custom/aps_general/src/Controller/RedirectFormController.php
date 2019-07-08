@@ -101,41 +101,74 @@ class RedirectFormController extends ControllerBase {
    * Method to create entity from CSV.
    */
   function create_entity($user_data, $entity_type) {
-    foreach ($user_data as $key => $value) {
-      if(strtolower($key) == 'shift'){
-        $get_shift_array = explode(',', $value);
-        foreach ($get_shift_array as $shift => $shift_value) {
-          $properties['name'] = $shift_value;
-          $properties['vid'] = 'shift';
-          $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
-          $term = reset($terms);
-          $id = !empty($term) ? $term->id() : 0;
-          $shift_terms[] = $id;
-          $data['field_shift'] = $shift_terms;
+    if($entity_type == 'assembly' && strtolower($user_data['type']) == 'assembly'){
+      foreach ($user_data as $key => $value) {
+        if(strtolower($key) == 'shift'){
+          $get_shift_array = explode(',', $value);
+          foreach ($get_shift_array as $shift => $shift_value) {
+            $properties['name'] = $shift_value;
+            $properties['vid'] = 'shift';
+            $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+            $term = reset($terms);
+            $id = !empty($term) ? $term->id() : 0;
+            $shift_terms[] = $id;
+            $data['field_shift'] = $shift_terms;
+          }
+        }
+        if(strtolower($key) == 'title'){
+          $title = $value;
+          $data['title'] = $title;
+        }
+        if(strtolower($key) == 'section'){
+          $query = \Drupal::database()->select('node_field_data', 'n');
+          $query->fields('n',['nid']);
+          $query->condition('n.title', $value);
+          $query->range(0, 1);
+          $nid_by_name = $query->execute()->fetchAll();
+          $nid = $nid_by_name[0]->nid;
+          $data['field_refere'] = $nid;
+        }
+        if(strtolower($key) == 'unit'){
+          $query = \Drupal::database()->select('node_field_data', 'n');
+          $query->fields('n',['nid']);
+          $query->condition('n.title', $value);
+          $query->range(0, 1);
+          $nid_by_name_unit = $query->execute()->fetchAll();
+          $nid_unit = $nid_by_name_unit[0]->nid;
+          $referenced_node = [$data['field_refere'], $nid_unit];
+          $data['field_refere'] = $referenced_node;
         }
       }
-      if(strtolower($key) == 'title'){
-        $title = $value;
-        $data['title'] = $title;
-      }
-      if(strtolower($key) == 'section'){
-        $query = \Drupal::database()->select('node_field_data', 'n');
-        $query->fields('n',['nid']);
-        $query->condition('n.title', $value);
-        $query->range(0, 1);
-        $nid_by_name = $query->execute()->fetchAll();
-        $nid = $nid_by_name[0]->nid;
-        $data['field_refere'] = $nid;
-      }
-      if(strtolower($key) == 'unit'){
-        $query = \Drupal::database()->select('node_field_data', 'n');
-        $query->fields('n',['nid']);
-        $query->condition('n.title', $value);
-        $query->range(0, 1);
-        $nid_by_name_unit = $query->execute()->fetchAll();
-        $nid_unit = $nid_by_name_unit[0]->nid;
-        $referenced_node = [$data['field_refere'], $nid_unit];
-        $data['field_refere'] = $referenced_node;
+    }
+    elseif ($entity_type == 'manufacturing_process' && strtolower($user_data['type']) == 'manufacturing_process') {
+      foreach ($user_data as $key => $value) {
+        if(strtolower($key) == 'title'){
+          $title = $value;
+          $data['title'] = $title;
+        }
+        if(strtolower($key) == 's_no'){
+          $s_no = $value;
+          $data['field_sr_no'] = $s_no;
+        }
+        if(strtolower($key) == 'section'){
+          $query = \Drupal::database()->select('node_field_data', 'n');
+          $query->fields('n',['nid']);
+          $query->condition('n.title', $value);
+          $query->range(0, 1);
+          $nid_by_name = $query->execute()->fetchAll();
+          $nid = $nid_by_name[0]->nid;
+          $data['field_refere'] = $nid;
+        }
+        if(strtolower($key) == 'unit'){
+          $query = \Drupal::database()->select('node_field_data', 'n');
+          $query->fields('n',['nid']);
+          $query->condition('n.title', $value);
+          $query->range(0, 1);
+          $nid_by_name_unit = $query->execute()->fetchAll();
+          $nid_unit = $nid_by_name_unit[0]->nid;
+          $referenced_node = [$data['field_refere'], $nid_unit];
+          $data['field_refere'] = $referenced_node;
+        }
       }
     }
     //Create Entity form data.

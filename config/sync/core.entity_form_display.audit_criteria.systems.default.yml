@@ -12,6 +12,7 @@ dependencies:
     - field.field.audit_criteria.systems.field_score_level_set_100
     - field.field.audit_criteria.systems.field_score_settings
     - field.field.audit_criteria.systems.field_supplier_audit
+    - field.field.audit_criteria.systems.field_unit_reference
   module:
     - conditional_fields
     - paragraphs
@@ -87,5 +88,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_unit_reference:
+    weight: 8
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
 hidden: {  }

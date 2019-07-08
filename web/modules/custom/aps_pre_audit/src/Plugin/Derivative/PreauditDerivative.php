@@ -57,6 +57,13 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
     else{
       $id = 0;
     }
+
+    if($type_id = \Drupal::request()->query->get('type')){
+      $type = $type_id;
+    }
+    else{
+      $type = 0;
+    }
     if($user_role == 'auditor' || $user_role == 'mr_admin'){
       $links['records'] = [
         'title' => 'Records',
@@ -143,6 +150,77 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       'route_parameters' => ['unit_reference' => $id, 'node_type' => 'clauses'],
     ] + $base_plugin_definition;
 
+    if($id){
+      $audit_criteria_query = \Drupal::entityQuery('audit_criteria');
+      $audit_criteria_query->condition('field_unit_reference', $id);
+      $audit_criteria_id = $audit_criteria_query->execute();
+
+      $audit_criteria_process_query = \Drupal::entityQuery('audit_criteria_process');
+      $audit_criteria_process_query->condition('field_unit_reference', $id);
+      $audit_criteria_process_id = $audit_criteria_process_query->execute();
+
+      $audit_criteria_product_query = \Drupal::entityQuery('audit_criteria_product');
+      $audit_criteria_product_query->condition('field_unit_reference', $id);
+      $audit_criteria_product_id = $audit_criteria_product_query->execute();
+      
+      if($type == 'edit'){
+        $base_route = 'entity.audit_criteria.edit_form';
+      }
+      else{
+        $base_route = 'eck.entity.add';
+      }
+      if(count($audit_criteria_id)){
+        $links['audit_criteria_systems'] = [
+          'title' => 'Systems',
+          'route_name' => 'entity.audit_criteria.edit_form',
+          'base_route' => $base_route,
+          'route_parameters' => ['audit_criteria' => key($audit_criteria_id), 'unit_reference' => $id, 'type' => $type],
+        ] + $base_plugin_definition;
+      }
+      else{
+        $links['audit_criteria_systems'] = [
+          'title' => 'Systems',
+          'route_name' => 'eck.entity.add',
+          'base_route' => $base_route,
+          'route_parameters' => ['eck_entity_type' => 'audit_criteria', 'eck_entity_bundle' => 'systems', 'unit_reference' => $id, 'type' => $type],
+        ] + $base_plugin_definition;
+      }
+
+      if(count($audit_criteria_process_id)){
+        $links['audit_criteria_process'] = [
+          'title' => 'Process',
+          'route_name' => 'entity.audit_criteria_process.edit_form',
+          'base_route' => $base_route,
+          'route_parameters' => ['audit_criteria_process' => key($audit_criteria_process_id), 'unit_reference' => $id, 'type' => $type],
+        ] + $base_plugin_definition;
+      }
+      else{
+        $links['audit_criteria_process'] = [
+          'title' => 'Process',
+          'route_name' => 'eck.entity.add',
+          'base_route' => $base_route,
+          'route_parameters' => ['eck_entity_type' => 'audit_criteria_process', 'eck_entity_bundle' => 'process', 'unit_reference' => $id, 'type' => $type],
+        ] + $base_plugin_definition;
+      }
+
+      if(count($audit_criteria_product_id)){
+         $links['audit_criteria_product'] = [
+          'title' => 'Product',
+          'route_name' => 'entity.audit_criteria_product.edit_form',
+          'base_route' => $base_route,
+          'route_parameters' => ['audit_criteria_product' => key($audit_criteria_product_id), 'unit_reference' => $id, 'type' => $type],
+        ] + $base_plugin_definition;
+      }
+      else{
+        $links['audit_criteria_product'] = [
+          'title' => 'Product',
+          'route_name' => 'eck.entity.add',
+          'base_route' => $base_route,
+          'route_parameters' => ['eck_entity_type' => 'audit_criteria_product', 'eck_entity_bundle' => 'product', 'unit_reference' => $id, 'type' => $type],
+        ] + $base_plugin_definition;
+      }
+
+    }
     return $links;
   }
 }

@@ -4,11 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.node.pages.body
-    - field.field.node.pages.field_n
     - field.field.node.pages.field_upload
     - node.type.pages
   module:
-    - aps_general
     - content_moderation
     - file
     - path
@@ -33,14 +31,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_n:
-    weight: 123
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: month_only_widget
-    region: content
   field_upload:
     weight: 122
     settings:

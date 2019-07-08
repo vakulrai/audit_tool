@@ -4,11 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.node.pages.body
-    - field.field.node.pages.field_n
     - field.field.node.pages.field_upload
     - node.type.pages
   module:
-    - aps_general
     - file
     - text
     - user
@@ -23,13 +21,6 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
-    region: content
-  field_n:
-    weight: 103
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: month_only_formatter
     region: content
   field_upload:
     weight: 102

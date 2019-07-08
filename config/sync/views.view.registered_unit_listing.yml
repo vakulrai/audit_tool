@@ -4,9 +4,9 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.storage.node.field_business_head_dept
     - field.storage.node.field_business_head_name
     - field.storage.node.field_remote_address
+    - field.storage.node.field_section_head
     - node.type.business_process
     - node.type.department
     - node.type.section
@@ -2887,14 +2887,14 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_business_head_dept:
-          id: field_business_head_dept
-          table: node__field_business_head_dept
-          field: field_business_head_dept
+        field_section_head:
+          id: field_section_head
+          table: node__field_section_head
+          field: field_section_head
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Business Head'
+          label: 'Section Head'
           exclude: false
           alter:
             alter_text: false
@@ -2935,11 +2935,11 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
+          click_sort_column: value
+          type: string
           settings:
-            link: false
-          group_column: target_id
+            link_to_entity: false
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -3063,7 +3063,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_business_head_dept'
+        - 'config:field.storage.node.field_section_head'
   unit:
     display_plugin: page
     id: unit

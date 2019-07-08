@@ -1,0 +1,20 @@
+uuid: ed11b2d3-db12-47cb-9ad2-78908d07c904
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - node
+id: audit_cycle.field_unit_reference
+field_name: field_unit_reference
+entity_type: audit_cycle
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

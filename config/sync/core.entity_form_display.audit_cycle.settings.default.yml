@@ -9,6 +9,7 @@ dependencies:
     - field.field.audit_cycle.settings.field_financial_dates
     - field.field.audit_cycle.settings.field_other
     - field.field.audit_cycle.settings.field_schedule_release
+    - field.field.audit_cycle.settings.field_unit_reference
   module:
     - datetime_range
     - paragraphs
@@ -58,5 +59,14 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
+    region: content
+  field_unit_reference:
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
 hidden: {  }

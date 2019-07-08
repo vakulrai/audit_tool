@@ -1,20 +1,18 @@
-uuid: 29b9fee1-e0d5-4f9a-ac0d-3c56c0ec90be
+uuid: 48563f3c-ca22-491a-9e3f-1e2e695a1e1b
 langcode: en
 status: true
 dependencies:
   module:
-    - aps_general
     - node
-id: node.field_n
-field_name: field_n
+id: node.field_standard_name
+field_name: field_standard_name
 entity_type: node
-type: month_only
+type: string
 settings:
-  month_store: {  }
+  max_length: 255
   is_ascii: false
   case_sensitive: false
-  month: {  }
-module: aps_general
+module: core
 locked: false
 cardinality: 1
 translatable: true

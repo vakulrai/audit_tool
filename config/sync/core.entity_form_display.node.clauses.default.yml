@@ -4,8 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.clauses.body
-    - field.field.node.clauses.field_clause_no_
+    - field.field.node.clauses.field_clause_
+    - field.field.node.clauses.field_clause_title
     - field.field.node.clauses.field_refere
+    - field.field.node.clauses.field_standard_name
+    - field.field.node.clauses.field_standard_title
     - node.type.clauses
   module:
     - content_moderation
@@ -14,11 +17,21 @@ targetEntityType: node
 bundle: clauses
 mode: default
 content:
-  field_clause_no_:
-    weight: 1
-    settings: {  }
+  field_clause_:
+    weight: 104
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: options_select
+    type: string_textfield
+    region: content
+  field_clause_title:
+    weight: 105
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_refere:
     weight: 101
@@ -28,6 +41,22 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_standard_name:
+    weight: 102
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_standard_title:
+    weight: 103
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   moderation_state:
     type: moderation_state_default

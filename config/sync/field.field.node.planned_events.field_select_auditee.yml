@@ -1,0 +1,25 @@
+uuid: 9c4ef491-b82f-4ed9-8c5e-cb66e6c0a6e5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_select_auditee
+    - node.type.planned_events
+id: node.planned_events.field_select_auditee
+field_name: field_select_auditee
+entity_type: node
+bundle: planned_events
+label: 'Select Auditee'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: user_listing
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

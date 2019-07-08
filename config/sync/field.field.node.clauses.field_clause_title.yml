@@ -1,0 +1,19 @@
+uuid: 037b024c-d39a-478b-965f-857de7314434
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_clause_title
+    - node.type.clauses
+id: node.clauses.field_clause_title
+field_name: field_clause_title
+entity_type: node
+bundle: clauses
+label: 'Clause Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

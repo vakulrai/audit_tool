@@ -18,6 +18,8 @@ dependencies:
     - field.field.node.planned_events.field_report_reference
     - field.field.node.planned_events.field_sections
     - field.field.node.planned_events.field_select_audit
+    - field.field.node.planned_events.field_select_auditee
+    - field.field.node.planned_events.field_select_users
     - field.field.node.planned_events.field_shift
     - field.field.node.planned_events.field_start_date
     - field.field.node.planned_events.field_suggested_date
@@ -37,7 +39,7 @@ third_party_settings:
         - field_remote_location_name
         - field_auditor
       parent_name: group_who
-      weight: 33
+      weight: 32
       format_type: fieldset
       format_settings:
         id: ''
@@ -69,7 +71,7 @@ third_party_settings:
         - field_list_of_product
         - field_unit
       parent_name: ''
-      weight: 1
+      weight: 2
       format_type: fieldset
       format_settings:
         id: ''
@@ -82,7 +84,7 @@ third_party_settings:
         - field_department
         - field_sections
       parent_name: ''
-      weight: 2
+      weight: 1
       format_type: fieldset
       format_settings:
         id: ''
@@ -92,6 +94,7 @@ third_party_settings:
       label: Where
     group_who:
       children:
+        - field_select_auditee
         - group_auditor
       parent_name: ''
       weight: 3
@@ -114,13 +117,13 @@ content:
     type: options_select
     region: content
   field_auditor:
-    weight: 31
+    weight: 33
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_customer_type:
-    weight: 4
+    weight: 5
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -156,7 +159,7 @@ content:
     type: datetime_timestamp
     region: content
   field_internal_audit_type:
-    weight: 5
+    weight: 6
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -180,7 +183,7 @@ content:
     type: options_select
     region: content
   field_list_of_process:
-    weight: 7
+    weight: 8
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -204,7 +207,7 @@ content:
     type: options_select
     region: content
   field_list_of_product:
-    weight: 8
+    weight: 9
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -228,7 +231,7 @@ content:
     type: options_select
     region: content
   field_list_of_systems:
-    weight: 6
+    weight: 7
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -252,7 +255,7 @@ content:
     type: options_select
     region: content
   field_refere:
-    weight: 34
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60
@@ -261,7 +264,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_remote_location_name:
-    weight: 30
+    weight: 32
     settings:
       size: 60
       placeholder: ''
@@ -269,7 +272,7 @@ content:
     type: string_textfield
     region: content
   field_report_reference:
-    weight: 101
+    weight: 9
     settings:
       match_operator: CONTAINS
       size: 60
@@ -279,6 +282,18 @@ content:
     region: content
   field_sections:
     weight: 28
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_select_auditee:
+    weight: 31
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_select_users:
+    weight: 34
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -308,14 +323,14 @@ content:
     type: daterange_default
     region: content
   field_unit:
-    weight: 9
+    weight: 10
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 8
     settings: {  }
     region: content
     third_party_settings: {  }

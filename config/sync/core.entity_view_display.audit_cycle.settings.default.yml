@@ -9,6 +9,7 @@ dependencies:
     - field.field.audit_cycle.settings.field_financial_dates
     - field.field.audit_cycle.settings.field_other
     - field.field.audit_cycle.settings.field_schedule_release
+    - field.field.audit_cycle.settings.field_unit_reference
   module:
     - datetime_range
     - entity_reference_revisions
@@ -62,5 +63,13 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    region: content
+  field_unit_reference:
+    weight: 6
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
 hidden: {  }

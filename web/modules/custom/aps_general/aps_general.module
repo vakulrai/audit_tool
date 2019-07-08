@@ -194,7 +194,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
   }
   elseif ($form_id == 'node_external_audit__edit_form') {
-    // $form['field_refere']['#access'] = FALSE;
+    $form['field_refere']['#access'] = FALSE;
   }
 
   //Condition for Clauses Add form
@@ -202,6 +202,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $form['field_refere']['#access'] = FALSE;
     if($unit_ref= \Drupal::request()->query->get('unit_reference')){
       $unit_ref_object = Node::load($unit_ref);
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $unit_ref_object;
       $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
@@ -215,7 +216,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
   }
   elseif ($form_id == 'node_clauses_edit_form') {
-    // $form['field_refere']['#access'] = FALSE;
+    $form['field_refere']['#access'] = FALSE;
   }
 
   //Condition for Assembly Add form
@@ -657,6 +658,22 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
+  
+  if($uri[0] = 'audit_criteria'){
+    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_systems']['#active'] = TRUE;
+    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_process']['#active'] = FALSE;
+    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product']['#active'] = FALSE;
+  }
+  elseif ($uri[0] = 'audit_criteria_process') {
+    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_process']['#active'] = TRUE;
+    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_systems']['#active'] = FALSE;
+    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product']['#active'] = FALSE;
+  }
+  elseif ($uri[0] = 'audit_criteria_product') {
+    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product']['#active'] = TRUE;
+    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_process']['#active'] = FALSE;
+    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_systems']['#active'] = FALSE;
+  }
   if(isset($uri[2])){
     if (stripos(strtolower($uri[2]), 'external_audit_?') !== false) {
       unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
@@ -778,12 +795,13 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     }
   }
   if($uri[0] = 'audit_criteria' && $uri[2] = 'edit'){
-    $data['tabs'][0]['aps_general.process_setting']['#link']['url'] = Url::fromUserInput('/audit_criteria_process/1/edit');
-    $data['tabs'][0]['aps_general.product_setting']['#link']['url'] = Url::fromUserInput('/audit_criteria_product/1/edit');
+    // kint($data['tabs']);
+    // $data['tabs'][0]['aps_general.process_setting']['#link']['url'] = Url::fromUserInput('/audit_criteria_process/1/edit');
+    // $data['tabs'][0]['aps_general.product_setting']['#link']['url'] = Url::fromUserInput('/audit_criteria_product/1/edit');
   }
   if (stripos(strtolower($current_uri), 'audit_criteria/1/edit?') !== false) {
-    $data['tabs'][0]['eck.entity_content:audit_criteria.eck_edit_tab']['#link']['title'] = 'Systems';
-    unset($data['tabs'][0]['aps_general.systems_setting']);
+    // $data['tabs'][0]['eck.entity_content:audit_criteria.eck_edit_tab']['#link']['title'] = 'Systems';
+    // unset($data['tabs'][0]['aps_general.systems_setting']);
   }
   if(stripos(strtolower($current_uri), 'internal-audit-list?') !== false){
     unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
@@ -942,6 +960,21 @@ function aps_general_link_alter(&$variables) {
   if ($cleanLinkText == 'Audit Criteria Settings') {
     $id = $uri[1];
     if($id){
+      $query = \Drupal::database()->select('audit_criteria__field_unit_reference', 'h');
+      $query->fields('h',['entity_id']);
+      $query->condition('h.field_unit_reference_target_id', $id);
+      $query->range(0, 1);
+      $nids = $query->execute()->fetchAll();
+      if(isset($nids[0]->entity_id)){
+        $url =Url::fromUserInput('/audit_criteria/'.$nids[0]->entity_id.'/edit',['query' => ['destination' => $current_uri],'absolute' => TRUE]);
+        $url->setRouteParameter('type', 'edit');
+      }
+      else{
+        $url =Url::fromUserInput('/admin/content/audit_criteria/add/systems',['query' => ['destination' => $current_uri],'absolute' => TRUE]);
+        $url->setRouteParameter('type', 'add');
+      }
+      unset($variables['url']);
+      $variables['url'] = $url;
       $variables['url']->setRouteParameter('unit_reference', $id);
     }
   }
@@ -949,6 +982,19 @@ function aps_general_link_alter(&$variables) {
   if ($cleanLinkText == 'Time Cycle Settings') {
     $id = $uri[1];
     if($id){
+      $query = \Drupal::database()->select('audit_cycle__field_unit_reference', 'h');
+      $query->fields('h',['entity_id']);
+      $query->condition('h.field_unit_reference_target_id', $id);
+      $query->range(0, 1);
+      $nids = $query->execute()->fetchAll();
+      if(isset($nids[0]->entity_id)){
+        $url =Url::fromUserInput('/audit_cycle/'.$nids[0]->entity_id.'/edit',['query' => ['destination' => $current_uri],'absolute' => TRUE]);
+      }
+      else{
+        $url =Url::fromUserInput('/admin/content/audit_cycle/add/settings',['query' => ['destination' => $current_uri],'absolute' => TRUE]);
+      }
+      unset($variables['url']);
+      $variables['url'] = $url;
       $variables['url']->setRouteParameter('unit_reference', $id);
     }
   }
@@ -1031,6 +1077,15 @@ function aps_general_link_alter(&$variables) {
       else{
         $url =Url::fromUserInput('/admin/content/holidays/add/holidays',['query' => ['destination' => $current_uri],'absolute' => TRUE]);
       }
+      unset($variables['url']);
+      $variables['url'] = $url;
+    }
+  }
+
+  if ($cleanLinkText == 'IMPORT DATA') {
+    $id = $uri[1];
+    if($id){
+      $url =Url::fromUserInput('/import/'.$id);
       unset($variables['url']);
       $variables['url'] = $url;
     }
@@ -1170,7 +1225,8 @@ function aps_ext_audit_page_redirect(array $form, \Drupal\Core\Form\FormStateInt
  * Callback method after Clauses form submits.
  */
 function aps_clauses_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
-  $response = Url::fromUserInput('/external-audit-standards');
+  $id = \Drupal::request()->query->get('unit_reference');
+  $response = Url::fromUserInput('/node/add/clauses',['query' => ['unit_reference' => $id]]);
   $form_state->setRedirectUrl($response);
 }
 

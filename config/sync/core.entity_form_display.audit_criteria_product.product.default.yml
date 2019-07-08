@@ -5,6 +5,7 @@ dependencies:
   config:
     - eck.eck_type.audit_criteria_product.product
     - field.field.audit_criteria_product.product.field_documents
+    - field.field.audit_criteria_product.product.field_unit_reference
 id: audit_criteria_product.product.default
 targetEntityType: audit_criteria_product
 bundle: product
@@ -15,5 +16,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_unit_reference:
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
 hidden: {  }

@@ -83,17 +83,19 @@ class GetTitleList extends ControllerBase {
       if(isset($unit_reference)){
         $node_object = Node::load($unit_reference);
         $get_unit_id = $node_object->get('field_refere')->target_id;
-        $query = \Drupal::database()->select('node_field_data', 'n');
-        $query->join('node__field_refere', 'rf', 'n.nid = rf.field_refere_target_id');
-        $query->fields('n', ['title','nid', 'type']);
-        $query->fields('rf',['field_refere_target_id', 'entity_id']);
-        $query->condition('rf.bundle', 'clauses');
-        $query->condition('rf.field_refere_target_id', $get_unit_id);
-        // $query->condition('n.title', db_like($typed_string) . '%', 'LIKE');
+        $query = \Drupal::database()->select('node__field_refere', 'n');
+        $query->join('node__field_clause_title', 'c', 'n.entity_id = c.entity_id');
+        $query->join('node__field_clause_', 'd', 'c.entity_id = d.entity_id');
+        $query->fields('n',['entity_id']);
+        $query->fields('c',['field_clause_title_value']);
+        $query->fields('d');
+        $query->condition('c.bundle', 'clauses');
+        $query->condition('n.field_refere_target_id', $get_unit_id);
+        $query->condition('c.field_clause_title_value', db_like($typed_string) . '%', 'LIKE');
         $nids = $query->execute()->fetchAll();
         foreach ($nids as $entity) {
           $node_object = Node::load($entity->entity_id);
-          $results[$node_object->get('nid')->value] = $node_object->get('title')->value;
+          $results[$node_object->get('nid')->value] = $node_object->get('field_clause_')->value;
         }
       }
     }

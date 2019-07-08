@@ -31,8 +31,37 @@ function aps_audit_criteria_help($route_name, RouteMatchInterface $route_match) 
  * Implements hook_form_alter().
  */
 function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'audit_criteria_process_process_form') {
+    if($id= \Drupal::request()->query->get('unit_reference')){
+      $node_object = Node::load($id);
+      $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
+    }
+    $form['field_unit_reference']['#access'] = FALSE;
+  }
+  elseif ($form_id == 'audit_criteria_process_process_edit_form') {
+    $form['field_unit_reference']['#access'] = FALSE;
+  }
 
+  if ($form_id == 'audit_criteria_product_product_form') {
+    if($id= \Drupal::request()->query->get('unit_reference')){
+      $node_object = Node::load($id);
+      $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
+    }
+    $form['field_unit_reference']['#access'] = FALSE;
+  }
+  elseif ($form_id == 'audit_criteria_product_product_edit_form') {
+    $form['field_unit_reference']['#access'] = FALSE;
+  }
 	if($form_id == 'audit_criteria_systems_form' || $form_id == 'audit_criteria_systems_edit_form'){
+    if ($form_id == 'audit_criteria_systems_form') {
+      if($id= \Drupal::request()->query->get('unit_reference')){
+        $node_object = Node::load($id);
+        $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
+      }
+      if($form_id == 'audit_criteria_systems_form' || $form_id == 'audit_criteria_systems_edit_form'){
+        $form['field_unit_reference']['#access'] = FALSE;
+      }
+    }
 	  $options_document = getVids('system_documents', 27);
 	  $options_records = getVids('system_documents', 28);
 	  $options_score = getVids('system_documents', 31);
@@ -89,6 +118,13 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
 	}
 
 	if($form_id == 'audit_cycle_settings_form' || $form_id == 'audit_cycle_settings_edit_form'){
+    if ($form_id == 'audit_cycle_settings_form') {
+      if($id= \Drupal::request()->query->get('unit_reference')){
+        $node_object = Node::load($id);
+        $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
+      }
+      $form['field_unit_reference']['#access'] = FALSE;
+    }
 	  $form['#attached']['library'][] = 'aps_audit_criteria/aps_audit_criteria_js';
 
       $form['audit_cycle_year'] = [
@@ -124,7 +160,6 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
           $form['actions'][$action]['#submit'][] = 'audit_cycle_redirect';
         }
       }
-
 	}
 
   if($form_id == 'node_internal_audit_form'){
