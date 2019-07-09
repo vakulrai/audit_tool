@@ -19,7 +19,8 @@ class MradminDashboardCoverage extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-  	// echo '<pre>';print_r($data);
+  	$current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+    $uri = explode('/', $current_uri);
     $build = [];
     $build['#markup'] = '<h1>Coverage</h1>';
     $header = [
@@ -34,7 +35,7 @@ class MradminDashboardCoverage extends BlockBase {
       '#header' => $header,
       '#empty' => t('No content available.'),
     ];
-    $data = $this->getAuditDetails();
+    $data = $this->getAuditDetails($uri[1]);
 
     if (count($data)) {
     	$sr = 1;
@@ -70,13 +71,17 @@ class MradminDashboardCoverage extends BlockBase {
     return $build;
   }
 
-  public function getAuditDetails(){
+  public function getAuditDetails($unit_reference){
     $query = \Drupal::database()->select('node_field_data', 'n');
-    $query->join('content_moderation_state_field_data', 'cm', 'n.nid = cm.content_entity_id');
+    $query->join('node__field_refere', 'rf', 'n.nid = rf.entity_id');
+    $query->join('content_moderation_state_field_data', 'cm', 'rf.entity_id = cm.content_entity_id');
     $query->fields('n',['nid', 'title', 'created']);
+    $query->fields('rf',['field_refere_target_id']);
     $query->fields('cm',['revision_id', 'moderation_state']);
     $query->condition('n.type', 'planned_events');
+    $query->condition('rf.field_refere_target_id', $unit_reference);
     $data = $query->execute()->fetchAll();
+
     $audit_data = [];
     $count_complete_system = 1;
     $count_ongoing_system = 1;

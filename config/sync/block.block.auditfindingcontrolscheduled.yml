@@ -1,33 +1,34 @@
-uuid: 57e42f63-156e-4802-90a7-edc89fcf49da
+uuid: 77c9c68b-8daa-4ab1-af28-a5ca7bdf2a29
 langcode: en
 status: true
 dependencies:
   module:
+    - aps_audit_report_analysis
     - system
     - user
   theme:
     - seven
-id: userlogin
+id: auditfindingcontrolscheduled
 theme: seven
 region: content
-weight: 6
+weight: 2
 provider: null
-plugin: user_login_block
+plugin: audit_finding_control_scheduled
 settings:
-  id: user_login_block
-  label: 'User login'
-  provider: user
-  label_display: visible
+  id: audit_finding_control_scheduled
+  label: 'Audit finding control scheduled'
+  provider: aps_audit_report_analysis
+  label_display: '0'
 visibility:
   request_path:
     id: request_path
-    pages: '<front>'
+    pages: '/unit-registration-view/*'
     negate: false
     context_mapping: {  }
   user_role:
     id: user_role
     roles:
-      anonymous: anonymous
+      mr_admin: mr_admin
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'

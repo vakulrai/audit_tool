@@ -4,6 +4,7 @@
     attach: function (context, settings) {
       var base_url = drupalSettings.siteBaseUrl;
       var audit_detail = drupalSettings.auditDetail;
+      var unit_reference = drupalSettings.unitReference;
       var chart = new Highcharts.Chart('container', { 
         chart: {
           plotBackgroundColor: null,
@@ -39,7 +40,7 @@
         var audit_type = $("#audit-type").val();
         var start_date = $("#start-date").val();
         var end_date = $("#end-date").val();
-        var url =  base_url + "/audit-coverage-details/get.json?audit_type="+audit_type;
+        var url =  base_url + "/audit-coverage-details/get.json?audit_type="+audit_type+"&unit_reference="+unit_reference;
         $.getJSON(url,  function(data) {
           chart.series[0].setData(data);
         });

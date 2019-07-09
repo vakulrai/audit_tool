@@ -3,9 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
+    - node.type.assembly
     - node.type.auditor_report
+    - node.type.customers_manual
     - node.type.internal_audit
+    - node.type.manufacturing_process
     - node.type.planned_events
+    - node.type.procedures
   module:
     - content_moderation
 id: workflow_for_audit_planning
@@ -89,7 +93,11 @@ type_settings:
       weight: 8
   entity_types:
     node:
+      - assembly
       - auditor_report
+      - customers_manual
       - internal_audit
+      - manufacturing_process
       - planned_events
+      - procedures
   default_moderation_state: draft

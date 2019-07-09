@@ -21,14 +21,17 @@ class MradminDashboardPlanningControl extends BlockBase {
    */
   public function build() {
     global $base_url;
+    $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+    $uri = explode('/', $current_uri);
     $build = [];
     $request = new Request;
-    $get_audit_total = GetAuditCoverageDetails::getAuditDetails($request);
+    $get_audit_total = GetAuditCoverageDetails::getAuditDetails();
     $response = $get_audit_total->getContent();
     $form_class = '\Drupal\aps_audit_report_analysis\Form\PlanningControlForm';
     $form_builder_class = \Drupal::formBuilder()->getForm($form_class);
     $response = json_decode($response);
     $build['#attached']['drupalSettings']['auditDetail'] = $response;
+    $build['#attached']['drupalSettings']['unitReference'] = $uri[1];
     $total = 0;
     foreach ($response as $key => $value) {
       $total += $value->y;

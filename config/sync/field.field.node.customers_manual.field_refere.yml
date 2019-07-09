@@ -1,26 +1,26 @@
-uuid: 86e34084-f46d-4aa6-b4f6-fac0dfa2d986
+uuid: 350785c3-c7a7-4e57-b2ec-bbb23ccced0b
 langcode: en
 status: true
 dependencies:
   config:
-    - eck.eck_type.customer_manual_parts.parts
-    - field.storage.node.field_reference_id
+    - field.storage.node.field_refere
     - node.type.customers_manual
-id: node.customers_manual.field_reference_id
-field_name: field_reference_id
+    - node.type.unit
+id: node.customers_manual.field_refere
+field_name: field_refere
 entity_type: node
 bundle: customers_manual
 label: 'Reference id'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:customer_manual_parts'
+  handler: 'default:node'
   handler_settings:
     target_bundles:
-      parts: parts
+      unit: unit
     sort:
       field: _none
     auto_create: false

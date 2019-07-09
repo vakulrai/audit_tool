@@ -82,3 +82,7 @@ function submit_auditee_audit(array$form, \Drupal\Core\Form\FormStateInterface $
   }
 
 }
+
+function aps_audit_report_analysis_node_access($node, $op, $account) {
+ 
+}

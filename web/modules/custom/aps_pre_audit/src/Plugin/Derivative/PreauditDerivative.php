@@ -221,6 +221,27 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       }
 
     }
+
+    $links['ia_system'] = [
+      'title' => 'Systems',
+      'route_name' => 'view.internal_audit_systems.ia_systems',
+      'base_route' => 'view.internal_audit_systems.ia_systems',
+      'route_parameters' => ['unit_reference' => $id],
+    ] + $base_plugin_definition;
+
+    $links['ia_process'] = [
+      'title' => 'Process',
+      'route_name' => 'view.internal_audit_systems.ia_process',
+      'base_route' => 'view.internal_audit_systems.ia_systems',
+      'route_parameters' => ['unit_reference' => $id],
+    ] + $base_plugin_definition;
+
+    $links['ia_product'] = [
+      'title' => 'Product',
+      'route_name' => 'view.internal_audit_systems.ia_product',
+      'base_route' => 'view.internal_audit_systems.ia_systems',
+      'route_parameters' => ['unit_reference' => $id],
+    ] + $base_plugin_definition;    
     return $links;
   }
 }

@@ -84,7 +84,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
   }
   elseif ($form_id == 'node_procedures_edit_form') {
-    $form['field_refere']['#access'] = FALSE;
+    // $form['field_refere']['#access'] = FALSE;
   }
   
   //Condition for Business Add form
@@ -306,7 +306,16 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $form['field_version_level']['#access'] = FALSE;
   }
   elseif ($form_id == 'node_customers_manual_form') {
-    $form['field_reference_id']['#access'] = FALSE;
+    if($id= \Drupal::request()->query->get('unit_reference')){
+      $node_object = Node::load($id);
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
+    }
+    $form['field_refere']['#access'] = FALSE;
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'customer_add';
+      }
+    }
   }
 
   if($form_id == 'node_external_audit__form' || $form_id == 'node_external_audit__edit_form'){
@@ -720,9 +729,7 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     }
     elseif ($uri[2] == 'internal_audit') {
       $link = Url::fromUserInput('/node/add/'.$uri[2]);
-      if ($link) {
-        unset($data['tabs'][0]['aps_general.standards']);
-        unset($data['tabs'][0]['aps_general.clauses']); 
+      if ($link) { 
         unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
         unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
         unset($data['tabs'][0]['aps_pre_audit.manuals:add_procedures']);
@@ -733,14 +740,14 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     elseif (stripos(strtolower($uri[2]), 'internal_audit?') !== false) {
       $link = Url::fromUserInput('/node/add/'.$uri[2]);
       if ($link) {
-        unset($data['tabs'][0]['aps_general.standards']);
-        unset($data['tabs'][0]['aps_general.clauses']); 
         unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
         unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
         unset($data['tabs'][0]['aps_pre_audit.manuals:add_procedures']);
         unset($data['tabs'][0]['aps_general.manual']);
         unset($data['tabs'][0]['aps_general.manual_product']);
         unset($data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']);
+        unset($data['tabs'][0]['aps_pre_audit.manuals:external_audit_systems']);
+        unset($data['tabs'][0]['aps_pre_audit.manuals:external_audit_clauses']);
         $data['tabs'][0]['aps_pre_audit.manuals:systems']['#active'] = TRUE;
       }
     }
@@ -790,7 +797,8 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
       unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
       unset($data['tabs'][0]['aps_audit_criteria.audit_list']);
       unset($data['tabs'][0]['aps_audit_criteria.systems_setting']);
-      unset($data['tabs'][0]['aps_general.standards']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:external_audit_systems']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:external_audit_clauses']);
       $data['tabs'][0]['aps_pre_audit.manuals:add_procedures']['#active'] = TRUE;
     }
   }
@@ -826,8 +834,8 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   if(stripos(strtolower($current_uri), 'procedure-listing?') !== false){
     unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
     unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
-    unset($data['tabs'][0]['aps_general.clauses']); 
-    unset($data['tabs'][0]['aps_general.standards']);
+    unset($data['tabs'][0]['aps_pre_audit.manuals:external_audit_systems']);
+    unset($data['tabs'][0]['aps_pre_audit.manuals:external_audit_clauses']);
     $data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']['#active'] = TRUE;
   }
 }
@@ -1232,6 +1240,12 @@ function aps_clauses_page_redirect(array $form, \Drupal\Core\Form\FormStateInter
 
 function parts_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
   $response = Url::fromUserInput('/node/add/customers_manual');
+  $form_state->setRedirectUrl($response);
+}
+function customer_add(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
+  $id = \Drupal::request()->query->get('unit_reference');
+  $response = Url::fromRoute('node.add',['node_type' => 'customers_manual', 'unit_reference' => $id]);
   $form_state->setRedirectUrl($response);
 }
 

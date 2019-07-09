@@ -1,0 +1,21 @@
+uuid: 398cbe93-1592-4650-a1ec-7cba81a9c7f5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_internal_audit_type
+    - node.type.internal_audit
+  module:
+    - options
+id: node.internal_audit.field_internal_audit_type
+field_name: field_internal_audit_type
+entity_type: node
+bundle: internal_audit
+label: 'Internal Audit Type'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

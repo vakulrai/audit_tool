@@ -6,7 +6,7 @@ dependencies:
     - field.field.node.customers_manual.body
     - field.field.node.customers_manual.field_document
     - field.field.node.customers_manual.field_qam
-    - field.field.node.customers_manual.field_reference_id
+    - field.field.node.customers_manual.field_refere
     - field.field.node.customers_manual.field_sr_no
     - field.field.node.customers_manual.field_upload_type
     - field.field.node.customers_manual.field_version_date
@@ -14,6 +14,7 @@ dependencies:
     - node.type.customers_manual
   module:
     - conditional_fields
+    - content_moderation
     - datetime
     - field_group
     - link
@@ -90,8 +91,8 @@ content:
           bundle: customers_manual
     type: link_default
     region: content
-  field_reference_id:
-    weight: 6
+  field_refere:
+    weight: 101
     settings:
       match_operator: CONTAINS
       size: 60
@@ -161,6 +162,12 @@ content:
           bundle: customers_manual
     type: number
     region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 1

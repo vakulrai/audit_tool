@@ -11,7 +11,7 @@ dependencies:
 id: mradmindashboardcoverage
 theme: seven
 region: content
-weight: -3
+weight: -1
 provider: null
 plugin: mradmin_dashboard_coverage
 settings:
@@ -22,7 +22,7 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '<front>'
+    pages: '/unit-registration-view/*'
     negate: false
     context_mapping: {  }
   user_role:

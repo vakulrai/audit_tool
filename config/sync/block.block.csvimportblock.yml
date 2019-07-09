@@ -10,7 +10,7 @@ dependencies:
 id: csvimportblock
 theme: seven
 region: content
-weight: 12
+weight: 10
 provider: null
 plugin: csv_import_block
 settings:

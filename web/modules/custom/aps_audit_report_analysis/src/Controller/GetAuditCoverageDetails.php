@@ -14,6 +14,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class GetAuditCoverageDetails extends ControllerBase {
 
   public function getAuditDetails() {
+    $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+    $uri = explode('/', $current_uri);
+    if(isset($_REQUEST['unit_reference'])){
+      $unit_reference = $_REQUEST['unit_reference'];
+    }else{
+      $unit_reference = $uri[1];
+    }
     $query = \Drupal::database()->select('node_field_data', 'n');
     $query->join('content_moderation_state_field_data', 'cm', 'n.nid = cm.content_entity_id');
     if(isset($_REQUEST['audit_type']) && $_REQUEST['audit_type'] != 'all'){
@@ -21,13 +28,17 @@ class GetAuditCoverageDetails extends ControllerBase {
       $query->join('node__field_audit_type', 'at', 'cm.content_entity_id = at.entity_id');
       $query->fields('at',['field_audit_type_value']);
     }
+    $query->join('node__field_refere', 'rf', 'cm.content_entity_id = rf.entity_id');
     $query->fields('n',['nid', 'title', 'created']);
+    $query->fields('rf');
     $query->fields('cm',['revision_id', 'moderation_state']);
     if(isset($check)){
       $query->condition('at.field_audit_type_value', $check);
     }
     $query->condition('n.type', 'planned_events');
+    $query->condition('rf.field_refere_target_id', $unit_reference);
     $data = $query->execute()->fetchAll();
+
     $audit_data = [];
     $count_complete_system = 1;
     $count_ongoing_system = 1;
