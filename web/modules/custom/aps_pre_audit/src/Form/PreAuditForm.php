@@ -291,10 +291,10 @@ class PreAuditForm extends FormBase {
                 $output[$ref_id]['type'] = 'predefined';
                 $output[$ref_id]['qid'] = $ref_id;
                 $output[$ref_id]['sno'] = count($predefined_question_object_array['field_sub_s_no_']) ? $predefined_question_object->get('field_sub_s_no_')->value : '';
-                $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_optimised')->value] = $predefined_question_object_array['field_answer_optimised'][0]['value'] ? $predefined_question_object_array['field_answer_optimised'][0]['value'] : 'Optimised';
-                $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_qualified')->value] = $predefined_question_object_array['field_answer_qualified'][0]['value'] ? $predefined_question_object_array['field_answer_qualified'][0]['value'] : 'Qualified';
-                $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_defined')->value] = $predefined_question_object_array['field_answers_defined'][0]['value'] ? $predefined_question_object_array['field_answers_defined'][0]['value'] : 'Defined';
-                $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_poor')->value] = $predefined_question_object_array['field_answers_poor'][0]['value'] ? $predefined_question_object_array['field_answers_poor'][0]['value'] : 'Poor';
+                $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_optimised')->value] = 'Optimised';
+                $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_qualified')->value] = 'Qualified';
+                $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_defined')->value] = 'Defined';
+                $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_poor')->value] = 'Poor';
                 $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
                 $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
 
