@@ -19,6 +19,7 @@ class TimeAnalysisBlock extends BlockBase {
    */
   public function build() {
     $build = [];
+    $build['#cache']['max-age'] = 0;
     $build['#markup'] = 'Time Analysis';
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $uri = explode('/', $current_uri);

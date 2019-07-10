@@ -6,6 +6,7 @@ dependencies:
     - field.storage.node.field_refere
     - node.type.auditor_report
     - node.type.planned_events
+    - node.type.unit
 id: node.auditor_report.field_refere
 field_name: field_refere
 entity_type: node
@@ -21,8 +22,9 @@ settings:
   handler_settings:
     target_bundles:
       planned_events: planned_events
+      unit: unit
     sort:
       field: _none
     auto_create: false
-    auto_create_bundle: ''
+    auto_create_bundle: planned_events
 field_type: entity_reference

@@ -7,9 +7,9 @@
       var product_data = drupalSettings.product_data;
       var process_data = drupalSettings.process_data;
       var procedure_data = drupalSettings.procedure_data;
-      var chart_a = new Highcharts.Chart({
+      var chart_a = new Highcharts.Chart('container-scheduled-a',{
 		  chart: {
-		    renderTo: 'container-scheduled-a',
+		    // renderTo: 'container-scheduled-a',
 		    type: 'bar',
             "height": 200,
             "width": 600,
@@ -18,7 +18,7 @@
             text: 'Products'
           },
 		  legend: {
-		    enabled: false
+		    enabled: true
 		  },
 		  colors: ['#173c64'],
 		  xAxis: {
@@ -52,22 +52,22 @@
 		      dataLabels: {
 		        enabled: true,
 		        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
-		      }
-		    }
+		      },
+		    },
 		  },
 		  series: [{
 		    "name": "Products covered",
-		    "data": [product_data['completed']/product_data['total'] * 100],
+		    "data": [Math.round(product_data['completed']/product_data['total'] * 100)],
 		    "color": "#33fff9",
-		    // "showInLegend": false
+		    "showInLegend": true
 		  },
 		  {
 		    "name": "Products not covered",
-		    "data": [(product_data['total'] - product_data['completed'])/product_data['total'] * 100],
+		    "data": [Math.round((product_data['total'] - product_data['completed'])/product_data['total'] * 100)],
 		    "color": "#ff8c1a",
-		    "showInLegend": false	
+		    "showInLegend": true	
 		  }]
-		})
+		});
 
       var chart_b = new Highcharts.Chart({
 		  chart: {
@@ -80,7 +80,7 @@
             text: 'Processes'
           },
 		  legend: {
-		    enabled: false
+		    enabled: true
 		  },
 		  colors: ['#173c64'],
 		  xAxis: {
@@ -119,15 +119,15 @@
 		  },
 		  series: [{
 		    "name": "Process covered",
-		    "data": [process_data['completed']/process_data['total'] * 100],
+		    "data": [Math.round(process_data['completed']/process_data['total'] * 100)],
 		    "color": "#33fff9",
-		    // "showInLegend": false
+		    "showInLegend": true
 		  },
 		  {
 		   "name": "Process not covered",
-		    "data": [(process_data['total'] - process_data['completed'])/process_data['total'] * 100],
+		    "data": [Math.round((process_data['total'] - process_data['completed'])/process_data['total'] * 100)],
 		    "color": "#ff8c1a",
-		    "showInLegend": false	
+		    "showInLegend": true	
 		  }]
 		})
 
@@ -142,7 +142,7 @@
             text: 'Procedures'
           },
 		  legend: {
-		    enabled: false
+		    enabled: true
 		  },
 		  colors: ['#173c64'],
 		  xAxis: {
@@ -181,14 +181,15 @@
 		  },
 		  series: [{
 		    "name": "Procedures Covered",
-		    "data": [procedure_data['completed']/procedure_data['total'] * 100],
+		    "data": Math.round([procedure_data['completed']/procedure_data['total'] * 100]),
 		    "color": "#33fff9",
+		    "showInLegend": true
 		  },
 		  {
 		    "name": "Procedures not Covered",
-		    "data": [(procedure_data['total'] - procedure_data['completed'])/procedure_data['total'] * 100],
+		    "data": [Math.round((procedure_data['total'] - procedure_data['completed'])/procedure_data['total'] * 100)],
 		    "color": "#ff8c1a",
-		    "showInLegend": false	
+		    "showInLegend": true	
 		  }]
 		})
     }

@@ -65,6 +65,14 @@ function aps_audit_report_analysis_form_alter(&$form, \Drupal\Core\Form\FormStat
       '#value' => t('Submit Report') ,
     );
   }
+  
+  if($form_id == 'node_auditor_report_form'){
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'set_report_moderation';
+      }
+    }
+  }
 }
 
 function submit_auditee_audit(array$form, \Drupal\Core\Form\FormStateInterface $form_state){
@@ -81,6 +89,14 @@ function submit_auditee_audit(array$form, \Drupal\Core\Form\FormStateInterface $
     $node_object_report->save();
   }
 
+}
+
+function set_report_moderation(array$form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $form_values = $form_state->getValues();
+  $nid = $form_values['nid'];
+  $node_object = Node::load($nid);
+  $node_object->set('moderation_state', 'post_audit');
+  $node_object->save();
 }
 
 function aps_audit_report_analysis_node_access($node, $op, $account) {

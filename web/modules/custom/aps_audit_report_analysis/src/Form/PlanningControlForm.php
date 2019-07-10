@@ -38,14 +38,16 @@ class PlanningControlForm extends FormBase {
     $nids = $query->execute()->fetchAll();
     $node_storage = \Drupal::entityManager()->getStorage('audit_cycle');
     $entity_audit_cycle = $node_storage->load($nids[0]->entity_id);
-    $cycle_type = $entity_audit_cycle->get('field_cycle_type')->value;
-    if($cycle_type == 0){
-      $audit_cycle_start_date = $entity_audit_cycle->get('field_financial_dates')->value;
-      $audit_cycle_end_date = $entity_audit_cycle->get('field_financial_dates')->end_value;
-    }
-    elseif ($cycle_type == 1) {
-      $audit_cycle_start_date = $entity_audit_cycle->get('field_calendar_date')->value;
-      $audit_cycle_end_date = $entity_audit_cycle->get('field_calendar_date')->end_value;
+    if(count($entity_audit_cycle)){
+      $cycle_type = $entity_audit_cycle->get('field_cycle_type')->value;
+      if($cycle_type == 0){
+        $audit_cycle_start_date = $entity_audit_cycle->get('field_financial_dates')->value;
+        $audit_cycle_end_date = $entity_audit_cycle->get('field_financial_dates')->end_value;
+      }
+      elseif ($cycle_type == 1) {
+        $audit_cycle_start_date = $entity_audit_cycle->get('field_calendar_date')->value;
+        $audit_cycle_end_date = $entity_audit_cycle->get('field_calendar_date')->end_value;
+      }
     }
 
     $form['audit_type'] = [

@@ -1,6 +1,6 @@
 aps_dashboard_audit_planning_js:
   js:
-    https://code.highcharts.com/highcharts.js: { type: external, minified: true }
+    https://code.highcharts.com/highcharts.js: { type: external, minified: true, weight: -1}
     https://code.highcharts.com/modules/exporting.js: { type: external, minified: true }
     https://code.highcharts.com/modules/export-data.js: { type: external, minified: true }
     js/aps_dashboard_audit_planning.js: { weight: -1 }
@@ -11,10 +11,20 @@ aps_dashboard_audit_planning_js:
 
 aps_dashboard_audit_control_scheduled_js:
   js:
-    https://code.highcharts.com/highcharts.js: { type: external, minified: true }
+    https://code.highcharts.com/highcharts.js: { type: external, minified: true, weight: -1 }
     https://code.highcharts.com/modules/exporting.js: { type: external, minified: true }
     https://code.highcharts.com/modules/export-data.js: { type: external, minified: true }
     js/aps_dashboard_audit_control_scheduled.js: { weight: -1 }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+
+aps_dashboard_ncr_car_js:
+  js:
+    https://code.highcharts.com/highcharts.js: { type: external, minified: true, weight: -1 }
+    https://code.highcharts.com/modules/exporting.js: { type: external, minified: true }
+    https://code.highcharts.com/modules/export-data.js: { type: external, minified: true }
+    js/ncr_car_management.js: { weight: -1 }
   dependencies:
     - core/jquery
     - core/jquery.once

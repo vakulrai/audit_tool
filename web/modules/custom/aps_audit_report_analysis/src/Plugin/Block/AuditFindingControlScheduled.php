@@ -19,6 +19,7 @@ class AuditFindingControlScheduled extends BlockBase {
    */
   public function build() {
   	global $base_url;
+    $build['#cache']['max-age'] = 0;
   	$current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $uri = explode('/', $current_uri);
     $data = $this->completionRate($uri[1]);

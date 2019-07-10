@@ -75,6 +75,14 @@ function aps_pre_audit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
     $form['field_assigned_user']['#access'] = FALSE;
   }
   elseif ($form_id == 'node_auditor_report_edit_form') {
+    if(\Drupal::request()->query->get('event_reference') && \Drupal::request()->query->get('unit_reference')){
+      $event_reference= \Drupal::request()->query->get('event_reference');
+      $unit_reference= \Drupal::request()->query->get('unit_reference');
+      $node_referenced = [$event_reference, $unit_reference];
+      $node_object= node_load_multiple($node_referenced);
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = Node::load($unit_reference);
+      $form['field_refere']['widget'][1]['target_id']['#default_value'] = Node::load($event_reference);
+    }
     $form['field_refere']['#access'] = FALSE;
     $form['field_assigned_user']['#access'] = FALSE;
     $current_user = \Drupal::currentUser();
@@ -85,16 +93,16 @@ function aps_pre_audit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
     if($user_role == 'auditor' || $user_role == 'auditee'){
       $entity_type_id = 'node';
       $bundle = 'auditor_report';
-      foreach (\Drupal::entityManager()->getFieldDefinitions($entity_type_id, $bundle) as $field_name => $field_definition) {
-        if (!empty($field_definition->getTargetBundle())) {
-          $bundleFields[$field_name]['type'] = $field_definition->getType();
-          $bundleFields[$field_name]['label'] = $field_definition->getLabel();
-          $form[$field_name]['#access'] = FALSE;
-          if($field_name == 'field_audit_list' || $field_name == 'field_auditor_signature' || $field_name == 'field_auditee_signature' || $field_name == 'field_hod_signature' || $field_name == 'field_qms_signature'){
-            $form[$field_name]['#access'] = TRUE;
-          }
-        }
-      }
+      // foreach (\Drupal::entityManager()->getFieldDefinitions($entity_type_id, $bundle) as $field_name => $field_definition) {
+      //   if (!empty($field_definition->getTargetBundle())) {
+      //     $bundleFields[$field_name]['type'] = $field_definition->getType();
+      //     $bundleFields[$field_name]['label'] = $field_definition->getLabel();
+      //     $form[$field_name]['#access'] = FALSE;
+      //     if($field_name == 'field_audit_list' || $field_name == 'field_auditor_signature' || $field_name == 'field_auditee_signature' || $field_name == 'field_hod_signature' || $field_name == 'field_qms_signature'){
+      //       $form[$field_name]['#access'] = TRUE;
+      //     }
+      //   }
+      // }
     }
   }
   if($form['#id'] == 'views-exposed-form-planned-audit-listing-planned-audit' || $form['#id'] == 'views-exposed-form-planned-audit-listing-mr-page'){

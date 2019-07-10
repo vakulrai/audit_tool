@@ -510,24 +510,27 @@ class UpdateAuditFindings extends PreAuditForm {
       }
       else{
         $tid = '';
+        $parent_tid = '';
       }
- 
-      $term_object_parent = Term::load($parent_tid);
-      if($term_object_parent->get('name')->value == 'Poor' && $a['question_type'] == 'non-delta' || $a['question_type'] == 'delta'){
-        $paragraph = Paragraph::create([
-          'field_step' => $a['field_step'],
-          'field_question' => $a['field_question'],
-          'field_evidence' => $a['field_evidence'],
-          'field_result' => $a['field_result'],
-          'field_finding_categories' => ['target_id' => $tid],
-          'field_clause' => $a['field_clause'],
-          'type' => 'audit_report',
-        ]);
-        $paragraph->save();
-        $paragraphp_version[] = [
-          'target_id' => $paragraph->id(),
-          'target_revision_id' => $paragraph->getRevisionId(),
-        ];
+      //Condition to only submit Poor categeories.
+      if($parent_tid){
+        $term_object_parent = Term::load($parent_tid);
+        if($term_object_parent->get('name')->value == 'Poor' && $a['question_type'] == 'non-delta' || $a['question_type'] == 'delta'){
+          $paragraph = Paragraph::create([
+            'field_step' => $a['field_step'],
+            'field_question' => $a['field_question'],
+            'field_evidence' => $a['field_evidence'],
+            'field_result' => $a['field_result'],
+            'field_finding_categories' => ['target_id' => $tid],
+            'field_clause' => $a['field_clause'],
+            'type' => 'audit_report',
+          ]);
+          $paragraph->save();
+          $paragraphp_version[] = [
+            'target_id' => $paragraph->id(),
+            'target_revision_id' => $paragraph->getRevisionId(),
+          ];
+        }
       }
     }
     // $data['field_audit_list'] = $paragraphp_version;
