@@ -667,10 +667,10 @@ class UpdateAuditFindings extends PreAuditForm {
                 $output[$ref_id]['clause_no'] = $predefined_question_object->get('field_clause_no')->target_id;
                 $output[$ref_id]['field_finding_categories'] = $predefined_question_object->get('field_finding_categories')->getValue();
                 $output[$ref_id]['sno'] = count($predefined_question_object_array['field_sub_s_no_']) ? $predefined_question_object->get('field_sub_s_no_')->value : '';
-                $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_optimised')->value] = $predefined_question_object_array['field_answer_optimised'][0]['value'];
-                $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_qualified')->value] = $predefined_question_object_array['field_answer_qualified'][0]['value'];
-                $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_defined')->value] = $predefined_question_object_array['field_answers_defined'][0]['value'];
-                $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_poor')->value] = $predefined_question_object_array['field_answers_poor'][0]['value'];
+                $output[$ref_id]['desc']['Optimised'] = 'Optimised';
+                $output[$ref_id]['desc']['Qualified'] = 'Qualified';
+                $output[$ref_id]['desc']['Effecient'] = 'Effecient';
+                $output[$ref_id]['desc']['Poor'] = 'Poor';
                 $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
                 $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
 
