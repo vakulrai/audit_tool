@@ -291,13 +291,13 @@ class PreAuditForm extends FormBase {
                 $output[$ref_id]['type'] = 'predefined';
                 $output[$ref_id]['qid'] = $ref_id;
                 $output[$ref_id]['sno'] = count($predefined_question_object_array['field_sub_s_no_']) ? $predefined_question_object->get('field_sub_s_no_')->value : '';
-                $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_optimised')->value] = 'Optimised';
-                $output[$ref_id]['desc'][$predefined_question_object->get('field_answer_qualified')->value] = 'Qualified';
-                $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_defined')->value] = 'Defined';
-                $output[$ref_id]['desc'][$predefined_question_object->get('field_answers_poor')->value] = 'Poor';
+                $output[$ref_id]['desc']['Optimised'] = 'Optimised';
+                $output[$ref_id]['desc']['Qualified'] = 'Qualified';
+                $output[$ref_id]['desc']['Effecient'] = 'Effecient';
+                $output[$ref_id]['desc']['Poor'] = 'Poor';
                 $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
                 $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
-
+                
                 if(count($output[$ref_id]['desc'])){
                   foreach ($output[$ref_id]['desc'] as $key => $value) {
                      $paragraphs_answer_object = Paragraph::load($ref_id);
