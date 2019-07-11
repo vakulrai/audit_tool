@@ -29,7 +29,7 @@ bundle: internal_audit
 mode: default
 content:
   field_audit_date:
-    weight: 9
+    weight: 10
     settings: {  }
     third_party_settings: {  }
     type: datetime_timestamp
@@ -101,7 +101,7 @@ content:
     type: options_select
     region: content
   field_list_of_product:
-    weight: 8
+    weight: 9
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -149,7 +149,7 @@ content:
     type: options_select
     region: content
   field_queries:
-    weight: 10
+    weight: 11
     settings:
       form_mode: default
       override_labels: true
@@ -175,7 +175,7 @@ content:
     region: content
   moderation_state:
     type: moderation_state_default
-    weight: 11
+    weight: 12
     settings: {  }
     region: content
     third_party_settings: {  }

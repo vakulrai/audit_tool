@@ -12,7 +12,7 @@ dependencies:
 id: views_block__customer_manual_listing_manual
 theme: seven
 region: content
-weight: 9
+weight: 10
 provider: null
 plugin: 'views_block:customer_manual_listing-manual'
 settings:

@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_score
+    - user.role.auditor
   module:
     - paragraphs
     - user
@@ -202,18 +203,16 @@ display:
           expose:
             operator: ''
           group: 1
-        field_score_value:
-          id: field_score_value
-          table: paragraph__field_score
-          field: field_score_value
-          relationship: field_functions
+        roles_target_id:
+          id: roles_target_id
+          table: user__roles
+          field: roles_target_id
+          relationship: none
           group_type: group
           admin_label: ''
-          operator: '>'
+          operator: or
           value:
-            min: ''
-            max: ''
-            value: '5'
+            auditor: auditor
           group: 1
           exposed: false
           expose:
@@ -228,9 +227,7 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -243,7 +240,10 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: numeric
+          reduce_duplicates: false
+          entity_type: user
+          entity_field: roles
+          plugin_id: user_roles
       sorts: {  }
       header: {  }
       footer: {  }

@@ -121,6 +121,12 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       'route_name' => 'view.registered_unit_listing.section_list',
       'base_route' => 'view.user_registration_view.registration',
     ] + $base_plugin_definition;
+
+    $links['department'] = [
+      'title' => 'Departments',
+      'route_name' => 'view.registered_unit_listing.department_listing',
+      'base_route' => 'view.user_registration_view.registration',
+    ] + $base_plugin_definition;
     
     $links['audit_list'] = [
       'title' => 'Audit List',

@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.planned_events.body
     - field.field.node.planned_events.field_audit_type
     - field.field.node.planned_events.field_auditor
+    - field.field.node.planned_events.field_checklist
     - field.field.node.planned_events.field_customer_type
     - field.field.node.planned_events.field_department
     - field.field.node.planned_events.field_end_date
@@ -39,7 +40,7 @@ third_party_settings:
         - field_remote_location_name
         - field_auditor
       parent_name: group_who
-      weight: 32
+      weight: 33
       format_type: fieldset
       format_settings:
         id: ''
@@ -68,6 +69,7 @@ third_party_settings:
         - field_internal_audit_type
         - field_list_of_systems
         - field_list_of_process
+        - field_checklist
         - field_list_of_product
         - field_unit
       parent_name: ''
@@ -122,8 +124,14 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_checklist:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_customer_type:
-    weight: 5
+    weight: 4
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -159,7 +167,7 @@ content:
     type: datetime_timestamp
     region: content
   field_internal_audit_type:
-    weight: 6
+    weight: 5
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -183,7 +191,7 @@ content:
     type: options_select
     region: content
   field_list_of_process:
-    weight: 8
+    weight: 7
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -231,7 +239,7 @@ content:
     type: options_select
     region: content
   field_list_of_systems:
-    weight: 7
+    weight: 6
     settings: {  }
     third_party_settings:
       conditional_fields:

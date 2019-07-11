@@ -28,3 +28,14 @@ aps_dashboard_ncr_car_js:
   dependencies:
     - core/jquery
     - core/jquery.once
+
+aps_dashboard_auditor_report_js:
+  js:
+    https://code.highcharts.com/highcharts.js: { type: external, minified: true, weight: -1 }
+    https://code.highcharts.com/modules/exporting.js: { type: external, minified: true }
+    https://code.highcharts.com/modules/export-data.js: { type: external, minified: true }
+    https://code.highcharts.com/modules/series-label.js: { type: external, minified: true }
+    js/aps_dashboard_auditor_report.js: { weight: -1 }
+  dependencies:
+    - core/jquery
+    - core/jquery.once

@@ -515,7 +515,7 @@ class UpdateAuditFindings extends PreAuditForm {
       //Condition to only submit Poor categeories.
       if($parent_tid){
         $term_object_parent = Term::load($parent_tid);
-        if($term_object_parent->get('name')->value == 'Poor' && $a['question_type'] == 'non-delta' || $a['question_type'] == 'delta'){
+        // if($term_object_parent->get('name')->value == 'Poor' && $a['question_type'] == 'non-delta' || $a['question_type'] == 'delta'){
           $paragraph = Paragraph::create([
             'field_step' => $a['field_step'],
             'field_question' => $a['field_question'],
@@ -530,7 +530,7 @@ class UpdateAuditFindings extends PreAuditForm {
             'target_id' => $paragraph->id(),
             'target_revision_id' => $paragraph->getRevisionId(),
           ];
-        }
+        // }
       }
     }
     // $data['field_audit_list'] = $paragraphp_version;

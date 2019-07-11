@@ -22,12 +22,19 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $id = \Drupal::request()->query->get('unit_reference');
     $form['#cache']['max-age'] = 0;
     $form['field_sections']['#attributes'] = ['id' => ['section']];
+    $form['field_checklist']['#attributes'] = ['id' => ['checklist']];
     $form['field_shift']['#attributes'] = ['id' => ['shift']];
     $form['field_internal_audit_type']['#attributes'] = ['id' => ['audit-type']];
     $form['field_available_procedures']['#attributes'] = ['id' => ['procedure-type']];
 	  $form['field_department']['widget']['#ajax'] = [
       'callback' => 'getSectionfromdepartment',
       'wrapper' => 'section',
+      'event' => 'change',
+    ];
+
+    $form['field_list_of_systems']['widget']['#ajax'] = [
+      'callback' => 'getChecklist',
+      'wrapper' => 'checklist',
       'event' => 'change',
     ];
 
@@ -163,6 +170,15 @@ function getSectionfromdepartment(array $form, FormStateInterface $form_state) {
     $form['field_sections']['widget']['#options'] = getSectionDropdownOptions($key);
    }
    return $form['field_sections'];
+}
+
+function getChecklist(array $form, FormStateInterface $form_state) {
+  if(count($form_state->getValue('field_list_of_systems'))){
+    $system_array = $form_state->getValue('field_list_of_systems')[0];
+    $key = $system_array['target_id'];
+    $form['field_checklist']['widget']['#options'] = getChecklistData($key);
+   }
+   return $form['field_checklist'];
 }
 
 function getSectionfromdepartmentProcedure(array $form, FormStateInterface $form_state) {
@@ -381,5 +397,19 @@ function getAuditOPtions($type, $url) {
     }
   }
   return $options;
+}
+
+function getChecklistData($key){
+  $data = [];
+  $query = \Drupal::database()->select('node__field_list_of_systems', 'cm');
+  $query->fields('cm',['field_list_of_systems_target_id', 'entity_id']);
+  $query->condition('cm.bundle', 'internal_audit');
+  $query->condition('cm.field_list_of_systems_target_id', $key);
+  $nids = $query->execute()->fetchAll();
+  foreach ($nids as $key => $value) {
+     $title = Node::load($value->entity_id);
+     $data[$value->entity_id] = $title->title->value;
+  }
+  return $data;
 }
 ?>

@@ -10,7 +10,7 @@ dependencies:
 id: auditplanningblock
 theme: seven
 region: content
-weight: -8
+weight: -10
 provider: null
 plugin: audit_planning_block
 settings:

@@ -11,7 +11,7 @@ dependencies:
 id: auditfindingcontrolscheduled
 theme: seven
 region: content
-weight: 2
+weight: 3
 provider: null
 plugin: audit_finding_control_scheduled
 settings:

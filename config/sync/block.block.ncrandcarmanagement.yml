@@ -10,7 +10,7 @@ dependencies:
 id: ncrandcarmanagement
 theme: seven
 region: content
-weight: 0
+weight: 1
 provider: null
 plugin: ncrand_car_management
 settings:

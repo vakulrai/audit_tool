@@ -1,34 +1,34 @@
-uuid: 868f42ab-2f64-413f-b5e6-a6c84a919ef2
+uuid: ae469847-5ede-4195-a44a-563f3517acd9
 langcode: en
 status: true
 dependencies:
   module:
-    - aps_pre_audit
+    - aps_audit_report_analysis
     - system
     - user
   theme:
     - seven
-id: askmoreinformationblock
+id: auditorselection_2
 theme: seven
 region: content
-weight: 9
+weight: -2
 provider: null
-plugin: ask_more_information_block
+plugin: auditor_selection
 settings:
-  id: ask_more_information_block
-  label: 'Ask more information block'
-  provider: aps_pre_audit
+  id: auditor_selection
+  label: 'Auditor selection'
+  provider: aps_audit_report_analysis
   label_display: '0'
 visibility:
   request_path:
     id: request_path
-    pages: "/documentrecords/*\r\n/documentmanuals/*\r\n/documentinternalrecords/*"
+    pages: '/unit-registration-view/*'
     negate: false
     context_mapping: {  }
   user_role:
     id: user_role
     roles:
-      auditor: auditor
+      mr_admin: mr_admin
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'
