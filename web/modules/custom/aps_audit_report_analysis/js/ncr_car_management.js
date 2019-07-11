@@ -34,12 +34,12 @@
 		        colorByPoint: true,
 		        data: [{
 		            name: 'Completed',
-		            y: Math.round((ncr_car_data['total'] - ncr_car_data['completed'])/ncr_car_data['total'] * 100),
+		            y: Math.round((ncr_car_data['completed'])/ncr_car_data['total'] * 100),
 		            sliced: true,
 		            selected: true
 		        }, {
 		            name: 'Pending',
-		            y: Math.round((ncr_car_data['total'] - ncr_car_data['pending'])/ncr_car_data['total'] * 100),
+		            y: Math.round((ncr_car_data['pending'])/ncr_car_data['total'] * 100),
 		            color: 'red',
 		        }]
 		    }]
