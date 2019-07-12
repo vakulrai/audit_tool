@@ -1,0 +1,34 @@
+uuid: f4e70576-303e-437a-a076-f29b9a48e2d5
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_audit_report_analysis
+    - system
+    - user
+  theme:
+    - bootstrap_barrio
+id: bootstrap_barrio_mradmindashboardplanningcontrol
+theme: bootstrap_barrio
+region: content
+weight: 0
+provider: null
+plugin: mradmin_dashboard_planning_control
+settings:
+  id: mradmin_dashboard_planning_control
+  label: 'Mradmin dashboard planning control'
+  provider: aps_audit_report_analysis
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: '/unit-registration-view/*'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

@@ -1,0 +1,35 @@
+uuid: 0169af54-2bd7-402b-a411-ffc0b2c4860a
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_pre_audit
+    - system
+    - user
+  theme:
+    - bootstrap_barrio
+id: bootstrap_barrio_uploadmoredocumentsformradmmin
+theme: bootstrap_barrio
+region: content
+weight: 8
+provider: null
+plugin: upload_more_documents_for_mradmmin
+settings:
+  id: upload_more_documents_for_mradmmin
+  label: 'Upload more documents for mradmmin'
+  provider: aps_pre_audit
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/documentinternalrecords/*\r\n/documentrecords/*\r\n/documentmanuals/*"
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      auditee: auditee
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

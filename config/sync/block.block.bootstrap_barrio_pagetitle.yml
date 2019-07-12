@@ -1,0 +1,25 @@
+uuid: cbf1c1a8-a33a-4635-85ae-9db89b41004c
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - bootstrap_barrio
+id: bootstrap_barrio_pagetitle
+theme: bootstrap_barrio
+region: content
+weight: 14
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /home
+    negate: true
+    context_mapping: {  }

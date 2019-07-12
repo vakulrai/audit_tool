@@ -1,0 +1,31 @@
+uuid: 4811f0d9-bef5-46ac-ad86-2ddb0941bdc4
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.registered_unit_listing
+  module:
+    - system
+    - views
+  theme:
+    - bootstrap_barrio_subtheme
+id: bootstrap_barrio_subtheme_views_block__registered_unit_listing_block_2
+theme: bootstrap_barrio_subtheme
+region: content
+weight: -23
+provider: null
+plugin: 'views_block:registered_unit_listing-block_2'
+settings:
+  id: 'views_block:registered_unit_listing-block_2'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: "/node/add/section/*\r\n/node/add/section"
+    negate: false
+    context_mapping: {  }

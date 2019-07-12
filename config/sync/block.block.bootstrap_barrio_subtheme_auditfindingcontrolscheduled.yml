@@ -1,0 +1,34 @@
+uuid: e500b42d-5d42-472d-8af6-cba1e8117a74
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_audit_report_analysis
+    - system
+    - user
+  theme:
+    - bootstrap_barrio_subtheme
+id: bootstrap_barrio_subtheme_auditfindingcontrolscheduled
+theme: bootstrap_barrio_subtheme
+region: content
+weight: 3
+provider: null
+plugin: audit_finding_control_scheduled
+settings:
+  id: audit_finding_control_scheduled
+  label: 'Audit finding control scheduled'
+  provider: aps_audit_report_analysis
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: '/unit-registration-view/*'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

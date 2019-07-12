@@ -1,0 +1,37 @@
+uuid: 2a151fdc-0c7e-4b8a-a882-c8df304bbbe7
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+    - user
+  theme:
+    - bootstrap_barrio_subtheme
+id: bootstrap_barrio_subtheme_views_block__department_view_block_2
+theme: bootstrap_barrio_subtheme
+region: content
+weight: 13
+provider: null
+plugin: 'views_block:department_view-block_2'
+settings:
+  id: 'views_block:department_view-block_2'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: "/node/add/department\r\n/node/add/department/*"
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      executive: executive
+      auditor: auditor
+      auditee: auditee
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
