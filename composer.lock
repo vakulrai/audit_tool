@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "79286110118140d6c98278d13f8ed4f3",
+    "content-hash": "73992c6dfe975d0a3329a09778388cd7",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3885,21 +3885,21 @@
             }
         },
         {
-            "name": "drupal/regcode",
-            "version": "1.0.0",
+            "name": "drupal/renderviz",
+            "version": "1.0.0-alpha1",
             "source": {
                 "type": "git",
-                "url": "https://git.drupalcode.org/project/regcode.git",
-                "reference": "8.x-1.0"
+                "url": "https://git.drupalcode.org/project/renderviz.git",
+                "reference": "8.x-1.0-alpha1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/regcode-8.x-1.0.zip",
-                "reference": "8.x-1.0",
-                "shasum": "b538a4737b8c3bd4bb0217c3e5cc6f8f490223e1"
+                "url": "https://ftp.drupal.org/files/projects/renderviz-8.x-1.0-alpha1.zip",
+                "reference": "8.x-1.0-alpha1",
+                "shasum": "a4193b642c3a814372712c24d7085fb57c945c60"
             },
             "require": {
-                "drupal/core": "*"
+                "drupal/core": "~8.0"
             },
             "type": "drupal-module",
             "extra": {
@@ -3907,40 +3907,47 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0",
-                    "datestamp": "1548199980",
+                    "version": "8.x-1.0-alpha1",
+                    "datestamp": "1474915439",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
                     }
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
-                    "name": "Ayesh",
-                    "homepage": "https://www.drupal.org/user/796148"
+                    "name": "G-raph",
+                    "homepage": "https://www.drupal.org/user/1009760"
                 },
                 {
-                    "name": "aidanlis",
-                    "homepage": "https://www.drupal.org/user/502018"
+                    "name": "Sam152",
+                    "homepage": "https://www.drupal.org/user/1485048"
                 },
                 {
-                    "name": "azovsky",
-                    "homepage": "https://www.drupal.org/user/330533"
+                    "name": "Wim Leers",
+                    "homepage": "https://www.drupal.org/user/99777"
                 },
                 {
-                    "name": "chertzog",
-                    "homepage": "https://www.drupal.org/user/806366"
+                    "name": "larowlan",
+                    "homepage": "https://www.drupal.org/user/395439"
+                },
+                {
+                    "name": "nod_",
+                    "homepage": "https://www.drupal.org/user/598310"
+                },
+                {
+                    "name": "sqndr",
+                    "homepage": "https://www.drupal.org/user/2516272"
                 }
             ],
-            "description": "Provides functionality for using/enabling/requiring registration codes upon user registration.",
-            "homepage": "https://www.drupal.org/project/regcode",
+            "homepage": "https://www.drupal.org/project/renderviz",
             "support": {
-                "source": "https://git.drupalcode.org/project/regcode"
+                "source": "https://git.drupalcode.org/project/renderviz"
             }
         },
         {
@@ -8712,6 +8719,65 @@
             "time": "2019-04-16T18:56:06+00:00"
         },
         {
+            "name": "drupal/regcode",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/regcode.git",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/regcode-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "b538a4737b8c3bd4bb0217c3e5cc6f8f490223e1"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1548199980",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Ayesh",
+                    "homepage": "https://www.drupal.org/user/796148"
+                },
+                {
+                    "name": "aidanlis",
+                    "homepage": "https://www.drupal.org/user/502018"
+                },
+                {
+                    "name": "azovsky",
+                    "homepage": "https://www.drupal.org/user/330533"
+                },
+                {
+                    "name": "chertzog",
+                    "homepage": "https://www.drupal.org/user/806366"
+                }
+            ],
+            "description": "Provides functionality for using/enabling/requiring registration codes upon user registration.",
+            "homepage": "https://www.drupal.org/project/regcode",
+            "support": {
+                "source": "https://git.drupalcode.org/project/regcode"
+            }
+        },
+        {
             "name": "fabpot/goutte",
             "version": "v3.2.3",
             "source": {
@@ -10631,6 +10697,7 @@
         "drupal/front": 10,
         "drupal/inline_entity_form": 5,
         "drupal/mobile_number": 15,
+        "drupal/renderviz": 15,
         "drupal/smtp": 10
     },
     "prefer-stable": true,
