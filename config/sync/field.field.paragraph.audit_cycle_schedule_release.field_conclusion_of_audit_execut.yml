@@ -1,0 +1,23 @@
+uuid: 0c6bb7fe-203c-49bc-988f-cce07eb0d267
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_conclusion_of_audit_execut
+    - paragraphs.paragraphs_type.audit_cycle_schedule_release
+id: paragraph.audit_cycle_schedule_release.field_conclusion_of_audit_execut
+field_name: field_conclusion_of_audit_execut
+entity_type: paragraph
+bundle: audit_cycle_schedule_release
+label: 'Conclusion of Audit execution  confirmation '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

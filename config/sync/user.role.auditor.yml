@@ -107,6 +107,7 @@ permissions:
   - 'edit any procedures content'
   - 'edit any qanda content'
   - 'edit any section content'
+  - 'edit any supplier content'
   - 'edit any unit content'
   - 'edit any unit entities'
   - 'edit own assembly content'

@@ -2,9 +2,12 @@ uuid: 2cf32f75-1279-4d89-9e39-7e56d7c9f00d
 langcode: en
 status: true
 dependencies:
+  config:
+    - views.view.external_audit_listing
   module:
     - system
     - user
+    - views
   theme:
     - seven
 id: views_block__external_audit_listing_clauses

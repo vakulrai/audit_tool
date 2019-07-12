@@ -1,0 +1,20 @@
+uuid: 7cb1865c-b5b5-4f61-afb7-84061599f985
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: audit_cycle.field_car_release_by_auidtee_
+field_name: field_car_release_by_auidtee_
+entity_type: audit_cycle
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

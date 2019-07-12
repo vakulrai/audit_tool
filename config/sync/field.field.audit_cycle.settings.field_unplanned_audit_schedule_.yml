@@ -1,0 +1,23 @@
+uuid: f306e319-8803-4a18-96e7-ad417ce1acba
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_cycle.settings
+    - field.storage.audit_cycle.field_unplanned_audit_schedule_
+id: audit_cycle.settings.field_unplanned_audit_schedule_
+field_name: field_unplanned_audit_schedule_
+entity_type: audit_cycle
+bundle: settings
+label: 'Unplanned audit schedule '
+description: 'days before start of Audit '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

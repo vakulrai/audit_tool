@@ -118,6 +118,7 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
 	}
 
 	if($form_id == 'audit_cycle_settings_form' || $form_id == 'audit_cycle_settings_edit_form'){
+    $form['field_unit_reference']['#access'] = FALSE;
     if ($form_id == 'audit_cycle_settings_form') {
       if($id= \Drupal::request()->query->get('unit_reference')){
         $node_object = Node::load($id);

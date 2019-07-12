@@ -5,11 +5,15 @@ dependencies:
   config:
     - eck.eck_type.audit_cycle.settings
     - field.field.audit_cycle.settings.field_calendar_date
+    - field.field.audit_cycle.settings.field_car_release_by_auidtee_
     - field.field.audit_cycle.settings.field_cycle_type
     - field.field.audit_cycle.settings.field_financial_dates
+    - field.field.audit_cycle.settings.field_non_conformity_release_
     - field.field.audit_cycle.settings.field_other
+    - field.field.audit_cycle.settings.field_rescheduling_of_dates_
     - field.field.audit_cycle.settings.field_schedule_release
     - field.field.audit_cycle.settings.field_unit_reference
+    - field.field.audit_cycle.settings.field_unplanned_audit_schedule_
   module:
     - datetime_range
     - entity_reference_revisions
@@ -29,6 +33,15 @@ content:
     third_party_settings: {  }
     type: daterange_default
     region: content
+  field_car_release_by_auidtee_:
+    weight: 8
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
   field_cycle_type:
     weight: 3
     label: above
@@ -46,6 +59,15 @@ content:
     third_party_settings: {  }
     type: daterange_default
     region: content
+  field_non_conformity_release_:
+    weight: 7
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
   field_other:
     type: entity_reference_revisions_entity_view
     weight: 2
@@ -54,6 +76,15 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    region: content
+  field_rescheduling_of_dates_:
+    weight: 9
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   field_schedule_release:
     type: entity_reference_revisions_entity_view
@@ -71,5 +102,14 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_unplanned_audit_schedule_:
+    weight: 10
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
 hidden: {  }

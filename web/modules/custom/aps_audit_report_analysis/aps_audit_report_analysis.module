@@ -46,6 +46,14 @@ function aps_audit_report_analysis_theme($existing, $type, $theme, $path) {
           'data' => NULL,
         ],
     ],
+    // 'risk_management' => [
+    //   'path' => $path . '/templates',
+    //   'template' => 'risk-management',
+    //     'variables' => [
+    //       'risk_chart' => NULL,
+    //       'data' => NULL,
+    //     ],
+    // ],
   ];
 }
 

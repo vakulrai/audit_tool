@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pre_audit_records.body
+    - field.field.node.pre_audit_records.field_accumlative_kpi
     - field.field.node.pre_audit_records.field_files
     - field.field.node.pre_audit_records.field_qam
     - field.field.node.pre_audit_records.field_reasons_data
@@ -13,6 +14,7 @@ dependencies:
     - field.field.node.pre_audit_records.field_verified
     - node.type.pre_audit_records
   module:
+    - content_moderation
     - datetime_range
     - link
     - media_library
@@ -22,6 +24,13 @@ targetEntityType: node
 bundle: pre_audit_records
 mode: default
 content:
+  field_accumlative_kpi:
+    weight: 2
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
   field_files:
     weight: 1
     settings:
@@ -30,7 +39,7 @@ content:
     type: media_library_widget
     region: content
   field_qam:
-    weight: 3
+    weight: 4
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -38,7 +47,7 @@ content:
     type: link_default
     region: content
   field_reasons_data:
-    weight: 5
+    weight: 6
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -50,7 +59,7 @@ content:
     type: entity_reference_paragraphs
     region: content
   field_refere:
-    weight: 27
+    weight: 8
     settings:
       match_operator: CONTAINS
       size: 60
@@ -59,23 +68,29 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_submitted_by:
-    weight: 26
+    weight: 7
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_valid_upto:
-    weight: 2
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: daterange_default
     region: content
   field_verified:
-    weight: 4
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 9
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0

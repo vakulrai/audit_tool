@@ -1,0 +1,19 @@
+uuid: 4541853b-49c9-4f23-9927-cc1f970ed8d4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_product_list
+    - node.type.supplier
+id: node.supplier.field_product_list
+field_name: field_product_list
+entity_type: node
+bundle: supplier
+label: 'Product List'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

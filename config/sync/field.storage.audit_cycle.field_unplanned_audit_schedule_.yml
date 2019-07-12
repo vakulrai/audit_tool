@@ -1,0 +1,20 @@
+uuid: 24bdd351-858d-40ea-9e65-41691eefdc8b
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: audit_cycle.field_unplanned_audit_schedule_
+field_name: field_unplanned_audit_schedule_
+entity_type: audit_cycle
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

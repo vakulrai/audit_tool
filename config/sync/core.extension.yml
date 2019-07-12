@@ -59,6 +59,7 @@ module:
   quickedit: 0
   range: 0
   rdf: 0
+  renderviz: 0
   rest: 0
   restui: 0
   search: 0

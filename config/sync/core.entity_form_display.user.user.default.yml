@@ -7,6 +7,7 @@ dependencies:
     - field.field.user.user.field_employee_id
     - field.field.user.user.field_functions
     - field.field.user.user.field_phone
+    - field.field.user.user.field_reference_id
   module:
     - mobile_number
     - paragraphs
@@ -55,6 +56,15 @@ content:
       placeholder: null
     third_party_settings: {  }
     type: mobile_number_default
+    region: content
+  field_reference_id:
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
 hidden:
   contact: true

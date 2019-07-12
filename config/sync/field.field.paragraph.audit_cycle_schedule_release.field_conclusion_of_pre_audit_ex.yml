@@ -1,0 +1,23 @@
+uuid: c5e5e631-3085-41f6-bfd4-d7a7502aa56d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_conclusion_of_pre_audit_ex
+    - paragraphs.paragraphs_type.audit_cycle_schedule_release
+id: paragraph.audit_cycle_schedule_release.field_conclusion_of_pre_audit_ex
+field_name: field_conclusion_of_pre_audit_ex
+entity_type: paragraph
+bundle: audit_cycle_schedule_release
+label: 'Conclusion of Pre- Audit execution  confirmation '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

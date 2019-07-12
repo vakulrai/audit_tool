@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.pre_audit_records.body
+    - field.field.node.pre_audit_records.field_accumlative_kpi
     - field.field.node.pre_audit_records.field_files
     - field.field.node.pre_audit_records.field_qam
     - field.field.node.pre_audit_records.field_reasons_data
@@ -30,6 +31,17 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_accumlative_kpi:
+    weight: 109
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
     region: content
   field_files:
     weight: 102

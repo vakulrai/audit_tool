@@ -12,10 +12,12 @@ bundle: auditor_functional_details
 mode: default
 content:
   field_functions_qualified:
-    weight: 0
-    settings: {  }
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: options_select
+    type: string_textfield
     region: content
   field_score:
     weight: 1

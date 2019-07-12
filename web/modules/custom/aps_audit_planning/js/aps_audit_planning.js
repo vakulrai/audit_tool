@@ -24,10 +24,8 @@
         }
       },
       eventSources: [
-        {
-          url: base_url+'/generate-events',
-          url: base_url+'/list-of-unit-holidays/'+unit_id,
-        },
+        base_url+'/generate-events',
+        base_url+'/list-of-unit-holidays/'+unit_id,
         {
           googleCalendarId: 'en.indian#holiday@group.v.calendar.google.com',
           color: 'blue',

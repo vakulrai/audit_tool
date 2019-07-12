@@ -39,3 +39,16 @@ aps_dashboard_auditor_report_js:
   dependencies:
     - core/jquery
     - core/jquery.once
+
+aps_dashboard_risk_management_js:
+  js:
+    https://code.highcharts.com/highcharts.js: { type: external, minified: true, weight: -1 }
+    https://code.highcharts.com/modules/exporting.js: { type: external, minified: true }
+    https://code.highcharts.com/modules/export-data.js: { type: external, minified: true }
+    https://code.highcharts.com/modules/series-label.js: { type: external, minified: true }
+    https://code.highcharts.com/highcharts-more.js: { type: external, minified: true, weight: 0 }
+    https://code.highcharts.com/modules/solid-gauge.js: { type: external, minified: true }
+    js/risk_management.js: { weight: -1 }
+  dependencies:
+    - core/jquery
+    - core/jquery.once

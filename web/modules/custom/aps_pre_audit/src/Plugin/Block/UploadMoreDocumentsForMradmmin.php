@@ -21,6 +21,7 @@ class UploadMoreDocumentsForMradmmin extends BlockBase {
     $build = [];
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $uri = explode('/', $current_uri);
+    $build['#cache']['max-age'] = 0;
     switch ($uri[0]) {
     	case 'documentinternalrecords':
     	    $url = Url::fromRoute('node.add',['node_type' => 'internal_documents', 'id' => $uri[1], 'destination' => $current_uri]);

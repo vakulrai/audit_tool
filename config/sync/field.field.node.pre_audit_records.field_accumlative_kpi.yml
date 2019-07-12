@@ -1,0 +1,23 @@
+uuid: 697fdc24-1e36-4c08-b751-00383a4177bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_accumlative_kpi
+    - node.type.pre_audit_records
+id: node.pre_audit_records.field_accumlative_kpi
+field_name: field_accumlative_kpi
+entity_type: node
+bundle: pre_audit_records
+label: 'Accumlative KPI'
+description: 'In Percentage'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: !!float 0
+  max: !!float 100
+  prefix: ''
+  suffix: ''
+field_type: decimal

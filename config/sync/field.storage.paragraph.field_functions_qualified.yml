@@ -1,19 +1,20 @@
-uuid: 6810fdcd-f2ac-4421-9360-bca82b1d63a3
+uuid: 9b5ca6c5-0368-46ea-9068-e77ed56c04b4
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
-    - taxonomy
 id: paragraph.field_functions_qualified
 field_name: field_functions_qualified
 entity_type: paragraph
-type: entity_reference
+type: string
 settings:
-  target_type: taxonomy_term
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
 module: core
 locked: false
-cardinality: 1
+cardinality: -1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

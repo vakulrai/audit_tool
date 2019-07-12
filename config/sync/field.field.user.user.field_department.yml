@@ -1,10 +1,10 @@
-uuid: 97609010-d1e5-4d5e-97d7-f6a15ec54855
+uuid: 6f8f3ddd-7f80-45a2-a9f8-facfedfb2a85
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.user.field_department
-    - taxonomy.vocabulary.department_type
+    - node.type.department
   module:
     - user
 id: user.user.field_department
@@ -18,13 +18,12 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:taxonomy_term'
+  handler: 'default:node'
   handler_settings:
     target_bundles:
-      department_type: department_type
+      department: department
     sort:
-      field: name
-      direction: asc
+      field: _none
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

@@ -1,11 +1,10 @@
-uuid: e3235dd6-7882-4662-82b7-a6b6251f2f9c
+uuid: 6e3a6001-9e12-4c4d-9a95-828b600b64b8
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_functions_qualified
     - paragraphs.paragraphs_type.auditor_functional_details
-    - taxonomy.vocabulary.functions_qualified
 id: paragraph.auditor_functional_details.field_functions_qualified
 field_name: field_functions_qualified
 entity_type: paragraph
@@ -16,14 +15,5 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:
-  handler: 'default:taxonomy_term'
-  handler_settings:
-    target_bundles:
-      functions_qualified: functions_qualified
-    sort:
-      field: name
-      direction: asc
-    auto_create: false
-    auto_create_bundle: ''
-field_type: entity_reference
+settings: {  }
+field_type: string

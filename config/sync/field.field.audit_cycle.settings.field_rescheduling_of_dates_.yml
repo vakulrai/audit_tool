@@ -1,0 +1,23 @@
+uuid: 068c4010-09dd-4f59-b4ba-695a3c5dd5f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_cycle.settings
+    - field.storage.audit_cycle.field_rescheduling_of_dates_
+id: audit_cycle.settings.field_rescheduling_of_dates_
+field_name: field_rescheduling_of_dates_
+entity_type: audit_cycle
+bundle: settings
+label: 'Rescheduling of dates '
+description: 'days before start of Audit '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

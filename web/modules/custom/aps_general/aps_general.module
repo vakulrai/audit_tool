@@ -62,6 +62,7 @@ function aps_general_theme() {
  */
 function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   //Condition for Unit Add form
+  $form['moderation_state']['#access'] = FALSE;
   if($form_id == 'node_unit_form'){
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
@@ -72,11 +73,17 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
 
   //Condition for Procedure Add form
   if($form_id == 'node_procedures_form'){
-    $form['field_refere']['#access'] = FALSE;
-     if($id = \Drupal::request()->query->get('unit_reference')){
+    if($id = \Drupal::request()->query->get('unit_reference')){
       $node_object = Node::load($id);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
+    $get_business_options = getDepartmenttypeUnderunit('business_process', $id);
+    $get_department_options = getDepartmenttypeUnderunit('department', $id);
+    $get_section_options = getDepartmenttypeUnderunit('business_process', $id);
+    $form['field_business_process']['widget']['#options'] = $get_business_options;
+    $form['field_department']['widget']['#options'] = $get_department_options;
+    $form['field_section_type']['widget']['#options'] = $get_section_options;
+    $form['field_refere']['#access'] = FALSE;
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'aps_general_procedures_page_redirect';
@@ -268,6 +275,20 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   }
 
   if($form_id == 'user_register_form'){
+    $unit_reference = \Drupal::request()->query->get('unit_reference');
+    $node_object = Node::load($unit_reference);
+    $form['field_reference_id']['widget'][0]['target_id']['#default_value'] = $node_object;
+     $form['field_reference_id']['#access'] = FALSE;
+    $query = \Drupal::database()->select('node__field_refere', 'n');
+    $query->fields('n',['entity_id']);
+    $query->condition('n.bundle', 'department');
+    $query->condition('n.field_refere_target_id', $unit_reference);
+    $nids = $query->execute()->fetchAll();
+     foreach ($nids as $i => $j) {
+      $title = Node::load($j->entity_id);
+      $selected_department[$j->entity_id] = $title->title->value;
+     }
+    $form['field_department']['widget']['#options'] = $selected_department;
     $form['#title'] = 'Add Roles';
     if($form['account']['roles']){
       $form['account']['roles']['#type'] = 'select';
@@ -378,6 +399,14 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $form['field_audit_type']['#access'] = FALSE;
       $form['field_audit_date']['#access'] = FALSE;
       $form['title']['#access'] = FALSE;
+    }
+  }
+
+  if($form_id == 'node_supplier_form'){
+    if($id= \Drupal::request()->query->get('unit_reference')){
+      $node_object = Node::load($id);
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
+      $form['field_refere']['#access'] = FALSE;
     }
   }
 }
@@ -653,6 +682,7 @@ function aps_general_preprocess_page(&$variables) {
   }
   // if (\Drupal::routeMatch()->getRouteName() == 'view.user_registration_view.registration') {
     Drupal\Core\Cache\Cache::invalidateTags(['local_task']);
+    Drupal\Core\Cache\Cache::invalidateTags(['block_list']);
   // }
 }
 
@@ -724,7 +754,10 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
      elseif (stripos(strtolower($uri[2]), 'department?') !== false) {
         unset($data['tabs']);
     }
-     elseif (stripos(strtolower($uri[2]), 'business_process?') !== false) {
+    elseif (stripos(strtolower($uri[2]), 'business_process?') !== false) {
+        unset($data['tabs']);
+    }
+    elseif (stripos(strtolower($uri[2]), 'supplier?') !== false) {
         unset($data['tabs']);
     }
     elseif ($uri[2] == 'internal_audit') {
@@ -755,13 +788,7 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
         unset($data['tabs']);
     }
     elseif ($uri[2] == 'customers_manual?destination=node') {
-        unset($data['tabs'][0]['aps_general.standards']);
-        unset($data['tabs'][0]['aps_general.clauses']); 
-        unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
-        unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
-        unset($data['tabs'][0]['aps_audit_criteria.audit_list']);
-        unset($data['tabs'][0]['aps_audit_criteria.systems_setting']);
-        unset($data['tabs'][0]['aps_pre_audit.manuals:add_procedures']);
+      unset($data['tabs']);
     }
     elseif ($uri[2] == 'customers_manual') {
         unset($data['tabs']);
@@ -1098,6 +1125,14 @@ function aps_general_link_alter(&$variables) {
       $variables['url'] = $url;
     }
   }
+
+   if ($cleanLinkText == 'SUPPLIERS') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('unit_reference', $id);
+      $variables['url']->setRouteParameter('destination', $current_uri);
+    }
+  }
 }
 
 function get_user_roles(){
@@ -1225,7 +1260,9 @@ function aps_general_procedures_page_redirect(array $form, \Drupal\Core\Form\For
  * Callback method after Ext. Audit form submits.
  */
 function aps_ext_audit_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
-  $response = Url::fromUserInput('/external-audit-standards');
+  $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
+  $id = \Drupal::request()->query->get('unit_reference');
+  $response = Url::fromRoute('node.add',['node_type' => 'external_audit_', 'id' => $id]);
   $form_state->setRedirectUrl($response);
 }
 
@@ -1290,4 +1327,19 @@ function get_location_from_unit(FieldStorageConfig $definition, ContentEntityInt
     $options = [];
   }
   return $options;
+}
+
+function getDepartmenttypeUnderunit($bundle, $unit_reference){
+  $query = \Drupal::database()->select('node__field_refere', 'n');
+  $query->fields('n',['entity_id']);
+  $query->condition('n.bundle', $bundle);
+  $query->condition('n.field_refere_target_id', $unit_reference);
+  $nids = $query->execute()->fetchAll();
+  $selected_department = [];
+  $selected_department['_none'] = t('- None -');
+  foreach ($nids as $i => $j) {
+    $title = Node::load($j->entity_id);
+    $selected_department[$j->entity_id] = $title->title->value;
+  }
+   return $selected_department;
 }

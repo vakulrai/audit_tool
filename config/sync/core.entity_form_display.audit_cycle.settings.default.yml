@@ -5,14 +5,36 @@ dependencies:
   config:
     - eck.eck_type.audit_cycle.settings
     - field.field.audit_cycle.settings.field_calendar_date
+    - field.field.audit_cycle.settings.field_car_release_by_auidtee_
     - field.field.audit_cycle.settings.field_cycle_type
     - field.field.audit_cycle.settings.field_financial_dates
+    - field.field.audit_cycle.settings.field_non_conformity_release_
     - field.field.audit_cycle.settings.field_other
+    - field.field.audit_cycle.settings.field_rescheduling_of_dates_
     - field.field.audit_cycle.settings.field_schedule_release
     - field.field.audit_cycle.settings.field_unit_reference
+    - field.field.audit_cycle.settings.field_unplanned_audit_schedule_
   module:
     - datetime_range
+    - field_group
     - paragraphs
+third_party_settings:
+  field_group:
+    group_reports:
+      children:
+        - field_car_release_by_auidtee_
+        - field_rescheduling_of_dates_
+        - field_unplanned_audit_schedule_
+        - field_non_conformity_release_
+      parent_name: ''
+      weight: 6
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Reports
 id: audit_cycle.settings.default
 targetEntityType: audit_cycle
 bundle: settings
@@ -23,6 +45,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: daterange_default
+    region: content
+  field_car_release_by_auidtee_:
+    weight: 8
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
     region: content
   field_cycle_type:
     weight: 0
@@ -36,6 +65,13 @@ content:
     third_party_settings: {  }
     type: daterange_default
     region: content
+  field_non_conformity_release_:
+    weight: 11
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
   field_other:
     type: entity_reference_paragraphs
     weight: 4
@@ -47,6 +83,13 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
+    region: content
+  field_rescheduling_of_dates_:
+    weight: 9
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
     region: content
   field_schedule_release:
     type: entity_reference_paragraphs
@@ -68,5 +111,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_unplanned_audit_schedule_:
+    weight: 10
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
     region: content
 hidden: {  }
