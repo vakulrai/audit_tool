@@ -11,8 +11,8 @@ third_party_settings:
     parent: 'main:'
 name: Section
 type: section
-description: 'Add a section'
+description: 'Add a section under Department'
 help: ''
-new_revision: false
+new_revision: true
 preview_mode: 1
 display_submitted: false

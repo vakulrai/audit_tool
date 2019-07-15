@@ -11,8 +11,8 @@ third_party_settings:
     parent: 'main:'
 name: 'Predefined Answers'
 type: answers
-description: ''
+description: 'Generate Checklist for Audit. Mostly added by MR admin.'
 help: ''
-new_revision: false
+new_revision: true
 preview_mode: 1
 display_submitted: false

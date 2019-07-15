@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 name: 'Home Page'
 type: home_page
-description: ''
+description: 'Home Page for Audit Tool'
 help: ''
 new_revision: true
 preview_mode: 1

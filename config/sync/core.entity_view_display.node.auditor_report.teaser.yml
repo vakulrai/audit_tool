@@ -22,9 +22,27 @@ content:
       trim_length: 600
     third_party_settings: {  }
     region: content
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }
     third_party_settings: {  }
     region: content
-hidden: {  }
+hidden:
+  field_assigned_user: true
+  field_audit_list: true
+  field_auditee_name: true
+  field_auditee_signature: true
+  field_auditor_name: true
+  field_auditor_signature: true
+  field_hod_name: true
+  field_hod_signature: true
+  field_occurence: true
+  field_qms_head_name: true
+  field_qms_signature: true
+  field_refere: true
+  field_standards: true

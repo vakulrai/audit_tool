@@ -41,12 +41,19 @@ class RiskManagement extends BlockBase {
     
     $risk_data['findings']['no_of_department'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?type=department'));
     //Logic for calculating score.
-    $total_major_minor = 0;
-    if($risk_data['findings']['major']){
-      $total_major_minor += $risk_data['findings']['major'] * 5;
+    $total_marks_obtained = 0;
+    if($risk_data['findings']['major']>0){
+      $total_marks_obtained += $risk_data['findings']['major'] * 5;
     }
-    if($risk_data['findings']['minor']){
-      $total_major_minor += $risk_data['findings']['minor'] * 3;
+    else{
+      $total_marks_obtained += $risk_data['findings']['major'] * 0;
+    }
+
+    if($risk_data['findings']['minor'] > 0){
+      $total_marks_obtained += $risk_data['findings']['minor'] * 3;
+    }
+    else{
+      $total_marks_obtained += $risk_data['findings']['minor'] * 0;
     }
 
     if($risk_data['findings']['count_audits'] >= $risk_data['findings']['no_of_department']){
@@ -79,10 +86,10 @@ class RiskManagement extends BlockBase {
     ];
 
     $header = [
-      $this->t('MARKS OBTAINED.'),
-      $this->t('RISK CATEGORY'),
-      $this->t('INCIDENCE'),
-      $this->t('RISK SCORE'),
+      t('MARKS OBTAINED.'),
+      t('RISK CATEGORY'),
+      t('INCIDENCE'),
+      t('RISK SCORE'),
     ];
     $build['title_data'] = [
       '#type' => 'item',
@@ -96,7 +103,7 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['findings']['tableselect_element'][0]['obtained_marks'] = [
-      '#markup' => 'Deviations<br>(Total):'.$total_major_minor,
+      '#markup' => 'Deviations<br>(Total):'.$total_marks_obtained,
       '#title_display' => 'invisible',
     ];
 
@@ -106,12 +113,12 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['findings']['tableselect_element'][0]['incidence'] = [
-      '#markup' => '1',
+      '#markup' => $score,
       '#title_display' => 'invisible',
     ];
 
     $build['findings']['tableselect_element'][0]['risk_score'] = [
-      '#markup' => $score * 1,
+      '#markup' => $score * $total_marks_obtained,
       '#title_display' => 'invisible',
     ];
 
@@ -139,7 +146,7 @@ class RiskManagement extends BlockBase {
     $query->condition('n.bundle', 'auditor_report');
     $query->condition('n.field_refere_target_id', $uri[1]);
     $nids = $query->execute()->fetchAll();
-    
+
     $quality = 0;
     $cost = 0;
     $productivity = 0;
@@ -202,6 +209,10 @@ class RiskManagement extends BlockBase {
         $risk_category_improvement = 'LOW';
         $score_improvement = 1;
       }
+      else{
+        $risk_category_improvement = 'Not Found';
+        $score_improvement = 0;
+      }
     }
     $maxs = array_keys($count_no_of_frequency, max($count_no_of_frequency));
     $get_max_count = $count_no_of_frequency[$maxs[0]];
@@ -222,7 +233,7 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['findings']['tableselect_element_imp_points'][0]['incidence_improvement'] = [
-      '#markup' => $get_max_count,
+      '#markup' => $score_improvement,
       '#title_display' => 'invisible',
     ];
 
@@ -247,19 +258,21 @@ class RiskManagement extends BlockBase {
     $reschedule_risk_category = '';
     $reschedule_count = 0;
     $score_improvement_adherence = 0;
-    $risk_data['adherence']['rescheduled'] = count(getAuditOPtions('risk_managemant','/rest-export-system/'.$uri[1].'?type=planned_events&moderation_state=workflow_for_audit_planning-reschedule'));
+    $total_schedule_reschedule = 0;
+    $risk_data['adherence']['rescheduled'] = count(getAuditOPtions('risk_managemant','/get-moderation-export/'.$uri[1].'?type=planned_events&moderation=workflow_for_audit_planning-reschedule'));
     
-    $risk_data['adherence']['scheduled'] = count(getAuditOPtions('risk_managemant','/rest-export-system/'.$uri[1].'?type=planned_events&moderation_state=workflow_for_audit_planning-scheduled'));
+    $risk_data['adherence']['scheduled'] = count(getAuditOPtions('risk_managemant','/get-moderation-export/'.$uri[1].'?type=planned_events&moderation=workflow_for_audit_planning-scheduled'));
 
     if($risk_data['adherence']['rescheduled'] > 0){
-      $reschedule_count += 0;
-      $reschedule_risk_category = '';
+      $reschedule_count += 0 * $risk_data['adherence']['rescheduled'];
+      $total_schedule_reschedule = $reschedule_count;
     }
-    else{
-      $reschedule_count += 3;
+    if($risk_data['adherence']['scheduled'] > 0){
+      $reschedule_count += 3 * $risk_data['adherence']['scheduled'];
+      $total_schedule_reschedule = $reschedule_count;
     }
 
-    if($reschedule_count <= 0){
+    if($reschedule_count <= 3){
       $reschedule_risk_category = 'HIGH';
       $risk_count = 5;
     }
@@ -272,12 +285,12 @@ class RiskManagement extends BlockBase {
       $risk_count = 1;
     }
     
-    if($risk_data['adherence']['rescheduled'] > $risk_data['adherence']['scheduled']){
-      $score_improvement_adherence = $risk_data['adherence']['rescheduled'];
-    }
-    else{
-      $score_improvement_adherence = $risk_data['adherence']['scheduled'];
-    }
+    // if($risk_data['adherence']['rescheduled'] > $risk_data['adherence']['scheduled']){
+    //   $score_improvement_adherence = $risk_data['adherence']['rescheduled'];
+    // }
+    // else{
+    //   $score_improvement_adherence = $risk_data['adherence']['scheduled'];
+    // }
     $build['findings']['tableselect_element_rescheduled'] = [
       '#type' => 'table',
       '#header' => $header,
@@ -285,7 +298,7 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['findings']['tableselect_element_rescheduled'][0]['obtained_marks_improvement'] = [
-      '#markup' => 'Improvement Points<br>'.$total,
+      '#markup' => 'adherence to Reschedule<br>'.$total_schedule_reschedule,
       '#title_display' => 'invisible',
     ];
 
@@ -295,12 +308,12 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['findings']['tableselect_element_rescheduled'][0]['incidence_improvement'] = [
-      '#markup' => $score_improvement_adherence,
+      '#markup' => $risk_count,
       '#title_display' => 'invisible',
     ];
 
     $build['findings']['tableselect_element_rescheduled'][0]['risk_score_improvement'] = [
-      '#markup' => $score_improvement_adherence * $risk_count,
+      '#markup' => $total_schedule_reschedule * $risk_count,
       '#title_display' => 'invisible',
     ];
 
@@ -313,28 +326,21 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['findings']['risk_score_details_rescheduled']['data_improvement'] = [
-      '#markup' => '<b>Improvement - Quality</b>  :'.$quality.'</br><b>Improvement - Cost</b>  : '.$cost.'<br><b>No Improvement Point</b>  : '.$no_improvement.'<br><b>Improvement - Productivity</b>  : '.$productivity.'<br><b>Procedural Related</b>  : '.$procedural,
+      '#markup' => '<b>No rescheduling incidences due to Auditor</b>  :'.$risk_data['adherence']['scheduled'].'</br><b>Reported incidences of rescheduling due to Auditor </b>  : '.$risk_data['adherence']['rescheduled'],
     ];
 
     //QUALIFICATIONS
     $count_auditor = 0;
     $risk_data['qualifications']['auditor7'] = count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value_greater=7'));
+    $risk_data['qualifications']['auditor6'] = count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value_greater=6'));
     if($risk_data['qualifications']['auditor7'] > 0){
-       $risk_data['qualifications']['auditor7'] =  $risk_data['qualifications']['auditor7']* 3;
-       $count_auditor = $risk_data['qualifications']['auditor7'];
+       $count_auditor += 3;
+    }
+    elseif($risk_data['qualifications']['auditor6'] == 1 || $risk_data['qualifications']['auditor6'] > 1){
+      $count_auditor += 1;
     }
     else{
-      $risk_data['qualifications']['auditor7'] = 0;
-      $risk_data['qualifications']['auditor6'] = count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value_greater=6'));
-       if($risk_data['qualifications']['auditor6'] > 0){
-          $risk_data['qualifications']['auditor6'] = $risk_data['qualifications']['auditor6'] * 1;
-          $count_auditor = $risk_data['qualifications']['auditor6'];
-       }
-       else{
-          $risk_data['qualifications']['auditor6'] = 0;
-          $risk_data['qualifications']['other'] = count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value=6')) * 0;
-          $count_auditor = $risk_data['qualifications']['other'];
-       }
+     $count_auditor += 0;
     }
     
     if($count_auditor == 3){
@@ -348,9 +354,6 @@ class RiskManagement extends BlockBase {
        $qual_risk_category = 'HIGH';
        $qual_risk_score = 5;
     }
-    $total_of_qualifications = $risk_data['qualifications']['auditor7'] + $risk_data['qualifications']['auditor6'] + $risk_data['qualifications']['other'];
-    $maxs_qualifications = array_keys($risk_data['qualifications'], max($risk_data['qualifications']));
-    $get_max_count = $risk_data['qualifications'][$maxs_qualifications[0]];
 
     $build['qualifications']['tableselect_element_qualifications'] = [
       '#type' => 'table',
@@ -359,7 +362,7 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['qualifications']['tableselect_element_qualifications'][0]['obtained_marks_improvement'] = [
-      '#markup' => 'Score<br>'.$total_of_qualifications,
+      '#markup' => 'Score<br>'.$count_auditor,
       '#title_display' => 'invisible',
     ];
 
@@ -369,12 +372,12 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['qualifications']['tableselect_element_qualifications'][0]['incidence_improvement'] = [
-      '#markup' => $get_max_count,
+      '#markup' => $qual_risk_score,
       '#title_display' => 'invisible',
     ];
 
     $build['qualifications']['tableselect_element_qualifications'][0]['risk_score_improvement'] = [
-      '#markup' => $get_max_count * $qual_risk_score,
+      '#markup' => $count_auditor * $qual_risk_score,
       '#title_display' => 'invisible',
     ];
 

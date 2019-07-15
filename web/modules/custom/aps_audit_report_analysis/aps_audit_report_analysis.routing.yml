@@ -12,4 +12,21 @@ aps_audit_report_analysis.planning_control_form:
     _title: 'PlanningControlForm'
   requirements:
     _access: 'TRUE'
+
+aps_audit_report_analysis.generate_reports:
+  path: '/generate_reports/{report_type}'
+  defaults:
+    _controller: '\Drupal\aps_audit_report_analysis\Controller\GenerateReports::generateHTMLReports'
+    _title: 'PlanningControlForm'
+  requirements:
+    _access: 'TRUE'
+  
+
+aps_audit_report_analysis.generate_reports:
+  path: '/aps_audit_report_analysis/form/generate_reports'
+  defaults:
+    _form: '\Drupal\aps_audit_report_analysis\Form\GenerateReports'
+    _title: 'GenerateReports'
+  requirements:
+    _access: 'TRUE'
   

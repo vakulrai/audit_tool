@@ -11,8 +11,8 @@ third_party_settings:
     parent: 'main:'
 name: 'Planned Events'
 type: planned_events
-description: 'List all Events'
+description: 'Create a audit of type Internal/External/Supplier/ .'
 help: ''
-new_revision: false
+new_revision: true
 preview_mode: 1
 display_submitted: false
