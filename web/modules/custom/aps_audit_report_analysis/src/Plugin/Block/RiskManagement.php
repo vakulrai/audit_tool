@@ -85,6 +85,14 @@ class RiskManagement extends BlockBase {
       '#collapsed' => FALSE,
     ];
 
+    $build['scheduling'] = [
+      '#type' => 'details', 
+      '#title' => t('Scheduling'), 
+      '#attributes' => ['id' => 'scheduling'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    ];
+
     $header = [
       t('MARKS OBTAINED.'),
       t('RISK CATEGORY'),
@@ -392,7 +400,103 @@ class RiskManagement extends BlockBase {
     $build['qualifications']['risk_score_details_qualifications']['data_improvement'] = [
       '#markup' => '<b>75% of Auditors in the Qualified Auditor list with a score of 75%</b>  :'.count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value_greater=7')).'</br><b>at least one auditor for each listed Function with a score of >60%</b>  : '.count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value_greater=6')).'<br><b>All other categories </b>  : '.count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value=6')),
     ];
+
+    //Audit Performance.
+    $risk_data['ap']['get_total_sections'] = getAuditOPtions('ap','/get-moderation-export/'.$uri[1].'?type=section');
+    $risk_data['ap']['get_total_events'] = $this->getsectionOPtions('auditor_selection','/get-moderation-export/'.$uri[1].'?type=planned_events');
+    $count_covered_sections = 0;
+    $count_uncovered_sections = 0;
+    $total_section = 0;
+    foreach ($risk_data['ap']['get_total_sections'] as $section_key => $section_value) {
+      $total_section++;
+      if(array_key_exists($section_key, $risk_data['ap']['get_total_events'])){
+        $count_covered_sections++;
+      }
+      else{
+        $count_uncovered_sections++;
+      }
+    }
+    $ap_total_all = 0;
+    $ap_total_one = 0;
+    $ap_total_more_one = 0;
+    if($count_covered_sections){
+      $ap_total_all = 3;
+    }
+    elseif ($count_uncovered_sections == 1) {
+      $ap_total_one = 1;
+    }
+    elseif ($count_uncovered_sections > 1) {
+      $ap_total_more_one = 0;
+    }
+    $ap_total = $ap_total_all + $ap_total_one + $ap_total_more_one;
+    if($ap_total == 3){
+      $ap_risk_cat = 'HIGH';
+      $ap_score = 5;
+    }
+    elseif ($ap_total == 1) {
+      $ap_risk_cat = 'MEDIUM';
+      $ap_score = 3;
+    }elseif ($ap_total == 0) {
+      $ap_risk_cat = 'LOW';
+      $ap_score = 1;
+    }
+    else{
+      $ap_score = 0;
+    }
+
+    $build['scheduling']['ap']['ap_tableselect'] = [
+      '#type' => 'table',
+      '#header' => $header,
+      '#empty' => t('No content available.'),
+    ];
+
+    $build['scheduling']['ap']['ap_tableselect'][0]['obtained_marks_improvement'] = [
+      '#markup' => 'Scheduling<br>'.$ap_total,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['scheduling']['ap']['ap_tableselect'][0]['risk_cat_dev_improvement'] = [
+      '#markup' => $ap_risk_cat,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['scheduling']['ap']['ap_tableselect'][0]['incidence_improvement'] = [
+      '#markup' => $ap_score,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['scheduling']['ap']['ap_tableselect'][0]['risk_score_improvement'] = [
+      '#markup' => $ap_score * $ap_total,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['scheduling']['ap']['ap_details'] = [
+      '#type' => 'details', 
+      '#title' => t('View Details'), 
+      '#attributes' => ['id' => 'display'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    ];
+
+    $build['scheduling']['ap']['ap_details']['data_improvement'] = [
+      '#markup' => '<b>All sections covered </b>  :'.$ap_total_all.'* 5'.'</br><b>1 section missed out </b>  : '.$ap_total_one.'* 3'.'<br><b>More then 1 section missed out </b>  : '.$ap_total_more_one.'* 1',
+    ];
+
     return $build;
   }
+
+  function getsectionOPtions($type, $url) {
+    global $base_url;
+    if($type){
+      $client = \Drupal::httpClient();
+      $request = $client->get($base_url.$url);
+      $response = $request->getBody();
+      $data = json_decode($response);
+      foreach ($data as $key => $value) {
+        $options[$value->field_sections] = $value->title;
+      }
+    }
+    return $options;
+}
 
 }
