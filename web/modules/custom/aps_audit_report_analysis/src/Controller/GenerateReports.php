@@ -428,11 +428,11 @@ class GenerateReports extends ControllerBase {
     $risk_data['adherence']['scheduled'] = count(getAuditOPtions('risk_managemant','/get-moderation-export/'.$unit_reference.'?type=planned_events&moderation=workflow_for_audit_planning-scheduled'));
 
     if($risk_data['adherence']['rescheduled'] > 0){
-      $reschedule_count += 0 * $risk_data['adherence']['rescheduled'];
+      $reschedule_count += 0;
       $total_schedule_reschedule = $reschedule_count;
     }
     if($risk_data['adherence']['scheduled'] > 0){
-      $reschedule_count += 3 * $risk_data['adherence']['scheduled'];
+      $reschedule_count += 3;
       $total_schedule_reschedule = $reschedule_count;
     }
 
