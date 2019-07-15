@@ -119,10 +119,12 @@ class GenerateReportsForm extends FormBase {
    * AJAX Callback to generate report.
    */
   public function GenerateReport(array $form, FormStateInterface $form_state) {
+    $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+    $uri = explode('/', $current_uri);
     $response = new AjaxResponse();
     global $base_url;
     $form_values = $form_state->getValues();
-    $response->addCommand(new RedirectCommand('/generate_reports/'.$form_values['audit_type']));
+    $response->addCommand(new RedirectCommand('/generate_reports/'.$form_values['audit_type'].'/'.$uri[1]));
     return $response;
   }
 
