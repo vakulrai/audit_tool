@@ -64,4 +64,4 @@
 //  */
 // function aps_pre_audit_uninstall() {
 //   db_drop_table('notifications');
-}
+// }
