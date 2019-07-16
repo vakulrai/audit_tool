@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.planned_events.field_list_of_product
     - field.field.node.planned_events.field_list_of_systems
     - field.field.node.planned_events.field_refere
+    - field.field.node.planned_events.field_release_status
     - field.field.node.planned_events.field_remote_location_name
     - field.field.node.planned_events.field_report_reference
     - field.field.node.planned_events.field_sections
@@ -270,6 +271,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_release_status:
+    weight: 35
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_remote_location_name:
     weight: 32

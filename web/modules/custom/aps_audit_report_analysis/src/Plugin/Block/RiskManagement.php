@@ -401,6 +401,80 @@ class RiskManagement extends BlockBase {
       '#markup' => '<b>75% of Auditors in the Qualified Auditor list with a score of 75%</b>  :'.count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value_greater=7')).'</br><b>at least one auditor for each listed Function with a score of >60%</b>  : '.count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value_greater=6')).'<br><b>All other categories </b>  : '.count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value=6')),
     ];
 
+    //Timely release as calculated.
+    $risk_data['schedule_release']['#title'] = 'Timely Release as Calculated';
+    $risk_data['schedule_release']['intime'] = count(getAuditOPtions('schedule_release','/get-moderation-export/'.$uri[1].'?type=planned_events&release_status=intime'));
+    $risk_data['schedule_release']['notinintime'] = count(getAuditOPtions('schedule_release','/get-moderation-export/'.$uri[1].'?type=planned_events&release_status=notinintime'));
+    $total_score_release = 0;
+    $intime_score = 0;
+    $notintime_score = 0;
+    $not_asper_target = 0;
+    if($risk_data['schedule_release']['intime'] > 0){
+      $intime_score += 1;
+    }
+    else{
+      $not_asper_target = 0;
+    }
+    if($risk_data['schedule_release']['notinintime'] > 0){
+      $notintime_score += 3;
+    }
+    else{
+      $not_asper_target = 0;
+    }
+    
+    $total_score_release = $intime_score + $notintime_score ;
+    
+    if($total_score_release == 3){
+      $risk_level = 'LOW';
+      $risk_score = 3;
+    }
+    elseif($total_score_release == 1){
+      $risk_level = 'MEDIUM';
+      $risk_score = 3;
+    }
+    elseif($total_score_release == 0){
+      $risk_level = 'HIGH';
+      $risk_score = 5;
+    }
+
+    $build['scheduling']['audit_release']['tableselect'] = [
+      '#type' => 'table',
+      '#header' => $header,
+      '#empty' => t('No content available.'),
+    ];
+
+    $build['scheduling']['audit_release']['tableselect'][0]['obtained_marks_improvement'] = [
+      '#markup' => 'Timely release as calculated<br>'.$total_score_release,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['scheduling']['audit_release']['tableselect'][0]['risk_cat_dev_improvement'] = [
+      '#markup' => $risk_level,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['scheduling']['audit_release']['tableselect'][0]['incidence_improvement'] = [
+      '#markup' => $risk_score,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['scheduling']['audit_release']['tableselect'][0]['risk_score_improvement'] = [
+      '#markup' => $risk_score * $total_score_release,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['scheduling']['audit_release']['details'] = [
+      '#type' => 'details', 
+      '#title' => t('View Details'), 
+      '#attributes' => ['id' => 'display'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    ];
+
+    $build['scheduling']['audit_release']['details']['data_improvement'] = [
+      '#markup' => '<b>as per target </b>  :'.$intime_score.'</br><b> exceeded target </b>  : '.$notintime_score.'<br><b>not as per target </b>  : '.$not_asper_target,
+    ];
+
     //Audit Performance.
     $risk_data['ap']['get_total_sections'] = getAuditOPtions('ap','/get-moderation-export/'.$uri[1].'?type=section');
     $risk_data['ap']['get_total_events'] = $this->getsectionOPtions('auditor_selection','/get-moderation-export/'.$uri[1].'?type=planned_events');
@@ -451,7 +525,7 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['scheduling']['ap']['ap_tableselect'][0]['obtained_marks_improvement'] = [
-      '#markup' => 'Scheduling<br>'.$ap_total,
+      '#markup' => 'coverage of all sections in Audit cycle<br>'.$ap_total,
       '#title_display' => 'invisible',
     ];
 

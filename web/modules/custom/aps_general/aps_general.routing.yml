@@ -35,4 +35,12 @@ aps_general.csv_entity_import:
     _title: 'CsvEntityImport'
   requirements:
     _access: 'TRUE'
+
+aps_general.notificatios:
+  path: '/notifications'
+  defaults:
+    _controller: '\Drupal\aps_general\Controller\RedirectFormController::notifications'
+    _title: 'Notifications'
+  requirements:
+    _access: 'TRUE'
   

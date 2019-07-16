@@ -178,5 +178,51 @@ class RedirectFormController extends ControllerBase {
       $save_submission->save();
     }
   }
+
+   /*
+   * Method to get List of Notifications.
+   */
+  function notifications() {
+      $header = [
+        $this->t('Sr. No.'),
+        $this->t('Message'),
+        $this->t('Timestamp'),
+      ];
+      $build['tableselect_element'] = [
+        '#type' => 'table',
+        '#header' => $header,
+        '#empty' => t('No content available.'),
+      ];
+      $data = $this->getNotification();
+
+      if (count($data)) {
+        $sr = 1;
+        foreach ($data as $key => $value) {
+            $build['tableselect_element'][$sr]['sr'] = [
+              '#markup' => $sr,
+              '#title_display' => 'invisible',
+            ];
+
+            $build['tableselect_element'][$sr]['message'] = [
+              '#markup' => $value->message ? $value->message : '-',
+              '#title_display' => 'invisible',
+            ];
+
+            $build['tableselect_element'][$sr]['time'] = [
+              '#markup' => $value->timestamp? date('Y-m-d',$value->timestamp): '-',
+              '#title_display' => 'invisible',
+            ];
+            $sr++;
+        }
+    }
+    return $build;
+  }
+
+  public function getNotification(){
+    $query = \Drupal::database()->select('notifications', 'nf');
+    $query->fields('nf',['sr', 'message', 'timestamp']);
+    $nids = $query->execute()->fetchAll();
+    return $nids;
+  }
 }	
 ?>
