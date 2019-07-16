@@ -7,61 +7,61 @@
 /**
  * Implements hook_schema()
  */
-function aps_pre_audit_schema() {
-  $schema['notifications'] = [
-    'description' => 'Stores data related to Notifications.',
-    'fields' => [
-      'sr' => [
-        'description' => 'Sr number for notification',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'length' => 10,
-        'not null' => TRUE,
-      ],
-      'nid' => [
-        'description' => 'The primary message identifier for notifications.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'length' => 10,
-        'not null' => TRUE,
-      ],
-      'uid' => [
-        'description' => 'User ID',
-        'type' => 'int',
-        'length' => 10,
-        'not null' => TRUE,
-        'default' => '1',
-      ],
-      'message' => [
-        'description' => 'Notification message.',
-        'type' => 'varchar',
-        'length' => 500,
-        'not null' => TRUE,
-        'default' => 'NULL',
-      ],
-      'timestamp' => [
-        'description' => 'Notification timestamp',
-        'type' => 'int',
-        'length' => 10,
-        'not null' => TRUE,
-        'default' => '1',
-      ],
-      'status' => [
-        'description' => 'Notification status(1=Read,0=Unread).',
-        'type' => 'int',
-        'length' => 1,
-        'not null' => TRUE,
-        'default' => '1',
-      ],
-    ],
-    'primary key' => ['sr'],
-  ];
-  return $schema;
-}
+// function aps_pre_audit_schema() {
+//   $schema['notifications'] = [
+//     'description' => 'Stores data related to Notifications.',
+//     'fields' => [
+//       'sr' => [
+//         'description' => 'Sr number for notification',
+//         'type' => 'serial',
+//         'unsigned' => TRUE,
+//         'length' => 10,
+//         'not null' => TRUE,
+//       ],
+//       'nid' => [
+//         'description' => 'The primary message identifier for notifications.',
+//         'type' => 'int',
+//         'unsigned' => TRUE,
+//         'length' => 10,
+//         'not null' => TRUE,
+//       ],
+//       'uid' => [
+//         'description' => 'User ID',
+//         'type' => 'int',
+//         'length' => 10,
+//         'not null' => FALSE,
+//         'default' => '1',
+//       ],
+//       'message' => [
+//         'description' => 'Notification message.',
+//         'type' => 'varchar',
+//         'length' => 500,
+//         'not null' => TRUE,
+//         'default' => 'NULL',
+//       ],
+//       'timestamp' => [
+//         'description' => 'Notification timestamp',
+//         'type' => 'int',
+//         'length' => 10,
+//         'not null' => TRUE,
+//         'default' => '1',
+//       ],
+//       'status' => [
+//         'description' => 'Notification status(1=Read,0=Unread).',
+//         'type' => 'int',
+//         'length' => 1,
+//         'not null' => TRUE,
+//         'default' => '1',
+//       ],
+//     ],
+//     'primary key' => ['sr'],
+//   ];
+//   return $schema;
+// }
 
-/**
- * Implements hook_uninstall()
- */
-function aps_pre_audit_uninstall() {
-  db_drop_table('notifications');
+// /**
+//  * Implements hook_uninstall()
+//  */
+// function aps_pre_audit_uninstall() {
+//   db_drop_table('notifications');
 }

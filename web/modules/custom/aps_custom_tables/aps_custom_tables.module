@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains aps_custom_tables.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function aps_custom_tables_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the aps_custom_tables module.
+    case 'help.page.aps_custom_tables':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Contain custom database tables for PAS') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function aps_custom_tables_theme() {
+  return [
+    'aps_custom_tables' => [
+      'render element' => 'children',
+    ],
+  ];
+}

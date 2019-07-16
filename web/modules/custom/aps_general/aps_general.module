@@ -61,6 +61,8 @@ function aps_general_theme() {
  * Implements hook_form_alter().
  */
 function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // $data = auditReleaseDates(283);
+  // echo '<pre>';print_r($data);
   //Condition for Unit Add form
   $form['moderation_state']['#access'] = FALSE;
   if($form_id == 'node_unit_form'){
@@ -1412,3 +1414,108 @@ function getsectionDropdownOptionsfromDept($key) {
     }
     return $entity_title;
   }
+
+/**
+ * Implements hook_cron().
+ */
+function aps_general_cron() {
+  //Get All units.
+  global $base_url;
+  $query = \Drupal::database()->select('node_field_data', 'n');
+  $query->fields('n',['nid', 'type']);
+  $query->condition('n.type', 'unit');
+  $units = $query->execute()->fetchAll();
+  $get_user_timezone =  drupal_get_user_timezone();
+  foreach ($units as $unit_key => $unit_value) {
+    $dates = auditReleaseDates($unit_value->nid);
+    if($dates['moderation_state'] == 'release_audit'){
+      if($dates['changed'] < getCurrentTimestampfromdate($get_user_timezone,$value->field_time_value, NULL)){
+         $node_object = Node::load($dates['nid']);
+         $node_object->set('field_release_status', 'intime');
+         $node_object->save();
+      }
+      else{
+        $node_object = Node::load($dates['nid']);
+        $node_object->set('field_release_status', 'notintime');
+        $node_object->save();
+      }
+    }
+    if($dates['release_start_date']){
+      $url = $base_url.'/node/'.$dates['nid'].'edit';
+      $uid = \Drupal::currentUser()->id();
+      $get_current_timestamp = getCurrentTimestampfromdate($get_user_timezone,$dates['release_start_date'], NULL);
+      $notifictaion_insert = \Drupal::database()->insert('notifications');
+      $message = 'Last date for Audit Release is  '.$dates['nid'].'Please Check the Url:'.'<a href="">'.$dates['release_start_date'].'Please Check the Url:'.'<a href='.$url.'>Link</a>';
+      $notifictaion_insert->fields([
+        'nid' => $dates['nid'],
+        'uid' => '',
+        'message' => $message,
+        'timestamp' => $get_current_timestamp,
+        'status' => 0,
+      ]);
+      $notifictaion_insert->execute();
+    }
+  }
+}
+
+/*
+ * Get Audit Release dates.
+ */
+function auditReleaseDates($unit_reference){
+    $event_nids = [];
+    $query = \Drupal::database()->select('content_moderation_state_field_data', 'cm');
+    $query->join('node_field_revision', 'rf', 'cm.content_entity_revision_id = rf.vid');
+    $query->join('node__field_refere', 'ref', 'cm.content_entity_id = ref.entity_id');
+    $query->join('node__field_time', 'tm', 'cm.content_entity_id = tm.entity_id');
+    $query->fields('rf',['nid', 'vid', 'changed']);
+    $query->fields('cm',['revision_id', 'moderation_state']);
+    $query->fields('ref');
+    $query->fields('tm', ['field_time_value', 'field_time_end_value']);
+    $query->condition('ref.bundle', 'planned_events');
+    // $query->condition('cm.moderation_state', 'release_audit');
+    $query->condition('ref.field_refere_target_id', $unit_reference);
+    $nids = $query->execute()->fetchAll();
+    $get_user_timezone =  drupal_get_user_timezone();
+
+    //Load Audit Cycle Configurations.
+    $query = \Drupal::database()->select('audit_cycle__field_unit_reference', 'h');
+    $query->fields('h',['entity_id']);
+    $query->condition('h.field_unit_reference_target_id', $unit_reference);
+    $query->range(0, 1);
+    $nids_cycle = $query->execute()->fetchAll();
+    $node_storage = \Drupal::entityManager()->getStorage('audit_cycle');
+    $entity_audit_cycle = $node_storage->load($nids_cycle[0]->entity_id);
+    if(count($entity_audit_cycle)){
+      $scheduled_date = $entity_audit_cycle->get('field_schedule_release')->target_id;
+      if($scheduled_date){
+        $node_storage = \Drupal\paragraphs\Entity\Paragraph::load($scheduled_date);
+        $days_before_event = $node_storage->get('field_department')->value;
+      }
+    }
+
+    foreach ($nids as $key => $value) {
+      $planned_nids_start_date = getCurrentTimestampfromdate($get_user_timezone,$value->field_time_value, $days_before_event);
+      $planned_nids_end_date = getCurrentTimestampfromdate($get_user_timezone,$value->field_time_end_value, $days_before_event);
+      $event_nids[$value->nid]['nid'] = $value->nid;
+      $event_nids[$value->nid]['release_start_date'] = $planned_nids_start_date;
+      $event_nids[$value->nid]['release_end_date'] = $planned_nids_end_date;
+      $event_nids[$value->nid]['planned_start_date'] =$value->field_time_value;
+      $event_nids[$value->nid]['planned_end_date'] =$value->field_time_end_value;
+      $event_nids[$value->nid]['moderation_state'] =$value->moderation_state;
+      $event_nids[$value->nid]['changed'] =$value->changed;
+    }
+    return $event_nids;
+}
+
+function getCurrentTimestampfromdate($get_user_timezone, $date, $nDays){
+  $start_date_obj = new \DateTime($date , new \DateTimeZone('UTC'));
+  $start_date_obj->setTimezone(new \DateTimeZone($get_user_timezone));
+  $start_date_timestamp = $start_date_obj->getTimestamp();
+  if($nDays){
+    $release_time = date('Y-m-d',strtotime('-'.$nDays.'day', $start_date_timestamp));
+  }
+  else{
+    $release_time = $start_date_timestamp;
+  }
+  return $release_time;
+}

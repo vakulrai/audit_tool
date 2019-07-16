@@ -1,0 +1,5 @@
+name: 'aps_custom_tables'
+type: module
+description: 'Contain custom database tables for PAS'
+core: 8.x
+package: 'Custom'
