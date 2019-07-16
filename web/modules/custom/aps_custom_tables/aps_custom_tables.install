@@ -7,7 +7,7 @@
 /**
  * Implements hook_schema()
  */
-function aps_pre_audit_schema() {
+function aps_custom_tables_schema() {
   $schema['notifications'] = [
     'description' => 'Stores data related to Notifications.',
     'fields' => [
@@ -62,6 +62,10 @@ function aps_pre_audit_schema() {
 /**
  * Implements hook_uninstall()
  */
-function aps_pre_audit_uninstall() {
+function aps_custom_tables_uninstall() {
+  db_drop_table('notifications');
+}
+
+function aps_custom_tables_update_8101() {
   db_drop_table('notifications');
 }
