@@ -150,6 +150,7 @@ permissions:
   - 'use workflow_for_audit_planning transition post_audit'
   - 'use workflow_for_audit_planning transition pre_audit'
   - 'use workflow_for_audit_planning transition publish'
+  - 'use workflow_for_audit_planning transition release_audit'
   - 'use workflow_for_audit_planning transition reschedule'
   - 'use workflow_for_audit_planning transition rescheduled'
   - 'use workflow_for_audit_planning transition scheduled'

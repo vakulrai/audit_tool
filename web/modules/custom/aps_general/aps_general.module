@@ -77,9 +77,19 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $node_object = Node::load($id);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
+    $form['field_department']['#attributes'] = ['id' => ['department']];
+    $form['field_section_type']['#attributes'] = ['id' => ['section']];
     $get_business_options = getDepartmenttypeUnderunit('business_process', $id);
-    $get_department_options = getDepartmenttypeUnderunit('department', $id);
-    $get_section_options = getDepartmenttypeUnderunit('business_process', $id);
+    $form['field_business_process']['widget']['#ajax'] = [
+      'callback' => 'getDeptfromBP',
+      'wrapper' => 'department',
+      'event' => 'change',
+    ];
+    $form['field_department']['widget']['#ajax'] = [
+      'callback' => 'getSectionfromdept',
+      'wrapper' => 'section',
+      'event' => 'change',
+    ];
     $form['field_business_process']['widget']['#options'] = $get_business_options;
     $form['field_department']['widget']['#options'] = $get_department_options;
     $form['field_section_type']['widget']['#options'] = $get_section_options;
@@ -1062,6 +1072,13 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
+  if ($cleanLinkText == 'RESCHEDULE') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('schedule_type', 'reschedule');
+    }
+  }
+
   if ($cleanLinkText == 'AUDIT PLANNING') {
     $id = $uri[1];
     if($id){
@@ -1343,3 +1360,55 @@ function getDepartmenttypeUnderunit($bundle, $unit_reference){
   }
    return $selected_department;
 }
+
+function getDeptfromBP(array $form, FormStateInterface $form_state) {
+  if(count($form_state->getValue('field_business_process'))){
+    $department_array = $form_state->getValue('field_business_process')[0];
+    $key = $department_array['target_id'];
+    $form['field_department']['widget']['#options'] = getdepartmentDropdownOptionsfromBP($key);
+   }
+   return $form['field_department'];
+}
+
+function getSectionfromdept(array $form, FormStateInterface $form_state) {
+  if(count($form_state->getValue('field_department'))){
+    $department_array = $form_state->getValue('field_department')[0];
+    $key = $department_array['target_id'];
+    $form['field_section_type']['widget']['#options'] = getsectionDropdownOptionsfromDept($key);
+   }
+   return $form['field_section_type'];
+}
+
+function getdepartmentDropdownOptionsfromBP($key) {
+  if($key){
+    $query = \Drupal::database()->select('node_field_data', 'n');
+    $query->join('node__field_select_business_process', 'rf', 'n.nid = rf.entity_id');
+    $query->fields('rf',['entity_id', 'bundle']);
+    $query->condition('rf.bundle', 'department');
+    $query->condition('rf.field_select_business_process_target_id', $key);
+    $nids = $query->execute()->fetchAll();
+  }
+    $entity_title['_none'] = "- None -";
+    foreach ($nids as $entity) {
+      $node_object = Node::load($entity->entity_id);
+      $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
+    }
+    return $entity_title;
+  }
+
+function getsectionDropdownOptionsfromDept($key) {
+  if($key){
+    $query = \Drupal::database()->select('node_field_data', 'n');
+    $query->join('node__field_select_department_type', 'rf', 'n.nid = rf.entity_id');
+    $query->fields('rf',['entity_id', 'bundle']);
+    $query->condition('rf.bundle', 'section');
+    $query->condition('rf.field_select_department_type_target_id', $key);
+    $nids = $query->execute()->fetchAll();
+  }
+    $entity_title['_none'] = "- None -";
+    foreach ($nids as $entity) {
+      $node_object = Node::load($entity->entity_id);
+      $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
+    }
+    return $entity_title;
+  }

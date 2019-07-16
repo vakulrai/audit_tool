@@ -37,6 +37,11 @@ type_settings:
       published: true
       default_revision: true
       weight: 1
+    release_audit:
+      published: true
+      default_revision: true
+      label: 'Release Audit'
+      weight: 8
     reschedule:
       published: true
       default_revision: true
@@ -57,6 +62,7 @@ type_settings:
       label: 'Post Audit'
       from:
         - pre_audit
+        - release_audit
         - scheduled
         - submit_audit
       to: post_audit
@@ -67,9 +73,19 @@ type_settings:
         - draft
       to: pre_audit
       weight: 4
+    release_audit:
+      label: 'Release Audit'
+      from:
+        - draft
+        - pre_audit
+        - reschedule
+        - scheduled
+      to: release_audit
+      weight: 9
     reschedule:
       label: Reschedule
       from:
+        - release_audit
         - scheduled
       to: reschedule
       weight: 5
@@ -80,6 +96,7 @@ type_settings:
         - post_audit
         - pre_audit
         - published
+        - release_audit
         - reschedule
         - scheduled
       to: scheduled
@@ -88,6 +105,7 @@ type_settings:
       label: Submit
       from:
         - post_audit
+        - release_audit
         - scheduled
       to: submit_audit
       weight: 8

@@ -60,6 +60,12 @@ class RemainingdayEvent extends FieldPluginBase {
     $days = floor($diff/(60*60*24));
     $hours = round(($diff-$days*60*60*24)/(60*60));
     $time_remaining = $days .' Days '. $hours . ' Hour';
+    if($node->get('moderation_state')->value == 'release_audit'){
+      $time_remaining = $days .' Days '. $hours . ' Hour';
+    }
+    else{
+      $time_remaining = 'Audit Date not Released';
+    }
     return $time_remaining;
   }
 

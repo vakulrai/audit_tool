@@ -136,6 +136,7 @@ permissions:
   - 'update paragraph content report_reason'
   - 'use workflow_for_audit_planning transition post_audit'
   - 'use workflow_for_audit_planning transition pre_audit'
+  - 'use workflow_for_audit_planning transition release_audit'
   - 'use workflow_for_audit_planning transition reschedule'
   - 'use workflow_for_audit_planning transition reschedule_to_schedule'
   - 'use workflow_for_audit_planning transition rescheduled'
