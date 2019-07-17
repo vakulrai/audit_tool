@@ -27,6 +27,7 @@ use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\field\Entity\FieldStorageConfig;
 use \Drupal\field\Entity\FieldConfig;
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Component\Utility\UrlHelper;
 
 
 
@@ -61,7 +62,6 @@ function aps_general_theme() {
  * Implements hook_form_alter().
  */
 function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  // echo '<pre>';print_r(auditReleaseDates(283));
   //Condition for Unit Add form
   $form['moderation_state']['#access'] = FALSE;
   if($form_id == 'node_unit_form'){
@@ -418,6 +418,16 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $node_object = Node::load($id);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
       $form['field_refere']['#access'] = FALSE;
+    }
+  }
+  if($form_id == 'holidays_holidays_form'){
+    $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+    $query_parameters = UrlHelper::parse($current_uri);
+    $uri = explode('=', $query_parameters['query']['unit_reference']);
+    if($uri[1]){
+      $id = $uri[1];
+      $node_object = Node::load($id);
+      $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
   }
 }
@@ -1108,11 +1118,13 @@ function aps_general_link_alter(&$variables) {
   }
 
   if ($cleanLinkText == 'HOLIDAY LIST') {
+
     $id = $uri[1];
     if($id){
       $url =Url::fromUserInput('/holidays-listing/'.$id);
       unset($variables['url']);
       $variables['url'] = $url;
+      $variables['url']->setRouteParameter('unit_reference', $id);
     }
   }
 
@@ -1125,12 +1137,13 @@ function aps_general_link_alter(&$variables) {
       $query->range(0, 1);
       $nids = $query->execute()->fetchAll();
       if(isset($nids[0]->entity_id)){
-        $url =Url::fromUserInput('/holidays/'.$nids[0]->entity_id.'/edit',['query' => ['destination' => $current_uri],'absolute' => TRUE]);
+        $url =Url::fromUserInput('/holidays/'.$nids[0]->entity_id.'/edit');
       }
       else{
-        $url =Url::fromUserInput('/admin/content/holidays/add/holidays',['query' => ['destination' => $current_uri],'absolute' => TRUE]);
+        $url =Url::fromUserInput('/admin/content/holidays/add/holidays');
       }
       unset($variables['url']);
+      $url->setRouteParameter('unit_reference', $id);
       $variables['url'] = $url;
     }
   }
