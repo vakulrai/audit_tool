@@ -20,6 +20,7 @@ class AuditorSelection extends BlockBase {
    */
   public function build() {
     $build = [];
+    $build['#cache']['max-age'] = 0;
     $first_last_date_monthly = [];
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $uri = explode('/', $current_uri);
@@ -54,7 +55,11 @@ class AuditorSelection extends BlockBase {
     $build['audit_auditor_report']['auditor_report']['#attached']['drupalSettings']['total_user'] = $first_last_date_monthly['total_user'];
     $build['audit_auditor_report']['auditor_report']['#attached']['drupalSettings']['selected_user_count'] = $first_last_date_monthly['selected_user_count'];
     $build['audit_auditor_report']['auditor_report']['container_element_audit_auditor_report']['#markup'] = '<div id="container-element-auditor-report" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>';
-   // echo '<pre>';print_r($build['audit_auditor_report']['auditor_report']['#attached']['drupalSettings']);
+
+    $selected_user = $build['audit_auditor_report']['auditor_report']['#attached']['drupalSettings']['selected_user_count'];
+    $total_user = $build['audit_auditor_report']['auditor_report']['#attached']['drupalSettings']['total_user'];
+    $percentage_selection = ($selected_user / $total_user * 100);
+    $chart_title = $percentage_selection.'% Auditor Selection';
     return $build;
   }
 

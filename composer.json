@@ -53,6 +53,7 @@
         "drupal/workflow": "^1.1",
         "drupal/yearonly": "^1.3",
         "drush/drush": "^9.0.0",
+        "ghunti/highcharts-php": "^3.0",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",

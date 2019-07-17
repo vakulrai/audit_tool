@@ -61,6 +61,7 @@ function aps_general_theme() {
  * Implements hook_form_alter().
  */
 function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // echo '<pre>';print_r(auditReleaseDates(283));
   //Condition for Unit Add form
   $form['moderation_state']['#access'] = FALSE;
   if($form_id == 'node_unit_form'){
@@ -1427,8 +1428,8 @@ function aps_general_cron() {
   foreach ($units as $unit_key => $unit_value) {
       $dates = auditReleaseDates($unit_value->nid);
       foreach ($dates as $i => $j) {
-        if($dates['moderation_state'] == 'release_audit'){
-          if($dates['changed'] < getCurrentTimestampfromdate($get_user_timezone,$j['release_start_date'], NULL)){
+        if($j['moderation_state'] == 'release_audit'){
+          if($j['changed'] < getCurrentTimestampfromdate($get_user_timezone,$j['release_start_date'], NULL)){
              $node_object = Node::load($j['nid']);
              $node_object->set('field_release_status', 'intime');
              $node_object->save();
@@ -1442,14 +1443,14 @@ function aps_general_cron() {
         if($dates[$i]['release_start_date']){
           $current_date = date('Y-m-d',\Drupal::time()->getCurrentTime());
           if($current_date == $dates[$i]['release_start_date']){
-            $url = $base_url.'/node/'.$j['nid'].'edit';
+            $url = $base_url.'/node/'.$j['nid'].'/edit';
             $uid = \Drupal::currentUser()->id();
-            $get_current_timestamp = getCurrentTimestampfromdate($get_user_timezone,$dates['release_start_date'], NULL);
+            $get_current_timestamp = getCurrentTimestampfromdate($get_user_timezone,$j['release_start_date'], NULL);
             $notifictaion_insert = \Drupal::database()->insert('notifications');
-            $message = 'Last date for Audit Release is  '.$j['nid'].'Please Check the Url:'.'<a href="">'.$j['release_start_date'].'Please Check the Url:'.'<a href='.$url.'>Link</a>';
+            $message = 'Last date for Audit Release is  '.$dates[$i]['release_start_date'].'Please Check the Url:'.'<a href='.$url.'>Link</a>';
             $notifictaion_insert->fields([
               'nid' => $j['nid'],
-              'uid' => '',
+              'uid' => 0,
               'message' => $message,
               'timestamp' => $get_current_timestamp,
               'status' => 0,
@@ -1537,7 +1538,7 @@ function getCurrentTimestampfromdate($get_user_timezone, $date, $nDays){
     $release_time = date('Y-m-d',strtotime('-'.$nDays.'day', $start_date_timestamp));
   }
   else{
-    $release_time = $date;
+    $release_time = $start_date_timestamp;
   }
   return $release_time;
 }

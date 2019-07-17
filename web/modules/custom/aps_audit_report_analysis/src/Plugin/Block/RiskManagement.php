@@ -27,6 +27,46 @@ class RiskManagement extends BlockBase {
     $build['risk_management_fieldset']['risk_management'] = [
       '#type' => 'fieldset',
     ];
+
+    $build['findings'] = [
+      '#type' => 'details', 
+      '#title' => t('Findings'), 
+      '#attributes' => ['id' => 'findings'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    ];
+
+    $build['qualifications'] = [
+      '#type' => 'details', 
+      '#title' => t('Qualifications'), 
+      '#attributes' => ['id' => 'qualifications'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    ];
+
+    $build['scheduling'] = [
+      '#type' => 'details', 
+      '#title' => t('Scheduling'), 
+      '#attributes' => ['id' => 'scheduling'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    ];
+
+    $header_findings = [
+      t('NUMBER'),
+      t('MARKS OBTAINED.'),
+      t('RISK CATEGORY'),
+      t('INCIDENCE'),
+      t('RISK SCORE'),
+    ];
+
+     $header = [
+      t('MARKS OBTAINED.'),
+      t('RISK CATEGORY'),
+      t('INCIDENCE'),
+      t('RISK SCORE'),
+    ];
+
     $build['risk_management_fieldset']['risk_management']['#attached']['library'][] = 'aps_audit_report_analysis/aps_dashboard_risk_management_js';
     // $build['risk_management_fieldset']['risk_management']['#attached']['drupalSettings']['auditor_data'] = json_encode($plot_data['data']);
     // $build['risk_management_fieldset']['risk_management']['#attached']['drupalSettings']['total_user'] = $first_last_date_monthly['total_user'];
@@ -69,36 +109,6 @@ class RiskManagement extends BlockBase {
       $score = 5;
     }
 
-    $build['findings'] = [
-      '#type' => 'details', 
-      '#title' => t('Findings'), 
-      '#attributes' => ['id' => 'findings'], 
-      '#collapsible' => TRUE, 
-      '#collapsed' => FALSE,
-    ];
-
-    $build['qualifications'] = [
-      '#type' => 'details', 
-      '#title' => t('Qualifications'), 
-      '#attributes' => ['id' => 'qualifications'], 
-      '#collapsible' => TRUE, 
-      '#collapsed' => FALSE,
-    ];
-
-    $build['scheduling'] = [
-      '#type' => 'details', 
-      '#title' => t('Scheduling'), 
-      '#attributes' => ['id' => 'scheduling'], 
-      '#collapsible' => TRUE, 
-      '#collapsed' => FALSE,
-    ];
-
-    $header = [
-      t('MARKS OBTAINED.'),
-      t('RISK CATEGORY'),
-      t('INCIDENCE'),
-      t('RISK SCORE'),
-    ];
     $build['title_data'] = [
       '#type' => 'item',
       '#markup' => '<h1>FINDINGS</h1>',
@@ -106,8 +116,13 @@ class RiskManagement extends BlockBase {
 
     $build['findings']['tableselect_element'] = [
       '#type' => 'table',
-      '#header' => $header,
+      '#header' => $header_findings,
       '#empty' => t('No content available.'),
+    ];
+    
+    $build['findings']['tableselect_element'][0]['each_score'] = [
+      '#markup' => '<b>Minor</b>  :  3*'.$risk_data['findings']['minor'].'</br><b>Major</b>  :  5*'.$risk_data['findings']['major'].'<br><b>None</b>  :  0*0',
+      '#title_display' => 'invisible',
     ];
 
     $build['findings']['tableselect_element'][0]['obtained_marks'] = [

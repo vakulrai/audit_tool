@@ -7,6 +7,8 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\node\Entity\Node;
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 /**
  * Implements hook_help().
  */
@@ -46,14 +48,6 @@ function aps_audit_report_analysis_theme($existing, $type, $theme, $path) {
           'data' => NULL,
         ],
     ],
-    // 'risk_management' => [
-    //   'path' => $path . '/templates',
-    //   'template' => 'risk-management',
-    //     'variables' => [
-    //       'risk_chart' => NULL,
-    //       'data' => NULL,
-    //     ],
-    // ],
   ];
 }
 
@@ -110,3 +104,66 @@ function set_report_moderation(array$form, \Drupal\Core\Form\FormStateInterface 
 function aps_audit_report_analysis_node_access($node, $op, $account) {
  
 }
+
+function getHighchartImageExportforPDF($data,$series_title,$chart_title,$type,$report_type){  
+      $chart = new Highchart();
+      $chart->title = [
+          'text' => $chart_title,
+      ];
+      $chart->xAxis->categories = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      ];
+      $chart->xAxis->labels->style =[
+              'fontSize' => '25px',
+      ];
+      $chart->yAxis->labels->style =[
+              'fontSize' => '30px',
+      ];
+      $chart->yAxis->title =[
+              'text' => 'Underscore Auditor',
+      ];
+      $chart->plotOptions = [
+            "line"=> [
+                "stacking"=> "normal",
+                "dataLabels"=> [
+                    "enabled"=> "true",
+                    'style' => [
+                        'fontSize'=>'20px'
+                      ],
+                ],
+            ],
+      ];
+      $chart->credits = [
+          'enabled' => false,
+      ];
+      $chart->series[] = [
+          'name' => $series_title,
+          'type' => $type,
+          'data' => $data,
+          'showInLegend' => true,
+      ];
+      $img_option = $chart->renderOptions();
+      $exportUrl = 'http://export.highcharts.com/';
+      $ch = curl_init( $exportUrl );
+      $dataArray = [
+        "async" => true,
+        "type" => "image/jpeg",
+        "width" => 800,
+        "options" => $img_option
+      ];
+      curl_setopt( $ch, CURLOPT_POSTFIELDS, $dataArray);
+      curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+      $result = curl_exec($ch);
+      curl_close($ch);
+      $image_url = 'http://export.highcharts.com/'.$result;
+      file_get_contents_highchart($image_url);
+}
+
+function file_get_contents_highchart($url) {
+  $path = drupal_get_path('module', 'aps_audit_report_analysis') . '/highchart-images-pdf/Auditor-Performance.jpeg'; 
+  $content = file_get_contents($url);
+  //Store in the filesystem.
+  $fp = fopen($path , "w");
+  fwrite($fp, $content);
+  fclose($fp);
+} 

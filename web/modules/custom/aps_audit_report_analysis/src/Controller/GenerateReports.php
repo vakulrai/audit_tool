@@ -9,8 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-use Drupal\aps_audit_report_analysis\Plugin\Block\RiskManagement;
-
+use Drupal\Core\Datetime\DateHelper;
 
 /**
  * Controller routines for aps_audit_report_analysis routes.
@@ -18,6 +17,7 @@ use Drupal\aps_audit_report_analysis\Plugin\Block\RiskManagement;
 class GenerateReports extends ControllerBase {
 
   public function generateHTMLReports($report_type,$unit_reference) {
+    $this->getAuditorGraph($unit_reference);
     $output = $this->getDataforHTML($report_type, $unit_reference);
     $options = new Options();
     $options->set('isRemoteEnabled', TRUE);
@@ -133,6 +133,7 @@ class GenerateReports extends ControllerBase {
       $html .= '<h1>List of Qualitifed Auditors </h1>';
 
       //Detail: B *****List of Qualitifed Auditors ****//.
+      $auditor_chart_path = drupal_get_path('module', 'aps_audit_report_analysis') . '/highchart-images-pdf/Auditor-Performance.jpeg';
       $data_qualified_auditors = $this->getdatafromuri('auditor','/auditor-and-audit-export/'.$unit_reference.'?field_score_value_greater=5');
       if(count($data_qualified_auditors)){
         $html .= '<table id = "qualified-auditors" style="width:100%;">
@@ -157,6 +158,7 @@ class GenerateReports extends ControllerBase {
         $html .= '</table>';
       }
       $html .= '</br>';
+      $html .= ' <img src='.$auditor_chart_path.' height="700" width="450"> ';
       $html .= '<h1>List of Process/Product/Business Process </h1>';
 
       //Detail: B *****List of Process ****//.
@@ -215,6 +217,52 @@ class GenerateReports extends ControllerBase {
     }
     $html .="</html>";
     return $html;
+  }
+
+  public function getAuditorGraph($unit_reference){
+    $build = [];
+    $build['#cache']['max-age'] = 0;
+    $first_last_date_monthly = [];
+    $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+    $uri = explode('/', $current_uri);
+    $first_day_this_month = date('01-01-Y');
+    $last_day_this_month  = date('m-t-Y');
+    $get_all_months_name = DateHelper::monthNamesUntranslated();
+    $current_month = date('n');
+    $user_count = 0;
+    $selected_user_count = 0;
+    foreach ($get_all_months_name as $key => $month_name) {
+      if($key<=$current_month){
+        $format_for_first_day = 'Y-'. $key . '-01';
+        $format_for_last_day = 'Y-m-t';
+        $first_last_date_monthly[$month_name]['first_day'] = date($format_for_first_day);
+        $first_last_date_monthly[$month_name]['last_day'] = date($format_for_last_day, strtotime(date($format_for_first_day)));
+        $first_last_date_monthly[$month_name]['count_underscore_auditor'] = count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$unit_reference.'?created[min]='.$first_last_date_monthly[$month_name]['first_day'].'&created[max]='.$first_last_date_monthly[$month_name]['last_day'].'&field_score_value=6'));
+        $first_last_date_monthly[$month_name]['audit_count'] = count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$unit_reference.'?created[min]='.$first_last_date_monthly[$month_name]['first_day'].'&created[max]='.$first_last_date_monthly[$month_name]['last_day']));
+
+        $user_count += count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$unit_reference.'?created[min]='.$first_last_date_monthly[$month_name]['first_day'].'&created[max]='.$first_last_date_monthly[$month_name]['last_day']));
+        $selected_user_count += $first_last_date_monthly[$month_name]['count_underscore_auditor'] = count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$unit_reference.'?created[min]='.$first_last_date_monthly[$month_name]['first_day'].'&created[max]='.$first_last_date_monthly[$month_name]['last_day'].'&field_score_value=6'));
+
+        $first_last_date_monthly['total_user'] = $user_count;
+        $first_last_date_monthly['selected_user_count'] = $selected_user_count;
+        $plot_data['data'][] = [$first_last_date_monthly[$month_name]['count_underscore_auditor']];
+      }
+    }
+    $build['audit_auditor_report']['auditor_report'] = [
+      '#type' => 'fieldset',
+    ];
+    $build['audit_auditor_report']['auditor_report'] ['#attached']['library'][] = 'aps_audit_report_analysis/aps_dashboard_auditor_report_js';
+    $build['audit_auditor_report']['auditor_report']['#attached']['drupalSettings']['auditor_data'] = json_encode($plot_data['data']);
+    $build['audit_auditor_report']['auditor_report']['#attached']['drupalSettings']['total_user'] = $first_last_date_monthly['total_user'];
+    $build['audit_auditor_report']['auditor_report']['#attached']['drupalSettings']['selected_user_count'] = $first_last_date_monthly['selected_user_count'];
+    $build['audit_auditor_report']['auditor_report']['container_element_audit_auditor_report']['#markup'] = '<div id="container-element-auditor-report" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>';
+
+    $selected_user = $build['audit_auditor_report']['auditor_report']['#attached']['drupalSettings']['selected_user_count'];
+    $total_user = $build['audit_auditor_report']['auditor_report']['#attached']['drupalSettings']['total_user'];
+    $percentage_selection = ($selected_user / $total_user * 100);
+    $chart_title = $percentage_selection.'% Auditor Selection';
+    getHighchartImageExportforPDF($plot_data['data'], 'Underscore User', $chart_title, 'line', 'auditor_report');
+    return $build;
   }
 
   public function getdatafromuri($type, $url) {
