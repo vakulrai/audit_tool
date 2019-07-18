@@ -8,11 +8,15 @@
 		    chart: {
 		        type: 'solidgauge'
 		    },
-
-		    title: 'Risk Meter',
+		    title: {
+              text: 'Risk Meter',
+              align: 'center',
+              verticalAlign: 'middle',
+              y: 50
+            },
 
 		    pane: {
-		        center: ['30%', '90%'],
+		        center: ['50%', '75%'],
 		        size: '70%',
 		        startAngle: -90,
 		        endAngle: 90,
@@ -26,16 +30,11 @@
 		    },
 
 		    tooltip: {
-		        enabled: false
+		        enabled: true
 		    },
 
 		    // the value axis
 		    yAxis: {
-		        // stops: [
-		        //     [0.1, '#55BF3B'], // green
-		        //     [0.5, '#DDDF0D'], // yellow
-		        //     [0.9, '#DF5353'] // red
-		        // ],
 		        lineWidth: 0,
 		        minorTickInterval: null,
 		        tickAmount: 2,
@@ -53,7 +52,7 @@
 		                y: 5,
 		                borderWidth: 0,
 		                useHTML: true
-		            }
+		            },
 		        }
 		    }
 		};
@@ -73,8 +72,8 @@
 		    },
 
 		    series: [{
-		        name: 'Speed',
-		        data: [80],
+		        name: 'Risk',
+		        data: [20],
 		        dataLabels: {
 		            format:
 		                '<div style="text-align:center">' +
@@ -88,41 +87,55 @@
 		    }]
 
 		}));
-
-		// The RPM gauge
-		// Bring life to the dials
-		// setInterval(function () {
-		//     // Speed
-		//     var point,
-		//         newVal,
-		//         inc;
-
-		//     if (chartSpeed) {
-		//         point = chartSpeed.series[0].points[0];
-		//         inc = Math.round((Math.random() - 0.5) * 100);
-		//         newVal = point.y + inc;
-
-		//         if (newVal < 0 || newVal > 200) {
-		//             newVal = point.y - inc;
-		//         }
-
-		//         point.update(newVal);
-		//     }
-
-		//     // RPM
-		//     if (chartRpm) {
-		//         point = chartRpm.series[0].points[0];
-		//         inc = Math.random() - 0.5;
-		//         newVal = point.y + inc;
-
-		//         if (newVal < 0 || newVal > 5) {
-		//             newVal = point.y - inc;
-		//         }
-
-		//         point.update(newVal);
-		//     }
-		// }, 2000);
-
+        
+        var legend = Highcharts.chart('container-element-risk-legend',{
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+            text: 'Risk Scale',
+            align: 'center',
+            verticalAlign: 'middle',
+            y: 50
+        },
+        tooltip: {
+		    enabled: false
+		},
+        plotOptions: {
+            pie: {
+                dataLabels: {
+                    enabled: true,
+                    distance: -50, 
+                    // formatter: function() {
+                    //     var dlabel = this.point.name + '<br/>';
+                    //     dlabel += Math.round(this.percentage*100)/100 + ' %';
+                    //     return dlabel
+                    // },
+                    style: {
+                        fontWeight: 'bold',
+                        color: 'white',
+                        textShadow: '0px 1px 2px black'
+                    }
+                },
+                startAngle: -90,
+                endAngle: 90,
+                center: ['50%', '75%']
+            },
+        },
+        series: [{
+            type: 'pie',
+            name: 'Risk Score',
+            innerSize: '50%',
+            data: [
+                ['LOW: 1',33.7],
+                ['MODERATE: 3',33.7],
+                ['HIGH: 5',33.7],    
+            ]
+        }]
+    });
+        
     }
   };
 }(jQuery));

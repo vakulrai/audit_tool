@@ -17,7 +17,6 @@ use Drupal\Core\Datetime\DateHelper;
 class GenerateReports extends ControllerBase {
 
   public function generateHTMLReports($report_type,$unit_reference) {
-    $this->getAuditorGraph($unit_reference);
     $output = $this->getDataforHTML($report_type, $unit_reference);
     $options = new Options();
     $options->set('isRemoteEnabled', TRUE);
@@ -103,6 +102,7 @@ class GenerateReports extends ControllerBase {
 
     //********************************//
     if($report_type == 'activity_related'){
+      $this->getAuditorGraph($unit_reference);
       $html .= '<h1>Annual calendar plan</h1>';
       //Detail: A *****Get Annual calendar plan****//.
       $data_planned_event = $this->getdatafromuri('event','/ncr-car-management-details/'.$unit_reference.'?type=planned_events');

@@ -71,7 +71,8 @@ class RiskManagement extends BlockBase {
     // $build['risk_management_fieldset']['risk_management']['#attached']['drupalSettings']['auditor_data'] = json_encode($plot_data['data']);
     // $build['risk_management_fieldset']['risk_management']['#attached']['drupalSettings']['total_user'] = $first_last_date_monthly['total_user'];
     // $build['risk_management_fieldset']['risk_management']['#attached']['drupalSettings']['selected_user_count'] = $first_last_date_monthly['selected_user_count'];
-    $build['risk_management_fieldset']['risk_management']['container_element_risk_eport']['#markup'] = '<div id="container-element-risk-report" style="min-width: 150px; height: 400px; max-width: 400px; margin: 0 auto">HELLO</div>';
+    $build['risk_management_fieldset']['risk_management']['container_element_risk_legend']['#markup'] = '<div id="container-element-risk-legend" style="min-width: 150px; height: 400px; max-width: 400px; margin: 0 auto"></div>';
+    $build['risk_management_fieldset']['risk_management']['container_element_risk_eport']['#markup'] = '<div id="container-element-risk-report" style="min-width: 150px; height: 400px; max-width: 400px; margin: 0 auto"></div>';
 
     //Get data for Finding categories minor/major.
     $risk_data = [];
@@ -82,6 +83,10 @@ class RiskManagement extends BlockBase {
     $risk_data['findings']['no_of_department'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?type=department'));
     //Logic for calculating score.
     $total_marks_obtained = 0;
+    $finding_percentage_minor = 0;
+    $finding_percentage_major = 0;
+    $total_major_minor = 0;
+    $total_major_minor = $risk_data['findings']['major'] + $risk_data['findings']['minor'];
     if($risk_data['findings']['major']>0){
       $total_marks_obtained += $risk_data['findings']['major'] * 5;
     }
@@ -96,23 +101,29 @@ class RiskManagement extends BlockBase {
       $total_marks_obtained += $risk_data['findings']['minor'] * 0;
     }
 
-    if($risk_data['findings']['count_audits'] >= $risk_data['findings']['no_of_department']){
-      $risk_category = 'MEDIUM';
-      $score = 3;
+    if($total_major_minor != 0){
+      $major = $total_major_minor - $risk_data['findings']['minor'];
+      $minor = $total_major_minor - $risk_data['findings']['major'];
+      if($minor != 0){
+        $finding_percentage_minor = ($risk_data['findings']['minor'] / $total_major_minor * 100);
+        if($finding_percentage_minor > 50){
+          $risk_category = 'MEDIUM';
+          $score = 3;
+        }
+        else{
+          $risk_category = 'HIGH';
+          $score = 5;
+        }
+      }
+      if($major != 0){
+        $risk_category = 'LOW';
+        $score = 1;
+      }
+      else{
+        $risk_category = 'HIGH';
+        $score = 5;
+      }
     }
-    elseif ($risk_data['findings']['count_audits'] <= $risk_data['findings']['no_of_department']) {
-      $risk_category = 'LOW';
-      $score = 1;
-    }
-    else{
-      $risk_category = 'HIGH';
-      $score = 5;
-    }
-
-    $build['title_data'] = [
-      '#type' => 'item',
-      '#markup' => '<h1>FINDINGS</h1>',
-    ];
 
     $build['findings']['tableselect_element'] = [
       '#type' => 'table',
@@ -141,7 +152,7 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['findings']['tableselect_element'][0]['risk_score'] = [
-      '#markup' => $score * $total_marks_obtained,
+      '#markup' => $score,
       '#title_display' => 'invisible',
     ];
 
@@ -336,7 +347,7 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['findings']['tableselect_element_rescheduled'][0]['risk_score_improvement'] = [
-      '#markup' => $total_schedule_reschedule * $risk_count,
+      '#markup' => $risk_count,
       '#title_display' => 'invisible',
     ];
 
