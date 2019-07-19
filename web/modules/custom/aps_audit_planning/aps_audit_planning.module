@@ -22,6 +22,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_report_reference']['#access'] = FALSE;
     $form['field_select_users']['#access'] = FALSE;
     $form['field_time']['#access'] = FALSE;
+    $form['field_audit_frequency']['#access'] = FALSE;
     $form['field_release_status']['#access'] = FALSE;
     $id = \Drupal::request()->query->get('unit_reference');
     $form['#cache']['max-age'] = 0;

@@ -27,6 +27,7 @@ dependencies:
     - field.field.node.planned_events.field_suggested_date
     - field.field.node.planned_events.field_time
     - field.field.node.planned_events.field_unit
+    - field.field.node.planned_events.field_year_frequency
     - node.type.planned_events
   module:
     - datetime
@@ -236,6 +237,15 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_year_frequency:
+    weight: 126
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   links:
     weight: 100

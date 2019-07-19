@@ -151,6 +151,28 @@ class CsvEntityImport extends FormBase {
   public function EntityGenerateFields(array &$form, FormStateInterface $form_state) {
     $entity_type_id = 'user';
     $bundle = $form_state->getValue('import_type');
+    switch ($bundle) {
+      case 'assembly':
+        $get_csv_file = drupal_get_path('module', 'aps_general') . '/csv_samples/Auditor-Performance.jpeg';
+        break;
+      
+      case 'manufacturing_process':
+        $get_csv_file = drupal_get_path('module', 'aps_general') . '/csv_samples/Auditor-Performance.jpeg';
+        break;
+
+      case 'customers_manual':
+        $get_csv_file = drupal_get_path('module', 'aps_general') . '/csv_samples/'.$bundle.'.csv';
+        break;
+
+      case 'supplier':
+       $get_csv_file = drupal_get_path('module', 'aps_general') . '/csv_samples/'.$bundle.'.csv';
+        break;
+
+      case 'user':
+        $get_csv_file = drupal_get_path('module', 'aps_general') . '/csv_samples/'.$bundle.'.csv';
+        break;
+    }
+    $path = file_create_url($get_csv_file);
     if($bundle != 'user'){
       $entity_type_id = 'node';
     }
@@ -193,7 +215,7 @@ class CsvEntityImport extends FormBase {
         }
       }
     }
-    $fields_markup .= '<b>]</b>';
+    $fields_markup .= '<b>]</b><a href='.$path.'>Sample</a>';
     $avilable_fields = $fields_markup;
     $ajax_response = new AjaxResponse();
     $renderer = \Drupal::service('renderer');

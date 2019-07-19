@@ -28,6 +28,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use \Drupal\field\Entity\FieldConfig;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Component\Utility\UrlHelper;
+use Drupal\Core\Datetime\DateHelper;
 
 
 
@@ -535,6 +536,7 @@ function aps_general_node_insert(Node $node) {
     $count_supplier = 0;
     $count_ia = 0;
     $count_ea = 0;
+    $audit_frequency = getListofMonths();
     foreach ($node_load_multiple as $key => $value) {
       if($value->field_audit_type->value == 'internal' && $value->field_internal_audit_type->value == 'systems'){
         $id_system[] = $key; 
@@ -572,15 +574,15 @@ function aps_general_node_insert(Node $node) {
     if($node->field_audit_type->value == 'internal'){
       if($node->field_internal_audit_type->value == 'systems'){
         $val = $count_systems;
-        $title_val = 'IS'.$val;
+        $title_val = 'IS'.$val.'-S-'.$audit_frequency;
       }
       elseif ($node->field_internal_audit_type->value == 'process') {
         $val = $count_process;
-        $title_val = 'IP'.$val;
+        $title_val = 'IP'.$val.'-PS-'.$audit_frequency;
       }
       elseif ($node->field_internal_audit_type->value == 'product') {
         $val = $count_product;
-        $title_val = 'IPR'.$val;
+        $title_val = 'IPR'.$val.'-PR-'.$audit_frequency;
       }
       else{
         $title_val = 'Systems Audit';
@@ -588,29 +590,77 @@ function aps_general_node_insert(Node $node) {
     }
     elseif ($node->field_audit_type->value == 'external') {
       $val = $count_external;
-      $title_val = 'EA'.$val;
+      $title_val = 'EA'.$val.'-E-'.$audit_frequency;
     }
     elseif ($node->field_audit_type->value == 'supplier') {
       $val = $count_supplier;
-      $title_val = 'S'.$val;
+      $title_val = 'S'.$val.'-S-'.$audit_frequency;
     }
     elseif ($node->field_audit_type->value == 'customer') {
       if($node->field_customer_type->value == 'internal_assessment'){
         $val = $count_ia;
-        $title_val = 'ICA'.$val;
+        $title_val = 'ICA'.$val.'-C-IA-'.$audit_frequency;
       }
       elseif ($node->field_customer_type->value == 'external_assessment') {
         $val = $count_ea;
-        $title_val = 'ECA'.$val;
+        $title_val = 'ECA'.$val.'-C-EA-'.$audit_frequency;
       }
     }
     else{
         $title_val = 'Systems Audit';
       }
+    $node->set('field_year_frequency', $audit_frequency);
     $node->set('title', $title_val);
     $node->set('moderation_state', 'scheduled');
     $node->save();
   }
+}
+
+function getListofMonths(){
+  $get_all_months_name = DateHelper::monthNamesUntranslated();
+  $query = \Drupal::database()->select('audit_cycle__field_unit_reference', 'h');
+  $query->fields('h',['entity_id']);
+  $query->condition('h.field_unit_reference_target_id', 283);
+  $query->range(0, 1);
+  $nids = $query->execute()->fetchAll();
+  $node_storage = \Drupal::entityManager()->getStorage('audit_cycle');
+  $entity_audit_cycle = $node_storage->load($nids[0]->entity_id);
+  if(count($entity_audit_cycle)){
+    $cycle_type = $entity_audit_cycle->get('field_cycle_type')->value;
+    $frequency = $entity_audit_cycle->get('field_audit_frequency')->value;
+    if($cycle_type == 0){
+      $audit_cycle_start_date = $entity_audit_cycle->get('field_financial_dates')->value;
+      $audit_cycle_end_date = $entity_audit_cycle->get('field_financial_dates')->end_value;
+    }
+    elseif ($cycle_type == 1) {
+      $audit_cycle_start_date = $entity_audit_cycle->get('field_calendar_date')->value;
+      $audit_cycle_end_date = $entity_audit_cycle->get('field_calendar_date')->end_value;
+    }
+  }
+ 
+  $curr = date('m');
+  $month_array = [
+    1=>[12],
+    2=>[6,6],
+    3=>[4,4,4],
+    4=>[3,3,3,3],
+    5=>[5,5,2],
+    6=>[6,6],
+    7=>[7,5],
+    8=>[8,4],
+    9=>[9,3],
+    10=>[10,2],
+    11=>[11,1],
+    12=>[12],
+  ];
+  foreach ($month_array[$frequency] as $key => $value) {
+    $total += $value;
+    if ($curr <= $total) {
+      $month_of_audit_frequency = $key+1;
+      break;
+    }
+  }
+  return $month_of_audit_frequency;
 }
 
 /**
@@ -1162,7 +1212,7 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
-  if ($cleanLinkText == 'IMPORT DATA') {
+  if ($cleanLinkText == 'OPERATIONS') {
     $id = $uri[1];
     if($id){
       $url =Url::fromUserInput('/import/'.$id);

@@ -1,0 +1,4 @@
+title,type,field_upload_type,field_document,field_qam,field_refere,field_sr_no,field_version_date,field_version_level
+CA 1,customers_manual,doc_only,,"A,B,C",Honda,1,2019-07-25,1.1
+CA 2,customers_manual,qam_only,,http://aps.local/admin/structure/types/manage/customers_manual/fields,Honda,2,2019-07-25,2.1
+CA 3,customers_manual,both,,http://aps.local/admin/structure/types/manage/customers_manual/fields,Honda,3,2019-07-25,3.1
