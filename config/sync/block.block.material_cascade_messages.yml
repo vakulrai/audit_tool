@@ -1,0 +1,22 @@
+uuid: d6aee026-a603-4f33-8f56-58f09e730d23
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - material_cascade
+_core:
+  default_config_hash: AzCthfcfTKSNb0lXQ-6NM9FbMbHNKghsaxwJMvwd4Ng
+id: material_cascade_messages
+theme: material_cascade
+region: ''
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,25 @@
+uuid: d19c8633-7bea-48c0-a92b-0c6f8e14344c
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.admin-main-menu
+  module:
+    - system
+  theme:
+    - material_base
+id: adminmainmenu_3
+theme: material_base
+region: navbar
+weight: 0
+provider: null
+plugin: 'system_menu_block:admin-main-menu'
+settings:
+  id: 'system_menu_block:admin-main-menu'
+  label: 'Admin main menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

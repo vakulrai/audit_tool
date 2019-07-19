@@ -1,0 +1,38 @@
+uuid: db140146-640c-44da-b500-b58e9fff71fd
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - user
+  theme:
+    - audit_tool
+id: audit_tool_views_block__assembly_view_block_1
+theme: audit_tool
+region: content
+weight: -11
+provider: null
+plugin: 'views_block:assembly_view-block_1'
+settings:
+  id: 'views_block:assembly_view-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: "/node/add/assembly\r\n/node/add/assembly/*"
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      executive: executive
+      auditor: auditor
+      auditee: auditee
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

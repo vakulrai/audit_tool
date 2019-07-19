@@ -1,0 +1,35 @@
+uuid: 4d9894dc-37ae-4088-bd85-f1f0267342b0
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_pre_audit
+    - system
+    - user
+  theme:
+    - audit_tool
+id: audit_tool_preauditblock
+theme: audit_tool
+region: content
+weight: 4
+provider: null
+plugin: pre_audit_block
+settings:
+  id: pre_audit_block
+  label: 'PRE AUDIT'
+  provider: aps_pre_audit
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/preaudit/\r\n/preaudit/*"
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      auditor: auditor
+      auditee: auditee
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

@@ -1,0 +1,30 @@
+uuid: aa51d883-6d9d-4380-a6c1-94cca9bd3477
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.customer_manual_listing
+  module:
+    - system
+    - views
+  theme:
+    - audit_tool
+id: audit_tool_views_block__customer_manual_listing_manual
+theme: audit_tool
+region: content
+weight: 10
+provider: null
+plugin: 'views_block:customer_manual_listing-manual'
+settings:
+  id: 'views_block:customer_manual_listing-manual'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: /node/add/customers_manual
+    negate: false
+    context_mapping: {  }

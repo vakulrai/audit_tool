@@ -1,0 +1,22 @@
+uuid: 8cc5fa4f-f761-440f-9f36-e645672e53a9
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - material_cascade
+_core:
+  default_config_hash: 8oTr7kuYd8C4RrvGIDH_5dlxT0pVJj2jqwnjxBKH8l4
+id: material_cascade_breadcrumbs
+theme: material_cascade
+region: ''
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility: {  }

@@ -1,4 +1,4 @@
-uuid: 9adb2e83-af51-4bb8-bbd2-88ae1bb27463
+uuid: a625b73d-4d01-454e-b67d-3e38e73bc32e
 langcode: en
 status: true
 dependencies:
@@ -7,16 +7,16 @@ dependencies:
     - system
     - user
   theme:
-    - bootstrap_barrio_subtheme
-id: generatereports
-theme: bootstrap_barrio_subtheme
-region: sidebar_first
-weight: -28
+    - audit_tool
+id: audit_tool_auditfindingcontrolscheduled
+theme: audit_tool
+region: content
+weight: 3
 provider: null
-plugin: generate_reports
+plugin: audit_finding_control_scheduled
 settings:
-  id: generate_reports
-  label: 'Generate reports'
+  id: audit_finding_control_scheduled
+  label: 'Audit finding control scheduled'
   provider: aps_audit_report_analysis
   label_display: '0'
 visibility:
