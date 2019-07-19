@@ -1,4 +1,4 @@
-uuid: 9adb2e83-af51-4bb8-bbd2-88ae1bb27463
+uuid: b5506392-3e64-46df-8359-b73e1b7579ab
 langcode: en
 status: true
 dependencies:
@@ -7,16 +7,16 @@ dependencies:
     - system
     - user
   theme:
-    - bootstrap_barrio_subtheme
-id: generatereports
-theme: bootstrap_barrio_subtheme
-region: sidebar_first
-weight: -28
+    - audit_tool
+id: audit_tool_mradmindashboardplanningcontrol
+theme: audit_tool
+region: content
+weight: 0
 provider: null
-plugin: generate_reports
+plugin: mradmin_dashboard_planning_control
 settings:
-  id: generate_reports
-  label: 'Generate reports'
+  id: mradmin_dashboard_planning_control
+  label: 'Mradmin dashboard planning control'
   provider: aps_audit_report_analysis
   label_display: '0'
 visibility:

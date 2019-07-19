@@ -1,0 +1,23 @@
+uuid: 352808e9-ed9b-4d40-a4d4-874b30f352dc
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - audit_tool
+id: audit_tool_sitebranding
+theme: audit_tool
+region: header
+weight: -23
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: false
+visibility: {  }

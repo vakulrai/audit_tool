@@ -1,4 +1,4 @@
-uuid: 9adb2e83-af51-4bb8-bbd2-88ae1bb27463
+uuid: b06ef42f-98a1-4983-9ad6-64da3d1f0332
 langcode: en
 status: true
 dependencies:
@@ -7,16 +7,16 @@ dependencies:
     - system
     - user
   theme:
-    - bootstrap_barrio_subtheme
-id: generatereports
-theme: bootstrap_barrio_subtheme
-region: sidebar_first
-weight: -28
+    - audit_tool
+id: audit_tool_auditorselection_2
+theme: audit_tool
+region: content
+weight: -2
 provider: null
-plugin: generate_reports
+plugin: auditor_selection
 settings:
-  id: generate_reports
-  label: 'Generate reports'
+  id: auditor_selection
+  label: 'Auditor selection'
   provider: aps_audit_report_analysis
   label_display: '0'
 visibility:

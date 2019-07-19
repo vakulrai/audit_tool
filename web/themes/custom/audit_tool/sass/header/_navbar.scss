@@ -1,0 +1,28 @@
+#navbar {
+  .main-navigation-menu {
+  	> ul {
+  		li {
+  			a {
+  				display: block;
+			    line-height: 20px;
+			    border-bottom: 2px solid transparent;
+			    font-size: 14px;
+			    font-weight: 500;
+			    color: #FFF;
+			    text-transform: uppercase;
+			    &:hover {
+			    	border-color: rgba(255, 255, 255, 0.5);
+			    }
+			    &.is-active {
+			    	border-color: #fff;
+			    }
+			    &.menuparent {
+			    	&:hover {
+			    		border-color: transparent;
+			    	}
+			    }
+  			}
+  		}
+  	}
+  }
+}

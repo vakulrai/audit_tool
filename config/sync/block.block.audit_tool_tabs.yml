@@ -1,0 +1,27 @@
+uuid: cb4f1b9a-5f23-4d45-89f8-dd6f89339016
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - audit_tool
+id: audit_tool_tabs
+theme: audit_tool
+region: content
+weight: -14
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility:
+  request_path:
+    id: request_path
+    pages: "/home\r\n/planned-audit-listing"
+    negate: true
+    context_mapping: {  }

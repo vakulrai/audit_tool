@@ -1,0 +1,31 @@
+uuid: 8d03abc5-1252-4db7-a991-35e0e52876c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.user_registration_view
+  module:
+    - system
+    - views
+  theme:
+    - audit_tool
+id: audit_tool_views_block__user_registration_view_details
+theme: audit_tool
+region: content
+weight: -5
+provider: null
+plugin: 'views_block:user_registration_view-details'
+settings:
+  id: 'views_block:user_registration_view-details'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '/unit-registration-view/*'
+    negate: false
+    context_mapping: {  }

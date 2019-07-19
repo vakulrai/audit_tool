@@ -1,4 +1,4 @@
-uuid: 9adb2e83-af51-4bb8-bbd2-88ae1bb27463
+uuid: 007474f8-3b71-4c2a-9ada-8f410f95275d
 langcode: en
 status: true
 dependencies:
@@ -7,11 +7,11 @@ dependencies:
     - system
     - user
   theme:
-    - bootstrap_barrio_subtheme
-id: generatereports
-theme: bootstrap_barrio_subtheme
-region: sidebar_first
-weight: -28
+    - audit_tool
+id: audit_tool_generatereports
+theme: audit_tool
+region: sidebar_second
+weight: -29
 provider: null
 plugin: generate_reports
 settings:

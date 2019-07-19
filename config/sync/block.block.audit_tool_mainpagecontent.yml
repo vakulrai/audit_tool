@@ -1,0 +1,25 @@
+uuid: c5185bf2-db70-4a30-9dae-3f680d70af10
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - audit_tool
+id: audit_tool_mainpagecontent
+theme: audit_tool
+region: content
+weight: -4
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: true
+    context_mapping: {  }
