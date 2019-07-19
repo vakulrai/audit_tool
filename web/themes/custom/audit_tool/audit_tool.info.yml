@@ -8,7 +8,7 @@ base theme: material_base
 
 # Defines libraries group in which we can add css/js.
 libraries:
-  - material_cascade/custom
+  - audit_tool/custom
 
 # Regions
 regions:

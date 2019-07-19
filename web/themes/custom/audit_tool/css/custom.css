@@ -1,2 +1,24 @@
+#navbar .main-navigation-menu > ul li a {
+  display: block;
+  line-height: 20px;
+  border-bottom: 2px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFF;
+  text-transform: uppercase; }
+  #navbar .main-navigation-menu > ul li a:hover {
+    border-color: rgba(255, 255, 255, 0.5); }
+  #navbar .main-navigation-menu > ul li a.is-active {
+    border-color: #fff; }
+  #navbar .main-navigation-menu > ul li a.menuparent:hover {
+    border-color: transparent; }
+
+#block-audit-tool-sitebranding {
+  text-align: center;
+  position: relative;
+  bottom: 50px; }
+  #block-audit-tool-sitebranding .navbar-title {
+    margin-left: 0;
+    margin-right: 0; }
 
 /*# sourceMappingURL=../css/custom.css.map */
