@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - eck.eck_type.audit_cycle.settings
+    - field.field.audit_cycle.settings.field_audit_frequency
     - field.field.audit_cycle.settings.field_calendar_date
     - field.field.audit_cycle.settings.field_car_release_by_auidtee_
     - field.field.audit_cycle.settings.field_cycle_type
@@ -27,7 +28,7 @@ third_party_settings:
         - field_unplanned_audit_schedule_
         - field_non_conformity_release_
       parent_name: ''
-      weight: 6
+      weight: 7
       format_type: fieldset
       format_settings:
         id: ''
@@ -40,8 +41,15 @@ targetEntityType: audit_cycle
 bundle: settings
 mode: default
 content:
+  field_audit_frequency:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
   field_calendar_date:
-    weight: 2
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: daterange_default
@@ -60,7 +68,7 @@ content:
     type: options_buttons
     region: content
   field_financial_dates:
-    weight: 1
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: daterange_default
@@ -74,7 +82,7 @@ content:
     region: content
   field_other:
     type: entity_reference_paragraphs
-    weight: 4
+    weight: 5
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -93,7 +101,7 @@ content:
     region: content
   field_schedule_release:
     type: entity_reference_paragraphs
-    weight: 3
+    weight: 4
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -104,7 +112,7 @@ content:
     third_party_settings: {  }
     region: content
   field_unit_reference:
-    weight: 5
+    weight: 6
     settings:
       match_operator: CONTAINS
       size: 60

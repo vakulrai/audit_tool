@@ -22,7 +22,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_report_reference']['#access'] = FALSE;
     $form['field_select_users']['#access'] = FALSE;
     $form['field_time']['#access'] = FALSE;
-    // $form['field_release_status']['#access'] = FALSE;
+    $form['field_release_status']['#access'] = FALSE;
     $id = \Drupal::request()->query->get('unit_reference');
     $form['#cache']['max-age'] = 0;
     $form['field_sections']['#attributes'] = ['id' => ['section']];
@@ -61,8 +61,12 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
+        $title = $form['field_shift']['widget']['#options'][$value['target_id']];
+        $selected_option[$value['target_id']] = $title; 
       }
+      $form['field_shift']['widget']['#options'] = $selected_option;
       $form['field_shift']['widget']['#default_value'] = $def_values;
+      $form['field_shift']['widget']['#disabled'] = TRUE;
     }
     $form['field_refere']['#access'] = FALSE;
 	}

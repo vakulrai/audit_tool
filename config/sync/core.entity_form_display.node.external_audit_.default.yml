@@ -4,9 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.external_audit_.body
+    - field.field.node.external_audit_.field__lead_auditor
     - field.field.node.external_audit_.field_audit_cycle
     - field.field.node.external_audit_.field_audit_month
     - field.field.node.external_audit_.field_audit_type
+    - field.field.node.external_audit_.field_auditor_s_name
     - field.field.node.external_audit_.field_certification_std
     - field.field.node.external_audit_.field_decision
     - field.field.node.external_audit_.field_issue_date
@@ -35,6 +37,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  field__lead_auditor:
+    weight: 102
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_audit_cycle:
     weight: 6
     settings: {  }
@@ -54,6 +64,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_auditor_s_name:
+    weight: 103
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_certification_std:
     weight: 1

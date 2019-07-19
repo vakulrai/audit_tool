@@ -1,0 +1,18 @@
+uuid: 95877e3c-ac2b-449c-b5df-f204f45ea7fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.customers_manual
+id: node.customers_manual.title
+field_name: title
+entity_type: node
+bundle: customers_manual
+label: 'Contact Person Name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

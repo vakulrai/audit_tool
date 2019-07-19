@@ -19,7 +19,7 @@ bundle: supplier
 mode: default
 content:
   field_address_url:
-    weight: 26
+    weight: 4
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -27,7 +27,7 @@ content:
     type: link_default
     region: content
   field_product_list:
-    weight: 3
+    weight: 2
     settings:
       size: 60
       placeholder: ''
@@ -35,7 +35,7 @@ content:
     type: string_textfield
     region: content
   field_refere:
-    weight: 27
+    weight: 5
     settings:
       match_operator: CONTAINS
       size: 60
@@ -44,22 +44,14 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_supplier_city:
-    weight: 2
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
-  field_supplier_name:
-    weight: 1
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
   moderation_state:
     type: string_textfield
-    weight: 4
+    weight: 3
     region: content
     settings:
       size: 60
@@ -76,6 +68,7 @@ content:
 hidden:
   body: true
   created: true
+  field_supplier_name: true
   path: true
   promote: true
   status: true

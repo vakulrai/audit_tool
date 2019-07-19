@@ -5,6 +5,7 @@ dependencies:
   module:
     - aps_general
     - node
+    - system
   theme:
     - bootstrap_barrio_subtheme
 id: bootstrap_barrio_subtheme_csvimportblock
@@ -27,3 +28,8 @@ visibility:
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+  request_path:
+    id: request_path
+    pages: '/import/*'
+    negate: false
+    context_mapping: {  }

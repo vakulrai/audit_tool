@@ -11,7 +11,7 @@ id: node.section.field_assembly
 field_name: field_assembly
 entity_type: node
 bundle: section
-label: Assembly
+label: Process
 description: ''
 required: false
 translatable: false

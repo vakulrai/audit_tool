@@ -1,0 +1,18 @@
+uuid: da5e1b47-9fff-4b83-b937-91160565bc27
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.supplier
+id: node.supplier.title
+field_name: title
+entity_type: node
+bundle: supplier
+label: 'Contact Person Name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,4 +1,4 @@
-uuid: 4be28fbf-c24c-4375-9df7-14ccf02bacc4
+uuid: 84eb858b-0516-4f3b-b8cb-5ba2011c6275
 langcode: en
 status: true
 dependencies:
@@ -7,31 +7,28 @@ dependencies:
     - user
   theme:
     - bootstrap_barrio_subtheme
-id: bootstrap_barrio_subtheme_views_block__assembly_view_block_2
+id: exposedformplanned_audit_listingbusiness_ps_listing
 theme: bootstrap_barrio_subtheme
 region: content
-weight: 6
+weight: 0
 provider: null
-plugin: 'views_block:assembly_view-block_2'
+plugin: 'views_exposed_filter_block:planned_audit_listing-business_ps_listing'
 settings:
-  id: 'views_block:assembly_view-block_2'
+  id: 'views_exposed_filter_block:planned_audit_listing-business_ps_listing'
   label: ''
   provider: views
-  label_display: visible
+  label_display: '0'
   views_label: ''
-  items_per_page: none
 visibility:
   request_path:
     id: request_path
-    pages: "/node/add/assembly\r\n/node/add/assembly/*"
+    pages: '/documentrecords/*?unit_reference=*'
     negate: false
     context_mapping: {  }
   user_role:
     id: user_role
     roles:
-      executive: executive
       auditor: auditor
-      auditee: auditee
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'

@@ -89,40 +89,48 @@ class RiskManagement extends BlockBase {
     $total_major_minor = $risk_data['findings']['major'] + $risk_data['findings']['minor'];
     if($risk_data['findings']['major']>0){
       $total_marks_obtained += $risk_data['findings']['major'] * 5;
+      $finding_percentage_major  = $total_marks_obtained;
     }
     else{
       $total_marks_obtained += $risk_data['findings']['major'] * 0;
+      $finding_percentage_major  = $total_marks_obtained;
     }
 
     if($risk_data['findings']['minor'] > 0){
       $total_marks_obtained += $risk_data['findings']['minor'] * 3;
+      $finding_percentage_minor  = $total_marks_obtained;
     }
     else{
       $total_marks_obtained += $risk_data['findings']['minor'] * 0;
+      $finding_percentage_minor  = $total_marks_obtained;
     }
-
-    if($total_major_minor != 0){
-      $major = $total_major_minor - $risk_data['findings']['minor'];
-      $minor = $total_major_minor - $risk_data['findings']['major'];
-      if($minor != 0){
-        $finding_percentage_minor = ($risk_data['findings']['minor'] / $total_major_minor * 100);
-        if($finding_percentage_minor > 50){
+   
+    if($total_marks_obtained != 0){
+      $major = $total_marks_obtained - $finding_percentage_minor;
+      $minor = $total_marks_obtained - $finding_percentage_major;
+      if($major != 0){
+        $finding_percentage_major = ($major/ $total_marks_obtained * 100);
+        if($finding_percentage_major < 75){
           $risk_category = 'MEDIUM';
           $score = 3;
+        }
+        elseif($finding_percentage_major > 75) {
+          $risk_category = 'LOW';
+          $score = 1;
         }
         else{
           $risk_category = 'HIGH';
           $score = 5;
         }
       }
-      if($major != 0){
-        $risk_category = 'LOW';
-        $score = 1;
-      }
       else{
         $risk_category = 'HIGH';
         $score = 5;
       }
+    }
+    else{
+      $risk_category = 'HIGH';
+      $score = 5;
     }
 
     $build['findings']['tableselect_element'] = [

@@ -168,8 +168,12 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
+        $title = $form['field_shift']['widget']['#options'][$value['target_id']];
+        $selected_option[$value['target_id']] = $title; 
       }
+      $form['field_shift']['widget']['#options'] = $selected_option;
       $form['field_shift']['widget']['#default_value'] = $def_values;
+      $form['field_shift']['widget']['#disabled'] = TRUE;
     }
     if($id= \Drupal::request()->query->get('id')){
       $node_object = Node::load($id);
@@ -203,7 +207,9 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
       }
+      $form['field_shift']['widget']['#options'] = $def_values;
       $form['field_shift']['widget']['#default_value'] = $def_values;
+      $form['field_shift']['widget']['#disabled'] = TRUE;
     }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
@@ -225,7 +231,9 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
       }
+      $form['field_shift']['widget']['#options'] = $def_values;
       $form['field_shift']['widget']['#default_value'] = $def_values;
+      $form['field_shift']['widget']['#disabled'] = TRUE;
     }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
@@ -240,13 +248,17 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   //Condition for Assembly Add form
   if($form_id == 'node_assembly_form'){
     $form['field_refere']['#access'] = FALSE;
-    if($unit_ref= \Drupal::request()->query->get('unit_ref')){
+    if($unit_ref= \Drupal::request()->query->get('id')){
       $unit_ref_object = Node::load($unit_ref);
       $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
+        $title = $form['field_shift']['widget']['#options'][$value['target_id']];
+        $selected_option[$value['target_id']] = $title; 
       }
+      $form['field_shift']['widget']['#options'] = $selected_option;
       $form['field_shift']['widget']['#default_value'] = $def_values;
+      $form['field_shift']['widget']['#disabled'] = TRUE;
     }
     if(\Drupal::request()->query->get('section_reference') && \Drupal::request()->query->get('id')){
       $section_reference= \Drupal::request()->query->get('section_reference');
@@ -262,7 +274,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
   }
   elseif ($form_id == 'node_assembly_edit_form') {//Edit form
-    // $form['field_refere']['#access'] = FALSE;
+    $form['field_refere']['#access'] = FALSE;
   }
 
   //Condition for Manufacturing Process
@@ -289,7 +301,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $unit_reference = \Drupal::request()->query->get('unit_reference');
     $node_object = Node::load($unit_reference);
     $form['field_reference_id']['widget'][0]['target_id']['#default_value'] = $node_object;
-     $form['field_reference_id']['#access'] = FALSE;
+    $form['field_reference_id']['#access'] = FALSE;
     $query = \Drupal::database()->select('node__field_refere', 'n');
     $query->fields('n',['entity_id']);
     $query->condition('n.bundle', 'department');
@@ -871,8 +883,8 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   if($route_name == 'view.planned_audit_listing.document_list_ia'){
     if($user_role == 'auditor'){
       $config = \Drupal::service('config.factory')->getEditable('aps_general.adduserroles');
-      if($config->get('doc_id')){
-        $id = $config->get('doc_id');
+      if($config->get('nid')){
+        $id = $config->get('nid');
       }
       if($id){
         $data['tabs'][0]['aps_pre_audit.manuals:internal_documents']['#link']['url']->setRouteParameters(['arg_0' => $id]);
@@ -942,7 +954,7 @@ function aps_general_views_pre_render(ViewExecutable $view) {
 /**
  * Implements hook_link_alter().
  */
-function aps_general_link_alter(&$variables) { 
+function aps_general_link_alter(&$variables) {
   $route_name = \Drupal::routeMatch()->getRouteName();
   $node = \Drupal::routeMatch()->getParameter('node');
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
@@ -965,8 +977,10 @@ function aps_general_link_alter(&$variables) {
     if ($cleanLinkText == 'Documents') {
       $get_nid = explode('?', $uri[1]);
       $url = Url::fromRoute('view.planned_audit_listing.document_list_ia',['arg_0' => $get_nid[0]]);
+      $get_unit_from_event = Node::load($get_nid[0]);
       unset($variables['url']);
       $variables['url'] = $url;
+      $variables['url']->setRouteParameter('unit_reference', $get_unit_from_event->field_refere->target_id);
       $config->set('nid', $get_nid[0])->save();
     }
   }
