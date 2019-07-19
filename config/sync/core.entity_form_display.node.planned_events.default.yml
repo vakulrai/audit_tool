@@ -27,6 +27,7 @@ dependencies:
     - field.field.node.planned_events.field_suggested_date
     - field.field.node.planned_events.field_time
     - field.field.node.planned_events.field_unit
+    - field.field.node.planned_events.field_year_frequency
     - node.type.planned_events
     - workflows.workflow.workflow_for_audit_planning
   module:
@@ -342,6 +343,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_year_frequency:
+    weight: 36
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
     region: content
   moderation_state:
     type: moderation_state_default

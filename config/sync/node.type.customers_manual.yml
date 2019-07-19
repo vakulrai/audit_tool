@@ -13,6 +13,6 @@ name: 'Customers Manual'
 type: customers_manual
 description: 'Add customer manual'
 help: ''
-new_revision: false
+new_revision: true
 preview_mode: 1
 display_submitted: false

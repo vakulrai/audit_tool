@@ -1,0 +1,25 @@
+uuid: fc3ea8cd-2cb6-4529-9019-3c5afb7751cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.planned_audit_listing
+  module:
+    - views
+  theme:
+    - seven
+id: views_block__planned_audit_listing_block_1_2
+theme: seven
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:planned_audit_listing-block_1'
+settings:
+  id: 'views_block:planned_audit_listing-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility: {  }

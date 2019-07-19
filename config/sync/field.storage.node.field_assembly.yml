@@ -13,7 +13,7 @@ settings:
   allowed_values:
     -
       value: assembly
-      label: Assembly
+      label: 'Assembly Process'
     -
       value: manufacturing
       label: 'Manufacturing Process'

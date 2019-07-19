@@ -1,0 +1,19 @@
+uuid: 98dc8289-f2f0-4b7d-b11d-e87d10caea2a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field__lead_auditor
+    - node.type.external_audit_
+id: node.external_audit_.field__lead_auditor
+field_name: field__lead_auditor
+entity_type: node
+bundle: external_audit_
+label: ' Lead Auditor''s Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

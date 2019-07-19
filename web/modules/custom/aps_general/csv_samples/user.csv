@@ -1,0 +1,2 @@
+name,type,pass,mail,status,roles,field_department,field_employee_id,field_phone,field_reference_id,field_functions_qualified,field_score
+U 3,user,123,vakul.r@gmail.com,1,"auditor,administrator",test dept,007,9788544212,Honda,Paint Shop,5

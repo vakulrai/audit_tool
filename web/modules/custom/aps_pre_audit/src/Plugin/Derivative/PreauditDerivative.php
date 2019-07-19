@@ -69,18 +69,21 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
         'title' => 'Records',
         'route_name' => 'view.planned_audit_listing.document_list_records',
         'base_route' => 'view.planned_audit_listing.document_list_ia',
+        'route_parameters' => ['unit_reference' => $id],
       ] + $base_plugin_definition;
 
       $links['manuals'] = [
         'title' => 'Manuals',
         'route_name' => 'view.planned_audit_listing.document_list_manuals',
         'base_route' => 'view.planned_audit_listing.document_list_ia',
+        'route_parameters' => ['unit_reference' => $id],
       ] + $base_plugin_definition;
       
       $links['internal_documents'] = [
         'title' => 'Internal Documents',
         'route_name' => 'view.planned_audit_listing.document_list_ia',
         'base_route' => 'view.planned_audit_listing.document_list_ia',
+        'route_parameters' => ['unit_reference' => $id],
       ] + $base_plugin_definition;
     }
     elseif ($user_role == 'auditee') {

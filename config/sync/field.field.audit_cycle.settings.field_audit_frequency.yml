@@ -1,0 +1,23 @@
+uuid: f82853f8-e3f5-45a9-a92c-26ada4c76dc5
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_cycle.settings
+    - field.storage.audit_cycle.field_audit_frequency
+id: audit_cycle.settings.field_audit_frequency
+field_name: field_audit_frequency
+entity_type: audit_cycle
+bundle: settings
+label: 'Audit Frequency'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -1,0 +1,20 @@
+uuid: d0641fbf-ebe0-4183-9942-1534e7152118
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: audit_cycle.field_audit_frequency
+field_name: field_audit_frequency
+entity_type: audit_cycle
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

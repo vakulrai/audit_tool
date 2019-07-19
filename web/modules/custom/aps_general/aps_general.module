@@ -28,6 +28,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use \Drupal\field\Entity\FieldConfig;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Component\Utility\UrlHelper;
+use Drupal\Core\Datetime\DateHelper;
 
 
 
@@ -168,8 +169,12 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
+        $title = $form['field_shift']['widget']['#options'][$value['target_id']];
+        $selected_option[$value['target_id']] = $title; 
       }
+      $form['field_shift']['widget']['#options'] = $selected_option;
       $form['field_shift']['widget']['#default_value'] = $def_values;
+      $form['field_shift']['widget']['#disabled'] = TRUE;
     }
     if($id= \Drupal::request()->query->get('id')){
       $node_object = Node::load($id);
@@ -203,7 +208,9 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
       }
+      $form['field_shift']['widget']['#options'] = $def_values;
       $form['field_shift']['widget']['#default_value'] = $def_values;
+      $form['field_shift']['widget']['#disabled'] = TRUE;
     }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
@@ -225,7 +232,9 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
       }
+      $form['field_shift']['widget']['#options'] = $def_values;
       $form['field_shift']['widget']['#default_value'] = $def_values;
+      $form['field_shift']['widget']['#disabled'] = TRUE;
     }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
@@ -240,13 +249,17 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   //Condition for Assembly Add form
   if($form_id == 'node_assembly_form'){
     $form['field_refere']['#access'] = FALSE;
-    if($unit_ref= \Drupal::request()->query->get('unit_ref')){
+    if($unit_ref= \Drupal::request()->query->get('id')){
       $unit_ref_object = Node::load($unit_ref);
       $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
+        $title = $form['field_shift']['widget']['#options'][$value['target_id']];
+        $selected_option[$value['target_id']] = $title; 
       }
+      $form['field_shift']['widget']['#options'] = $selected_option;
       $form['field_shift']['widget']['#default_value'] = $def_values;
+      $form['field_shift']['widget']['#disabled'] = TRUE;
     }
     if(\Drupal::request()->query->get('section_reference') && \Drupal::request()->query->get('id')){
       $section_reference= \Drupal::request()->query->get('section_reference');
@@ -262,7 +275,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
   }
   elseif ($form_id == 'node_assembly_edit_form') {//Edit form
-    // $form['field_refere']['#access'] = FALSE;
+    $form['field_refere']['#access'] = FALSE;
   }
 
   //Condition for Manufacturing Process
@@ -289,7 +302,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $unit_reference = \Drupal::request()->query->get('unit_reference');
     $node_object = Node::load($unit_reference);
     $form['field_reference_id']['widget'][0]['target_id']['#default_value'] = $node_object;
-     $form['field_reference_id']['#access'] = FALSE;
+    $form['field_reference_id']['#access'] = FALSE;
     $query = \Drupal::database()->select('node__field_refere', 'n');
     $query->fields('n',['entity_id']);
     $query->condition('n.bundle', 'department');
@@ -523,6 +536,7 @@ function aps_general_node_insert(Node $node) {
     $count_supplier = 0;
     $count_ia = 0;
     $count_ea = 0;
+    $audit_frequency = getListofMonths();
     foreach ($node_load_multiple as $key => $value) {
       if($value->field_audit_type->value == 'internal' && $value->field_internal_audit_type->value == 'systems'){
         $id_system[] = $key; 
@@ -560,15 +574,15 @@ function aps_general_node_insert(Node $node) {
     if($node->field_audit_type->value == 'internal'){
       if($node->field_internal_audit_type->value == 'systems'){
         $val = $count_systems;
-        $title_val = 'IS'.$val;
+        $title_val = 'IS'.$val.'-S-'.$audit_frequency;
       }
       elseif ($node->field_internal_audit_type->value == 'process') {
         $val = $count_process;
-        $title_val = 'IP'.$val;
+        $title_val = 'IP'.$val.'-PS-'.$audit_frequency;
       }
       elseif ($node->field_internal_audit_type->value == 'product') {
         $val = $count_product;
-        $title_val = 'IPR'.$val;
+        $title_val = 'IPR'.$val.'-PR-'.$audit_frequency;
       }
       else{
         $title_val = 'Systems Audit';
@@ -576,29 +590,77 @@ function aps_general_node_insert(Node $node) {
     }
     elseif ($node->field_audit_type->value == 'external') {
       $val = $count_external;
-      $title_val = 'EA'.$val;
+      $title_val = 'EA'.$val.'-E-'.$audit_frequency;
     }
     elseif ($node->field_audit_type->value == 'supplier') {
       $val = $count_supplier;
-      $title_val = 'S'.$val;
+      $title_val = 'S'.$val.'-S-'.$audit_frequency;
     }
     elseif ($node->field_audit_type->value == 'customer') {
       if($node->field_customer_type->value == 'internal_assessment'){
         $val = $count_ia;
-        $title_val = 'ICA'.$val;
+        $title_val = 'ICA'.$val.'-C-IA-'.$audit_frequency;
       }
       elseif ($node->field_customer_type->value == 'external_assessment') {
         $val = $count_ea;
-        $title_val = 'ECA'.$val;
+        $title_val = 'ECA'.$val.'-C-EA-'.$audit_frequency;
       }
     }
     else{
         $title_val = 'Systems Audit';
       }
+    $node->set('field_year_frequency', $audit_frequency);
     $node->set('title', $title_val);
     $node->set('moderation_state', 'scheduled');
     $node->save();
   }
+}
+
+function getListofMonths(){
+  $get_all_months_name = DateHelper::monthNamesUntranslated();
+  $query = \Drupal::database()->select('audit_cycle__field_unit_reference', 'h');
+  $query->fields('h',['entity_id']);
+  $query->condition('h.field_unit_reference_target_id', 283);
+  $query->range(0, 1);
+  $nids = $query->execute()->fetchAll();
+  $node_storage = \Drupal::entityManager()->getStorage('audit_cycle');
+  $entity_audit_cycle = $node_storage->load($nids[0]->entity_id);
+  if(count($entity_audit_cycle)){
+    $cycle_type = $entity_audit_cycle->get('field_cycle_type')->value;
+    $frequency = $entity_audit_cycle->get('field_audit_frequency')->value;
+    if($cycle_type == 0){
+      $audit_cycle_start_date = $entity_audit_cycle->get('field_financial_dates')->value;
+      $audit_cycle_end_date = $entity_audit_cycle->get('field_financial_dates')->end_value;
+    }
+    elseif ($cycle_type == 1) {
+      $audit_cycle_start_date = $entity_audit_cycle->get('field_calendar_date')->value;
+      $audit_cycle_end_date = $entity_audit_cycle->get('field_calendar_date')->end_value;
+    }
+  }
+ 
+  $curr = date('m');
+  $month_array = [
+    1=>[12],
+    2=>[6,6],
+    3=>[4,4,4],
+    4=>[3,3,3,3],
+    5=>[5,5,2],
+    6=>[6,6],
+    7=>[7,5],
+    8=>[8,4],
+    9=>[9,3],
+    10=>[10,2],
+    11=>[11,1],
+    12=>[12],
+  ];
+  foreach ($month_array[$frequency] as $key => $value) {
+    $total += $value;
+    if ($curr <= $total) {
+      $month_of_audit_frequency = $key+1;
+      break;
+    }
+  }
+  return $month_of_audit_frequency;
 }
 
 /**
@@ -871,8 +933,8 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   if($route_name == 'view.planned_audit_listing.document_list_ia'){
     if($user_role == 'auditor'){
       $config = \Drupal::service('config.factory')->getEditable('aps_general.adduserroles');
-      if($config->get('doc_id')){
-        $id = $config->get('doc_id');
+      if($config->get('nid')){
+        $id = $config->get('nid');
       }
       if($id){
         $data['tabs'][0]['aps_pre_audit.manuals:internal_documents']['#link']['url']->setRouteParameters(['arg_0' => $id]);
@@ -942,7 +1004,7 @@ function aps_general_views_pre_render(ViewExecutable $view) {
 /**
  * Implements hook_link_alter().
  */
-function aps_general_link_alter(&$variables) { 
+function aps_general_link_alter(&$variables) {
   $route_name = \Drupal::routeMatch()->getRouteName();
   $node = \Drupal::routeMatch()->getParameter('node');
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
@@ -965,8 +1027,10 @@ function aps_general_link_alter(&$variables) {
     if ($cleanLinkText == 'Documents') {
       $get_nid = explode('?', $uri[1]);
       $url = Url::fromRoute('view.planned_audit_listing.document_list_ia',['arg_0' => $get_nid[0]]);
+      $get_unit_from_event = Node::load($get_nid[0]);
       unset($variables['url']);
       $variables['url'] = $url;
+      $variables['url']->setRouteParameter('unit_reference', $get_unit_from_event->field_refere->target_id);
       $config->set('nid', $get_nid[0])->save();
     }
   }
@@ -1148,7 +1212,7 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
-  if ($cleanLinkText == 'IMPORT DATA') {
+  if ($cleanLinkText == 'OPERATIONS') {
     $id = $uri[1];
     if($id){
       $url =Url::fromUserInput('/import/'.$id);

@@ -4,6 +4,10 @@ namespace Drupal\aps_general\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\Core\Ajax\InvokeCommand;
 
 /**
  * Class CsvEntityImport.
@@ -30,6 +34,9 @@ class CsvEntityImport extends FormBase {
     $options = [
       'assembly' => 'Assembly',
       'manufacturing_process' => 'Manufacturing Process',
+      'customers_manual' => 'Customer Manual',
+      'supplier' => 'Supplier',
+      'user' => 'User',
     ];
 
     $form['data_import'] = [
@@ -46,6 +53,20 @@ class CsvEntityImport extends FormBase {
       '#required' => TRUE,
       '#title' => t('List of '. $type),
       '#required' => TRUE,
+      '#ajax' => [
+          'callback' => '::EntityGenerateFields',
+          'wrapper' => 'field-list',
+          'event' => 'change',
+          'effect' => 'fade',
+        ],
+    ];
+
+    $form['data_import']['field_list'] = [
+      '#type' => 'container',
+      '#markup' => '',
+      '#attributes' => ['id' => 'field-list'],
+      '#prefix' => '<div id="field-info"',
+      '#suffix' => '</div>',
     ];
     
     $form['data_import']['files'] = [
@@ -122,6 +143,91 @@ class CsvEntityImport extends FormBase {
       fclose($handle);
     }
     return $data;
+  }
+
+   /**
+   * AJAX Callback to get avilable fields.
+   */
+  public function EntityGenerateFields(array &$form, FormStateInterface $form_state) {
+    $entity_type_id = 'user';
+    $bundle = $form_state->getValue('import_type');
+    switch ($bundle) {
+      case 'assembly':
+        $get_csv_file = drupal_get_path('module', 'aps_general') . '/csv_samples/Auditor-Performance.jpeg';
+        break;
+      
+      case 'manufacturing_process':
+        $get_csv_file = drupal_get_path('module', 'aps_general') . '/csv_samples/Auditor-Performance.jpeg';
+        break;
+
+      case 'customers_manual':
+        $get_csv_file = drupal_get_path('module', 'aps_general') . '/csv_samples/'.$bundle.'.csv';
+        break;
+
+      case 'supplier':
+       $get_csv_file = drupal_get_path('module', 'aps_general') . '/csv_samples/'.$bundle.'.csv';
+        break;
+
+      case 'user':
+        $get_csv_file = drupal_get_path('module', 'aps_general') . '/csv_samples/'.$bundle.'.csv';
+        break;
+    }
+    $path = file_create_url($get_csv_file);
+    if($bundle != 'user'){
+      $entity_type_id = 'node';
+    }
+    else{
+      $entity_type_id = 'user';
+    }
+    $fields_markup = '<b>Please Create a CSV using the Available Fields. Separate Multivalue with ","</b> </br><b>[</b>';
+    $field_definition_object = \Drupal::entityManager()->getFieldDefinitions($entity_type_id, $bundle);
+    if($bundle == 'user'){
+      unset($field_definition_object['uid']);
+      unset($field_definition_object['uuid']);
+      unset($field_definition_object['langcode']);
+      unset($field_definition_object['preferred_langcode']);
+      unset($field_definition_object['timezone']);
+      unset($field_definition_object['created']);
+      unset($field_definition_object['changed']);
+      unset($field_definition_object['access']);
+      unset($field_definition_object['login']);
+      unset($field_definition_object['init']);
+      unset($field_definition_object['default_langcode']);
+      unset($field_definition_object['preferred_admin_langcode']);
+    }else{
+      unset($field_definition_object['status']);
+      unset($field_definition_object['promote']);
+      unset($field_definition_object['moderation_state']);
+      unset($field_definition_object['body']);
+    }
+    foreach ($field_definition_object as $field_name => $field_definition) {
+      if($field_name != 'status' || $field_name != 'promote' || $field_name != 'moderation_state' || $field_name != 'body'){
+        if($bundle != 'user'){
+          if (!empty($field_definition->getTargetBundle())) {
+            if($field_name == 'field_refere'){
+              $fields_markup .= '<b>(Name Of Unit) </b>';
+            }
+            $fields_markup .= $field_name . ', ';
+          }
+        }
+        else{
+          $fields_markup .= $field_name . ', ';
+        }
+      }
+    }
+    $fields_markup .= '<b>]</b><a href='.$path.'>Sample</a>';
+    $avilable_fields = $fields_markup;
+    $ajax_response = new AjaxResponse();
+    $renderer = \Drupal::service('renderer');
+    $elem = [
+      '#type' => 'container',
+      '#markup' => $avilable_fields,
+      '#attributes' => ['id' => 'field-list'],
+      '#prefix' => '<div id="field-info"',
+      '#suffix' => '</div>',
+    ];
+    $ajax_response->addCommand(new ReplaceCommand('#field-info', $renderer->render($elem)));
+    return $ajax_response;
   }
 
 }
