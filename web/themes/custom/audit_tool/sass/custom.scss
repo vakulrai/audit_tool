@@ -3,7 +3,6 @@
 @import "breakpoint";
 
 // colors
-
 //$color-primary: #607d8b;
 $color-accent: #ff9100;
 
@@ -17,5 +16,5 @@ $lg: 1256px;
 $xl: 1520px;
 
 // put your styles here
-
 @import "header/include";
+@import "components/include";

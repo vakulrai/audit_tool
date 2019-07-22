@@ -3,6 +3,16 @@
   	> ul {
   		li {
   			a {
+          &+ul {
+            background: #fff;
+            color: rgba(0, 0, 0, 0.87);
+            * {
+              color: inherit;
+              &:hover {
+                border-color: inherit;
+              }
+            }
+          }
   				display: block;
 			    line-height: 20px;
 			    border-bottom: 2px solid transparent;

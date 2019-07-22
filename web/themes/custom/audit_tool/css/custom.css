@@ -6,6 +6,13 @@
   font-weight: 500;
   color: #FFF;
   text-transform: uppercase; }
+  #navbar .main-navigation-menu > ul li a + ul {
+    background: #fff;
+    color: rgba(0, 0, 0, 0.87); }
+    #navbar .main-navigation-menu > ul li a + ul * {
+      color: inherit; }
+      #navbar .main-navigation-menu > ul li a + ul *:hover {
+        border-color: inherit; }
   #navbar .main-navigation-menu > ul li a:hover {
     border-color: rgba(255, 255, 255, 0.5); }
   #navbar .main-navigation-menu > ul li a.is-active {
@@ -20,5 +27,8 @@
   #block-audit-tool-sitebranding .navbar-title {
     margin-left: 0;
     margin-right: 0; }
+
+#content {
+  margin-top: 50px; }
 
 /*# sourceMappingURL=../css/custom.css.map */

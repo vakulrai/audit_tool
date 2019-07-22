@@ -15,6 +15,7 @@
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
+      contentHeight: 600,
       navLinks: true,
       selectable: true,
       selectMirror: true,
