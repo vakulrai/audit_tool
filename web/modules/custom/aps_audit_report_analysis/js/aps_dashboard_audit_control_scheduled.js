@@ -12,7 +12,6 @@
 		    // renderTo: 'container-scheduled-a',
 		    type: 'bar',
             "height": 200,
-            "width": 600,
 		  },
 		  title: {
             text: 'Products'
@@ -74,7 +73,6 @@
 		    renderTo: 'container-scheduled-b',
 		    type: 'bar',
             "height": 200,
-            "width": 600,
 		  },
 		  title: {
             text: 'Processes'
@@ -136,7 +134,6 @@
 		    renderTo: 'container-scheduled-c',
 		    type: 'bar',
             "height": 200,
-            "width": 600,
 		  },
 		  title: {
             text: 'Procedures'
