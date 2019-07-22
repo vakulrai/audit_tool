@@ -10,8 +10,8 @@ dependencies:
     - bootstrap_barrio_subtheme
 id: generatereports
 theme: bootstrap_barrio_subtheme
-region: sidebar_first
-weight: -28
+region: content
+weight: 0
 provider: null
 plugin: generate_reports
 settings:

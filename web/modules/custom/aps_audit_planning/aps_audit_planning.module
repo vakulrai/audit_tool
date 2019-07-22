@@ -12,6 +12,25 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Field\FieldFilteredMarkup;
 use Drupal\Core\Ajax\ChangedCommand;
 use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Url;
+
+
+/**
+* Implements hook_mail().
+*/
+function aps_audit_planning_mail($key, &$message, $params) {
+ $options = [
+   'langcode' => $message['langcode'],
+ ];
+ switch ($key) {
+   case 'audit-planning':
+     $message['from'] = \Drupal::config('system.site')->get('mail');
+     $message['subject'] = $params['subject'];
+     $message['body'] = $params['body'];
+     $message['message'] = $params['message'];
+     break;
+ }
+}
 
 /**
  * Implements hook_form_alter().
@@ -159,6 +178,11 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
     $form['field_suggested_date']['#access'] = FALSE;
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'planned_event_redirect';
+      }
+    }
   }
   if($form['#id'] == 'views-exposed-form-customer-manual-parts-product-listing'){
      $form['title']['#autocomplete_route_name'] = 'aps_audit_planning.title_list';
@@ -179,6 +203,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     ];
   }
   if ($form_id == 'node_planned_events_edit_form'){
+    $form['field_shift']['widget']['#options'] = $form['field_shift']['widget']['#default_value'];
     $schedule_type = \Drupal::request()->query->get('schedule_type');
     if($schedule_type == 'reschedule'){
       $form['moderation_state']['widget'][0]['state']['#default_value'] = 'reschedule';
@@ -467,5 +492,32 @@ function releaseAuditCallback(array$form, \Drupal\Core\Form\FormStateInterface $
     $node_object->save();
   }
   return $response;
+}
+
+function planned_event_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  //Send Mail to the Assigned Auditee And auditor About the audit.
+  global $base_url;
+  $form_values = $form_state->getValues();
+  if(count($form_values['field_auditor']) > 0){
+    $auditor = User::load($form_values['field_auditor'][0]['target_id']);
+    $user_load[$form_values['field_auditor'][0]['target_id']] = $auditor->mail->value;
+  }
+  if(count($form_values['field_select_auditee']) > 0){
+    $auditee = User::load($form_values['field_select_auditee'][0]['target_id']);
+    $user_load[$form_values['field_select_auditee'][0]['target_id']] = $auditee->mail->value;
+  }
+  
+  $url_options = ['node' => $form_values['nid']];
+  $audit_link = $base_url.Url::fromRoute('entity.node.edit_form',$url_options)->toString();
+  $message = 'Hi,
+    You have been Assigned an Audit, Please Check your Dashboard or Go to the following Url ('.$audit_link.') form Browser, After Login.
+  ';
+  $subject = 'Audit Planning';
+  foreach ($user_load as $user => $mails) {
+    sendEmail('aps_audit_planning', 'audit-planning', $mails, $message, $subject);
+  }
+  $id = \Drupal::request()->query->get('unit_reference');
+  $response = Url::fromUserInput('/audit-planning/'.$id);
+  $form_state->setRedirectUrl($response);
 }
 ?>

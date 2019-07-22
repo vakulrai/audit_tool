@@ -59,6 +59,28 @@ function aps_general_theme() {
   ];
 }
 
+/*
+ * Callback to Send Mail.
+ */
+function sendEmail($module, $type, $to_address, $message, $subject){
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = $module;
+  $key = $type;
+  $to = $to_address;
+  $params['body'] = [t($message)];
+  $params['subject'] = t($subject);
+  $params['message'] = t($message);
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] !== true) {
+    drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
+  }
+  else {
+    drupal_set_message(t('Your message has been sent.'));
+  }
+}
+
 /**
  * Implements hook_form_alter().
  */
@@ -299,6 +321,8 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   }
 
   if($form_id == 'user_register_form'){
+    $form['account']['notify']['#default_value'] = 1;
+    $form['account']['notify']['#access'] = FALSE;
     $unit_reference = \Drupal::request()->query->get('unit_reference');
     $node_object = Node::load($unit_reference);
     $form['field_reference_id']['widget'][0]['target_id']['#default_value'] = $node_object;
@@ -780,22 +804,50 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
+
+  if($route_name == 'eck.entity.add'){  
+    if($uri[2] == 'audit_criteria'){
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_systems']['#active'] = TRUE;
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_process']['#active'] = FALSE;
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product']['#active'] = FALSE;
+    }
+    elseif ($uri[2] == 'audit_criteria_process') {
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_process']['#active'] = TRUE;
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_systems']['#active'] = FALSE;
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product']['#active'] = FALSE;
+    }
+    elseif ($uri[2] == 'audit_criteria_product') {
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product']['#active'] = TRUE;
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_process']['#active'] = FALSE;
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_systems']['#active'] = FALSE;
+    }
+    unset($data['tabs'][0]['devel.entities:audit_criteria.devel_tab']);
+    unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_canonical_tab']);
+    unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_edit_tab']);
+    unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_delete_tab']); 
+  }
+  elseif($route_name == 'entity.audit_criteria.edit_form' || $route_name == 'entity.audit_criteria_process.edit_form' || $route_name == 'entity.audit_criteria_product.edit_form'){
+    if($uri[0] == 'audit_criteria'){
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_systems']['#active'] = TRUE;
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_process']['#active'] = FALSE;
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product']['#active'] = FALSE;
+    }
+    elseif ($uri[0] == 'audit_criteria_process') {
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_process']['#active'] = TRUE;
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_systems']['#active'] = FALSE;
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product']['#active'] = FALSE;
+    }
+    elseif ($uri[0] == 'audit_criteria_product') {
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product']['#active'] = TRUE;
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_process']['#active'] = FALSE;
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_systems']['#active'] = FALSE;
+    }
+    unset($data['tabs'][0]['devel.entities:audit_criteria.devel_tab']);
+    unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_canonical_tab']);
+    unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_edit_tab']);
+    unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_delete_tab']);
+  }
   
-  if($uri[0] = 'audit_criteria'){
-    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_systems']['#active'] = TRUE;
-    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_process']['#active'] = FALSE;
-    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product']['#active'] = FALSE;
-  }
-  elseif ($uri[0] = 'audit_criteria_process') {
-    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_process']['#active'] = TRUE;
-    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_systems']['#active'] = FALSE;
-    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product']['#active'] = FALSE;
-  }
-  elseif ($uri[0] = 'audit_criteria_product') {
-    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product']['#active'] = TRUE;
-    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_process']['#active'] = FALSE;
-    $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_systems']['#active'] = FALSE;
-  }
   if(isset($uri[2])){
     if (stripos(strtolower($uri[2]), 'external_audit_?') !== false) {
       unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
@@ -958,6 +1010,7 @@ function aps_general_user_insert(User $user) {
     $user->addRole('auditor');
     $user->save();
   }
+
 }
 
 /**

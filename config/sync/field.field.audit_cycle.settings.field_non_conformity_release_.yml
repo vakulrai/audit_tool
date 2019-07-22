@@ -10,13 +10,13 @@ field_name: field_non_conformity_release_
 entity_type: audit_cycle
 bundle: settings
 label: 'Non conformity release '
-description: ''
+description: '<days > after the Last date of Audit  '
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  min: null
+  min: 0
   max: null
   prefix: ''
   suffix: ''
