@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.unit.field_time_s1
     - field.field.node.unit.field_time_s3
     - field.field.node.unit.field_time_s4
+    - field.field.node.unit.field_total_mandays
     - field.field.node.unit.field_total_members
     - field.field.node.unit.field_unit_name
     - node.type.unit
@@ -206,6 +207,13 @@ content:
           entity_type: node
           bundle: unit
     type: time_range
+    region: content
+  field_total_mandays:
+    weight: 106
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
     region: content
   field_total_members:
     weight: 103

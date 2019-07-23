@@ -489,12 +489,17 @@ function getChecklistData($key){
   return $data;
 }
 
-function releaseAuditCallback(array$form, \Drupal\Core\Form\FormStateInterface $form_state){
+function releaseAuditCallback(&$form, \Drupal\Core\Form\FormStateInterface &$form_state){
+  $form_input_values = $form_state->getUserInput();
+  $field_start_date = timestampFromDate($form_input_values['field_start_date'][0]['value']['date']);
+  $field_end_date = timestampFromDate($form_input_values['field_end_date'][0]['value']['date']);
   $response = new AjaxResponse();
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $uri = explode('/', $current_uri);
   if($uri[1]){
     $node_object = Node::load($uri[1]);
+    $node_object->set('field_start_date', $field_start_date);
+    $node_object->set('field_end_date', $field_end_date);
     $node_object->set('moderation_state', 'release_audit');
     $node_object->save();
   }
@@ -547,7 +552,7 @@ function notify_on_reschedule(array $form, \Drupal\Core\Form\FormStateInterface 
   $get_current_timestamp = getCurrentTimestamp($user_timezone);
   $notifictaion_insert = \Drupal::database()->insert('notifications');
   $reschedule_link = $base_url.Url::fromRoute('entity.node.edit_form',['node' => $uri[1]])->toString();
-  $message = 'Following Audit has been requested to Reschedule By: '.$current_user_detail->name->value.'<br> Follow the Audit action link. <a href='.$reschedule_link.'><a>';
+  $message = 'Following Audit has been requested to Reschedule By: '.$current_user_detail->name->value.'<br> Follow the Audit action link. <a href='.$reschedule_link.'></a>';
   $notifictaion_insert->fields([
     'nid' => $uri[1],
     'uid' => $current_node_detail->getOwner()->id(),
@@ -556,5 +561,13 @@ function notify_on_reschedule(array $form, \Drupal\Core\Form\FormStateInterface 
     'status' => 0,
   ]);
   $notifictaion_insert->execute();
+}
+
+function timestampFromDate($date){
+  $user_timezone =  drupal_get_user_timezone();
+  $start_date_obj = new \DateTime($date , new \DateTimeZone('UTC'));
+  $start_date_obj->setTimezone(new \DateTimeZone($user_timezone));
+  $start_date_timestamp = $start_date_obj->getTimestamp();
+  return $start_date_timestamp;
 }
 ?>

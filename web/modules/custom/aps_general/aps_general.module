@@ -88,11 +88,15 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   //Condition for Unit Add form
   $form['moderation_state']['#access'] = FALSE;
   if($form_id == 'node_unit_form'){
+    $form['field_total_mandays']['#access'] = FALSE;
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'aps_general_unit_page_redirect';
       }
     }
+  }
+  elseif ($form_id == 'node_unit_edit_form') {
+    $form['field_total_mandays']['#access'] = FALSE;
   }
 
   //Condition for Procedure Add form
@@ -597,36 +601,36 @@ function aps_general_node_insert(Node $node) {
     
     if($node->field_audit_type->value == 'internal'){
       if($node->field_internal_audit_type->value == 'systems'){
-        $val = $count_systems;
-        $title_val = 'IS'.$val.'-S-'.$audit_frequency;
+        $val = $count_systems+1;
+        $title_val = 'IS'.$val.'-D-'.$audit_frequency;
       }
       elseif ($node->field_internal_audit_type->value == 'process') {
-        $val = $count_process;
-        $title_val = 'IP'.$val.'-PS-'.$audit_frequency;
+        $val = $count_process+1;
+        $title_val = 'IP'.$val.'-D-'.$audit_frequency;
       }
       elseif ($node->field_internal_audit_type->value == 'product') {
-        $val = $count_product;
-        $title_val = 'IPR'.$val.'-PR-'.$audit_frequency;
+        $val = $count_product+1;
+        $title_val = 'IPR'.$val.'-D-'.$audit_frequency;
       }
       else{
         $title_val = 'Systems Audit';
       }
     }
     elseif ($node->field_audit_type->value == 'external') {
-      $val = $count_external;
+      $val = $count_external+1;
       $title_val = 'EA'.$val.'-E-'.$audit_frequency;
     }
     elseif ($node->field_audit_type->value == 'supplier') {
-      $val = $count_supplier;
+      $val = $count_supplier+1;
       $title_val = 'S'.$val.'-S-'.$audit_frequency;
     }
     elseif ($node->field_audit_type->value == 'customer') {
       if($node->field_customer_type->value == 'internal_assessment'){
-        $val = $count_ia;
+        $val = $count_ia+1;
         $title_val = 'ICA'.$val.'-C-IA-'.$audit_frequency;
       }
       elseif ($node->field_customer_type->value == 'external_assessment') {
-        $val = $count_ea;
+        $val = $count_ea+1;
         $title_val = 'ECA'.$val.'-C-EA-'.$audit_frequency;
       }
     }
@@ -1297,7 +1301,14 @@ function test(){
  */
 function aps_general_unit_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
   $form_values = $form_state->getValues();
+  $field_sales_turnover = $form_values['field_sales_turnover'][0]['value'];
+  $field_total_members = $form_values['field_total_members'][0]['value'];
+  $field_contributed_sales = $form_values['field_contributed_sales'][0]['value'];
+  $total_system_mandays = getMandaysFromAuditType('systems', $field_sales_turnover, $field_total_members, $field_contributed_sales);
   $nid = $form_values['nid'];
+  $node_object = Node::load($nid);
+  $node_object->set('field_total_mandays', $total_system_mandays);
+  $node_object->save();
   $response = Url::fromUserInput('/unit-registration-view/'.$nid);
   $form_state->setRedirectUrl($response);
 }
@@ -1768,4 +1779,5 @@ function getMandaysFromAuditType($type, $value, $additional_mandays1, $additiona
       $total += $mandays;
     break;
   }
+  return $total;
 }
