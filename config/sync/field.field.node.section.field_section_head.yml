@@ -1,4 +1,4 @@
-uuid: 7f906362-10ec-4653-a465-4a31d0f8ea61
+uuid: 57b9e2ca-2c18-4d6b-9c72-f7fbe64769ac
 langcode: en
 status: true
 dependencies:
@@ -15,5 +15,14 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings: {  }
-field_type: string
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

@@ -1582,7 +1582,7 @@ function aps_general_cron() {
               'nid' => $j['nid'],
               'uid' => 0,
               'message' => $message,
-              'timestamp' => $get_current_timestamp,
+              'timestamp' => strtotime($get_current_timestamp),
               'status' => 0,
             ]);
             $notifictaion_insert->execute();
@@ -1639,8 +1639,8 @@ function auditReleaseDates($unit_reference){
       $end_date= date($format_for_last_day);
       $current_month = date('m');
       if($current_month == $start_date_array[1]){
-        $planned_nids_start_date = getCurrentTimestampfromdate($get_user_timezone, $start_date_, $days_before_event);
-        $planned_nids_end_date = getCurrentTimestampfromdate($get_user_timezone, $end_date_ , $days_before_event);
+        $planned_nids_start_date = getCurrentTimestampfromdate($get_user_timezone, $start_date_, NULL);
+        $planned_nids_end_date = getCurrentTimestampfromdate($get_user_timezone, $end_date_ , NULL);
       }
       else{
       $planned_nids_start_date = getCurrentTimestampfromdate($get_user_timezone, $start_date, $days_before_event);
@@ -1668,7 +1668,104 @@ function getCurrentTimestampfromdate($get_user_timezone, $date, $nDays){
     $release_time = date('Y-m-d',strtotime('-'.$nDays.'day', $start_date_timestamp));
   }
   else{
-    $release_time = $start_date_timestamp;
+    $release_time = date('Y-m-d', $start_date_timestamp);
   }
   return $release_time;
+}
+
+
+function getMandaysFromAuditType($type, $value, $additional_mandays1, $additional_mandays2){
+  $mandays = 0;
+  $total = 0;
+  switch ($type) {
+    case 'systems':
+      if($value <= 10){
+        $mandays = 4;
+      }
+      elseif ($value >= 11 && $value < 100) {
+        $mandays += 8;
+      }
+      elseif ($value >= 101 && $value < 500) {
+        $mandays += 12;
+      }
+      elseif ($value >= 501 && $value < 1000) {
+        $mandays += 20;
+      }
+      elseif ($value >= 1001 && $value < 1500) {
+        $mandays += 24;
+      }
+      elseif ($value >= 1501 && $value < 2000) {
+        $mandays += 30;
+      }
+      
+      if(isset($additional_mandays1) || isset($additional_mandays2)){
+        if($additional_mandays1 > 10){
+          $mandays += 4;
+        }
+        else{
+          $mandays += 2;
+        }
+
+        if($additional_mandays2 <= 500){
+          $mandays += 2;
+        }
+        elseif($additional_mandays2 >= 501 && $additional_mandays2 < 1000){
+          $mandays += 4;
+        }
+        elseif($additional_mandays2 > 1000){
+          $mandays += 6;
+        }
+      }
+
+      $total += $mandays;
+      break;
+    
+    case 'process':
+      if(isset($additional_mandays1)){ //For manufacturing process.
+        if($value >= 1 && $value < 5){
+          $mandays += 2;
+        }
+        elseif ($value >= 6 && $value < 10) {
+          $mandays += 4;
+        }
+        elseif ($value >= 11 && $value < 15) {
+          $mandays += 6;
+        }
+        elseif ($value > 15) {
+          $mandays += 8;
+        }
+      }
+
+      if(isset($additional_mandays2)){ //For assembly process.
+        if($value >= 1 && $value < 20){
+          $mandays += 4;
+        }
+        elseif ($value >= 21 && $value < 40) {
+          $mandays += 8;
+        }
+        elseif ($value >= 41 && $value < 60) {
+          $mandays += 12;
+        }
+        elseif ($value > 60) {
+          $mandays += 8;
+        }
+      }
+
+      $total += $mandays;
+      break;
+
+    case 'product':
+      if($value >= 1 && $value < 10){
+        $mandays += 1;
+      }
+      elseif ($value >= 11 && $value < 20) {
+        $mandays += 2;
+      }
+      elseif ($value > 20) {
+        $mandays += 3;
+      }
+
+      $total += $mandays;
+    break;
+  }
 }

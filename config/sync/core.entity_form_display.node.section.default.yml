@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.section.field_shift
     - node.type.section
   module:
+    - content_moderation
     - media_library
 id: node.section.default
 targetEntityType: node
@@ -22,7 +23,7 @@ bundle: section
 mode: default
 content:
   field_assembly:
-    weight: 3
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -57,15 +58,16 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_section_head:
-    weight: 1
+    weight: 3
     settings:
+      match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
+    type: entity_reference_autocomplete
     region: content
   field_select_department_type:
-    weight: 2
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -76,6 +78,12 @@ content:
     third_party_settings: {  }
     type: options_buttons
     region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 9
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0

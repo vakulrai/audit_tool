@@ -272,46 +272,54 @@ class RedirectFormController extends ControllerBase {
    * Method to get List of Notifications.
    */
   function notifications() {
-      $header = [
-        $this->t('Sr. No.'),
-        $this->t('Message'),
-        $this->t('Timestamp'),
-      ];
-      $build['tableselect_element'] = [
-        '#type' => 'table',
-        '#header' => $header,
-        '#empty' => t('No content available.'),
-      ];
-      $data = $this->getNotification();
-
-      if (count($data)) {
-        $sr = 1;
-        foreach ($data as $key => $value) {
-            $build['tableselect_element'][$sr]['sr'] = [
-              '#markup' => $sr,
-              '#title_display' => 'invisible',
-            ];
-
-            $build['tableselect_element'][$sr]['message'] = [
-              '#markup' => $value->message ? $value->message : '-',
-              '#title_display' => 'invisible',
-            ];
-
-            $build['tableselect_element'][$sr]['time'] = [
-              '#markup' => $value->timestamp? date('Y-m-d',$value->timestamp): '-',
-              '#title_display' => 'invisible',
-            ];
-            $sr++;
-        }
+    $header = [
+      $this->t('Sr. No.'),
+      $this->t('Message'),
+      $this->t('Audit Date'),
+    ];
+    $data = $this->getNotification();
+    $notification_list = $this->_return_pager_for_array($data, 5);
+    foreach ($notification_list as $item) {
+      $rows[] = $item;
     }
-    return $build;
+
+  if (count($data)) {
+    $element['table'] = [
+      '#type' => 'table',
+      '#header' => $header,
+      '#rows' => $rows,
+      '#empty' => t('There is no data available.'),
+    ];
+  }
+
+  $element['pager'] = array(
+    '#type' => 'pager',
+  );
+
+  return $element;
   }
 
   public function getNotification(){
+    $data = [];
     $query = \Drupal::database()->select('notifications', 'nf');
     $query->fields('nf',['sr', 'message', 'timestamp']);
     $nids = $query->execute()->fetchAll();
-    return $nids;
+    $count = 0;
+    foreach ($nids as $key => $value) {
+      $data[$count]['sr'] = $value->sr;
+      $data[$count]['message'] = $value->message;
+      $data[$count]['timestamp'] = date('Y-m-d', $value->timestamp);
+      $count++;
+    }
+    return $data;
+  }
+
+  public function _return_pager_for_array($items, $num_page) {
+    $total = count($items);
+    $current_page = pager_default_initialize($total, $num_page);
+    $chunks = array_chunk($items, $num_page);
+    $current_page_items = $chunks[$current_page];
+    return $current_page_items;
   }
 }	
 ?>

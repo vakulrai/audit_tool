@@ -41,7 +41,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_report_reference']['#access'] = FALSE;
     $form['field_select_users']['#access'] = FALSE;
     $form['field_time']['#access'] = FALSE;
-    $form['field_audit_frequency']['#access'] = FALSE;
+    $form['field_year_frequency']['#access'] = FALSE;
     $form['field_release_status']['#access'] = FALSE;
     $id = \Drupal::request()->query->get('unit_reference');
     $form['#cache']['max-age'] = 0;
@@ -207,13 +207,19 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $schedule_type = \Drupal::request()->query->get('schedule_type');
     if($schedule_type == 'reschedule'){
       $form['moderation_state']['widget'][0]['state']['#default_value'] = 'reschedule';
+      foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'notify_on_reschedule';
+      }
+    }
     }
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $uri = explode('/', $current_uri);
     if($uri[1]){
       $node_object = Node::load($uri[1]);
       if($node_object->get('moderation_state')->value == 'scheduled' || $node_object->get('moderation_state')->value == 'reschedule'){
-        $form['actions']['release_audit'] = array(
+        if($schedule_type == ''){
+          $form['actions']['release_audit'] = array(
           '#type' => 'submit',
           '#weight' => 999,
           '#limit_validation_errors' => array() ,
@@ -228,6 +234,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
           ],
           '#value' => t('Release Audit') ,
         );
+        }
       }
     }
   }
@@ -498,6 +505,7 @@ function planned_event_redirect(array $form, \Drupal\Core\Form\FormStateInterfac
   //Send Mail to the Assigned Auditee And auditor About the audit.
   global $base_url;
   $form_values = $form_state->getValues();
+  $id = \Drupal::request()->query->get('unit_reference');
   if(count($form_values['field_auditor']) > 0){
     $auditor = User::load($form_values['field_auditor'][0]['target_id']);
     $user_load[$form_values['field_auditor'][0]['target_id']] = $auditor->mail->value;
@@ -506,9 +514,16 @@ function planned_event_redirect(array $form, \Drupal\Core\Form\FormStateInterfac
     $auditee = User::load($form_values['field_select_auditee'][0]['target_id']);
     $user_load[$form_values['field_select_auditee'][0]['target_id']] = $auditee->mail->value;
   }
-  
+  if(count($form_values['field_department']) > 0){
+    $department = User::load($form_values['field_department'][0]['target_id']);
+    $user_load[$form_values['field_department'][0]['target_id']] = $department->mail->value;
+  }
+  if(count($form_values['field_sections']) > 0){
+    $sections = User::load($form_values['field_sections'][0]['target_id']);
+    $user_load[$form_values['field_sections'][0]['target_id']] = $sections->mail->value;
+  }
   $url_options = ['node' => $form_values['nid']];
-  $audit_link = $base_url.Url::fromRoute('entity.node.edit_form',$url_options)->toString();
+  $audit_link = $base_url.Url::fromUserInput('/planned-audit-listing/'.$id)->toString();
   $message = 'Hi,
     You have been Assigned an Audit, Please Check your Dashboard or Go to the following Url ('.$audit_link.') form Browser, After Login.
   ';
@@ -519,5 +534,27 @@ function planned_event_redirect(array $form, \Drupal\Core\Form\FormStateInterfac
   $id = \Drupal::request()->query->get('unit_reference');
   $response = Url::fromUserInput('/audit-planning/'.$id);
   $form_state->setRedirectUrl($response);
+}
+
+function notify_on_reschedule(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  global $base_url;
+  $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+  $uri = explode('/', $current_uri);
+  $uid = \Drupal::currentUser()->id();
+  $current_user_detail = User::load($uid);
+  $current_node_detail = Node::load($uri[1]);
+  $user_timezone =  drupal_get_user_timezone();
+  $get_current_timestamp = getCurrentTimestamp($user_timezone);
+  $notifictaion_insert = \Drupal::database()->insert('notifications');
+  $reschedule_link = $base_url.Url::fromRoute('entity.node.edit_form',['node' => $uri[1]])->toString();
+  $message = 'Following Audit has been requested to Reschedule By: '.$current_user_detail->name->value.'<br> Follow the Audit action link. <a href='.$reschedule_link.'><a>';
+  $notifictaion_insert->fields([
+    'nid' => $uri[1],
+    'uid' => $current_node_detail->getOwner()->id(),
+    'message' => $message,
+    'timestamp' => $get_current_timestamp,
+    'status' => 0,
+  ]);
+  $notifictaion_insert->execute();
 }
 ?>
