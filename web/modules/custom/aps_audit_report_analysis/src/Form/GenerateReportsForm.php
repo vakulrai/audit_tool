@@ -84,6 +84,9 @@ class GenerateReportsForm extends FormBase {
       '#attributes' => [
         'class' => [
           'use-ajax',
+          'btn-colored',
+          'btn',
+          'btn-raised',
         ],
       ],
       '#ajax' => [
