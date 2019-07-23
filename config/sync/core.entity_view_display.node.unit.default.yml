@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.unit.field_time_s1
     - field.field.node.unit.field_time_s3
     - field.field.node.unit.field_time_s4
+    - field.field.node.unit.field_total_mandays
     - field.field.node.unit.field_total_members
     - field.field.node.unit.field_unit_name
     - node.type.unit
@@ -140,6 +141,15 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: daterange_default
+    region: content
+  field_total_mandays:
+    weight: 116
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   field_total_members:
     weight: 113

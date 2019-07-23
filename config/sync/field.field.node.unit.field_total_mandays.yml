@@ -1,23 +1,23 @@
-uuid: fd780099-94bb-4e9c-842d-c317ea1f92c1
+uuid: 8e53630f-4349-405e-881d-298f1b9f5501
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_sales_turnover
+    - field.storage.node.field_total_mandays
     - node.type.unit
-id: node.unit.field_sales_turnover
-field_name: field_sales_turnover
+id: node.unit.field_total_mandays
+field_name: field_total_mandays
 entity_type: node
 bundle: unit
-label: 'Sales Turnover (INR)'
-description: 'In Crores'
+label: 'Total Mandays'
+description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
   min: 0
-  max: null
+  max: 50
   prefix: ''
   suffix: ''
 field_type: integer

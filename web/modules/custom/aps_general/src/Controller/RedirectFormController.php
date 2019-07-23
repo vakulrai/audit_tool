@@ -10,6 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\Core\Render\Markup;
 
 /**
  * Class RedirectForm.
@@ -279,8 +280,8 @@ class RedirectFormController extends ControllerBase {
     ];
     $data = $this->getNotification();
     $notification_list = $this->_return_pager_for_array($data, 5);
-    foreach ($notification_list as $item) {
-      $rows[] = $item;
+    foreach ($notification_list as $item => $val) {
+      $rows[] = $val;
     }
 
   if (count($data)) {
@@ -289,6 +290,7 @@ class RedirectFormController extends ControllerBase {
       '#header' => $header,
       '#rows' => $rows,
       '#empty' => t('There is no data available.'),
+      '#allowed_tags' => ['break'],
     ];
   }
 
@@ -307,7 +309,7 @@ class RedirectFormController extends ControllerBase {
     $count = 0;
     foreach ($nids as $key => $value) {
       $data[$count]['sr'] = $value->sr;
-      $data[$count]['message'] = $value->message;
+      $data[$count]['message'] = Markup::create($value->message);
       $data[$count]['timestamp'] = date('Y-m-d', $value->timestamp);
       $count++;
     }
