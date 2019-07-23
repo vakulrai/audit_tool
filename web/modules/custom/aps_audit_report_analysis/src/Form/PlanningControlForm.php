@@ -75,7 +75,14 @@ class PlanningControlForm extends FormBase {
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Apply'),
-      '#attributes' => ['id' => 'planning-submit'],
+      '#attributes' => [
+                        'id' => 'planning-submit',
+                        'class' => [
+                            'btn-colored',
+                            'btn',
+                            'btn-raised',
+                          ],
+                        ],
     ];
 
     return $form;
