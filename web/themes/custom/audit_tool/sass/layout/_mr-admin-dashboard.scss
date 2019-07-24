@@ -1,0 +1,217 @@
+form.planning-control-form {
+	@extend .highlight;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+details {
+	&#findings,
+	&#qualifications,
+	&#scheduling {
+		@extend .highlight;
+		summary {
+			cursor: pointer;
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+}
+
+div {
+	&#block-audit-tool-auditfindingcontrolscheduled {
+		.fieldset-wrapper {
+       a {
+         &#product-list,
+         &#process-list,
+         &#procedure-list {
+           display: inline-block;
+           margin: 10px auto 20px;
+           @extend .btn;
+           @extend .btn-raised;
+           @extend .btn-accent;
+         }
+       }
+    }
+	}
+}
+
+//edit unit content type
+form {
+  &.node-unit-edit-form,
+  &.node-unit-form {
+  .form-item {
+     input[type="text"],textarea {
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+     }
+  }
+  .field--type-address {
+     details {
+       @extend .highlight;
+       summary {
+         cursor: pointer;
+         &:focus {
+           outline: none;
+         }
+       }
+     }
+  }
+  .tabledrag-toggle-weight-wrapper {
+    button {
+      @extend .btn;
+      @extend .btn-raised;
+    }
+  }
+  .field--name-field-shift {
+      .form-checkboxes {
+        display: flex;
+        flex-wrap: wrap;
+      }
+  }
+  .field--type-daterange {
+    @extend .card;
+    margin-bottom: 10px;
+      fieldset {
+        > legend {
+          margin-bottom: 10px;
+          span {
+            color: $color-accent;
+            font-weight: 700;
+            text-transform: uppercase;
+          }
+        }
+        .fieldset-wrapper {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          @extend .divider-top;
+          padding-top: 10px;
+          > h4 {
+            margin:0;
+            font-weight: 600;
+
+          }
+          > div {
+            margin: 0 10px;
+          }
+      }
+    }
+  }
+  .form-actions {
+    input[type="submit"] {
+      @extend .btn;
+      @extend .btn-raised;
+      &#edit-submit {
+       @extend .btn-colored;
+      }
+      &#edit-preview {
+         @extend .btn-accent;
+      }
+    }
+  }
+  input[type="submit"] {
+    &.field-add-more-submit {
+      @extend .btn;
+      @extend .btn-raised;
+      @extend .btn-colored;
+    }
+  }
+  .field--name-field-sales-turnover,
+  .field--name-field-contributed-sales ,
+  .field--name-field-total-members,
+  .field--name-field-frequency {
+    .form-item {
+      label {
+         margin-right: 10px;
+      }
+      input[type="number"] {
+        border-bottom: 1px solid;
+        &:focus {
+          border-color: $color-accent;
+        }
+      }
+    }
+  }
+}
+}
+
+//register form
+form.user-register-form {
+  .form-item-roles,
+  .field--name-field-department {
+     select {
+       width: 100%;
+       max-width: 100%;
+       min-width: 100%;
+     }
+  }
+  .field--type-mobile-number {
+     .mobile-number-field {
+       display: flex;
+       flex-wrap: wrap;
+       label {
+        flex: 0 0 100%;
+       }
+     }
+  }
+  input[type="submit"] {
+    @extend .btn-raised;
+    @extend .btn-colored;
+    @extend .btn;
+  }
+}
+
+//preview page
+
+.node-preview-container {
+  @extend .card;
+}
+
+//supplier form
+
+form.node-supplier-form {
+  input[type="text"],select,textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  .field--type-address {
+    details {
+      @extend .highlight;
+      summary {
+        cursor: pointer;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+  .tabledrag-toggle-weight-wrapper {
+     button {
+       @extend .btn;
+       @extend .btn-raised;
+     }
+  }
+  input.field-add-more-submit {
+    @extend .btn-colored;
+  }
+
+  input#edit-submit {
+    @extend .btn-colored;
+  }
+  input#edit-preview {
+    @extend .btn-accent;
+  }
+}
+input[type="submit"] {
+  @extend .btn;
+  @extend .btn-raised;
+
+}
+input#edit-submit {
+  @extend .btn-colored;
+}

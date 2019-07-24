@@ -5,7 +5,12 @@
 // colors
 //$color-primary: #607d8b;
 $color-accent: #ff9100;
-
+//material scss
+@import "../../contrib/material_base/sass/reset";
+@import "../../contrib/material_base/sass/color-palette";
+@import "variables";
+@import "../../contrib/material_base/sass/variables";
+@import "../../contrib/material_base/sass/modules";
 // breakpoints
 
 $ss: 360px;
@@ -15,6 +20,8 @@ $md: 992px;
 $lg: 1256px;
 $xl: 1520px;
 
+
 // put your styles here
 @import "header/include";
 @import "components/include";
+@import "layout/include";
