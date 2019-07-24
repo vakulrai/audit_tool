@@ -8,7 +8,7 @@ aps_audit_planning.audit_planning_controller_build:
     _permission: 'access content'
 
 aps_audit_planning.audit_planning_get_scheduled_events:
-  path: '/generate-events'
+  path: '/generate-events/{unit_reference}'
   defaults:
     _controller: '\Drupal\aps_audit_planning\Controller\AuditPlanningController::generateEvents'
   methods: [GET]
@@ -20,5 +20,12 @@ aps_audit_planning.title_list:
   defaults:
     _controller: '\Drupal\aps_audit_planning\Controller\AuditPlanningController::getTitle'
     _format: json
+  requirements:
+    _access: 'TRUE'
+
+aps_audit_planning.audit_planning_get_kpi:
+  path: '/update-kpi-info'
+  defaults:
+    _controller: '\Drupal\aps_audit_planning\Controller\AuditPlanningController::updateKPI'
   requirements:
     _access: 'TRUE'

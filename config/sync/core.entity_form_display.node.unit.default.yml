@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.unit.field_total_mandays
     - field.field.node.unit.field_total_members
     - field.field.node.unit.field_unit_name
+    - field.field.node.unit.field_updated_mandays
     - node.type.unit
   module:
     - address
@@ -217,6 +218,13 @@ content:
     region: content
   field_total_members:
     weight: 103
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_updated_mandays:
+    weight: 107
     settings:
       placeholder: ''
     third_party_settings: {  }

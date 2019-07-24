@@ -1,0 +1,21 @@
+uuid: b26cdfa7-6689-4337-a113-573b966aa784
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pre_audit_status
+    - node.type.planned_events
+  module:
+    - options
+id: node.planned_events.field_pre_audit_status
+field_name: field_pre_audit_status
+entity_type: node
+bundle: planned_events
+label: 'Pre Audit Status'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

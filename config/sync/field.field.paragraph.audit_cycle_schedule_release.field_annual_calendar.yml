@@ -17,7 +17,7 @@ default_value: {  }
 default_value_callback: ''
 settings:
   min: 0
-  max: 0
+  max: 100
   prefix: ''
   suffix: 'Days Before start of the year'
 field_type: integer

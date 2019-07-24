@@ -234,7 +234,7 @@ function aps_audit_criteria_preprocess_page(&$variables) {
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $uri = explode('/', $current_uri);
   if ($current_uri == 'audit_criteria/1/edit') {
-    $variables['#attached']['library'][] = 'aps_audit_criteria/audit_criteria_system_js';
+    $variables['#attached']['library'][] = 'aps_audit_criteria/aps_audit_general_js';
   }
 }
 

@@ -1,0 +1,23 @@
+uuid: 6a18c257-b7f7-40cf-bb8e-ef275e0fda32
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_updated_mandays
+    - node.type.unit
+id: node.unit.field_updated_mandays
+field_name: field_updated_mandays
+entity_type: node
+bundle: unit
+label: 'Updated Mandays'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

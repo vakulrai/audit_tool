@@ -65,5 +65,13 @@ function aps_general_views_data() {
         ],
     ];
 
+    $data['views']['kpi_status'] = [
+        'title' => t('Provide checkbox to check KPI is achieved or not'),
+        'help' => t('Validate Pre-Audit'),
+        'field' => [
+            'id' => 'kpi_status',
+        ],
+    ];
+
     return $data;
 }
