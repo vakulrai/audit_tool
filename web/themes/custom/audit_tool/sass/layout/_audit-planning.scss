@@ -1,0 +1,234 @@
+form.views-exposed-form {
+	@extend .highlight;
+	.path-planned-mr-audit-listing & {
+	  display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+	}
+	input[type="submit"] {
+		@extend .btn-colored;
+	}
+}
+
+a.button {
+  .path-documentinternalrecords &,
+  .path-documentrecords &,
+  .path-documentmanuals & {
+    @extend .btn;
+    @extend .btn-raised;
+    @extend .btn-colored;
+  }
+}
+
+form.node-internal-documents-form {
+
+}
+
+form.node-planned-events-form,
+form.node-planned-events-edit-form {
+  > fieldset {
+  	 @extend .card;
+  	 > legend {
+  	 	@extend h4;
+  	 }
+  	 > .fieldset-wrapper {
+  	 	display: flex;
+  	 	flex-wrap: wrap;
+  	 	align-items: center;
+  	 	justify-content: space-around;
+  	 }
+  }
+  > div.field--type-datetime {
+     width: 100%;
+     display: inline-block;
+     fieldset {
+      @media (min-width: 768px) {
+       max-width: 50%;
+      }
+       legend {
+         @extend h4;
+       }
+       .fieldset-wrapper > div {
+         display: flex;
+         flex-wrap: wrap;
+         align-items: center;
+         justify-content: space-around;
+       }
+     }
+  }
+  > div.field--type-timestamp {
+  	 @extend .h6;
+  	/* @extend .card;*/
+  	 @extend .form-item;
+  	 margin-top: 0;
+  	 margin-bottom: 0;
+  	 @media (min-width: 768px) {
+  	 	width: 50%;
+  	 	float: left;
+  	 	display: inline-block;
+  	 }
+  	 #edit-field-start-date-0-value,
+  	 #edit-field-end-date-0-value {
+  	 	display: flex;
+  	 	flex-wrap: wrap;
+  	 	align-items: center;
+  	 	justify-content: space-around;
+  	 }
+
+  }
+  > .form-type-vertical-tabs {
+  	width: 100%;
+  	display: inline-block;
+  }
+  input#edit-preview {
+  	@extend .btn-accent;
+  }
+}
+
+table.cols-7 {
+  @extend .table-striped;
+  @extend .table-responsive;
+  caption {
+    @extend .h1;
+    @extend .text-disabled;
+    @extend .highlight;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+  }
+}
+
+form.node-internal-documents-form {
+  input.text-full {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  select#edit-field-verified {
+    width: 100%;
+  } 
+  fieldset.media-library-widget {
+    @extend .highlight;
+    input[type="submit"] {
+      @extend .btn-colored;
+    }
+  }
+  .tabledrag-toggle-weight-wrapper {
+    button {
+      @extend .btn;
+      @extend .btn-raised;
+    }
+  }
+  table.field-multiple-table {
+    .paragraph-type-top {
+       .paragraphs-dropbutton-wrapper {
+        padding-right: 20px;
+         input.button {
+          @extend .btn-accent;
+         }
+       }
+    }
+  }
+  input.field-add-more-submit {
+    @extend .btn-accent;
+  }
+}
+
+form.node-business-process-form,
+form.node-procedures-form,
+form.node-business-process-edit-form,
+form.node-section-edit-form,
+form.node-customers-manual-edit-form,
+form.holidays-holidays-form,
+form.user-form   {
+  table.field-multiple-table {
+    .paragraph-type-top {
+       .paragraphs-dropbutton-wrapper {
+        padding-right: 20px;
+         input.button {
+          @extend .btn-accent;
+         }
+       }
+    }
+  }
+  .paragraphs-subform {
+    max-width: 480px;
+  }
+  input.text-full {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  .tabledrag-toggle-weight-wrapper {
+    button {
+      @extend .btn;
+      @extend .btn-raised;
+    }
+  }
+  input[type="submit"].field-add-more-submit,
+  input#edit-preview {
+    @extend .btn-accent;
+  }
+  input#edit-continue-dept {
+    @extend .btn-colored;
+  }
+}
+input[type="number"] {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  &:focus {
+    border-color: $color-accent;
+  }
+}
+
+form.node-department-form,
+form.node-section-form,
+form.node-department-edit-form,
+form.node-procedures-form,
+form.node-section-edit-form,
+form.node-customers-manual-form,
+form.node-customers-manual-edit-form,
+form.holidays-holidays-form,
+form.user-form     {
+  input.text-full,
+  input.form-autocomplete {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  .field--widget-media-library-widget  {
+    @extend .highlight;
+    input[type="submit"] {
+      @extend .btn-colored;
+    }
+    legend {
+      @extend h4;
+    }
+  }
+  input[type="submit"].field-add-more-submit,
+  input#edit-preview {
+    @extend .btn-accent;
+  }
+  input#edit-continue-dept {
+    @extend .btn-colored;
+  }
+  .tabledrag-toggle-weight-wrapper {
+    button {
+      @extend .btn;
+      @extend .btn-raised;
+    }
+  }
+}
+
+form.user-form {
+  input[type="password"],
+  input[type="email"],
+  input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  input[type="submit"]#edit-delete {
+    @extend .btn-accent;
+  }
+}
