@@ -27,14 +27,33 @@ class AuditPlanningController extends ControllerBase {
     ];
   }
 
-   public function generateEvents(Request $request) {
+  public function updateKPI() {
+    $get_kpi_data = $_REQUEST;
+    if (count($get_kpi_data)) {
+      try {
+         $node_object = Node::load($get_kpi_data['record_reference']);
+         $node_object->set('field_kpi_status', $get_kpi_data['value_selected']);
+         $node_object->save();
+         $respose['response'] = TRUE;
+      } 
+      catch(\Exception $e) {
+        $respose['response'] = FALSE;
+      }
+    }
+    return new JsonResponse( $response );
+  }
+
+   public function generateEvents(Request $request, $unit_reference) {
     $query = \Drupal::database()->select('node_field_data', 'n');
     $query->join('node__field_start_date', 'st', 'n.nid = st.entity_id');
     $query->join('node__field_end_date', 'ed', 'st.entity_id = ed.entity_id');
+    $query->join('node__field_refere', 'rf', 'n.nid = rf.entity_id');
     $query->fields('n',['title', 'nid']);
     $query->fields('st',['field_start_date_value']);
+    $query->fields('rf',['field_refere_target_id']);
     $query->fields('ed',['field_end_date_value']);
     $query->condition('n.type', 'planned_events');
+    $query->condition('rf.field_refere_target_id', $unit_reference);
     $records = $query->execute()->fetchAll();
     $list = [];
     foreach ($records as $key => $value) {

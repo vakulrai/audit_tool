@@ -1,16 +1,17 @@
-uuid: 9afb5178-1feb-4cd9-b68f-e52dede9b138
+uuid: 5b943595-f8ba-4f05-b898-c0bd246bb721
 langcode: en
 status: true
 dependencies:
   module:
     - aps_audit_planning
     - system
+    - user
   theme:
-    - seven
+    - bootstrap_barrio_subtheme
 id: auditplanningblock
-theme: seven
+theme: bootstrap_barrio_subtheme
 region: content
-weight: -10
+weight: 0
 provider: null
 plugin: audit_planning_block
 settings:
@@ -24,3 +25,10 @@ visibility:
     pages: '/audit-planning/*'
     negate: false
     context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

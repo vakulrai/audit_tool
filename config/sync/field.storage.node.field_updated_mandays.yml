@@ -1,0 +1,20 @@
+uuid: e083ea92-91a5-47c4-ae3c-b65f5e248802
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_updated_mandays
+field_name: field_updated_mandays
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.pre_audit_records.body
     - field.field.node.pre_audit_records.field_accumlative_kpi
     - field.field.node.pre_audit_records.field_files
+    - field.field.node.pre_audit_records.field_kpi_status
     - field.field.node.pre_audit_records.field_qam
     - field.field.node.pre_audit_records.field_reasons_data
     - field.field.node.pre_audit_records.field_refere
@@ -50,6 +51,13 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_kpi_status:
+    weight: 110
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_qam:
     weight: 104

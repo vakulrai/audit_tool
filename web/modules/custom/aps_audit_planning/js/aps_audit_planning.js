@@ -25,7 +25,7 @@
         }
       },
       eventSources: [
-        base_url+'/generate-events',
+        base_url+'/generate-events/'+unit_id,
         base_url+'/list-of-unit-holidays/'+unit_id,
         {
           googleCalendarId: 'en.indian#holiday@group.v.calendar.google.com',

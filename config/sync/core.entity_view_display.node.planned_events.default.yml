@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.planned_events.field_list_of_process
     - field.field.node.planned_events.field_list_of_product
     - field.field.node.planned_events.field_list_of_systems
+    - field.field.node.planned_events.field_pre_audit_status
     - field.field.node.planned_events.field_refere
     - field.field.node.planned_events.field_release_status
     - field.field.node.planned_events.field_remote_location_name
@@ -26,6 +27,7 @@ dependencies:
     - field.field.node.planned_events.field_start_date
     - field.field.node.planned_events.field_suggested_date
     - field.field.node.planned_events.field_time
+    - field.field.node.planned_events.field_total_mandays
     - field.field.node.planned_events.field_unit
     - field.field.node.planned_events.field_year_frequency
     - node.type.planned_events
@@ -131,6 +133,13 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_pre_audit_status:
+    weight: 128
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
   field_refere:
     weight: 120
     label: above
@@ -229,6 +238,15 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: daterange_default
+    region: content
+  field_total_mandays:
+    weight: 127
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   field_unit:
     weight: 106

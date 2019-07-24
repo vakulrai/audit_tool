@@ -15,3 +15,11 @@ aps_audit_planning_js:
   dependencies:
     - core/jquery
     - core/jquery.once
+
+aps_audit_general_js:
+  js:
+    js/general_operations.js: {}
+
+  dependencies:
+    - core/jquery
+    - core/jquery.once

@@ -43,6 +43,9 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_time']['#access'] = FALSE;
     $form['field_year_frequency']['#access'] = FALSE;
     $form['field_release_status']['#access'] = FALSE;
+    $form['field_total_mandays']['#access'] = FALSE;
+    $form['field_pre_audit_status']['#access'] = FALSE;
+    $form['field_refere']['#access'] = FALSE;
     $id = \Drupal::request()->query->get('unit_reference');
     $form['#cache']['max-age'] = 0;
     $form['field_sections']['#attributes'] = ['id' => ['section']];
@@ -204,8 +207,32 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
   }
   if ($form_id == 'node_planned_events_edit_form'){
     $form['field_shift']['widget']['#options'] = $form['field_shift']['widget']['#default_value'];
+    $form['field_unit_reference']['#access'] = FALSE;
     $schedule_type = \Drupal::request()->query->get('schedule_type');
     if($schedule_type == 'reschedule'){
+      $config_factory = \Drupal::configFactory();
+      $config = $config_factory->getEditable('aps_audit_planning.mandaysettings');
+      $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+      $uri = explode('/', $current_uri);
+      $query = \Drupal::database()->select('content_moderation_state_field_data', 'n');
+      $query->fields('n',['content_entity_revision_id', 'moderation_state']);
+      $query->condition('n.moderation_state', 'release_audit');
+      $query->condition('n.content_entity_id', $uri[1]);
+      $vid = $query->execute()->fetchAll();
+      $node_revison_load = node_revision_load($vid[0]->content_entity_revision_id);
+      $update_mandays_from_rev = $node_revison_load->field_total_mandays->value;
+      $audit_type =  $node_revison_load->field_internal_audit_type->value;
+      if($audit_type = 'systems'){
+        $config_to_use = 'system_mandays_updated';
+      }elseif ($audit_type = 'process') {
+        $config_to_use = 'process_mandays_updated';
+      }
+      elseif ($audit_type = 'product') {
+       $config_to_use = 'product_mandays_updated';
+      }
+      $get_mandays_from_config = $config->get($config_to_use);
+      $config->set($config_to_use,  $get_mandays_from_config + $update_mandays_from_rev);
+      $config->save();
       $form['moderation_state']['widget'][0]['state']['#default_value'] = 'reschedule';
       foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
@@ -491,18 +518,60 @@ function getChecklistData($key){
 
 function releaseAuditCallback(&$form, \Drupal\Core\Form\FormStateInterface &$form_state){
   $form_input_values = $form_state->getUserInput();
-  $field_start_date = timestampFromDate($form_input_values['field_start_date'][0]['value']['date']);
-  $field_end_date = timestampFromDate($form_input_values['field_end_date'][0]['value']['date']);
   $response = new AjaxResponse();
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $uri = explode('/', $current_uri);
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('aps_audit_planning.mandaysettings');
+  $field_start_date = timestampFromDate($form_input_values['field_start_date'][0]['value']['date']);
+  $field_end_date = timestampFromDate($form_input_values['field_end_date'][0]['value']['date']);
   if($uri[1]){
     $node_object = Node::load($uri[1]);
     $node_object->set('field_start_date', $field_start_date);
     $node_object->set('field_end_date', $field_end_date);
     $node_object->set('moderation_state', 'release_audit');
-    $node_object->save();
   }
+
+  if($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'systems'){
+    $date_difference =  abs($field_end_date - $field_start_date);
+    $years = floor($date_difference / (365*60*60*24));
+    $months = floor(($date_difference - $years * 365*60*60*24) / (30*60*60*24));
+    $total_mandays = floor(($date_difference - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24)); 
+    $get_system_mandays_from_unit = $config->get('system_mandays_updated', $total_system_mandays);
+    if($get_system_mandays_from_unit >= $total_mandays ){
+      $node_object->set('field_total_mandays', $total_mandays);
+      $config->set('system_mandays_updated',  $get_system_mandays_from_unit - $total_mandays);
+    }
+    else{
+      $node_object->set('field_total_mandays', 0);
+      $config->set('system_mandays_updated', 0);
+    }
+  }
+  elseif ($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'process') {
+    $unit_reference = $node_object->field_refere->target_id;
+    $get_total_process_assembly = count(getAuditOPtions('process','/rest-export-system/'.$unit_reference.'?type[]=assembly'));
+    $get_total_process_manufacturing = count(getAuditOPtions('process','/rest-export-system/'.$unit_reference.'?type[]=manufacturing_process'));
+    $total_process_mandays = getMandaysFromAuditType('process', $get_total_process_manufacturing, $get_total_process_assembly, NULL);
+    $config->set('process_mandays_standard', $total_process_mandays);
+    $config->set('process_mandays_updated', $total_process_mandays);
+    $get_process_mandays_standard = $config->get('process_mandays_updated');
+    $config->set('system_mandays_updated', $get_process_mandays_standard - $total_process_mandays);
+  }
+  elseif ($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'product') {
+    $unit_reference = $node_object->field_refere->target_id;
+    $query = \Drupal::database()->select('customer_manual_parts__field_reference_id', 'cm');
+    $query->fields('cm',['field_reference_id_target_id', 'entity_id']);
+    $query->condition('cm.field_reference_id_target_id', $unit_reference);
+    $nids = $query->execute()->fetchAll();
+    $get_total_product = count($nids);
+    $total_product_mandays = getMandaysFromAuditType('product', $get_total_product, NULL, NULL);
+    $config->set('product_mandays_standard', $total_product_mandays);
+    $config->set('product_mandays_updated', $total_product_mandays);
+    $get_product_mandays_standard = $config->get('product_mandays_updated');
+    $config->set('product_mandays_updated', $get_product_mandays_standard - $total_process_mandays);
+  }
+  $config->save();
+  $node_object->save();
   return $response;
 }
 

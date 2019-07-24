@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.unit.field_total_mandays
     - field.field.node.unit.field_total_members
     - field.field.node.unit.field_unit_name
+    - field.field.node.unit.field_updated_mandays
     - node.type.unit
   module:
     - address
@@ -167,6 +168,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_updated_mandays:
+    weight: 117
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   links:
     weight: 100

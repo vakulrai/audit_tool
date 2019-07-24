@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.pre_audit_records.body
     - field.field.node.pre_audit_records.field_accumlative_kpi
     - field.field.node.pre_audit_records.field_files
+    - field.field.node.pre_audit_records.field_kpi_status
     - field.field.node.pre_audit_records.field_qam
     - field.field.node.pre_audit_records.field_reasons_data
     - field.field.node.pre_audit_records.field_refere
@@ -37,6 +38,12 @@ content:
       media_types: {  }
     third_party_settings: {  }
     type: media_library_widget
+    region: content
+  field_kpi_status:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_qam:
     weight: 4

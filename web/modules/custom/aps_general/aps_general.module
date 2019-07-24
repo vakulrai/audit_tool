@@ -89,6 +89,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   $form['moderation_state']['#access'] = FALSE;
   if($form_id == 'node_unit_form'){
     $form['field_total_mandays']['#access'] = FALSE;
+    $form['field_updated_mandays']['#access'] = FALSE;
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'aps_general_unit_page_redirect';
@@ -97,6 +98,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   }
   elseif ($form_id == 'node_unit_edit_form') {
     $form['field_total_mandays']['#access'] = FALSE;
+    $form['field_updated_mandays']['#access'] = FALSE;
   }
 
   //Condition for Procedure Add form
@@ -129,7 +131,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
   }
   elseif ($form_id == 'node_procedures_edit_form') {
-    // $form['field_refere']['#access'] = FALSE;
+    $form['field_refere']['#access'] = FALSE;
   }
   
   //Condition for Business Add form
@@ -768,7 +770,10 @@ function aps_general_node_create(Node $entity) {
  * Implements  hook_preprocess_page().
  */
 function aps_general_preprocess_page(&$variables) {
+  global $base_url;
   $route_name = \Drupal::routeMatch()->getRouteName();
+  $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+  $uri = explode('/', $current_uri);
   $node = \Drupal::routeMatch()->getParameter('node');
   if ($node instanceof  \Drupal\node\NodeInterface) {
     $nid_type = $node->bundle();
@@ -795,6 +800,10 @@ function aps_general_preprocess_page(&$variables) {
     Drupal\Core\Cache\Cache::invalidateTags(['local_task']);
     Drupal\Core\Cache\Cache::invalidateTags(['block_list']);
   // }
+  if($uri[0] == 'documentrecords'){
+    $variables['#attached']['library'][] = 'aps_audit_planning/aps_audit_general_js';
+    $variables['#attached']['drupalSettings']['siteBaseUrl'] = $base_url;
+  }
 }
 
 /**
@@ -1310,6 +1319,14 @@ function aps_general_unit_page_redirect(array $form, \Drupal\Core\Form\FormState
   $node_object->set('field_total_mandays', $total_system_mandays);
   $node_object->save();
   $response = Url::fromUserInput('/unit-registration-view/'.$nid);
+
+  //Saving mandays in aps_audit_planning.mandaysettings.yml
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('aps_audit_planning.mandaysettings');
+  $config->set('system_mandays_standard', $total_system_mandays);
+  $config->set('system_mandays_updated', $total_system_mandays);
+  $config->save(TRUE);
+
   $form_state->setRedirectUrl($response);
 }
 
@@ -1732,7 +1749,7 @@ function getMandaysFromAuditType($type, $value, $additional_mandays1, $additiona
       break;
     
     case 'process':
-      if(isset($additional_mandays1)){ //For manufacturing process.
+      if(isset($value)){ //For manufacturing process.
         if($value >= 1 && $value < 5){
           $mandays += 2;
         }
@@ -1745,20 +1762,26 @@ function getMandaysFromAuditType($type, $value, $additional_mandays1, $additiona
         elseif ($value > 15) {
           $mandays += 8;
         }
+        else{
+          $mandays += 0;
+        }
       }
 
-      if(isset($additional_mandays2)){ //For assembly process.
-        if($value >= 1 && $value < 20){
+      if(isset($additional_mandays1)){ //For assembly process.
+        if($additional_mandays1 >= 1 && $additional_mandays1 < 20){
           $mandays += 4;
         }
-        elseif ($value >= 21 && $value < 40) {
+        elseif ($additional_mandays1 >= 21 && $additional_mandays1 < 40) {
           $mandays += 8;
         }
-        elseif ($value >= 41 && $value < 60) {
+        elseif ($additional_mandays1 >= 41 && $additional_mandays1 < 60) {
           $mandays += 12;
         }
-        elseif ($value > 60) {
+        elseif ($additional_mandays1 > 60) {
           $mandays += 8;
+        }
+        else{
+          $mandays += 0;
         }
       }
 
@@ -1780,4 +1803,15 @@ function getMandaysFromAuditType($type, $value, $additional_mandays1, $additiona
     break;
   }
   return $total;
+}
+
+function getAuditCycleObjectCurrentUnit($unit_reference){
+  $query = \Drupal::database()->select('audit_cycle__field_unit_reference', 'h');
+  $query->fields('h',['entity_id']);
+  $query->condition('h.field_unit_reference_target_id', $unit_reference);
+  $query->range(0, 1);
+  $nids = $query->execute()->fetchAll();
+  $node_storage = \Drupal::entityManager()->getStorage('audit_cycle');
+  $entity_audit_cycle = $node_storage->load($nids[0]->entity_id);
+  return $entity_audit_cycle;
 }
