@@ -1,0 +1,26 @@
+uuid: c624616a-68d9-4dff-9128-06d55491f71f
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_audit_planning
+    - system
+  theme:
+    - audit_tool
+id: auditplanningblock_2
+theme: audit_tool
+region: content
+weight: 0
+provider: null
+plugin: audit_planning_block
+settings:
+  id: audit_planning_block
+  label: 'Audit planning block'
+  provider: aps_audit_planning
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /audit-planning/283
+    negate: false
+    context_mapping: {  }
