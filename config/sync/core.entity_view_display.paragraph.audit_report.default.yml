@@ -9,6 +9,7 @@ dependencies:
     - field.field.paragraph.audit_report.field_evidence
     - field.field.paragraph.audit_report.field_finding_categories
     - field.field.paragraph.audit_report.field_interim_action
+    - field.field.paragraph.audit_report.field_kpi_status
     - field.field.paragraph.audit_report.field_observation
     - field.field.paragraph.audit_report.field_question
     - field.field.paragraph.audit_report.field_remarks
@@ -18,6 +19,7 @@ dependencies:
   module:
     - entity_reference_revisions
     - file
+    - options
 id: paragraph.audit_report.default
 targetEntityType: paragraph
 bundle: audit_report
@@ -73,6 +75,13 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    region: content
+  field_kpi_status:
+    weight: 12
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_observation:
     weight: 9

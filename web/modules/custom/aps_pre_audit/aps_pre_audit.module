@@ -80,8 +80,7 @@ function aps_pre_audit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
       $unit_reference= \Drupal::request()->query->get('unit_reference');
       $node_referenced = [$event_reference, $unit_reference];
       $node_object= node_load_multiple($node_referenced);
-      $form['field_refere']['widget'][0]['target_id']['#default_value'] = Node::load($unit_reference);
-      $form['field_refere']['widget'][1]['target_id']['#default_value'] = Node::load($event_reference);
+      $form['field_refere']['widget']['target_id']['#default_value'] = $node_object;
     }
     $form['field_refere']['#access'] = FALSE;
     $form['field_assigned_user']['#access'] = FALSE;

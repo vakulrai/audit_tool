@@ -442,7 +442,7 @@ class UpdateAuditFindings extends PreAuditForm {
     $reference_id = \Drupal::request()->query->get('event_reference');
     $node_object = Node::load($reference_id);
     //*** Display only if not submitted ***//
-    if($node_object->field_report_reference->target_id == ''){
+    // if($node_object->field_report_reference->target_id == ''){
       $form['actions']['submit'] = [
         '#type' => 'submit',
         '#value' => $this->t('Submit'),
@@ -460,15 +460,15 @@ class UpdateAuditFindings extends PreAuditForm {
         '#prefix' =>'<p id="display-status-report">',
         '#suffix' =>'</p>',
       ];
-    }
-    else{
-      $form['actions']['submit'] = [
-        '#type' => 'submit',
-        '#value' => $this->t('Report Already Submitted'),
-        '#button_type' => 'primary',
-        '#disabled' => TRUE,
-      ];
-    }
+    // }
+    // else{
+    //   $form['actions']['submit'] = [
+    //     '#type' => 'submit',
+    //     '#value' => $this->t('Report Already Submitted'),
+    //     '#button_type' => 'primary',
+    //     '#disabled' => TRUE,
+    //   ];
+    // }
 
     return $form;
   }
@@ -485,6 +485,7 @@ class UpdateAuditFindings extends PreAuditForm {
     $node_object->save();
     $data_array = $node_object->toArray();
     $form_values = $form_state->getValues();
+    $paragraph_ = [];
     unset($form_values['submit']);
     unset($form_values['form_build_id']);
     unset($form_values['form_token']);
@@ -501,6 +502,7 @@ class UpdateAuditFindings extends PreAuditForm {
           $list[$count]['field_finding_categories'] = strip_tags($key['findings_category']);
           $list[$count]['field_clause'] = $key['clause'];
           $list[$count]['question_type'] = $key['question_type'];
+          $list[$count]['kpi'] = $key['kpi'];
         }
       }
       $count++;
@@ -514,9 +516,9 @@ class UpdateAuditFindings extends PreAuditForm {
       }
       $data['field_standards'] = $form_values['header_report'][0]['standards']; 
     }
-    $data['paragraph_data'] = $list;
+    $paragraph_['paragraph_data'] = $list;
 
-    foreach ($data['paragraph_data'] as $q => $a) {
+    foreach ($paragraph_['paragraph_data'] as $q => $a) {
       if($a['field_finding_categories'] != ''){
         $properties['name'] = $a['field_finding_categories'];
         $terms = array_values(\Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties));
@@ -538,6 +540,7 @@ class UpdateAuditFindings extends PreAuditForm {
             'field_result' => $a['field_result'],
             'field_finding_categories' => ['target_id' => $tid],
             'field_clause' => $a['field_clause'],
+            'field_kpi_status' => $a['kpi'],
             'type' => 'audit_report',
           ]);
           $paragraph->save();
@@ -561,7 +564,7 @@ class UpdateAuditFindings extends PreAuditForm {
     $data['title'] = 'Submission for '.$data_array['title'][0]['value'] . ' on '. date('Y-m-d ');
     
     //***Save Only once***//
-    if($node_object->field_report_reference->target_id == ''){
+    // if($node_object->field_report_reference->target_id == ''){
       $save_submission = entity_create('node', $data);
       if(count($paragraphp_version) > 0){
         foreach ($paragraphp_version as $key => $value) {
@@ -577,10 +580,15 @@ class UpdateAuditFindings extends PreAuditForm {
       $save_refence_to_event->field_report_reference = $save_submission->id();
       $save_refence_to_event->save();
       $response->addCommand(new HtmlCommand('#display-status-report', t('Report Submitted Successfully.')));
-    }
-    else{
-      $response->addCommand(new HtmlCommand('#display-status-report', t('Report Already Submitted.')));
-    }
+    // }
+    // else{
+    //   // $report_reference_object = Node::load($node_object->field_report_reference->target_id);
+    //   // foreach ($data as $key => $value) {
+    //   //   $report_reference_object->set($key, $value);
+    //   //   $report_reference_object->save();
+    //   // }
+    //   $response->addCommand(new HtmlCommand('#display-status-report', t('Report Updated Successfully.')));
+    // }
     return $response;
   }
 
