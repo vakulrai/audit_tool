@@ -232,3 +232,11 @@ form.user-form {
     @extend .btn-accent;
   }
 }
+
+form.audit-criteria-systems-edit-form {
+  .paragraphs-dropbutton-wrapper {
+     input[type="submit"] {
+       @extend .btn-accent;
+     }
+  }
+}

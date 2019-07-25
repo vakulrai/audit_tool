@@ -141,6 +141,7 @@ form {
 
 //register form
 form.user-register-form {
+  max-width: 600px;
   .form-item-roles,
   .field--name-field-department {
      select {
@@ -153,8 +154,15 @@ form.user-register-form {
      .mobile-number-field {
        display: flex;
        flex-wrap: wrap;
+       align-items: flex-end;
        label {
         flex: 0 0 100%;
+       }
+       .form-type-select {
+        flex: 0 0 20%;
+       }
+       .form-type-textfield {
+        flex: 0 0 80%;
        }
      }
   }

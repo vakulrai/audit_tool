@@ -1,0 +1,137 @@
+#views-exposed-form-planned-audit-listing-listing-auditee {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form.node-pre-audit-records-form {
+  input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+  }
+  .field--widget-media-library-widget {
+    @extend .highlight;
+    input[type="submit"] {
+      @extend .btn-colored;
+    }
+  }
+  .field--name-field-accumlative-kpi {
+    @extend .card;
+    input[type="number"] {
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+    }
+    .description {
+      @extend .text-disabled;
+    }
+  }
+  .field--type-daterange {
+    @extend .highlight;
+  }
+  .form-type-entity-autocomplete {
+    input {
+      width: 100%;
+      max-width: 100%;
+    }
+    .description {
+      @extend .text-disabled;
+    }
+  }
+  .tabledrag-toggle-weight-wrapper {
+    button {
+      @extend .btn;
+      @extend .btn-raised;
+    }
+  }
+  table.field-multiple-table {
+    .paragraphs-subform {
+      max-width: 460px;
+    }
+    .paragraph-type-top {
+       .paragraphs-dropbutton-wrapper {
+        padding-right: 20px;
+       }
+    }
+  }
+  .paragraphs-dropbutton-wrapper {
+    input.button {
+      @extend .btn-accent;
+    }
+  }
+
+  .field--type-daterange {
+    fieldset {
+      legend {
+        @extend .h4;
+      }
+      > .fieldset-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+}
+
+
+form.node-auditor-report-edit-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .field--name-title,
+  .field--name-field-audit-list,
+  details.field-group-details,
+  .form-type-vertical-tabs,
+  .form-actions  {
+    flex: 0 0 100%;
+  }
+  input.text-full {
+    width: 100%;
+    max-width: 100%;
+  }
+  .tabledrag-toggle-weight-wrapper {
+    button {
+      @extend .btn;
+      @extend .btn-raised;
+    }
+  }
+  details.field-group-details {
+    .form-type-managed-file {
+      @extend .info;
+    }
+  }
+  input#edit-preview {
+    @extend .btn-accent;
+  }
+  input#edit-submit-report {
+    @extend .btn-colored;
+  }
+  table.field-multiple-table {
+   .field-multiple-table {
+      @extend .card;
+      max-width: 90%;
+    }
+    .field--name-field-interim-action {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .field--name-field-evidence,
+    .field--name-field-result,
+    .field--name-field-remarks {
+      max-width: 460px;
+     }
+    .paragraph-type-top {
+       .paragraphs-dropbutton-wrapper {
+        padding-right: 20px;
+       }
+    }
+  }
+  .paragraphs-dropbutton-wrapper {
+    input.button {
+      @extend .btn-accent;
+    }
+  }
+}
