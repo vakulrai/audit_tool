@@ -15,11 +15,13 @@ dependencies:
     - field.field.paragraph.internal_audit_qa.field_description_qualified
     - field.field.paragraph.internal_audit_qa.field_evidence
     - field.field.paragraph.internal_audit_qa.field_finding_categories
+    - field.field.paragraph.internal_audit_qa.field_kpi_status
     - field.field.paragraph.internal_audit_qa.field_questions
     - field.field.paragraph.internal_audit_qa.field_sub_s_no_
     - paragraphs.paragraphs_type.internal_audit_qa
   module:
     - file
+    - options
 id: paragraph.internal_audit_qa.default
 targetEntityType: paragraph
 bundle: internal_audit_qa
@@ -116,6 +118,13 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_kpi_status:
+    weight: 16
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_questions:
     weight: 9

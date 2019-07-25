@@ -8,6 +8,9 @@ dependencies:
     - field.field.node.manufacturing_process.field_section
     - field.field.node.manufacturing_process.field_sr_no
     - node.type.manufacturing_process
+    - workflows.workflow.workflow_for_audit_planning
+  module:
+    - content_moderation
 id: node.manufacturing_process.default
 targetEntityType: node
 bundle: manufacturing_process
@@ -15,9 +18,12 @@ mode: default
 content:
   field_refere:
     weight: 3
-    settings: {  }
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: options_select
+    type: entity_reference_autocomplete_tags
     region: content
   field_section:
     weight: 2
@@ -32,6 +38,12 @@ content:
     third_party_settings: {  }
     type: number
     region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0

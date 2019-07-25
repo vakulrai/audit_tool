@@ -98,11 +98,7 @@ display:
       style:
         type: table
         options:
-          grouping:
-            -
-              field: title
-              rendered: false
-              rendered_strip: false
+          grouping: {  }
           row_class: ''
           default_row_class: true
           override: true
@@ -111,11 +107,25 @@ display:
           summary: ''
           description: ''
           columns:
+            nid: nid
             title: title
-            field_business_process_effective: field_business_process_effective
-            field_business_process_efficienc: field_business_process_efficienc
+            field_audit_type: field_audit_type
+            field_start_date: field_start_date
+            remainingday_event: remainingday_event
             edit_node: edit_node
+            field_select_audit_1: field_select_audit_1
+            field_report_reference: field_report_reference
+            remainingday_event_validate: remainingday_event_validate
+            moderation_state: moderation_state
+            nothing: nothing
           info:
+            nid:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             title:
               sortable: false
               default_sort_order: asc
@@ -123,17 +133,63 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_business_process_effective:
+            field_audit_type:
+              sortable: false
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_business_process_efficienc:
+            field_start_date:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            remainingday_event:
+              sortable: false
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             edit_node:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_select_audit_1:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_report_reference:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            remainingday_event_validate:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            moderation_state:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            nothing:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -6250,7 +6306,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<a href=\"node/{{nid}}/edit\">RESCHEDULE</a><br>\r\n{{remainingday_event}}"
+            text: "{% if  remainingday_event == 'Audit Date Not Released.' %}\r\n    <a href=\"#\">RESCHEDULE</a><br>\r\n{% else %}\r\n    <a href=\"node/{{nid}}/edit\">RESCHEDULE</a><br>\r\n{% endif %}\r\n\r\n{{remainingday_event}}"
             make_link: false
             path: ''
             absolute: false
@@ -6671,7 +6727,7 @@ display:
           id: title
           table: node_field_data
           field: title
-          relationship: field_refere
+          relationship: none
           group_type: group
           admin_label: ''
           operator: '='

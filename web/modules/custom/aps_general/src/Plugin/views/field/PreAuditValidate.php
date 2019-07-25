@@ -86,15 +86,14 @@ class PreAuditValidate extends FieldPluginBase {
     }
     $audit_cycle_settings = getAuditCycleObjectCurrentUnit($node->get('field_refere')->target_id);
     $days_before_event = $audit_cycle_settings->get('field_rescheduling_of_dates_')->value;
-    $audit_cycle_time = date('Y-m-d',strtotime('-'.$days_before_event.'day', $event_start_date_timestamp));
-    $diff = strtotime($audit_cycle_time) - time();
-    $years = floor($diff / (365*60*60*24));
-    $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
-    $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24)); 
-    $hours = floor(($diff - $years * 365*60*60*24  - $months*30*60*60*24 - $days*60*60*24) / (60*60));  
-    $time_remaining = $days .' Days '. $hours . ' Hour';
-    $days_check = $hours.$days;
-    if ($days > 0) {
+    $audit_cycle_time = date('Y-m-d H:i:s',strtotime('-'.$days_before_event.'day', $event_start_date_timestamp));
+    $date1 = new \DateTime($audit_cycle_time);
+    $date2 = new \DateTime();
+    $diff = $date1->diff($date2);
+    $months = $diff->m;
+    $days = $diff->days; 
+    $hours = $diff->h;
+    if ($hours > 0) {
       if($user_role == 'auditor'){
         $form['add_delta_qa'] = [
           '#type' => 'link',
@@ -112,7 +111,7 @@ class PreAuditValidate extends FieldPluginBase {
     }
     else{
       $form['add_delta_qa'] = [
-          '#markup' => 'Last Date of Pre-audit was :<b>'.$event_start_date_timestamp.'</b>',
+          '#markup' => 'Last Date of Pre-audit was :<b>'.$audit_cycle_time.'</b>',
         ];
     }
     return $form;

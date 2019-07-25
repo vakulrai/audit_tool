@@ -82,7 +82,14 @@ function submit_auditee_audit(array$form, \Drupal\Core\Form\FormStateInterface $
   $uri = explode('/', $current_uri);
   if($id = \Drupal::request()->query->get('event_reference')){
     $node_object = Node::load($id);
+    if($node_object->field_audit_type->value == 'internal' && $node_object->field_internal_audit_type->value == 'process'){
+      $field_name = 'field_list_of_'.$node_object->field_internal_audit_type->value;
+      $get_target_audit_type = $node_object->$field_name->target_id;
+      $get_target_audit_type = Node::load($get_target_audit_type);
+      $get_target_audit_type->set('moderation_state', 'submit_audit');
+    }
     $node_object->set('moderation_state', 'submit_audit');
+    $get_target_audit_type->save();
     $node_object->save();
   }
   if($uri[1]){

@@ -3589,10 +3589,10 @@ display:
             description: ''
             use_operator: false
             operator: type_op
-            identifier: type
+            identifier: content_type
             required: false
             remember: false
-            multiple: true
+            multiple: false
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
@@ -3620,7 +3620,7 @@ display:
           id: moderation_state
           table: node_field_revision
           field: moderation_state
-          relationship: none
+          relationship: nid
           group_type: group
           admin_label: ''
           operator: in
@@ -3633,7 +3633,7 @@ display:
             description: ''
             use_operator: false
             operator: moderation_state_op
-            identifier: moderation_state
+            identifier: moderation_type
             required: false
             remember: false
             multiple: false

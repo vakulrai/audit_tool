@@ -7,6 +7,39 @@
       var product_data = drupalSettings.product_data;
       var process_data = drupalSettings.process_data;
       var procedure_data = drupalSettings.procedure_data;
+      var total_product_covered = 0;
+      var total_product_not = 0;
+      var total_process_covered = 0;
+      var total_process_not = 0;
+      var total_procedure_covered = 0;
+      var total_procedure_not = 0;
+
+      if(product_data['total'] == 0){
+        total_product_covered = 0;
+        total_product_not = 100;
+      }
+      else{
+      	total_product_covered = Math.round(product_data['completed']/product_data['total'] * 100);
+      	total_product_not = Math.round((product_data['total'] - product_data['completed'])/product_data['total'] * 100);
+      }
+
+      if(process_data['total'] == 0){
+        total_process_covered = 0;
+        total_process_not = 100;
+      }
+      else{
+      	total_process_covered = Math.round(process_data['completed']/process_data['total'] * 100);
+      	total_process_not = Math.round((process_data['total'] - process_data['completed'])/process_data['total'] * 100);
+      }
+
+      if(procedure_data['total'] == 0){
+        total_procedure_covered = 0;
+        total_procedure_not = 100;
+      }
+      else{
+      	total_procedure_covered = Math.round(procedure_data['completed']/procedure_data['total'] * 100);
+      	total_procedure_not = Math.round((procedure_data['total'] - procedure_data['completed'])/procedure_data['total'] * 100);
+      }
       var chart_a = new Highcharts.Chart('container-scheduled-a',{
 		  chart: {
 		    // renderTo: 'container-scheduled-a',
@@ -56,13 +89,13 @@
 		  },
 		  series: [{
 		    "name": "Products covered",
-		    "data": [Math.round(product_data['completed']/product_data['total'] * 100)],
+		    "data": [total_product_covered],
 		    "color": "#33fff9",
 		    "showInLegend": true
 		  },
 		  {
 		    "name": "Products not covered",
-		    "data": [Math.round((product_data['total'] - product_data['completed'])/product_data['total'] * 100)],
+		    "data": [total_product_not],
 		    "color": "#ff8c1a",
 		    "showInLegend": true	
 		  }]
@@ -117,13 +150,13 @@
 		  },
 		  series: [{
 		    "name": "Process covered",
-		    "data": [Math.round(process_data['completed']/process_data['total'] * 100)],
+		    "data": [total_process_covered],
 		    "color": "#33fff9",
 		    "showInLegend": true
 		  },
 		  {
 		   "name": "Process not covered",
-		    "data": [Math.round((process_data['total'] - process_data['completed'])/process_data['total'] * 100)],
+		    "data": [total_process_not],
 		    "color": "#ff8c1a",
 		    "showInLegend": true	
 		  }]
@@ -178,13 +211,13 @@
 		  },
 		  series: [{
 		    "name": "Procedures Covered",
-		    "data": Math.round([procedure_data['completed']/procedure_data['total'] * 100]),
+		    "data": [total_procedure_covered],
 		    "color": "#33fff9",
 		    "showInLegend": true
 		  },
 		  {
 		    "name": "Procedures not Covered",
-		    "data": [Math.round((procedure_data['total'] - procedure_data['completed'])/procedure_data['total'] * 100)],
+		    "data": [total_procedure_not],
 		    "color": "#ff8c1a",
 		    "showInLegend": true	
 		  }]

@@ -43,6 +43,7 @@ class UpdateAuditFindings extends PreAuditForm {
         $this-> t('Result'),
         $this-> t('Finding Categories'),
         $this-> t('Clause'),
+        $this-> t('KPI Status'),
       ];
 
       $header_report = [
@@ -235,12 +236,19 @@ class UpdateAuditFindings extends PreAuditForm {
             '#title_display' => 'invisible',
           ];
 
+          $form['display']['tableselect_element'][$sr]['kpi'] = [
+            '#type' => 'value',
+            '#value' =>  $value['kpi'],
+            '#markup' =>  ucfirst($value['kpi']),
+            '#title' => $this->t('KPI Status'),
+            '#title_display' => 'invisible',
+          ];
           $sr++;
 
         }
       }
     }
-
+    
     if(count($details)){
         $srq = 1;
         foreach ($details as $keyq=>$valueq) {
@@ -329,7 +337,14 @@ class UpdateAuditFindings extends PreAuditForm {
             '#title' => $this->t('Finding Categories'),
             '#title_display' => 'invisible',
           ];
-
+          
+          $form['display_d_q']['tableselect_element_dq'][$srq]['kpi'] = [
+            '#type' => 'value',
+            '#value' =>  $value['kpi'],
+            '#markup' =>  ucfirst($value['kpi']),
+            '#title' => $this->t('KPI Status'),
+            '#title_display' => 'invisible',
+          ];
           $srq++;
         }
       }
@@ -663,6 +678,7 @@ class UpdateAuditFindings extends PreAuditForm {
                 $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
                 $output[$ref_id]['type'] = 'predefined';
                 $output[$ref_id]['field_answer_type'] = $answer_node_object->get('field_answer_type')->value;
+                $output[$ref_id]['kpi'] = $predefined_question_object->get('field_kpi_status')->value;
                 $output[$ref_id]['qid'] = $ref_id;
                 $output[$ref_id]['clause_no'] = $predefined_question_object->get('field_clause_no')->target_id;
                 $output[$ref_id]['field_finding_categories'] = $predefined_question_object->get('field_finding_categories')->getValue();

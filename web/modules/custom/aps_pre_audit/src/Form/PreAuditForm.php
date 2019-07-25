@@ -68,6 +68,11 @@ class PreAuditForm extends FormBase {
       '#collapsible' => TRUE, 
       '#collapsed' => FALSE,
     );
+    
+    $kpi_options = [
+      'achieved' => 'Achieved',
+      'not-achieved' => 'Not Achieved',
+    ];
 
     foreach ($details as $key => $value) {
       $count_value = count($value['evidence_value']);
@@ -225,8 +230,16 @@ class PreAuditForm extends FormBase {
            '#disabled' => $disable_fields,
         );
       }
+      $form['display']['audit_qa_'.$key]['kpi_status'.$key] = array(
+         '#type' => 'radios',
+         '#title' => 'KPI Status',
+         '#options' => $kpi_options,
+         '#weight' => 20,
+         '#default_value' => $value['kpi'],
+         '#disabled' => $disable_fields,
+        );
     }
-   
+    
     $form['display']['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Next'),
@@ -279,8 +292,8 @@ class PreAuditForm extends FormBase {
         if($target_id = $qa_object->get('field_queries')->target_id){
           $answer_node_object = Node::load($qa_ref_nid);
           // $data = $answer_node_object->toArray();
-          $selection = $answer_node_object->get('field_select_query_type')->value;
-          // if($answer_node_object->get('field_select_query_type')->value == 'yes'){
+          if(isset($answer_node_object->get('field_select_query_type')->value)){
+             $selection = $answer_node_object->get('field_select_query_type')->value;
             if($selection == 'Pdef'){
               $get_question_id = $answer_node_object->get('field_defined_options_default')->getValue();
               foreach ($get_question_id as $k => $val) {
@@ -290,6 +303,7 @@ class PreAuditForm extends FormBase {
                 $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
                 $output[$ref_id]['type'] = 'predefined';
                 $output[$ref_id]['qid'] = $ref_id;
+                $output[$ref_id]['kpi'] = $predefined_question_object->get('field_kpi_status')->value;
                 $output[$ref_id]['sno'] = count($predefined_question_object_array['field_sub_s_no_']) ? $predefined_question_object->get('field_sub_s_no_')->value : '';
                 $output[$ref_id]['desc']['Optimised'] = 'Optimised';
                 $output[$ref_id]['desc']['Qualified'] = 'Qualified';
@@ -329,7 +343,7 @@ class PreAuditForm extends FormBase {
                 }
               }
             }
-          // }
+          }
         }
       }
     }
@@ -405,6 +419,7 @@ class PreAuditForm extends FormBase {
       $form_data['answer'][$value['qid']]['optimised'] = $form_state->getValue('finding_category_optimised'.$key);
       $form_data['answer'][$value['qid']]['effecient'] = $form_state->getValue('finding_category_effecient'.$key);
       $form_data['answer'][$value['qid']]['clause'] = $form_state->getValue('clause_number'.$key);
+      $form_data['answer'][$value['qid']]['kpi'] = $form_state->getValue('kpi_status'.$key);
       $form_data['question'][$value['qid']][] = $form_state->getValue('finding_img_'.$key)[0];
       $form_data['question'][$value['qid']][] = $form_state->getValue('finding_audio_'.$key)[0];
     }
@@ -444,6 +459,9 @@ class PreAuditForm extends FormBase {
               $query->condition('n.title', db_like($j['clause']) . '%', 'LIKE');
               $nids = $query->execute()->fetchAll();
               $paragraph_object->set('field_clause_no', $nids[0]->nid);
+            }
+            if(isset($j['kpi'])) {
+              $paragraph_object->set('field_kpi_status', $j['kpi']);
             }
           }
           $paragraph_object->save();

@@ -33,15 +33,14 @@ class AuditFindingControlScheduled extends BlockBase {
     $build['audit_finding_control_scheduled']['fieldset']['container_element_scheduled_c']['#markup'] = '<div id="container-scheduled-c" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div><a href="/procedure-listing?unit_reference='.$uri[1].'" id="procedure-list">view list</a>';
     $build['audit_finding_control_scheduled']['#attached']['library'][] = 'aps_audit_report_analysis/aps_dashboard_audit_control_scheduled_js';
 
-    $build['#attached']['drupalSettings']['product_data']['total'] = count(getAuditOPtions('product','/rest-export-system/'.$uri[1].'?type=customers_manual'));
-    $build['#attached']['drupalSettings']['product_data']['completed'] = count(getAuditOPtions('product','/rest-export-system/'.$uri[1].'?type=customers_manual&moderation_state=workflow_for_audit_planning-submit_audit'));
+    $build['#attached']['drupalSettings']['product_data']['total'] = count(getAuditOPtions('product','/rest-export-system/'.$uri[1].'?content_type=customers_manual'));
+    $build['#attached']['drupalSettings']['product_data']['completed'] = count(getAuditOPtions('product','/rest-export-system/'.$uri[1].'?content_type=customers_manual&moderation_type=workflow_for_audit_planning-submit_audit'));
 
-    $build['#attached']['drupalSettings']['process_data']['total'] = count(getAuditOPtions('process','/rest-export-system/'.$uri[1].'?type[]=assembly&type[]=manufacturing_process'));
-    $build['#attached']['drupalSettings']['process_data']['completed'] = count(getAuditOPtions('process','/rest-export-system/'.$uri[1].'?type[]=assembly&type[]=manufacturing_process&moderation_state=workflow_for_audit_planning-submit_audit'));
+    $build['#attached']['drupalSettings']['process_data']['total'] = count(getAuditOPtions('process','/rest-export-system/'.$uri[1].'?content_type[]=assembly&content_type[]=manufacturing_process'));
+    $build['#attached']['drupalSettings']['process_data']['completed'] = count(getAuditOPtions('process','/rest-export-system/'.$uri[1].'?content_type[]=assembly&content_type[]=manufacturing_process&moderation_type=workflow_for_audit_planning-submit_audit'));
 
-    $build['#attached']['drupalSettings']['procedure_data']['total'] = count(getAuditOPtions('process','/rest-export-system/'.$uri[1].'?type[]=procedures'));
-    $build['#attached']['drupalSettings']['procedure_data']['completed'] = count(getAuditOPtions('process','/rest-export-system/'.$uri[1].'?type[]=procedures&moderation_state=workflow_for_audit_planning-submit_audit'));
-
+    $build['#attached']['drupalSettings']['procedure_data']['total'] = count(getAuditOPtions('process','/rest-export-system/'.$uri[1].'?content_type[]=procedures'));
+    $build['#attached']['drupalSettings']['procedure_data']['completed'] = count(getAuditOPtions('process','/rest-export-system/'.$uri[1].'?content_type[]=procedures&moderation_type=workflow_for_audit_planning-submit_audit'));
     $build['#attached']['drupalSettings']['siteBaseUrl'] = $base_url;
     $build['#attached']['drupalSettings']['data'] = $data;
     $build['#attached']['drupalSettings']['unit_reference'] = $uri[1];
