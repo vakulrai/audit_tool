@@ -44,6 +44,14 @@ class RiskManagement extends BlockBase {
       '#collapsed' => FALSE,
     ];
 
+    $build['kpi'] = [
+      '#type' => 'details', 
+      '#title' => t('KPI targets of sections and Audit findings '), 
+      '#attributes' => ['id' => 'kpi'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    ];
+
     $build['scheduling'] = [
       '#type' => 'details', 
       '#title' => t('Scheduling'), 
@@ -72,7 +80,7 @@ class RiskManagement extends BlockBase {
     // $build['risk_management_fieldset']['risk_management']['#attached']['drupalSettings']['total_user'] = $first_last_date_monthly['total_user'];
     // $build['risk_management_fieldset']['risk_management']['#attached']['drupalSettings']['selected_user_count'] = $first_last_date_monthly['selected_user_count'];
     $build['risk_management_fieldset']['risk_management']['container_element_risk_legend']['#markup'] = '<div id="container-element-risk-legend" style="min-width: 150px; height: 400px; max-width: 400px; margin: 0 auto"></div>';
-    $build['risk_management_fieldset']['risk_management']['container_element_risk_eport']['#markup'] = '<div id="container-element-risk-report" style="min-width: 150px; height: 400px; max-width: 400px; margin: 0 auto"></div>';
+    $build['risk_management_fieldset']['risk_management']['container_element_risk_report']['#markup'] = '<div id="container-element-risk-report" style="min-width: 150px; height: 400px; max-width: 400px; margin: 0 auto"></div>';
 
     //Get data for Finding categories minor/major.
     $risk_data = [];
@@ -182,9 +190,11 @@ class RiskManagement extends BlockBase {
     $query->join('node__field_audit_list', 'ls', 'nfd.nid = ls.entity_id');
     $query->join('paragraphs_item_field_data', 'f', 'ls.field_audit_list_target_id = f.id');
     $query->join('paragraph__field_finding_categories', 'fc', 'f.id = fc.entity_id');
+    $query->join('paragraph__field_kpi_status', 'kpi', 'fc.entity_id = kpi.entity_id');
     $query->fields('n',['entity_id', 'bundle', 'field_refere_target_id']);
     $query->fields('f',['id']);
     $query->fields('fc',['field_finding_categories_target_id']);
+    $query->fields('kpi',['field_kpi_status_value']);
     $query->condition('n.bundle', 'auditor_report');
     $query->condition('n.field_refere_target_id', $uri[1]);
     $nids = $query->execute()->fetchAll();
@@ -204,6 +214,8 @@ class RiskManagement extends BlockBase {
     $key_productivity= 0;
     $key_procedural = 0;
     $key_no = 0;
+    $kpi = 0;
+    $kpi_total = 0;
     foreach ($nids as $key => $value) {
       $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($value->field_finding_categories_target_id);
       $names = $term->name->value;
@@ -231,6 +243,30 @@ class RiskManagement extends BlockBase {
         $key_procedural += count($term->tid->value);
         $count_no_of_frequency[$names] = $key_procedural;
       }
+      elseif ($names == 'No Improvement Point') {
+        if($names == 'No Improvement Point' && $value->field_kpi_status_value == 'achieved'){
+          $kpi_total += 1;
+        }
+        else{
+          $kpi_total += 0;
+        }
+      }
+      elseif ($names == 'Minor') {
+        if($names == 'Minor' && $value->field_kpi_status_value == 'achieved'){
+          $kpi_total += 1;
+        }
+        else{
+          $kpi_total += 0;
+        }
+      }
+      elseif ($names == 'Major') {
+        if($names == 'Major' && $value->field_kpi_status_value == 'achieved'){
+          $kpi_total += 3;
+        }
+        else{
+          $kpi_total += 0;
+        }
+      }
       else{
         if($names != 'Major' || $names != 'Minor'){
           $total += 0 * count($term->tid->value);
@@ -254,6 +290,20 @@ class RiskManagement extends BlockBase {
       else{
         $risk_category_improvement = 'Not Found';
         $score_improvement = 0;
+      }
+      
+      //Risk Prameter for KPI.
+      if($kpi_total == 0){
+        $risk_category_improvement = 'HIGH';
+        $kpi = 5;
+      }
+      elseif ($kpi_total == 1) {
+        $risk_category_improvement = 'MEDIUM';
+        $kpi = 3;
+      }
+      elseif ($kpi_total == 3) {
+        $risk_category_improvement = 'LOW';
+        $kpi = 1;
       }
     }
     $maxs = array_keys($count_no_of_frequency, max($count_no_of_frequency));
@@ -589,6 +639,46 @@ class RiskManagement extends BlockBase {
     $build['scheduling']['ap']['ap_details']['data_improvement'] = [
       '#markup' => '<b>All sections covered </b>  :'.$ap_total_all.'* 5'.'</br><b>1 section missed out </b>  : '.$ap_total_one.'* 3'.'<br><b>More then 1 section missed out </b>  : '.$ap_total_more_one.'* 1',
     ];
+
+    //Get data for Finding categories minor/major.
+    $build['kpi']['tableselect_element_imp_points'] = [
+      '#type' => 'table',
+      '#header' => $header,
+      '#empty' => t('No content available.'),
+    ];
+
+    $build['kpi']['tableselect_element_imp_points'][0]['obtained_marks_improvement'] = [
+      '#markup' => 'Improvement Points<br>'.$kpi_total,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['kpi']['tableselect_element_imp_points'][0]['risk_cat_dev_improvement'] = [
+      '#markup' => $risk_category_improvement,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['kpi']['tableselect_element_imp_points'][0]['incidence_improvement'] = [
+      '#markup' => $kpi,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['kpi']['tableselect_element_imp_points'][0]['risk_score_improvement'] = [
+      '#markup' => $kpi_total * $kpi,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['kpi']['risk_score_details_improvement'] = [
+      '#type' => 'details', 
+      '#title' => t('View Details'), 
+      '#attributes' => ['id' => 'display'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    ];
+
+    $build['kpi']['risk_score_details_improvement']['data_improvement'] = [
+      '#markup' => '<b>KPI achieved and  with No Improvement Findings </b>  :'.$kpi_total.'</br><b>KPI not achieved and  with No Improvement Findings </b>  : '.$kpi_total.'<br><b>KPI achieved and with Minor nonconformity Findings </b>  : '.$kpi_total.'<br><b>KPI not achieved and  with Minor Non conformity  Findings </b>  : '.$kpi_total.'<br><b>KPI achieved and with Major non conformity Findings </b>  : '.$kpi_total.'<br><b>KPI not achieved and with Major Non Findings</b>  : '.$kpi_total,
+    ];
+
 
     return $build;
   }

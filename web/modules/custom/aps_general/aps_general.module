@@ -557,7 +557,8 @@ function aps_general_node_insert(Node $node) {
     $node->save();
   }
   if($node->bundle() == 'planned_events'){
-    $entity = getPlannedEventCount();
+    $unit_id = \Drupal::request()->query->get('unit_reference');
+    $entity = getPlannedEventCount($unit_id);
     $node_load_multiple = Node::loadMultiple($entity);
     $count_systems = 0;
     $count_process = 0;
@@ -696,12 +697,17 @@ function getListofMonths(){
 /**
  * Method to get count of Planned events.
  */
-function getPlannedEventCount(){
-  $query = \Drupal::entityQuery('node');
-  $query->condition('status', 1);
-  $query->condition('type', 'planned_events');
-  $entity_ids = $query->execute();
-  return $entity_ids;
+function getPlannedEventCount($unit_reference){
+  $query = \Drupal::database()->select('node_field_data', 'n');
+  $query->join('node__field_refere', 'rf', 'n.nid = rf.field_refere_target_id');
+  $query->fields('rf',['entity_id']);
+  $query->condition('rf.bundle', 'planned_events');
+  $query->condition('rf.field_refere_target_id', $unit_reference);
+  $nids = $query->execute()->fetchAll();
+  foreach ($nids as $key => $value) {
+    $data[$value->entity_id] = $value->entity_id;
+  }
+  return $data;
 }
 
 /**
