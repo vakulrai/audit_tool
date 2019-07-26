@@ -17,6 +17,11 @@ label: 'Workflow for Audit Planning'
 type: content_moderation
 type_settings:
   states:
+    auditee_post_audit:
+      published: true
+      default_revision: true
+      label: 'Auditee Post Audit'
+      weight: 9
     draft:
       label: Draft
       published: false
@@ -58,6 +63,19 @@ type_settings:
       label: 'Submit Audit'
       weight: 7
   transitions:
+    auditee_post_audit:
+      label: 'Auditee Post Audit'
+      from:
+        - draft
+        - post_audit
+        - pre_audit
+        - published
+        - release_audit
+        - reschedule
+        - scheduled
+        - submit_audit
+      to: auditee_post_audit
+      weight: 10
     post_audit:
       label: 'Post Audit'
       from:
@@ -76,6 +94,7 @@ type_settings:
     release_audit:
       label: 'Release Audit'
       from:
+        - auditee_post_audit
         - draft
         - pre_audit
         - reschedule
@@ -85,6 +104,7 @@ type_settings:
     reschedule:
       label: Reschedule
       from:
+        - auditee_post_audit
         - release_audit
         - scheduled
       to: reschedule
@@ -104,6 +124,7 @@ type_settings:
     submit:
       label: Submit
       from:
+        - auditee_post_audit
         - post_audit
         - release_audit
         - scheduled

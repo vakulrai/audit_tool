@@ -89,11 +89,13 @@ class PreAuditValidate extends FieldPluginBase {
     $audit_cycle_time = date('Y-m-d H:i:s',strtotime('-'.$days_before_event.'day', $event_start_date_timestamp));
     $date1 = new \DateTime($audit_cycle_time);
     $date2 = new \DateTime();
-    $diff = $date1->diff($date2);
+    $diff = $date2->diff($date1);
     $months = $diff->m;
     $days = $diff->days; 
     $hours = $diff->h;
-    if ($hours > 0) {
+    $check_invert_time = $diff->invert;
+    $total_hours = $days * 24 + $hours;
+    if ($total_hours > 0  && $check_invert_time != 1) {
       if($user_role == 'auditor'){
         $form['add_delta_qa'] = [
           '#type' => 'link',

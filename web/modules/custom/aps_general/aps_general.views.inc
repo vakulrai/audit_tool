@@ -73,5 +73,13 @@ function aps_general_views_data() {
         ],
     ];
 
+    $data['views']['ncr_audit_validate'] = [
+        'title' => t('NCR Validation to be added from audit cycle settings'),
+        'help' => t('Validate NCR'),
+        'field' => [
+            'id' => 'ncr_audit_validate',
+        ],
+    ];
+
     return $data;
 }

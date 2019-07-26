@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.auditor_report.field_qms_signature
     - field.field.node.auditor_report.field_refere
     - field.field.node.auditor_report.field_standards
+    - field.field.node.auditor_report.field_status
     - node.type.auditor_report
     - workflows.workflow.workflow_for_audit_planning
   module:
@@ -153,6 +154,12 @@ content:
     region: content
   field_standards:
     weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_status:
+    weight: 26
     settings: {  }
     third_party_settings: {  }
     type: options_select

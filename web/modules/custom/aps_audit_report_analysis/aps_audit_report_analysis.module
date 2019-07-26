@@ -68,13 +68,15 @@ function aps_audit_report_analysis_form_alter(&$form, \Drupal\Core\Form\FormStat
     );
   }
   
-  if($form_id == 'node_auditor_report_form'){
+  if($form_id == 'node_auditor_report_edit_form'){
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'set_report_moderation';
       }
     }
   }
+  unset($form['actions']['submit_report']['#submit'][1]);
+  // kint($form['actions']);
 }
 
 function submit_auditee_audit(array$form, \Drupal\Core\Form\FormStateInterface $form_state){
@@ -82,7 +84,7 @@ function submit_auditee_audit(array$form, \Drupal\Core\Form\FormStateInterface $
   $uri = explode('/', $current_uri);
   if($id = \Drupal::request()->query->get('event_reference')){
     $node_object = Node::load($id);
-    if($node_object->field_audit_type->value == 'internal' && $node_object->field_internal_audit_type->value == 'process'){
+    if($node_object->field_audit_type->value == 'internal' && $node_object->field_internal_audit_type->value == 'process' || $node_object->field_internal_audit_type->value == 'system' || $node_object->field_internal_audit_type->value == 'product'){
       if(isset($node_object->field_internal_audit_type->value)){
         $field_name = 'field_list_of_'.$node_object->field_internal_audit_type->value;
         $get_target_audit_type = $node_object->$field_name->target_id;
@@ -97,16 +99,17 @@ function submit_auditee_audit(array$form, \Drupal\Core\Form\FormStateInterface $
   if($uri[1]){
     $node_object_report = Node::load($uri[1]);
     $node_object_report->set('moderation_state', 'submit_audit');
+    $node_object_report->set('field_status', 'closed');
     $node_object_report->save();
   }
 
 }
 
 function set_report_moderation(array$form, \Drupal\Core\Form\FormStateInterface $form_state){
-  $form_values = $form_state->getValues();
-  $nid = $form_values['nid'];
-  $node_object = Node::load($nid);
-  $node_object->set('moderation_state', 'post_audit');
+  $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+  $uri = explode('/', $current_uri);
+  $node_object = Node::load($uri[1]);
+  $node_object->set('field_status', 'pending');
   $node_object->save();
 }
 

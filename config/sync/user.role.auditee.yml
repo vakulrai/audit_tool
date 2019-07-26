@@ -123,6 +123,7 @@ permissions:
   - 'update paragraph content new_sub_question_yes_no'
   - 'update paragraph content procedures'
   - 'update paragraph content report_reason'
+  - 'use workflow_for_audit_planning transition auditee_post_audit'
   - 'use workflow_for_audit_planning transition post_audit'
   - 'use workflow_for_audit_planning transition pre_audit'
   - 'use workflow_for_audit_planning transition reschedule'

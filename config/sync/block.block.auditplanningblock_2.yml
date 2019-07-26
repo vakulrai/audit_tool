@@ -1,10 +1,11 @@
-uuid: c624616a-68d9-4dff-9128-06d55491f71f
+uuid: 17fc88c6-ba42-414e-b802-76e8a9377434
 langcode: en
 status: true
 dependencies:
   module:
     - aps_audit_planning
     - system
+    - user
   theme:
     - audit_tool
 id: auditplanningblock_2
@@ -21,6 +22,13 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /audit-planning/283
+    pages: '/audit-planning/*'
     negate: false
     context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
