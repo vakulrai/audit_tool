@@ -1,0 +1,15 @@
+#block-audit-tool-userlogin {
+  > h2 {
+    text-align: center;
+  }
+  > ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      list-style: none;
+      max-width: 360px;
+      margin: 10px auto;
+      @extend .highlight;
+      width: 100%;
+  }
+}
