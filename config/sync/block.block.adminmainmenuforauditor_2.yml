@@ -1,23 +1,23 @@
-uuid: 939440d7-727d-445e-b612-5fa9b2161c2a
+uuid: d9342a72-cf28-499c-a065-0ce58407cd02
 langcode: en
 status: true
 dependencies:
   config:
-    - system.menu.admin-main-menu
+    - system.menu.admin-main-menu-for-auditor
   module:
     - system
     - user
   theme:
     - audit_tool
-id: adminmainmenu_6
+id: adminmainmenuforauditor_2
 theme: audit_tool
 region: drawer
 weight: 0
 provider: null
-plugin: 'system_menu_block:admin-main-menu'
+plugin: 'system_menu_block:admin-main-menu-for-auditor'
 settings:
-  id: 'system_menu_block:admin-main-menu'
-  label: 'Admin main menu'
+  id: 'system_menu_block:admin-main-menu-for-auditor'
+  label: 'Admin main menu for Auditor'
   provider: system
   label_display: '0'
   level: 1
@@ -27,7 +27,8 @@ visibility:
   user_role:
     id: user_role
     roles:
-      mr_admin: mr_admin
+      auditor: auditor
+      auditee: auditee
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'

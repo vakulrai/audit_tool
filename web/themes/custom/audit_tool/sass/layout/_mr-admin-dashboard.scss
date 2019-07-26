@@ -223,3 +223,29 @@ input[type="submit"] {
 input#edit-submit {
   @extend .btn-colored;
 }
+
+.unit-details  {
+  @extend .highlight;
+  > h3 {
+    display: none;
+  }
+  span.views-label {
+    width: 100%;
+    display: inline-block;
+    @extend .h4;
+    position: relative;
+  }
+  .views-field {
+    &+ .views-field {
+      @extend .divider-top;
+    }
+  }
+}
+
+#block-audit-tool-generatereports {
+  @extend .highlight;
+  h1 {
+    @extend .h3;
+    text-transform: uppercase;
+  }
+}

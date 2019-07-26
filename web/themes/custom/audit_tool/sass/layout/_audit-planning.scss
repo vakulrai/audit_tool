@@ -30,18 +30,23 @@ form.node-planned-events-edit-form {
   > fieldset {
   	 @extend .card;
   	 > legend {
-  	 	@extend h4;
+      @extend .h4;
+      text-transform: uppercase;
+      @extend .text-primary;
+      position: relative;
+      top: 30px;
   	 }
   	 > .fieldset-wrapper {
   	 	display: flex;
   	 	flex-wrap: wrap;
   	 	align-items: center;
-  	 	justify-content: space-around;
+  	 	justify-content: space-between;
   	 }
   }
   > div.field--type-datetime {
      width: 100%;
      display: inline-block;
+     @extend .card;
      fieldset {
       @media (min-width: 768px) {
        max-width: 50%;
@@ -53,13 +58,15 @@ form.node-planned-events-edit-form {
          display: flex;
          flex-wrap: wrap;
          align-items: center;
-         justify-content: space-around;
+         justify-content: space-between;
+         max-width: 320px;
        }
      }
   }
   > div.field--type-timestamp {
-  	 @extend .h6;
-  	/* @extend .card;*/
+  	 font-size: 0;
+  	 @extend .card;
+
   	 @extend .form-item;
   	 margin-top: 0;
   	 margin-bottom: 0;
@@ -73,7 +80,8 @@ form.node-planned-events-edit-form {
   	 	display: flex;
   	 	flex-wrap: wrap;
   	 	align-items: center;
-  	 	justify-content: space-around;
+  	 	justify-content: space-between;
+      max-width: 320px;
   	 }
 
   }
@@ -99,7 +107,8 @@ table.cols-7 {
   }
 }
 
-form.node-internal-documents-form {
+form.node-internal-documents-form,
+form.customer-manual-parts-parts-form {
   input.text-full {
     width: 100%;
     max-width: 100%;
@@ -238,5 +247,11 @@ form.audit-criteria-systems-edit-form {
      input[type="submit"] {
        @extend .btn-accent;
      }
+  }
+}
+
+form.csv-entity-import {
+  .form-item-users-upload {
+    @extend .highlight;
   }
 }

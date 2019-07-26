@@ -9,7 +9,7 @@ dependencies:
 id: audit_tool_csvimportblock
 theme: audit_tool
 region: content
-weight: 11
+weight: 9
 provider: null
 plugin: csv_import_block
 settings:

@@ -10,7 +10,7 @@ dependencies:
 id: audit_tool_views_block__department_view_block_1
 theme: audit_tool
 region: content
-weight: 12
+weight: 10
 provider: null
 plugin: 'views_block:department_view-block_1'
 settings:
