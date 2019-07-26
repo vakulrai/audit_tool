@@ -1,0 +1,43 @@
+form#views-exposed-form-planned-audit-listing-planned-audit {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	.form-item-title {
+		@media (min-width: 768px) {
+      flex: 1;
+      input {
+			  max-width: 90%;  
+		  }
+	  }
+  }
+}
+
+form.pre-audit-form,
+form.update-audit-findings {
+  .form-type-managed-file {
+    @extend .info;
+    &:before {
+      display: none;
+    }
+  }
+  details.form-wrapper {
+    summary {
+      @extend .text-primary;
+      @extend .h3;
+    }
+  }
+}
+
+div.ui-dialog {
+  .ui-dialog-titlebar {
+    @extend .card-bg-primary;
+  }
+  input[type="submit"] {
+    @extend .btn-colored;
+    height: auto;
+  }
+  input[value="Cancel"] {
+    @extend .btn-accent;
+  }
+}
