@@ -1271,6 +1271,7 @@ display:
         style: false
         row: false
         access: false
+        css_class: false
       fields:
         title:
           id: title
@@ -1565,6 +1566,7 @@ display:
         options:
           role:
             mr_admin: mr_admin
+      css_class: unit-listing-home-page
     cache_metadata:
       max-age: -1
       contexts:

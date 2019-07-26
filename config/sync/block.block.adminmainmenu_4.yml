@@ -7,6 +7,7 @@ dependencies:
   module:
     - block_class
     - superfish
+    - user
   theme:
     - audit_tool
 third_party_settings:
@@ -15,7 +16,7 @@ third_party_settings:
 id: adminmainmenu_4
 theme: audit_tool
 region: navbar
-weight: -30
+weight: -29
 provider: null
 plugin: 'superfish:admin-main-menu'
 settings:
@@ -72,4 +73,11 @@ settings:
   custom_list_class: ''
   custom_item_class: ''
   custom_link_class: ''
-visibility: {  }
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

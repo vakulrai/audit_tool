@@ -11,8 +11,8 @@ dependencies:
     - audit_tool
 id: audit_tool_adduserauditor
 theme: audit_tool
-region: content
-weight: -9
+region: sidebar_first
+weight: -21
 provider: null
 plugin: 'superfish:add-user-auditor'
 settings:
