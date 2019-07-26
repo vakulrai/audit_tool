@@ -38,16 +38,19 @@ class PreAuditForm extends FormBase {
       $node_object = Node::load($path_args[1]);
       $event_timestamp = $node_object->get('field_start_date')->value;
     }
-    $user_timezone =  drupal_get_user_timezone();
-    $event_timestamp = $this->getTimezoneofEventDate($event_timestamp, $user_timezone, $format = 'd/m/Y H:i:s');
-    $get_current_timestamp = $this->getCurrentTimestamp($user_timezone);
-    $diff = $event_timestamp - $get_current_timestamp;
-    // $diff = 1;
-    // if($diff == 0) {
-    //   $disable_fields = 'TRUE';
+    $date1 = new \DateTime(date('Y-m-d H:i:s', $event_timestamp));
+    $date2 = new \DateTime();
+    $diff = $date2->diff($date1);
+    $months = $diff->m;
+    $days = $diff->days; 
+    $hours = $diff->h;
+    $check_invert_time = $diff->invert;
+    $total_hours = $days * 24 + $hours;
+    // if ($days == 0 && $check_invert_time != 1) {
+    //   $disable_fields = 'FALSE';
     // }
     // else{
-    //   $disable_fields = 'FALSE';
+    //   $disable_fields = 'TRUE';
     // }
     $procedure_no = aps_pre_audit_get_node_value($nid, 'field_procedure_no');
     $procedure_title = aps_pre_audit_get_node_value($procedure_no, 'title');

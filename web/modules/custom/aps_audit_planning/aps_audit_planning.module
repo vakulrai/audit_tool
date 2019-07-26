@@ -180,7 +180,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       $node_object = Node::load($id);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
-    $form['field_suggested_date']['#access'] = FALSE;
+    // $form['field_suggested_date']['#access'] = FALSE;
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'planned_event_redirect';
@@ -234,6 +234,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       $config->set($config_to_use,  $get_mandays_from_config + $update_mandays_from_rev);
       $config->save();
       $form['moderation_state']['widget'][0]['state']['#default_value'] = 'reschedule';
+  $form['moderation_state']['widget'][0]['state']['#default_value'] = 'reschedule';
       foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'notify_on_reschedule';
@@ -621,7 +622,7 @@ function notify_on_reschedule(array $form, \Drupal\Core\Form\FormStateInterface 
   $get_current_timestamp = getCurrentTimestamp($user_timezone);
   $notifictaion_insert = \Drupal::database()->insert('notifications');
   $reschedule_link = $base_url.Url::fromRoute('entity.node.edit_form',['node' => $uri[1]])->toString();
-  $message = 'Following Audit has been requested to Reschedule By: '.$current_user_detail->name->value.'<br> Follow the Audit action link. <a href='.$reschedule_link.'></a>';
+  $message = 'Following Audit has been requested to Reschedule By: <b>'.$current_user_detail->name->value.'</b><br> Follow the Audit action link.'.'<a href="'.$reschedule_link.'">Link</a>';
   $notifictaion_insert->fields([
     'nid' => $uri[1],
     'uid' => $current_node_detail->getOwner()->id(),

@@ -560,6 +560,8 @@ class UpdateAuditFindings extends PreAuditForm {
     $data['field_hod_signature'] = $form_values['upload_signature_hod'];
     $data['field_qms_head_name'] = $form_values['signature_qms'];
     $data['field_qms_signature'] = $form_values['upload_signature_qms'];
+    $data['moderation_state'] = 'auditee_post_audit';
+    $data['field_status'] = 'open';
     $data['type'] = 'auditor_report';
     $data['title'] = 'Submission for '.$data_array['title'][0]['value'] . ' on '. date('Y-m-d ');
     

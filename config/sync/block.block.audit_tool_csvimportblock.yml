@@ -1,10 +1,9 @@
 uuid: 13b5ce2a-a9bc-4e8d-bb47-860b14563962
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - aps_general
-    - node
   theme:
     - audit_tool
 id: audit_tool_csvimportblock
@@ -18,12 +17,4 @@ settings:
   label: 'Csv import block'
   provider: aps_general
   label_display: '0'
-visibility:
-  node_type:
-    id: node_type
-    bundles:
-      assembly: assembly
-      manufacturing_process: manufacturing_process
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
+visibility: {  }

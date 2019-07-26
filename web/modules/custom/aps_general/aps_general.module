@@ -86,7 +86,7 @@ function sendEmail($module, $type, $to_address, $message, $subject){
  */
 function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   //Condition for Unit Add form
-  $form['moderation_state']['#access'] = FALSE;
+  // $form['moderation_state']['#access'] = FALSE;
   if($form_id == 'node_unit_form'){
     $form['field_total_mandays']['#access'] = FALSE;
     $form['field_updated_mandays']['#access'] = FALSE;
@@ -714,29 +714,29 @@ function getPlannedEventCount($unit_reference){
  * Implements  hook_entity_presave().
  */
 function aps_general_node_presave(Node $node) {
- if($node->bundle() == 'planned_events'){
-    if($suggested_date = $node->get('field_suggested_date')->value){
-      $current_user = \Drupal::currentUser();
-      $roles = $current_user->getRoles();
-      foreach ($roles as $key => $value) {
-        $user_role = $value;
-      }
-      $user_timezone =  drupal_get_user_timezone();
-      $get_current_timestamp = getCurrentTimestamp($user_timezone);
-      if($user_role == 'auditor' || $user_role == 'auditee'){
-        $notifictaion_insert = \Drupal::database()->insert('notifications');
-        $message = 'Reschedule the audit to '.$suggested_date;
-        $notifictaion_insert->fields([
-          'nid' => $node->id(),
-          'uid' => $current_user->id(),
-          'message' => $message,
-          'timestamp' => $get_current_timestamp,
-          'status' => 0,
-        ]);
-        $notifictaion_insert->execute();
-      }
-    }
-  }
+ // if($node->bundle() == 'planned_events'){
+ //    if($suggested_date = $node->get('field_suggested_date')->value){
+ //      $current_user = \Drupal::currentUser();
+ //      $roles = $current_user->getRoles();
+ //      foreach ($roles as $key => $value) {
+ //        $user_role = $value;
+ //      }
+ //      $user_timezone =  drupal_get_user_timezone();
+ //      $get_current_timestamp = getCurrentTimestamp($user_timezone);
+ //      if($user_role == 'auditor' || $user_role == 'auditee'){
+ //        $notifictaion_insert = \Drupal::database()->insert('notifications');
+ //        $message = 'Reschedule the audit to '.$suggested_date;
+ //        $notifictaion_insert->fields([
+ //          'nid' => $node->id(),
+ //          'uid' => $current_user->id(),
+ //          'message' => $message,
+ //          'timestamp' => $get_current_timestamp,
+ //          'status' => 0,
+ //        ]);
+ //        $notifictaion_insert->execute();
+ //      }
+ //    }
+ //  }
 }
 
 /**
