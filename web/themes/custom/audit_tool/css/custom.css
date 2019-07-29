@@ -16196,10 +16196,33 @@ ul.messages-list {
   #navbar .main-navigation-menu > ul li a.menuparent:hover {
     border-color: transparent; }
 
+#drawer ul.menu {
+  margin: 0; }
+  #drawer ul.menu li.menu-item.expanded ul.menu li a {
+    padding: 8px 27px;
+    font-weight: 400;
+    font-size: 95%; }
+    #drawer ul.menu li.menu-item.expanded ul.menu li a.is-active {
+      text-decoration: underline;
+      font-weight: 500; }
+  #drawer ul.menu li.menu-item.expanded.active-trail ul.menu li:not(.active-trail) a {
+    color: rgba(0, 0, 0, 0.87); }
+
 #block-audit-tool-sitebranding {
   text-align: center;
   position: relative;
-  bottom: 50px; }
+  /*	bottom: 50px;
+	@media (min-width: 768px) and (max-width: 1024px) {
+    bottom: 0;
+	}*/ }
+  #block-audit-tool-sitebranding .logo {
+    max-width: -webkit-fit-content;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto; }
+    #block-audit-tool-sitebranding .logo a {
+      display: inline-block;
+      z-index: 100; }
   #block-audit-tool-sitebranding .navbar-title {
     margin-left: 0;
     margin-right: 0; }
@@ -16661,5 +16684,20 @@ form.update-audit-findings .form-type-managed-file:before {
 
 div.ui-dialog input[type="submit"] {
   height: auto; }
+
+@media (max-width: 767px) {
+  #block-audit-tool-tabs ul.tabs.primary {
+    flex-wrap: wrap; }
+  #block-audit-tool-mainpagecontent .views-element-container > div,
+  #block-audit-tool-mradmindashboardcoverage,
+  #block-audit-tool-views-block-auditor-selection-export-auditor-selection-detail,
+  details#findings, details#qualifications, details#kpi, details#scheduling {
+    width: 100%;
+    overflow-x: scroll; }
+  .sidebar {
+    width: 100%;
+    display: inline-block; }
+  #block-auditplanningblock-2 > .fc > .fc-toolbar.fc-header-toolbar {
+    flex-wrap: wrap; } }
 
 /*# sourceMappingURL=../css/custom.css.map */

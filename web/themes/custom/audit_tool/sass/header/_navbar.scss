@@ -36,3 +36,35 @@
   	}
   }
 }
+
+#drawer {
+  ul.menu {
+    margin: 0;
+    li.menu-item {
+      &.expanded {
+        ul.menu {
+          li {
+            a {
+              padding: 8px 27px;
+              font-weight: 400;
+              font-size: 95%;
+              &.is-active {
+                text-decoration: underline;
+                font-weight: 500;
+              }
+            }
+          }
+        }
+        &.active-trail {
+          ul.menu {
+            li:not(.active-trail) {
+              a {
+                color: rgba(0, 0, 0, 0.87);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
