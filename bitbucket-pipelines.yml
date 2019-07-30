@@ -3,7 +3,4 @@ pipelines:
     - step:
         deployment: test
         script:
-          - composer install
-          - drush cim
-          - drush cr
-
+          - echo "A Test"
