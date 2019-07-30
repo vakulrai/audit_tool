@@ -33,6 +33,9 @@ class MradminDashboardCoverage extends BlockBase {
     $build['tableselect_element'] = [
       '#type' => 'table',
       '#header' => $header,
+      '#prefix' => '<div class=table-responsive-wrapper>',
+      '#suffix' => '</div>',
+      '#attributes' => ['class' => ['table-responsive']],
       '#empty' => t('No content available.'),
     ];
     $data = $this->getAuditDetails($uri[1]);
@@ -44,26 +47,31 @@ class MradminDashboardCoverage extends BlockBase {
 	        $build['tableselect_element'][$sr]['audit_type'] = [
 	          '#markup' => strtoupper($key),
 	          '#title_display' => 'invisible',
+            '#wrapper_attributes' => ['data-label' => 'Audit.'],
 	        ];
 
 	        $build['tableselect_element'][$sr]['type'] = [
 	          '#markup' => $data_key['type'] ? $data_key['type'] : '-',
 	          '#title_display' => 'invisible',
+            '#wrapper_attributes' => ['data-label' => 'Audit Type'],
 	        ];
 
 	        $build['tableselect_element'][$sr]['completed'] = [
 	          '#markup' => $data_key['completed']? $data_key['completed'] : '-',
 	          '#title_display' => 'invisible',
+            '#wrapper_attributes' => ['data-label' => 'Completed'],
 	        ];
 
 	        $build['tableselect_element'][$sr]['on_going'] = [
 	          '#markup' => $data_key['on-going']? $data_key['on-going'] : '-',
 	          '#title_display' => 'invisible',
+            '#wrapper_attributes' => ['data-label' => 'on-going'],
 	        ];
 
 	        $build['tableselect_element'][$sr]['count'] = [
 	          '#markup' => $data_key['count']? $data_key['count'] : '-',
 	          '#title_display' => 'invisible',
+            '#wrapper_attributes' => ['data-label' => 'Total'],
 	        ];
 	        $sr++;
         }
