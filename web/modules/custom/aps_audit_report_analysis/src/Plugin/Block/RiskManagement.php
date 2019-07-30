@@ -84,12 +84,12 @@ class RiskManagement extends BlockBase {
 
     //Get data for Finding categories minor/major.
     $risk_data = [];
-    // $risk_data['findings']['count_audits'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?field_finding_categories_target_id=major&field_finding_categories_target_id=minor'));
     $risk_data['findings']['major'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?field_finding_categories_target_id=major&type=auditor_report'));
     $risk_data['findings']['minor'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?field_finding_categories_target_id=minor&type=auditor_report'));
-    $risk_data['findings']['count_audits'] = $risk_data['findings']['major'] + $risk_data['findings']['minor'];
 
     $risk_data['findings']['no_of_department'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?type=department'));
+    //Get Frequency form Audit criteria settings.
+    $frequency = getListofMonths($uri[1]);
     //Logic for calculating score.
     $total_marks_obtained = 0;
     $finding_percentage_minor = 0;
@@ -115,26 +115,25 @@ class RiskManagement extends BlockBase {
     }
    
     if($total_marks_obtained != 0){
-      $major = $total_marks_obtained - $finding_percentage_minor;
-      $minor = $total_marks_obtained - $finding_percentage_major;
+      $major = $risk_data['findings']['major'];
+      $minor = $risk_data['findings']['minor'];
       if($major != 0){
         $finding_percentage_major = ($major/ $total_marks_obtained * 100);
-        if($finding_percentage_major < 75){
-          $risk_category = 'MEDIUM';
-          $score = 3;
-        }
-        elseif($finding_percentage_major > 75) {
           $risk_category = 'LOW';
           $score = 1;
+      }
+      else{
+        if($minor != 0){
+          $finding_percentage_minor = ($minor/ $total_marks_obtained * 100);
+          if($finding_percentage_minor == 50){
+            $risk_category = 'MEDIUM';
+            $score = 3;
+          }
         }
         else{
           $risk_category = 'HIGH';
           $score = 5;
         }
-      }
-      else{
-        $risk_category = 'HIGH';
-        $score = 5;
       }
     }
     else{
@@ -164,12 +163,12 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['findings']['tableselect_element'][0]['incidence'] = [
-      '#markup' => $score,
+      '#markup' => $frequency,
       '#title_display' => 'invisible',
     ];
 
     $build['findings']['tableselect_element'][0]['risk_score'] = [
-      '#markup' => $score,
+      '#markup' => $score * $frequency,
       '#title_display' => 'invisible',
     ];
 
@@ -221,28 +220,36 @@ class RiskManagement extends BlockBase {
       $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($value->field_finding_categories_target_id);
       $names = $term->name->value;
       if($names == 'Improvement - Quality'){
+        $quality_no = count($term->tid->value);
         $total += 3 * count($term->tid->value);
         $quality = $total;
         $key_quality += count($term->tid->value);
         $count_no_of_frequency[$names] = $key_quality;
+        $names_array[$names] = $names;
       }
       elseif ($names == 'Improvement - Cost') {
+        $cost_no = count($term->tid->value);
         $total += 5 * count($term->tid->value);
         $cost = $total;
         $key_cost += count($term->tid->value);
         $count_no_of_frequency[$names] = $key_cost;
+        $names_array[$names] = $names;
       }
       elseif ($names == 'Improvement - Productivity') {
+        $prod_no = count($term->tid->value);
         $total += 5 * count($term->tid->value);
         $productivity = $total;
         $key_productivity += count($term->tid->value);
         $count_no_of_frequency[$names] = $key_productivity;
+        $names_array[$names] = $names;
       }
       elseif ($names == 'Procedural Related') {
+        $procedural_no = count($term->tid->value);
         $total += 2 *count($term->tid->value);
         $procedural = $total;
         $key_procedural += count($term->tid->value);
         $count_no_of_frequency[$names] = $key_procedural;
+        $names_array[$names] = $names;
       }
       elseif ($names == 'No Improvement Point') {
         if($names == 'No Improvement Point' && $value->field_kpi_status_value == 'achieved'){
@@ -276,22 +283,6 @@ class RiskManagement extends BlockBase {
           $count_no_of_frequency[$names] = $key_no;
         }
       }
-      if($names == 'No Improvement Point'){
-        $risk_category_improvement = 'HIGH';
-        $score_improvement = 5;
-      }
-      elseif ($names == 'Procedural Related' && $names == 'Improvement - Quality') {
-        $risk_category_improvement = 'MEDIUM';
-        $score_improvement = 3;
-      }
-      elseif ($names == 'Improvement - Cost' || $names == 'Improvement - Productivity') {
-        $risk_category_improvement = 'LOW';
-        $score_improvement = 1;
-      }
-      else{
-        $risk_category_improvement = 'Not Found';
-        $score_improvement = 0;
-      }
       
       //Risk Prameter for KPI.
       if($kpi_total == 0){
@@ -307,12 +298,34 @@ class RiskManagement extends BlockBase {
         $kpi = 1;
       }
     }
+
+    if($names_array['No Improvement Point']){
+        $names_array[$names] = $names;
+        $risk_category_improvement = 'HIGH';
+        $score_improvement = 5;
+      }
+      elseif ($names_array['Procedural Related'] && $names_array['Improvement - Quality']) {
+        $risk_category_improvement = 'MEDIUM';
+        $score_improvement = 3;
+      }
+      elseif ($names_array['Improvement - Cost'] || $names_array['Improvement - Productivity']) {
+        $risk_category_improvement = 'LOW';
+        $score_improvement = 1;
+      }
+      else{
+        $risk_category_improvement = 'Not Found';
+        $score_improvement = 0;
+      }
     $maxs = array_keys($count_no_of_frequency, max($count_no_of_frequency));
     $get_max_count = $count_no_of_frequency[$maxs[0]];
     $build['findings']['tableselect_element_imp_points'] = [
       '#type' => 'table',
-      '#header' => $header,
+      '#header' => $header_findings,
       '#empty' => t('No content available.'),
+    ];
+    
+    $build['findings']['tableselect_element_imp_points'][0]['each_score'] = [
+      '#markup' => '<b>Improvement - Quality</b> '.$quality_no.'</br><b>Improvement - Cost</b>  : '.$cost_no.'<br><b>No Improvement Point</b> '.$no_improvement.'<br><b>Improvement - Productivity</b> '.$prod_no.'<br><b>Procedural Related</b> '.$procedural_no,
     ];
 
     $build['findings']['tableselect_element_imp_points'][0]['obtained_marks_improvement'] = [
@@ -326,12 +339,12 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['findings']['tableselect_element_imp_points'][0]['incidence_improvement'] = [
-      '#markup' => $score_improvement,
+      '#markup' => $frequency,
       '#title_display' => 'invisible',
     ];
 
     $build['findings']['tableselect_element_imp_points'][0]['risk_score_improvement'] = [
-      '#markup' => $get_max_count * $score_improvement,
+      '#markup' => $frequency * $score_improvement,
       '#title_display' => 'invisible',
     ];
 
@@ -365,15 +378,15 @@ class RiskManagement extends BlockBase {
       $total_schedule_reschedule = $reschedule_count;
     }
 
-    if($reschedule_count <= 3){
+    if($reschedule_count < 3){
       $reschedule_risk_category = 'HIGH';
       $risk_count = 5;
     }
-    elseif ($reschedule_count == 6) {
+    elseif ($reschedule_count == 3) {
       $reschedule_risk_category = 'MEDIUM';
       $risk_count = 3;
     }
-    elseif ($reschedule_count == 9) {
+    elseif ($reschedule_count >=3) {
       $reschedule_risk_category = 'LOW';
       $risk_count = 1;
     }
@@ -406,7 +419,7 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['findings']['tableselect_element_rescheduled'][0]['risk_score_improvement'] = [
-      '#markup' => $risk_count,
+      '#markup' => $risk_count * $frequency,
       '#title_display' => 'invisible',
     ];
 

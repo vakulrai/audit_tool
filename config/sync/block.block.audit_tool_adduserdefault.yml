@@ -12,7 +12,7 @@ dependencies:
 id: audit_tool_adduserdefault
 theme: audit_tool
 region: content
-weight: 0
+weight: 2
 provider: null
 plugin: 'superfish:add-user'
 settings:

@@ -15,7 +15,7 @@ third_party_settings:
 id: audit_tool_useraccountmenu
 theme: audit_tool
 region: navbar
-weight: -28
+weight: -29
 provider: null
 plugin: 'system_menu_block:account'
 settings:

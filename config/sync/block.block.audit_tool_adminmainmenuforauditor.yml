@@ -5,17 +5,14 @@ dependencies:
   config:
     - system.menu.admin-main-menu-for-auditor
   module:
-    - block_class
     - superfish
+    - system
     - user
   theme:
     - audit_tool
-third_party_settings:
-  block_class:
-    classes: ' visible-sm  main-navigation-menu'
 id: audit_tool_adminmainmenuforauditor
 theme: audit_tool
-region: navbar
+region: sidebar_first
 weight: -27
 provider: null
 plugin: 'superfish:admin-main-menu-for-auditor'
@@ -28,16 +25,16 @@ settings:
   depth: '0'
   expand_all_items: false
   menu_type: horizontal
-  style: none
+  style: blue
   arrow: 1
   shadow: 1
   speed: fast
   delay: '800'
-  slide: horizontal
+  slide: vertical
   supposition: 1
   hoverintent: 1
-  touch: '1'
-  touchbh: '1'
+  touch: '0'
+  touchbh: '2'
   touchbp: '768'
   touchua: '0'
   touchual: ''
@@ -74,6 +71,11 @@ settings:
   custom_item_class: ''
   custom_link_class: ''
 visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }
   user_role:
     id: user_role
     roles:

@@ -13,7 +13,7 @@ dependencies:
 id: audit_tool_views_block__external_audit_listing_clauses
 theme: audit_tool
 region: content
-weight: 3
+weight: 5
 provider: null
 plugin: 'views_block:external_audit_listing-clauses'
 settings:
