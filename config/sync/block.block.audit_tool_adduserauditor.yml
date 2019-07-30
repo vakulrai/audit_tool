@@ -11,8 +11,8 @@ dependencies:
     - audit_tool
 id: audit_tool_adduserauditor
 theme: audit_tool
-region: sidebar_first
-weight: -21
+region: content
+weight: -9
 provider: null
 plugin: 'superfish:add-user-auditor'
 settings:
@@ -32,8 +32,8 @@ settings:
   slide: vertical
   supposition: 1
   hoverintent: 1
-  touch: '1'
-  touchbh: '1'
+  touch: '0'
+  touchbh: '2'
   touchbp: '768'
   touchua: '0'
   touchual: ''

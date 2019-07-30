@@ -567,7 +567,7 @@ function aps_general_node_insert(Node $node) {
     $count_supplier = 0;
     $count_ia = 0;
     $count_ea = 0;
-    $audit_frequency = getListofMonths();
+    $audit_frequency = getListofMonths($unit_reference);
     foreach ($node_load_multiple as $key => $value) {
       if($value->field_audit_type->value == 'internal' && $value->field_internal_audit_type->value == 'systems'){
         $id_system[] = $key; 
@@ -647,11 +647,11 @@ function aps_general_node_insert(Node $node) {
   }
 }
 
-function getListofMonths(){
+function getListofMonths($unit_reference){
   $get_all_months_name = DateHelper::monthNamesUntranslated();
   $query = \Drupal::database()->select('audit_cycle__field_unit_reference', 'h');
   $query->fields('h',['entity_id']);
-  $query->condition('h.field_unit_reference_target_id', 283);
+  $query->condition('h.field_unit_reference_target_id', $unit_reference);
   $query->range(0, 1);
   $nids = $query->execute()->fetchAll();
   $node_storage = \Drupal::entityManager()->getStorage('audit_cycle');

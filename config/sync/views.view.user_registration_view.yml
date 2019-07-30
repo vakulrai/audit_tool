@@ -1080,7 +1080,6 @@ display:
         fields: false
         style: false
         row: false
-        css_class: false
       style:
         type: grid
         options:
@@ -1093,7 +1092,7 @@ display:
           automatic_width: false
           alignment: horizontal
           col_class_default: false
-          col_class_custom: ''
+          col_class_custom: 'fx col-md-4 col-xs-12'
           row_class_default: false
           row_class_custom: row
       row:
@@ -1103,7 +1102,6 @@ display:
           inline: {  }
           separator: ''
           hide_empty: false
-      css_class: unit-details
     cache_metadata:
       max-age: -1
       contexts:

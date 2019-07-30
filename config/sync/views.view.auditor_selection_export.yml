@@ -1281,7 +1281,7 @@ display:
             identifier: field_finding_categories_target_id
             required: false
             remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               anonymous: '0'

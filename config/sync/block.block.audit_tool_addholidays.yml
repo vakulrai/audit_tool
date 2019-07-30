@@ -30,7 +30,7 @@ settings:
   shadow: 1
   speed: fast
   delay: '800'
-  slide: horizontal
+  slide: vertical
   supposition: 1
   hoverintent: 1
   touch: '0'

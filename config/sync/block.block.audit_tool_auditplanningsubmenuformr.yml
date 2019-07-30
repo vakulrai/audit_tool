@@ -12,8 +12,8 @@ dependencies:
     - audit_tool
 id: audit_tool_auditplanningsubmenuformr
 theme: audit_tool
-region: sidebar_first
-weight: -27
+region: content
+weight: -13
 provider: null
 plugin: 'superfish:audit-planning-sub-menu'
 settings:
@@ -24,8 +24,8 @@ settings:
   level: '1'
   depth: '0'
   expand_all_items: false
-  menu_type: vertical
-  style: white
+  menu_type: horizontal
+  style: blue
   arrow: 1
   shadow: 1
   speed: fast
@@ -33,8 +33,8 @@ settings:
   slide: horizontal
   supposition: 1
   hoverintent: 1
-  touch: '1'
-  touchbh: '1'
+  touch: '0'
+  touchbh: '2'
   touchbp: '768'
   touchua: '0'
   touchual: ''
