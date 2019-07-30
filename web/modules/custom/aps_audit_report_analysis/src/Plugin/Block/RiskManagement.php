@@ -144,32 +144,40 @@ class RiskManagement extends BlockBase {
     $build['findings']['tableselect_element'] = [
       '#type' => 'table',
       '#header' => $header_findings,
+      '#prefix' => '<div class=table-responsive-wrapper>',
+      '#suffix' => '</div>',
+      '#attributes' => ['class' => ['table-responsive']],
       '#empty' => t('No content available.'),
     ];
     
     $build['findings']['tableselect_element'][0]['each_score'] = [
       '#markup' => '<b>Minor</b>  :  3*'.$risk_data['findings']['minor'].'</br><b>Major</b>  :  5*'.$risk_data['findings']['major'].'<br><b>None</b>  :  0*0',
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'NUMBER'],
     ];
 
     $build['findings']['tableselect_element'][0]['obtained_marks'] = [
       '#markup' => 'Deviations<br>(Total):'.$total_marks_obtained,
       '#title_display' => 'invisible',
+       '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
     $build['findings']['tableselect_element'][0]['risk_cat'] = [
       '#markup' => $risk_category,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
     $build['findings']['tableselect_element'][0]['incidence'] = [
       '#markup' => $frequency,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
     $build['findings']['tableselect_element'][0]['risk_score'] = [
       '#markup' => $score * $frequency,
       '#title_display' => 'invisible',
+       '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
     ];
 
     $build['findings']['risk_score_details'] = [
@@ -321,31 +329,40 @@ class RiskManagement extends BlockBase {
     $build['findings']['tableselect_element_imp_points'] = [
       '#type' => 'table',
       '#header' => $header_findings,
+      '#prefix' => '<div class=table-responsive-wrapper>',
+      '#suffix' => '</div>',
+      '#attributes' => ['class' => ['table-responsive']],
       '#empty' => t('No content available.'),
     ];
     
     $build['findings']['tableselect_element_imp_points'][0]['each_score'] = [
       '#markup' => '<b>Improvement - Quality</b> '.$quality_no.'</br><b>Improvement - Cost</b>  : '.$cost_no.'<br><b>No Improvement Point</b> '.$no_improvement.'<br><b>Improvement - Productivity</b> '.$prod_no.'<br><b>Procedural Related</b> '.$procedural_no,
+       '#wrapper_attributes' => ['data-label' => 'NUMBER'],
     ];
+
 
     $build['findings']['tableselect_element_imp_points'][0]['obtained_marks_improvement'] = [
       '#markup' => 'Improvement Points<br>'.$total,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
     $build['findings']['tableselect_element_imp_points'][0]['risk_cat_dev_improvement'] = [
       '#markup' => $risk_category_improvement,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
     $build['findings']['tableselect_element_imp_points'][0]['incidence_improvement'] = [
       '#markup' => $frequency,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
     $build['findings']['tableselect_element_imp_points'][0]['risk_score_improvement'] = [
       '#markup' => $frequency * $score_improvement,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
     ];
 
     $build['findings']['risk_score_details_improvement'] = [
@@ -400,27 +417,34 @@ class RiskManagement extends BlockBase {
     $build['findings']['tableselect_element_rescheduled'] = [
       '#type' => 'table',
       '#header' => $header,
+      '#prefix' => '<div class=table-responsive-wrapper>',
+      '#suffix' => '</div>',
+      '#attributes' => ['class' => ['table-responsive']],
       '#empty' => t('No content available.'),
     ];
 
     $build['findings']['tableselect_element_rescheduled'][0]['obtained_marks_improvement'] = [
       '#markup' => 'adherence to Reschedule<br>'.$total_schedule_reschedule,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
     $build['findings']['tableselect_element_rescheduled'][0]['risk_cat_dev_improvement'] = [
       '#markup' => $reschedule_risk_category,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
     $build['findings']['tableselect_element_rescheduled'][0]['incidence_improvement'] = [
       '#markup' => $risk_count,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
     $build['findings']['tableselect_element_rescheduled'][0]['risk_score_improvement'] = [
       '#markup' => $risk_count * $frequency,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
     ];
 
     $build['findings']['risk_score_details_rescheduled'] = [
@@ -464,27 +488,34 @@ class RiskManagement extends BlockBase {
     $build['qualifications']['tableselect_element_qualifications'] = [
       '#type' => 'table',
       '#header' => $header,
+      '#prefix' => '<div class=table-responsive-wrapper>',
+      '#suffix' => '</div>',
+      '#attributes' => ['class' => ['table-responsive']],
       '#empty' => t('No content available.'),
     ];
 
     $build['qualifications']['tableselect_element_qualifications'][0]['obtained_marks_improvement'] = [
       '#markup' => 'Score<br>'.$count_auditor,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
     $build['qualifications']['tableselect_element_qualifications'][0]['risk_cat_dev_improvement'] = [
       '#markup' => $qual_risk_category,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
     $build['qualifications']['tableselect_element_qualifications'][0]['incidence_improvement'] = [
       '#markup' => $qual_risk_score,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
     $build['qualifications']['tableselect_element_qualifications'][0]['risk_score_improvement'] = [
       '#markup' => $count_auditor * $qual_risk_score,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
     ];
 
     $build['qualifications']['risk_score_details_qualifications'] = [
@@ -538,27 +569,34 @@ class RiskManagement extends BlockBase {
     $build['scheduling']['audit_release']['tableselect'] = [
       '#type' => 'table',
       '#header' => $header,
+      '#prefix' => '<div class=table-responsive-wrapper>',
+      '#suffix' => '</div>',
+      '#attributes' => ['class' => ['table-responsive']],
       '#empty' => t('No content available.'),
     ];
 
     $build['scheduling']['audit_release']['tableselect'][0]['obtained_marks_improvement'] = [
       '#markup' => 'Timely release as calculated<br>'.$total_score_release,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
     $build['scheduling']['audit_release']['tableselect'][0]['risk_cat_dev_improvement'] = [
       '#markup' => $risk_level,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
     $build['scheduling']['audit_release']['tableselect'][0]['incidence_improvement'] = [
       '#markup' => $risk_score,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
     $build['scheduling']['audit_release']['tableselect'][0]['risk_score_improvement'] = [
       '#markup' => $risk_score * $total_score_release,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
     ];
 
     $build['scheduling']['audit_release']['details'] = [
@@ -619,27 +657,34 @@ class RiskManagement extends BlockBase {
     $build['scheduling']['ap']['ap_tableselect'] = [
       '#type' => 'table',
       '#header' => $header,
+      '#prefix' => '<div class=table-responsive-wrapper>',
+      '#suffix' => '</div>',
+      '#attributes' => ['class' => ['table-responsive']],
       '#empty' => t('No content available.'),
     ];
 
     $build['scheduling']['ap']['ap_tableselect'][0]['obtained_marks_improvement'] = [
       '#markup' => 'coverage of all sections in Audit cycle<br>'.$ap_total,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
     $build['scheduling']['ap']['ap_tableselect'][0]['risk_cat_dev_improvement'] = [
       '#markup' => $ap_risk_cat,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
     $build['scheduling']['ap']['ap_tableselect'][0]['incidence_improvement'] = [
       '#markup' => $ap_score,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
     $build['scheduling']['ap']['ap_tableselect'][0]['risk_score_improvement'] = [
       '#markup' => $ap_score * $ap_total,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
     ];
 
     $build['scheduling']['ap']['ap_details'] = [
@@ -658,27 +703,34 @@ class RiskManagement extends BlockBase {
     $build['kpi']['tableselect_element_imp_points'] = [
       '#type' => 'table',
       '#header' => $header,
+      '#prefix' => '<div class=table-responsive-wrapper>',
+      '#suffix' => '</div>',
+      '#attributes' => ['class' => ['table-responsive']],
       '#empty' => t('No content available.'),
     ];
 
     $build['kpi']['tableselect_element_imp_points'][0]['obtained_marks_improvement'] = [
       '#markup' => 'Improvement Points<br>'.$kpi_total,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
     $build['kpi']['tableselect_element_imp_points'][0]['risk_cat_dev_improvement'] = [
       '#markup' => $risk_category_improvement,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
     $build['kpi']['tableselect_element_imp_points'][0]['incidence_improvement'] = [
       '#markup' => $kpi,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
     $build['kpi']['tableselect_element_imp_points'][0]['risk_score_improvement'] = [
       '#markup' => $kpi_total * $kpi,
       '#title_display' => 'invisible',
+      '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
     ];
 
     $build['kpi']['risk_score_details_improvement'] = [
