@@ -84,10 +84,11 @@ class RiskManagement extends BlockBase {
 
     //Get data for Finding categories minor/major.
     $risk_data = [];
-    $risk_data['findings']['count_audits'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?field_finding_categories_target_id=major&field_finding_categories_target_id=minor'));
+    // $risk_data['findings']['count_audits'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?field_finding_categories_target_id=major&field_finding_categories_target_id=minor'));
     $risk_data['findings']['major'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?field_finding_categories_target_id=major&type=auditor_report'));
     $risk_data['findings']['minor'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?field_finding_categories_target_id=minor&type=auditor_report'));
-    
+    $risk_data['findings']['count_audits'] = $risk_data['findings']['major'] + $risk_data['findings']['minor'];
+
     $risk_data['findings']['no_of_department'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?type=department'));
     //Logic for calculating score.
     $total_marks_obtained = 0;

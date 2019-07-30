@@ -43,11 +43,14 @@ class UpdateAuditFindings extends PreAuditForm {
         $this-> t('Result'),
         $this-> t('Finding Categories'),
         $this-> t('Clause'),
+        $this-> t(''),
+        $this-> t(''),
         $this-> t('KPI Status'),
       ];
 
       $header_report = [
         $this->t('Occurence'),
+        $this-> t(''),
         $this-> t('Standard'),
       ];
 
