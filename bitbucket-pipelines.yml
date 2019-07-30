@@ -1,6 +1,0 @@
-pipelines:
-  default:
-    - step:
-        deployment: test
-        script:
-          - echo "A Test"
