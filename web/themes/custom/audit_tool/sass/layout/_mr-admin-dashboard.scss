@@ -249,3 +249,39 @@ input#edit-submit {
     text-transform: uppercase;
   }
 }
+
+div#block-audit-tool-riskmanagement {
+ > fieldset {
+   > div.fieldset-wrapper {
+     @media (min-width: 1025px) {
+        display: flex;
+        flex-wrap: wrap;
+         > div {
+           flex: 0 0 50%;
+           .highcharts-container {
+             width: 100% !important;
+             > svg {
+                width: 100% !important;
+                position: absolute;
+                height: 100% !important;
+                left: 0;
+                top: 0;
+             }
+           }
+         }
+     }
+   }
+ }
+}
+
+.highcharts-container {
+  width: 100% !important;
+  position: relative;
+  > svg {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
