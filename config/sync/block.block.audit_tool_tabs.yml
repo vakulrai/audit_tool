@@ -9,7 +9,7 @@ dependencies:
 id: audit_tool_tabs
 theme: audit_tool
 region: content
-weight: -14
+weight: -23
 provider: null
 plugin: local_tasks_block
 settings:

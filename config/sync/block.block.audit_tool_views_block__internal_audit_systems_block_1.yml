@@ -13,7 +13,7 @@ dependencies:
 id: audit_tool_views_block__internal_audit_systems_block_1
 theme: audit_tool
 region: content
-weight: 0
+weight: -9
 provider: null
 plugin: 'views_block:internal_audit_systems-block_1'
 settings:

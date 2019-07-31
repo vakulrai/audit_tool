@@ -11,7 +11,7 @@ dependencies:
 id: audit_tool_generatereports
 theme: audit_tool
 region: sidebar_second
-weight: -29
+weight: -28
 provider: null
 plugin: generate_reports
 settings:
