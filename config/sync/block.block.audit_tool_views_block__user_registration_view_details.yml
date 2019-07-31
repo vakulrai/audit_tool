@@ -11,8 +11,8 @@ dependencies:
     - audit_tool
 id: audit_tool_views_block__user_registration_view_details
 theme: audit_tool
-region: content
-weight: -5
+region: sidebar_second
+weight: -29
 provider: null
 plugin: 'views_block:user_registration_view-details'
 settings:

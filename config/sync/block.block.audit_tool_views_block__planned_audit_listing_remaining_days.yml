@@ -12,7 +12,7 @@ dependencies:
 id: audit_tool_views_block__planned_audit_listing_remaining_days
 theme: audit_tool
 region: content
-weight: -20
+weight: -25
 provider: null
 plugin: 'views_block:planned_audit_listing-remaining_days'
 settings:

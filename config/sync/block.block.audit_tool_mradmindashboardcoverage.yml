@@ -11,7 +11,7 @@ dependencies:
 id: audit_tool_mradmindashboardcoverage
 theme: audit_tool
 region: content
-weight: -3
+weight: -15
 provider: null
 plugin: mradmin_dashboard_coverage
 settings:

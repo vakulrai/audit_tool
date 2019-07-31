@@ -13,7 +13,7 @@ dependencies:
 id: audit_tool_views_block__planned_audit_listing_audit_details
 theme: audit_tool
 region: content
-weight: -18
+weight: -24
 provider: null
 plugin: 'views_block:planned_audit_listing-audit_details'
 settings:
