@@ -16,3 +16,19 @@ function audit_tool_preprocess_html(&$variables) {
   //$variables['attributes']['class'][] = 'primary-blue-gray';
   //$variables['attributes']['class'][] = 'navbar-fixed';
 }
+
+function audit_tool_preprocess_views_view_table(&$variables) {
+  // Get view id and display id from current view.
+  $view_id = $variables['view']->id();
+  $display_object = $variables['view']->getDisplay();
+  $display_id = $display_object->display['id'];
+
+  // Check for view id and display id.
+  if ($view_id  && $display_id ) {
+    foreach ($variables['rows'] as $row_id => $row) {
+      foreach ($row['columns'] as $column_id => $column) {
+        $variables['rows'][$row_id]['columns'][$column_id]['label'] = $variables['header'][$column_id]['content'];
+      }
+    }
+  }
+}
