@@ -2,14 +2,26 @@
   'use strict';
   Drupal.behaviors.risk_management_js = {
     attach: function (context, settings) {
-      // var audit_detail = drupalSettings.auditDetail;
+      var risk_percentage = drupalSettings.risk_percentage;
+      var risk_type = drupalSettings.risk_type;
+      var color = '';
+
+      if(risk_percentage > 0 && risk_percentage < 33.33 && risk_type == 'LOW'){
+        color = '#3980D1';
+      }
+      else if(risk_percentage >= 33.33 && risk_percentage <= 66.66 && risk_type == 'MEDIUM'){
+        color = '#55616E';
+      }
+      else{
+        color = '#DF5353';
+      }
       var gaugeOptions = {
 
 		    chart: {
 		        type: 'solidgauge'
 		    },
 		    title: {
-              text: 'Risk Meter',
+              text: 'Risk Meter<br>'+risk_type,
               align: 'center',
               verticalAlign: 'middle',
               y: 50
@@ -17,7 +29,7 @@
 
 		    pane: {
 		        center: ['50%', '75%'],
-		        size: '70%',
+		        size: '100%',
 		        startAngle: -90,
 		        endAngle: 90,
 		        background: {
@@ -73,7 +85,9 @@
 
 		    series: [{
 		        name: 'Risk',
-		        data: [20],
+		        data: [risk_percentage],
+		        colors: [color],
+		        selected: true,
 		        dataLabels: {
 		            format:
 		                '<div style="text-align:center">' +
@@ -105,6 +119,7 @@
 		},
         plotOptions: {
             pie: {
+            	allowPointSelect: true,
                 dataLabels: {
                     enabled: true,
                     distance: -50, 
@@ -132,7 +147,8 @@
                 ['LOW: 1',33.7],
                 ['MODERATE: 3',33.7],
                 ['HIGH: 5',33.7],    
-            ]
+            ],
+            colors: ['#3980D1', '#55616E', '#DF5353']
         }]
     });
         

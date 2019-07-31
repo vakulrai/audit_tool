@@ -24,7 +24,7 @@ class RiskManagement extends BlockBase {
     $first_last_date_monthly = [];
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $uri = explode('/', $current_uri);
-    
+    $risk_scale_array = [];
     $build['risk_management_fieldset']['risk_management'] = [
       '#type' => 'fieldset',
     ];
@@ -53,18 +53,18 @@ class RiskManagement extends BlockBase {
       '#collapsed' => FALSE,
     ];
 
-    $build['performance'] = [
-      '#type' => 'details', 
-      '#title' => t('Conclusion od Audit Cycle'), 
-      '#attributes' => ['id' => 'performance'], 
-      '#collapsible' => TRUE, 
-      '#collapsed' => FALSE,
-    ];
-
     $build['scheduling'] = [
       '#type' => 'details', 
       '#title' => t('Scheduling'), 
       '#attributes' => ['id' => 'scheduling'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    ];
+
+    $build['performance'] = [
+      '#type' => 'details', 
+      '#title' => t('Conclusion of Audit Cycle'), 
+      '#attributes' => ['id' => 'performance'], 
       '#collapsible' => TRUE, 
       '#collapsed' => FALSE,
     ];
@@ -150,6 +150,7 @@ class RiskManagement extends BlockBase {
       $score = 5;
     }
 
+    $risk_scale_array[] = $risk_category;
     $build['findings']['tableselect_element'] = [
       '#type' => 'table',
       '#header' => $header_findings,
@@ -339,7 +340,8 @@ class RiskManagement extends BlockBase {
         $kpi = 1;
       }
     }
-
+    
+    $risk_scale_array[] = $risk_category_improvement;
     if($names_array['No Improvement Point']){
         $names_array[$names] = $names;
         $risk_category_improvement = 'HIGH';
@@ -441,6 +443,7 @@ class RiskManagement extends BlockBase {
       $risk_count = 1;
     }
     
+    $risk_scale_array[] = $reschedule_risk_category;
     // if($risk_data['adherence']['rescheduled'] > $risk_data['adherence']['scheduled']){
     //   $score_improvement_adherence = $risk_data['adherence']['rescheduled'];
     // }
@@ -517,7 +520,8 @@ class RiskManagement extends BlockBase {
        $qual_risk_category = 'HIGH';
        $qual_risk_score = 5;
     }
-
+    
+    $risk_scale_array[] = $qual_risk_category;
     $build['qualifications']['tableselect_element_qualifications'] = [
       '#type' => 'table',
       '#header' => $header,
@@ -598,7 +602,8 @@ class RiskManagement extends BlockBase {
       $risk_level = 'HIGH';
       $risk_score = 5;
     }
-
+    
+    $risk_scale_array[] = $risk_level;
     $build['scheduling']['audit_release']['tableselect'] = [
       '#type' => 'table',
       '#header' => $header,
@@ -686,7 +691,8 @@ class RiskManagement extends BlockBase {
     else{
       $ap_score = 0;
     }
-
+    
+    $risk_scale_array[] = $ap_risk_cat;
     $build['scheduling']['ap']['ap_tableselect'] = [
       '#type' => 'table',
       '#header' => $header,
@@ -778,7 +784,7 @@ class RiskManagement extends BlockBase {
       '#markup' => '<b>KPI achieved and  with No Improvement Findings </b>  :'.$kpi_total.'</br><b>KPI not achieved and  with No Improvement Findings </b>  : '.$kpi_total.'<br><b>KPI achieved and with Minor nonconformity Findings </b>  : '.$kpi_total.'<br><b>KPI not achieved and  with Minor Non conformity  Findings </b>  : '.$kpi_total.'<br><b>KPI achieved and with Major non conformity Findings </b>  : '.$kpi_total.'<br><b>KPI not achieved and with Major Non Findings</b>  : '.$kpi_total,
     ];
 
-    //Get data for Audit Performance.
+    //Get data for Audit Performance - Improvement actions implementation.
     $total_implemented_notimplemented = $count_improvement_implemented + $count_improvement_not_implemented;
     $not_implemented = 0;
     $greater_than_50 = ($count_improvement_implemented / $total_implemented_notimplemented) * 100;
@@ -806,7 +812,8 @@ class RiskManagement extends BlockBase {
       $score_performance = 0;
       $total_implemented_notimplemented_score = 0;
     }
-
+    
+    $risk_scale_array[] = $risk_category_performance;
     $build['performance']['tableselect_element_performance'] = [
       '#type' => 'table',
       '#header' => $header_findings,
@@ -849,7 +856,85 @@ class RiskManagement extends BlockBase {
       '#markup' => '<b>Implemented </b>  :'.$count_improvement_implemented.'</br><b>50% Implemented</b>  : '.($count_improvement_implemented / $total_implemented_notimplemented).'<br><b>Not Implemented </b>  : '.$count_improvement_not_implemented,
     ];
 
+    //Get data for Audit Performance - Checklist additions.
+    $checlist_delta_added_total = 0;
+    $check_deltaQ_added_to_checklist = count(getAuditOPtions('auditor_selection','/checklist-addition/'.$uri[1].'?field_answer_type_value=delta'));
+    $check_non_delta_added_to_checklist = count(getAuditOPtions('auditor_selection','/checklist-addition/'.$uri[1].'?field_answer_type_value=non-delta'));
+    
+    if($check_deltaQ_added_to_checklist > 0){
+      $checlist_delta_added_total = $check_deltaQ_added_to_checklist * 3;
+    }
+    else{
+      $checlist_delta_added_total = $check_non_delta_added_to_checklist * 0;
+    }
 
+    if($checlist_delta_added_total == 3){
+      $checklist_score = 1;
+      $checklist_scale = 'LOW';
+    }
+    elseif($checlist_delta_added_total == 0){
+      $checklist_score = 5;
+      $checklist_scale = 'HIGH';
+    }
+    else{
+      $checklist_score = 0;
+      $checklist_scale = 'Not Applicable';
+    }
+    
+    $risk_scale_array[] = $checklist_scale;
+    $build['performance']['tableselect_element_checklist'] = [
+      '#type' => 'table',
+      '#header' => $header_findings,
+      '#empty' => t('No content available.'),
+    ];
+    
+    $build['performance']['tableselect_element_checklist'][1]['each_score'] = [
+      '#markup' => '<b>Auditor recommendations from the audit cycle approved and checklist revised </b>  :'.$check_deltaQ_added_to_checklist.'</br><b>Auidtor recommendations from the audit cycle approved and checklist not revised</b>  : '.$check_non_delta_added_to_checklist,
+    ];
+
+    $build['performance']['tableselect_element_checklist'][1]['obtained_marks_improvement'] = [
+      '#markup' => 'Improvement Points: <br>'.$checlist_delta_added_total,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['performance']['tableselect_element_checklist'][1]['risk_cat_dev_improvement'] = [
+      '#markup' => $checklist_scale,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['performance']['tableselect_element_checklist'][1]['incidence_improvement'] = [
+      '#markup' => $frequency,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['performance']['tableselect_element_checklist'][1]['risk_score_improvement'] = [
+      '#markup' => $checklist_score * $frequency,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['performance']['risk_score_details_checklist'] = [
+      '#type' => 'details', 
+      '#title' => t('View Details'), 
+      '#attributes' => ['id' => 'display'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    ];
+
+    $build['performance']['risk_score_details_checklist']['data_improvement'] = [
+      '#markup' => '<b>Auditor recommendations from the audit cycle approved and checklist revised </b>  :'.$check_deltaQ_added_to_checklist.'</br><b>Auidtor recommendations from the audit cycle approved and checklist not revised</b>  : '.$check_non_delta_added_to_checklist,
+    ];
+    
+    $count_report = count($risk_scale_array);
+    $risk_category_count = array_count_values($risk_scale_array);
+    $risk_category_['high'] = $risk_category_count['HIGH'];
+    $risk_category_['medium']= $risk_category_count['MEDIUM'];
+    $risk_category_['low'] = $risk_category_count['LOW'];
+    $maxs_risk = array_keys($risk_category_, max($risk_category_));
+    $get_max_risk = $risk_category_[$maxs_risk[0]];
+    $total_risk_percentage = ($get_max_risk / $count_report) * 100;
+
+    $build['risk_management']['#attached']['drupalSettings']['risk_percentage'] = $total_risk_percentage;
+    $build['risk_management']['#attached']['drupalSettings']['risk_type'] = strtoupper($maxs_risk[0]);
     return $build;
   }
 
