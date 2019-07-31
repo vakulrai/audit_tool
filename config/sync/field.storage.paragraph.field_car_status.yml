@@ -1,0 +1,27 @@
+uuid: eabb6855-173a-41fd-ad1c-88e878aab450
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_car_status
+field_name: field_car_status
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: implemented
+      label: Implemented
+    -
+      value: not-implemented
+      label: 'Not Implemented'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

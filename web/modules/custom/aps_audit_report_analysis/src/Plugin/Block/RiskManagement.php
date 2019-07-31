@@ -3,6 +3,7 @@
 namespace Drupal\aps_audit_report_analysis\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Provides a 'RiskManagement' block.
@@ -48,6 +49,14 @@ class RiskManagement extends BlockBase {
       '#type' => 'details', 
       '#title' => t('KPI targets of sections and Audit findings '), 
       '#attributes' => ['id' => 'kpi'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    ];
+
+    $build['performance'] = [
+      '#type' => 'details', 
+      '#title' => t('Conclusion od Audit Cycle'), 
+      '#attributes' => ['id' => 'performance'], 
       '#collapsible' => TRUE, 
       '#collapsed' => FALSE,
     ];
@@ -216,8 +225,11 @@ class RiskManagement extends BlockBase {
     $key_no = 0;
     $kpi = 0;
     $kpi_total = 0;
+    $count_improvement_implemented = 0;
+    $count_improvement_not_implemented = 0;
     foreach ($nids as $key => $value) {
       $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($value->field_finding_categories_target_id);
+      $load_item = Paragraph::load($value->id);
       $names = $term->name->value;
       if($names == 'Improvement - Quality'){
         $quality_no = count($term->tid->value);
@@ -226,6 +238,13 @@ class RiskManagement extends BlockBase {
         $key_quality += count($term->tid->value);
         $count_no_of_frequency[$names] = $key_quality;
         $names_array[$names] = $names;
+        if($load_item->field_car_status->value == 'implemented'){
+          $count_improvement_implemented++;
+        }
+        elseif ($load_item->field_car_status->value == 'not-implemented') {
+          $count_improvement_not_implemented++;
+        }
+        $car_status[$load_item->field_car_status->value] = $load_item->field_car_status->value;
       }
       elseif ($names == 'Improvement - Cost') {
         $cost_no = count($term->tid->value);
@@ -234,6 +253,13 @@ class RiskManagement extends BlockBase {
         $key_cost += count($term->tid->value);
         $count_no_of_frequency[$names] = $key_cost;
         $names_array[$names] = $names;
+        if($load_item->field_car_status->value == 'implemented'){
+          $count_improvement_implemented++;
+        }
+        elseif ($load_item->field_car_status->value == 'not-implemented') {
+          $count_improvement_not_implemented++;
+        }
+        $car_status[$load_item->field_car_status->value] = $load_item->field_car_status->value;
       }
       elseif ($names == 'Improvement - Productivity') {
         $prod_no = count($term->tid->value);
@@ -242,6 +268,13 @@ class RiskManagement extends BlockBase {
         $key_productivity += count($term->tid->value);
         $count_no_of_frequency[$names] = $key_productivity;
         $names_array[$names] = $names;
+        if($load_item->field_car_status->value == 'implemented'){
+          $count_improvement_implemented++;
+        }
+        elseif ($load_item->field_car_status->value == 'not-implemented') {
+          $count_improvement_not_implemented++;
+        }
+        $car_status[$load_item->field_car_status->value] = $load_item->field_car_status->value;
       }
       elseif ($names == 'Procedural Related') {
         $procedural_no = count($term->tid->value);
@@ -303,19 +336,19 @@ class RiskManagement extends BlockBase {
         $names_array[$names] = $names;
         $risk_category_improvement = 'HIGH';
         $score_improvement = 5;
-      }
-      elseif ($names_array['Procedural Related'] && $names_array['Improvement - Quality']) {
-        $risk_category_improvement = 'MEDIUM';
-        $score_improvement = 3;
-      }
-      elseif ($names_array['Improvement - Cost'] || $names_array['Improvement - Productivity']) {
-        $risk_category_improvement = 'LOW';
-        $score_improvement = 1;
-      }
-      else{
-        $risk_category_improvement = 'Not Found';
-        $score_improvement = 0;
-      }
+    }
+    elseif ($names_array['Procedural Related'] && $names_array['Improvement - Quality']) {
+      $risk_category_improvement = 'MEDIUM';
+      $score_improvement = 3;
+    }
+    elseif ($names_array['Improvement - Cost'] || $names_array['Improvement - Productivity']) {
+      $risk_category_improvement = 'LOW';
+      $score_improvement = 1;
+    }
+    else{
+      $risk_category_improvement = 'Not Found';
+      $score_improvement = 0;
+    }
     $maxs = array_keys($count_no_of_frequency, max($count_no_of_frequency));
     $get_max_count = $count_no_of_frequency[$maxs[0]];
     $build['findings']['tableselect_element_imp_points'] = [
@@ -654,7 +687,7 @@ class RiskManagement extends BlockBase {
       '#markup' => '<b>All sections covered </b>  :'.$ap_total_all.'* 5'.'</br><b>1 section missed out </b>  : '.$ap_total_one.'* 3'.'<br><b>More then 1 section missed out </b>  : '.$ap_total_more_one.'* 1',
     ];
 
-    //Get data for Finding categories minor/major.
+    //Get data for KPI.
     $build['kpi']['tableselect_element_imp_points'] = [
       '#type' => 'table',
       '#header' => $header,
@@ -691,6 +724,77 @@ class RiskManagement extends BlockBase {
 
     $build['kpi']['risk_score_details_improvement']['data_improvement'] = [
       '#markup' => '<b>KPI achieved and  with No Improvement Findings </b>  :'.$kpi_total.'</br><b>KPI not achieved and  with No Improvement Findings </b>  : '.$kpi_total.'<br><b>KPI achieved and with Minor nonconformity Findings </b>  : '.$kpi_total.'<br><b>KPI not achieved and  with Minor Non conformity  Findings </b>  : '.$kpi_total.'<br><b>KPI achieved and with Major non conformity Findings </b>  : '.$kpi_total.'<br><b>KPI not achieved and with Major Non Findings</b>  : '.$kpi_total,
+    ];
+
+    //Get data for Audit Performance.
+    $total_implemented_notimplemented = $count_improvement_implemented + $count_improvement_not_implemented;
+    $not_implemented = 0;
+    $greater_than_50 = ($count_improvement_implemented / $total_implemented_notimplemented) * 100;
+    
+    if($car_status['implemented']){
+        $names_array[$names] = $names;
+        if($greater_than_50 > 50){
+          $risk_category_performance = 'MEDIUM';
+          $score_performance = 3;
+          $total_implemented_notimplemented_score = 3 * $count_improvement_implemented;
+        }
+        else{
+          $risk_category_performance = 'LOW';
+          $score_performance = 1;
+          $total_implemented_notimplemented_score = 1 * $count_improvement_implemented;
+        }
+    }
+    elseif ($car_status['not-implemented']) {
+      $risk_category_performance = 'HIGH';
+      $score_performance = 5;
+      $total_implemented_notimplemented_score = 0 * $count_improvement_not_implemented;
+    }
+    else{
+      $risk_category_performance = 'Not Found';
+      $score_performance = 0;
+      $total_implemented_notimplemented_score = 0;
+    }
+
+    $build['performance']['tableselect_element_performance'] = [
+      '#type' => 'table',
+      '#header' => $header_findings,
+      '#empty' => t('No content available.'),
+    ];
+    
+    $build['performance']['tableselect_element_performance'][0]['each_score'] = [
+      '#markup' => '<b>Implemented </b>  :'.$count_improvement_implemented.'</br><b>50% Implemented</b>  : '.($count_improvement_implemented / $total_implemented_notimplemented).'<br><b>Not Implemented </b>  : '.$count_improvement_not_implemented,
+    ];
+
+    $build['performance']['tableselect_element_performance'][0]['obtained_marks_improvement'] = [
+      '#markup' => 'Improvement Points: <br>'.$total_implemented_notimplemented_score,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['performance']['tableselect_element_performance'][0]['risk_cat_dev_improvement'] = [
+      '#markup' => $risk_category_performance,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['performance']['tableselect_element_performance'][0]['incidence_improvement'] = [
+      '#markup' => $frequency,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['performance']['tableselect_element_performance'][0]['risk_score_improvement'] = [
+      '#markup' => $score_performance * $frequency,
+      '#title_display' => 'invisible',
+    ];
+
+    $build['performance']['risk_score_details_improvement'] = [
+      '#type' => 'details', 
+      '#title' => t('View Details'), 
+      '#attributes' => ['id' => 'display'], 
+      '#collapsible' => TRUE, 
+      '#collapsed' => FALSE,
+    ];
+
+    $build['performance']['risk_score_details_improvement']['data_improvement'] = [
+      '#markup' => '<b>Implemented </b>  :'.$count_improvement_implemented.'</br><b>50% Implemented</b>  : '.($count_improvement_implemented / $total_implemented_notimplemented).'<br><b>Not Implemented </b>  : '.$count_improvement_not_implemented,
     ];
 
 

@@ -810,6 +810,11 @@ function aps_general_preprocess_page(&$variables) {
     $variables['#attached']['library'][] = 'aps_audit_planning/aps_audit_general_js';
     $variables['#attached']['drupalSettings']['siteBaseUrl'] = $base_url;
   }
+  
+  if($uri[0] == 'planned-audit-listing'){
+    $variables['#attached']['library'][] = 'aps_audit_planning/aps_audit_general_js';
+    $variables['#attached']['drupalSettings']['siteBaseUrl'] = $base_url;
+  }
 }
 
 /**

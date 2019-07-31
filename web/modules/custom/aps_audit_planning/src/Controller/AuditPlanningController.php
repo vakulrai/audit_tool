@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Drupal\node\Entity\Node;
 use Drupal\Component\Utility\Tags;
 use Drupal\Component\Utility\Unicode;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Class AuditPlanningController.
@@ -30,14 +31,27 @@ class AuditPlanningController extends ControllerBase {
   public function updateKPI() {
     $get_kpi_data = $_REQUEST;
     if (count($get_kpi_data)) {
-      try {
-         $node_object = Node::load($get_kpi_data['record_reference']);
-         $node_object->set('field_kpi_status', $get_kpi_data['value_selected']);
-         $node_object->save();
-         $respose['response'] = TRUE;
-      } 
-      catch(\Exception $e) {
-        $respose['response'] = FALSE;
+      if($get_kpi_data['type'] == 'record'){
+        try {
+           $node_object = Node::load($get_kpi_data['record_reference']);
+           $node_object->set('field_kpi_status', $get_kpi_data['value_selected']);
+           $node_object->save();
+           $respose['response'] = TRUE;
+        } 
+        catch(\Exception $e) {
+          $respose['response'] = FALSE;
+        }
+      }
+      else{
+         try {
+           $paragraphs_answer_object = Paragraph::load($get_kpi_data['record_reference']);
+           $paragraphs_answer_object->set('field_car_status', $get_kpi_data['value_selected']);
+           $paragraphs_answer_object->save();
+           $respose['response'] = TRUE;
+        } 
+        catch(\Exception $e) {
+          $respose['response'] = FALSE;
+        }
       }
     }
     return new JsonResponse( $response );

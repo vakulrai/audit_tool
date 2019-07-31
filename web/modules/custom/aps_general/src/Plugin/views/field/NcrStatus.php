@@ -8,15 +8,16 @@ use Drupal\views\Plugin\views\field\FieldPluginBase;
 use Drupal\views\ResultRow;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * A handler to provide a field that is completely custom by the administrator.
  *
  * @ingroup views_field_handlers
  *
- * @ViewsField("kpi_status")
+ * @ViewsField("ncr_status")
  */
-class kpiStatus extends FieldPluginBase {
+class NcrStatus extends FieldPluginBase {
 
   /**
    * {@inheritdoc}
@@ -60,28 +61,24 @@ class kpiStatus extends FieldPluginBase {
     $node_object  = Node::load($nid->id());
     $options = [
       '_none' => '-None-',
-      'achieved' => 'Achieved',
-      'not-achieved' => 'Not Achieved',
+      'implemented' => 'Implemented',
+      'not-implemented' => 'Not Implemented',
     ];
   
-    if(isset($node_object->field_kpi_status->value)){
-      $form['kpi_check'] = [
-        '#type' => 'select',
-        '#required' => TRUE,
-        '#title' => t('<b>KPI Status</b> :'),
-        '#options' => $options,
-        '#attributes' => ['id' => 'kpi-details', 'record_reference' => $nid->id()],
-        '#value'=> $node_object->field_kpi_status->value,
-      ];
-    }
-    else{
-       $form['kpi_check'] = [
-        '#type' => 'select',
-        '#required' => TRUE,
-        '#title' => t('<b>KPI Status</b> :'),
-        '#options' => $options,
-        '#attributes' => ['id' => 'kpi-details', 'record_reference' => $nid->id()],
-      ];
+    if(isset($node_object->field_report_reference->target_id)){
+      $node_report = Node::load($node_object->field_report_reference->target_id);
+      if(isset($node_report->field_audit_list->target_id)){
+        $car_paragraph_id = $node_report->field_audit_list->target_id;
+        $paragraphs_answer_object = Paragraph::load($car_paragraph_id);
+        $form['ncr_check'] = [
+          '#type' => 'select',
+          '#required' => TRUE,
+          '#title' => t('<b>NCR Status</b> :'),
+          '#options' => $options,
+          '#attributes' => ['id' => 'ncr-details', 'record_reference' => $car_paragraph_id],
+          '#value'=> $paragraphs_answer_object->field_car_status->value,
+        ];
+      }
     }
     return $form;
   }

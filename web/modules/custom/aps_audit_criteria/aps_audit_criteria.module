@@ -275,6 +275,18 @@ function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form
        $element['subform']['field_sub_s_no_']['widget'][0]['value']['#default_value'] = $key_pdef;
     }
   }
+
+  if($field_definition->getName() == 'field_audit_list'){
+    $key_pdef = $context['form']['#parents'][1];
+    $widget_state_pdef = \Drupal\Core\Field\WidgetBase::getWidgetState($element['#field_parents'], $field_definition->getName(), $form_state);
+    $paragraph_instance_pdef = $widget_state_pdef['paragraphs'][$element['#delta']]['entity'];
+    $paragraph_type_pdef = $paragraph_instance_pdef->bundle();
+    if($paragraph_type_pdef == 'audit_report'){
+      $element['subform']['field_clause']['#access'] = FALSE;
+      $element['subform']['field_clause_no']['#access'] = FALSE;
+      $element['subform']['field_car_status']['#access'] = FALSE;
+    }
+  }
 }
 
 function aps_audit_criteria_form_paragraphs_subform_alter(array &$subform, \Drupal\Core\Form\FormStateInterface &$form_state, $delta) {
@@ -286,10 +298,6 @@ function aps_audit_criteria_form_paragraphs_subform_alter(array &$subform, \Drup
     $subform['field_answer_qualified']['#disabled'] = TRUE;
     $subform['field_answers_defined']['#disabled'] = TRUE;
     // $subform['field_clause_no']['#access'] = FALSE;
-  }
-  if($paragraph_type == 'audit_report'){
-    $subform['field_clause']['#access'] = FALSE;
-    $subform['field_clause_no']['#access'] = FALSE;
   }
 }
 

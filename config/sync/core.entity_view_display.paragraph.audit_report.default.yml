@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.audit_report.field_car_status
     - field.field.paragraph.audit_report.field_casualty_number
     - field.field.paragraph.audit_report.field_clause
     - field.field.paragraph.audit_report.field_corrective_action
@@ -25,6 +26,13 @@ targetEntityType: paragraph
 bundle: audit_report
 mode: default
 content:
+  field_car_status:
+    weight: 13
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
   field_casualty_number:
     weight: 11
     label: above

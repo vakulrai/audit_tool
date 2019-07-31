@@ -81,5 +81,13 @@ function aps_general_views_data() {
         ],
     ];
 
+    $data['views']['ncr_status'] = [
+        'title' => t('Update NCR Status as Implemented/Not-Implemented'),
+        'help' => t('Update NCR Status'),
+        'field' => [
+            'id' => 'ncr_status',
+        ],
+    ];
+
     return $data;
 }

@@ -1,0 +1,21 @@
+uuid: ed53689e-5a43-4007-b68f-db6be166e728
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_car_status
+    - paragraphs.paragraphs_type.audit_report
+  module:
+    - options
+id: paragraph.audit_report.field_car_status
+field_name: field_car_status
+entity_type: paragraph
+bundle: audit_report
+label: 'CAR Status'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
