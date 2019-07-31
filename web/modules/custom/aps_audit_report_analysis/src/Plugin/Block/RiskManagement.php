@@ -18,12 +18,18 @@ class RiskManagement extends BlockBase {
   /**
    * {@inheritdoc}
    */
-  public function build() {
+  public function build($unit_reference=NULL) {
     $build = [];
     $build = [];
     $first_last_date_monthly = [];
-    $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
-    $uri = explode('/', $current_uri);
+    if($unit_reference == 0){
+      $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+      $uri = explode('/', $current_uri);
+      $unit_reference = $uri[1];
+    }
+    else{
+      $unit_reference = $unit_reference;
+    }
     $risk_scale_array = [];
     $build['risk_management_fieldset']['risk_management'] = [
       '#type' => 'fieldset',
@@ -93,12 +99,12 @@ class RiskManagement extends BlockBase {
 
     //Get data for Finding categories minor/major.
     $risk_data = [];
-    $risk_data['findings']['major'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?field_finding_categories_target_id=major&type=auditor_report'));
-    $risk_data['findings']['minor'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?field_finding_categories_target_id=minor&type=auditor_report'));
+    $risk_data['findings']['major'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$unit_reference.'?field_finding_categories_target_id=major&type=auditor_report'));
+    $risk_data['findings']['minor'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$unit_reference.'?field_finding_categories_target_id=minor&type=auditor_report'));
 
-    $risk_data['findings']['no_of_department'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$uri[1].'?type=department'));
+    $risk_data['findings']['no_of_department'] = count(getAuditOPtions('risk_managemant','/risk-report-export/'.$unit_reference.'?type=department'));
     //Get Frequency form Audit criteria settings.
-    $frequency = getListofMonths($uri[1]);
+    $frequency = getListofMonths($unit_reference);
     //Logic for calculating score.
     $total_marks_obtained = 0;
     $finding_percentage_minor = 0;
@@ -160,31 +166,31 @@ class RiskManagement extends BlockBase {
       '#empty' => t('No content available.'),
     ];
     
-    $build['findings']['tableselect_element'][0]['each_score'] = [
+    $build['findings']['tableselect_element']['data-0']['each_score'] = [
       '#markup' => '<b>Minor</b>  :  3*'.$risk_data['findings']['minor'].'</br><b>Major</b>  :  5*'.$risk_data['findings']['major'].'<br><b>None</b>  :  0*0',
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'NUMBER'],
     ];
 
-    $build['findings']['tableselect_element'][0]['obtained_marks'] = [
+    $build['findings']['tableselect_element']['data-0']['obtained_marks'] = [
       '#markup' => 'Deviations<br>(Total):'.$total_marks_obtained,
       '#title_display' => 'invisible',
        '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
-    $build['findings']['tableselect_element'][0]['risk_cat'] = [
+    $build['findings']['tableselect_element']['data-0']['risk_cat'] = [
       '#markup' => $risk_category,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
-    $build['findings']['tableselect_element'][0]['incidence'] = [
+    $build['findings']['tableselect_element']['data-0']['incidence'] = [
       '#markup' => $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
-    $build['findings']['tableselect_element'][0]['risk_score'] = [
+    $build['findings']['tableselect_element']['data-0']['risk_score'] = [
       '#markup' => $score * $frequency,
       '#title_display' => 'invisible',
        '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
@@ -214,7 +220,7 @@ class RiskManagement extends BlockBase {
     $query->fields('fc',['field_finding_categories_target_id']);
     $query->fields('kpi',['field_kpi_status_value']);
     $query->condition('n.bundle', 'auditor_report');
-    $query->condition('n.field_refere_target_id', $uri[1]);
+    $query->condition('n.field_refere_target_id', $unit_reference);
     $nids = $query->execute()->fetchAll();
 
     $quality = 0;
@@ -370,31 +376,31 @@ class RiskManagement extends BlockBase {
       '#empty' => t('No content available.'),
     ];
     
-    $build['findings']['tableselect_element_imp_points'][0]['each_score'] = [
+    $build['findings']['tableselect_element_imp_points']['data-1']['each_score'] = [
       '#markup' => '<b>Improvement - Quality</b> '.$quality_no.'</br><b>Improvement - Cost</b>  : '.$cost_no.'<br><b>No Improvement Point</b> '.$no_improvement.'<br><b>Improvement - Productivity</b> '.$prod_no.'<br><b>Procedural Related</b> '.$procedural_no,
        '#wrapper_attributes' => ['data-label' => 'NUMBER'],
     ];
 
 
-    $build['findings']['tableselect_element_imp_points'][0]['obtained_marks_improvement'] = [
+    $build['findings']['tableselect_element_imp_points']['data-1']['obtained_marks'] = [
       '#markup' => 'Improvement Points<br>'.$total,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
-    $build['findings']['tableselect_element_imp_points'][0]['risk_cat_dev_improvement'] = [
+    $build['findings']['tableselect_element_imp_points']['data-1']['risk_cat'] = [
       '#markup' => $risk_category_improvement,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
-    $build['findings']['tableselect_element_imp_points'][0]['incidence_improvement'] = [
+    $build['findings']['tableselect_element_imp_points']['data-1']['incidence'] = [
       '#markup' => $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
-    $build['findings']['tableselect_element_imp_points'][0]['risk_score_improvement'] = [
+    $build['findings']['tableselect_element_imp_points']['data-1']['risk_score'] = [
       '#markup' => $frequency * $score_improvement,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
@@ -408,7 +414,7 @@ class RiskManagement extends BlockBase {
       '#collapsed' => FALSE,
     ];
 
-    $build['findings']['risk_score_details_improvement']['data_improvement'] = [
+    $build['findings']['risk_score_details_improvement']['data'] = [
       '#markup' => '<b>Improvement - Quality</b>  :'.$quality.'</br><b>Improvement - Cost</b>  : '.$cost.'<br><b>No Improvement Point</b>  : '.$no_improvement.'<br><b>Improvement - Productivity</b>  : '.$productivity.'<br><b>Procedural Related</b>  : '.$procedural,
     ];
 
@@ -417,9 +423,9 @@ class RiskManagement extends BlockBase {
     $reschedule_count = 0;
     $score_improvement_adherence = 0;
     $total_schedule_reschedule = 0;
-    $risk_data['adherence']['rescheduled'] = count(getAuditOPtions('risk_managemant','/get-moderation-export/'.$uri[1].'?type=planned_events&moderation=workflow_for_audit_planning-reschedule'));
+    $risk_data['adherence']['rescheduled'] = count(getAuditOPtions('risk_managemant','/get-moderation-export/'.$unit_reference.'?type=planned_events&moderation=workflow_for_audit_planning-reschedule'));
     
-    $risk_data['adherence']['scheduled'] = count(getAuditOPtions('risk_managemant','/get-moderation-export/'.$uri[1].'?type=planned_events&moderation=workflow_for_audit_planning-scheduled'));
+    $risk_data['adherence']['scheduled'] = count(getAuditOPtions('risk_managemant','/get-moderation-export/'.$unit_reference.'?type=planned_events&moderation=workflow_for_audit_planning-scheduled'));
 
     if($risk_data['adherence']['rescheduled'] > 0){
       $reschedule_count += 0;
@@ -459,25 +465,25 @@ class RiskManagement extends BlockBase {
       '#empty' => t('No content available.'),
     ];
 
-    $build['findings']['tableselect_element_rescheduled'][0]['obtained_marks_improvement'] = [
+    $build['findings']['tableselect_element_rescheduled']['data-2']['obtained_marks'] = [
       '#markup' => 'adherence to Reschedule<br>'.$total_schedule_reschedule,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
-    $build['findings']['tableselect_element_rescheduled'][0]['risk_cat_dev_improvement'] = [
+    $build['findings']['tableselect_element_rescheduled']['data-2']['risk_cat'] = [
       '#markup' => $reschedule_risk_category,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
-    $build['findings']['tableselect_element_rescheduled'][0]['incidence_improvement'] = [
+    $build['findings']['tableselect_element_rescheduled']['data-2']['incidence'] = [
       '#markup' => $risk_count,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
-    $build['findings']['tableselect_element_rescheduled'][0]['risk_score_improvement'] = [
+    $build['findings']['tableselect_element_rescheduled']['data-2']['risk_score'] = [
       '#markup' => $risk_count * $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
@@ -491,14 +497,14 @@ class RiskManagement extends BlockBase {
       '#collapsed' => FALSE,
     ];
 
-    $build['findings']['risk_score_details_rescheduled']['data_improvement'] = [
+    $build['findings']['risk_score_details_rescheduled']['data'] = [
       '#markup' => '<b>No rescheduling incidences due to Auditor</b>  :'.$risk_data['adherence']['scheduled'].'</br><b>Reported incidences of rescheduling due to Auditor </b>  : '.$risk_data['adherence']['rescheduled'],
     ];
 
     //QUALIFICATIONS
     $count_auditor = 0;
-    $risk_data['qualifications']['auditor7'] = count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value_greater=7'));
-    $risk_data['qualifications']['auditor6'] = count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value_greater=6'));
+    $risk_data['qualifications']['auditor7'] = count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$unit_reference.'?field_score_value_greater=7'));
+    $risk_data['qualifications']['auditor6'] = count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$unit_reference.'?field_score_value_greater=6'));
     if($risk_data['qualifications']['auditor7'] > 0){
        $count_auditor += 3;
     }
@@ -531,25 +537,25 @@ class RiskManagement extends BlockBase {
       '#empty' => t('No content available.'),
     ];
 
-    $build['qualifications']['tableselect_element_qualifications'][0]['obtained_marks_improvement'] = [
+    $build['qualifications']['tableselect_element_qualifications']['data-3']['obtained_marks'] = [
       '#markup' => 'Score<br>'.$count_auditor,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
-    $build['qualifications']['tableselect_element_qualifications'][0]['risk_cat_dev_improvement'] = [
+    $build['qualifications']['tableselect_element_qualifications']['data-3']['risk_cat'] = [
       '#markup' => $qual_risk_category,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
-    $build['qualifications']['tableselect_element_qualifications'][0]['incidence_improvement'] = [
+    $build['qualifications']['tableselect_element_qualifications']['data-3']['incidence'] = [
       '#markup' => $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
-    $build['qualifications']['tableselect_element_qualifications'][0]['risk_score_improvement'] = [
+    $build['qualifications']['tableselect_element_qualifications']['data-3']['risk_score'] = [
       '#markup' => $count_auditor * $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
@@ -563,14 +569,14 @@ class RiskManagement extends BlockBase {
       '#collapsed' => FALSE,
     ];
 
-    $build['qualifications']['risk_score_details_qualifications']['data_improvement'] = [
-      '#markup' => '<b>75% of Auditors in the Qualified Auditor list with a score of 75%</b>  :'.count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value_greater=7')).'</br><b>at least one auditor for each listed Function with a score of >60%</b>  : '.count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value_greater=6')).'<br><b>All other categories </b>  : '.count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$uri[1].'?field_score_value=6')),
+    $build['qualifications']['risk_score_details_qualifications']['data'] = [
+      '#markup' => '<b>75% of Auditors in the Qualified Auditor list with a score of 75%</b>  :'.count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$unit_reference.'?field_score_value_greater=7')).'</br><b>at least one auditor for each listed Function with a score of >60%</b>  : '.count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$unit_reference.'?field_score_value_greater=6')).'<br><b>All other categories </b>  : '.count(getAuditOPtions('auditor_selection','/auditor-and-audit-export/'.$unit_reference.'?field_score_value=6')),
     ];
 
     //Timely release as calculated.
     $risk_data['schedule_release']['#title'] = 'Timely Release as Calculated';
-    $risk_data['schedule_release']['intime'] = count(getAuditOPtions('schedule_release','/get-moderation-export/'.$uri[1].'?type=planned_events&release_status=intime'));
-    $risk_data['schedule_release']['notinintime'] = count(getAuditOPtions('schedule_release','/get-moderation-export/'.$uri[1].'?type=planned_events&release_status=notinintime'));
+    $risk_data['schedule_release']['intime'] = count(getAuditOPtions('schedule_release','/get-moderation-export/'.$unit_reference.'?type=planned_events&release_status=intime'));
+    $risk_data['schedule_release']['notinintime'] = count(getAuditOPtions('schedule_release','/get-moderation-export/'.$unit_reference.'?type=planned_events&release_status=notinintime'));
     $total_score_release = 0;
     $intime_score = 0;
     $notintime_score = 0;
@@ -613,25 +619,25 @@ class RiskManagement extends BlockBase {
       '#empty' => t('No content available.'),
     ];
 
-    $build['scheduling']['audit_release']['tableselect'][0]['obtained_marks_improvement'] = [
+    $build['scheduling']['audit_release']['tableselect']['data-4']['obtained_marks'] = [
       '#markup' => 'Timely release as calculated<br>'.$total_score_release,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
-    $build['scheduling']['audit_release']['tableselect'][0]['risk_cat_dev_improvement'] = [
+    $build['scheduling']['audit_release']['tableselect']['data-4']['risk_cat'] = [
       '#markup' => $risk_level,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
-    $build['scheduling']['audit_release']['tableselect'][0]['incidence_improvement'] = [
+    $build['scheduling']['audit_release']['tableselect']['data-4']['incidence'] = [
       '#markup' => $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
-    $build['scheduling']['audit_release']['tableselect'][0]['risk_score_improvement'] = [
+    $build['scheduling']['audit_release']['tableselect']['data-4']['risk_score'] = [
       '#markup' => $frequency * $total_score_release,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
@@ -645,13 +651,13 @@ class RiskManagement extends BlockBase {
       '#collapsed' => FALSE,
     ];
 
-    $build['scheduling']['audit_release']['details']['data_improvement'] = [
+    $build['scheduling']['audit_release']['details']['data'] = [
       '#markup' => '<b>as per target </b>  :'.$intime_score.'</br><b> exceeded target </b>  : '.$notintime_score.'<br><b>not as per target </b>  : '.$not_asper_target,
     ];
 
     //Audit Performance.
-    $risk_data['ap']['get_total_sections'] = getAuditOPtions('ap','/get-moderation-export/'.$uri[1].'?type=section');
-    $risk_data['ap']['get_total_events'] = $this->getsectionOPtions('auditor_selection','/get-moderation-export/'.$uri[1].'?type=planned_events');
+    $risk_data['ap']['get_total_sections'] = getAuditOPtions('ap','/get-moderation-export/'.$unit_reference.'?type=section');
+    $risk_data['ap']['get_total_events'] = RiskManagement::getsectionOPtions('auditor_selection','/get-moderation-export/'.$unit_reference.'?type=planned_events');
     $count_covered_sections = 0;
     $count_uncovered_sections = 0;
     $total_section = 0;
@@ -702,25 +708,25 @@ class RiskManagement extends BlockBase {
       '#empty' => t('No content available.'),
     ];
 
-    $build['scheduling']['ap']['ap_tableselect'][0]['obtained_marks_improvement'] = [
+    $build['scheduling']['ap']['ap_tableselect']['data-5']['obtained_marks'] = [
       '#markup' => 'coverage of all sections in Audit cycle<br>'.$ap_total,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
-    $build['scheduling']['ap']['ap_tableselect'][0]['risk_cat_dev_improvement'] = [
+    $build['scheduling']['ap']['ap_tableselect']['data-5']['risk_cat'] = [
       '#markup' => $ap_risk_cat,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
-    $build['scheduling']['ap']['ap_tableselect'][0]['incidence_improvement'] = [
+    $build['scheduling']['ap']['ap_tableselect']['data-5']['incidence'] = [
       '#markup' => $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
-    $build['scheduling']['ap']['ap_tableselect'][0]['risk_score_improvement'] = [
+    $build['scheduling']['ap']['ap_tableselect']['data-5']['risk_score'] = [
       '#markup' => $frequency * $ap_total,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
@@ -734,7 +740,7 @@ class RiskManagement extends BlockBase {
       '#collapsed' => FALSE,
     ];
 
-    $build['scheduling']['ap']['ap_details']['data_improvement'] = [
+    $build['scheduling']['ap']['ap_details']['data'] = [
       '#markup' => '<b>All sections covered </b>  :'.$ap_total_all.'* 5'.'</br><b>1 section missed out </b>  : '.$ap_total_one.'* 3'.'<br><b>More then 1 section missed out </b>  : '.$ap_total_more_one.'* 1',
     ];
 
@@ -748,25 +754,25 @@ class RiskManagement extends BlockBase {
       '#empty' => t('No content available.'),
     ];
 
-    $build['kpi']['tableselect_element_imp_points'][0]['obtained_marks_improvement'] = [
+    $build['kpi']['tableselect_element_imp_points']['data-6']['obtained_marks'] = [
       '#markup' => 'Improvement Points<br>'.$kpi_total,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'MARKS OBTAINED.'],
     ];
 
-    $build['kpi']['tableselect_element_imp_points'][0]['risk_cat_dev_improvement'] = [
+    $build['kpi']['tableselect_element_imp_points']['data-6']['risk_cat'] = [
       '#markup' => $risk_category_improvement,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK CATEGORY'],
     ];
 
-    $build['kpi']['tableselect_element_imp_points'][0]['incidence_improvement'] = [
+    $build['kpi']['tableselect_element_imp_points']['data-6']['incidence'] = [
       '#markup' => $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
-    $build['kpi']['tableselect_element_imp_points'][0]['risk_score_improvement'] = [
+    $build['kpi']['tableselect_element_imp_points']['data-6']['risk_score'] = [
       '#markup' => $kpi_total * $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
@@ -780,7 +786,7 @@ class RiskManagement extends BlockBase {
       '#collapsed' => FALSE,
     ];
 
-    $build['kpi']['risk_score_details_improvement']['data_improvement'] = [
+    $build['kpi']['risk_score_details_improvement']['data'] = [
       '#markup' => '<b>KPI achieved and  with No Improvement Findings </b>  :'.$kpi_total.'</br><b>KPI not achieved and  with No Improvement Findings </b>  : '.$kpi_total.'<br><b>KPI achieved and with Minor nonconformity Findings </b>  : '.$kpi_total.'<br><b>KPI not achieved and  with Minor Non conformity  Findings </b>  : '.$kpi_total.'<br><b>KPI achieved and with Major non conformity Findings </b>  : '.$kpi_total.'<br><b>KPI not achieved and with Major Non Findings</b>  : '.$kpi_total,
     ];
 
@@ -820,26 +826,26 @@ class RiskManagement extends BlockBase {
       '#empty' => t('No content available.'),
     ];
     
-    $build['performance']['tableselect_element_performance'][0]['each_score'] = [
+    $build['performance']['tableselect_element_performance']['data-7']['each_score'] = [
       '#markup' => '<b>Implemented </b>  :'.$count_improvement_implemented.'</br><b>50% Implemented</b>  : '.($count_improvement_implemented / $total_implemented_notimplemented).'<br><b>Not Implemented </b>  : '.$count_improvement_not_implemented,
     ];
 
-    $build['performance']['tableselect_element_performance'][0]['obtained_marks_improvement'] = [
+    $build['performance']['tableselect_element_performance']['data-7']['obtained_marks'] = [
       '#markup' => 'Improvement Points: <br>'.$total_implemented_notimplemented_score,
       '#title_display' => 'invisible',
     ];
 
-    $build['performance']['tableselect_element_performance'][0]['risk_cat_dev_improvement'] = [
+    $build['performance']['tableselect_element_performance']['data-7']['risk_cat'] = [
       '#markup' => $risk_category_performance,
       '#title_display' => 'invisible',
     ];
 
-    $build['performance']['tableselect_element_performance'][0]['incidence_improvement'] = [
+    $build['performance']['tableselect_element_performance']['data-7']['incidence'] = [
       '#markup' => $frequency,
       '#title_display' => 'invisible',
     ];
 
-    $build['performance']['tableselect_element_performance'][0]['risk_score_improvement'] = [
+    $build['performance']['tableselect_element_performance']['data-7']['risk_score'] = [
       '#markup' => $score_performance * $frequency,
       '#title_display' => 'invisible',
     ];
@@ -852,14 +858,14 @@ class RiskManagement extends BlockBase {
       '#collapsed' => FALSE,
     ];
 
-    $build['performance']['risk_score_details_improvement']['data_improvement'] = [
+    $build['performance']['risk_score_details_improvement']['data'] = [
       '#markup' => '<b>Implemented </b>  :'.$count_improvement_implemented.'</br><b>50% Implemented</b>  : '.($count_improvement_implemented / $total_implemented_notimplemented).'<br><b>Not Implemented </b>  : '.$count_improvement_not_implemented,
     ];
 
     //Get data for Audit Performance - Checklist additions.
     $checlist_delta_added_total = 0;
-    $check_deltaQ_added_to_checklist = count(getAuditOPtions('auditor_selection','/checklist-addition/'.$uri[1].'?field_answer_type_value=delta'));
-    $check_non_delta_added_to_checklist = count(getAuditOPtions('auditor_selection','/checklist-addition/'.$uri[1].'?field_answer_type_value=non-delta'));
+    $check_deltaQ_added_to_checklist = count(getAuditOPtions('auditor_selection','/checklist-addition/'.$unit_reference.'?field_answer_type_value=delta'));
+    $check_non_delta_added_to_checklist = count(getAuditOPtions('auditor_selection','/checklist-addition/'.$unit_reference.'?field_answer_type_value=non-delta'));
     
     if($check_deltaQ_added_to_checklist > 0){
       $checlist_delta_added_total = $check_deltaQ_added_to_checklist * 3;
@@ -888,26 +894,26 @@ class RiskManagement extends BlockBase {
       '#empty' => t('No content available.'),
     ];
     
-    $build['performance']['tableselect_element_checklist'][1]['each_score'] = [
+    $build['performance']['tableselect_element_checklist']['data-8']['each_score'] = [
       '#markup' => '<b>Auditor recommendations from the audit cycle approved and checklist revised </b>  :'.$check_deltaQ_added_to_checklist.'</br><b>Auidtor recommendations from the audit cycle approved and checklist not revised</b>  : '.$check_non_delta_added_to_checklist,
     ];
 
-    $build['performance']['tableselect_element_checklist'][1]['obtained_marks_improvement'] = [
+    $build['performance']['tableselect_element_checklist']['data-8']['obtained_marks'] = [
       '#markup' => 'Improvement Points: <br>'.$checlist_delta_added_total,
       '#title_display' => 'invisible',
     ];
 
-    $build['performance']['tableselect_element_checklist'][1]['risk_cat_dev_improvement'] = [
+    $build['performance']['tableselect_element_checklist']['data-8']['risk_cat'] = [
       '#markup' => $checklist_scale,
       '#title_display' => 'invisible',
     ];
 
-    $build['performance']['tableselect_element_checklist'][1]['incidence_improvement'] = [
+    $build['performance']['tableselect_element_checklist']['data-8']['incidence'] = [
       '#markup' => $frequency,
       '#title_display' => 'invisible',
     ];
 
-    $build['performance']['tableselect_element_checklist'][1]['risk_score_improvement'] = [
+    $build['performance']['tableselect_element_checklist']['data-8']['risk_score'] = [
       '#markup' => $checklist_score * $frequency,
       '#title_display' => 'invisible',
     ];
@@ -920,7 +926,7 @@ class RiskManagement extends BlockBase {
       '#collapsed' => FALSE,
     ];
 
-    $build['performance']['risk_score_details_checklist']['data_improvement'] = [
+    $build['performance']['risk_score_details_checklist']['data'] = [
       '#markup' => '<b>Auditor recommendations from the audit cycle approved and checklist revised </b>  :'.$check_deltaQ_added_to_checklist.'</br><b>Auidtor recommendations from the audit cycle approved and checklist not revised</b>  : '.$check_non_delta_added_to_checklist,
     ];
     
@@ -938,7 +944,7 @@ class RiskManagement extends BlockBase {
     return $build;
   }
 
-  function getsectionOPtions($type, $url) {
+  public function getsectionOPtions($type, $url) {
     global $base_url;
     if($type){
       $client = \Drupal::httpClient();
