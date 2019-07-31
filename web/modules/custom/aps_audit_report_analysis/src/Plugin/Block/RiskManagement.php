@@ -544,13 +544,13 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['qualifications']['tableselect_element_qualifications'][0]['incidence_improvement'] = [
-      '#markup' => $qual_risk_score,
+      '#markup' => $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
     $build['qualifications']['tableselect_element_qualifications'][0]['risk_score_improvement'] = [
-      '#markup' => $count_auditor * $qual_risk_score,
+      '#markup' => $count_auditor * $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
     ];
@@ -626,13 +626,13 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['scheduling']['audit_release']['tableselect'][0]['incidence_improvement'] = [
-      '#markup' => $risk_score,
+      '#markup' => $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
     $build['scheduling']['audit_release']['tableselect'][0]['risk_score_improvement'] = [
-      '#markup' => $risk_score * $total_score_release,
+      '#markup' => $frequency * $total_score_release,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
     ];
@@ -715,13 +715,13 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['scheduling']['ap']['ap_tableselect'][0]['incidence_improvement'] = [
-      '#markup' => $ap_score,
+      '#markup' => $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
     $build['scheduling']['ap']['ap_tableselect'][0]['risk_score_improvement'] = [
-      '#markup' => $ap_score * $ap_total,
+      '#markup' => $frequency * $ap_total,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
     ];
@@ -761,13 +761,13 @@ class RiskManagement extends BlockBase {
     ];
 
     $build['kpi']['tableselect_element_imp_points'][0]['incidence_improvement'] = [
-      '#markup' => $kpi,
+      '#markup' => $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'INCIDENCE'],
     ];
 
     $build['kpi']['tableselect_element_imp_points'][0]['risk_score_improvement'] = [
-      '#markup' => $kpi_total * $kpi,
+      '#markup' => $kpi_total * $frequency,
       '#title_display' => 'invisible',
       '#wrapper_attributes' => ['data-label' => 'RISK SCORE'],
     ];
