@@ -29,6 +29,8 @@ use \Drupal\field\Entity\FieldConfig;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Datetime\DateHelper;
+use Drupal\Core\Render\Markup;
+
 
 
 
@@ -557,7 +559,7 @@ function aps_general_node_insert(Node $node) {
     $node->save();
   }
   if($node->bundle() == 'planned_events'){
-    $unit_id = \Drupal::request()->query->get('unit_reference');
+    $unit_reference = \Drupal::request()->query->get('unit_reference');
     $entity = getPlannedEventCount($unit_id);
     $node_load_multiple = Node::loadMultiple($entity);
     $count_systems = 0;
@@ -1121,7 +1123,8 @@ function aps_general_link_alter(&$variables) {
     $title = new TranslatableMarkup("@text", array(
        '@text' => 'Notification'.'('.$count.')',
     ));
-    $variables['text'] = $title;
+    $title_with_class = '<span class=new>'.$title.'</span>';
+    $variables['text'] = Markup::create($title_with_class);
   }
 
   if ($cleanLinkText == 'Go To Unit Page') {

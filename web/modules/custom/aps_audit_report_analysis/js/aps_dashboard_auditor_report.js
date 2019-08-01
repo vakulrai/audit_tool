@@ -6,13 +6,13 @@
       var auditor_data = JSON.parse(drupalSettings.auditor_data);
       var total_user = drupalSettings.total_user;
       var selected_user_count = drupalSettings.selected_user_count;
-      var percentage_auditor = Math.round(selected_user_count/total_user * 100)
+      var percentage_auditor = Math.round(selected_user_count/total_user * 100);
       Highcharts.chart('container-element-auditor-report', {
 		    chart: {
 		        type: 'line'
 		    },
 		    title: {
-		        text: percentage_auditor+'% Auditor Selection'
+		        text: percentage_auditor+'% Auditor Selection<br>Total Users: '+total_user
 		    },
 		    subtitle: {
 		        text: ''

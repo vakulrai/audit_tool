@@ -97,9 +97,13 @@ function submit_auditee_audit(array$form, \Drupal\Core\Form\FormStateInterface $
     $node_object->save();
   }
   if($uri[1]){
+    $event_reference= \Drupal::request()->query->get('event_reference');
+    $unit_reference= \Drupal::request()->query->get('unit_reference');
+    $node_referenced = [$event_reference, $unit_reference];
     $node_object_report = Node::load($uri[1]);
     $node_object_report->set('moderation_state', 'submit_audit');
     $node_object_report->set('field_status', 'closed');
+    $node_object_report->set('field_refere', $node_referenced);
     $node_object_report->save();
   }
 
