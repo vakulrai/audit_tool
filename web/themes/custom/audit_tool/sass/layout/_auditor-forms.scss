@@ -41,3 +41,22 @@ div.ui-dialog {
     @extend .btn-accent;
   }
 }
+
+.preaudit-table-responsive-wrapper {
+  table.preaudit-table-responsive {
+    tbody {
+      td {
+        > #ajax-wrapper {
+           width: 100;
+           .form-item-users-upload {
+             padding: 10px;
+             .form-managed-file {
+               width: 100px;
+               overflow: hidden;
+             }
+           }
+        }
+      }
+    }
+  }
+}

@@ -285,3 +285,13 @@ div#block-audit-tool-riskmanagement {
     top: 0;
   }
 }
+
+.sidebar {
+  .menu.sf-menu {
+    li {
+      a {
+        color: $blue-color;
+      } 
+    }
+  }
+}
