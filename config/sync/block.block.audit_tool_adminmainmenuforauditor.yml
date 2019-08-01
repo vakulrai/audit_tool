@@ -75,11 +75,6 @@ settings:
   custom_item_class: ''
   custom_link_class: ''
 visibility:
-  request_path:
-    id: request_path
-    pages: '<front>'
-    negate: false
-    context_mapping: {  }
   user_role:
     id: user_role
     roles:
@@ -88,3 +83,8 @@ visibility:
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

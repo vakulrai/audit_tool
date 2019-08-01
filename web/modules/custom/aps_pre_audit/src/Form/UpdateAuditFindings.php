@@ -38,7 +38,10 @@ class UpdateAuditFindings extends PreAuditForm {
 
      $header = [
         $this->t('Step'),
-        $this-> t('Question'),
+        [
+          'data' => $this->t('Question'),
+          'colspan' => 2,
+        ],
         $this->t('Evidence'),
         $this-> t('Result'),
         $this-> t('Finding Categories'),
@@ -90,6 +93,9 @@ class UpdateAuditFindings extends PreAuditForm {
       '#type' => 'table', 
       '#caption' => $this->t('Checklist'),
       '#header' => $header, 
+      '#prefix' => '<div class=preaudit-table-responsive-wrapper>',
+      '#suffix' => '</div>',
+      '#attributes' => ['class' => ['preaudit-table-responsive']],
       '#empty' => t('No content available.'),
       '#tree' => TRUE,
       );
@@ -98,6 +104,9 @@ class UpdateAuditFindings extends PreAuditForm {
       '#type' => 'table', 
       '#caption' => $this->t('Delta Q'),
       '#header' => $header, 
+      '#prefix' => '<div class=preaudit-table-responsive-wrapper>',
+      '#suffix' => '</div>',
+      '#attributes' => ['class' => ['preaudit-table-responsive']],
       '#empty' => t('No content available.'), 
       );
       
@@ -157,6 +166,7 @@ class UpdateAuditFindings extends PreAuditForm {
               '#markup' =>  $value['question'],
               '#title' => $this->t('Question'),
               '#title_display' => 'invisible',
+              '#wrapper_attributes' => ['colspan' => '2'],
             ];
             
           if(count($value['evidence_value']) > 1){
@@ -270,6 +280,7 @@ class UpdateAuditFindings extends PreAuditForm {
               '#markup' =>  $valueq['question'],
               '#title' => $this->t('Question'),
               '#title_display' => 'invisible',
+              '#wrapper_attributes' => ['colspan' => '2'],
             ];
             
           if(count($valueq['evidence_value']) > 1){
