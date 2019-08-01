@@ -12,7 +12,7 @@ dependencies:
 id: audit_tool_addclauses
 theme: audit_tool
 region: sidebar_first
-weight: -22
+weight: -24
 provider: null
 plugin: 'superfish:add-clauses'
 settings:
