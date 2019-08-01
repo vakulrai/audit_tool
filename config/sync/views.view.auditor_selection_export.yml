@@ -469,6 +469,12 @@ display:
           admin_label: 'field_functions: Paragraph'
           required: false
           plugin_id: standard
+        field_reference_id:
+          id: field_reference_id
+          table: user__field_reference_id
+          field: field_reference_id
+          plugin_id: standard
+          relationship: field_auditor
       arguments:
         nid:
           id: nid
@@ -2072,6 +2078,8 @@ display:
         fields: false
         filters: false
         filter_groups: false
+        relationships: false
+        arguments: false
       filters:
         type:
           id: type
@@ -2261,6 +2269,82 @@ display:
         operator: AND
         groups:
           1: AND
+      relationships:
+        field_refere:
+          id: field_refere
+          table: node__field_refere
+          field: field_refere
+          relationship: none
+          group_type: group
+          admin_label: 'field_refere: Content'
+          required: false
+          plugin_id: standard
+        field_auditor:
+          id: field_auditor
+          table: node__field_auditor
+          field: field_auditor
+          relationship: none
+          group_type: group
+          admin_label: 'field_auditor: User'
+          required: false
+          plugin_id: standard
+        field_functions:
+          id: field_functions
+          table: user__field_functions
+          field: field_functions
+          relationship: field_auditor
+          group_type: group
+          admin_label: 'field_functions: Paragraph'
+          required: false
+          plugin_id: standard
+        field_reference_id:
+          id: field_reference_id
+          table: user__field_reference_id
+          field: field_reference_id
+          relationship: field_auditor
+          group_type: group
+          admin_label: 'field_reference_id: Content'
+          required: false
+          plugin_id: standard
+      arguments:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: field_reference_id
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: raw
+          default_argument_options:
+            index: 1
+            use_alias: false
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+          entity_type: node
+          entity_field: nid
+          plugin_id: node_nid
     cache_metadata:
       max-age: -1
       contexts:
