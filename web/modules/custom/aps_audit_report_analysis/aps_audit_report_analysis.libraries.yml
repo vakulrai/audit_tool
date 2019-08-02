@@ -12,10 +12,6 @@ aps_dashboard_audit_planning_js:
 
 aps_dashboard_audit_control_scheduled_js:
   js:
-    https://code.highcharts.com/highcharts.js: { type: external, minified: true, weight: -1 }
-    https://code.highcharts.com/modules/exporting.js: { type: external, minified: true }
-    https://code.highcharts.com/modules/export-data.js: { type: external, minified: true }
-    https://code.highcharts.com/modules/no-data-to-display.js: { type: external, minified: true }
     js/aps_dashboard_audit_control_scheduled.js: { weight: -1 }
   dependencies:
     - core/jquery
@@ -23,10 +19,6 @@ aps_dashboard_audit_control_scheduled_js:
 
 aps_dashboard_ncr_car_js:
   js:
-    https://code.highcharts.com/highcharts.js: { type: external, minified: true, weight: -1 }
-    https://code.highcharts.com/modules/exporting.js: { type: external, minified: true }
-    https://code.highcharts.com/modules/export-data.js: { type: external, minified: true }
-    https://code.highcharts.com/modules/no-data-to-display.js: { type: external, minified: true }
     js/ncr_car_management.js: { weight: -1 }
   dependencies:
     - core/jquery
@@ -34,11 +26,6 @@ aps_dashboard_ncr_car_js:
 
 aps_dashboard_auditor_report_js:
   js:
-    https://code.highcharts.com/highcharts.js: { type: external, minified: true, weight: -1 }
-    https://code.highcharts.com/modules/exporting.js: { type: external, minified: true }
-    https://code.highcharts.com/modules/export-data.js: { type: external, minified: true }
-    https://code.highcharts.com/modules/series-label.js: { type: external, minified: true }
-    https://code.highcharts.com/modules/no-data-to-display.js: { type: external, minified: true }
     js/aps_dashboard_auditor_report.js: { weight: -1 }
   dependencies:
     - core/jquery
@@ -46,13 +33,9 @@ aps_dashboard_auditor_report_js:
 
 aps_dashboard_risk_management_js:
   js:
-    https://code.highcharts.com/highcharts.js: { type: external, minified: true, weight: -1 }
-    https://code.highcharts.com/modules/exporting.js: { type: external, minified: true }
-    https://code.highcharts.com/modules/export-data.js: { type: external, minified: true }
     https://code.highcharts.com/modules/series-label.js: { type: external, minified: true }
     https://code.highcharts.com/highcharts-more.js: { type: external, minified: true, weight: 0 }
     https://code.highcharts.com/modules/solid-gauge.js: { type: external, minified: true }
-    https://code.highcharts.com/modules/no-data-to-display.js: { type: external, minified: true }
     js/risk_management.js: { weight: -1 }
   dependencies:
     - core/jquery
