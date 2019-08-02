@@ -215,13 +215,17 @@ class GetAuditCoverageDetails extends ControllerBase {
       }
     }
     
-    $plannig_report_json[0]['name'] = strtoupper('reschedule');
-    $plannig_report_json[0]['y'] = $count_reschedule;
-    $plannig_report_json[0]['color'] = 'red';
-    $plannig_report_json[1]['name'] = strtoupper('on going');
-    $plannig_report_json[1]['y'] = $count_pending;
-    $plannig_report_json[2]['name'] = strtoupper('completed');
-    $plannig_report_json[2]['y'] = $count_completed;
+    if($count_reschedule == 0 && $count_pending == 0 && $count_completed == 0){
+      $plannig_report_json;
+    }else{
+      $plannig_report_json[0]['name'] = strtoupper('reschedule');
+      $plannig_report_json[0]['y'] = $count_reschedule;
+      $plannig_report_json[0]['color'] = 'red';
+      $plannig_report_json[1]['name'] = strtoupper('on going');
+      $plannig_report_json[1]['y'] = $count_pending;
+      $plannig_report_json[2]['name'] = strtoupper('completed');
+      $plannig_report_json[2]['y'] = $count_completed;
+    }
 
     return new JsonResponse( $plannig_report_json );
   }

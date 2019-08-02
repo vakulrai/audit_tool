@@ -42,8 +42,22 @@
 		            y: Math.round((ncr_car_data['pending'])/ncr_car_data['total'] * 100),
 		            color: 'red',
 		        }]
-		    }]
+		    }],
+		    lang: {
+              noData: ''
+            },
+            noData: {
+		        style: {
+		            fontWeight: 'bold',
+		            fontSize: '20px',
+		            color: '#3980d1'
+		        }
+            }
 		});
+
+        if(ncr_car_data['total'] == 0){
+          chart_a.showNoData('No data Found');
+        }
     }
   };
 }(jQuery));

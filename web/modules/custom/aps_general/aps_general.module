@@ -1123,17 +1123,19 @@ function aps_general_link_alter(&$variables) {
     $count = count($nids);
     if($count == 0){
       $class = 'not-new';
+      $notify_icon = 'notifications_none';
       $title = new TranslatableMarkup("@text", array(
        '@text' => '',
       ));
     }
     else{
       $class = 'new';
+      $notify_icon = 'notifications_active';
       $title = new TranslatableMarkup("@text", array(
        '@text' => $count,
       ));
     }
-    $title_with_class = '<i class="material-icons">notifications_active</i><span class='.$class.'>'.$title.'</span>';
+    $title_with_class = '<span class='.$class.'>'.$title.'</span><i class="material-icons">'.$notify_icon.'</i>';
     $variables['text'] = Markup::create($title_with_class);
   }
 

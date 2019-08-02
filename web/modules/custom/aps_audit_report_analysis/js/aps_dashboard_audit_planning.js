@@ -32,7 +32,17 @@
           name: 'Audit Type',
           colorByPoint: true,
           data: audit_detail
-        }]
+        }],
+        lang: {
+          noData: 'No data Found'
+        },
+        noData: {
+        style: {
+            fontWeight: 'bold',
+            fontSize: '20px',
+            color: '#3980d1'
+        }
+    }
     });
 
     //Check if filter is applied.
