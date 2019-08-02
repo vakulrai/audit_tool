@@ -16806,6 +16806,14 @@ ul.messages-list {
       color: inherit; }
       #navbar .main-navigation-menu > ul li a + ul *:hover {
         border-color: inherit; }
+  #navbar .main-navigation-menu > ul li a span.new {
+    position: relative;
+    display: inline-block;
+    background: #f52525;
+    padding: 10px;
+    animation: mymove 5s infinite;
+    bottom: 10px;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5); }
   #navbar .main-navigation-menu > ul li a:hover {
     border-color: rgba(255, 255, 255, 0.5); }
   #navbar .main-navigation-menu > ul li a.is-active {
@@ -16815,6 +16823,14 @@ ul.messages-list {
 
 #drawer ul.menu {
   margin: 0; }
+  #drawer ul.menu span.new {
+    position: relative;
+    display: inline-block;
+    background: #f52525;
+    padding: 5px;
+    border-radius: 10px 0;
+    color: #fff;
+    animation: mymove 1s infinite; }
   #drawer ul.menu li.menu-item.expanded ul.menu li a {
     padding: 8px 27px;
     font-weight: 400;
@@ -16824,6 +16840,14 @@ ul.messages-list {
       font-weight: 500; }
   #drawer ul.menu li.menu-item.expanded.active-trail ul.menu li:not(.active-trail) a {
     color: rgba(0, 0, 0, 0.87); }
+
+@keyframes mymove {
+  from {
+    -webkit-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+  to {
+    -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); } }
 
 #block-audit-tool-sitebranding {
   text-align: center;
@@ -16854,6 +16878,12 @@ table * {
   .no-sidebars main.container {
     max-width: 1024px;
     width: 100%; } }
+
+form label.form-required:after {
+  content: "*";
+  display: inline-block;
+  color: #f52525;
+  padding-left: 2px; }
 
 form.planning-control-form {
   display: flex;
@@ -17048,7 +17078,7 @@ form.node-supplier-form .field--type-address details summary {
     top: 0; }
 
 .sidebar .menu.sf-menu li a {
-  color: #005bb7; }
+  color: #3980d1; }
 
 .path-planned-mr-audit-listing form.views-exposed-form {
   display: flex;

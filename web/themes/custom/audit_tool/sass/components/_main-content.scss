@@ -15,3 +15,13 @@ table {
 	}
 } 
 
+form {
+	label.form-required {
+		&:after {
+			content: "*";
+			display: inline-block;
+			color: $color-red;
+			padding-left: 2px;
+		}
+	}
+}
