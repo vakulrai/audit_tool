@@ -1,0 +1,6 @@
+aps_general_notification_js:
+  js:
+    js/notification.js: { weight: -1 }
+  dependencies:
+    - core/jquery
+    - core/jquery.once

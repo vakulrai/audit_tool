@@ -21,6 +21,7 @@ class RiskManagement extends BlockBase {
   public function build($unit_reference=NULL) {
     $build = [];
     $build = [];
+    $build['#cache']['max-age'] = 0;
     $first_last_date_monthly = [];
     if($unit_reference == 0){
       $current_uri = trim(\Drupal::request()->getRequestUri(), '/');

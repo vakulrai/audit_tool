@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Render\Markup;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Class RedirectForm.
@@ -314,6 +315,27 @@ class RedirectFormController extends ControllerBase {
       $count++;
     }
     return $data;
+  }
+
+  public function updateNotification(){
+    $data = [];
+    $query = \Drupal::database()->select('notifications', 'nf');
+    $query->fields('nf',['sr', 'message', 'timestamp', 'status']);
+    $nids = $query->execute()->fetchAll();
+    $count = 0;
+    foreach ($nids as $key => $value) {
+      $notifications_update = \Drupal::database()->update('notifications');
+      $notifications_update->fields([
+           'status' => 1,
+       ]);
+      if($notifications_update->execute()){
+        $response['status'] = 'updated';
+      }
+      else{
+        $response['status'] = 'updated';
+      }
+    }
+      return new JsonResponse($response);
   }
 
   public function _return_pager_for_array($items, $num_page) {

@@ -30,7 +30,7 @@
 		        }
 		    },
 		    series: [{
-		        name: 'Brands',
+		        name: 'NCR vs CAR',
 		        colorByPoint: true,
 		        data: [{
 		            name: 'Completed',

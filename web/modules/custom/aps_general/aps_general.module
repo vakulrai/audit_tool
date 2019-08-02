@@ -810,13 +810,13 @@ function aps_general_preprocess_page(&$variables) {
   // }
   if($uri[0] == 'documentrecords'){
     $variables['#attached']['library'][] = 'aps_audit_planning/aps_audit_general_js';
-    $variables['#attached']['drupalSettings']['siteBaseUrl'] = $base_url;
   }
   
   if($uri[0] == 'planned-audit-listing'){
     $variables['#attached']['library'][] = 'aps_audit_planning/aps_audit_general_js';
-    $variables['#attached']['drupalSettings']['siteBaseUrl'] = $base_url;
   }
+  $variables['#attached']['drupalSettings']['siteBaseUrl'] = $base_url;
+  $variables['#attached']['library'][] = 'aps_general/aps_general_notification_js';
 }
 
 /**
@@ -1118,12 +1118,22 @@ function aps_general_link_alter(&$variables) {
   if ($cleanLinkText == 'Notification') {
     $query = \Drupal::database()->select('notifications', 'n');
     $query->fields('n');
+    $query->condition('status', 0);
     $nids = $query->execute()->fetchAll();
     $count = count($nids);
-    $title = new TranslatableMarkup("@text", array(
-       '@text' => 'Notification'.'('.$count.')',
-    ));
-    $title_with_class = '<span class=new>'.$title.'</span>';
+    if($count == 0){
+      $class = 'not-new';
+      $title = new TranslatableMarkup("@text", array(
+       '@text' => '',
+      ));
+    }
+    else{
+      $class = 'new';
+      $title = new TranslatableMarkup("@text", array(
+       '@text' => $count,
+      ));
+    }
+    $title_with_class = '<i class="material-icons">notifications_active</i><span class='.$class.'>'.$title.'</span>';
     $variables['text'] = Markup::create($title_with_class);
   }
 

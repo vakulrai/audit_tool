@@ -43,4 +43,12 @@ aps_general.notificatios:
     _title: 'Notifications'
   requirements:
     _access: 'TRUE'
+
+aps_general.notificatios_update:
+  path: '/update-notifications'
+  defaults:
+    _controller: '\Drupal\aps_general\Controller\RedirectFormController::updateNotification'
+    _title: 'Notifications'
+  requirements:
+    _access: 'TRUE'
   

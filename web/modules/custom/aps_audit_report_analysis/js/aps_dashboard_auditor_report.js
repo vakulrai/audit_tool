@@ -12,7 +12,7 @@
 		        type: 'line'
 		    },
 		    title: {
-		        text: percentage_auditor+'% Auditor Selection<br>Total Users: '+total_user
+		        text: percentage_auditor+'% Auditor Selection<br>Total Auditors: '+total_user
 		    },
 		    subtitle: {
 		        text: ''

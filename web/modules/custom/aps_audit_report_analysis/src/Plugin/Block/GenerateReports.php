@@ -19,6 +19,7 @@ class GenerateReports extends BlockBase {
    */
   public function build() {
     $build = [];
+    $build['#cache']['max-age'] = 0;
     $build['#markup'] = '<h1>Generate Reports</h1>';
     $form_class = '\Drupal\aps_audit_report_analysis\Form\GenerateReportsForm';
     $form_builder_class = \Drupal::formBuilder()->getForm($form_class);

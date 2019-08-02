@@ -37,6 +37,7 @@
         "drupal/field_group": "^1.0",
         "drupal/front": "^1.0@beta",
         "drupal/inline_entity_form": "^1.0@RC",
+        "drupal/link_attributes": "^1.9",
         "drupal/material_base": "^1.7",
         "drupal/menu_trail_by_path": "^1.1",
         "drupal/mobile_number": "^1.0@alpha",
