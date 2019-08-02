@@ -6,10 +6,10 @@
       var risk_type = drupalSettings.risk_type;
       var color = '';
 
-      if(risk_percentage > 0 && risk_percentage < 33.33 && risk_type == 'LOW'){
+      if(risk_type == 'LOW'){
         color = '#3980D1';
       }
-      else if(risk_percentage >= 33.33 && risk_percentage <= 66.66 && risk_type == 'MEDIUM'){
+      else if(risk_type == 'MEDIUM'){
         color = '#55616E';
       }
       else{
