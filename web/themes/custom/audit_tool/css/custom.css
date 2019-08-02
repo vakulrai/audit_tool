@@ -16806,16 +16806,20 @@ ul.messages-list {
       color: inherit; }
       #navbar .main-navigation-menu > ul li a + ul *:hover {
         border-color: inherit; }
+    #navbar .main-navigation-menu > ul li a + ul a.is-active {
+      opacity: 0.8; }
   #navbar .main-navigation-menu > ul li a span.new {
-    position: relative;
-    display: inline-block;
-    background: #f52525;
-    padding: 10px;
-    animation: mymove 5s infinite;
-    bottom: 10px;
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.5); }
+    background: rgba(255, 145, 0, 0.8);
+    padding: 3px 6px;
+    border-radius: 100%;
+    text-shadow: 1px 1px black; }
+    #navbar .main-navigation-menu > ul li a span.new + i.material-icons, #navbar .main-navigation-menu > ul li a span.new + i.info:before, #navbar .main-navigation-menu > ul li a span.new + i.important:before, #navbar .main-navigation-menu > ul li a span.new + i.messages-status:before, #navbar .main-navigation-menu > ul li a span.new + i.messages-warning:before, #navbar .main-navigation-menu > ul li a span.new + i.messages-error:before, #navbar .main-navigation-menu > ul li a form.node-auditor-report-edit-form details.field-group-details span.new + i.form-type-managed-file:before, form.node-auditor-report-edit-form details.field-group-details #navbar .main-navigation-menu > ul li a span.new + i.form-type-managed-file:before, #navbar .main-navigation-menu > ul li a form.pre-audit-form span.new + i.form-type-managed-file:before, form.pre-audit-form #navbar .main-navigation-menu > ul li a span.new + i.form-type-managed-file:before,
+    #navbar .main-navigation-menu > ul li a form.update-audit-findings span.new + i.form-type-managed-file:before, form.update-audit-findings #navbar .main-navigation-menu > ul li a span.new + i.form-type-managed-file:before, #navbar .main-navigation-menu > ul li a span.new + i.form-item.form-type-select:after, #navbar .main-navigation-menu > ul li a span.new + i.collapsible-toggle:before {
+      color: rgba(255, 145, 0, 0.8); }
   #navbar .main-navigation-menu > ul li a:hover {
     border-color: rgba(255, 255, 255, 0.5); }
+  #navbar .main-navigation-menu > ul li a.notify {
+    padding-bottom: 5px; }
   #navbar .main-navigation-menu > ul li a.is-active {
     border-color: #fff; }
   #navbar .main-navigation-menu > ul li a.menuparent:hover {
@@ -16824,13 +16828,13 @@ ul.messages-list {
 #drawer ul.menu {
   margin: 0; }
   #drawer ul.menu span.new {
-    position: relative;
-    display: inline-block;
-    background: #f52525;
-    padding: 5px;
-    border-radius: 10px 0;
-    color: #fff;
-    animation: mymove 1s infinite; }
+    background: rgba(255, 145, 0, 0.8);
+    padding: 3px 6px;
+    border-radius: 100%;
+    text-shadow: 1px 1px black; }
+    #drawer ul.menu span.new + i.material-icons, #drawer ul.menu span.new + i.info:before, #drawer ul.menu span.new + i.important:before, #drawer ul.menu span.new + i.messages-status:before, #drawer ul.menu span.new + i.messages-warning:before, #drawer ul.menu span.new + i.messages-error:before, #drawer ul.menu form.node-auditor-report-edit-form details.field-group-details span.new + i.form-type-managed-file:before, form.node-auditor-report-edit-form details.field-group-details #drawer ul.menu span.new + i.form-type-managed-file:before, #drawer ul.menu form.pre-audit-form span.new + i.form-type-managed-file:before, form.pre-audit-form #drawer ul.menu span.new + i.form-type-managed-file:before,
+    #drawer ul.menu form.update-audit-findings span.new + i.form-type-managed-file:before, form.update-audit-findings #drawer ul.menu span.new + i.form-type-managed-file:before, #drawer ul.menu span.new + i.form-item.form-type-select:after, #drawer ul.menu span.new + i.collapsible-toggle:before {
+      color: rgba(255, 145, 0, 0.8); }
   #drawer ul.menu li.menu-item.expanded ul.menu li a {
     padding: 8px 27px;
     font-weight: 400;
@@ -16840,14 +16844,6 @@ ul.messages-list {
       font-weight: 500; }
   #drawer ul.menu li.menu-item.expanded.active-trail ul.menu li:not(.active-trail) a {
     color: rgba(0, 0, 0, 0.87); }
-
-@keyframes mymove {
-  from {
-    -webkit-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
-  to {
-    -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); } }
 
 #block-audit-tool-sitebranding {
   text-align: center;

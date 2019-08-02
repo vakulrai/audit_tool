@@ -12,6 +12,9 @@
                 border-color: inherit;
               }
             }
+            a.is-active {
+              opacity: 0.8;
+            }
           }
   				display: block;
 			    line-height: 20px;
@@ -21,17 +24,20 @@
 			    color: #FFF;
 			    text-transform: uppercase;
           span.new {
-            position: relative;
-            display: inline-block;
-            background: $color-red;
-            padding: 10px;
-            animation: mymove 5s infinite;
-            bottom: 10px;
-            text-shadow: 1px 1px rgba(0,0,0,0.5);
+              background: rgba(255,145,0,0.8);
+              padding: 3px 6px;
+              border-radius: 100%;
+              text-shadow: 1px 1px #000;
+              &+ i.material-icons {
+                color: rgba(255,145,0,0.8);
+              }
           }
 			    &:hover {
 			    	border-color: rgba(255, 255, 255, 0.5);
 			    }
+          &.notify {
+           padding-bottom: 5px;
+          }
 			    &.is-active {
 			    	border-color: #fff;
 			    }
@@ -50,13 +56,13 @@
   ul.menu {
     margin: 0;
     span.new {
-      position: relative;
-      display: inline-block;
-      background: $color-red;
-      padding: 5px;
-      border-radius: 10px 0;
-      color: #fff;
-      animation: mymove 1s infinite;
+      background: rgba(255,145,0,0.8);
+      padding: 3px 6px;
+      border-radius: 100%;
+      text-shadow: 1px 1px #000;
+      &+ i.material-icons {
+        color: rgba(255,145,0,0.8);
+      }
     }
     li.menu-item {
       &.expanded {
@@ -88,7 +94,3 @@
 }
 
 
-@keyframes mymove {
-  from {clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);}
-  to {clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);}
-}
