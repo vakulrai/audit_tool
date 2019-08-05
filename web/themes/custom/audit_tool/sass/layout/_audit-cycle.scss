@@ -1,0 +1,84 @@
+form.audit-cycle-settings-edit-form {
+	> fieldset {
+      > legend {
+        @extend .h2;
+      }
+     .paragraphs-dropbutton-wrapper {
+        input[type="submit"] {
+          @extend .btn-accent;
+        }
+     }
+    &#edit-audit-cycle-year-sr {
+      .paragraphs-subform {
+        @media (min-width: 1024px) {
+          display: flex;
+          justify-content: space-between;
+        }
+        > div {
+          margin-bottom: 10px;
+          label,
+          .field-suffix {
+             width: 100%;
+             margin: 10px 0;
+             display: inline-block;
+          }
+          .field-suffix {
+            color: #ccc;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+    &.field-group-fieldset {
+      > .fieldset-wrapper {
+        @media (min-width: 1024px) {
+          display: flex;
+          justify-content: space-between;
+        }
+        > div {
+          margin-bottom: 10px;
+        }
+        label,
+        .description {
+          width: 100%;
+          margin: 10px 0;
+          display: inline-block;
+        }
+        .description {
+          color: #ccc;
+        }
+      }
+    }
+		&#edit-audit-cycle-year {
+      .field--type-daterange {
+        fieldset {
+          @extend .highlight;
+          > legend {
+            @extend .h4;
+            text-transform: uppercase;
+            @extend .text-primary;
+            position: relative;
+            top: 30px;
+           }
+          > .fieldset-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding-top: 10px;
+            h4 {
+              margin: 0 20px 0 0;
+            }
+          }
+        }
+      }
+		}
+	}
+  .field--name-field-title-other,
+  .field--name-field-audit-frequency {
+    margin: 10px 0;
+    label {
+      width: 100%;
+      display: inline-block;
+    }
+  }
+}

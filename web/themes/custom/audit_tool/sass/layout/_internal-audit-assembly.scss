@@ -1,7 +1,9 @@
-form.node-internal-audit-form {
+form.node-internal-audit-form,
+form.node-internal-audit-edit-form,
+form.node-procedures-edit-form  {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   .field--name-title,
   .field--type-timestamp,
   .field--name-field-queries,
@@ -23,7 +25,7 @@ form.node-internal-audit-form {
       }
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
+      justify-content: space-between;
     }
   }
   .tabledrag-toggle-weight-wrapper {
@@ -94,5 +96,22 @@ form.node-manufacturing-process-form {
   @extend .highlight;
   input.button {
     @extend .btn-colored;
+  }
+}
+
+form.node-procedures-edit-form {
+  .field--name-field-create-procedure {
+    flex: 0 0 100%;
+    .paragraphs-subform {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .field--name-field-procedure-document {
+        @extend .highlight;
+        input.media-library-open-button {
+          @extend .btn-colored;
+        }
+      }
+    }
   }
 }
