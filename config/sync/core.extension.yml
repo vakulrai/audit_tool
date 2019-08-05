@@ -45,6 +45,7 @@ module:
   history: 0
   image: 0
   inline_entity_form: 0
+  inline_form_errors: 0
   kint: 0
   link: 0
   link_attributes: 0

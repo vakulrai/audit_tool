@@ -46,6 +46,8 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_total_mandays']['#access'] = FALSE;
     $form['field_pre_audit_status']['#access'] = FALSE;
     $form['field_refere']['#access'] = FALSE;
+    $form['field_audit_reasons']['#access'] = FALSE;
+    $form['field_proceed_with_audit']['#access'] = FALSE;
     $id = \Drupal::request()->query->get('unit_reference');
     $form['#cache']['max-age'] = 0;
     $form['field_sections']['#attributes'] = ['id' => ['section']];

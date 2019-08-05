@@ -42,16 +42,17 @@ class PreAuditForm extends FormBase {
     $date2 = new \DateTime();
     $diff = $date2->diff($date1);
     $months = $diff->m;
-    $days = $diff->days; 
+    $days = $diff->days;
     $hours = $diff->h;
     $check_invert_time = $diff->invert;
     $total_hours = $days * 24 + $hours;
-    // if ($days == 0 && $check_invert_time != 1) {
-    //   $disable_fields = 'FALSE';
-    // }
-    // else{
-    //   $disable_fields = 'TRUE';
-    // }
+    
+    if ($days == 0 && $check_invert_time != 1) {
+      $disable_fields = 'FALSE';
+    }
+    else{
+      $disable_fields = 'TRUE';
+    }
     $procedure_no = aps_pre_audit_get_node_value($nid, 'field_procedure_no');
     $procedure_title = aps_pre_audit_get_node_value($procedure_no, 'title');
 
