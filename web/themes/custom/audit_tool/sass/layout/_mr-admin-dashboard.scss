@@ -49,6 +49,15 @@ form {
       max-width: 100%;
      }
   }
+  .field--type-integer {
+    label {
+      width: 100%;
+      display: inline-block;
+    }
+    .description {
+      color: #ccc;
+    }
+  }
   .field--type-address {
      details {
        @extend .highlight;
