@@ -1,7 +1,7 @@
 system_mandays_standard: 8
 process_mandays_standard: 4
 product_mandays_standard: 1
-system_mandays_updated: !!float 3
+system_mandays_updated: !!float 11
 process_mandays_updated: 4
 product_mandays_updated: 1
 _core:
