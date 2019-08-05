@@ -1,0 +1,21 @@
+uuid: d10ff77f-1769-4d58-8494-42caf345cbbe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_proceed_with_audit
+    - node.type.planned_events
+  module:
+    - options
+id: node.planned_events.field_proceed_with_audit
+field_name: field_proceed_with_audit
+entity_type: node
+bundle: planned_events
+label: 'Proceed with Audit'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

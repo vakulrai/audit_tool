@@ -62,23 +62,38 @@ class DocumentReport extends FieldPluginBase {
       $user_role = $value;
     }
     if($user_role === 'auditor'){
-      if($node->get('field_verified')->value == 1){
-        $report = 1;
-      }else{
-        $report = 0;
-      }
-      if($report == 0){
-        $form['report'] = [
-          '#type' => 'link',
-          '#title' => t('Report'),
-          '#url' => Url::fromRoute('aps_general.create_reports',['id' => $node->id()]),
-          '#attributes' => [
-            'class' => [
-              'use-ajax',
-              'button',
+      if($node->bundle() == 'pre_audit_records'){
+        if($node->get('field_verified')->value == 1){
+          $report = 1;
+        }else{
+          $report = 0;
+        }
+        if($report == 0){
+          $form['report'] = [
+            '#type' => 'link',
+            '#title' => t('Report'),
+            '#url' => Url::fromRoute('aps_general.create_reports',['id' => $node->id()]),
+            '#attributes' => [
+              'class' => [
+                'use-ajax',
+                'button',
+              ],
             ],
-          ],
-        ];
+          ];
+        }
+      }
+      elseif ($node->bundle() == 'planned_events') {
+        $form['report'] = [
+            '#type' => 'link',
+            '#title' => t('Report/Execute'),
+            '#url' => Url::fromRoute('aps_general.create_reports',['id' => $node->id()]),
+            '#attributes' => [
+              'class' => [
+                'use-ajax',
+                'button',
+              ],
+            ],
+          ];
       }
       $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
     }

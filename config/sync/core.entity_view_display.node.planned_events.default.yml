@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.planned_events.body
+    - field.field.node.planned_events.field_audit_reasons
     - field.field.node.planned_events.field_audit_type
     - field.field.node.planned_events.field_auditor
     - field.field.node.planned_events.field_checklist
@@ -15,6 +16,7 @@ dependencies:
     - field.field.node.planned_events.field_list_of_product
     - field.field.node.planned_events.field_list_of_systems
     - field.field.node.planned_events.field_pre_audit_status
+    - field.field.node.planned_events.field_proceed_with_audit
     - field.field.node.planned_events.field_refere
     - field.field.node.planned_events.field_release_status
     - field.field.node.planned_events.field_remote_location_name
@@ -34,6 +36,7 @@ dependencies:
   module:
     - datetime
     - datetime_range
+    - entity_reference_revisions
     - options
     - text
     - user
@@ -52,6 +55,15 @@ content:
   content_moderation_control:
     weight: -20
     settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_audit_reasons:
+    type: entity_reference_revisions_entity_view
+    weight: 129
+    label: above
+    settings:
+      view_mode: default
+      link: ''
     third_party_settings: {  }
     region: content
   field_audit_type:
@@ -135,6 +147,13 @@ content:
     region: content
   field_pre_audit_status:
     weight: 128
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_proceed_with_audit:
+    weight: 130
     label: above
     settings: {  }
     third_party_settings: {  }

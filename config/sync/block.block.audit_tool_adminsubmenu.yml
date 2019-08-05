@@ -33,8 +33,8 @@ settings:
   slide: horizontal
   supposition: 1
   hoverintent: 1
-  touch: '1'
-  touchbh: '1'
+  touch: '0'
+  touchbh: '0'
   touchbp: '768'
   touchua: '0'
   touchual: ''

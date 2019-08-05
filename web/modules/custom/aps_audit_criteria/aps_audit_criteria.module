@@ -272,7 +272,16 @@ function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form
           'input[name="field_queries['.$key_pdef.'][inline_entity_form][field_select_query_type]"]' => ['value' => 'Pdef']
         ],
       ];
-       $element['subform']['field_sub_s_no_']['widget'][0]['value']['#default_value'] = $key_pdef;
+      
+      $element['subform']['field_answers_poor']['widget'][0]['value']['#placeholder'] = 'POOR';
+      $element['subform']['field_answer_optimised']['widget'][0]['value']['#placeholder'] = 'OPTIMISED';
+      $element['subform']['field_answer_qualified']['widget'][0]['value']['#placeholder'] = 'QUALIFIED';
+      $element['subform']['field_answers_defined']['widget'][0]['value']['#placeholder'] = 'EFFECIENT';
+      $element['subform']['field_answers_poor']['#disabled'] = TRUE;
+      $element['subform']['field_answer_optimised']['#disabled'] = TRUE;
+      $element['subform']['field_answer_qualified']['#disabled'] = TRUE;
+      $element['subform']['field_answers_defined']['#disabled'] = TRUE;
+      $element['subform']['field_sub_s_no_']['widget'][0]['value']['#default_value'] = $key_pdef;
     }
   }
 
@@ -293,10 +302,10 @@ function aps_audit_criteria_form_paragraphs_subform_alter(array &$subform, \Drup
   $paragraph = $form_state->get('paragraph');
   $paragraph_type = $paragraph->getType();
   if($paragraph_type == 'internal_audit_qa'){
-    $subform['field_answers_poor']['#disabled'] = TRUE;
-    $subform['field_answer_optimised']['#disabled'] = TRUE;
-    $subform['field_answer_qualified']['#disabled'] = TRUE;
-    $subform['field_answers_defined']['#disabled'] = TRUE;
+    // $subform['field_answers_poor']['#disabled'] = TRUE;
+    // $subform['field_answer_optimised']['#disabled'] = TRUE;
+    // $subform['field_answer_qualified']['#disabled'] = TRUE;
+    // $subform['field_answers_defined']['#disabled'] = TRUE;
     // $subform['field_clause_no']['#access'] = FALSE;
   }
 }

@@ -30,6 +30,7 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Datetime\DateHelper;
 use Drupal\Core\Render\Markup;
+use Symfony\Component\Yaml\Yaml;
 
 
 
@@ -1348,9 +1349,17 @@ function aps_general_unit_page_redirect(array $form, \Drupal\Core\Form\FormState
 
   //Saving mandays in aps_audit_planning.mandaysettings.yml
   $config_factory = \Drupal::configFactory();
-  $config = $config_factory->getEditable('aps_audit_planning.mandaysettings');
+  $config = $config_factory->getEditable('aps_audit_planning.mandaysettings.yml');
   $config->set('system_mandays_standard', $total_system_mandays);
   $config->set('system_mandays_updated', $total_system_mandays);
+
+  // $unit_data = [
+  //   $node->id() => ['system_mandays_standard' => 0, 'process_mandays_standard' => 0, 'product_mandays_standard' => 0, 'system_mandays_updated' => 0, 'process_mandays_updated' => 0, 'product_mandays_updated' => 0],
+  // ];
+
+  // $yaml = Yaml::dump($unit_data);
+
+  // file_put_contents('/path/to/file.yaml', $yaml);
   $config->save(TRUE);
 
   $form_state->setRedirectUrl($response);
