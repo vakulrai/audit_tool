@@ -33,13 +33,6 @@ div.ui-dialog {
   .ui-dialog-titlebar {
     @extend .card-bg-primary;
   }
-  input[type="submit"] {
-    @extend .btn-colored;
-    height: auto;
-  }
-  input[value="Cancel"] {
-    @extend .btn-accent;
-  }
 }
 
 .preaudit-table-responsive-wrapper {

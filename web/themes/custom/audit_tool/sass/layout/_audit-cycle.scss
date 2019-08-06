@@ -3,11 +3,6 @@ form.audit-cycle-settings-edit-form {
       > legend {
         @extend .h2;
       }
-     .paragraphs-dropbutton-wrapper {
-        input[type="submit"] {
-          @extend .btn-accent;
-        }
-     }
     &#edit-audit-cycle-year-sr {
       .paragraphs-subform {
         @media (min-width: 1024px) {

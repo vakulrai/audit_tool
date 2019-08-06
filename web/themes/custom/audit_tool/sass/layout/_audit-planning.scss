@@ -6,23 +6,6 @@ form.views-exposed-form {
 		justify-content: space-between;
 		align-items: center;
 	}
-	input[type="submit"] {
-		@extend .btn-colored;
-	}
-}
-
-a.button {
-  .path-documentinternalrecords &,
-  .path-documentrecords &,
-  .path-documentmanuals & {
-    @extend .btn;
-    @extend .btn-raised;
-    @extend .btn-colored;
-  }
-}
-
-form.node-internal-documents-form {
-
 }
 
 form.node-planned-events-form,
@@ -89,9 +72,6 @@ form.node-planned-events-edit-form {
   	width: 100%;
   	display: inline-block;
   }
-  input#edit-preview {
-  	@extend .btn-accent;
-  }
 }
 
 table.cols-7 {
@@ -119,28 +99,13 @@ form.customer-manual-parts-parts-form {
   } 
   fieldset.media-library-widget {
     @extend .highlight;
-    input[type="submit"] {
-      @extend .btn-colored;
-    }
-  }
-  .tabledrag-toggle-weight-wrapper {
-    button {
-      @extend .btn;
-      @extend .btn-raised;
-    }
   }
   table.field-multiple-table {
     .paragraph-type-top {
        .paragraphs-dropbutton-wrapper {
         padding-right: 20px;
-         input.button {
-          @extend .btn-accent;
-         }
        }
     }
-  }
-  input.field-add-more-submit {
-    @extend .btn-accent;
   }
 }
 
@@ -156,9 +121,6 @@ form.holidays-holidays-edit-form   {
     .paragraph-type-top {
        .paragraphs-dropbutton-wrapper {
         padding-right: 20px;
-         input.button {
-          @extend .btn-accent;
-         }
        }
     }
   }
@@ -169,19 +131,6 @@ form.holidays-holidays-edit-form   {
     width: 100%;
     max-width: 100%;
     min-width: 100%;
-  }
-  .tabledrag-toggle-weight-wrapper {
-    button {
-      @extend .btn;
-      @extend .btn-raised;
-    }
-  }
-  input[type="submit"].field-add-more-submit,
-  input#edit-preview {
-    @extend .btn-accent;
-  }
-  input#edit-continue-dept {
-    @extend .btn-colored;
   }
 }
 input[type="number"] {
@@ -208,24 +157,8 @@ form.user-form     {
   }
   .field--widget-media-library-widget  {
     @extend .highlight;
-    input[type="submit"] {
-      @extend .btn-colored;
-    }
     legend {
       @extend h4;
-    }
-  }
-  input[type="submit"].field-add-more-submit,
-  input#edit-preview {
-    @extend .btn-accent;
-  }
-  input#edit-continue-dept {
-    @extend .btn-colored;
-  }
-  .tabledrag-toggle-weight-wrapper {
-    button {
-      @extend .btn;
-      @extend .btn-raised;
     }
   }
 }
@@ -238,18 +171,8 @@ form.user-form {
     max-width: 100%;
     min-width: 100%;
   }
-  input[type="submit"]#edit-delete {
-    @extend .btn-accent;
-  }
 }
 
-form.audit-criteria-systems-edit-form {
-  .paragraphs-dropbutton-wrapper {
-     input[type="submit"] {
-       @extend .btn-accent;
-     }
-  }
-}
 
 form.csv-entity-import {
   .form-item-users-upload {

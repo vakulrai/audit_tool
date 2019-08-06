@@ -16,6 +16,12 @@ table {
 } 
 
 form {
+  .form-type-number {
+    label {
+      width: 100%;
+      display: inline-block;
+    }
+  }
 	label.form-required {
 		&:after {
 			content: "*";
