@@ -1,0 +1,43 @@
+button,
+a.button {
+  @extend .btn;
+  @extend .btn-raised;
+  @extend .btn-colored;
+  .dropbutton-widget li.dropbutton-toggle & {
+    min-width: auto;
+    background: transparent;
+    color: #000;
+    box-shadow: none;
+    border: none;
+    &:hover,&:focus {
+      background: transparent;
+      box-shadow: none;
+      border: none;
+    }
+  }
+}
+
+input.button {
+  @extend .btn;
+  @extend .btn-raised;
+  @extend .btn-colored;
+  &#edit-submit {
+    @extend .btn-colored;
+  } 
+  &#edit-preview,
+  &.field-add-more-submit,
+  li.restore & {
+    @extend .btn-accent;
+  }
+  &[value="Remove"],
+  li.confirm-remove & {
+    background: #f5574c;
+    color: #fff;
+    &:hover,&:focus {
+      background: #f0190a;
+    }
+  }
+  &.media-library-open-button {
+    @extend .btn-colored;
+  }
+}

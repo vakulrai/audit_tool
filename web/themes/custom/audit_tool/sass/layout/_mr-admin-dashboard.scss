@@ -19,7 +19,11 @@ details {
 		}
 	}
 }
-
+.views-field-edit-node {
+  @media (min-width: 768px) {
+    text-align: right;
+  }
+}
 div {
 	&#block-audit-tool-auditfindingcontrolscheduled {
 		.fieldset-wrapper {
@@ -29,9 +33,7 @@ div {
          &#procedure-list {
            display: inline-block;
            margin: 10px auto 20px;
-           @extend .btn;
-           @extend .btn-raised;
-           @extend .btn-accent;
+           @extend .button;
          }
        }
     }
@@ -69,12 +71,6 @@ form {
        }
      }
   }
-  .tabledrag-toggle-weight-wrapper {
-    button {
-      @extend .btn;
-      @extend .btn-raised;
-    }
-  }
   .field--name-field-shift {
       .form-checkboxes {
         display: flex;
@@ -110,15 +106,12 @@ form {
       }
     }
   }
-  .form-actions {
+  /*.form-actions {
     input[type="submit"] {
       @extend .btn;
       @extend .btn-raised;
       &#edit-submit {
        @extend .btn-colored;
-      }
-      &#edit-preview {
-         @extend .btn-accent;
       }
     }
   }
@@ -128,7 +121,7 @@ form {
       @extend .btn-raised;
       @extend .btn-colored;
     }
-  }
+  }*/
   .field--name-field-sales-turnover,
   .field--name-field-contributed-sales ,
   .field--name-field-total-members,
@@ -175,11 +168,11 @@ form.user-register-form {
        }
      }
   }
-  input[type="submit"] {
+ /* input[type="submit"] {
     @extend .btn-raised;
     @extend .btn-colored;
     @extend .btn;
-  }
+  }*/
 }
 
 //preview page
@@ -207,32 +200,7 @@ form.node-supplier-form {
       }
     }
   }
-  .tabledrag-toggle-weight-wrapper {
-     button {
-       @extend .btn;
-       @extend .btn-raised;
-     }
-  }
-  input.field-add-more-submit {
-    @extend .btn-colored;
-  }
-
-  input#edit-submit {
-    @extend .btn-colored;
-  }
-  input#edit-preview {
-    @extend .btn-accent;
-  }
 }
-input[type="submit"] {
-  @extend .btn;
-  @extend .btn-raised;
-
-}
-input#edit-submit {
-  @extend .btn-colored;
-}
-
 .unit-details  {
   @extend .highlight;
   > h3 {

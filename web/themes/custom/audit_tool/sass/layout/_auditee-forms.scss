@@ -12,9 +12,6 @@ form.node-pre-audit-records-form {
   }
   .field--widget-media-library-widget {
     @extend .highlight;
-    input[type="submit"] {
-      @extend .btn-colored;
-    }
   }
   .field--name-field-accumlative-kpi {
     @extend .card;
@@ -39,12 +36,6 @@ form.node-pre-audit-records-form {
       @extend .text-disabled;
     }
   }
-  .tabledrag-toggle-weight-wrapper {
-    button {
-      @extend .btn;
-      @extend .btn-raised;
-    }
-  }
   table.field-multiple-table {
     .paragraphs-subform {
       max-width: 460px;
@@ -55,12 +46,6 @@ form.node-pre-audit-records-form {
        }
     }
   }
-  .paragraphs-dropbutton-wrapper {
-    input.button {
-      @extend .btn-accent;
-    }
-  }
-
   .field--type-daterange {
     fieldset {
       legend {
@@ -92,22 +77,10 @@ form.node-auditor-report-edit-form {
     width: 100%;
     max-width: 100%;
   }
-  .tabledrag-toggle-weight-wrapper {
-    button {
-      @extend .btn;
-      @extend .btn-raised;
-    }
-  }
   details.field-group-details {
     .form-type-managed-file {
       @extend .info;
     }
-  }
-  input#edit-preview {
-    @extend .btn-accent;
-  }
-  input#edit-submit-report {
-    @extend .btn-colored;
   }
   table.field-multiple-table {
    .field-multiple-table {
@@ -127,11 +100,6 @@ form.node-auditor-report-edit-form {
        .paragraphs-dropbutton-wrapper {
         padding-right: 20px;
        }
-    }
-  }
-  .paragraphs-dropbutton-wrapper {
-    input.button {
-      @extend .btn-accent;
     }
   }
 }

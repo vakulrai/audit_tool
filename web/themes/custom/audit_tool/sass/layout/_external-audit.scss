@@ -35,11 +35,6 @@ form.node-clauses-form {
   .form-actions {
     flex: 0 0 100%;
   }
-  .form-actions {
-    input#edit-preview {
-      @extend .btn-accent;
-    }
-  }
 }
 
 form.taxonomy-term-decision-form,
