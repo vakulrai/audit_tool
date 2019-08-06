@@ -28,7 +28,6 @@ class PreAuditForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['#cache']['max-age'] = 0;
     $reference_id = \Drupal::request()->query->get('ref');
     $details = $this->getAuditDetails($reference_id);
     $nid = \Drupal::request()->query->get('ref');
@@ -48,11 +47,12 @@ class PreAuditForm extends FormBase {
     $total_hours = $days * 24 + $hours;
     
     if ($days == 0 && $check_invert_time != 1) {
-      $disable_fields = 'FALSE';
+      $disable_fields = FALSE;
     }
     else{
-      $disable_fields = 'TRUE';
+      $disable_fields = TRUE;
     }
+
     $procedure_no = aps_pre_audit_get_node_value($nid, 'field_procedure_no');
     $procedure_title = aps_pre_audit_get_node_value($procedure_no, 'title');
 
@@ -259,7 +259,7 @@ class PreAuditForm extends FormBase {
       ],
       '#disabled' => $disable_fields,
     ];
-
+    $form['#cache']['max-age'] = 0;
     return $form;
   }
 
