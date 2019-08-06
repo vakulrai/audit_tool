@@ -6417,59 +6417,6 @@ display:
           empty_zero: false
           hide_alter_empty: false
           plugin_id: remainingday_event
-        edit_node:
-          id: edit_node
-          table: node
-          field: edit_node
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: true
-            text: "{% if  remainingday_event == 'Audit Date Not Released.' %}\r\n    <a href=\"#\"></a><br>\r\n{% else %}\r\n    <a href=\"/node/{{nid}}/edit?schedule_type=reschedule\">RESCHEDULE</a><br>\r\n{% endif %}\r\n\r\n{{remainingday_event}}"
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: RESCHEDULE
-          output_url_as_text: false
-          absolute: false
-          entity_type: node
-          plugin_id: entity_link_edit
         field_select_audit_1:
           id: field_select_audit_1
           table: node__field_select_audit
@@ -6594,6 +6541,59 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "{% if  'Passed' in remainingday_event|render %}\r\n    <a href=\"#\"></a><br>\r\n{% else %}\r\n    <a href=\"/node/{{nid}}/edit?schedule_type=reschedule\">RESCHEDULE</a><br>\r\n{% endif %}\r\n{{remainingday_event}}"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: RESCHEDULE
+          output_url_as_text: false
+          absolute: false
+          entity_type: node
+          plugin_id: entity_link_edit
         remainingday_event_validate:
           id: remainingday_event_validate
           table: views
@@ -6811,6 +6811,7 @@ display:
         access: false
         relationships: false
         arguments: false
+        cache: false
       filters:
         type:
           id: type
@@ -7024,6 +7025,9 @@ display:
           entity_type: node
           entity_field: nid
           plugin_id: node_nid
+      cache:
+        type: none
+        options: {  }
     cache_metadata:
       maxage: 1
       contexts:

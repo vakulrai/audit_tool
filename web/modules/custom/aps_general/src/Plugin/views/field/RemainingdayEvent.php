@@ -74,10 +74,11 @@ class RemainingdayEvent extends FieldPluginBase {
     $hours = $diff->h;
     $check_invert_time = $diff->invert;
     $total_hours = $days * 24 + $hours;
-    
+    $minutes = $diff->i;
+
     if($node->get('moderation_state')->value == 'release_audit' || $node->get('moderation_state')->value == 'post_audit'){
-      if ($total_hours > 0 && $check_invert_time != 1) {
-        $time_remaining = $days .' Days '. $hours . ' Hour';
+      if ($total_hours >= 0 && $check_invert_time != 1) {
+        $time_remaining = $days .' Days '. $hours . ' Hour '.$minutes. ' Minutes';
         $form['days'] = [
           '#markup' => $time_remaining,
           '#suffix' => '<br><p class="event-date"><b>Note:<br>Last day to Reschedule Event is: '. $audit_cycle_time.'</b></p>',
@@ -85,14 +86,14 @@ class RemainingdayEvent extends FieldPluginBase {
         $node->set('field_pre_audit_status', 'intime');
       }
       else{
-        $time_remaining = 'Audit Date Has been Passed,<br>Last date Was: <b>'.$audit_cycle_time.'</b>';
+        $time_remaining = 'Reschedule Date Has been Passed,<br>Last date Was: <b>'.$audit_cycle_time.'</b>';
         $form['days'] = [
           '#markup' => $time_remaining,
         ];
         $node->set('field_pre_audit_status', 'notintime');
       }
     }
-   else{
+    else{
       $time_remaining = 'Audit Date Not Released.';
       $form['days'] = [
         '#markup' => $time_remaining,
