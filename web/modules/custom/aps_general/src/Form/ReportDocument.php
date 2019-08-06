@@ -200,7 +200,7 @@ class ReportDocument extends FormBase {
         $action_link = '<a href="'.$link.'">Link</a>';
         $message = 'The Audit has been Reported with category: <b>'.$term_name.'<br>Please check the Action link.'.$action_link;
         notify($nid, $message);
-        $response->addCommand(new OpenModalDialogCommand("Success!", 'Report Submitted Successfully.', ['width' => 800]));
+        $response->addCommand(new RedirectCommand('/planned-audit-listing/'.$node_object->field_refere->target_id));
       }
     }
     $node_object->save();
