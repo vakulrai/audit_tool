@@ -28,8 +28,8 @@ third_party_settings:
       children:
         - field_answers_poor
         - field_description_effecient
-      parent_name: ''
-      weight: 5
+      parent_name: group_checklist_category
+      weight: 4
       format_type: html_element
       format_settings:
         label: Poor
@@ -47,8 +47,8 @@ third_party_settings:
       children:
         - field_answer_qualified
         - field_description_poor
-      parent_name: ''
-      weight: 6
+      parent_name: group_checklist_category
+      weight: 5
       format_type: html_element
       format_settings:
         label: Qualified
@@ -66,8 +66,8 @@ third_party_settings:
       children:
         - field_answer_optimised
         - field_description_qualified
-      parent_name: ''
-      weight: 7
+      parent_name: group_checklist_category
+      weight: 6
       format_type: html_element
       format_settings:
         label: Optimised
@@ -85,8 +85,8 @@ third_party_settings:
       children:
         - field_answers_defined
         - field_description_optimised
-      parent_name: ''
-      weight: 2
+      parent_name: group_checklist_category
+      weight: 3
       format_type: html_element
       format_settings:
         label: Efficient
@@ -100,6 +100,26 @@ third_party_settings:
         id: answer-efficient
         classes: ''
       label: Efficient
+    group_checklist_category:
+      children:
+        - group_group_effecient
+        - group_group_poor
+        - group_group_qualified
+        - group_group_optimised
+      parent_name: ''
+      weight: 2
+      format_type: html_element
+      format_settings:
+        id: checklist-category
+        classes: ''
+        element: div
+        show_label: false
+        label_element: h3
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Checklist Category'
 id: paragraph.internal_audit_qa.default
 targetEntityType: paragraph
 bundle: internal_audit_qa
@@ -138,7 +158,7 @@ content:
     type: string_textfield
     region: content
   field_checked:
-    weight: 9
+    weight: 8
     settings:
       size: 60
       placeholder: ''
@@ -146,7 +166,7 @@ content:
     type: string_textfield
     region: content
   field_clause_no:
-    weight: 11
+    weight: 10
     settings:
       match_operator: CONTAINS
       size: 60
@@ -187,14 +207,14 @@ content:
     type: string_textarea
     region: content
   field_evidence:
-    weight: 8
+    weight: 7
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
     region: content
   field_finding_categories:
-    weight: 10
+    weight: 9
     settings:
       match_operator: CONTAINS
       size: 60
@@ -203,7 +223,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_kpi_status:
-    weight: 12
+    weight: 11
     settings: {  }
     third_party_settings: {  }
     type: options_select

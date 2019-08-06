@@ -174,9 +174,11 @@ class ReportDocument extends FormBase {
         }
       }
       elseif ($user_role == 'auditee' || $user_role == 'auditor') {
-        $reason = Paragraph::load($node_object->field_audit_reasons->target_id);
-        $term = Term::load($reason->field_reason->target_id);
-        $term_name = $term->getName();
+        if(isset($node->field_audit_reasons->target_id)){
+          $reason = Paragraph::load($node_object->field_audit_reasons->target_id);
+          $term = Term::load($reason->field_reason->target_id);
+          $term_name = $term->getName();
+        }
         $paragraph = Paragraph::create([
         'field_reason' => $form_values['reasons'],
         'field_others' => $form_values['reasons_other'],
