@@ -1840,6 +1840,7 @@ function getMandaysFromAuditType($type, $value, $additional_mandays1, $additiona
   return $total;
 }
 
+
 function getAuditCycleObjectCurrentUnit($unit_reference){
   $query = \Drupal::database()->select('audit_cycle__field_unit_reference', 'h');
   $query->fields('h',['entity_id']);
@@ -1849,4 +1850,21 @@ function getAuditCycleObjectCurrentUnit($unit_reference){
   $node_storage = \Drupal::entityManager()->getStorage('audit_cycle');
   $entity_audit_cycle = $node_storage->load($nids[0]->entity_id);
   return $entity_audit_cycle;
+}
+
+function notify($nid, $message){
+  $user_timezone =  drupal_get_user_timezone();
+  $notifictaion_insert = \Drupal::database()->insert('notifications');
+  $uid = \Drupal::currentUser()->id();
+  $get_current_timestamp = getCurrentTimestamp($user_timezone);
+  $notifictaion_insert->fields([
+    'nid' => $nid,
+    'uid' => $uid,
+    'message' => $message,
+    'timestamp' => $get_current_timestamp,
+    'status' => 0,
+  ]);
+  if($notifictaion_insert->execute()){
+    return true;
+  }
 }

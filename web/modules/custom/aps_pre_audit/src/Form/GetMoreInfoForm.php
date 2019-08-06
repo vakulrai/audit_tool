@@ -95,7 +95,7 @@ class GetMoreInfoForm extends FormBase {
     $config = \Drupal::service('config.factory')->getEditable('aps_pre_audit.getmoreinfo');
     if($nid = $config->get('nid')){
       $uid = \Drupal::currentUser()->id();
-      $get_current_timestamp = $this->getCurrentTimestamp($user_timezone);
+      $get_current_timestamp = getCurrentTimestamp($user_timezone);
       $notifictaion_insert = \Drupal::database()->insert('notifications');
       $message = $form_state->getValues('message')['message'];
       $notifictaion_insert->fields([
@@ -119,17 +119,5 @@ class GetMoreInfoForm extends FormBase {
     $response->addCommand(new RemoveCommand('.ui-dialog'));
     return $response;
   }
-  
-  /**
-   * Callback to get Current timestamp.
-   */
-  public function getCurrentTimestamp($user_timezone){
-    $db_timezone = 'UTC';
-    $get_current_timestamp =  \Drupal::time()->getCurrentTime();
-    $current_date_object = DateTimePlus::createFromTimestamp($get_current_timestamp, $db_timezone);
-    $current_date_object->setTimezone(new \DateTimeZone($user_timezone));
-    return $current_date_object->getTimestamp();
-  }
-
 
 }

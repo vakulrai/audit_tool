@@ -101,12 +101,30 @@ class PreAuditValidate extends FieldPluginBase {
     $check_invert_time = $diff->invert;
     $total_hours = $days * 24 + $hours; //Hours for Pre audit form audit cycle.
     $total_hours_to_audit = $audit_date_current_date_diff->days * 24 + $audit_date_current_date_diff->h; //Actual event date.
+    
+    if(isset($node->field_audit_reasons->target_id)){
+      $reason = Paragraph::load($node->field_audit_reasons->target_id);
+      $term = Term::load($reason->field_reason->target_id);
+      $term_name = $term->getName();
+      $name = Markup::create('<b>'.$term_name.'</b>');
+    }
     if ($total_hours >= 0  && $check_invert_time != 1) {
       if($user_role == 'auditor'){
-        $form['add_delta_qa'] = [
+        if($node->field_proceed_with_audit->value == 'no'){
+          $add_report_message = '<br><b>Audit Has been Reported with: '.$name.'</b>';
+        }
+        else{
+          $add_report_message = '';
+        }
+        $form['add_delta_qa'][] = [
           '#type' => 'link',
           '#title' => t('Pre Audit'),
           '#url' => Url::fromUserInput('/preaudit/'.$node->id().'?ref='.$audit_reference),
+        ];
+
+        $form['add_delta_qa'][] = [
+          '#type' => 'markup',
+          '#markup' => $add_report_message,
         ];
       }
       elseif ($user_role == 'auditee') {
@@ -121,10 +139,6 @@ class PreAuditValidate extends FieldPluginBase {
       if($user_role == 'auditor'){
         if($total_hours_to_audit >= 0 && $audit_date_current_date_diff->invert != 1 && $check_invert_time == 1){
           if($node->field_proceed_with_audit->value == 'no'){
-            $reason = Paragraph::load($node->field_audit_reasons->target_id);
-            $term = Term::load($reason->field_reason->target_id);
-            $term_name = $term->getName();
-            $name = Markup::create('<b>'.$term_name.'</b>');
             $form['add_delta_qa'] = [
               '#type' => 'markup',
               '#markup' => 'Audit Has been Reported with: '.$name,

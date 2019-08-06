@@ -10,6 +10,11 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
 use Drupal\Core\Ajax\RemoveCommand;
 use Drupal\Core\Ajax\RedirectCommand;
+use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Url;
+use Drupal\taxonomy\Entity\Term;
+
 
 /**
  * Class ReportDocument.
@@ -52,6 +57,7 @@ class ReportDocument extends FormBase {
        '#title' => 'Select One',
        '#options' => $option_to_proceed,
        '#weight' => 0,
+       '#suffix'=> '<p id="execute-audit"></p>',
       ];
 
       $form['customer_audit']['reasons'] = [
@@ -146,6 +152,7 @@ class ReportDocument extends FormBase {
    * AJAX Callback to update report.
    */
   public function UpdateReport(array $form, FormStateInterface $form_state) {
+    global $base_url;
     $response = new AjaxResponse();
     $current_user = \Drupal::currentUser();
     $roles = $current_user->getRoles();
@@ -158,11 +165,18 @@ class ReportDocument extends FormBase {
     if($nid = \Drupal::request()->query->get('id')){
       $node_object = Node::load($nid);
       if($user_role == 'auditor' && $form_values['option_proceed'] == 'execute'){
-        $node_object->set('field_proceed_with_audit', 'yes');
-        $response->addCommand(new RedirectCommand('/preaudit/'.$node_object->id().'?ref='.$node_object->field_checklist->target_id));
+        // $node_object->set('field_proceed_with_audit', 'yes');
+        if($node_object->get('field_proceed_with_audit')->value == 'no'){
+          $response->addCommand(new HtmlCommand('#execute-audit', t('Audit has been Reported. Can\'t Proceed.')));
+        }
+        else{
+          $response->addCommand(new RedirectCommand('/preaudit/'.$node_object->id().'?ref='.$node_object->field_checklist->target_id));
+        }
       }
       elseif ($user_role == 'auditee' || $user_role == 'auditor') {
-      
+        $reason = Paragraph::load($node_object->field_audit_reasons->target_id);
+        $term = Term::load($reason->field_reason->target_id);
+        $term_name = $term->getName();
         $paragraph = Paragraph::create([
         'field_reason' => $form_values['reasons'],
         'field_others' => $form_values['reasons_other'],
@@ -182,7 +196,11 @@ class ReportDocument extends FormBase {
           $node_object->set('field_audit_reasons', $paragraph_version);
           $node_object->set('field_proceed_with_audit', 'no');
         }
-        $response->addCommand(new OpenModalDialogCommand("Success!", 'Report Submitted Successfully.', ['width' => 800]));
+        $link = $base_url.Url::fromRoute('entity.node.edit_form',['node' => $nid])->toString();
+        $action_link = '<a href="'.$link.'">Link</a>';
+        $message = 'The Audit has been Reported with category: <b>'.$term_name.'<br>Please check the Action link.'.$action_link;
+        notify($nid, $message);
+        $response->addCommand(new RedirectCommand('/planned-audit-listing/'.$node_object->field_refere->target_id));
       }
     }
     $node_object->save();
