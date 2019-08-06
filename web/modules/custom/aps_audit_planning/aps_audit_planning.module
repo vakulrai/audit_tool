@@ -37,6 +37,12 @@ function aps_audit_planning_mail($key, &$message, $params) {
  */
 function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   global $base_url;
+  $id = \Drupal::request()->query->get('unit_reference');
+  $current_user = \Drupal::currentUser();
+  $roles = $current_user->getRoles();
+  foreach ($roles as $key => $value) {
+    $user_role = $value;
+  }
 	if($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form'){
     $form['field_report_reference']['#access'] = FALSE;
     $form['field_select_users']['#access'] = FALSE;
@@ -46,9 +52,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_total_mandays']['#access'] = FALSE;
     $form['field_pre_audit_status']['#access'] = FALSE;
     $form['field_refere']['#access'] = FALSE;
-    $form['field_audit_reasons']['#access'] = FALSE;
     $form['field_proceed_with_audit']['#access'] = FALSE;
-    $id = \Drupal::request()->query->get('unit_reference');
     $form['#cache']['max-age'] = 0;
     $form['field_sections']['#attributes'] = ['id' => ['section']];
     $form['field_checklist']['#attributes'] = ['id' => ['checklist']];
@@ -157,11 +161,6 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       //   '#type' => 'container',
       // ];
     }
-    $current_user = \Drupal::currentUser();
-    $roles = $current_user->getRoles();
-    foreach ($roles as $key => $value) {
-      $user_role = $value;
-    }
     if($user_role == 'auditor' || $user_role == 'auditee'){
       $entity_type_id = 'node';
       $bundle = 'planned_events';
@@ -208,6 +207,9 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     ];
   }
   if ($form_id == 'node_planned_events_edit_form'){
+    if($user_role == 'auditor' || $user_role == 'auditee'){
+      $form['field_audit_reasons']['#access'] = FALSE;
+    }
     $form['field_shift']['widget']['#options'] = $form['field_shift']['widget']['#default_value'];
     $form['field_unit_reference']['#access'] = FALSE;
     $schedule_type = \Drupal::request()->query->get('schedule_type');
