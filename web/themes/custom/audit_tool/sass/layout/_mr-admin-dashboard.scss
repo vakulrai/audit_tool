@@ -106,22 +106,6 @@ form {
       }
     }
   }
-  /*.form-actions {
-    input[type="submit"] {
-      @extend .btn;
-      @extend .btn-raised;
-      &#edit-submit {
-       @extend .btn-colored;
-      }
-    }
-  }
-  input[type="submit"] {
-    &.field-add-more-submit {
-      @extend .btn;
-      @extend .btn-raised;
-      @extend .btn-colored;
-    }
-  }*/
   .field--name-field-sales-turnover,
   .field--name-field-contributed-sales ,
   .field--name-field-total-members,
@@ -272,3 +256,4 @@ div#block-audit-tool-riskmanagement {
     }
   }
 }
+

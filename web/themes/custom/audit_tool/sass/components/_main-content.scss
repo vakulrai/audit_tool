@@ -32,3 +32,21 @@ form {
 	}
 }
 
+
+#checklist-category {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+   > div {
+    @extend .highlight;
+     @media (min-width: 600px) {
+       flex: 0 0 25%;
+     }
+     @media (max-width: 599px) {
+       flex: 0 0 50%;
+     }
+     input.form-text {
+      text-transform: uppercase;
+     }
+   }
+}
