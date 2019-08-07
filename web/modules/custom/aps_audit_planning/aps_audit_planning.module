@@ -255,7 +255,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     }
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $uri = explode('/', $current_uri);
-    if($uri[1]){
+    if(is_numeric($uri[1])){
       $node_object = Node::load($uri[1]);
       if($node_object->get('moderation_state')->value == 'scheduled' || $node_object->get('moderation_state')->value == 'reschedule'){
         if($schedule_type == ''){

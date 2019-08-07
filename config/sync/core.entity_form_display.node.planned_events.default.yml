@@ -36,6 +36,7 @@ dependencies:
     - node.type.planned_events
     - workflows.workflow.workflow_for_audit_planning
   module:
+    - conditional_fields
     - content_moderation
     - datetime
     - datetime_range
@@ -371,7 +372,74 @@ content:
   field_tolerance:
     weight: 7
     settings: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      conditional_fields:
+        a881c90e-9648-4840-92be-9498171b05df:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+        95bb5249-0f39-4ad7-b4df-b000904ad00e:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: external
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+        a76a042c-8213-4ee7-bd3e-e7c8595eca9c:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: supplier
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+        16f36950-c014-4c31-9ebd-5af14eefdfa8:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: customer
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
     type: datetime_default
     region: content
   field_total_mandays:
