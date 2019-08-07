@@ -12,4 +12,18 @@
       @extend .highlight;
       width: 100%;
   }
+  .card-item.card-actions {
+    margin-top: 48px;
+    background: #f5f5f5;
+    border-top: none;
+    padding: 10px 24px;
+  }
+}
+form.user-login-form {
+  .card-item.card-actions {
+    margin-top: 48px;
+    background: #f5f5f5;
+    border-top: none;
+    padding: 10px 24px;
+  }
 }
