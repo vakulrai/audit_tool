@@ -29,6 +29,7 @@ dependencies:
     - field.field.node.planned_events.field_start_date
     - field.field.node.planned_events.field_suggested_date
     - field.field.node.planned_events.field_time
+    - field.field.node.planned_events.field_tolerance
     - field.field.node.planned_events.field_total_mandays
     - field.field.node.planned_events.field_unit
     - field.field.node.planned_events.field_year_frequency
@@ -257,6 +258,15 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: daterange_default
+    region: content
+  field_tolerance:
+    weight: 131
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_total_mandays:
     weight: 127

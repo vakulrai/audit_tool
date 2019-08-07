@@ -1,0 +1,21 @@
+uuid: d5075af4-8b76-4171-91f3-06859dd877fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tolerance
+    - node.type.planned_events
+  module:
+    - datetime
+id: node.planned_events.field_tolerance
+field_name: field_tolerance
+entity_type: node
+bundle: planned_events
+label: Tolerance
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

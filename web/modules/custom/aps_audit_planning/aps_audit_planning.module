@@ -53,6 +53,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_pre_audit_status']['#access'] = FALSE;
     $form['field_refere']['#access'] = FALSE;
     $form['#cache']['max-age'] = 0;
+    $form['field_select_auditee']['#attributes'] = ['id' => ['auditee']];
     $form['field_sections']['#attributes'] = ['id' => ['section']];
     $form['field_checklist']['#attributes'] = ['id' => ['checklist']];
     $form['field_shift']['#attributes'] = ['id' => ['shift']];
@@ -60,6 +61,13 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_available_procedures']['#attributes'] = ['id' => ['procedure-type']];
     $get_department_options = getDepartmenttypeUnderunit('department', $id);
     $form['field_department']['widget']['#options'] = $get_department_options;
+
+    $form['field_audit_type']['widget']['#ajax'] = [
+      'callback' => 'changeAuditeeOptions',
+      'wrapper' => 'auditee',
+      'event' => 'change',
+    ];
+
 	  $form['field_department']['widget']['#ajax'] = [
       'callback' => 'getSectionfromdepartment',
       'wrapper' => 'section',
@@ -290,6 +298,19 @@ function getChecklist(array $form, FormStateInterface $form_state) {
    return $form['field_checklist'];
 }
 
+function changeAuditeeOptions(array $form, FormStateInterface $form_state) {
+  if(count($form_state->getValue('field_audit_type'))){
+    $audit_array = $form_state->getValue('field_audit_type')[0];
+    $key = $audit_array['value'];
+    if($key == 'external' || $key == 'supplier' || $key == 'customer'){
+      $form['field_select_auditee']['widget']['#title'] = 'Select MR';
+      $form['field_select_auditee']['widget']['#options'] = getMRlist($key);
+      $form['field_select_auditee']['widget']['#default_value'] = '_none';
+    }
+   }
+   return $form['field_select_auditee'];
+}
+
 function getSectionfromdepartmentProcedure(array $form, FormStateInterface $form_state) {
   if(count($form_state->getValue('field_department'))){
     $department_array = $form_state->getValue('field_department')[0];
@@ -517,6 +538,36 @@ function getChecklistData($key){
   foreach ($nids as $key => $value) {
      $title = Node::load($value->entity_id);
      $data[$value->entity_id] = $title->title->value;
+  }
+  return $data;
+}
+
+function getMRlist($key){
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if($route_name == 'entity.node.edit_form'){
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node instanceof \Drupal\node\NodeInterface) {
+      $nid = $node->id();
+      $unit_reference = $node->field_refere->target_id;
+    }
+  }
+  else{
+    $unit_reference = \Drupal::request()->query->get('type');
+  }
+
+  $data = [];
+  $user_count_query = \Drupal::database()->select('user__field_reference_id', 'n');
+  $user_count_query->fields('n', ['field_reference_id_target_id','entity_id']);
+  $user_count_query->condition('n.bundle', 'user');
+  $user_count_query->condition('n.field_reference_id_target_id', $unit_reference);
+  $users = $user_count_query->execute()->fetchAll();
+
+  $data['_none'] = "- None -";
+  foreach ($users as $key => $value) {
+    $mr_user = User::load($value->entity_id);
+    if($mr_user->roles->target_id == 'mr_admin'){
+      $data[$mr_user->uid->value] = $mr_user->name->value;
+    }
   }
   return $data;
 }

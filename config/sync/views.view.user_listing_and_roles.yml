@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - user.role.auditee
+    - user.role.mr_admin
   module:
     - user
 id: user_listing_and_roles
@@ -166,6 +167,7 @@ display:
           operator: or
           value:
             auditee: auditee
+            mr_admin: mr_admin
           group: 1
           exposed: false
           expose:
