@@ -93,6 +93,12 @@ class RemainingdayEvent extends FieldPluginBase {
         $node->set('field_pre_audit_status', 'notintime');
       }
     }
+    elseif($node->get('moderation_state')->value == 'submit_audit'){
+      $time_remaining = 'Audit Has been Submitted.';
+      $form['days'] = [
+        '#markup' => $time_remaining,
+      ];
+    }
     else{
       $time_remaining = 'Audit Date Not Released.';
       $form['days'] = [

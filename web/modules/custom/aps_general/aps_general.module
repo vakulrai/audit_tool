@@ -89,6 +89,11 @@ function sendEmail($module, $type, $to_address, $message, $subject){
  */
 function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   //Condition for Unit Add form
+  $current_user = \Drupal::currentUser();
+  $roles = $current_user->getRoles();
+  foreach ($roles as $key => $value) {
+    $user_role = $value;
+  }
   $form['moderation_state']['#access'] = FALSE;
   if($form_id == 'node_unit_form'){
     $form['field_total_mandays']['#access'] = FALSE;
@@ -341,6 +346,10 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $query->condition('n.bundle', 'department');
     $query->condition('n.field_refere_target_id', $unit_reference);
     $nids = $query->execute()->fetchAll();
+    if($user_role == 'anonymous'){
+      $form['field_department']['widget']['#access'] = FALSE;
+      $form['field_functions']['widget']['#access'] = FALSE;
+    }
      foreach ($nids as $i => $j) {
       $title = Node::load($j->entity_id);
       $selected_department[$j->entity_id] = $title->title->value;
@@ -481,6 +490,12 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
  * Implements  hook_entity_insert().
  */
 function aps_general_node_insert(Node $node) {
+  $current_user = \Drupal::currentUser();
+  $current_user_id = $current_user->id();
+  $roles = $current_user->getRoles();
+  foreach ($roles as $key => $value) {
+    $user_role = $value;
+  }
   $node->setPublished(TRUE);
   $node->save();
   if($node->bundle() == 'assembly'){
@@ -489,6 +504,10 @@ function aps_general_node_insert(Node $node) {
       'name' => $title, 
       'vid' => 'assembly_type',
     ])->save();
+  }
+  if($node->bundle() == 'auditor_report'){
+    $message = 'Audit report Has been Sumbitted Successfully.';
+    notify($node->id(), $message);
   }
   if($node->bundle() == 'unit'){
     // $title = $node->get('title')->value;
@@ -561,7 +580,7 @@ function aps_general_node_insert(Node $node) {
   }
   if($node->bundle() == 'planned_events'){
     $unit_reference = \Drupal::request()->query->get('unit_reference');
-    $entity = getPlannedEventCount($unit_id);
+    $entity = getPlannedEventCount($unit_reference);
     $node_load_multiple = Node::loadMultiple($entity);
     $count_systems = 0;
     $count_process = 0;
@@ -607,15 +626,15 @@ function aps_general_node_insert(Node $node) {
     
     if($node->field_audit_type->value == 'internal'){
       if($node->field_internal_audit_type->value == 'systems'){
-        $val = $count_systems+1;
+        $val = $count_systems;
         $title_val = 'IS'.$val.'-D-'.$audit_frequency;
       }
       elseif ($node->field_internal_audit_type->value == 'process') {
-        $val = $count_process+1;
+        $val = $count_process;
         $title_val = 'IP'.$val.'-D-'.$audit_frequency;
       }
       elseif ($node->field_internal_audit_type->value == 'product') {
-        $val = $count_product+1;
+        $val = $count_product;
         $title_val = 'IPR'.$val.'-D-'.$audit_frequency;
       }
       else{
@@ -623,20 +642,20 @@ function aps_general_node_insert(Node $node) {
       }
     }
     elseif ($node->field_audit_type->value == 'external') {
-      $val = $count_external+1;
+      $val = $count_external;
       $title_val = 'EA'.$val.'-E-'.$audit_frequency;
     }
     elseif ($node->field_audit_type->value == 'supplier') {
-      $val = $count_supplier+1;
+      $val = $count_supplier;
       $title_val = 'S'.$val.'-S-'.$audit_frequency;
     }
     elseif ($node->field_audit_type->value == 'customer') {
       if($node->field_customer_type->value == 'internal_assessment'){
-        $val = $count_ia+1;
+        $val = $count_ia;
         $title_val = 'ICA'.$val.'-C-IA-'.$audit_frequency;
       }
       elseif ($node->field_customer_type->value == 'external_assessment') {
-        $val = $count_ea+1;
+        $val = $count_ea;
         $title_val = 'ECA'.$val.'-C-EA-'.$audit_frequency;
       }
     }
@@ -1085,6 +1104,12 @@ function aps_general_views_pre_render(ViewExecutable $view) {
  * Implements hook_link_alter().
  */
 function aps_general_link_alter(&$variables) {
+  $current_user = \Drupal::currentUser();
+  $current_user_id = $current_user->id();
+  $roles = $current_user->getRoles();
+  foreach ($roles as $key => $value) {
+    $user_role = $value;
+  }
   $route_name = \Drupal::routeMatch()->getRouteName();
   $node = \Drupal::routeMatch()->getParameter('node');
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
@@ -1119,6 +1144,9 @@ function aps_general_link_alter(&$variables) {
   if ($cleanLinkText == 'Notification') {
     $query = \Drupal::database()->select('notifications', 'n');
     $query->fields('n');
+    if($user_role == 'auditor' || $user_role == 'auditee'){
+      $query->condition('uid', $current_user_id);
+    }
     $query->condition('status', 0);
     $nids = $query->execute()->fetchAll();
     $count = count($nids);

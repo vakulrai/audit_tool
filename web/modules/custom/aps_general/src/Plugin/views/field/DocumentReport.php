@@ -83,7 +83,13 @@ class DocumentReport extends FieldPluginBase {
         }
       }
       elseif ($node->bundle() == 'planned_events') {
-        $form['report'] = [
+        $event_start_date_timestamp = $node->get('field_start_date')->value;
+        $current_date = new \DateTime();
+        $date_of_audit = new \DateTime(date('Y-m-d H:i:s', $event_start_date_timestamp));
+        $audit_date_current_date_diff = $current_date->diff($date_of_audit);
+        $current_date_invert = $audit_date_current_date_diff->invert;
+        if ($audit_date_current_date_diff->days > 0  && $current_date_invert != 1) {
+          $form['report'] = [
             '#type' => 'link',
             '#title' => t('Report/Execute'),
             '#url' => Url::fromRoute('aps_general.create_reports',['id' => $node->id()]),
@@ -94,6 +100,7 @@ class DocumentReport extends FieldPluginBase {
               ],
             ],
           ];
+        }
       }
       $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
     }

@@ -92,23 +92,26 @@ class PreAuditValidate extends FieldPluginBase {
     $audit_cycle_time = date('Y-m-d H:i:s',strtotime('-'.$days_before_event.'day', $event_start_date_timestamp));
     $date1 = new \DateTime($audit_cycle_time);
     $date2 = new \DateTime();
-    $date_of_audit = new \DateTime(date('Y-m-d H:i:s',strtotime($event_start_date_timestamp)));
+    $date_of_audit = new \DateTime(date('Y-m-d H:i:s',$event_start_date_timestamp));
     $diff = $date2->diff($date1);
-    $audit_date_current_date_diff = $date_of_audit->diff($date2);
+    $audit_date_current_date_diff = $date2->diff($date_of_audit);
     $months = $diff->m;
     $days = $diff->days; 
     $hours = $diff->h;
     $check_invert_time = $diff->invert;
+    $current_date_invert = $audit_date_current_date_diff->invert;
     $total_hours = $days * 24 + $hours; //Hours for Pre audit form audit cycle.
     $total_hours_to_audit = $audit_date_current_date_diff->days * 24 + $audit_date_current_date_diff->h; //Actual event date.
     
     if(isset($node->field_audit_reasons->target_id)){
       $reason = Paragraph::load($node->field_audit_reasons->target_id);
-      $term = Term::load($reason->field_reason->target_id);
-      $term_name = $term->getName();
-      $name = Markup::create('<b>'.$term_name.'</b>');
+      if(isset($reason->field_reason->target_id)){
+        $term = Term::load($reason->field_reason->target_id);
+        $term_name = $term->getName();
+        $name = Markup::create('<b>'.$term_name.'</b>');
+      }
     }
-    if ($total_hours >= 0  && $check_invert_time != 1) {
+    if ($audit_date_current_date_diff->days > 0  && $current_date_invert != 1) {
       if($user_role == 'auditor'){
         if($node->field_proceed_with_audit->value == 'no'){
           $add_report_message = '<br><b>Audit Has been Reported with: '.$name.'</b>';
@@ -116,16 +119,24 @@ class PreAuditValidate extends FieldPluginBase {
         else{
           $add_report_message = '';
         }
-        $form['add_delta_qa'][] = [
-          '#type' => 'link',
-          '#title' => t('Pre Audit'),
-          '#url' => Url::fromUserInput('/preaudit/'.$node->id().'?ref='.$audit_reference),
-        ];
+        if($node->get('moderation_state')->value == 'submit_audit'){
+          $form['add_delta_qa'] = [
+            '#type' => 'markup',
+            '#markup' => 'Audit Has been Submitted.',
+          ];
+        }
+        else{
+          $form['add_delta_qa'][] = [
+            '#type' => 'link',
+            '#title' => t('Pre Audit'),
+            '#url' => Url::fromUserInput('/preaudit/'.$node->id().'?ref='.$audit_reference),
+          ];
 
-        $form['add_delta_qa'][] = [
-          '#type' => 'markup',
-          '#markup' => $add_report_message,
-        ];
+          $form['add_delta_qa'][] = [
+            '#type' => 'markup',
+            '#markup' => $add_report_message,
+          ];
+        }
       }
       elseif ($user_role == 'auditee') {
         $form['add_delta_qa'] = [
@@ -137,7 +148,7 @@ class PreAuditValidate extends FieldPluginBase {
     }
     else{
       if($user_role == 'auditor'){
-        if($total_hours_to_audit >= 0 && $audit_date_current_date_diff->invert != 1 && $check_invert_time == 1){
+        if($total_hours_to_audit >= 0 && $current_date_invert != 1 && $check_invert_time == 1){
           if($node->field_proceed_with_audit->value == 'no'){
             $form['add_delta_qa'] = [
               '#type' => 'markup',
@@ -145,11 +156,19 @@ class PreAuditValidate extends FieldPluginBase {
             ];
           }
           else{
-            $form['add_delta_qa'] = [
-              '#type' => 'link',
-              '#title' => t('Execute Audit'),
-              '#url' => Url::fromUserInput('/preaudit/'.$node->id().'?ref='.$audit_reference),
-            ];
+            if($node->get('moderation_state')->value == 'submit_audit'){
+              $form['add_delta_qa'] = [
+                '#type' => 'markup',
+                '#markup' => 'Audit Has been Submitted.',
+              ];
+            }
+            else{
+              $form['add_delta_qa'] = [
+                '#type' => 'link',
+                '#title' => t('Execute Audit'),
+                '#url' => Url::fromUserInput('/preaudit/'.$node->id().'?ref='.$audit_reference),
+              ];
+            }
           }
         }
       }

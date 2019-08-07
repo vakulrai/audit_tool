@@ -10,6 +10,7 @@ use Drupal\Core\Url;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\node\Entity\Node;
 use Drupal\Component\Utility\UrlHelper;
+use Drupal\user\Entity\User;
 
 /**
  * Implements hook_help().
@@ -31,6 +32,11 @@ function aps_audit_criteria_help($route_name, RouteMatchInterface $route_match) 
  * Implements hook_form_alter().
  */
 function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $current_user = \Drupal::currentUser();
+  $roles = $current_user->getRoles();
+  foreach ($roles as $key => $value) {
+    $user_role = $value;
+  }
   if ($form_id == 'audit_criteria_process_process_form') {
     if($id= \Drupal::request()->query->get('unit_reference')){
       $node_object = Node::load($id);
@@ -212,7 +218,9 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
 
   if($form_id == 'node_answers_form'){
     $form['field_answer_type']['#access'] = FALSE;
-    $form['field_add_to_checklist']['#access'] = FALSE;
+    if($user_role == 'auditor' || $user_role == 'auditee'){
+      $form['field_add_to_checklist']['#access'] = FALSE;
+    }
     unset($form['field_defined_option_yes_no']['widget']['add_more']);
     unset($form['field_defined_options_default']['widget']['add_more']);
     foreach (array_keys($form['actions']) as $action) {
@@ -223,7 +231,9 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
   }
   else{
     $form['field_answer_type']['#access'] = FALSE;
-    $form['field_add_to_checklist']['#access'] = FALSE;
+    if($user_role == 'auditor' || $user_role == 'auditee'){
+      $form['field_add_to_checklist']['#access'] = FALSE;
+    }
   }
 }
 
@@ -375,11 +385,14 @@ function product_redirect(array $form, \Drupal\Core\Form\FormStateInterface $for
  * Callback method after Add delta Q form submits.
  */
 function submit_delta_q(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  global $base_url;
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $query_parameters = UrlHelper::parse($current_uri);
   $uri = explode('=', $query_parameters['query']['destination']);
   $id = $uri[1];
   $node_object = Node::load($id);
+  $uid = \Drupal::currentUser()->id();
+  $current_user_detail = User::load($uid);
   $form_values = $form_state->getValues();
   $nid = $form_values['nid'];
   $get_stored_entity = [];
@@ -392,6 +405,10 @@ function submit_delta_q(array $form, \Drupal\Core\Form\FormStateInterface $form_
     $target_node->set('field_add_to_checklist', 'no');
     $node_object->save();
     $target_node->save();
+    $link = $base_url.Url::fromRoute('entity.node.edit_form',['node' => $nid])->toString();
+    $action_link = '<a href='.$link.'>Link</a>';
+    $message = 'Delta-Q has been requested to add to the following Audit by <b>'.$current_user_detail->name->value.'</b><br> Follow the Audit action link.'.$action_link;
+    notify($nid, $message);
   }
   $destination = \Drupal::request()->query->get('destination');
   $response = Url::fromUserInput('/'.$destination);

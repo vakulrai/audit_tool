@@ -170,7 +170,12 @@ class ReportDocument extends FormBase {
           $response->addCommand(new HtmlCommand('#execute-audit', t('Audit has been Reported. Can\'t Proceed.')));
         }
         else{
-          $response->addCommand(new RedirectCommand('/preaudit/'.$node_object->id().'?ref='.$node_object->field_checklist->target_id));
+          if($node_object->get('moderation_state')->value == 'submit_audit'){
+             $response->addCommand(new HtmlCommand('#execute-audit', t('Audit has been Submitted. Can\'t Proceed.')));
+          }
+          else{
+            $response->addCommand(new RedirectCommand('/preaudit/'.$node_object->id().'?ref='.$node_object->field_checklist->target_id));
+          }
         }
       }
       elseif ($user_role == 'auditee' || $user_role == 'auditor') {

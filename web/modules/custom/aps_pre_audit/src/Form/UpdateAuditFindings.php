@@ -512,15 +512,16 @@ class UpdateAuditFindings extends PreAuditForm {
           $list[$count]['field_step'] = $key['srno'];
           $list[$count]['field_question'] = $key['question'];
           $list[$count]['field_evidence'] = $key['evidence_values'];
-          $list[$count]['field_result'] = $key['result'];
+          $list[$count]['field_result'] = $jkey['result'];
           $list[$count]['field_finding_categories'] = strip_tags($key['findings_category']);
           $list[$count]['field_clause'] = $key['clause'];
           $list[$count]['question_type'] = $key['question_type'];
           $list[$count]['kpi'] = $key['kpi'];
+          $count++;
         }
       }
-      $count++;
     }
+
     if(count($form_values['header_report'])){
       if($form_values['header_report'][0]['occurence']){
         $data['field_occurence'] = $form_values['header_report'][0]['occurence']; 
@@ -531,7 +532,7 @@ class UpdateAuditFindings extends PreAuditForm {
       $data['field_standards'] = $form_values['header_report'][0]['standards']; 
     }
     $paragraph_['paragraph_data'] = $list;
-
+   
     foreach ($paragraph_['paragraph_data'] as $q => $a) {
       if($a['field_finding_categories'] != ''){
         $properties['name'] = $a['field_finding_categories'];
@@ -698,27 +699,29 @@ class UpdateAuditFindings extends PreAuditForm {
               foreach ($get_question_id as $k => $val) {
                 $ref_id = $val['target_id'];
                 $predefined_question_object = Paragraph::load($ref_id);
-                $predefined_question_object_array = $predefined_question_object->toArray();
-                $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
-                $output[$ref_id]['type'] = 'predefined';
-                $output[$ref_id]['field_answer_type'] = $answer_node_object->get('field_answer_type')->value;
-                $output[$ref_id]['kpi'] = $predefined_question_object->get('field_kpi_status')->value;
-                $output[$ref_id]['qid'] = $ref_id;
-                $output[$ref_id]['clause_no'] = $predefined_question_object->get('field_clause_no')->target_id;
-                $output[$ref_id]['field_finding_categories'] = $predefined_question_object->get('field_finding_categories')->getValue();
-                $output[$ref_id]['sno'] = count($predefined_question_object_array['field_sub_s_no_']) ? $predefined_question_object->get('field_sub_s_no_')->value : '';
-                $output[$ref_id]['desc']['Optimised'] = 'Optimised';
-                $output[$ref_id]['desc']['Qualified'] = 'Qualified';
-                $output[$ref_id]['desc']['Effecient'] = 'Effecient';
-                $output[$ref_id]['desc']['Poor'] = 'Poor';
-                $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
-                $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
+                if($answer_node_object->get('field_add_to_checklist')->value == 'yes'){
+                  $predefined_question_object_array = $predefined_question_object->toArray();
+                  $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
+                  $output[$ref_id]['type'] = 'predefined';
+                  $output[$ref_id]['field_answer_type'] = $answer_node_object->get('field_answer_type')->value;
+                  $output[$ref_id]['kpi'] = $predefined_question_object->get('field_kpi_status')->value;
+                  $output[$ref_id]['qid'] = $ref_id;
+                  $output[$ref_id]['clause_no'] = $predefined_question_object->get('field_clause_no')->target_id;
+                  $output[$ref_id]['field_finding_categories'] = $predefined_question_object->get('field_finding_categories')->getValue();
+                  $output[$ref_id]['sno'] = count($predefined_question_object_array['field_sub_s_no_']) ? $predefined_question_object->get('field_sub_s_no_')->value : '';
+                  $output[$ref_id]['desc']['Optimised'] = 'Optimised';
+                  $output[$ref_id]['desc']['Qualified'] = 'Qualified';
+                  $output[$ref_id]['desc']['Effecient'] = 'Effecient';
+                  $output[$ref_id]['desc']['Poor'] = 'Poor';
+                  $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
+                  $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
 
-                if(count($output[$ref_id]['desc'])){
-                  foreach ($output[$ref_id]['desc'] as $key => $value) {
-                     $paragraphs_answer_object = Paragraph::load($ref_id);
-                     $output[$ref_id]['answers'][$value] = ['aid' => $ref_id,'answer' => $paragraphs_answer_object->get('field_description_'.strtolower($key))->value,'checked_value' => $selection];
-                     $output[$ref_id]['question'] = $predefined_question_object->get('field_questions')->value;
+                  if(count($output[$ref_id]['desc'])){
+                    foreach ($output[$ref_id]['desc'] as $key => $value) {
+                       $paragraphs_answer_object = Paragraph::load($ref_id);
+                       $output[$ref_id]['answers'][$value] = ['aid' => $ref_id,'answer' => $paragraphs_answer_object->get('field_description_'.strtolower($key))->value,'checked_value' => $selection];
+                       $output[$ref_id]['question'] = $predefined_question_object->get('field_questions')->value;
+                    }
                   }
                 }
               }
@@ -726,22 +729,24 @@ class UpdateAuditFindings extends PreAuditForm {
             elseif ($selection == 'Yes') {
               $get_question_id = $answer_node_object->get('field_defined_option_yes_no')->getValue();
               foreach ($get_question_id as $k => $val) {
-                 $ref_id = $val['target_id'];
-                 $predefined_question_object = Paragraph::load($ref_id);
-                $predefined_question_object_array = $predefined_question_object->toArray();
-                $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
-                $output[$ref_id]['type'] = 'defined';
-                 $output[$ref_id]['field_answer_type'] = $answer_node_object->get('field_answer_type')->value;
-                $output[$ref_id]['qid'] = $val['target_id'];
-                $output[$ref_id]['sno'] = count($predefined_question_object_array['field_s_no']) ? $predefined_question_object->get('field_s_no')->value : '';
-                $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
-                $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
-                $output[$ref_id]['desc'][$predefined_question_object->get('field_description')->value] = $predefined_question_object->get('field_description')->value;
-                $output[$ref_id]['option'] = $predefined_question_object->get('field_description')->value;
-                if(count($output[$ref_id]['desc'])){
-                  foreach ($output[$ref_id]['desc'] as $key => $value) {
-                     $paragraphs_answer_object = Paragraph::load($ref_id);
-                     $output[$ref_id]['answers'][$value] = ['aid' => $ref_id,'answer' => $paragraphs_answer_object->get('field_description')->value,'checked_value' => $selection];
+                $ref_id = $val['target_id'];
+                $predefined_question_object = Paragraph::load($ref_id);
+                if($answer_node_object->get('field_add_to_checklist')->value == 'yes'){
+                  $predefined_question_object_array = $predefined_question_object->toArray();
+                  $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
+                  $output[$ref_id]['type'] = 'defined';
+                   $output[$ref_id]['field_answer_type'] = $answer_node_object->get('field_answer_type')->value;
+                  $output[$ref_id]['qid'] = $val['target_id'];
+                  $output[$ref_id]['sno'] = count($predefined_question_object_array['field_s_no']) ? $predefined_question_object->get('field_s_no')->value : '';
+                  $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
+                  $output[$ref_id]['evidence_value'] = count($predefined_question_object_array['field_evidence']) ? $predefined_question_object->get('field_evidence')->getValue() : '';
+                  $output[$ref_id]['desc'][$predefined_question_object->get('field_description')->value] = $predefined_question_object->get('field_description')->value;
+                  $output[$ref_id]['option'] = $predefined_question_object->get('field_description')->value;
+                  if(count($output[$ref_id]['desc'])){
+                    foreach ($output[$ref_id]['desc'] as $key => $value) {
+                       $paragraphs_answer_object = Paragraph::load($ref_id);
+                       $output[$ref_id]['answers'][$value] = ['aid' => $ref_id,'answer' => $paragraphs_answer_object->get('field_description')->value,'checked_value' => $selection];
+                    }
                   }
                 }
               }

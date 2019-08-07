@@ -304,8 +304,18 @@ class RedirectFormController extends ControllerBase {
 
   public function getNotification(){
     $data = [];
+    $current_user = \Drupal::currentUser();
+    $current_user_id = $current_user->id();
+    $roles = $current_user->getRoles();
+    foreach ($roles as $key => $value) {
+      $user_role = $value;
+    }
     $query = \Drupal::database()->select('notifications', 'nf');
     $query->fields('nf',['sr', 'message', 'timestamp']);
+    $query->orderBy('sr', 'DESC');
+    if($user_role == 'auditor' || $user_role == 'auditee'){
+      $query->condition('uid', $current_user_id);
+    }
     $nids = $query->execute()->fetchAll();
     $count = 0;
     foreach ($nids as $key => $value) {
