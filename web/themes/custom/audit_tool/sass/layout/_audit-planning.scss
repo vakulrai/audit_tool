@@ -26,14 +26,17 @@ form.node-planned-events-edit-form {
   	 	justify-content: space-between;
   	 }
   }
-  > div.field--type-datetime {
-     width: 100%;
-     display: inline-block;
+  >#planning-dates {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 16px 0;
+    > div {
+      flex: 1 1 50%;
+    }
+  }
+  >#planning-dates div.field--type-datetime {
      @extend .card;
      fieldset {
-      @media (min-width: 768px) {
-       max-width: 50%;
-      }
        legend {
          @extend h4;
        }
@@ -46,18 +49,13 @@ form.node-planned-events-edit-form {
        }
      }
   }
-  > div.field--type-timestamp {
+  >#planning-dates div.field--type-timestamp {
   	 font-size: 0;
   	 @extend .card;
 
   	 @extend .form-item;
   	 margin-top: 0;
   	 margin-bottom: 0;
-  	 @media (min-width: 768px) {
-  	 	width: 50%;
-  	 	float: left;
-  	 	display: inline-block;
-  	 }
   	 #edit-field-start-date-0-value,
   	 #edit-field-end-date-0-value {
   	 	display: flex;

@@ -9,3 +9,15 @@ input:disabled {
 }
 
 
+a,
+input,
+select,
+textarea,
+button {
+	&:focus {
+		outline: none;
+	}
+  .focused & {
+    outline: none;
+  }
+}
