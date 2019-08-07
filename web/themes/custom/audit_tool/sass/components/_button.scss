@@ -15,6 +15,16 @@ a.button {
       border: none;
     }
   }
+  td & {
+    margin: 0;
+  }
+  &#edit-delete {
+    background: #f5574c;
+    color: #fff;
+    &:hover,&:focus {
+      background: #f0190a;
+    }
+  }
 }
 
 input.button {
