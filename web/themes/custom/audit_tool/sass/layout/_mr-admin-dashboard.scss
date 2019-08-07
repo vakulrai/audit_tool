@@ -136,6 +136,17 @@ form.user-register-form {
        min-width: 100%;
      }
   }
+  #edit-name--description,
+  #edit-mail--description
+  {
+    display: none;
+  }
+  .card-item.card-actions {
+    margin-top: 48px;
+    background: #f5f5f5;
+    border-top: none;
+    padding: 10px 24px;
+  }
   .field--type-mobile-number {
      .mobile-number-field {
        display: flex;
@@ -192,14 +203,23 @@ form.node-supplier-form {
   }
   span.views-label {
     width: 100%;
-    display: inline-block;
+    display: none;
     @extend .h4;
     position: relative;
   }
+  .views-field-field-address-locality,
+  .views-field-field-remote-address-address-line1,
+  .views-field-field-remote-address-address-line2,
+  .views-field-field-remote-address-locality {
+    display: none;
+  }
+  .views-field-title .field-content {
+    @extend .h3;
+  }
   .views-field {
-    &+ .views-field {
+    /*&+ .views-field {
       @extend .divider-top;
-    }
+    }*/
   }
 }
 
@@ -257,3 +277,9 @@ div#block-audit-tool-riskmanagement {
   }
 }
 
+form.user-pass .card-item.card-actions {
+  margin-top: 48px;
+  background: #f5f5f5;
+  border-top: none;
+  padding: 10px 24px;
+}
