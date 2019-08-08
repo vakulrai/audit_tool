@@ -1304,6 +1304,157 @@ taxonomies:
       weight: '0'
       parent: '0'
       uuid: 5d4166ea-52a2-42b6-b7b3-0330df81b311
+  report_categories:
+    -
+      vid: report_categories
+      tid: '254'
+      langcode: en
+      name: 'A matrix for Auditor score and each realted Function'
+      description__value: null
+      description__format: null
+      weight: '7'
+      parent: '251'
+      uuid: 71eb105a-4c11-468c-8c49-6ebcabdbe67a
+    -
+      vid: report_categories
+      tid: '251'
+      langcode: en
+      name: 'Activity related'
+      description__value: null
+      description__format: null
+      weight: '3'
+      parent: '0'
+      uuid: 2644fb4d-c528-49f7-93e7-84d3391a7360
+    -
+      vid: report_categories
+      tid: '252'
+      langcode: en
+      name: 'Annual calendar plan'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '251'
+      uuid: afe8c09e-82b9-4c52-825d-d7219e5ee1bb
+    -
+      vid: report_categories
+      tid: '263'
+      langcode: en
+      name: 'Audit check list'
+      description__value: null
+      description__format: null
+      weight: '5'
+      parent: '251'
+      uuid: bab0a1cf-df33-4346-a91a-0cc5e6cb8676
+    -
+      vid: report_categories
+      tid: '262'
+      langcode: en
+      name: 'Department wise audit plan'
+      description__value: null
+      description__format: null
+      weight: '6'
+      parent: '251'
+      uuid: d304e1c8-a21a-42ef-a88b-a3ccb38dccfa
+    -
+      vid: report_categories
+      tid: '265'
+      langcode: en
+      name: 'External audit schedules'
+      description__value: null
+      description__format: null
+      weight: '8'
+      parent: '251'
+      uuid: 24db7d74-a70f-478f-a8bb-a8eea874757d
+    -
+      vid: report_categories
+      tid: '258'
+      langcode: en
+      name: 'List of Business Process'
+      description__value: null
+      description__format: null
+      weight: '1'
+      parent: '251'
+      uuid: cd4dd19d-b07e-4de3-8b23-ff46598fd3d4
+    -
+      vid: report_categories
+      tid: '257'
+      langcode: en
+      name: 'List of External certificates'
+      description__value: null
+      description__format: null
+      weight: '9'
+      parent: '251'
+      uuid: 0e9b9f6c-7cb0-44d0-887d-459f030c45a7
+    -
+      vid: report_categories
+      tid: '260'
+      langcode: en
+      name: 'List of Other Plants supporting the Unit'
+      description__value: null
+      description__format: null
+      weight: '10'
+      parent: '251'
+      uuid: d8db489c-2868-4529-93ca-97700ccd10fb
+    -
+      vid: report_categories
+      tid: '255'
+      langcode: en
+      name: 'List of Process'
+      description__value: null
+      description__format: null
+      weight: '2'
+      parent: '251'
+      uuid: 3c4b50e1-74d2-4611-9ad6-eb7388966fd0
+    -
+      vid: report_categories
+      tid: '256'
+      langcode: en
+      name: 'List of Product'
+      description__value: null
+      description__format: null
+      weight: '3'
+      parent: '251'
+      uuid: ce432619-ffdb-4908-8352-3db749757460
+    -
+      vid: report_categories
+      tid: '253'
+      langcode: en
+      name: 'List of Qualitifed Auditors'
+      description__value: null
+      description__format: null
+      weight: '4'
+      parent: '251'
+      uuid: a185f08e-5658-4daa-bf2c-ba666edaea64
+    -
+      vid: report_categories
+      tid: '259'
+      langcode: en
+      name: 'Matrix depicting Business process and Departments'
+      description__value: null
+      description__format: null
+      weight: '11'
+      parent: '251'
+      uuid: 1339ef57-3a57-406e-b387-92d691a4de55
+    -
+      vid: report_categories
+      tid: '264'
+      langcode: en
+      name: NCR
+      description__value: null
+      description__format: null
+      weight: '12'
+      parent: '251'
+      uuid: 6f7883eb-e12b-4910-93fc-5713ede22c88
+    -
+      vid: report_categories
+      tid: '261'
+      langcode: en
+      name: 'Time line master'
+      description__value: null
+      description__format: null
+      weight: '13'
+      parent: '251'
+      uuid: 5db03cf2-0ffa-456a-acb1-10d105ac598a
   scope:
     -
       vid: scope

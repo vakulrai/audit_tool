@@ -1,0 +1,8 @@
+uuid: e2d27c65-8bb1-426d-8613-6d3229210b75
+langcode: en
+status: true
+dependencies: {  }
+name: 'Report Categories'
+vid: report_categories
+description: 'Contain Report Categories to Be exported on Homepage'
+weight: 0

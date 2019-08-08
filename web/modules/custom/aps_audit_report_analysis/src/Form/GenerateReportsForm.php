@@ -28,7 +28,6 @@ class GenerateReportsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $uri = explode('/', $current_uri);
-
     $options['all'] = 'ALL';
     //GEtting Audit cycle values from "audit_cycle" configurations.
     $query = \Drupal::database()->select('audit_cycle__field_unit_reference', 'h');
@@ -50,11 +49,22 @@ class GenerateReportsForm extends FormBase {
       }
     }
 
-    $options = [
-      'activity_related' => 'Activity Related',
-      'audit_cycle' => 'Audit Cycle',
-      'risk' => 'Risk',
-    ];
+    // $options = [
+    //   'activity_related' => 'Activity Related',
+    //   'audit_cycle' => 'Audit Cycle',
+    //   'risk' => 'Risk',
+    // ];
+    $vid = 'report_categories';
+    $load_report_categories = \Drupal::service('entity_type.manager')->getStorage("taxonomy_term")->loadTree($vid, $parent = 0, $max_depth = NULL, $load_entities = FALSE);
+  
+    foreach ($load_report_categories as $name => $term) {
+      if($term->parents[0] == 0){
+        $key = $term->name;
+      }
+      else{
+        $options[$key][preg_replace('/\s+/', '_', strtolower($term->name))] = $term->name;
+      }
+    }
 
     $form['audit_type'] = [
       '#type' => 'select',

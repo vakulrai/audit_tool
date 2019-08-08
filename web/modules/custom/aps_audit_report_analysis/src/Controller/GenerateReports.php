@@ -84,7 +84,7 @@ class GenerateReports extends ControllerBase {
     $html .= '</style>';
     $html .= '</head>';
     $html .= '<header>
-    <h1 class ="title">'.$report_name.'</h1>';
+    <h1 class ="title">Unit '.Node::load($unit_reference)->title->value.'</h1>';
     $html .= '</header>';
 
     // Audit cycle related .
@@ -102,8 +102,8 @@ class GenerateReports extends ControllerBase {
     $html .= '</br>';
 
     //********************************//
-    if($report_type == 'activity_related'){
-      $this->getAuditorGraph($unit_reference);
+    if($report_type == 'annual_calendar_plan'){
+      // $this->getAuditorGraph($unit_reference);
       $html .= '<h1>Annual calendar plan</h1>';
       //Detail: A *****Get Annual calendar plan****//.
       $data_planned_event = $this->getdatafromuri('event','/ncr-car-management-details/'.$unit_reference.'?type=planned_events');
@@ -113,6 +113,9 @@ class GenerateReports extends ControllerBase {
               <tr>
                   <th>'.$this->t('Sl No.').'</th>
                   <th>'.$this->t('Title: ').'</th>
+                  <th>'.$this->t('Audit Type').'</th>
+                  <th>'.$this->t('Selected Auditor').'</th>
+                  <th>'.$this->t('Selected Auditee').'</th>
                   <th>'.$this->t('Start Date: ').'</th>
                   <th>'.$this->t('End Date: ').'</th>
               </tr>
@@ -122,6 +125,9 @@ class GenerateReports extends ControllerBase {
           $html .= '<tr>';
           $html .= '<td>' . $planned_count . '</td>';
           $html .= '<td>' . $data_planned_event_value['title'] . '</td>';
+          $html .= '<td>' . $data_planned_event_value['field_audit_type'] . '</td>';
+          $html .= '<td>' . $data_planned_event_value['field_auditor'] . '</td>';
+          $html .= '<td>' . $data_planned_event_value['field_select_auditee'] . '</td>';
           $html .= '<td>' . $data_planned_event_value['start_date'] . '</td>';
           $html .= '<td>' . $data_planned_event_value['end_date'] . '</td>';
           $html .= '</tr>';
@@ -130,80 +136,112 @@ class GenerateReports extends ControllerBase {
         $html .= '</table>';
       }
 
-      $html .= '</br>';
-      $html .= '<h1>List of Qualitifed Auditors </h1>';
+      // $html .= '</br>';
+      // $html .= '<h1>List of Qualitifed Auditors </h1>';
 
       //Detail: B *****List of Qualitifed Auditors ****//.
-      $auditor_chart_path = drupal_get_path('module', 'aps_audit_report_analysis') . '/highchart-images-pdf/Auditor-Performance.jpeg';
-      $data_qualified_auditors = $this->getdatafromuri('auditor','/auditor-and-audit-export/'.$unit_reference.'?field_score_value_greater=5');
-      if(count($data_qualified_auditors)){
-        $html .= '<table id = "qualified-auditors" style="width:100%;">
-          <thead>
-              <tr>
-                  <th>'.$this->t('Sl No.').'</th>
-                  <th>'.$this->t('Name: ').'</th>
-                  <th>'.$this->t('Score: ').'</th>
-                  <th>'.$this->t('Function: ').'</th>
-              </tr>
-          </thead>';
-        $qualified_auditors_count = 0;
-        foreach ($data_qualified_auditors as $data_qualified_auditors_key => $data_qualified_auditors_value) {
-          $html .= '<tr>';
-          $html .= '<td>' . $qualified_auditors_count . '</td>';
-          $html .= '<td>' . $data_qualified_auditors_value['name'] . '</td>';
-          $html .= '<td>' . $data_qualified_auditors_value['score'] . '</td>';
-          $html .= '<td>' . $data_qualified_auditors_value['function'] . '</td>';
-          $html .= '</tr>';
-          $qualified_auditors_count++;
-        }
-        $html .= '</table>';
-      }
-      else{
-        $html .= '<table id = "qualified-auditors" style="width:100%;">
-          <thead>
-              <tr>
-                  <th>'.$this->t('Sl No.').'</th>
-                  <th>'.$this->t('Name: ').'</th>
-                  <th>'.$this->t('Score: ').'</th>
-                  <th>'.$this->t('Function: ').'</th>
-              </tr>
-          </thead>';
-        $html .= '<tfoot>
-            <tr>
-                <th></th>
-                <th></th>
-                <th><b>No content Found</b></th>
-                <th></th>
-            </tr>
-        </tfoot><br><br>';
+      // $auditor_chart_path = drupal_get_path('module', 'aps_audit_report_analysis') . '/highchart-images-pdf/Auditor-Performance.jpeg';
+      // $data_qualified_auditors = $this->getdatafromuri('auditor','/auditor-and-audit-export/'.$unit_reference.'?field_score_value_greater=5');
+      // if(count($data_qualified_auditors)){
+      //   $html .= '<table id = "qualified-auditors" style="width:100%;">
+      //     <thead>
+      //         <tr>
+      //             <th>'.$this->t('Sl No.').'</th>
+      //             <th>'.$this->t('Name: ').'</th>
+      //             <th>'.$this->t('Score: ').'</th>
+      //             <th>'.$this->t('Function: ').'</th>
+      //         </tr>
+      //     </thead>';
+      //   $qualified_auditors_count = 0;
+      //   foreach ($data_qualified_auditors as $data_qualified_auditors_key => $data_qualified_auditors_value) {
+      //     $html .= '<tr>';
+      //     $html .= '<td>' . $qualified_auditors_count . '</td>';
+      //     $html .= '<td>' . $data_qualified_auditors_value['name'] . '</td>';
+      //     $html .= '<td>' . $data_qualified_auditors_value['score'] . '</td>';
+      //     $html .= '<td>' . $data_qualified_auditors_value['function'] . '</td>';
+      //     $html .= '</tr>';
+      //     $qualified_auditors_count++;
+      //   }
+      //   $html .= '</table>';
+      // }
+      // else{
+      //   $html .= '<table id = "qualified-auditors" style="width:100%;">
+      //     <thead>
+      //         <tr>
+      //             <th>'.$this->t('Sl No.').'</th>
+      //             <th>'.$this->t('Name: ').'</th>
+      //             <th>'.$this->t('Score: ').'</th>
+      //             <th>'.$this->t('Function: ').'</th>
+      //         </tr>
+      //     </thead>';
+      //   $html .= '<tfoot>
+      //       <tr>
+      //           <th></th>
+      //           <th></th>
+      //           <th><b>No content Found</b></th>
+      //           <th></th>
+      //       </tr>
+      //   </tfoot><br><br>';
 
-      }
-      $html .= '</br>';
-      $html .= ' <img src='.$auditor_chart_path.' height="700" width="450"> ';
-      $html .= '<h1>List of Process/Product/Business Process </h1>';
+      // }
+      // $html .= '</br>';
+      // $html .= ' <img src='.$auditor_chart_path.' height="700" width="450"> ';
+      // $html .= '<h1>List of Process/Product/Business Process </h1>';
 
-      //Detail: B *****List of Process ****//.
-      $data_process = $this->getdatafromuri('process','/get-registration-data/'.$unit_reference.'?type[]=assembly&type[]=manufacturing_process&type[]=customers_manual&type[]=customers_manual&type[]=business_process');
-      if(count($data_process)){
-        $html .= '<table id = "qualified-auditors" style="width:100%;">
+      // //Detail: B *****List of Process ****//.
+      // $data_process = $this->getdatafromuri('process','/get-registration-data/'.$unit_reference.'?type[]=assembly&type[]=manufacturing_process&type[]=customers_manual&type[]=customers_manual&type[]=business_process');
+      // if(count($data_process)){
+      //   $html .= '<table id = "qualified-auditors" style="width:100%;">
+      //     <thead>
+      //         <tr>
+      //             <th>'.$this->t('Sl No.').'</th>
+      //             <th>'.$this->t('Name: ').'</th>
+      //             <th>'.$this->t('Type: ').'</th>
+      //             <th>'.$this->t('Unit Name: ').'</th>
+      //         </tr>
+      //     </thead>';
+      //   $process_count = 0;
+      //   foreach ($data_process as $data_process_key => $data_process_value) {
+      //     $html .= '<tr>';
+      //     $html .= '<td>' . $process_count . '</td>';
+      //     $html .= '<td>' . $data_process_value['title'] . '</td>';
+      //     $html .= '<td>' . $data_process_value['type'] . '</td>';
+      //     $html .= '<td>' . $data_process_value['unit_name'] . '</td>';
+      //     $html .= '</tr>';
+      //     $process_count++;
+      //   }
+      //   $html .= '</table>';
+      // }
+    }
+    elseif($report_type == 'list_of_business_process'){
+      $html .= '<h1>List of Business Process</h1>';
+      //Detail: A *****Get Annual calendar plan****//.
+      $data_business_process = $this->getdatafromuri('business_process','/ncr-car-management-details/'.$unit_reference.'?type=business_process');
+      if(count($data_business_process)){
+        $html .= '<table id = "list-business-process" style="width:100%;">
           <thead>
               <tr>
                   <th>'.$this->t('Sl No.').'</th>
-                  <th>'.$this->t('Name: ').'</th>
-                  <th>'.$this->t('Type: ').'</th>
-                  <th>'.$this->t('Unit Name: ').'</th>
+                  <th>'.$this->t('Title: ').'</th>
+                  <th>'.$this->t('Business Head').'</th>
+                  <th>'.$this->t('Business Process Effectiveness').'</th>
+                  <th>'.$this->t('Business Process Efficiency').'</th>
               </tr>
           </thead>';
-        $process_count = 0;
-        foreach ($data_process as $data_process_key => $data_process_value) {
+        $planned_count = 0;
+        foreach ($data_business_process as $data_business_process_paragraph_generation_key => $data_business_process_paragraph_generation_val) {
           $html .= '<tr>';
-          $html .= '<td>' . $process_count . '</td>';
-          $html .= '<td>' . $data_process_value['title'] . '</td>';
-          $html .= '<td>' . $data_process_value['type'] . '</td>';
-          $html .= '<td>' . $data_process_value['unit_name'] . '</td>';
+          $html .= '<td>' . $planned_count . '</td>';
+          $html .= '<td>' . $data_business_process_paragraph_generation_val['title'] . '</td>';
+          $html .= '<td>' . $data_business_process_paragraph_generation_val['business_head'] . '</td>';
+
+          $html .= '<td>' .'<b>Effectiveness: </b>'. $data_business_process_paragraph_generation_val['effectiveness'][0]->field_effectiveness.'<br><b>Target: </b>'.$data_business_process_paragraph_generation_val['effectiveness'][0]->field_target.'<br><b>UOM: </b>'.$data_business_process_paragraph_generation_val['effectiveness'][0]->field_uom_text . '</td>';
+
+          $html .= '<td>' .'<b>Effieciency: </b>'. $data_business_process_paragraph_generation_val['efficiency'][0]->field_efficiency.'<br><b>Target: </b>'.$data_business_process_paragraph_generation_val['efficiency'][0]->field_target.'<br><b>UOM: </b>'.$data_business_process_paragraph_generation_val['efficiency'][0]->field_uom_text. '</td>';
           $html .= '</tr>';
-          $process_count++;
+          $planned_count++;
         }
+
         $html .= '</table>';
       }
     }
@@ -326,6 +364,9 @@ class GenerateReports extends ControllerBase {
           $options[$value->nid]['title'] = $value->title;
           $options[$value->nid]['start_date']  = $value->field_start_date;
           $options[$value->nid]['end_date']  = $value->field_end_date;
+          $options[$value->nid]['field_audit_type']  = $value->field_audit_type;
+          $options[$value->nid]['field_auditor']  = $value->field_auditor;
+          $options[$value->nid]['field_select_auditee']  = $value->field_select_auditee;
         }
         elseif($type == 'auditor'){
           $options[$value->uid]['name'] = $value->name;
@@ -337,9 +378,29 @@ class GenerateReports extends ControllerBase {
           $options[$value->nid]['type']  = $value->type;
           $options[$value->nid]['unit_name']  = $value->unit_name;
         }
+        elseif($type == 'business_process'){
+          $node_business_process = Node::load($value->nid);
+          $field_business_process_effective = $node_business_process->field_business_process_effective->target_id;
+          $field_business_process_efficienc = $node_business_process->field_business_process_efficienc->target_id;
+          $options[$value->nid]['title'] = $node_business_process->title->value;
+          $options[$value->nid]['business_head'] = $node_business_process->field_business_head_name->value;
+          $data_effectiveness = $this->getJSONFromExport('/paragraph-export/'.$field_business_process_effective);
+          $data_efficiency = $this->getJSONFromExport('/paragraph-export/'.$field_business_process_efficienc);
+          $options[$value->nid]['effectiveness'] = $data_effectiveness;
+          $options[$value->nid]['efficiency'] = $data_efficiency;
+        }
       }
     }
     return $options;
+  }
+
+  public function getJSONFromExport($url){
+    global $base_url;
+    $client = \Drupal::httpClient();
+    $request = $client->get($base_url.$url);
+    $response = $request->getBody();
+    $data = json_decode($response);
+    return $data;
   }
 
   public function getDataRiskManagement($unit_reference,$key){
