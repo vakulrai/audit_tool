@@ -3,6 +3,15 @@
   .menu {
     a {
       color: #ff9100; 
+      &:hover,&:focus,&.is-active {
+        color: #ff6d00;
+        
+      }
+    }
+    .active-trail {
+      a {
+        color: #ff6d00;
+      }
     }
   }
   .main-navigation-menu {
@@ -39,13 +48,15 @@
               }
           }
 			    &:hover {
-			    	border-color: rgba(255, 255, 255, 0.5);
+			    	color: #ff6d00;
+            
 			    }
           &.notify {
            padding-bottom: 5px;
           }
 			    &.is-active {
-			    	border-color: #fff;
+			    	color: #ff6d00;
+            
 			    }
 			    &.menuparent {
 			    	&:hover {
