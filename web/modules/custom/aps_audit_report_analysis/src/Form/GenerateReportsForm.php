@@ -143,7 +143,7 @@ class GenerateReportsForm extends FormBase {
       $response->addCommand(new HtmlCommand('#generate-report', t('Please Select A Value.')));
     }
     else{
-      $response->addCommand(new RedirectCommand('/generate_reports/'.$form_values['audit_type'].'/'.$uri[1]));
+      $response->addCommand(new RedirectCommand('/generate_reports/'.$form_values['audit_type'].'/'.$form_values['start_date'].'/'.$form_values['end_date'].'/'.$uri[1]));
     }
     return $response;
   }

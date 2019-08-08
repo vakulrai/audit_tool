@@ -17,8 +17,8 @@ use Drupal\aps_audit_report_analysis\Plugin\Block\RiskManagement;
  */
 class GenerateReports extends ControllerBase {
 
-  public function generateHTMLReports($report_type,$unit_reference) {
-    $output = $this->getDataforHTML($report_type, $unit_reference);
+  public function generateHTMLReports($report_type,$start_date, $end_date, $unit_reference) {
+    $output = $this->getDataforHTML($report_type, $start_date, $end_date, $unit_reference);
     $options = new Options();
     $options->set('isRemoteEnabled', TRUE);
     $dompdf = new Dompdf($options);
@@ -29,11 +29,13 @@ class GenerateReports extends ControllerBase {
     $file_name = "Audit Reporting";
     $dompdf->get_canvas()->page_text(370, 570, "Page: {PAGE_NUM} of {PAGE_COUNT}", null, 12, array(0,0,0));
     $dompdf->stream($file_name,["Attachment" => 1]);
+    return $dompdf;
   }
 
-  public function getDataforHTML($report_type, $unit_reference){
+  public function getDataforHTML($report_type, $start_date, $end_date, $unit_reference){
     global $base_url;
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+    $date_range_query = '&range[min]='.$start_date.'&range[max]='.$end_date.'';
     $uri = explode('/', $current_uri);
     $query = \Drupal::database()->select('audit_cycle__field_unit_reference', 'h');
     $query->fields('h',['entity_id']);
@@ -106,7 +108,7 @@ class GenerateReports extends ControllerBase {
       // $this->getAuditorGraph($unit_reference);
       $html .= '<h1>Annual calendar plan</h1>';
       //Detail: A *****Get Annual calendar plan****//.
-      $data_planned_event = $this->getdatafromuri('event','/ncr-car-management-details/'.$unit_reference.'?type=planned_events');
+      $data_planned_event = $this->getdatafromuri('event','/ncr-car-management-details/'.$unit_reference.'?type[]=planned_events'.$date_range_query);
       if(count($data_planned_event)){
         $html .= '<table id = "annual-planned-events" style="width:100%;">
           <thead>
@@ -215,8 +217,7 @@ class GenerateReports extends ControllerBase {
     }
     elseif($report_type == 'list_of_business_process'){
       $html .= '<h1>List of Business Process</h1>';
-      //Detail: A *****Get Annual calendar plan****//.
-      $data_business_process = $this->getdatafromuri('business_process','/ncr-car-management-details/'.$unit_reference.'?type=business_process');
+      $data_business_process = $this->getdatafromuri('business_process','/ncr-car-management-details/'.$unit_reference.'?type[]=business_process'.$date_range_query);
       if(count($data_business_process)){
         $html .= '<table id = "list-business-process" style="width:100%;">
           <thead>
@@ -245,35 +246,59 @@ class GenerateReports extends ControllerBase {
         $html .= '</table>';
       }
     }
-     elseif($report_type == 'list_of_business_process'){
-      $html .= '<h1>List of Business Process</h1>';
-      //Detail: A *****Get Annual calendar plan****//.
-      $data_business_process = $this->getdatafromuri('business_process','/ncr-car-management-details/'.$unit_reference.'?type=business_process');
-      if(count($data_business_process)){
+    elseif($report_type == 'list_of_process'){
+      $html .= '<h1>List of Processes</h1>';
+      $list_of_process = $this->getdatafromuri('process','/ncr-car-management-details/'.$unit_reference.'?type[]=manufacturing_process&type[]=assembly'.$date_range_query);
+      if(count($list_of_process)){
         $html .= '<table id = "list-business-process" style="width:100%;">
-          <thead>
-              <tr>
-                  <th>'.$this->t('Sl No.').'</th>
-                  <th>'.$this->t('Title: ').'</th>
-                  <th>'.$this->t('Business Head').'</th>
-                  <th>'.$this->t('Business Process Effectiveness').'</th>
-                  <th>'.$this->t('Business Process Efficiency').'</th>
-              </tr>
-          </thead>';
-        $planned_count = 0;
-        foreach ($data_business_process as $data_business_process_paragraph_generation_key => $data_business_process_paragraph_generation_val) {
-          $html .= '<tr>';
-          $html .= '<td>' . $planned_count . '</td>';
-          $html .= '<td>' . $data_business_process_paragraph_generation_val['title'] . '</td>';
-          $html .= '<td>' . $data_business_process_paragraph_generation_val['business_head'] . '</td>';
-
-          $html .= '<td>' .'<b>Effectiveness: </b>'. $data_business_process_paragraph_generation_val['effectiveness'][0]->field_effectiveness.'<br><b>Target: </b>'.$data_business_process_paragraph_generation_val['effectiveness'][0]->field_target.'<br><b>UOM: </b>'.$data_business_process_paragraph_generation_val['effectiveness'][0]->field_uom_text . '</td>';
-
-          $html .= '<td>' .'<b>Effieciency: </b>'. $data_business_process_paragraph_generation_val['efficiency'][0]->field_efficiency.'<br><b>Target: </b>'.$data_business_process_paragraph_generation_val['efficiency'][0]->field_target.'<br><b>UOM: </b>'.$data_business_process_paragraph_generation_val['efficiency'][0]->field_uom_text. '</td>';
-          $html .= '</tr>';
-          $planned_count++;
-        }
-
+            <thead>
+                <tr>
+                    <th>'.$this->t('Sl No.').'</th>
+                    <th>'.$this->t('Title: ').'</th>
+                    <th>'.$this->t('Process Type').'</th>
+                    <th>'.$this->t('Shift').'</th>
+                    <th>'.$this->t('Section').'</th>
+                </tr>
+            </thead>';
+          $planned_count = 0;
+          foreach ($list_of_process as $list_of_process_key => $list_of_process_val) {
+            $html .= '<tr>';
+            $html .= '<td>' . $planned_count . '</td>';
+            $html .= '<td>' . $list_of_process_val['title'] . '</td>';
+            $html .= '<td>' . $list_of_process_val['type'] . '</td>';
+            $html .= '<td>' . $list_of_process_val['field_shift'] . '</td>';
+            $html .= '<td>' . $list_of_process_val['field_select_section'] . '</td>';
+            $html .= '</tr>';
+            $planned_count++;
+          }
+        $html .= '</table>';
+      }
+    }
+    elseif($report_type == 'list_of_products'){
+      $html .= '<h1>List of Products</h1>';
+      $list_of_process = $this->getdatafromuri('process','/ncr-car-management-details/'.$unit_reference.'?type[]=customers_manual'.$date_range_query);
+      if(count($list_of_process)){
+        $html .= '<table id = "list-business-process" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>'.$this->t('Sl No.').'</th>
+                    <th>'.$this->t('Title: ').'</th>
+                    <th>'.$this->t('Process Type').'</th>
+                    <th>'.$this->t('Shift').'</th>
+                    <th>'.$this->t('Section').'</th>
+                </tr>
+            </thead>';
+          $planned_count = 0;
+          foreach ($list_of_process as $list_of_process_key => $list_of_process_val) {
+            $html .= '<tr>';
+            $html .= '<td>' . $planned_count . '</td>';
+            $html .= '<td>' . $list_of_process_val['title'] . '</td>';
+            $html .= '<td>' . $list_of_process_val['type'] . '</td>';
+            $html .= '<td>' . $list_of_process_val['field_shift'] . '</td>';
+            $html .= '<td>' . $list_of_process_val['field_select_section'] . '</td>';
+            $html .= '</tr>';
+            $planned_count++;
+          }
         $html .= '</table>';
       }
     }
@@ -405,11 +430,6 @@ class GenerateReports extends ControllerBase {
           $options[$value->uid]['score']  = $value->field_score;
           $options[$value->uid]['function']  = $value->field_functions_qualified;
         }
-        elseif($type == 'process'){
-          $options[$value->nid]['title'] = $value->title;
-          $options[$value->nid]['type']  = $value->type;
-          $options[$value->nid]['unit_name']  = $value->unit_name;
-        }
         elseif($type == 'business_process'){
           $node_business_process = Node::load($value->nid);
           $field_business_process_effective = $node_business_process->field_business_process_effective->target_id;
@@ -420,6 +440,13 @@ class GenerateReports extends ControllerBase {
           $data_efficiency = $this->getJSONFromExport('/paragraph-export/'.$field_business_process_efficienc);
           $options[$value->nid]['effectiveness'] = $data_effectiveness;
           $options[$value->nid]['efficiency'] = $data_efficiency;
+        }
+        elseif($type == 'process'){
+          $options[$value->nid]['title'] = $value->title;
+          $options[$value->nid]['type'] = $value->type;
+          $options[$value->nid]['field_shift'] = $value->field_shift;
+          $options[$value->nid]['field_select_section'] = $value->field_select_section;
+          $options[$value->nid]['title'] = $value->title;
         }
       }
     }

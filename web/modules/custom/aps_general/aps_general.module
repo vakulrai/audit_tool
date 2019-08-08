@@ -94,7 +94,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
-  $form['moderation_state']['#access'] = FALSE;
+  // $form['moderation_state']['#access'] = FALSE;
   if($form_id == 'node_unit_form'){
     $form['field_total_mandays']['#access'] = FALSE;
     $form['field_updated_mandays']['#access'] = FALSE;
@@ -576,6 +576,10 @@ function aps_general_node_insert(Node $node) {
   }
   if($node->bundle() == 'internal_audit'){
     $node->set('moderation_state', 'pre_audit');
+    $node->save();
+  }
+  if($node->bundle() == 'customers_manual'){
+    $node->set('moderation_state', 'published');
     $node->save();
   }
   if($node->bundle() == 'planned_events'){
@@ -1518,10 +1522,12 @@ function parts_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_
   $response = Url::fromUserInput('/node/add/customers_manual');
   $form_state->setRedirectUrl($response);
 }
+
 function customer_add(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
   $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
-  $id = \Drupal::request()->query->get('unit_reference');
-  $response = Url::fromRoute('node.add',['node_type' => 'customers_manual', 'unit_reference' => $id]);
+  $destination = \Drupal::request()->query->get('destination');
+  $unit_reference = \Drupal::request()->query->get('unit_reference');
+  $response = Url::fromUserInput('/node/add/customers_manual?unit_reference='.$unit_reference);
   $form_state->setRedirectUrl($response);
 }
 
