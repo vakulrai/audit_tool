@@ -6264,6 +6264,9 @@ textarea, .focused
 button {
   outline: none; }
 
+select#audit-type-report {
+  width: 200px; }
+
 form.planning-control-form {
   display: flex;
   flex-wrap: wrap;

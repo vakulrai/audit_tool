@@ -62,28 +62,28 @@ class GenerateReports extends ControllerBase {
     $html .= '<head>';
     $html .= '<style>
     header {
-      position: fixed;
-      top: -60px;
-      left: 0px;
-      right: 0px;
-      border-bottom: 2px solid #0aa7c6;
-      padding-bottom:-5px;
-      color: #000;
-    }
-    .logo_section {
-      float: left;
-      margin-top: 1.8em;
-      width: 20%;
-      display: inline-block;
+      height: 64px;
+      z-index: 30;
+      color: #FFF;
+      text-align: center;
+      position: relative;
+      width: 100%;
+      border-bottom: 2px solid #607d8b;
+      display: block;
+      margin-bottom: 20px;
     }
     .title {
-      width: 80%;
-      display: inline-block;
-      margin-top: 0.9em;
-      text-align: center;
-      color: #000;
+      display: block;
+      padding: 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: #607d8b;
+      margin-top: 0;
+      margin-bottom: 0;
+      text-transform: uppercase;
       font-family: "RobotoBold",sans-serif;
-    }';
+    }
+    ';
     $html .= '</style>';
     $html .= '</head>';
     $html .= '<header>
@@ -94,7 +94,7 @@ class GenerateReports extends ControllerBase {
     $html .= '<div class="consumption-userinfo">';
 
     // First Section.
-    $html .= '<div class="infowrap" style="width:100%;">';
+    $html .= '<div class="infowrap" style="width:100%; ">';
       // Name
     $html .= '<div class="audit-cycle-cycle">'.$this->t('<span class="label">Cycle Type: </span>').'<span class="customer-info">'.$this->t($cycle_type_name).'</span></div>';
 
@@ -111,9 +111,9 @@ class GenerateReports extends ControllerBase {
       //Detail: A *****Get Annual calendar plan****//.
       $data_planned_event = $this->getdatafromuri('event','/ncr-car-management-details/'.$unit_reference.'?type[]=planned_events'.$date_range_query);
       if(count($data_planned_event)){
-        $html .= '<table id = "annual-planned-events" style="width:100%;">
+        $html .= '<table id = "annual-planned-events" style="width:100%;box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); border-collapse: collapse;">
           <thead>
-              <tr>
+              <tr style="border-bottom: 1px solid black;">
                   <th>'.$this->t('Sl No.').'</th>
                   <th>'.$this->t('Title: ').'</th>
                   <th>'.$this->t('Audit Type').'</th>
@@ -125,7 +125,7 @@ class GenerateReports extends ControllerBase {
           </thead>';
         $planned_count = 0;
         foreach ($data_planned_event as $data_planned_event_key => $data_planned_event_value) {
-          $html .= '<tr>';
+          $html .= '<tr  style="border-bottom: 1px solid #e0e0e0;">';
           $html .= '<td>' . $planned_count . '</td>';
           $html .= '<td>' . $data_planned_event_value['title'] . '</td>';
           $html .= '<td>' . $data_planned_event_value['field_audit_type'] . '</td>';
