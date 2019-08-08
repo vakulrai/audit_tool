@@ -245,6 +245,38 @@ class GenerateReports extends ControllerBase {
         $html .= '</table>';
       }
     }
+     elseif($report_type == 'list_of_business_process'){
+      $html .= '<h1>List of Business Process</h1>';
+      //Detail: A *****Get Annual calendar plan****//.
+      $data_business_process = $this->getdatafromuri('business_process','/ncr-car-management-details/'.$unit_reference.'?type=business_process');
+      if(count($data_business_process)){
+        $html .= '<table id = "list-business-process" style="width:100%;">
+          <thead>
+              <tr>
+                  <th>'.$this->t('Sl No.').'</th>
+                  <th>'.$this->t('Title: ').'</th>
+                  <th>'.$this->t('Business Head').'</th>
+                  <th>'.$this->t('Business Process Effectiveness').'</th>
+                  <th>'.$this->t('Business Process Efficiency').'</th>
+              </tr>
+          </thead>';
+        $planned_count = 0;
+        foreach ($data_business_process as $data_business_process_paragraph_generation_key => $data_business_process_paragraph_generation_val) {
+          $html .= '<tr>';
+          $html .= '<td>' . $planned_count . '</td>';
+          $html .= '<td>' . $data_business_process_paragraph_generation_val['title'] . '</td>';
+          $html .= '<td>' . $data_business_process_paragraph_generation_val['business_head'] . '</td>';
+
+          $html .= '<td>' .'<b>Effectiveness: </b>'. $data_business_process_paragraph_generation_val['effectiveness'][0]->field_effectiveness.'<br><b>Target: </b>'.$data_business_process_paragraph_generation_val['effectiveness'][0]->field_target.'<br><b>UOM: </b>'.$data_business_process_paragraph_generation_val['effectiveness'][0]->field_uom_text . '</td>';
+
+          $html .= '<td>' .'<b>Effieciency: </b>'. $data_business_process_paragraph_generation_val['efficiency'][0]->field_efficiency.'<br><b>Target: </b>'.$data_business_process_paragraph_generation_val['efficiency'][0]->field_target.'<br><b>UOM: </b>'.$data_business_process_paragraph_generation_val['efficiency'][0]->field_uom_text. '</td>';
+          $html .= '</tr>';
+          $planned_count++;
+        }
+
+        $html .= '</table>';
+      }
+    }
     elseif($report_type == 'risk'){
       $risk_data = $this->getDataRiskManagement($unit_reference, null);
       $html .= '<h1>Risk Management</h1>';

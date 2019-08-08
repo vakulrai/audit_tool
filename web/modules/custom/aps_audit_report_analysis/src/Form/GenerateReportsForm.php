@@ -28,7 +28,7 @@ class GenerateReportsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $uri = explode('/', $current_uri);
-    $options['all'] = 'ALL';
+    $options['none'] = '- None -';
     //GEtting Audit cycle values from "audit_cycle" configurations.
     $query = \Drupal::database()->select('audit_cycle__field_unit_reference', 'h');
     $query->fields('h',['entity_id']);
