@@ -11,7 +11,9 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Drupal\Core\Datetime\DateHelper;
 use Drupal\aps_audit_report_analysis\Plugin\Block\RiskManagement;
-use Drupal\aps_pre_audit\Form\PreAuditForm;
+use Drupal\aps_pre_audit\Form\UpdateAuditFindings;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Controller routines for aps_audit_report_analysis routes.
@@ -19,6 +21,7 @@ use Drupal\aps_pre_audit\Form\PreAuditForm;
 class GenerateReports extends ControllerBase {
 
   public function generateHTMLReports($report_type,$start_date, $end_date, $unit_reference) {
+    $response = new AjaxResponse();
     $output = $this->getDataforHTML($report_type, $start_date, $end_date, $unit_reference);
     $options = new Options();
     $options->set('isRemoteEnabled', TRUE);
@@ -30,7 +33,7 @@ class GenerateReports extends ControllerBase {
     $file_name = "Audit Reporting";
     $dompdf->get_canvas()->page_text(370, 570, "Page: {PAGE_NUM} of {PAGE_COUNT}", null, 12, array(0,0,0));
     $dompdf->stream($file_name,["Attachment" => 1]);
-    return true;
+    return $response;
   }
 
   public function getDataforHTML($report_type, $start_date, $end_date, $unit_reference){
@@ -356,34 +359,40 @@ class GenerateReports extends ControllerBase {
     }
     elseif($report_type == 'audit_check_list'){
       $audit_check_list = $this->getdatafromuri('checklist','/ncr-car-management-details/'.$unit_reference.'?type[]=planned_events'.$date_range_query);
-      if(count($list_of_product)){
+      if(count($audit_check_list)){
         $html .= '<table id = "list-business-process" style="width:100%;">
             <thead>
                 <tr>
                     <th>'.$this->t('Sl No.').'</th>
-                    <th>'.$this->t('Title: ').'</th>
-                    <th>'.$this->t('Document').'</th>
-                    <th>'.$this->t('QAM').'</th>
-                    <th>'.$this->t('Version Date').'</th>
-                    <th>'.$this->t('Version Level').'</th>
+                    <th>'.$this->t('Checklist Number ').'</th>
+                    <th>'.$this->t('Checklist Title ').'</th>
+                    <th>'.$this->t('Question: ').'</th>
+                    <th>'.$this->t('Options').'</th>
+                    <th>'.$this->t('Answered').'</th>
+                    <th>'.$this->t('Finding Categories').'</th>
+                    <th>'.$this->t('Clause No.').'</th>
+                    <th>'.$this->t('KPI').'</th>
                 </tr>
             </thead>';
           $planned_count = 0;
-          foreach ($list_of_product as $list_of_product_key => $list_of_product_val) {
+          foreach ($audit_check_list as $audit_check_list_key => $audit_check_list_val) {
             $html .= '<tr>';
             $html .= '<td>' . $planned_count . '</td>';
-            $html .= '<td>' . $list_of_product_val['title'] . '</td>';
-            $html .= '<td>' . $list_of_product_val['field_document'] . '</td>';
-            $html .= '<td>' . $list_of_product_val['field_qam'] . '</td>';
-            $html .= '<td>' . $list_of_product_val['field_version_date'] . '</td>';
-            $html .= '<td>' . $list_of_product_val['field_version_level'] . '</td>';
+            $html .= '<td>' . $audit_check_list_val['sno'] . '</td>';
+            $html .= '<td>' . $audit_check_list_val['title'] . '</td>';
+            $html .= '<td>' . $audit_check_list_val['question'] . '</td>';
+            $html .= '<td>' . $audit_check_list_val['answers'] . '</td>';
+            $html .= '<td>' . $audit_check_list_val['default_checked'] . '</td>';
+            $html .= '<td>' . $audit_check_list_val['field_finding_categories'] . '</td>';
+            $html .= '<td>' . $audit_check_list_val['clause_no'] . '</td>';
+            $html .= '<td>' . strtoupper($audit_check_list_val['kpi']) . '</td>';
             $html .= '</tr>';
             $planned_count++;
           }
         $html .= '</table>';
       }
     }
-    elseif($report_type == 'risk'){
+    elseif($report_type == 'risk_report'){
       $risk_data = $this->getDataRiskManagement($unit_reference, null);
       $html .= '<h1>Risk Management</h1>';
       //Detail: A *****Risk::Findings****//.
@@ -545,7 +554,7 @@ class GenerateReports extends ControllerBase {
           $options[$value->nid]['field_version_level'] = $value->field_version_level ? $value->field_version_level : ' - ';
         }
         elseif($type == 'checklist'){
-          $load_checklist = PreAuditForm::getAuditDetails($value->field_checklist);
+          $load_checklist = UpdateAuditFindings::getAuditDetails($value->field_checklist);
           $checklist_title = Node::load($value->field_checklist)->title->value;
           foreach ($load_checklist as $checklist_key => $checklist_value) {
             $options[$checklist_key]['title'] = $checklist_title;
@@ -558,11 +567,30 @@ class GenerateReports extends ControllerBase {
                   <b>Effecient:<b>'.$checklist_value['answers']['Effecient']['answer'].'<br>
                   <b>Poor:<b>'.$checklist_value['answers']['Poor']['answer'].'<br>'
                   ;
-            $options[$checklist_key]['kpi'] = $checklist_value['Optimised'];
-            $options[$checklist_key]['kpi'] = $checklist_value['not-achieved'];
-            $options[$checklist_key]['kpi'] = $checklist_value['not-achieved'];
+            $options[$checklist_key]['field_answer_type'] = $checklist_value['field_answer_type'];
+            $options[$checklist_key]['default_checked'] = $checklist_value['default_checked'];
+            if(count($checklist_value['field_finding_categories']) > 0){
+              foreach ($checklist_value['field_finding_categories'] as $finding => $val) {
+                if($term = Term::load($val['target_id'])){
+                  $name = $term->getName().'<br>';
+                }
+                else{
+                  $name = 'Not Found.';
+                }
+              }
+            }
+            else{
+              $name = 'Not Found.';
+            }
+            $options[$checklist_key]['field_finding_categories'] = $name;
+            if($checklist_value['clause_no'] != ''){
+              $clause_no = Node::load($checklist_value['clause_no'])->title->value;
+            }
+            else{
+              $clause_no = 'Not Found';
+            }
+            $options[$checklist_key]['clause_no'] = $clause_no;
           }
-          echo '<pre>';print_r($load_checklist);die();
         }
       }
     }
