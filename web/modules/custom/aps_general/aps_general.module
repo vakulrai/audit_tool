@@ -94,7 +94,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
-  // $form['moderation_state']['#access'] = FALSE;
+  $form['moderation_state']['#access'] = FALSE;
   if($form_id == 'node_unit_form'){
     $form['field_total_mandays']['#access'] = FALSE;
     $form['field_updated_mandays']['#access'] = FALSE;

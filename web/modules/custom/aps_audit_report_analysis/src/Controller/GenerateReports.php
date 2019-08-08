@@ -11,6 +11,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Drupal\Core\Datetime\DateHelper;
 use Drupal\aps_audit_report_analysis\Plugin\Block\RiskManagement;
+use Drupal\aps_pre_audit\Form\PreAuditForm;
 
 /**
  * Controller routines for aps_audit_report_analysis routes.
@@ -29,7 +30,7 @@ class GenerateReports extends ControllerBase {
     $file_name = "Audit Reporting";
     $dompdf->get_canvas()->page_text(370, 570, "Page: {PAGE_NUM} of {PAGE_COUNT}", null, 12, array(0,0,0));
     $dompdf->stream($file_name,["Attachment" => 1]);
-    return $dompdf;
+    return true;
   }
 
   public function getDataforHTML($report_type, $start_date, $end_date, $unit_reference){
@@ -274,28 +275,108 @@ class GenerateReports extends ControllerBase {
         $html .= '</table>';
       }
     }
-    elseif($report_type == 'list_of_products'){
+    elseif($report_type == 'list_of_product'){
       $html .= '<h1>List of Products</h1>';
-      $list_of_process = $this->getdatafromuri('process','/ncr-car-management-details/'.$unit_reference.'?type[]=customers_manual'.$date_range_query);
-      if(count($list_of_process)){
+      $list_of_product = $this->getdatafromuri('product','/ncr-car-management-details/'.$unit_reference.'?type[]=customers_manual'.$date_range_query);
+      if(count($list_of_product)){
         $html .= '<table id = "list-business-process" style="width:100%;">
             <thead>
                 <tr>
                     <th>'.$this->t('Sl No.').'</th>
                     <th>'.$this->t('Title: ').'</th>
-                    <th>'.$this->t('Process Type').'</th>
-                    <th>'.$this->t('Shift').'</th>
-                    <th>'.$this->t('Section').'</th>
+                    <th>'.$this->t('Document').'</th>
+                    <th>'.$this->t('QAM').'</th>
+                    <th>'.$this->t('Version Date').'</th>
+                    <th>'.$this->t('Version Level').'</th>
                 </tr>
             </thead>';
           $planned_count = 0;
-          foreach ($list_of_process as $list_of_process_key => $list_of_process_val) {
+          foreach ($list_of_product as $list_of_product_key => $list_of_product_val) {
             $html .= '<tr>';
             $html .= '<td>' . $planned_count . '</td>';
-            $html .= '<td>' . $list_of_process_val['title'] . '</td>';
-            $html .= '<td>' . $list_of_process_val['type'] . '</td>';
-            $html .= '<td>' . $list_of_process_val['field_shift'] . '</td>';
-            $html .= '<td>' . $list_of_process_val['field_select_section'] . '</td>';
+            $html .= '<td>' . $list_of_product_val['title'] . '</td>';
+            $html .= '<td>' . $list_of_product_val['field_document'] . '</td>';
+            $html .= '<td>' . $list_of_product_val['field_qam'] . '</td>';
+            $html .= '<td>' . $list_of_product_val['field_version_date'] . '</td>';
+            $html .= '<td>' . $list_of_product_val['field_version_level'] . '</td>';
+            $html .= '</tr>';
+            $planned_count++;
+          }
+        $html .= '</table>';
+      }
+    }
+    elseif($report_type == 'list_of_qualified_auditors'){
+      $this->getAuditorGraph($unit_reference);
+      $auditor_chart_path = drupal_get_path('module', 'aps_audit_report_analysis') . '/highchart-images-pdf/Auditor-Performance.jpeg';
+      $data_qualified_auditors = $this->getdatafromuri('auditor','/auditor-and-audit-export/'.$unit_reference.'?field_score_value_greater=5');
+      if(count($data_qualified_auditors)){
+        $html .= '<table id = "qualified-auditors" style="width:100%;">
+          <thead>
+              <tr>
+                  <th>'.$this->t('Sl No.').'</th>
+                  <th>'.$this->t('Name: ').'</th>
+                  <th>'.$this->t('Score: ').'</th>
+                  <th>'.$this->t('Function: ').'</th>
+              </tr>
+          </thead>';
+        $qualified_auditors_count = 0;
+        foreach ($data_qualified_auditors as $data_qualified_auditors_key => $data_qualified_auditors_value) {
+          $html .= '<tr>';
+          $html .= '<td>' . $qualified_auditors_count . '</td>';
+          $html .= '<td>' . $data_qualified_auditors_value['name'] . '</td>';
+          $html .= '<td>' . $data_qualified_auditors_value['score'] . '</td>';
+          $html .= '<td>' . $data_qualified_auditors_value['function'] . '</td>';
+          $html .= '</tr>';
+          $qualified_auditors_count++;
+        }
+        $html .= '</table>';
+      }
+      else{
+        $html .= '<table id = "qualified-auditors" style="width:100%;">
+          <thead>
+              <tr>
+                  <th>'.$this->t('Sl No.').'</th>
+                  <th>'.$this->t('Name: ').'</th>
+                  <th>'.$this->t('Score: ').'</th>
+                  <th>'.$this->t('Function: ').'</th>
+              </tr>
+          </thead>';
+        $html .= '<tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th><b>No content Found</b></th>
+                <th></th>
+            </tr>
+        </tfoot><br><br>';
+
+      }
+      $html .= '</br>';
+      $html .= ' <img src='.$auditor_chart_path.' height="700" width="450"> ';
+    }
+    elseif($report_type == 'audit_check_list'){
+      $audit_check_list = $this->getdatafromuri('checklist','/ncr-car-management-details/'.$unit_reference.'?type[]=planned_events'.$date_range_query);
+      if(count($list_of_product)){
+        $html .= '<table id = "list-business-process" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>'.$this->t('Sl No.').'</th>
+                    <th>'.$this->t('Title: ').'</th>
+                    <th>'.$this->t('Document').'</th>
+                    <th>'.$this->t('QAM').'</th>
+                    <th>'.$this->t('Version Date').'</th>
+                    <th>'.$this->t('Version Level').'</th>
+                </tr>
+            </thead>';
+          $planned_count = 0;
+          foreach ($list_of_product as $list_of_product_key => $list_of_product_val) {
+            $html .= '<tr>';
+            $html .= '<td>' . $planned_count . '</td>';
+            $html .= '<td>' . $list_of_product_val['title'] . '</td>';
+            $html .= '<td>' . $list_of_product_val['field_document'] . '</td>';
+            $html .= '<td>' . $list_of_product_val['field_qam'] . '</td>';
+            $html .= '<td>' . $list_of_product_val['field_version_date'] . '</td>';
+            $html .= '<td>' . $list_of_product_val['field_version_level'] . '</td>';
             $html .= '</tr>';
             $planned_count++;
           }
@@ -447,6 +528,41 @@ class GenerateReports extends ControllerBase {
           $options[$value->nid]['field_shift'] = $value->field_shift;
           $options[$value->nid]['field_select_section'] = $value->field_select_section;
           $options[$value->nid]['title'] = $value->title;
+        }
+        elseif($type == 'product'){
+          if($value->field_document != ''){
+            $fid = (int)$value->field_document;
+            $file = \Drupal\file\Entity\File::load($fid);
+            $path = file_create_url($file->getFileUri());
+          }
+          else{
+            $path = ' - ';
+          }
+          $options[$value->nid]['title'] = $value->title;
+          $options[$value->nid]['field_document'] = $path != ' - ' ? '<a href='.$path.'>DOCUMENT</a>' : ' - ';
+          $options[$value->nid]['field_qam'] = $value->field_qam ? '<a href='.$value->field_qam.'>QAM</a>' : ' - ';
+          $options[$value->nid]['field_version_date'] = $value->field_version_date ? $value->field_version_date : ' - ';
+          $options[$value->nid]['field_version_level'] = $value->field_version_level ? $value->field_version_level : ' - ';
+        }
+        elseif($type == 'checklist'){
+          $load_checklist = PreAuditForm::getAuditDetails($value->field_checklist);
+          $checklist_title = Node::load($value->field_checklist)->title->value;
+          foreach ($load_checklist as $checklist_key => $checklist_value) {
+            $options[$checklist_key]['title'] = $checklist_title;
+            $options[$checklist_key]['sno'] = $checklist_value['sno'];
+            $options[$checklist_key]['kpi'] = $checklist_value['kpi'];
+            $options[$checklist_key]['question'] = $checklist_value['question'];
+            $options[$checklist_key]['answers'] = '
+                  <b>Optimised:<b>'.$checklist_value['answers']['Optimised']['answer'].'<br>
+                  <b>Qualified:<b>'.$checklist_value['answers']['Qualified']['answer'].'<br>
+                  <b>Effecient:<b>'.$checklist_value['answers']['Effecient']['answer'].'<br>
+                  <b>Poor:<b>'.$checklist_value['answers']['Poor']['answer'].'<br>'
+                  ;
+            $options[$checklist_key]['kpi'] = $checklist_value['Optimised'];
+            $options[$checklist_key]['kpi'] = $checklist_value['not-achieved'];
+            $options[$checklist_key]['kpi'] = $checklist_value['not-achieved'];
+          }
+          echo '<pre>';print_r($load_checklist);die();
         }
       }
     }
