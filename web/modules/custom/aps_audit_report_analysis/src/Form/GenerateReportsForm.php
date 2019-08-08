@@ -4,10 +4,11 @@ namespace Drupal\aps_audit_report_analysis\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\aps_audit_report_analysis\Controller\GenerateReports;
 use Drupal\Core\Ajax\RedirectCommand;
+use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\HtmlCommand;
 
 /**
  * Class GenerateReports.
@@ -72,6 +73,7 @@ class GenerateReportsForm extends FormBase {
       '#options' => $options,
       '#attributes' => ['id' => 'audit-type-report'],
       '#default_value' => 'all',
+      '#suffix'=> '<p id="generate-report"></p>',
     ];
 
     $form['start_date'] = [
@@ -137,7 +139,12 @@ class GenerateReportsForm extends FormBase {
     $response = new AjaxResponse();
     global $base_url;
     $form_values = $form_state->getValues();
-    $response->addCommand(new RedirectCommand('/generate_reports/'.$form_values['audit_type'].'/'.$uri[1]));
+    if($form_values['audit_type'] == 'none'){
+      $response->addCommand(new HtmlCommand('#generate-report', t('Please Select A Value.')));
+    }
+    else{
+      $response->addCommand(new RedirectCommand('/generate_reports/'.$form_values['audit_type'].'/'.$uri[1]));
+    }
     return $response;
   }
 
