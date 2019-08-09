@@ -496,7 +496,6 @@ class UpdateAuditFindings extends PreAuditForm {
     $reference_id = \Drupal::request()->query->get('event_reference');
     $node_object = Node::load($reference_id);
     $node_object->set('moderation_state', 'post_audit');
-    $node_object->save();
     $data_array = $node_object->toArray();
     $form_values = $form_state->getValues();
     $paragraph_ = [];
@@ -593,9 +592,15 @@ class UpdateAuditFindings extends PreAuditForm {
       }
       $save_submission->field_refere = $reference_id;
       $save_submission->save();
-      $save_refence_to_event = Node::load($reference_id);
-      $save_refence_to_event->field_report_reference = $save_submission->id();
-      $save_refence_to_event->save();
+      if($node_object->field_report_reference->target_id == ''){
+        $node_object->field_report_reference = $save_submission->id();
+      }
+      else{
+        $report_reference_object = Node::load($node_object->field_report_reference->target_id);
+        $report_reference_object->delete();
+        $node_object->field_report_reference = $save_submission->id();
+      }
+      $node_object->save();
       $response->addCommand(new HtmlCommand('#display-status-report', t('Report Submitted Successfully.')));
     // }
     // else{

@@ -11,15 +11,24 @@ dependencies:
     - field.storage.node.field_department
     - field.storage.node.field_document
     - field.storage.node.field_end_date
+    - field.storage.node.field_occurence
     - field.storage.node.field_qam
+    - field.storage.node.field_refere
     - field.storage.node.field_section
     - field.storage.node.field_select_auditee
+    - field.storage.node.field_select_business_process
     - field.storage.node.field_select_section
     - field.storage.node.field_shift
+    - field.storage.node.field_standards
     - field.storage.node.field_start_date
     - field.storage.node.field_status
     - field.storage.node.field_version_date
     - field.storage.node.field_version_level
+    - field.storage.paragraph.field_car_status
+    - field.storage.paragraph.field_casualty_number
+    - field.storage.paragraph.field_finding_categories
+    - field.storage.paragraph.field_question
+    - field.storage.paragraph.field_result
   module:
     - content_moderation
     - datetime
@@ -661,6 +670,68 @@ display:
           type: entity_reference_label
           settings:
             link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_department_1:
+          id: field_department_1
+          table: node__field_department
+          field: field_department
+          relationship: none
+          group_type: group
+          admin_label: 'Department Nid'
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_entity_id
+          settings: {  }
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -1435,6 +1506,631 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        field_select_business_process:
+          id: field_select_business_process
+          table: node__field_select_business_process
+          field: field_select_business_process
+          relationship: field_department
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_entity_id
+          settings: {  }
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_occurence:
+          id: field_occurence
+          table: node__field_occurence
+          field: field_occurence
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: true
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_standards:
+          id: field_standards
+          table: node__field_standards
+          field: field_standards
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: true
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_status_1:
+          id: field_status_1
+          table: node__field_status
+          field: field_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: true
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_car_status:
+          id: field_car_status
+          table: paragraph__field_car_status
+          field: field_car_status
+          relationship: field_audit_list
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: true
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_casualty_number:
+          id: field_casualty_number
+          table: paragraph__field_casualty_number
+          field: field_casualty_number
+          relationship: field_audit_list
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: true
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_finding_categories:
+          id: field_finding_categories
+          table: paragraph__field_finding_categories
+          field: field_finding_categories
+          relationship: field_audit_list
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_question:
+          id: field_question
+          table: paragraph__field_question
+          field: field_question
+          relationship: field_audit_list
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: true
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: basic_string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_result:
+          id: field_result
+          table: paragraph__field_result
+          field: field_result
+          relationship: field_audit_list
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_refere:
+          id: field_refere
+          table: node__field_refere
+          field: field_refere
+          relationship: field_refere
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 2
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
       filters:
         type:
           id: type
@@ -1659,6 +2355,33 @@ display:
           entity_type: node
           entity_field: nid
           plugin_id: standard
+        field_department:
+          id: field_department
+          table: node__field_department
+          field: field_department
+          relationship: none
+          group_type: group
+          admin_label: 'field_department: Content'
+          required: false
+          plugin_id: standard
+        field_select_business_process:
+          id: field_select_business_process
+          table: node__field_select_business_process
+          field: field_select_business_process
+          relationship: none
+          group_type: group
+          admin_label: 'field_select_business_process: Content'
+          required: false
+          plugin_id: standard
+        field_audit_list:
+          id: field_audit_list
+          table: node__field_audit_list
+          field: field_audit_list
+          relationship: none
+          group_type: group
+          admin_label: 'field_audit_list: Paragraph'
+          required: false
+          plugin_id: standard
       arguments:
         nid:
           id: nid
@@ -1718,15 +2441,24 @@ display:
         - 'config:field.storage.node.field_department'
         - 'config:field.storage.node.field_document'
         - 'config:field.storage.node.field_end_date'
+        - 'config:field.storage.node.field_occurence'
         - 'config:field.storage.node.field_qam'
+        - 'config:field.storage.node.field_refere'
         - 'config:field.storage.node.field_section'
         - 'config:field.storage.node.field_select_auditee'
+        - 'config:field.storage.node.field_select_business_process'
         - 'config:field.storage.node.field_select_section'
         - 'config:field.storage.node.field_shift'
+        - 'config:field.storage.node.field_standards'
         - 'config:field.storage.node.field_start_date'
         - 'config:field.storage.node.field_status'
         - 'config:field.storage.node.field_version_date'
         - 'config:field.storage.node.field_version_level'
+        - 'config:field.storage.paragraph.field_car_status'
+        - 'config:field.storage.paragraph.field_casualty_number'
+        - 'config:field.storage.paragraph.field_finding_categories'
+        - 'config:field.storage.paragraph.field_question'
+        - 'config:field.storage.paragraph.field_result'
         - 'config:workflow_list'
   rest_export_1:
     display_plugin: rest_export
@@ -1753,6 +2485,69 @@ display:
             title:
               alias: ''
               raw_output: false
+            nid:
+              alias: ''
+              raw_output: false
+            moderation_state:
+              alias: ''
+              raw_output: false
+            field_end_date:
+              alias: ''
+              raw_output: false
+            field_start_date:
+              alias: ''
+              raw_output: false
+            field_status:
+              alias: ''
+              raw_output: false
+            field_audit_type:
+              alias: ''
+              raw_output: false
+            field_auditor:
+              alias: ''
+              raw_output: false
+            field_department:
+              alias: ''
+              raw_output: false
+            field_department_1:
+              alias: department_nid
+              raw_output: false
+            field_select_auditee:
+              alias: ''
+              raw_output: false
+            field_business_head_name:
+              alias: ''
+              raw_output: false
+            field_business_process_effective:
+              alias: ''
+              raw_output: false
+            type:
+              alias: ''
+              raw_output: false
+            field_shift:
+              alias: ''
+              raw_output: false
+            field_select_section:
+              alias: ''
+              raw_output: false
+            field_section:
+              alias: ''
+              raw_output: false
+            field_document:
+              alias: ''
+              raw_output: false
+            field_qam:
+              alias: ''
+              raw_output: false
+            field_version_date:
+              alias: ''
+              raw_output: false
+            field_version_level:
+              alias: ''
+              raw_output: false
+            field_checklist:
+              alias: ''
+              raw_output: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -1771,13 +2566,22 @@ display:
         - 'config:field.storage.node.field_department'
         - 'config:field.storage.node.field_document'
         - 'config:field.storage.node.field_end_date'
+        - 'config:field.storage.node.field_occurence'
         - 'config:field.storage.node.field_qam'
+        - 'config:field.storage.node.field_refere'
         - 'config:field.storage.node.field_section'
         - 'config:field.storage.node.field_select_auditee'
+        - 'config:field.storage.node.field_select_business_process'
         - 'config:field.storage.node.field_select_section'
         - 'config:field.storage.node.field_shift'
+        - 'config:field.storage.node.field_standards'
         - 'config:field.storage.node.field_start_date'
         - 'config:field.storage.node.field_status'
         - 'config:field.storage.node.field_version_date'
         - 'config:field.storage.node.field_version_level'
+        - 'config:field.storage.paragraph.field_car_status'
+        - 'config:field.storage.paragraph.field_casualty_number'
+        - 'config:field.storage.paragraph.field_finding_categories'
+        - 'config:field.storage.paragraph.field_question'
+        - 'config:field.storage.paragraph.field_result'
         - 'config:workflow_list'

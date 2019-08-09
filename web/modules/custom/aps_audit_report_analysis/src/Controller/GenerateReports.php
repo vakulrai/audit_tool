@@ -14,6 +14,7 @@ use Drupal\aps_audit_report_analysis\Plugin\Block\RiskManagement;
 use Drupal\aps_pre_audit\Form\UpdateAuditFindings;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Controller routines for aps_audit_report_analysis routes.
@@ -392,6 +393,160 @@ class GenerateReports extends ControllerBase {
         $html .= '</table>';
       }
     }
+    elseif($report_type == 'department_wise_audit_plan'){
+      $department_wise_audit_plan = $this->getdatafromuri('dept_wise_audit','/ncr-car-management-details/'.$unit_reference.'?type[]=planned_events'.$date_range_query);
+      if(count($department_wise_audit_plan)){
+          foreach ($department_wise_audit_plan as $department_wise_audit_plan_key => $department_wise_audit_plan_val) {
+            $html .= '<table id = "list-business-process" style="width:100%;">
+            <thead>
+                <tr>
+                  <th>
+                    <h2>Department Name: '.Node::load($department_wise_audit_plan_key)->title->value.'<h2/>
+                  </th>
+                </tr>
+                <tr>
+                    <th>'.$this->t('Sl No.').'</th>
+                    <th>'.$this->t('Title').'</th>
+                    <th>'.$this->t('Section Name ').'</th>
+                    <th>'.$this->t('Start Date').'</th>
+                    <th>'.$this->t('End Date').'</th>
+                    <th>'.$this->t('Shift').'</th>
+                    <th>'.$this->t('Auditor').'</th>
+                    <th>'.$this->t('Auditee.').'</th>
+                    <th>'.$this->t('Current State').'</th>
+                </tr>
+            </thead>';
+            $planned_count = 1;
+            foreach ($department_wise_audit_plan_val as $i => $j) {
+              $html .= '<tr>';
+              $html .= '<td>' . $planned_count . '</td>';
+              $html .= '<td>' . $j['title'] . '</td>';
+              $html .= '<td>' . $j['field_section'] . '</td>';
+              $html .= '<td>' . $j['field_start_date'] . '</td>';
+              $html .= '<td>' . $j['field_end_date'] . '</td>';
+              $html .= '<td>' . $j['field_shift'] . '</td>';
+              $html .= '<td>' . $j['field_auditor'] . '</td>';
+              $html .= '<td>' . $j['field_select_auditee'] . '</td>';
+              $html .= '<td>' . $j['moderation_state'] . '</td>';
+              $html .= '</tr>';
+              $planned_count++;
+            }
+          }
+        $html .= '</table>';
+      }
+    }
+    elseif($report_type == 'a_matrix_for_auditor_score_and_each_realted_function'){
+      $data_auditor_function = $this->getdatafromuri('auditor_functions','/auditor-and-audit-export/'.$unit_reference.'?field_score_value_greater=0');
+      if(count($data_auditor_function)){
+          foreach ($data_auditor_function as $data_auditor_function_key => $data_auditor_function_val) {
+            $html .= '<table id = "list-business-process" style="width:100%;">
+            <thead>
+                <tr>
+                  <th>
+                    <h2>Auditor Name: '.User::load($data_auditor_function_key)->name->value.'<h2/>
+                  </th>
+                </tr>
+                <tr>
+                    <th>'.$this->t('Sl No.').'</th>
+                    <th>'.$this->t('Auditor Name').'</th>
+                    <th>'.$this->t('Function').'</th>
+                    <th>'.$this->t('Score').'</th>
+                    <th>'.$this->t('Audit Conducted').'</th>
+                </tr>
+            </thead>';
+            $planned_count = 1;
+            foreach ($data_auditor_function_val as $i => $j) {
+              $html .= '<tr>';
+              $html .= '<td>' . $planned_count . '</td>';
+              $html .= '<td>' . $j['name'] . '</td>';
+              $html .= '<td>' . $j['field_functions_qualified'] . '</td>';
+              $html .= '<td>' . $j['field_score'] . '</td>';
+              $html .= '<td>' . $j['title'] . '</td>';
+              $html .= '</tr>';
+              $planned_count++;
+            }
+          }
+        $html .= '</table>';
+      }
+    }
+    elseif($report_type == 'matrix_depicting_business_process_and_departments'){
+      $data_bp_dept = $this->getdatafromuri('bp_dept','/ncr-car-management-details/'.$unit_reference.'?type[]=business_process'.$date_range_query);
+      if(count($data_bp_dept)){
+          foreach ($data_bp_dept as $data_bp_dept_key => $data_bp_dept_value) {
+            $html .= '<table id = "list-business-process" style="width:100%;">
+            <thead>
+                <tr>
+                  <th>
+                    <h2>Department Name: '.Node::load($data_bp_dept_key)->title->value.'<h2/>
+                  </th>
+                </tr>
+                <tr>
+                  <th>'.$this->t('Sl No.').'</th>
+                  <th>'.$this->t('Business Process: ').'</th>
+                  <th>'.$this->t('Department: ').'</th>
+                  <th>'.$this->t('Business Head').'</th>
+                  <th>'.$this->t('Business Process Effectiveness').'</th>
+                  <th>'.$this->t('Business Process Efficiency').'</th>
+                </tr>
+            </thead>';
+            $planned_count = 1;
+            foreach ($data_bp_dept_value as $i => $j) {
+              $html .= '<tr>';
+              $html .= '<td>' . $planned_count . '</td>';
+              $html .= '<td>' . $j['business_title'] . '</td>';
+              $html .= '<td>' . $j['department_title'] . '</td>';
+              $html .= '<td>' . $j['business_head'] . '</td>';
+
+              $html .= '<td>' .'<b>Effectiveness: </b>'. $j['effectiveness'][0]->field_effectiveness.'<br><b>Target: </b>'.$j['effectiveness'][0]->field_target.'<br><b>UOM: </b>'.$j['effectiveness'][0]->field_uom_text . '</td>';
+
+              $html .= '<td>' .'<b>Effieciency: </b>'. $j['efficiency'][0]->field_efficiency.'<br><b>Target: </b>'.$j['efficiency'][0]->field_target.'<br><b>UOM: </b>'.$j['efficiency'][0]->field_uom_text. '</td>';
+              $html .= '</tr>';
+              $planned_count++;
+            }
+          }
+        $html .= '</table>';
+      }
+    }
+    elseif($report_type == 'ncr'){
+      $checklist_car = $this->getdatafromuri('checklist_car','/ncr-car-management-details/'.$unit_reference.'?type[]=auditor_report'.$date_range_query);
+      if(count($checklist_car)){
+        foreach ($checklist_car as $checklist_car_key => $checklist_car_key_val) {
+          $html .= '<table id = "list-business-process" style="width:100%;">
+              <thead>
+                <tr>
+                  <th>
+                    <h2>Event Name: '.Node::load($checklist_car_key)->title->value.'<h2/>
+                  </th>
+                </tr>
+                  <tr>
+                      <th>'.$this->t('Sl No.').'</th>
+                      <th>'.$this->t('Event Name').'</th>
+                      <th>'.$this->t('Occurence ').'</th>
+                      <th>'.$this->t('Standards ').'</th>
+                      <th>'.$this->t('Question: ').'</th>
+                      <th>'.$this->t('Answered').'</th>
+                      <th>'.$this->t('Interim Action').'</th>
+                      <th>'.$this->t('Corrective Action').'</th>
+                  </tr>
+              </thead>';
+            $planned_count = 1;
+            foreach ($checklist_car_key_val as $j) {
+              $html .= '<tr>';
+              $html .= '<td>' . $planned_count . '</td>';
+              $html .= '<td>' . $j['event_title'] . '</td>';
+              $html .= '<td>' . $j['field_occurence'] . '</td>';
+              $html .= '<td>' . $j['field_standards'] . '</td>';
+              $html .= '<td>' . $j['field_question'] . '</td>';
+              $html .= '<td>' . $j['field_result'] . '</td>';
+              $html .= '<td>' . $j['interim'] . '</td>';
+              $html .= '<td>' . $j['corrective'] . '</td>';
+              $html .= '</tr>';
+              $planned_count++;
+            }
+          $html .= '</table>';
+        }
+      }
+    }
     elseif($report_type == 'risk_report'){
       $risk_data = $this->getDataRiskManagement($unit_reference, null);
       $html .= '<h1>Risk Management</h1>';
@@ -506,6 +661,7 @@ class GenerateReports extends ControllerBase {
       $request = $client->get($base_url.$url);
       $response = $request->getBody();
       $data = json_decode($response);
+      $i = 0;
       foreach ($data as $key => $value) {
         if($type == 'event'){
           $options[$value->nid]['title'] = $value->title;
@@ -592,8 +748,83 @@ class GenerateReports extends ControllerBase {
             $options[$checklist_key]['clause_no'] = $clause_no;
           }
         }
+        elseif($type == 'dept_wise_audit'){
+          $options[$value->department_nid][$value->nid]['title'] = $value->title;
+          $options[$value->department_nid][$value->nid]['field_department'] = $value->field_department;
+          $options[$value->department_nid][$value->nid]['field_section'] = $value->field_section;
+          $options[$value->department_nid][$value->nid]['field_start_date'] = $value->field_start_date;
+          $options[$value->department_nid][$value->nid]['field_end_date'] = $value->field_end_date;
+          $options[$value->department_nid][$value->nid]['field_shift'] = $value->field_shift;
+          $options[$value->department_nid][$value->nid]['field_auditor'] = $value->field_auditor;
+          $options[$value->department_nid][$value->nid]['field_select_auditee'] = $value->field_select_auditee;
+          $options[$value->department_nid][$value->nid]['moderation_state'] = $value->moderation_state;
+        }
+        elseif($type == 'auditor_functions'){
+          $options[$value->uid][$value->field_functions_qualified]['name'] = $value->name;
+          $options[$value->uid][$value->field_functions_qualified]['field_functions_qualified'] = $value->field_functions_qualified;
+          $options[$value->uid][$value->field_functions_qualified]['field_score'] = $value->field_score;
+          $options[$value->uid][$value->field_functions_qualified]['title'] = $value->title;
+        }
+        elseif($type == 'bp_dept'){
+          $query = \Drupal::database()->select('node_field_data', 'n');
+          $query->join('node__field_select_business_process', 'bp', 'n.nid = bp.field_select_business_process_target_id');
+          $query->fields('bp',['entity_id', 'bundle']);
+          $query->condition('bp.bundle', 'department');
+          $query->condition('bp.field_select_business_process_target_id', $value->nid);
+          $nids = $query->execute()->fetchAll();
+          $node_business_process = Node::load($value->nid);
+          $field_business_process_effective = $node_business_process->field_business_process_effective->target_id;
+          $field_business_process_efficienc = $node_business_process->field_business_process_efficienc->target_id;
+          $data_effectiveness = $this->getJSONFromExport('/paragraph-export/'.$field_business_process_effective);
+          $data_efficiency = $this->getJSONFromExport('/paragraph-export/'.$field_business_process_efficienc);
+
+          foreach ($nids as $dept => $dept_value) {
+            $options[$dept_value->entity_id][$value->nid]['department_title'] = Node::load($dept_value->entity_id)->title->value;
+            $options[$dept_value->entity_id][$value->nid]['business_title'] = $node_business_process->title->value;
+            $options[$dept_value->entity_id][$value->nid]['business_head'] = $node_business_process->field_business_head_name->value;
+            $options[$dept_value->entity_id][$value->nid]['effectiveness'] = $data_effectiveness;
+            $options[$dept_value->entity_id][$value->nid]['efficiency'] = $data_efficiency;
+          }
+        }
+        elseif($type == 'checklist_car'){
+          $node_business_process = Node::load($value->nid);
+          $audit_list_id = $node_business_process->field_audit_list->target_id;
+          $audit_list_data = Paragraph::load($audit_list_id)->toArray();
+          $interim_action = $audit_list_data['field_interim_action'];
+          $corrective_action = $audit_list_data['field_corrective_action'];
+          $array_action =array_merge($interim_action,$corrective_action);
+
+          $query = \Drupal::database()->select('node_field_data', 'nf');
+          $query->join('node__field_refere', 'n', 'nf.nid = n.field_refere_target_id');
+          $query->fields('n',['entity_id', 'bundle', 'field_refere_target_id']);
+          $query->condition('nf.type', 'planned_events');
+          $query->condition('n.entity_id', $value->nid);
+          $nids = $query->execute()->fetchAll();
+          foreach ($array_action as $action_key => $action_value) {
+            $load = Paragraph::load($action_value['target_id']);
+            if($load->type->target_id == 'interrim_action'){
+              $interim .= 'Intrim Action: '.$load->field_description_poor->value.'<br>';
+            }
+            elseif ($load->type->target_id == 'corrective_action') {
+              $corrective .= 'Corrective Action: '.$load->field_description_answer->value.'<br>';
+            }
+          }
+
+          foreach ($nids as $event => $event_value) {
+            $options[$event_value->field_refere_target_id][$value->nid]['event_title'] = Node::load($event_value->entity_id)->title->value;
+            $options[$event_value->field_refere_target_id][$value->nid]['field_occurence'] = $value->field_occurence;
+            $options[$event_value->field_refere_target_id][$value->nid]['field_standards'] =  $value->field_standards;
+            $options[$event_value->field_refere_target_id][$value->nid]['field_status_1'] =  $value->field_status_1;
+            $options[$event_value->field_refere_target_id][$value->nid]['field_question'] =  $value->field_question;
+            $options[$event_value->field_refere_target_id][$value->nid]['field_result'] =  $value->field_result;
+            $options[$event_value->field_refere_target_id][$value->nid]['interim'] =  $interim;
+            $options[$event_value->field_refere_target_id][$value->nid]['corrective'] =  $corrective;
+          }
+
+        }
       }
     }
+
     return $options;
   }
 
