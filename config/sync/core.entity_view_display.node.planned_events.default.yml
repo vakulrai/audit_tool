@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.planned_events.field_customer_type
     - field.field.node.planned_events.field_department
     - field.field.node.planned_events.field_end_date
+    - field.field.node.planned_events.field_external_auditor_name
     - field.field.node.planned_events.field_internal_audit_type
     - field.field.node.planned_events.field_list_of_process
     - field.field.node.planned_events.field_list_of_product
@@ -114,6 +115,14 @@ content:
       timezone: ''
     third_party_settings: {  }
     type: timestamp
+    region: content
+  field_external_auditor_name:
+    weight: 132
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
   field_internal_audit_type:
     weight: 114
