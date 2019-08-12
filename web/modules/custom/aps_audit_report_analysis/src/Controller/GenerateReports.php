@@ -49,6 +49,7 @@ class GenerateReports extends ControllerBase {
     $nids = $query->execute()->fetchAll();
     $node_storage = \Drupal::entityManager()->getStorage('audit_cycle');
     $entity_audit_cycle = $node_storage->load($nids[0]->entity_id);
+
     if(count($entity_audit_cycle)){
       $cycle_type = $entity_audit_cycle->get('field_cycle_type')->value;
       if($cycle_type == 0){
@@ -547,6 +548,42 @@ class GenerateReports extends ControllerBase {
         }
       }
     }
+    elseif($report_type == 'time_line_master'){
+      // $timeline = $this->getTimelinemaster($entity_audit_cycle);
+      echo '<pre>';print_r($entity_audit_cycle);
+      if(count($timeline)){
+        $html .= '<table id = "list-business-process" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>'.$this->t('Sl No.').'</th>
+                    <th>'.$this->t('Checklist Number ').'</th>
+                    <th>'.$this->t('Checklist Title ').'</th>
+                    <th>'.$this->t('Question: ').'</th>
+                    <th>'.$this->t('Options').'</th>
+                    <th>'.$this->t('Answered').'</th>
+                    <th>'.$this->t('Finding Categories').'</th>
+                    <th>'.$this->t('Clause No.').'</th>
+                    <th>'.$this->t('KPI').'</th>
+                </tr>
+            </thead>';
+          $planned_count = 0;
+          foreach ($timeline as $timeline_key => $timeline_value) {
+            $html .= '<tr>';
+            $html .= '<td>' . $planned_count . '</td>';
+            $html .= '<td>' . $audit_check_list_val['sno'] . '</td>';
+            $html .= '<td>' . $audit_check_list_val['title'] . '</td>';
+            $html .= '<td>' . $audit_check_list_val['question'] . '</td>';
+            $html .= '<td>' . $audit_check_list_val['answers'] . '</td>';
+            $html .= '<td>' . $audit_check_list_val['default_checked'] . '</td>';
+            $html .= '<td>' . $audit_check_list_val['field_finding_categories'] . '</td>';
+            $html .= '<td>' . $audit_check_list_val['clause_no'] . '</td>';
+            $html .= '<td>' . strtoupper($audit_check_list_val['kpi']) . '</td>';
+            $html .= '</tr>';
+            $planned_count++;
+          }
+        $html .= '</table>';
+      }
+    }
     elseif($report_type == 'risk_report'){
       $risk_data = $this->getDataRiskManagement($unit_reference, null);
       $html .= '<h1>Risk Management</h1>';
@@ -820,7 +857,12 @@ class GenerateReports extends ControllerBase {
             $options[$event_value->field_refere_target_id][$value->nid]['interim'] =  $interim;
             $options[$event_value->field_refere_target_id][$value->nid]['corrective'] =  $corrective;
           }
-
+        }
+        elseif($type == 'timeline_master'){
+          $options[$value->uid][$value->field_functions_qualified]['name'] = $value->name;
+          $options[$value->uid][$value->field_functions_qualified]['field_functions_qualified'] = $value->field_functions_qualified;
+          $options[$value->uid][$value->field_functions_qualified]['field_score'] = $value->field_score;
+          $options[$value->uid][$value->field_functions_qualified]['title'] = $value->title;
         }
       }
     }
@@ -853,5 +895,10 @@ class GenerateReports extends ControllerBase {
     $risk_report['risk_report'][7] = $risk_data['performance']['tableselect_element_performance']['data-7'];
     $risk_report['risk_report'][8] = $risk_data['performance']['tableselect_element_checklist']['data-8'];
     return $risk_report;
+  }
+
+  public function getTimelinemaster($data){
+    echo '<pre>';print_r($data);die;
+    $timeline = $data->toArray();
   }
 }

@@ -75,7 +75,7 @@ class AuditPlanningController extends ControllerBase {
       $list[$key]['title'] = $value->title;
       $list[$key]['start'] = date('Y-m-d h:m:i', $value->field_start_date_value);
       $list[$key]['end'] = date('Y-m-d h:m:i', $value->field_end_date_value);
-      $list[$key]['url'] = '/node/'.$value->nid.'/edit';
+      $list[$key]['url'] = '/node/'.$value->nid.'/edit?unit_reference='.$unit_reference;
       $list[$key]['color'] = 'pink';
       $list[$key]['textColor'] = 'black';
     }

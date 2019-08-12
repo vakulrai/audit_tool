@@ -1675,9 +1675,10 @@ function aps_general_cron() {
             $get_current_timestamp = getCurrentTimestampfromdate($get_user_timezone,$j['release_start_date'], NULL);
             $notifictaion_insert = \Drupal::database()->insert('notifications');
             $message = 'Last date for Audit Release is  '.$dates[$i]['release_start_date'].'Please Check the Url:'.'<a href='.$url.'>Link</a>';
+            $node_detail = Node::load($j['nid']);
             $notifictaion_insert->fields([
-              'nid' => $j['nid'],
-              'uid' => 0,
+              'nid' => $node_detail->id(),
+              'uid' => $node_detail->getOwner()->id(),
               'message' => $message,
               'timestamp' => strtotime($get_current_timestamp),
               'status' => 0,

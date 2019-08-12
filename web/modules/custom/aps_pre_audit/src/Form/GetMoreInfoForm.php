@@ -9,6 +9,7 @@ use Drupal\Core\Ajax\OpenModalDialogCommand;
 use Drupal\Core\Ajax\RemoveCommand;
 use Drupal\Component\Datetime\DateTimePlus;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\node\Entity\Node;
 
 /**
  * Class GetMoreInfoForm.
@@ -27,6 +28,7 @@ class GetMoreInfoForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
     $form['get_info'] = [
       '#type' => 'fieldset',
       '#title' => 'Report',
@@ -91,6 +93,8 @@ class GetMoreInfoForm extends FormBase {
    */
   public function requestInfo(array $form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
+    $unit_reference = \Drupal::request()->query->get('unit_reference');
+    $node_detail = Node::load($unit_reference);
     $user_timezone =  drupal_get_user_timezone();
     $config = \Drupal::service('config.factory')->getEditable('aps_pre_audit.getmoreinfo');
     if($nid = $config->get('nid')){
@@ -100,7 +104,7 @@ class GetMoreInfoForm extends FormBase {
       $message = $form_state->getValues('message')['message'];
       $notifictaion_insert->fields([
         'nid' => $nid,
-        'uid' => $uid,
+        'uid' => $node_detail->getOwner()->id(),
         'message' => $message,
         'timestamp' => $get_current_timestamp,
         'status' => 0,
