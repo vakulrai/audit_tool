@@ -31,6 +31,7 @@ use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Datetime\DateHelper;
 use Drupal\Core\Render\Markup;
 use Symfony\Component\Yaml\Yaml;
+use Drupal\Core\Database\Schema;
 
 
 
@@ -1146,13 +1147,19 @@ function aps_general_link_alter(&$variables) {
   $linkText = $variables['text'];
   $cleanLinkText = rtrim(strip_tags($linkText));
   if ($cleanLinkText == 'Notification') {
-    $query = \Drupal::database()->select('notifications', 'n');
-    $query->fields('n');
-    if($user_role == 'auditor' || $user_role == 'auditee'){
-      $query->condition('uid', $current_user_id);
+    $database = \Drupal::service('database');
+    if($database->schema()->tableExists('notifications')){
+      $query = \Drupal::database()->select('notifications', 'n');
+      $query->fields('n');
+      if($user_role == 'auditor' || $user_role == 'auditee'){
+        $query->condition('uid', $current_user_id);
+      }
+      $query->condition('status', 0);
+      $nids = $query->execute()->fetchAll();
     }
-    $query->condition('status', 0);
-    $nids = $query->execute()->fetchAll();
+    else{
+      $nids = [];
+    }
     $count = count($nids);
     if($count == 0){
       $class = 'not-new';

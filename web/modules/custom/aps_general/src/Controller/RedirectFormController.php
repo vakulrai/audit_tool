@@ -364,5 +364,16 @@ class RedirectFormController extends ControllerBase {
     $current_page_items = $chunks[$current_page];
     return $current_page_items;
   }
+
+  public function dropTable($table_name){
+     try {
+        db_drop_table($table_name);
+        $respose['response'] = TRUE;
+      } 
+      catch(\Exception $e) {
+        $respose['response'] = FALSE;
+      }
+      return new JsonResponse($response);
+  }
 }	
 ?>

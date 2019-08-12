@@ -51,4 +51,12 @@ aps_general.notificatios_update:
     _title: 'Notifications'
   requirements:
     _access: 'TRUE'
+
+aps_general.drop_tables:
+  path: '/drop-table/{table_name}'
+  defaults:
+    _controller: '\Drupal\aps_general\Controller\RedirectFormController::dropTable'
+    _title: 'Drop Table'
+  requirements:
+    _access: 'TRUE'
   
