@@ -29,9 +29,9 @@ class NcrandCarManagement extends BlockBase {
     ];
     $build['audit_ncr_car_report']['ncr_car']['container_element_ncr_car']['#markup'] = '<div id="container-element-ncr-car" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>';
     $build['audit_ncr_car_report']['#attached']['library'][] = 'aps_audit_report_analysis/aps_dashboard_ncr_car_js';
-    $build['#attached']['drupalSettings']['ncr_car_data']['total'] = count(getAuditOPtions('ncr','/ncr-car-management-details/'.$uri[1].'?type=auditor_report'));
-    $build['#attached']['drupalSettings']['ncr_car_data']['completed'] = count(getAuditOPtions('ncr','/ncr-car-management-details/'.$uri[1].'?type=auditor_report&field_status_value[]=closed'));
-    $build['#attached']['drupalSettings']['ncr_car_data']['pending'] = count(getAuditOPtions('ncr','/ncr-car-management-details/'.$uri[1].'?type=auditor_report&field_status_value[]=open&field_status_value[]=pending'));
+    $build['#attached']['drupalSettings']['ncr_car_data']['total'] = count(getAuditOPtions('ncr','/ncr-car-management-details/'.$uri[1].'?type[]=auditor_report'));
+    $build['#attached']['drupalSettings']['ncr_car_data']['completed'] = count(getAuditOPtions('ncr','/ncr-car-management-details/'.$uri[1].'?type[]=auditor_report&field_status_value[]=closed'));
+    $build['#attached']['drupalSettings']['ncr_car_data']['pending'] = count(getAuditOPtions('ncr','/ncr-car-management-details/'.$uri[1].'?type[]=auditor_report&field_status_value[]=open&field_status_value[]=pending'));
 
     return $build;
   }
