@@ -351,7 +351,7 @@ class RedirectFormController extends ControllerBase {
         $response['status'] = 'updated';
       }
       else{
-        $response['status'] = 'updated';
+        $response['status'] = 'failed';
       }
     }
       return new JsonResponse($response);
