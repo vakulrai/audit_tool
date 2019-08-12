@@ -115,7 +115,7 @@ class MradminDashboardCoverage extends BlockBase {
           $audit_data['internal'][$node_object->field_internal_audit_type->value]['completed'] = $count_complete_system;
           $count_complete_system++;
         }
-        elseif ($value->moderation_state == 'scheduled' || $value->moderation_state == 'reschedule') {
+        elseif ($value->moderation_state == 'release_audit' || $value->moderation_state == 'reschedule') {
           $audit_data['internal'][$node_object->field_internal_audit_type->value]['on-going'] = $count_ongoing_system;
           $count_ongoing_system++;
         }
@@ -128,7 +128,7 @@ class MradminDashboardCoverage extends BlockBase {
           $audit_data['internal'][$node_object->field_internal_audit_type->value]['completed'] = $count_complete_process;
           $count_complete_process++;
         }
-        elseif ($value->moderation_state == 'scheduled' || $value->moderation_state == 'reschedule') {
+        elseif ($value->moderation_state == 'release_audit' || $value->moderation_state == 'reschedule') {
           $audit_data['internal'][$node_object->field_internal_audit_type->value]['on-going'] = $count_ongoing_process;
           $count_ongoing_process++;
         }
@@ -141,7 +141,7 @@ class MradminDashboardCoverage extends BlockBase {
           $audit_data['internal'][$node_object->field_internal_audit_type->value]['completed'] = $count_complete_product;
           $count_complete_product++;
         }
-        elseif ($value->moderation_state == 'scheduled' || $value->moderation_state == 'reschedule') {
+        elseif ($value->moderation_state == 'release_audit' || $value->moderation_state == 'reschedule') {
           $audit_data['internal'][$node_object->field_internal_audit_type->value]['on-going'] = $count_ongoing_product;
           $count_ongoing_product++;
         }
@@ -155,7 +155,7 @@ class MradminDashboardCoverage extends BlockBase {
           $audit_data['external'][$node_object->field_audit_type->value]['completed'] = $count_complete_external;
           $count_complete_external++;
         }
-        elseif ($value->moderation_state == 'scheduled' || $value->moderation_state == 'reschedule') {
+        elseif ($value->moderation_state == 'release_audit' || $value->moderation_state == 'reschedule') {
           $audit_data['external'][$node_object->field_audit_type->value]['on-going'] = $count_ongoing_external;
           $count_ongoing_external++;
         }
@@ -168,7 +168,7 @@ class MradminDashboardCoverage extends BlockBase {
           $audit_data['supplier'][$node_object->field_audit_type->value]['completed'] = $count_complete_supplier;
           $count_complete_supplier++;
         }
-        elseif ($value->moderation_state == 'scheduled' || $value->moderation_state == 'reschedule') {
+        elseif ($value->moderation_state == 'release_audit' || $value->moderation_state == 'reschedule') {
           $audit_data['supplier'][$node_object->field_audit_type->value]['on-going'] = $count_ongoing_supplier;
           $count_ongoing_supplier++;
         }
@@ -181,7 +181,7 @@ class MradminDashboardCoverage extends BlockBase {
           $audit_data['customer'][$node_object->field_customer_type->value]['completed'] = $count_complete_ia;
           $count_complete_ia++;
         }
-        elseif ($value->moderation_state == 'scheduled' || $value->moderation_state == 'reschedule') {
+        elseif ($value->moderation_state == 'release_audit' || $value->moderation_state == 'reschedule') {
           $audit_data['customer'][$node_object->field_customer_type->value]['on-going'] = $count_ongoing_ia;
           $count_ongoing_ia++;
         }
@@ -194,7 +194,7 @@ class MradminDashboardCoverage extends BlockBase {
           $audit_data['customer'][$node_object->field_customer_type->value]['completed'] = $count_complete_ea;
           $count_complete_ea++;
         }
-        elseif ($value->moderation_state == 'scheduled' || $value->moderation_state == 'reschedule') {
+        elseif ($value->moderation_state == 'release_audit' || $value->moderation_state == 'reschedule') {
           $audit_data['customer'][$node_object->field_customer_type->value]['on-going'] = $count_ongoing_ea;
           $count_ongoing_ea++;
         }
