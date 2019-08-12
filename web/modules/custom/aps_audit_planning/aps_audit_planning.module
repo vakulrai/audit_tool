@@ -79,6 +79,12 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       'wrapper' => 'checklist',
       'event' => 'change',
     ];
+    
+    $form['field_auditor']['#states'] = [
+      'visible' => [
+        'select[name="field_audit_type"]' => ['value' => 'internal']
+      ],
+    ];
 
     $form['field_auditor']['widget']['#ajax'] = [
       'callback' => 'getUserINfo',
@@ -246,12 +252,11 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       $config->set($config_to_use,  $get_mandays_from_config + $update_mandays_from_rev);
       $config->save();
       $form['moderation_state']['widget'][0]['state']['#default_value'] = 'reschedule';
-  $form['moderation_state']['widget'][0]['state']['#default_value'] = 'reschedule';
       foreach (array_keys($form['actions']) as $action) {
-      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-        $form['actions'][$action]['#submit'][] = 'notify_on_reschedule';
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'notify_on_reschedule';
+        }
       }
-    }
     }
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $uri = explode('/', $current_uri);

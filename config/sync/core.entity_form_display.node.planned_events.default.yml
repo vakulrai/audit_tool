@@ -163,39 +163,7 @@ content:
     weight: 33
     settings: {  }
     third_party_settings:
-      conditional_fields:
-        b185a8ca-4797-49b3-8ec8-330778292248:
-          dependee: field_audit_type
-          settings:
-            state: visible
-            condition: value
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form: {  }
-            effect: show
-            effect_options: {  }
-            selector: ''
-          entity_type: node
-          bundle: planned_events
-        bf6ec4f0-61be-4398-8ba4-e8c186548372:
-          dependee: field_audit_type
-          settings:
-            state: visible
-            condition: value
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form:
-              -
-                value: internal
-            effect: show
-            effect_options: {  }
-            selector: ''
-          entity_type: node
-          bundle: planned_events
+      conditional_fields: {  }
     type: options_select
     region: content
   field_checklist:
@@ -208,24 +176,7 @@ content:
     weight: 4
     settings: {  }
     third_party_settings:
-      conditional_fields:
-        d8841940-a180-4354-8c17-7bb3b7f90d8b:
-          dependee: field_audit_type
-          settings:
-            state: visible
-            condition: value
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form:
-              -
-                value: customer
-            effect: show
-            effect_options: {  }
-            selector: ''
-          entity_type: node
-          bundle: planned_events
+      conditional_fields: {  }
     type: options_select
     region: content
   field_department:
@@ -248,6 +199,23 @@ content:
     third_party_settings:
       conditional_fields:
         fe68906c-217e-40f7-a394-338c00ed1be5:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: external
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+        331c6384-7afc-4d0d-99e3-86dccd1f4221:
           dependee: field_audit_type
           settings:
             state: visible
@@ -396,16 +364,18 @@ content:
       placeholder: ''
     third_party_settings:
       conditional_fields:
-        908e9e8a-fbec-46ed-9332-74851d18196c:
+        43ebf909-78b7-47c2-b18d-2bf1d40004de:
           dependee: field_audit_type
           settings:
-            state: '!visible'
+            state: visible
             condition: value
             grouping: AND
-            values_set: 3
+            values_set: 1
             value: ''
-            values: "external\r\nsupplier\r\ncustomer"
-            value_form: {  }
+            values: {  }
+            value_form:
+              -
+                value: internal
             effect: show
             effect_options: {  }
             selector: ''
@@ -469,16 +439,18 @@ content:
     settings: {  }
     third_party_settings:
       conditional_fields:
-        4ff87bdf-a553-4517-aa3f-0d108a107124:
+        384073c7-56e2-4a4a-8b3d-67d254727b77:
           dependee: field_audit_type
           settings:
             state: '!visible'
             condition: value
             grouping: AND
-            values_set: 3
+            values_set: 1
             value: ''
-            values: "internal\r\nsupplier\r\ncustomer"
-            value_form: {  }
+            values: {  }
+            value_form:
+              -
+                value: internal
             effect: show
             effect_options: {  }
             selector: ''
