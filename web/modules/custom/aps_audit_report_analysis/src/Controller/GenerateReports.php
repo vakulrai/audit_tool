@@ -549,39 +549,36 @@ class GenerateReports extends ControllerBase {
       }
     }
     elseif($report_type == 'time_line_master'){
-      // $timeline = $this->getTimelinemaster($entity_audit_cycle);
-      echo '<pre>';print_r($entity_audit_cycle);
+      $timeline = $this->getTimelinemaster($entity_audit_cycle);
       if(count($timeline)){
-        $html .= '<table id = "list-business-process" style="width:100%;">
-            <thead>
-                <tr>
-                    <th>'.$this->t('Sl No.').'</th>
-                    <th>'.$this->t('Checklist Number ').'</th>
-                    <th>'.$this->t('Checklist Title ').'</th>
-                    <th>'.$this->t('Question: ').'</th>
-                    <th>'.$this->t('Options').'</th>
-                    <th>'.$this->t('Answered').'</th>
-                    <th>'.$this->t('Finding Categories').'</th>
-                    <th>'.$this->t('Clause No.').'</th>
-                    <th>'.$this->t('KPI').'</th>
-                </tr>
-            </thead>';
-          $planned_count = 0;
-          foreach ($timeline as $timeline_key => $timeline_value) {
-            $html .= '<tr>';
-            $html .= '<td>' . $planned_count . '</td>';
-            $html .= '<td>' . $audit_check_list_val['sno'] . '</td>';
-            $html .= '<td>' . $audit_check_list_val['title'] . '</td>';
-            $html .= '<td>' . $audit_check_list_val['question'] . '</td>';
-            $html .= '<td>' . $audit_check_list_val['answers'] . '</td>';
-            $html .= '<td>' . $audit_check_list_val['default_checked'] . '</td>';
-            $html .= '<td>' . $audit_check_list_val['field_finding_categories'] . '</td>';
-            $html .= '<td>' . $audit_check_list_val['clause_no'] . '</td>';
-            $html .= '<td>' . strtoupper($audit_check_list_val['kpi']) . '</td>';
-            $html .= '</tr>';
-            $planned_count++;
-          }
-        $html .= '</table>';
+        $html .= '
+          <div id="data-view">
+          <h2>Audit Cycle Schedule Release</h1>
+          <label class="label-name">'.$this->t('<h3>Audit Frequency</h3>').'</label><span class="info-value">'.$timeline['frequency'].'</span>
+          <div class="col-md-12 row schedule-release-contract-info">
+            <div class="schedule-release-data-list-a col-md-6">
+              <label class="label-name">'.$this->t('<h3>Annual Calendar</h3>').'</label><span class="info-value">'.$timeline['annual_calendar'].'</span>
+              </br>
+              <label class="label-name">'.$this->t('<h3>Department</h3>').'</label><span class="info-value">'.$timeline['department'].'</span>
+
+              <label class="label-name">'.$this->t('<h3>Conclusion of Pre- Audit execution confirmation </h3>').'</label><span class="info-value">'.$timeline['pre_audit_execution'].'</span>
+
+              <label class="label-name">'.$this->t('<h3>Conclusion of Audit execution confirmation </h3>').'</label><span class="info-value">'.$timeline['audit_excution'].'</span>
+
+
+            <div class="schedule-release-list-b col-md-6">
+              <label class="label-name">'.$this->t('<h3>CAR release by Auidtee </h3>').'</label><span class="info-value">'.$timeline['car_release'].'</span>
+              </br>
+              <label class="label-name">'.$this->t('<h3>Rescheduling of dates </h3>').'</label><span class="info-value">'.$timeline['reschedule'].'</span>
+
+              <label class="label-name">'.$this->t('<h3>Unplanned audit schedule </h3>').'</label><span class="info-value">'.$timeline['unplanned_audit'].'</span>
+
+              <label class="label-name">'.$this->t('<h3>Non conformity release </h3>').'</label><span class="info-value">'.$timeline['nc_release'].'</span>
+
+            </div>
+            </div>
+          </div>       
+          ';
       }
     }
     elseif($report_type == 'risk_report'){
@@ -898,7 +895,18 @@ class GenerateReports extends ControllerBase {
   }
 
   public function getTimelinemaster($data){
-    echo '<pre>';print_r($data);die;
-    $timeline = $data->toArray();
+    $scheduled_release = Paragraph::load($data->field_schedule_release->target_id); 
+    $options['id'] = $data->id->value;
+    $options['frequency'] = $data->field_audit_frequency->value;
+    $options['car_release'] = $data->field_car_release_by_auidtee_->value;
+    $options['nc_release'] = $data->field_non_conformity_release_->value;
+    $options['reschedule'] = $data->field_rescheduling_of_dates_->value;
+    $options['annual_calendar'] = $scheduled_release->field_annual_calendar->value;
+    $options['audit_excution'] = $scheduled_release->field_conclusion_of_audit_execut->value;
+    $options['pre_audit_execution'] = $scheduled_release->field_conclusion_of_pre_audit_ex->value;
+    $options['department'] = $scheduled_release->field_department->value;
+    $options['unplanned_audit'] = $scheduled_release->field_unplanned_audit_schedule_->value;
+
+    return $options;
   }
 }

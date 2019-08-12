@@ -668,6 +668,7 @@ function planned_event_redirect(array $form, \Drupal\Core\Form\FormStateInterfac
 
 function notify_on_reschedule(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
   global $base_url;
+  $unit_reference = \Drupal::request()->query->get('unit_reference');
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $uri = explode('/', $current_uri);
   $uid = \Drupal::currentUser()->id();
@@ -676,7 +677,7 @@ function notify_on_reschedule(array $form, \Drupal\Core\Form\FormStateInterface 
   $user_timezone =  drupal_get_user_timezone();
   $get_current_timestamp = getCurrentTimestamp($user_timezone);
   $notifictaion_insert = \Drupal::database()->insert('notifications');
-  $reschedule_link = $base_url.Url::fromRoute('entity.node.edit_form',['node' => $uri[1]])->toString();
+  $reschedule_link = $base_url.Url::fromRoute('entity.node.edit_form',['node' => $uri[1], 'unit_reference' => $unit_reference])->toString();
   $message = 'Following Audit has been requested to Reschedule By: <b>'.$current_user_detail->name->value.'</b><br> Follow the Audit action link.'.'<a href="'.$reschedule_link.'">Link</a>';
   $notifictaion_insert->fields([
     'nid' => $uri[1],
