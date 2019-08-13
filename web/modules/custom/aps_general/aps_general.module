@@ -1570,10 +1570,11 @@ function get_location_from_unit(FieldStorageConfig $definition, ContentEntityInt
     $address_option = [];
     $id = \Drupal::request()->query->get('id');
     $node_object = Node::load($id);
-    $options = [
-      1 => $node_object->field_remote_address->locality,
-      2 => $node_object->field_address->locality,
-    ];
+    foreach ($node_object->field_remote_address->getValue() as $key => $value) {
+      $support_locations[] = $value['locality'];
+    }
+    $field_address[] = $node_object->field_address->locality;
+    $options = array_merge($field_address , $support_locations);
   }
   else{
     $options = [];

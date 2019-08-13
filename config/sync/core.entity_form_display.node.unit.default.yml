@@ -51,11 +51,12 @@ third_party_settings:
       weight: 1
       format_type: fieldset
       format_settings:
-        id: ''
-        classes: ''
+        label: 'Support Location Details'
         description: ''
         required_fields: true
-      label: 'Remote Location Details'
+        id: ''
+        classes: ''
+      label: 'Support Location Details'
 id: node.unit.default
 targetEntityType: node
 bundle: unit
