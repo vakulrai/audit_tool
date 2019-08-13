@@ -139,11 +139,19 @@ class PreAuditValidate extends FieldPluginBase {
         }
       }
       elseif ($user_role == 'auditee') {
-        $form['add_delta_qa'] = [
-          '#type' => 'link',
-          '#title' => t('UPLOAD'),
-          '#url' => Url::fromUserInput('/documentrecords/'.$node->id()),
-        ];
+        if($node->get('moderation_state')->value == 'release_audit'){
+          $form['add_delta_qa'] = [
+            '#type' => 'link',
+            '#title' => t('UPLOAD'),
+            '#url' => Url::fromUserInput('/documentrecords/'.$node->id()),
+          ];
+        }
+        else{
+          $form['add_delta_qa'][] = [
+              '#type' => 'markup',
+              '#markup' => 'Audit Date Not Released.',
+          ];
+        }
       }
     }
     else{
@@ -173,11 +181,19 @@ class PreAuditValidate extends FieldPluginBase {
         }
       }
       elseif ($user_role == 'auditee') {
-        $form['add_delta_qa'] = [
-          '#type' => 'link',
-          '#title' => t('UPLOAD'),
-          '#url' => Url::fromUserInput('/documentrecords/'.$node->id()),
-        ];
+        if($node->get('moderation_state')->value == 'release_audit'){
+          $form['add_delta_qa'] = [
+            '#type' => 'link',
+            '#title' => t('UPLOAD'),
+            '#url' => Url::fromUserInput('/documentrecords/'.$node->id()),
+          ];
+        }
+        else{
+          $form['add_delta_qa'][] = [
+              '#type' => 'markup',
+              '#markup' => 'Audit Date Not Released.',
+          ];
+        }
       }
     }
   return $form;

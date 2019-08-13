@@ -7,6 +7,7 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\node\Entity\Node;
+use Drupal\Component\Utility\UrlHelper;
 
 /**
  * Implements hook_help().
@@ -119,9 +120,12 @@ function aps_pre_audit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
   }
 
   if($form_id == 'node_internal_documents_form'){
+    $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+    $query_parameters = UrlHelper::parse($current_uri);
+    $uri = explode('?', $query_parameters['query']['id']);
     $form['field_refere']['#access'] = FALSE;
-    if($id = \Drupal::request()->query->get('id')){
-      $node_object = Node::load($id);
+    if(isset($uri[0])){
+      $node_object = Node::load($uri[0]);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
   }
@@ -130,20 +134,26 @@ function aps_pre_audit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
   }
 
   if($form_id == 'node_pre_audit_records_form'){
+    $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+    $query_parameters = UrlHelper::parse($current_uri);
+    $uri = explode('?', $query_parameters['query']['id']);
     $form['field_refere']['#access'] = FALSE;
-    if($id = \Drupal::request()->query->get('id')){
-      $node_object = Node::load($id);
+    if(isset($uri[0])){
+      $node_object = Node::load($uri[0]);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
   }
   elseif($form_id == 'node_pre_audit_records_edit_form'){
-    // $form['field_refere']['#access'] = FALSE;
+    $form['field_refere']['#access'] = FALSE;
   }
 
   if($form_id == 'node_pre_audit_manuals_form'){
+    $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+    $query_parameters = UrlHelper::parse($current_uri);
+    $uri = explode('?', $query_parameters['query']['id']);
     $form['field_refere']['#access'] = FALSE;
-    if($id = \Drupal::request()->query->get('id')){
-      $node_object = Node::load($id);
+    if(isset($uri[0])){
+      $node_object = Node::load($uri[0]);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
   }

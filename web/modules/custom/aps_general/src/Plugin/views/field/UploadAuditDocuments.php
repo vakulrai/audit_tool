@@ -56,7 +56,7 @@ class UploadAuditDocuments extends FieldPluginBase {
     $form['doc'] = [
         '#type' => 'link',
         '#title' => t('Upload'),
-        '#url' => Url::fromUserInput('/planned-audit-documents',['query' => ['id' => $node->id()],'absolute' => TRUE]),
+        '#url' => Url::fromUserInput('/planned-audit-documents',['query' => ['id' => $node->id(), 'unit_reference' => $node->field_refere->target_id],'absolute' => TRUE]),
         '#attributes' => [
           'class' => [
             'use-ajax',

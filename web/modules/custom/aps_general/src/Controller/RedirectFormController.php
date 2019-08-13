@@ -61,13 +61,14 @@ class RedirectFormController extends ControllerBase {
   public function redirect_form() {
     $response = new AjaxResponse();
     $id = \Drupal::request()->query->get('id');
+    $unit_reference = \Drupal::request()->query->get('unit_reference');
     $config = \Drupal::service('config.factory')->getEditable('aps_general.adduserroles');
     $config_info = \Drupal::service('config.factory')->getEditable('aps_pre_audit.getmoreinfo');
     $config_info->set('nid', $id)->save();
     $config->set('doc_id', $id);
     $config->save();
     if($config->get('doc_id') == $id){
-      $response->addCommand(new RedirectCommand('/documentinternalrecords/'.$id));
+      $response->addCommand(new RedirectCommand('/documentinternalrecords/'.$id.'?unit_reference='.$unit_reference));
     }  
     return $response;
   }
