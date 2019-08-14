@@ -101,11 +101,12 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
     if(count($options_score)){
        $form['field_score_settings']['widget']['#options'] = $options_score;
     } 
-    if($id= \Drupal::request()->query->get('unit_reference') && $form_id == 'audit_criteria_score_score_form'){
+    if(\Drupal::request()->query->get('unit_reference') && $form_id == 'audit_criteria_score_score_form'){
+      $id = \Drupal::request()->query->get('unit_reference');
       $node_object = Node::load($id);
       $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
-    $form['field_unit_reference']['#access'] = FALSE;
+    // $form['field_unit_reference']['#access'] = FALSE;
     $form['field_score_level_set_10']['#states'] = [
       'visible' => [
         '#edit-field-score-settings-32' => ['checked' => TRUE],
