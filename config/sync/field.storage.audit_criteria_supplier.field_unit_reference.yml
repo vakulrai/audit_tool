@@ -1,0 +1,20 @@
+uuid: 33c7fc01-9e29-489d-9cc7-8356a09dfe5b
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - node
+id: audit_criteria_supplier.field_unit_reference
+field_name: field_unit_reference
+entity_type: audit_criteria_supplier
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

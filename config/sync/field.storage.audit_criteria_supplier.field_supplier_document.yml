@@ -1,0 +1,20 @@
+uuid: cb476be1-cdd1-42e5-ba37-bb6b60340b8c
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - taxonomy
+id: audit_criteria_supplier.field_supplier_document
+field_name: field_supplier_document
+entity_type: audit_criteria_supplier
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

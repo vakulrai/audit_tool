@@ -1,0 +1,29 @@
+uuid: 12f6fc6c-5dd5-4f66-88a6-29a6b114ca1e
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_customer.customer
+    - field.storage.audit_criteria_customer.field_customer_records
+    - taxonomy.vocabulary.customer_audit_records
+id: audit_criteria_customer.customer.field_customer_records
+field_name: field_customer_records
+entity_type: audit_criteria_customer
+bundle: customer
+label: 'Customer Records'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      customer_audit_records: customer_audit_records
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

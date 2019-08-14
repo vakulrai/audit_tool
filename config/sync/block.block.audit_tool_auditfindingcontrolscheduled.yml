@@ -11,7 +11,7 @@ dependencies:
 id: audit_tool_auditfindingcontrolscheduled
 theme: audit_tool
 region: content
-weight: -5
+weight: -6
 provider: null
 plugin: audit_finding_control_scheduled
 settings:

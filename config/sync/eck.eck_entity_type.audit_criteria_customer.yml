@@ -1,0 +1,10 @@
+uuid: e56ad8be-5646-49e0-bf93-85005dda1fa1
+langcode: en
+status: true
+dependencies: {  }
+id: audit_criteria_customer
+label: 'Audit Criteria - Customer'
+created: false
+changed: false
+uid: false
+title: false

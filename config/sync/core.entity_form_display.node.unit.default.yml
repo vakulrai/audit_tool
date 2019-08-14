@@ -45,7 +45,6 @@ third_party_settings:
       label: 'Unit Details'
     group_remote_location_details:
       children:
-        - field_remote_location_name
         - field_remote_address
       parent_name: ''
       weight: 1
@@ -95,14 +94,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: address_default
-    region: content
-  field_remote_location_name:
-    weight: 3
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
     region: content
   field_sales_turnover:
     weight: 7
@@ -248,6 +239,7 @@ content:
 hidden:
   body: true
   created: true
+  field_remote_location_name: true
   field_unit_name: true
   path: true
   promote: true

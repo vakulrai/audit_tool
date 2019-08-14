@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.external_audit_.field_certification_std
     - field.field.node.external_audit_.field_decision
     - field.field.node.external_audit_.field_issue_date
+    - field.field.node.external_audit_.field_next_due_date
     - field.field.node.external_audit_.field_refere
     - field.field.node.external_audit_.field_scope
     - field.field.node.external_audit_.field_score
@@ -91,6 +92,15 @@ content:
     region: content
   field_issue_date:
     weight: 103
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_next_due_date:
+    weight: 115
     label: above
     settings:
       format_type: medium

@@ -11,7 +11,7 @@ dependencies:
 id: audit_tool_askmoreinformationblock
 theme: audit_tool
 region: content
-weight: 1
+weight: 0
 provider: null
 plugin: ask_more_information_block
 settings:

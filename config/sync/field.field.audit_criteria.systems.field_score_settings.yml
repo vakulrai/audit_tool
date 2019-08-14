@@ -6,6 +6,8 @@ dependencies:
     - eck.eck_type.audit_criteria.systems
     - field.storage.audit_criteria.field_score_settings
     - taxonomy.vocabulary.system_documents
+  content:
+    - 'taxonomy_term:system_documents:551711fb-a119-4603-a08f-1c298a118a83'
 id: audit_criteria.systems.field_score_settings
 field_name: field_score_settings
 entity_type: audit_criteria
@@ -14,7 +16,9 @@ label: 'Score Settings'
 description: ''
 required: false
 translatable: false
-default_value: {  }
+default_value:
+  -
+    target_uuid: 551711fb-a119-4603-a08f-1c298a118a83
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'

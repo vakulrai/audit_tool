@@ -4,93 +4,87 @@ status: true
 dependencies:
   config:
     - eck.eck_type.audit_criteria.systems
-    - field.field.audit_criteria.systems.field_customer_audit
     - field.field.audit_criteria.systems.field_documents
-    - field.field.audit_criteria.systems.field_external_audit
+    - field.field.audit_criteria.systems.field_process
+    - field.field.audit_criteria.systems.field_product
     - field.field.audit_criteria.systems.field_records
     - field.field.audit_criteria.systems.field_score_level_set
     - field.field.audit_criteria.systems.field_score_level_set_100
     - field.field.audit_criteria.systems.field_score_settings
-    - field.field.audit_criteria.systems.field_supplier_audit
     - field.field.audit_criteria.systems.field_unit_reference
   module:
-    - conditional_fields
-    - paragraphs
+    - field_group
+third_party_settings:
+  field_group:
+    group_system:
+      children:
+        - field_documents
+        - field_records
+        - field_unit_reference
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: System
+    group_process:
+      children:
+        - field_process
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Process
+    group_product:
+      children:
+        - field_product
+      parent_name: ''
+      weight: 2
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Product
 id: audit_criteria.systems.default
 targetEntityType: audit_criteria
 bundle: systems
 mode: default
 content:
-  field_customer_audit:
-    type: entity_reference_paragraphs
-    weight: 4
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-    region: content
   field_documents:
-    weight: 0
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
-  field_external_audit:
-    weight: 6
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
-  field_records:
     weight: 1
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
-  field_score_level_set:
-    type: entity_reference_paragraphs
-    weight: 3
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings:
-      conditional_fields: {  }
+  field_process:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
     region: content
-  field_score_level_set_100:
-    type: entity_reference_paragraphs
-    weight: 5
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings:
-      conditional_fields: {  }
+  field_product:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
     region: content
-  field_score_settings:
+  field_records:
     weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
-  field_supplier_audit:
-    weight: 7
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
   field_unit_reference:
-    weight: 8
+    weight: 6
     settings:
       match_operator: CONTAINS
       size: 60
@@ -98,4 +92,7 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-hidden: {  }
+hidden:
+  field_score_level_set: true
+  field_score_level_set_100: true
+  field_score_settings: true

@@ -1,0 +1,10 @@
+uuid: 524aa4d9-4f5f-44bd-bf33-d112bd5096d4
+langcode: en
+status: true
+dependencies: {  }
+id: audit_criteria_supplier
+label: 'Audit Criteria - Supplier'
+created: false
+changed: false
+uid: false
+title: false

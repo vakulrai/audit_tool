@@ -15,6 +15,7 @@ dependencies:
     - user.role.mr_admin
   module:
     - address
+    - aps_general
     - node
     - user
 id: registered_unit_listing
@@ -1271,6 +1272,7 @@ display:
         style: false
         row: false
         access: false
+        query: false
       fields:
         title:
           id: title
@@ -1323,7 +1325,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: true
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1337,10 +1339,10 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_remote_address_locality:
-          id: field_remote_address_locality
-          table: node__field_remote_address
-          field: field_remote_address_locality
+        aggregate_unit_address:
+          id: aggregate_unit_address
+          table: views
+          field: aggregate_unit_address
           relationship: none
           group_type: group
           admin_label: ''
@@ -1384,9 +1386,8 @@ display:
           empty: ''
           hide_empty: false
           empty_zero: false
-          hide_alter_empty: true
-          display_name: true
-          plugin_id: subdivision
+          hide_alter_empty: false
+          plugin_id: aggregate_unit_address
         nid:
           id: nid
           table: node_field_data
@@ -1519,18 +1520,11 @@ display:
           description: ''
           columns:
             title: title
-            field_remote_address_locality: field_remote_address_locality
             nid: nid
             edit_node: edit_node
+            aggregate_unit_address: aggregate_unit_address
           info:
             title:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_remote_address_locality:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -1551,6 +1545,13 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
+            aggregate_unit_address:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
           default: '-1'
           empty_table: false
       row:
@@ -1565,6 +1566,14 @@ display:
         options:
           role:
             mr_admin: mr_admin
+      query:
+        type: views_query
+        options:
+          disable_sql_rewrite: false
+          distinct: true
+          replica: false
+          query_comment: ''
+          query_tags: null
     cache_metadata:
       max-age: -1
       contexts:

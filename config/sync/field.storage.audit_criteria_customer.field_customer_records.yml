@@ -1,19 +1,19 @@
-uuid: be57f39e-a167-42ff-af22-89bd9c066d2f
+uuid: 770d68be-1b0d-4eac-838e-2ab66f6640b5
 langcode: en
 status: true
 dependencies:
   module:
     - eck
     - taxonomy
-id: audit_criteria.field_external_audit
-field_name: field_external_audit
-entity_type: audit_criteria
+id: audit_criteria_customer.field_customer_records
+field_name: field_customer_records
+entity_type: audit_criteria_customer
 type: entity_reference
 settings:
   target_type: taxonomy_term
 module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

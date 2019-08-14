@@ -1,19 +1,19 @@
-uuid: 8789d92e-0810-4be3-9fa9-f6b68e8b7990
+uuid: 1a566d3a-bfdb-4de3-a335-fe04226c9d7d
 langcode: en
 status: true
 dependencies:
   module:
     - eck
     - taxonomy
-id: audit_criteria.field_supplier_audit
-field_name: field_supplier_audit
-entity_type: audit_criteria
+id: audit_criteria_external.field_external_documents
+field_name: field_external_documents
+entity_type: audit_criteria_external
 type: entity_reference
 settings:
   target_type: taxonomy_term
 module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

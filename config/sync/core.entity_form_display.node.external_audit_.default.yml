@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.external_audit_.field_certification_std
     - field.field.node.external_audit_.field_decision
     - field.field.node.external_audit_.field_issue_date
+    - field.field.node.external_audit_.field_next_due_date
     - field.field.node.external_audit_.field_refere
     - field.field.node.external_audit_.field_scope
     - field.field.node.external_audit_.field_score
@@ -38,7 +39,7 @@ content:
     third_party_settings: {  }
     region: content
   field__lead_auditor:
-    weight: 102
+    weight: 12
     settings:
       size: 60
       placeholder: ''
@@ -46,13 +47,13 @@ content:
     type: string_textfield
     region: content
   field_audit_cycle:
-    weight: 6
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     type: yearonly_default
     region: content
   field_audit_month:
-    weight: 26
+    weight: 10
     settings:
       size: 60
       placeholder: ''
@@ -60,13 +61,13 @@ content:
     type: month_only_widget
     region: content
   field_audit_type:
-    weight: 10
+    weight: 9
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_auditor_s_name:
-    weight: 103
+    weight: 13
     settings:
       size: 60
       placeholder: ''
@@ -80,7 +81,7 @@ content:
     type: options_select
     region: content
   field_decision:
-    weight: 7
+    weight: 6
     settings:
       match_operator: CONTAINS
       size: 60
@@ -94,8 +95,14 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
+  field_next_due_date:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
   field_refere:
-    weight: 101
+    weight: 11
     settings:
       match_operator: CONTAINS
       size: 60
@@ -104,20 +111,20 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_scope:
-    weight: 9
+    weight: 8
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_score:
-    weight: 8
+    weight: 7
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_validity:
-    weight: 5
+    weight: 4
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -125,7 +132,7 @@ content:
     region: content
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 14
     settings: {  }
     region: content
     third_party_settings: {  }

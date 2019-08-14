@@ -1,0 +1,10 @@
+uuid: 2efcedd2-bb22-47a9-8360-b9ea04c196e7
+langcode: en
+status: true
+dependencies: {  }
+id: audit_criteria_external
+label: 'Audit Criteria - External'
+created: false
+changed: false
+uid: false
+title: false

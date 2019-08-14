@@ -1,0 +1,9 @@
+uuid: 1d83cb9f-9683-4888-a9e5-4e92789ee81e
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.audit_criteria_supplier
+name: supplier
+type: supplier
+description: 'Audit criteria For External Supplier'

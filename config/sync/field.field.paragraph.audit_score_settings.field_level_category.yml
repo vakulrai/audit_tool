@@ -1,0 +1,19 @@
+uuid: cad19c6e-eb35-47fd-9082-eacaef19ed5c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_level_category
+    - paragraphs.paragraphs_type.audit_score_settings
+id: paragraph.audit_score_settings.field_level_category
+field_name: field_level_category
+entity_type: paragraph
+bundle: audit_score_settings
+label: Level
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -13,7 +13,7 @@ dependencies:
 id: audit_tool_views_block__registered_unit_listing_block_6
 theme: audit_tool
 region: content
-weight: -18
+weight: -19
 provider: null
 plugin: 'views_block:registered_unit_listing-block_6'
 settings:

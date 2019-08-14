@@ -13,7 +13,7 @@ dependencies:
 id: audit_tool_views_block__auditor_selection_export_auditor_selection_detail
 theme: audit_tool
 region: content
-weight: -13
+weight: -14
 provider: null
 plugin: 'views_block:auditor_selection_export-auditor_selection_detail'
 settings:

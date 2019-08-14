@@ -82,7 +82,10 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     
     $form['field_auditor']['#states'] = [
       'visible' => [
-        'select[name="field_audit_type"]' => ['value' => 'internal']
+        'select[name="field_audit_type"]' => ['value' => 'internal'],
+      ],
+      'required' => [
+        'select[name="field_audit_type"]' => ['value' => 'internal'],
       ],
     ];
 
@@ -224,7 +227,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       $form['field_audit_reasons']['#access'] = FALSE;
       $form['field_proceed_with_audit']['#access'] = FALSE;
     }
-    $form['field_shift']['widget']['#options'] = $form['field_shift']['widget']['#default_value'];
+    $form['field_shift']['widget']['#options'] = $form['field_shift']['widget']['#options'];
     $form['field_unit_reference']['#access'] = FALSE;
     $schedule_type = \Drupal::request()->query->get('schedule_type');
     if($schedule_type == 'reschedule'){
@@ -315,6 +318,18 @@ function changeAuditeeOptions(array $form, FormStateInterface $form_state) {
    }
    return $form['field_select_auditee'];
 }
+
+// function disableAuditorfield(array $form, FormStateInterface $form_state) {
+
+//   if(count($form_state->getValue('field_audit_type'))){
+//     $audit_array = $form_state->getValue('field_audit_type')[0];
+//     $key = $audit_array['value'];
+//     if($key == 'internal' || $key == 'supplier' || $key == 'customer'){
+//       $form['field_auditor']['widget']['#required'] = FALSE;
+//     }
+//    }
+//    return $form['field_auditor'];
+// }
 
 function getSectionfromdepartmentProcedure(array $form, FormStateInterface $form_state) {
   if(count($form_state->getValue('field_department'))){

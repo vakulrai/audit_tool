@@ -10,7 +10,7 @@ dependencies:
 id: audit_tool_userlogin
 theme: audit_tool
 region: content
-weight: -1
+weight: -2
 provider: null
 plugin: user_login_block
 settings:

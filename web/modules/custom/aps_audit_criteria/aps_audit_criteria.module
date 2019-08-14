@@ -37,6 +37,29 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
+  
+  if ($form_id == 'audit_criteria_customer_customer_form') {
+    if($id= \Drupal::request()->query->get('unit_reference')){
+      $node_object = Node::load($id);
+      $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
+    }
+    $form['field_unit_reference']['#access'] = FALSE;
+  }
+  elseif ($form_id == 'audit_criteria_customer_customer_edit_form') {
+    $form['field_unit_reference']['#access'] = FALSE;
+  }
+
+  if ($form_id == 'audit_criteria_supplier_supplier_form') {
+    if($id= \Drupal::request()->query->get('unit_reference')){
+      $node_object = Node::load($id);
+      $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
+    }
+    $form['field_unit_reference']['#access'] = FALSE;
+  }
+  elseif ($form_id == 'audit_criteria_supplier_supplier_edit_form') {
+    $form['field_unit_reference']['#access'] = FALSE;
+  }
+
   if ($form_id == 'audit_criteria_process_process_form') {
     if($id= \Drupal::request()->query->get('unit_reference')){
       $node_object = Node::load($id);
@@ -58,7 +81,61 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
   elseif ($form_id == 'audit_criteria_product_product_edit_form') {
     $form['field_unit_reference']['#access'] = FALSE;
   }
+
+
+  if ($form_id == 'audit_criteria_score_score_form' || $form_id == 'audit_criteria_score_score_edit_form') {
+    $form['field_score_level_set_10']['#attributes'] = ['id' => ['set-10']];
+    $form['field_score_level_set_100']['#attributes'] = ['id' => ['set-100']];
+    $options_score = getVids('system_documents', 31);
+    if(count($options_score)){
+       $form['field_score_settings']['widget']['#options'] = $options_score;
+    } 
+    if($id= \Drupal::request()->query->get('unit_reference') && $form_id == 'audit_criteria_score_score_form'){
+      $node_object = Node::load($id);
+      $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
+    }
+    $form['field_unit_reference']['#access'] = FALSE;
+    $form['field_score_level_set_10']['#states'] = [
+      'visible' => [
+        '#edit-field-score-settings-32' => ['checked' => TRUE],
+        ],
+      ];
+
+      $form['field_score_level_set_10']['#states'] = [
+      'invisible' => [
+        '#edit-field-score-settings-32' => ['checked' => FALSE],
+        ],
+      ];
+
+      $form['field_score_level_set_100']['#states'] = [
+      'visible' => [
+        '#edit-field-score-settings-33' => ['checked' => TRUE],
+        ],
+      ];
+
+      $form['field_score_level_set_100']['#states'] = [
+      'invisible' => [
+        '#edit-field-score-settings-33' => ['checked' => FALSE],
+        ],
+      ];
+  }
+  elseif ($form_id == 'audit_criteria_score_score_edit_form') {
+    $form['field_unit_reference']['#access'] = FALSE;
+  }
+  
 	if($form_id == 'audit_criteria_systems_form' || $form_id == 'audit_criteria_systems_edit_form'){
+    if($user_role == 'auditor' || $user_role == 'auditee'){
+      $entity_type_id = 'audit_criteria';
+      $bundle = 'systems';
+      foreach (\Drupal::entityManager()->getFieldDefinitions($entity_type_id, $bundle) as $field_name => $field_definition) {
+        if (!empty($field_definition->getTargetBundle())) {
+          $bundleFields[$field_name]['type'] = $field_definition->getType();
+          $bundleFields[$field_name]['label'] = $field_definition->getLabel();
+          $form[$field_name]['#disabled'] = TRUE;
+        }
+      }
+      unset($form['actions']);
+    }
     if ($form_id == 'audit_criteria_systems_form') {
       if($id= \Drupal::request()->query->get('unit_reference')){
         $node_object = Node::load($id);
@@ -70,7 +147,7 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
     }
 	  $options_document = getVids('system_documents', 27);
 	  $options_records = getVids('system_documents', 28);
-	  $options_score = getVids('system_documents', 31);
+	  // $options_score = getVids('system_documents', 31);
 	  if(count($options_document)){
 	  	 $form['field_documents']['widget']['#options'] = $options_document;
 	  }
@@ -79,17 +156,9 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
 	  	 $form['field_records']['widget']['#options'] = $options_records;
 	  } 
 
-	  if(count($options_score)){
-	  	 $form['field_score_settings']['widget']['#options'] = $options_score;
-	  } 
-
-	  $form['customer_audit'] = [
-      '#type' => 'fieldset',
-      '#title' => 'CUSTOMER AUDIT',
-      '#weight' => '20',
-      ];
-
-      $form['customer_audit'][] = $form['field_customer_audit'];
+	  // if(count($options_score)){
+	  // 	 $form['field_score_settings']['widget']['#options'] = $options_score;
+	  // } 
 
       $form['field_score_level_set']['#states'] = [
       'visible' => [

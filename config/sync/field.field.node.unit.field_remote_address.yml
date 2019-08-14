@@ -19,7 +19,7 @@ default_value:
   -
     langcode: ''
     country_code: IN
-    administrative_area: ''
+    administrative_area: null
     locality: ''
     dependent_locality: null
     postal_code: null
@@ -41,8 +41,6 @@ settings:
     additionalName:
       override: hidden
     familyName:
-      override: hidden
-    organization:
       override: hidden
     postalCode:
       override: hidden

@@ -1,0 +1,28 @@
+uuid: 1cc3e1ea-2829-4220-b291-f300fa5e1a27
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_supplier.supplier
+    - field.storage.audit_criteria_supplier.field_unit_reference
+    - node.type.unit
+id: audit_criteria_supplier.supplier.field_unit_reference
+field_name: field_unit_reference
+entity_type: audit_criteria_supplier
+bundle: supplier
+label: 'Unit Reference'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      unit: unit
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

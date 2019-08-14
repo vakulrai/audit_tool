@@ -3,16 +3,25 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.audit_score_settings_range_100.field_category
     - field.field.paragraph.audit_score_settings_range_100.field_level_100
+    - field.field.paragraph.audit_score_settings_range_100.field_level_category
     - field.field.paragraph.audit_score_settings_range_100.field_level_range_100
     - paragraphs.paragraphs_type.audit_score_settings_range_100
-  module:
-    - range
 id: paragraph.audit_score_settings_range_100.default
 targetEntityType: paragraph
 bundle: audit_score_settings_range_100
 mode: default
 content:
+  field_category:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_level_100:
     weight: 1
     settings:
@@ -20,12 +29,15 @@ content:
     third_party_settings: {  }
     type: number
     region: content
-  field_level_range_100:
-    weight: 0
-    settings: {  }
+  field_level_category:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: range
+    type: string_textfield
     region: content
 hidden:
   created: true
+  field_level_range_100: true
   status: true

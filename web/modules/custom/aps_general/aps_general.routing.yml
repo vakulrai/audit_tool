@@ -29,7 +29,7 @@ aps_general.add_documents:
     _access: 'TRUE'
     
 aps_general.csv_entity_import:
-  path: '/import/{unit_reference}'
+  path: '/import/{reference}'
   defaults:
     _form: '\Drupal\aps_general\Form\CsvEntityImport'
     _title: 'CsvEntityImport'

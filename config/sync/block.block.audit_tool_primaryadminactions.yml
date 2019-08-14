@@ -7,7 +7,7 @@ dependencies:
 id: audit_tool_primaryadminactions
 theme: audit_tool
 region: content
-weight: -21
+weight: -22
 provider: null
 plugin: local_actions_block
 settings:

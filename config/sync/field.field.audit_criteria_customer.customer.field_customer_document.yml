@@ -1,0 +1,29 @@
+uuid: a685f765-0e97-4644-b909-3305e07e053e
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_customer.customer
+    - field.storage.audit_criteria_customer.field_customer_document
+    - taxonomy.vocabulary.customer_audit_docuents
+id: audit_criteria_customer.customer.field_customer_document
+field_name: field_customer_document
+entity_type: audit_criteria_customer
+bundle: customer
+label: 'Customer Document'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      customer_audit_docuents: customer_audit_docuents
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

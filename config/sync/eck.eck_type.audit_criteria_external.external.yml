@@ -1,0 +1,9 @@
+uuid: a56f8276-eeb5-4ee6-a1d4-1ab95cc31dc2
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.audit_criteria_external
+name: external
+type: external
+description: 'Audit criteria For External Audit'

@@ -89,5 +89,13 @@ function aps_general_views_data() {
         ],
     ];
 
+    $data['views']['aggregate_unit_address'] = [
+        'title' => t('Aggregate Address For Unit'),
+        'help' => t('Address information for Unit'),
+        'field' => [
+            'id' => 'aggregate_unit_address',
+        ],
+    ];
+
     return $data;
 }

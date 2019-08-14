@@ -1,0 +1,29 @@
+uuid: fac3660f-a5d7-4bd4-a1ac-eb6c9234cb5d
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_supplier.supplier
+    - field.field.audit_criteria_supplier.supplier.field_supplier_document
+    - field.field.audit_criteria_supplier.supplier.field_unit_reference
+id: audit_criteria_supplier.supplier.default
+targetEntityType: audit_criteria_supplier
+bundle: supplier
+mode: default
+content:
+  field_supplier_document:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_unit_reference:
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden: {  }

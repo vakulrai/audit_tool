@@ -1,0 +1,29 @@
+uuid: 01833712-0e4e-4ed5-b4ea-7a2431781bc1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_category
+    - paragraphs.paragraphs_type.audit_score_settings_range_100
+    - taxonomy.vocabulary.nc
+id: paragraph.audit_score_settings_range_100.field_category
+field_name: field_category
+entity_type: paragraph
+bundle: audit_score_settings_range_100
+label: Category
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      nc: nc
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

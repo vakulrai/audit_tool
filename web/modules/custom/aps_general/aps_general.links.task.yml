@@ -1,14 +1,14 @@
-aps_general.manual:
-  route_name: node.add
-  route_parameters:
-    node_type: 'customers_manual'
-    destination: 'node/add/customers_manual'
-  title: Add Procedures
-  base_route: view.customer_manual_parts.product_listing
-  weight: 30
+# aps_general.manual:
+#   route_name: node.add
+#   route_parameters:
+#     node_type: 'customers_manual'
+#     destination: 'node/add/customers_manual'
+#   title: Add Procedures
+#   base_route: view.customer_manual_parts.product_listing
+#   weight: 30
 
-aps_general.manual_product:
-  route_name: view.customer_manual_parts.product_listing
-  title: Product Listing
-  base_route: view.customer_manual_parts.product_listing
-  weight: 30
+# aps_general.manual_product:
+#   route_name: view.customer_manual_parts.product_listing
+#   title: Product Listing
+#   base_route: view.customer_manual_parts.product_listing
+#   weight: 30

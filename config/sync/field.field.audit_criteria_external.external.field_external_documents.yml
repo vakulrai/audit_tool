@@ -1,0 +1,29 @@
+uuid: efa80c45-5fd2-440c-ae63-1f07e3bf7c31
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_external.external
+    - field.storage.audit_criteria_external.field_external_documents
+    - taxonomy.vocabulary.external_audit
+id: audit_criteria_external.external.field_external_documents
+field_name: field_external_documents
+entity_type: audit_criteria_external
+bundle: external
+label: 'External Documents'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      external_audit: external_audit
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

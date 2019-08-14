@@ -1,0 +1,39 @@
+uuid: ea409973-d079-4bc9-871c-2b039b11e355
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_customer.customer
+    - field.field.audit_criteria_customer.customer.field_customer_document
+    - field.field.audit_criteria_customer.customer.field_customer_records
+    - field.field.audit_criteria_customer.customer.field_unit_reference
+id: audit_criteria_customer.customer.default
+targetEntityType: audit_criteria_customer
+bundle: customer
+mode: default
+content:
+  field_customer_document:
+    weight: 0
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_customer_records:
+    weight: 1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_unit_reference:
+    weight: 2
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden: {  }

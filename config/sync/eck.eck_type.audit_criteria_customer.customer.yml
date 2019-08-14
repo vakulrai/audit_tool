@@ -1,0 +1,9 @@
+uuid: e8165ff2-3107-465a-b0ff-328f57c61a4d
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.audit_criteria_customer
+name: customer
+type: customer
+description: 'Audit criteria For External Customer'

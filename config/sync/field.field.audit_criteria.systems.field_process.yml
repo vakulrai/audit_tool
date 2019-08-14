@@ -1,16 +1,16 @@
-uuid: 95d13e1f-3527-43bd-8fe4-3fe00ec4d21d
+uuid: 31169675-df1f-4bb1-8e11-f41133aba259
 langcode: en
 status: true
 dependencies:
   config:
     - eck.eck_type.audit_criteria.systems
-    - field.storage.audit_criteria.field_external_audit
-    - taxonomy.vocabulary.external_audit
-id: audit_criteria.systems.field_external_audit
-field_name: field_external_audit
+    - field.storage.audit_criteria.field_process
+    - taxonomy.vocabulary.internal_audit_process
+id: audit_criteria.systems.field_process
+field_name: field_process
 entity_type: audit_criteria
 bundle: systems
-label: 'External Audit'
+label: Process
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      external_audit: external_audit
+      internal_audit_process: internal_audit_process
     sort:
       field: name
       direction: asc

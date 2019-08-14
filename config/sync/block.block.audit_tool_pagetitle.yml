@@ -9,7 +9,7 @@ dependencies:
 id: audit_tool_pagetitle
 theme: audit_tool
 region: content
-weight: 6
+weight: 5
 provider: null
 plugin: page_title_block
 settings:

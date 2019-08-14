@@ -9,7 +9,7 @@ id: paragraph.audit_score_settings_range_100.field_level_100
 field_name: field_level_100
 entity_type: paragraph
 bundle: audit_score_settings_range_100
-label: Level
+label: Score
 description: ''
 required: false
 translatable: false

@@ -11,7 +11,7 @@ id: node.external_audit_.field_audit_cycle
 field_name: field_audit_cycle
 entity_type: node
 bundle: external_audit_
-label: 'Audit Cycle'
+label: 'Audit type'
 description: ''
 required: false
 translatable: false
