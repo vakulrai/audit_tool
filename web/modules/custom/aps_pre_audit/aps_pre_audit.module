@@ -161,3 +161,7 @@ function aps_pre_audit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
     $form['field_refere']['#access'] = FALSE;
   }
 }
+
+function getScoreSettings(){
+  
+}
