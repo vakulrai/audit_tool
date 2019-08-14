@@ -452,6 +452,11 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $unit_id = $unit_ref_object->id();
       $form['field_unit']['widget']['#default_value'] = $unit_id;
     }
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'checklist_submission';
+      }
+    }
    
   }
   elseif ($form_id == 'node_internal_audit_edit_form') {
@@ -1707,6 +1712,17 @@ function customer_add(array $form, \Drupal\Core\Form\FormStateInterface $form_st
   $destination = \Drupal::request()->query->get('destination');
   $unit_reference = \Drupal::request()->query->get('unit_reference');
   $response = Url::fromUserInput('/node/add/customers_manual?unit_reference='.$unit_reference);
+  $form_state->setRedirectUrl($response);
+}
+
+function checklist_submission(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $audit_reference = \Drupal::request()->query->get('audit_reference');
+  $form_values = $form_state->getValues();
+  $nid = $form_values['nid'];
+  $node_object = Node::load($audit_reference);
+  $node_object->set('field_checklist', $nid);
+  $node_object->save();
+  $response = Url::fromUserInput('/planned-mr-audit-listing');
   $form_state->setRedirectUrl($response);
 }
 

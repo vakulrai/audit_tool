@@ -1664,10 +1664,10 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_remote_address_locality:
-          id: field_remote_address_locality
-          table: node__field_remote_address
-          field: field_remote_address_locality
+        aggregate_unit_address:
+          id: aggregate_unit_address
+          table: views
+          field: aggregate_unit_address
           relationship: none
           group_type: group
           admin_label: ''
@@ -1711,9 +1711,8 @@ display:
           empty: ''
           hide_empty: false
           empty_zero: false
-          hide_alter_empty: true
-          display_name: true
-          plugin_id: subdivision
+          hide_alter_empty: false
+          plugin_id: aggregate_unit_address
         nid:
           id: nid
           table: node_field_data
@@ -1982,14 +1981,14 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_remote_address_locality:
-          id: field_remote_address_locality
-          table: node__field_remote_address
-          field: field_remote_address_locality
+        aggregate_unit_address:
+          id: aggregate_unit_address
+          table: views
+          field: aggregate_unit_address
           relationship: none
           group_type: group
           admin_label: ''
-          label: Address
+          label: 'Aggregate Address For Unit'
           exclude: false
           alter:
             alter_text: false
@@ -2029,9 +2028,8 @@ display:
           empty: ''
           hide_empty: false
           empty_zero: false
-          hide_alter_empty: true
-          display_name: true
-          plugin_id: subdivision
+          hide_alter_empty: false
+          plugin_id: aggregate_unit_address
         nid:
           id: nid
           table: node_field_data

@@ -8,6 +8,8 @@
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\node\Entity\Node;
 use Drupal\Component\Utility\UrlHelper;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Implements hook_help().
@@ -162,6 +164,32 @@ function aps_pre_audit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
   }
 }
 
-function getScoreSettings(){
+function getScoreSettings($unit_reference){
+  $audit_criteria_score = \Drupal::entityQuery('audit_criteria_score');
+  $audit_criteria_score->condition('field_unit_reference', $unit_reference);
+  $audit_criteria_score_id = $audit_criteria_score->execute();
+
+  $node_storage = \Drupal::entityManager()->getStorage('audit_criteria_score');
+  $entity_audit_cycle = $node_storage->load(key($audit_criteria_score_id));
   
+   //32 ,For score =10 Settings and 33 for score=100.
+  if($entity_audit_cycle->field_score_settings->target_id == 32){
+    $score_settings = $entity_audit_cycle->field_score_level_set_10->getValue();
+  }
+  elseif ($entity_audit_cycle->field_score_settings->target_id == 33) {
+   $score_settings = $entity_audit_cycle->field_score_level_set_100->getValue();
+  }
+  else{
+    $score_settings = [];
+  }
+
+   foreach ($score_settings as $score_key => $score_value) {
+      $score_object = Paragraph::load($score_value['target_id']);
+      $name_of_category = Term::load($score_object->field_category->target_id)->name->value;
+      $data[$name_of_category]['name'] = $name_of_category;
+      $data[$name_of_category]['level_score'] = $score_object->field_level->value;
+      $data[$name_of_category]['level_category'] = $score_object->field_level_category->value;
+    }
+
+  return $data;
 }

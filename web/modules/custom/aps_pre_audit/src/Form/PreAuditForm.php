@@ -45,7 +45,8 @@ class PreAuditForm extends FormBase {
       $check_invert_time = $diff->invert;
       $total_hours = $days * 24 + $hours;
     }
-    
+    $get_score_settings = getScoreSettings($node_object->get('field_refere')->target_id);
+    $get_score_options_for_selectlist = $this->getScoreLevels($get_score_settings);
     if ($days == 0 && $check_invert_time != 1) {
       $disable_fields = FALSE;
     }
@@ -171,11 +172,16 @@ class PreAuditForm extends FormBase {
         $options_qualified = getVids('finding_categories', 221); //204
         $options_optimised = getVids('finding_categories', 222); //205
         $options_effecient = getVids('finding_categories', 223); //206
+        $options_poor['_none'] = 'None';
+        $options_qualified['_none'] = 'None';
+        $options_optimised['_none'] = 'None';
+        $options_effecient['_none'] = 'None';
         $form['display']['audit_qa_'.$key]['finding_category_poor'.$key] = [
           '#type' => 'select',
           '#options' => $options_poor,
           '#title' => t('Finding Categories'),
           '#required' => TRUE,
+          '#default_value' => '_none',
           '#weight' => 20,
           '#states' => [
             'visible' => [
@@ -189,6 +195,7 @@ class PreAuditForm extends FormBase {
           '#options' => $options_qualified,
           '#title' => t('Finding Categories'),
           '#required' => TRUE,
+          '#default_value' => '_none',
           '#weight' => 20,
           '#states' => [
             'visible' => [
@@ -202,6 +209,7 @@ class PreAuditForm extends FormBase {
           '#options' => $options_optimised,
           '#title' => t('Finding Categories'),
           '#required' => TRUE,
+          '#default_value' => '_none',
           '#weight' => 20,
           '#states' => [
             'visible' => [
@@ -216,6 +224,7 @@ class PreAuditForm extends FormBase {
           '#options' => $options_effecient,
           '#title' => t('Finding Categories'),
           '#required' => TRUE,
+          '#default_value' => '_none',
           '#weight' => 20,
           '#states' => [
             'visible' => [
@@ -234,6 +243,63 @@ class PreAuditForm extends FormBase {
            '#disabled' => $disable_fields,
         );
       }
+
+      $form['display']['audit_qa_'.$key]['score_level_poor'.$key] = [
+          '#type' => 'select',
+          '#options' => count($get_score_options_for_selectlist['Poor']) > 0 ? $get_score_options_for_selectlist['Poor'] : ['none'=>'None'],
+          '#title' => t('Select Level'),
+          '#required' => TRUE,
+          '#default_value' => '_none',
+          '#weight' => 20,
+          '#states' => [
+            'visible' => [
+              'input[name="answers'.$key.'"]' => ['value' => 'Poor']
+              ],
+          ],
+      ];
+
+      $form['display']['audit_qa_'.$key]['score_level_qualified'.$key] = [
+          '#type' => 'select',
+          '#options' => count($get_score_options_for_selectlist['Qualified']) > 0 ?$get_score_options_for_selectlist['Qualified'] : ['none'=>'None'],
+          '#title' => t('Select Level'),
+          '#required' => TRUE,
+          '#default_value' => '_none',
+          '#weight' => 20,
+          '#states' => [
+            'visible' => [
+              'input[name="answers'.$key.'"]' => ['value' => 'Qualified']
+              ],
+          ],
+      ];
+
+      $form['display']['audit_qa_'.$key]['score_level_optimised'.$key] = [
+          '#type' => 'select',
+          '#options' => count($get_score_options_for_selectlist['Optimised']) > 0 ? $get_score_options_for_selectlist['Optimised'] : ['none'=>'None'],
+          '#title' => t('Select Level'),
+          '#required' => TRUE,
+          '#default_value' => '_none',
+          '#weight' => 20,
+          '#states' => [
+            'visible' => [
+              'input[name="answers'.$key.'"]' => ['value' => 'Optimised']
+              ],
+          ],
+      ];
+
+      $form['display']['audit_qa_'.$key]['score_level_efficient'.$key] = [
+          '#type' => 'select',
+          '#options' => count($get_score_options_for_selectlist['Efficient']) > 0 ? $get_score_options_for_selectlist['Efficient'] : ['none'=>'None'],
+          '#title' => t('Select Level'),
+          '#required' => TRUE,
+          '#weight' => 20,
+          '#default_value' => '_none',
+          '#states' => [
+            'visible' => [
+              'input[name="answers'.$key.'"]' => ['value' => 'Effecient']
+              ],
+          ],
+      ];
+
       $form['display']['audit_qa_'.$key]['kpi_status'.$key] = array(
          '#type' => 'radios',
          '#title' => 'KPI Status',
@@ -418,6 +484,15 @@ class PreAuditForm extends FormBase {
     return $id[$type];
   }
 
+  public function getScoreLevels($data){ 
+    $options = [];
+    foreach ($data as $key => $value) {
+        $options[$key]['_none'] = 'None';
+        $options[$key][$value['level_score']] = $value['level_category'];
+    }
+    return $options;
+  }
+
   public function getDetails(array $form, FormStateInterface $form_state){
     $response = new AjaxResponse();
     $nid = \Drupal::request()->query->get('ref');
@@ -432,11 +507,18 @@ class PreAuditForm extends FormBase {
       $form_data['answer'][$value['qid']]['kpi'] = $form_state->getValue('kpi_status'.$key);
       $form_data['question'][$value['qid']][] = $form_state->getValue('finding_img_'.$key)[0];
       $form_data['question'][$value['qid']][] = $form_state->getValue('finding_audio_'.$key)[0];
+      //Score Data.
+      $form_data['answer'][$key]['score_poor'] = $form_state->getValue( 'score_level_poor'.$key);
+      $form_data['answer'][$key]['score_qual'] = $form_state->getValue( 'score_level_qualified'.$key);
+      $form_data['answer'][$key]['score_opt'] = $form_state->getValue( 'score_level_optimised'.$key);
+      $form_data['answer'][$key]['score_effi'] = $form_state->getValue( 'score_level_efficient'.$key);
+
     }
 
     if(count($form_data['answer'])){
       $id = $this->getQandAid('answers');
       foreach ($form_data['answer'] as $i=>$j) {
+        $a[] = $j;
         unset($id[$i]);
         if(isset($i)){
           $paragraph_object =  Paragraph::load($i);
@@ -445,23 +527,27 @@ class PreAuditForm extends FormBase {
             $paragraph_object->set('field_checked', $j[0]);
           }else{
             $paragraph_object->set('field_checked', $j[0]);
-            if(count($j['poor']) > 0){
+            if($j['poor'] != '_none'){
               $paragraph_object->set('field_finding_categories', $j['poor']); 
             }
-            elseif (count($j['qualified']) > 0) {
+            elseif ($j['qualified']!= '_none') {
               $paragraph_object->set('field_finding_categories', $j['qualified']);
             }
             elseif (count($j['optimised']) > 0) {
               foreach ($j['optimised'] as $keys_optimised => $val_optimised) {
-                $options_op[$keys_optimised] = $val_optimised;
+                if ($keys_optimised != '_none') {
+                  $options_op[$keys_optimised] = $val_optimised;
+                  $paragraph_object->set('field_finding_categories', $options_op);
+                }
               }
-              $paragraph_object->set('field_finding_categories', $options_op);
             }
             elseif (count($j['effecient']) > 0) {
               foreach ($j['effecient'] as $keys_eff => $val_eff) {
-                $options_eff[$keys_eff] = $val_eff;
+                if ($keys_eff != '_none') {
+                  $options_eff[$keys_eff] = $val_eff;
+                  $paragraph_object->set('field_finding_categories', $options_eff);
+                }
               }
-              $paragraph_object->set('field_finding_categories', $options_eff);
             }
             elseif (isset($j['clause'])) {
               $query = \Drupal::database()->select('node_field_data', 'n');
@@ -471,13 +557,26 @@ class PreAuditForm extends FormBase {
               $nids = $query->execute()->fetchAll();
               $paragraph_object->set('field_clause_no', $nids[0]->nid);
             }
-            if(isset($j['kpi'])) {
+            elseif(isset($j['kpi'])) {
               $paragraph_object->set('field_kpi_status', $j['kpi']);
+            }
+            if (ctype_digit(strval($j['score_poor']))) {
+              $paragraph_object->set('field_total_score', $j['score_poor']);
+            }
+            if (ctype_digit(strval($j['score_qual']))) {
+              $paragraph_object->set('field_total_score', $j['score_qual']);
+            }
+            if (ctype_digit(strval($j['score_opt']))) {
+              $paragraph_object->set('field_total_score', $j['score_opt']);
+            }
+            if (ctype_digit(strval($j['score_effi']))) {
+              $paragraph_object->set('field_total_score', $j['score_effi']);
             }
           }
           $paragraph_object->save();
         }
       }
+      
     }
 
     if(count($form_data['question'])){

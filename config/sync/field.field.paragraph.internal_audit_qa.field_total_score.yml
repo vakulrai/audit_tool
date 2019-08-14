@@ -1,0 +1,23 @@
+uuid: 45ae2800-e7a7-4c16-9b0d-af56e3338151
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_total_score
+    - paragraphs.paragraphs_type.internal_audit_qa
+id: paragraph.internal_audit_qa.field_total_score
+field_name: field_total_score
+entity_type: paragraph
+bundle: internal_audit_qa
+label: 'Total Score'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
