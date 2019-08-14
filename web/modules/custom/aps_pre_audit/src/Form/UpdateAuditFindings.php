@@ -32,6 +32,7 @@ class UpdateAuditFindings extends PreAuditForm {
   public function buildForm(array $form, FormStateInterface $form_state) {
      $reference_id = \Drupal::request()->query->get('audit_reference');
      $details = $this->getAuditDetails($reference_id);
+     // echo '<pre>';print_r($details);
      $validators = array(
         'file_validate_extensions' => ['jpg mp4 pdf'],
      );
@@ -49,6 +50,8 @@ class UpdateAuditFindings extends PreAuditForm {
         $this-> t(''),
         $this-> t(''),
         $this-> t('KPI Status'),
+        $this-> t('Score'),
+        
       ];
 
       $header_report = [
@@ -248,12 +251,21 @@ class UpdateAuditFindings extends PreAuditForm {
             '#title' => $this->t('Finding Categories'),
             '#title_display' => 'invisible',
           ];
+          
 
           $form['display']['tableselect_element'][$sr]['kpi'] = [
             '#type' => 'value',
             '#value' =>  $value['kpi'],
             '#markup' =>  ucfirst($value['kpi']),
             '#title' => $this->t('KPI Status'),
+            '#title_display' => 'invisible',
+          ];
+
+          $form['display']['tableselect_element'][$sr]['score'] = [
+            '#type' => 'value',
+            '#value' =>  $value['score'],
+            '#markup' =>  ucfirst($value['score']),
+            '#title' => $this->t('Score'),
             '#title_display' => 'invisible',
           ];
           $sr++;
@@ -357,6 +369,14 @@ class UpdateAuditFindings extends PreAuditForm {
             '#value' =>  $value['kpi'],
             '#markup' =>  ucfirst($value['kpi']),
             '#title' => $this->t('KPI Status'),
+            '#title_display' => 'invisible',
+          ];
+
+          $form['display_d_q']['tableselect_element_dq'][$srq]['score'] = [
+            '#type' => 'value',
+            '#value' =>  $value['score'],
+            '#markup' =>  ucfirst($value['score']),
+            '#title' => $this->t('KPI Score'),
             '#title_display' => 'invisible',
           ];
           $srq++;
@@ -709,6 +729,7 @@ class UpdateAuditFindings extends PreAuditForm {
                   $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
                   $output[$ref_id]['type'] = 'predefined';
                   $output[$ref_id]['field_answer_type'] = $answer_node_object->get('field_answer_type')->value;
+                  $output[$ref_id]['score'] = $predefined_question_object->get('field_total_score')->value;
                   $output[$ref_id]['kpi'] = $predefined_question_object->get('field_kpi_status')->value;
                   $output[$ref_id]['qid'] = $ref_id;
                   $output[$ref_id]['clause_no'] = $predefined_question_object->get('field_clause_no')->target_id;
@@ -741,6 +762,7 @@ class UpdateAuditFindings extends PreAuditForm {
                   $output[$ref_id]['default_checked'] = count($predefined_question_object_array['field_checked']) ? $predefined_question_object->get('field_checked')->value : '';
                   $output[$ref_id]['type'] = 'defined';
                    $output[$ref_id]['field_answer_type'] = $answer_node_object->get('field_answer_type')->value;
+                  $output[$ref_id]['score'] = $predefined_question_object->get('field_total_score')->value;
                   $output[$ref_id]['qid'] = $val['target_id'];
                   $output[$ref_id]['sno'] = count($predefined_question_object_array['field_s_no']) ? $predefined_question_object->get('field_s_no')->value : '';
                   $output[$ref_id]['question'] = count($predefined_question_object_array['field_question']) ? $predefined_question_object->get('field_question')->value : '';
