@@ -1319,7 +1319,7 @@ function aps_general_link_alter(&$variables) {
   if ($cleanLinkText == 'External(active tab)') {
     $id = $uri[1];
     if($id){
-      $query = \Drupal::database()->select('audit_criteria__field_unit_reference', 'h');
+      $query = \Drupal::database()->select('audit_criteria_external__field_unit_reference', 'h');
       $query->fields('h',['entity_id']);
       $query->condition('h.field_unit_reference_target_id', $id);
       $query->condition('h.bundle', 'external');
@@ -1344,7 +1344,7 @@ function aps_general_link_alter(&$variables) {
   if ($cleanLinkText == 'Customer(active tab)') {
     $id = $uri[1];
     if($id){
-      $query = \Drupal::database()->select('audit_criteria__field_unit_reference', 'h');
+      $query = \Drupal::database()->select('audit_criteria_customer__field_unit_reference', 'h');
       $query->fields('h',['entity_id']);
       $query->condition('h.field_unit_reference_target_id', $id);
       $query->condition('h.bundle', 'customer');
@@ -1369,7 +1369,7 @@ function aps_general_link_alter(&$variables) {
   if ($cleanLinkText == 'Supplier(active tab)') {
     $id = $uri[1];
     if($id){
-      $query = \Drupal::database()->select('audit_criteria__field_unit_reference', 'h');
+      $query = \Drupal::database()->select('audit_criteria_supplier__field_unit_reference', 'h');
       $query->fields('h',['entity_id']);
       $query->condition('h.field_unit_reference_target_id', $id);
       $query->condition('h.bundle', 'supplier');
@@ -1394,7 +1394,7 @@ function aps_general_link_alter(&$variables) {
   if ($cleanLinkText == 'Score Settings(active tab)') {
     $id = $uri[1];
     if($id){
-      $query = \Drupal::database()->select('audit_criteria__field_unit_reference', 'h');
+      $query = \Drupal::database()->select('audit_criteria_score__field_unit_reference', 'h');
       $query->fields('h',['entity_id']);
       $query->condition('h.field_unit_reference_target_id', $id);
       $query->condition('h.bundle', 'score');

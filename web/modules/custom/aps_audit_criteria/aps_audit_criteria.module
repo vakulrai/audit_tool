@@ -60,6 +60,17 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
     $form['field_unit_reference']['#access'] = FALSE;
   }
 
+  if ($form_id == 'audit_criteria_external_external_form') {
+    if($id= \Drupal::request()->query->get('unit_reference')){
+      $node_object = Node::load($id);
+      $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
+    }
+    $form['field_unit_reference']['#access'] = FALSE;
+  }
+  elseif ($form_id == 'audit_criteria_external_external_edit_form') {
+    $form['field_unit_reference']['#access'] = FALSE;
+  }
+
   if ($form_id == 'audit_criteria_process_process_form') {
     if($id= \Drupal::request()->query->get('unit_reference')){
       $node_object = Node::load($id);
