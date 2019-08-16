@@ -35,6 +35,7 @@
         "drupal/entity_conditional_fields": "1.x-dev",
         "drupal/examples": "1.x-dev",
         "drupal/field_group": "^1.0",
+        "drupal/formtips": "^1.2",
         "drupal/front": "^1.0@beta",
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/link_attributes": "^1.9",
