@@ -515,7 +515,7 @@ function aps_general_node_insert(Node $node) {
   }
   if($node->bundle() == 'auditor_report'){
     $message = 'Audit report Has been Sumbitted Successfully.';
-    notify($node->id(), $message);
+    notify($id=NULL,$node->id(), $message);
   }
   if($node->bundle() == 'unit'){
     // $title = $node->get('title')->value;
@@ -811,6 +811,11 @@ function aps_general_node_create(Node $entity) {
  */
 function aps_general_preprocess_page(&$variables) {
   global $base_url;
+  $current_user = \Drupal::currentUser();
+  $roles = $current_user->getRoles();
+  foreach ($roles as $key => $value) {
+    $user_role = $value;
+  }
   $route_name = \Drupal::routeMatch()->getRouteName();
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $uri = explode('/', $current_uri);
@@ -852,9 +857,22 @@ function aps_general_preprocess_page(&$variables) {
     $variables['#attached']['library'][] = 'aps_audit_criteria/audit_criteria_system_js';
   }
   $variables['#attached']['drupalSettings']['siteBaseUrl'] = $base_url;
+
+  //Cahnege Block ids for Notification system.
+  if($user_role == 'auditor' || $user_role == 'auditee' ){
+    $block__notification_id = '#block-audit-tool-adminmainmenuforauditor';
+    $menu__notification_id = '#superfish-admin-main-menu-for-auditor';
+  }
+  else{
+    $block__notification_id = '#block-adminmainmenu-4';
+    $menu__notification_id = '#superfish-admin-main-menu';
+  }
+  $variables['#attached']['drupalSettings']['block_id'] = $block__notification_id;
+  $variables['#attached']['drupalSettings']['notify_id'] = $menu__notification_id;
   $variables['#attached']['library'][] = 'aps_general/aps_general_notification_js';
   Drupal\Core\Cache\Cache::invalidateTags(['local_task']);
   Drupal\Core\Cache\Cache::invalidateTags(['block_list']);
+  Drupal\Core\Cache\Cache::invalidateTags(['block_view']);
 }
 
 /**
@@ -1181,9 +1199,9 @@ function aps_general_link_alter(&$variables) {
     if($database->schema()->tableExists('notifications')){
       $query = \Drupal::database()->select('notifications', 'n');
       $query->fields('n');
-      if($user_role == 'auditor' || $user_role == 'auditee'){
+      // if($user_role == 'auditor' || $user_role == 'auditee'){
         $query->condition('uid', $current_user_id);
-      }
+      // }
       $query->condition('status', 0);
       $nids = $query->execute()->fetchAll();
     }
@@ -1465,6 +1483,13 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
+  if ($cleanLinkText == 'Role Registration') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('unit_reference', $id);
+    }
+  }
+
   if ($cleanLinkText == 'RESCHEDULE') {
     $id = $uri[1];
     if($id){
@@ -1703,7 +1728,8 @@ function aps_clauses_page_redirect(array $form, \Drupal\Core\Form\FormStateInter
 }
 
 function parts_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
-  $response = Url::fromUserInput('/node/add/customers_manual');
+  $id = \Drupal::request()->query->get('unit_reference');
+  $response = Url::fromUserInput('/node/add/customers_manual',['query' => ['unit_reference' => $id]]);
   $form_state->setRedirectUrl($response);
 }
 
@@ -2083,10 +2109,15 @@ function getAuditCycleObjectCurrentUnit($unit_reference){
   return $entity_audit_cycle;
 }
 
-function notify($nid, $message){
+function notify($user_id=NULL, $nid, $message){
   $user_timezone =  drupal_get_user_timezone();
   $notifictaion_insert = \Drupal::database()->insert('notifications');
-  $uid = \Drupal::currentUser()->id();
+  if(isset($user_id)){
+    $uid = $user_id;
+  }
+  else{
+    $uid = \Drupal::currentUser()->id();
+  }
   $get_current_timestamp = getCurrentTimestamp($user_timezone);
   $notifictaion_insert->fields([
     'nid' => $nid,

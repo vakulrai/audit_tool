@@ -106,7 +106,7 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
       $node_object = Node::load($id);
       $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
-    // $form['field_unit_reference']['#access'] = FALSE;
+    $form['field_unit_reference']['#access'] = FALSE;
     $form['field_score_level_set_10']['#states'] = [
       'visible' => [
         '#edit-field-score-settings-32' => ['checked' => TRUE],
@@ -472,6 +472,7 @@ function submit_delta_q(array $form, \Drupal\Core\Form\FormStateInterface $form_
   $uri = explode('=', $query_parameters['query']['destination']);
   $id = $uri[1];
   $node_object = Node::load($id);
+  $get_owner_id = $node_object->getOwner()->id();
   $uid = \Drupal::currentUser()->id();
   $current_user_detail = User::load($uid);
   $form_values = $form_state->getValues();
@@ -489,7 +490,7 @@ function submit_delta_q(array $form, \Drupal\Core\Form\FormStateInterface $form_
     $link = $base_url.Url::fromRoute('entity.node.edit_form',['node' => $nid])->toString();
     $action_link = '<a href='.$link.'>Link</a>';
     $message = 'Delta-Q has been requested to add to the following Audit by <b>'.$current_user_detail->name->value.'</b><br> Follow the Audit action link.'.$action_link;
-    notify($nid, $message);
+    notify($get_owner_id, $nid, $message);
   }
   $destination = \Drupal::request()->query->get('destination');
   $response = Url::fromUserInput('/'.$destination);

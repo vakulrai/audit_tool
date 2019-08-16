@@ -345,9 +345,9 @@ class RedirectFormController extends ControllerBase {
       $notifications_update->fields([
            'status' => 1,
        ]);
-      if($user_role == 'auditor' || $user_role == 'auditee'){
+      // if($user_role == 'auditor' || $user_role == 'auditee'){
         $notifications_update->condition('uid', $current_user_id);
-      }
+      // }
       if($notifications_update->execute()){
         $response['status'] = 'updated';
       }

@@ -375,13 +375,14 @@ display:
   parts:
     display_plugin: block
     id: parts
-    display_title: Block
+    display_title: 'List Of Parts'
     position: 1
     display_options:
       display_extenders: {  }
       title: 'Product Parts'
       defaults:
         title: false
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:

@@ -48,7 +48,7 @@
             start: arg.start,
             url: url,
             end: arg.end,
-            allDay: arg.allDay,
+            allDay: false,
             editable: false,
           })
         }

@@ -39,6 +39,7 @@ module:
   file: 0
   filter: 0
   form_api_example: 0
+  formtips: 0
   front_page: 0
   hal: 0
   help: 0

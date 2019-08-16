@@ -680,6 +680,7 @@ function planned_event_redirect(array $form, \Drupal\Core\Form\FormStateInterfac
   $subject = 'Audit Planning';
   foreach ($user_load as $user => $mails) {
     sendEmail('aps_audit_planning', 'audit-planning', $mails, $message, $subject);
+    notify($user, $id , $message);
   }
   $id = \Drupal::request()->query->get('unit_reference');
   $response = Url::fromUserInput('/audit-planning/'.$id);
