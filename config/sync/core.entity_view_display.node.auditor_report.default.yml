@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.auditor_report.field_refere
     - field.field.node.auditor_report.field_standards
     - field.field.node.auditor_report.field_status
+    - field.field.node.auditor_report.field_total_level_score
     - node.type.auditor_report
   module:
     - entity_reference_revisions
@@ -151,6 +152,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: list_default
+    region: content
+  field_total_level_score:
+    weight: 116
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   links:
     weight: 100

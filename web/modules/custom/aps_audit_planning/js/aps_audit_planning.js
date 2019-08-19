@@ -19,11 +19,11 @@
       navLinks: true,
       selectable: true,
       selectMirror: true,
-      selectOverlap: function(event) {
-        if (event._def.url.indexOf('google') > -1){
-           return event.rendering === 'background';
-        }
-      },
+      // selectOverlap: function(event) {
+      //   if (event._def.url.indexOf('google') > -1){
+      //      return event.rendering === 'background';
+      //   }
+      // },
       eventSources: [
         base_url+'/generate-events/'+unit_id,
         base_url+'/list-of-unit-holidays/'+unit_id,
@@ -34,6 +34,7 @@
           className: 'gcal-event',
           rendering: 'background',
           overlap: true,
+          allDay: true,
         }
       ],
       select: function(arg) {

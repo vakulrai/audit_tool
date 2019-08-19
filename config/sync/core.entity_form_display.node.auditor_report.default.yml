@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.auditor_report.field_refere
     - field.field.node.auditor_report.field_standards
     - field.field.node.auditor_report.field_status
+    - field.field.node.auditor_report.field_total_level_score
     - node.type.auditor_report
     - workflows.workflow.workflow_for_audit_planning
   module:
@@ -163,6 +164,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_total_level_score:
+    weight: 27
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
     region: content
   moderation_state:
     type: moderation_state_default

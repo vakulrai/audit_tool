@@ -61,7 +61,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_available_procedures']['#attributes'] = ['id' => ['procedure-type']];
     $get_department_options = getDepartmenttypeUnderunit('department', $id);
     $form['field_department']['widget']['#options'] = $get_department_options;
-
+    
     $form['field_audit_type']['widget']['#ajax'] = [
       'callback' => 'changeAuditeeOptions',
       'wrapper' => 'auditee',
@@ -150,11 +150,11 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       $form['title']['#disabled'] = TRUE;
       
       //Alter the internal audit field
-       $form['field_audit_type']['widget']['#ajax'] = [
-        'callback' => 'getAuditSubCategory',
-        'wrapper' => 'audit-type',
-        'event' => 'change',
-      ];
+      //  $form['field_audit_type']['widget']['#ajax'] = [
+      //   'callback' => 'getAuditSubCategory',
+      //   'wrapper' => 'audit-type',
+      //   'event' => 'change',
+      // ];
 
       //Alter for shift field.
       // $form['field_select_audit']['widget']['#ajax'] = [
@@ -312,9 +312,9 @@ function changeAuditeeOptions(array $form, FormStateInterface $form_state) {
     $key = $audit_array['value'];
     if($key == 'external' || $key == 'supplier' || $key == 'customer'){
       $form['field_select_auditee']['widget']['#title'] = 'Select MR';
-      $form['field_select_auditee']['widget']['#options'] = getMRlist($key);
-      $form['field_select_auditee']['widget']['#default_value'] = '_none';
     }
+    $form['field_select_auditee']['widget']['#options'] = getMRlist($key);
+    $form['field_select_auditee']['widget']['#default_value'] = '_none';
    }
    return $form['field_select_auditee'];
 }
@@ -350,16 +350,16 @@ function getSectionfromdepartmentDept(array $form, FormStateInterface $form_stat
 }
 
 function getAuditSubCategory(array $form, FormStateInterface $form_state) {
-  $ajax_response = new AjaxResponse();
-  if(count($form_state->getValue('field_audit_type'))){
-    if($form_state->getValue('field_audit_type')[0]['value'] == 'internal'){
-       $ajax_response->addCommand(new InvokeCommand('#edit-field-internal-audit-type', 'attr', array('disabled', false)));
-    }
-  }
-  if($form_state->getValue('field_audit_type')[0]['value'] == ''){
-     $ajax_response->addCommand(new InvokeCommand('#edit-field-internal-audit-type', 'attr', array('disabled', true)));
-  }
-  return $ajax_response;
+  // $ajax_response = new AjaxResponse();
+  // if(count($form_state->getValue('field_audit_type'))){
+  //   if($form_state->getValue('field_audit_type')[0]['value'] == 'internal'){
+  //      $ajax_response->addCommand(new InvokeCommand('#edit-field-internal-audit-type', 'attr', array('disabled', false)));
+  //   }
+  // }
+  // if($form_state->getValue('field_audit_type')[0]['value'] == ''){
+  //    $ajax_response->addCommand(new InvokeCommand('#edit-field-internal-audit-type', 'attr', array('disabled', true)));
+  // }
+  // return $ajax_response;
 }
 
 function getProcedures(array $form, FormStateInterface $form_state) {
@@ -562,7 +562,7 @@ function getChecklistData($key){
   return $data;
 }
 
-function getMRlist($key){
+function getMRlist($select_value){
   $route_name = \Drupal::routeMatch()->getRouteName();
   if($route_name == 'entity.node.edit_form'){
     $node = \Drupal::routeMatch()->getParameter('node');
@@ -572,7 +572,7 @@ function getMRlist($key){
     }
   }
   else{
-    $unit_reference = \Drupal::request()->query->get('type');
+    $unit_reference = \Drupal::request()->query->get('unit_reference');
   }
 
   $data = [];
@@ -585,8 +585,15 @@ function getMRlist($key){
   $data['_none'] = "- None -";
   foreach ($users as $key => $value) {
     $mr_user = User::load($value->entity_id);
-    if($mr_user->roles->target_id == 'mr_admin'){
-      $data[$mr_user->uid->value] = $mr_user->name->value;
+    if($select_value == 'internal'){
+       if($mr_user->roles->target_id == 'auditee'){
+         $data[$mr_user->uid->value] = $mr_user->name->value;
+       }
+    }
+    else{
+      if($mr_user->roles->target_id == 'mr_admin'){
+        $data[$mr_user->uid->value] = $mr_user->name->value;
+      }
     }
   }
   return $data;

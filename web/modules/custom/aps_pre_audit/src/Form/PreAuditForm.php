@@ -557,7 +557,7 @@ class PreAuditForm extends FormBase {
               $nids = $query->execute()->fetchAll();
               $paragraph_object->set('field_clause_no', $nids[0]->nid);
             }
-            elseif(isset($j['kpi'])) {
+            if(isset($j['kpi'])) {
               $paragraph_object->set('field_kpi_status', $j['kpi']);
             }
             if (ctype_digit(strval($j['score_poor']))) {

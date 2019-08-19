@@ -278,7 +278,7 @@ class RedirectFormController extends ControllerBase {
     $header = [
       $this->t('Sr. No.'),
       $this->t('Message'),
-      $this->t('Audit Date'),
+      $this->t('Date of Assigning'),
     ];
     $data = $this->getNotification();
     $notification_list = $this->_return_pager_for_array($data, 5);

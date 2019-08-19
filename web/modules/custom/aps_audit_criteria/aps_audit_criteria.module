@@ -302,6 +302,8 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
     if($user_role == 'auditor' || $user_role == 'auditee'){
       $form['field_add_to_checklist']['#access'] = FALSE;
     }
+    unset($form['revision_log']);
+    unset($form['revision_information']);
     unset($form['field_defined_option_yes_no']['widget']['add_more']);
     unset($form['field_defined_options_default']['widget']['add_more']);
     foreach (array_keys($form['actions']) as $action) {
@@ -315,6 +317,10 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
     if($user_role == 'auditor' || $user_role == 'auditee'){
       $form['field_add_to_checklist']['#access'] = FALSE;
     }
+    unset($form['revision_log']);
+    unset($form['revision_information']);
+    unset($form['field_defined_option_yes_no']['widget']['add_more']);
+    unset($form['field_defined_options_default']['widget']['add_more']);
   }
 }
 
@@ -478,7 +484,7 @@ function submit_delta_q(array $form, \Drupal\Core\Form\FormStateInterface $form_
   $form_values = $form_state->getValues();
   $nid = $form_values['nid'];
   $get_stored_entity = [];
-  if(count($node_object->get('field_queries')->target_id)){
+  if($node_object->hasField('field_queries')){
     $get_stored_entity = $node_object->get('field_queries')->getValue();
     $target_node = Node::load($nid);
     $get_stored_entity[] = ['target_id' => $nid];

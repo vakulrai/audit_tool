@@ -47,11 +47,19 @@ class UpdateAuditFindings extends PreAuditForm {
         $this-> t('Result'),
         $this-> t('Finding Categories'),
         $this-> t('Clause'),
-        $this-> t(''),
-        $this-> t(''),
         $this-> t('KPI Status'),
         $this-> t('Score'),
         
+      ];
+
+      $total_score = [
+        $this->t(''),
+        $this->t(''),
+        $this->t(''),
+        $this->t(''),
+        $this->t(''),
+        $this->t(''),
+        $this->t('Total Score'),  
       ];
 
       $header_report = [
@@ -91,7 +99,7 @@ class UpdateAuditFindings extends PreAuditForm {
       '#header' => $header_report, 
       '#empty' => t('No content available.'), 
       );
-
+     
       $form['display']['tableselect_element'] = array( 
       '#type' => 'table', 
       '#caption' => $this->t('Checklist'),
@@ -112,7 +120,7 @@ class UpdateAuditFindings extends PreAuditForm {
       '#attributes' => ['class' => ['preaudit-table-responsive']],
       '#empty' => t('No content available.'), 
       );
-      
+
       $occurence_options = [
         'first_time' => 'First Time',
         'repetitive' => 'Repetitive',
@@ -153,6 +161,7 @@ class UpdateAuditFindings extends PreAuditForm {
 
       if(count($details)){
         $sr = 0;
+        $total_sum = 0;
         foreach ($details as $key=>$value) {
           if($value['field_answer_type'] == 'non-delta'){
             $form['display']['tableselect_element'][$sr]['srno'] = [
@@ -174,7 +183,7 @@ class UpdateAuditFindings extends PreAuditForm {
             
           if(count($value['evidence_value']) > 1){
             foreach ($value['evidence_value'] as $i => $j) {
-              $form['display']['tableselect_element'][$sr][$i]['evidence'] = [
+              $form['display']['tableselect_element'][$sr]['evidence'][] = [
                 '#type' => 'managed_file',
                 '#name' => 'users_upload',
                 '#title' => t('Upload a File'),
@@ -184,6 +193,8 @@ class UpdateAuditFindings extends PreAuditForm {
                 '#upload_validators' => $validators,
                 '#upload_location' => 'public://',
                 '#default_value' => [$j['target_id']],
+                '#prefix' => '<div class=evidence>',
+                '#suffix' => '</div>',
               ];
             }
           }
@@ -237,20 +248,29 @@ class UpdateAuditFindings extends PreAuditForm {
               '#title_display' => 'invisible',
             ];
           }
+          else{
+            $form['display']['tableselect_element'][$sr]['clause'] = [
+              '#type' => 'value',
+              '#value' =>  '--',
+              '#markup' =>  '--',
+              '#title' => $this->t('Finding Categories'),
+              '#title_display' => 'invisible',
+            ];
+          }
 
-          $form['display']['tableselect_element'][$sr]['evidence_values'] = [
-            '#type' => 'value',
-            '#value' =>  $value['evidence_value'],
-            '#title' => $this->t('Finding Categories'),
-            '#title_display' => 'invisible',
-          ];
+          // $form['display']['tableselect_element'][$sr]['evidence_values'] = [
+          //   '#type' => 'value',
+          //   '#value' =>  $value['evidence_value'],
+          //   '#title' => $this->t('Finding Categories'),
+          //   '#title_display' => 'invisible',
+          // ];
 
-           $form['display']['tableselect_element'][$sr]['question_type'] = [
-            '#type' => 'value',
-            '#value' =>  $value['field_answer_type'],
-            '#title' => $this->t('Finding Categories'),
-            '#title_display' => 'invisible',
-          ];
+          //  $form['display']['tableselect_element'][$sr]['question_type'] = [
+          //   '#type' => 'value',
+          //   '#value' =>  $value['field_answer_type'],
+          //   '#title' => $this->t('Finding Categories'),
+          //   '#title_display' => 'invisible',
+          // ];
           
 
           $form['display']['tableselect_element'][$sr]['kpi'] = [
@@ -271,6 +291,7 @@ class UpdateAuditFindings extends PreAuditForm {
           $sr++;
 
         }
+        $total_sum += $value['score'];
       }
     }
     
@@ -297,7 +318,7 @@ class UpdateAuditFindings extends PreAuditForm {
             
           if(count($valueq['evidence_value']) > 1){
             foreach ($valueq['evidence_value'] as $iq => $jq) {
-              $form['display_d_q']['tableselect_element_dq'][$srq][$iq]['evidence'] = [
+              $form['display_d_q']['tableselect_element_dq'][$srq]['evidence'][] = [
                 '#type' => 'managed_file',
                 '#name' => 'users_upload',
                 '#title' => t('Upload a File'),
@@ -350,19 +371,19 @@ class UpdateAuditFindings extends PreAuditForm {
             ];
           }
           //Extra Detail fields for evidence.
-          $form['display_d_q']['tableselect_element_dq'][$srq]['evidence_values'] = [
-              '#type' => 'value',
-              '#value' =>  $valueq['evidence_value'],
-              '#title' => $this->t('Finding Categories'),
-              '#title_display' => 'invisible',
-            ];
+          // $form['display_d_q']['tableselect_element_dq'][$srq]['evidence_values'] = [
+          //     '#type' => 'value',
+          //     '#value' =>  $valueq['evidence_value'],
+          //     '#title' => $this->t('Finding Categories'),
+          //     '#title_display' => 'invisible',
+          //   ];
 
-          $form['display_d_q']['tableselect_element_dq'][$srq]['question_type'] = [
-            '#type' => 'value',
-            '#value' =>  $valueq['field_answer_type'],
-            '#title' => $this->t('Finding Categories'),
-            '#title_display' => 'invisible',
-          ];
+          // $form['display_d_q']['tableselect_element_dq'][$srq]['question_type'] = [
+          //   '#type' => 'value',
+          //   '#value' =>  $valueq['field_answer_type'],
+          //   '#title' => $this->t('Finding Categories'),
+          //   '#title_display' => 'invisible',
+          // ];
           
           $form['display_d_q']['tableselect_element_dq'][$srq]['kpi'] = [
             '#type' => 'value',
@@ -384,6 +405,54 @@ class UpdateAuditFindings extends PreAuditForm {
       }
     }
     
+    $form['total_score'] = array( 
+      '#type' => 'table', 
+      '#header' => $total_score, 
+      '#prefix' => '<div class=preaudit-table-responsive-wrapper score>',
+      '#suffix' => '</div>',
+      '#attributes' => ['class' => ['preaudit-table-responsive']],
+      '#empty' => t('No content available.'),
+      '#tree' => TRUE,
+    );
+      
+    $form['total_score'][0]['blank-a'] = [
+      '#markup' =>  '',
+      '#title' => $this->t('blank-a'),
+      '#title_display' => 'invisible',
+    ];
+    $form['total_score'][0]['blank-b'] = [
+      '#markup' =>  '',
+      '#title' => $this->t('blank-b'),
+      '#title_display' => 'invisible',
+    ];
+    $form['total_score'][0]['blank-c'] = [
+      '#markup' =>  '',
+      '#title' => $this->t('blank-c'),
+      '#title_display' => 'invisible',
+    ];
+    $form['total_score'][0]['blank-d'] = [
+      '#markup' =>  '',
+      '#title' => $this->t('blank-d'),
+      '#title_display' => 'invisible',
+    ];
+    $form['total_score'][0]['blank-e'] = [
+      '#markup' =>  '',
+      '#title' => $this->t('blank-e'),
+      '#title_display' => 'invisible',
+    ];
+    $form['total_score'][0]['blank-f'] = [
+      '#markup' =>  '',
+      '#title' => $this->t('blank-f'),
+      '#title_display' => 'invisible',
+    ];
+    $form['total_score'][0]['total'] = [
+      '#type' => 'value',
+      '#value' =>  $total_sum,
+      '#markup' =>  $total_sum,
+      '#title' => $this->t('Total Score'),
+      '#title_display' => 'invisible',
+    ];
+
     $form['signoff'] = array(
       '#type' => 'details', 
       '#title' => 'Signatures', 
@@ -525,13 +594,18 @@ class UpdateAuditFindings extends PreAuditForm {
     unset($form_values['form_id']);
     unset($form_values['op']);
     $count = 0;
+
     foreach ($form_values as $i => $j) {
       if($i == 'tableselect_element' || $i == 'tableselect_element_dq'){
         foreach ($j as $key) {
           $list[$count]['field_step'] = $key['srno'];
           $list[$count]['field_question'] = $key['question'];
-          $list[$count]['field_evidence'] = $key['evidence_values'];
-          $list[$count]['field_result'] = $jkey['result'];
+          if(count($key['evidence']) > 0){
+            for($ev_key=0; $ev_key < count($key['evidence']); $ev_key++) {
+               $list[$count]['field_evidence'][] = $key['evidence'][$ev_key][0];
+            }
+          }
+          $list[$count]['field_result'] = $key['result'];
           $list[$count]['field_finding_categories'] = strip_tags($key['findings_category']);
           $list[$count]['field_clause'] = $key['clause'];
           $list[$count]['question_type'] = $key['question_type'];
@@ -540,7 +614,6 @@ class UpdateAuditFindings extends PreAuditForm {
         }
       }
     }
-
     if(count($form_values['header_report'])){
       if($form_values['header_report'][0]['occurence']){
         $data['field_occurence'] = $form_values['header_report'][0]['occurence']; 
@@ -553,6 +626,7 @@ class UpdateAuditFindings extends PreAuditForm {
     $paragraph_['paragraph_data'] = $list;
    
     foreach ($paragraph_['paragraph_data'] as $q => $a) {
+      $kk[] = $a;
       if($a['field_finding_categories'] != ''){
         $properties['name'] = $a['field_finding_categories'];
         $terms = array_values(\Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties));
@@ -585,6 +659,7 @@ class UpdateAuditFindings extends PreAuditForm {
         // }
       }
     }
+
     // $data['field_audit_list'] = $paragraphp_version;
     $data['field_auditee_name'] = ['target_id' => $form_values['signature_auditee']];
     $data['field_auditee_signature'] = $form_values['upload_signature_auditee'];
@@ -595,6 +670,7 @@ class UpdateAuditFindings extends PreAuditForm {
     $data['field_qms_head_name'] = $form_values['signature_qms'];
     $data['field_qms_signature'] = $form_values['upload_signature_qms'];
     $data['moderation_state'] = 'auditee_post_audit';
+    $data['field_total_level_score'] = $form_values['total_score'][0]['total'];
     $data['field_status'] = 'open';
     $data['type'] = 'auditor_report';
     $data['title'] = 'Submission for '.$data_array['title'][0]['value'] . ' on '. date('Y-m-d ');
