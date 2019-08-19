@@ -1469,6 +1469,27 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
+  if ($cleanLinkText == 'Add Cert. Standard') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('destination', $current_uri);
+    }
+  }
+
+  if ($cleanLinkText == 'Add Decision') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('destination', $current_uri);
+    }
+  }
+
+  if ($cleanLinkText == 'Add Scope') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('destination', $current_uri);
+    }
+  }
+
   if ($cleanLinkText == 'Internal Audit Process') {
     $id = $uri[1];
     if($id){

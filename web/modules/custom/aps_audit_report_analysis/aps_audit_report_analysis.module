@@ -39,6 +39,7 @@ function aps_audit_report_analysis_theme($existing, $type, $theme, $path) {
           'audit_hours' => NULL,
           'car_hours' => NULL,
           'audit_cycle_effeciency' => NULL,
+          'mandays' => NULL,
         ],
     ],
     'mradmin_dashboard_coverage' => [
@@ -183,3 +184,14 @@ function file_get_contents_highchart($url) {
   fwrite($fp, $content);
   fclose($fp);
 } 
+
+function getCreationDatefromRevision($id, $state){
+  $query = \Drupal::database()->select('content_moderation_state_field_data', 'cm');
+  $query->join('node_revision', 'rf', 'cm.content_entity_revision_id = rf.vid');
+  $query->fields('rf',['nid', 'vid', 'revision_timestamp']);
+  $query->fields('cm',['revision_id', 'moderation_state']);
+  $query->condition('rf.nid', $id);
+  $query->condition('cm.moderation_state', $state);
+  $data = $query->execute()->fetchAll();
+  return $data;
+}
