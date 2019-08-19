@@ -1,0 +1,33 @@
+uuid: ccb171ca-927d-4d7b-aecd-9edcd54c8022
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_audit_type_external
+field_name: field_audit_type_external
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: certification
+      label: Certification
+    -
+      value: surveillance
+      label: Surveillance
+    -
+      value: repeat
+      label: Repeat
+    -
+      value: re-audit
+      label: Re-audit
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

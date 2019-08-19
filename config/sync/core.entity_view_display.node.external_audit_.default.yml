@@ -7,7 +7,7 @@ dependencies:
     - field.field.node.external_audit_.field__lead_auditor
     - field.field.node.external_audit_.field_audit_cycle
     - field.field.node.external_audit_.field_audit_month
-    - field.field.node.external_audit_.field_audit_type
+    - field.field.node.external_audit_.field_audit_type_external
     - field.field.node.external_audit_.field_auditor_s_name
     - field.field.node.external_audit_.field_certification_std
     - field.field.node.external_audit_.field_decision
@@ -59,8 +59,8 @@ content:
     third_party_settings: {  }
     type: month_only_formatter
     region: content
-  field_audit_type:
-    weight: 110
+  field_audit_type_external:
+    weight: 116
     label: above
     settings: {  }
     third_party_settings: {  }

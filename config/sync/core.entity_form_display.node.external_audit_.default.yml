@@ -7,7 +7,7 @@ dependencies:
     - field.field.node.external_audit_.field__lead_auditor
     - field.field.node.external_audit_.field_audit_cycle
     - field.field.node.external_audit_.field_audit_month
-    - field.field.node.external_audit_.field_audit_type
+    - field.field.node.external_audit_.field_audit_type_external
     - field.field.node.external_audit_.field_auditor_s_name
     - field.field.node.external_audit_.field_certification_std
     - field.field.node.external_audit_.field_decision
@@ -60,8 +60,8 @@ content:
     third_party_settings: {  }
     type: month_only_widget
     region: content
-  field_audit_type:
-    weight: 9
+  field_audit_type_external:
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -81,7 +81,7 @@ content:
     type: options_select
     region: content
   field_decision:
-    weight: 6
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60
@@ -96,7 +96,7 @@ content:
     type: datetime_default
     region: content
   field_next_due_date:
-    weight: 26
+    weight: 15
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -111,13 +111,13 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_scope:
-    weight: 8
+    weight: 9
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_score:
-    weight: 7
+    weight: 8
     settings:
       placeholder: ''
     third_party_settings: {  }
