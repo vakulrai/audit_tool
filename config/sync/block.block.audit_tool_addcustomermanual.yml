@@ -13,7 +13,7 @@ dependencies:
 id: audit_tool_addcustomermanual
 theme: audit_tool
 region: sidebar_first
-weight: -23
+weight: -24
 provider: null
 plugin: 'superfish:add-customer-manual'
 settings:

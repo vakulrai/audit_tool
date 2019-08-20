@@ -12,7 +12,7 @@ dependencies:
 id: audit_tool_preaudit
 theme: audit_tool
 region: sidebar_first
-weight: -26
+weight: -27
 provider: null
 plugin: 'superfish:pre-audit-'
 settings:

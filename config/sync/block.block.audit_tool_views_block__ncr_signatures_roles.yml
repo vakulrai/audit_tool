@@ -12,8 +12,8 @@ dependencies:
     - audit_tool
 id: audit_tool_views_block__ncr_signatures_roles
 theme: audit_tool
-region: highlighted
-weight: -24
+region: sidebar_first
+weight: -18
 provider: null
 plugin: 'views_block:ncr-signatures_roles'
 settings:

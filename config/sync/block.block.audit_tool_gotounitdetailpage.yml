@@ -12,7 +12,7 @@ dependencies:
 id: audit_tool_gotounitdetailpage
 theme: audit_tool
 region: sidebar_first
-weight: -27
+weight: -28
 provider: null
 plugin: 'superfish:go-to-unit-detail-page'
 settings:

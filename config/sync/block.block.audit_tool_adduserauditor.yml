@@ -12,7 +12,7 @@ dependencies:
 id: audit_tool_adduserauditor
 theme: audit_tool
 region: sidebar_first
-weight: -22
+weight: -23
 provider: null
 plugin: 'superfish:add-user-auditor'
 settings:

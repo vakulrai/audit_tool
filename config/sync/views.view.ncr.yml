@@ -75,6 +75,9 @@ display:
           offset: 0
           id: 0
           total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -83,9 +86,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          tags:
-            previous: ‹‹
-            next: ››
       style:
         type: table
         options:
@@ -3446,12 +3446,18 @@ display:
         style: false
         row: false
         access: false
+        relationships: false
       style:
-        type: default
+        type: grid
         options:
           grouping: {  }
-          row_class: ''
-          default_row_class: true
+          columns: 1
+          automatic_width: true
+          alignment: vertical
+          col_class_default: true
+          col_class_custom: ''
+          row_class_default: true
+          row_class_custom: ''
       row:
         type: fields
         options: {  }
@@ -3462,6 +3468,16 @@ display:
             auditor: auditor
             auditee: auditee
             mr_admin: mr_admin
+      relationships:
+        field_report_reference:
+          id: field_report_reference
+          table: node__field_report_reference
+          field: field_report_reference
+          relationship: none
+          group_type: group
+          admin_label: 'field_report_reference: Content'
+          required: false
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:

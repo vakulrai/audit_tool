@@ -134,8 +134,8 @@ class TimeAnalysisBlock extends BlockBase {
   
     $build['#audit_effeciency'] = $audit_EFFECIENCY;
     $build['#car_effeciency'] = $car_EFFECIENCY;
-    $build['#car_hours'] = round($total_car_days, 2). '* 8 = '.round($total_car_days * 8, 2);
-    $build['#audit_hours'] = round($total_days, 2) .'* 8 = '.round($total_days * 8, 2);
+    $build['#car_hours'] = round($total_car_hours, 2);
+    $build['#audit_hours'] = round($total_hours, 2);
     $build['#mandays'] = $mandays_count .'* 8  ^(1 Manday = 8)';
     $build['#theme'] = 'time_analysis_block';
     $build['#cache']['max-age'] = 0;

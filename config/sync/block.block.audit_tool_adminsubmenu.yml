@@ -13,7 +13,7 @@ dependencies:
 id: audit_tool_adminsubmenu
 theme: audit_tool
 region: sidebar_first
-weight: -29
+weight: -30
 provider: null
 plugin: 'superfish:admin-sub-menu'
 settings:

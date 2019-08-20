@@ -13,7 +13,7 @@ dependencies:
 id: auiditcriteriamenu
 theme: audit_tool
 region: sidebar_first
-weight: -18
+weight: -19
 provider: null
 plugin: 'superfish:auidit-criteria-menu'
 settings:
