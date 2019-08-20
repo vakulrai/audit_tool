@@ -59,4 +59,5 @@ aps_general.drop_tables:
     _title: 'Drop Table'
   requirements:
     _access: 'TRUE'
+    _role: 'administrator'
   
