@@ -51,11 +51,29 @@ class GetTitleList extends ControllerBase {
 
   public function getTitle(Request $request) {
     $results = [];
+    $current_user = \Drupal::currentUser();
+    $current_user_id = $current_user->id();
+    $roles = $current_user->getRoles();
+    foreach ($roles as $key => $value) {
+      $user_role = $value;
+    }
     if ($input = $request->query->get('q')) {
       $typed_string = Tags::explode($input);
       $typed_string = Unicode::strtolower(array_pop($typed_string));
       $query = \Drupal::database()->select('node_field_data', 'n');
+      if($user_role == 'auditee'){
+        $query->join('node__field_select_auditee', 'rf', 'n.nid = rf.entity_id');
+      }
+      elseif($user_role == 'auditor'){
+        $query->join('node__field_auditor', 'rf', 'n.nid = rf.entity_id');
+      }
       $query->fields('n', ['title','nid']);
+      if($user_role == 'auditee'){
+        $query->condition('rf.field_select_auditee_target_id', $current_user_id);
+      }
+      elseif($user_role == 'auditor'){
+        $query->condition('rf.field_auditor_target_id', $current_user_id);
+      }
       $query->condition('n.type', 'planned_events');
       $query->condition('n.title', db_like($typed_string) . '%', 'LIKE');
       $nids = $query->execute()->fetchAll();
