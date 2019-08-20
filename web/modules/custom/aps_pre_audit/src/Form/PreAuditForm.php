@@ -167,7 +167,7 @@ class PreAuditForm extends FormBase {
         '#disabled' => $disable_fields,
       ];
       
-      if($value['type'] == 'predefined'){
+      if($value['type'] == 'predefined' || $value['type'] == 'defined'){
         $options_poor = getVids('finding_categories', 220); //203
         $options_qualified = getVids('finding_categories', 221); //204
         $options_optimised = getVids('finding_categories', 222); //205
@@ -176,6 +176,8 @@ class PreAuditForm extends FormBase {
         $options_qualified['_none'] = 'None';
         $options_optimised['_none'] = 'None';
         $options_effecient['_none'] = 'None';
+        $category_default_value = [];
+
         $form['display']['audit_qa_'.$key]['finding_category_poor'.$key] = [
           '#type' => 'select',
           '#options' => $options_poor,
@@ -376,6 +378,7 @@ class PreAuditForm extends FormBase {
                   $output[$ref_id]['field_answer_type'] = $answer_node_object->get('field_answer_type')->value;
                   $output[$ref_id]['qid'] = $ref_id;
                   $output[$ref_id]['kpi'] = $predefined_question_object->get('field_kpi_status')->value;
+                  $output[$ref_id]['field_finding_categories'] = $predefined_question_object->get('field_finding_categories')->getValue();
                   $output[$ref_id]['sno'] = count($predefined_question_object_array['field_sub_s_no_']) ? $predefined_question_object->get('field_sub_s_no_')->value : '';
                   $output[$ref_id]['desc']['Optimised'] = 'Optimised';
                   $output[$ref_id]['desc']['Qualified'] = 'Qualified';
@@ -517,8 +520,8 @@ class PreAuditForm extends FormBase {
 
     if(count($form_data['answer'])){
       $id = $this->getQandAid('answers');
+      $empty_category = [];
       foreach ($form_data['answer'] as $i=>$j) {
-        $a[] = $j;
         unset($id[$i]);
         if(isset($i)){
           $paragraph_object =  Paragraph::load($i);
@@ -528,28 +531,36 @@ class PreAuditForm extends FormBase {
           }else{
             $paragraph_object->set('field_checked', $j[0]);
             if($j['poor'] != '_none'){
+              $paragraph_object->set('field_finding_categories', $empty_category); 
               $paragraph_object->set('field_finding_categories', $j['poor']); 
             }
-            elseif ($j['qualified']!= '_none') {
+
+            if ($j['qualified']!= '_none') {
+              $paragraph_object->set('field_finding_categories', $empty_category);
               $paragraph_object->set('field_finding_categories', $j['qualified']);
             }
-            elseif (count($j['optimised']) > 0) {
+
+            if(count($j['optimised']) > 0) {
               foreach ($j['optimised'] as $keys_optimised => $val_optimised) {
                 if ($keys_optimised != '_none') {
                   $options_op[$keys_optimised] = $val_optimised;
+                  $paragraph_object->set('field_finding_categories', $empty_category);
                   $paragraph_object->set('field_finding_categories', $options_op);
                 }
               }
             }
-            elseif (count($j['effecient']) > 0) {
+
+            if(count($j['effecient'])) {
               foreach ($j['effecient'] as $keys_eff => $val_eff) {
                 if ($keys_eff != '_none') {
                   $options_eff[$keys_eff] = $val_eff;
+                  $paragraph_object->set('field_finding_categories', $empty_category);
                   $paragraph_object->set('field_finding_categories', $options_eff);
                 }
               }
             }
-            elseif (isset($j['clause'])) {
+
+            if ($j['clause'] != '') {
               $query = \Drupal::database()->select('node_field_data', 'n');
               $query->join('node__field_clause_', 'rf', 'n.nid = rf.entity_id');
               $query->fields('n', ['title','nid', 'type']);
@@ -576,7 +587,6 @@ class PreAuditForm extends FormBase {
           $paragraph_object->save();
         }
       }
-      
     }
 
     if(count($form_data['question'])){

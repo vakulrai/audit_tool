@@ -32,7 +32,7 @@ class UpdateAuditFindings extends PreAuditForm {
   public function buildForm(array $form, FormStateInterface $form_state) {
      $reference_id = \Drupal::request()->query->get('audit_reference');
      $details = $this->getAuditDetails($reference_id);
-     // echo '<pre>';print_r($details);
+
      $validators = array(
         'file_validate_extensions' => ['jpg mp4 pdf'],
      );
@@ -220,15 +220,17 @@ class UpdateAuditFindings extends PreAuditForm {
             '#title_display' => 'invisible',
           ];
 
-          if($value['type'] == 'predefined'){
+          $name = '';
+          if($value['type'] == 'predefined' && count($value['field_finding_categories']) > 0){
             foreach ($value['field_finding_categories'] as $finding => $val) {
               if($term = Term::load($val['target_id'])){
-                $name .= $term->getName().'<br>';
+                $name .= $term->getName().',';
               }
               else{
                 $name = 'Not Found.';
               }
             }
+            $name = rtrim($name, ', ');
             $form['display']['tableselect_element'][$sr]['findings_category'] = [
               '#type' => 'value',
               '#value' =>  $name,
@@ -244,7 +246,7 @@ class UpdateAuditFindings extends PreAuditForm {
               '#type' => 'value',
               '#value' =>  $clause_object->get('title')->value,
               '#markup' =>  $clause_object->get('title')->value,
-              '#title' => $this->t('Finding Categories'),
+              '#title' => $this->t('Clause Number'),
               '#title_display' => 'invisible',
             ];
           }
@@ -253,7 +255,7 @@ class UpdateAuditFindings extends PreAuditForm {
               '#type' => 'value',
               '#value' =>  '--',
               '#markup' =>  '--',
-              '#title' => $this->t('Finding Categories'),
+              '#title' => $this->t('Clause Number'),
               '#title_display' => 'invisible',
             ];
           }
@@ -352,16 +354,18 @@ class UpdateAuditFindings extends PreAuditForm {
             '#title' => $this->t('Result'),
             '#title_display' => 'invisible',
           ];
-
+          
+          $nameq = '';
           if($valueq['type'] == 'predefined'){
             foreach ($valueq['field_finding_categories'] as $findingq => $valq) {
               if($termq = Term::load($valq['target_id'])){
-                $nameq .= $termq->getName().'<br>';
+                $nameq .= $termq->getName().',';
               }
               else{
                 $nameq = 'Not Found.';
               }
             }
+            rtrim($nameq, ', ');
             $form['display_d_q']['tableselect_element_dq'][$srq]['findings_category'] = [
               '#type' => 'value',
               '#value' =>  $nameq,
@@ -606,7 +610,7 @@ class UpdateAuditFindings extends PreAuditForm {
             }
           }
           $list[$count]['field_result'] = $key['result'];
-          $list[$count]['field_finding_categories'] = strip_tags($key['findings_category']);
+          $list[$count]['field_finding_categories'] = explode(',', strip_tags($key['findings_category']));
           $list[$count]['field_clause'] = $key['clause'];
           $list[$count]['question_type'] = $key['question_type'];
           $list[$count]['kpi'] = $key['kpi'];
@@ -614,6 +618,7 @@ class UpdateAuditFindings extends PreAuditForm {
         }
       }
     }
+
     if(count($form_values['header_report'])){
       if($form_values['header_report'][0]['occurence']){
         $data['field_occurence'] = $form_values['header_report'][0]['occurence']; 
@@ -624,14 +629,21 @@ class UpdateAuditFindings extends PreAuditForm {
       $data['field_standards'] = $form_values['header_report'][0]['standards']; 
     }
     $paragraph_['paragraph_data'] = $list;
-   
+    $tid = [];
+    $cat_count = 0;
     foreach ($paragraph_['paragraph_data'] as $q => $a) {
-      $kk[] = $a;
       if($a['field_finding_categories'] != ''){
-        $properties['name'] = $a['field_finding_categories'];
-        $terms = array_values(\Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties));
-        $tid = $terms[0]->id();
-        $parent_tid = $terms[0]->get('parent')->target_id;
+        foreach ($a['field_finding_categories'] as $cat_key => $cat_value) {
+          if(isset($cat_value)){
+            $properties['name'] = $cat_value;
+            $terms = array_values(\Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties));
+            $tid[$q][$cat_count]['target_id'] = $terms[0]->id() ? $terms[0]->id() : '';
+            if($tid != ''){
+              $parent_tid = $terms[0]->get('parent')->target_id;
+            }
+          }
+          $cat_count++;
+        }
       }
       else{
         $tid = '';
@@ -640,13 +652,13 @@ class UpdateAuditFindings extends PreAuditForm {
       //Condition to only submit Poor categeories.
       if($parent_tid){
         $term_object_parent = Term::load($parent_tid);
-        // if($term_object_parent->get('name')->value == 'Poor' && $a['question_type'] == 'non-delta' || $a['question_type'] == 'delta'){
+        // // if($term_object_parent->get('name')->value == 'Poor' && $a['question_type'] == 'non-delta' || $a['question_type'] == 'delta'){
           $paragraph = Paragraph::create([
             'field_step' => $a['field_step'],
             'field_question' => $a['field_question'],
             'field_evidence' => $a['field_evidence'],
             'field_result' => $a['field_result'],
-            'field_finding_categories' => ['target_id' => $tid],
+            'field_finding_categories' => $tid[$q],
             'field_clause' => $a['field_clause'],
             'field_kpi_status' => $a['kpi'],
             'type' => 'audit_report',
@@ -659,7 +671,7 @@ class UpdateAuditFindings extends PreAuditForm {
         // }
       }
     }
-
+// print_r($tid[1]);die;
     // $data['field_audit_list'] = $paragraphp_version;
     $data['field_auditee_name'] = ['target_id' => $form_values['signature_auditee']];
     $data['field_auditee_signature'] = $form_values['upload_signature_auditee'];
@@ -753,7 +765,6 @@ class UpdateAuditFindings extends PreAuditForm {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // $reference_id = \Drupal::request()->query->get('audit_reference');
     // $details = $this->getAuditDetails($reference_id);
-    // echo '<pre>';print_r($details);die;
   }
 
   public function getUserByRole(){
