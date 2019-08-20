@@ -1518,6 +1518,13 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
+  if ($cleanLinkText == 'NCR' && $user_role == 'auditee') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('destination', $current_uri);
+    }
+  }
+
   if ($cleanLinkText == 'SCHEDULING') {
     $id = $uri[1];
     if($id){
