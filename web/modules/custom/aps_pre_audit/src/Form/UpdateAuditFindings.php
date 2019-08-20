@@ -267,12 +267,12 @@ class UpdateAuditFindings extends PreAuditForm {
           //   '#title_display' => 'invisible',
           // ];
 
-          //  $form['display']['tableselect_element'][$sr]['question_type'] = [
-          //   '#type' => 'value',
-          //   '#value' =>  $value['field_answer_type'],
-          //   '#title' => $this->t('Finding Categories'),
-          //   '#title_display' => 'invisible',
-          // ];
+           $form['display']['tableselect_element'][$sr]['question_type'] = [
+            '#type' => 'value',
+            '#value' =>  $value['field_answer_type'],
+            '#title' => $this->t('Finding Categories'),
+            '#title_display' => 'invisible',
+          ];
           
 
           $form['display']['tableselect_element'][$sr]['kpi'] = [
@@ -382,12 +382,12 @@ class UpdateAuditFindings extends PreAuditForm {
           //     '#title_display' => 'invisible',
           //   ];
 
-          // $form['display_d_q']['tableselect_element_dq'][$srq]['question_type'] = [
-          //   '#type' => 'value',
-          //   '#value' =>  $valueq['field_answer_type'],
-          //   '#title' => $this->t('Finding Categories'),
-          //   '#title_display' => 'invisible',
-          // ];
+          $form['display_d_q']['tableselect_element_dq'][$srq]['question_type'] = [
+            '#type' => 'value',
+            '#value' =>  $valueq['field_answer_type'],
+            '#title' => $this->t('Finding Categories'),
+            '#title_display' => 'invisible',
+          ];
           
           $form['display_d_q']['tableselect_element_dq'][$srq]['kpi'] = [
             '#type' => 'value',
@@ -631,8 +631,9 @@ class UpdateAuditFindings extends PreAuditForm {
     $paragraph_['paragraph_data'] = $list;
     $tid = [];
     $cat_count = 0;
+    
     foreach ($paragraph_['paragraph_data'] as $q => $a) {
-      if($a['field_finding_categories'] != ''){
+      if($a['field_finding_categories'] != '' && $a['question_type'] == 'non-delta'){
         foreach ($a['field_finding_categories'] as $cat_key => $cat_value) {
           if(isset($cat_value)){
             $properties['name'] = $cat_value;
@@ -663,15 +664,25 @@ class UpdateAuditFindings extends PreAuditForm {
             'field_kpi_status' => $a['kpi'],
             'type' => 'audit_report',
           ]);
-          $paragraph->save();
-          $paragraphp_version[] = [
-            'target_id' => $paragraph->id(),
-            'target_revision_id' => $paragraph->getRevisionId(),
-          ];
         // }
       }
+      else{ //For Delta.
+        $paragraph = Paragraph::create([
+            'field_step' => $a['field_step'],
+            'field_question' => $a['field_question'],
+            'field_evidence' => $a['field_evidence'],
+            'field_result' => $a['field_result'],
+            // 'field_clause' => $a['field_clause'],
+            'type' => 'audit_report',
+        ]);
+      }
+      $paragraph->save();
+      $paragraphp_version[] = [
+        'target_id' => $paragraph->id(),
+        'target_revision_id' => $paragraph->getRevisionId(),
+      ];
     }
-// print_r($tid[1]);die;
+
     // $data['field_audit_list'] = $paragraphp_version;
     $data['field_auditee_name'] = ['target_id' => $form_values['signature_auditee']];
     $data['field_auditee_signature'] = $form_values['upload_signature_auditee'];

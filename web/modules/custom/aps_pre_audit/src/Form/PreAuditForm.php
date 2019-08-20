@@ -30,6 +30,7 @@ class PreAuditForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $reference_id = \Drupal::request()->query->get('ref');
     $details = $this->getAuditDetails($reference_id);
+
     $nid = \Drupal::request()->query->get('ref');
     $current_path = trim(\Drupal::service('path.current')->getPath(), '/');
     $path_args = explode('/', $current_path);
@@ -167,7 +168,7 @@ class PreAuditForm extends FormBase {
         '#disabled' => $disable_fields,
       ];
       
-      if($value['type'] == 'predefined' || $value['type'] == 'defined'){
+      if($value['type'] == 'predefined'){
         $options_poor = getVids('finding_categories', 220); //203
         $options_qualified = getVids('finding_categories', 221); //204
         $options_optimised = getVids('finding_categories', 222); //205
