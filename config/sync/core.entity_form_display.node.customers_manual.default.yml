@@ -4,7 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.node.customers_manual.body
+    - field.field.node.customers_manual.field_contact_person_name
     - field.field.node.customers_manual.field_document
+    - field.field.node.customers_manual.field_location
     - field.field.node.customers_manual.field_qam
     - field.field.node.customers_manual.field_refere
     - field.field.node.customers_manual.field_sr_no
@@ -28,7 +30,7 @@ third_party_settings:
         - field_version_level
         - field_version_date
       parent_name: ''
-      weight: 3
+      weight: 4
       format_type: fieldset
       format_settings:
         id: ''
@@ -41,9 +43,17 @@ targetEntityType: node
 bundle: customers_manual
 mode: default
 content:
+  field_contact_person_name:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_document:
     type: media_library_widget
-    weight: 3
+    weight: 27
     settings:
       media_types: {  }
     third_party_settings:
@@ -66,8 +76,16 @@ content:
           entity_type: node
           bundle: customers_manual
     region: content
+  field_location:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_qam:
-    weight: 4
+    weight: 5
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -93,20 +111,13 @@ content:
     type: link_default
     region: content
   field_refere:
-    weight: 6
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
-    region: content
-  field_sr_no:
-    weight: 1
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-    type: number
     region: content
   field_upload_type:
     weight: 2
@@ -115,7 +126,7 @@ content:
     type: options_select
     region: content
   field_version_date:
-    weight: 5
+    weight: 29
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -139,7 +150,7 @@ content:
     type: datetime_default
     region: content
   field_version_level:
-    weight: 4
+    weight: 28
     settings:
       placeholder: ''
     third_party_settings:
@@ -165,7 +176,7 @@ content:
     region: content
   moderation_state:
     type: moderation_state_default
-    weight: 5
+    weight: 6
     settings: {  }
     region: content
     third_party_settings: {  }
@@ -180,6 +191,7 @@ content:
 hidden:
   body: true
   created: true
+  field_sr_no: true
   path: true
   promote: true
   status: true

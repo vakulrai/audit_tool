@@ -4,7 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.node.customers_manual.body
+    - field.field.node.customers_manual.field_contact_person_name
     - field.field.node.customers_manual.field_document
+    - field.field.node.customers_manual.field_location
     - field.field.node.customers_manual.field_qam
     - field.field.node.customers_manual.field_refere
     - field.field.node.customers_manual.field_sr_no
@@ -35,6 +37,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  field_contact_person_name:
+    weight: 110
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_document:
     type: entity_reference_entity_view
     weight: 106
@@ -43,6 +53,14 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
+    region: content
+  field_location:
+    weight: 111
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
   field_qam:
     weight: 105

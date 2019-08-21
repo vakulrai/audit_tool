@@ -1,0 +1,19 @@
+uuid: 19ef48e1-8b0c-47be-9c11-cb19d56aa893
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_manufactured_product_id
+    - paragraphs.paragraphs_type.supplier_manufactured_product
+id: paragraph.supplier_manufactured_product.field_manufactured_product_id
+field_name: field_manufactured_product_id
+entity_type: paragraph
+bundle: supplier_manufactured_product
+label: 'Manufactured Product ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -401,6 +401,9 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
     $form['field_refere']['#access'] = FALSE;
+    $form['field_location']['widget']['add_more']['#value'] = new TranslatableMarkup("@type", array(
+       '@type' => 'Add Locations',
+    ));
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'customer_add';
@@ -482,6 +485,43 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
       $form['field_refere']['#access'] = FALSE;
     }
+    $form['field_location']['widget']['add_more']['#value'] = new TranslatableMarkup("@type", array(
+       '@type' => 'Add Locations',
+    ));
+    
+    $form['field_manufactured_products']['#states'] = [
+      'visible' => [
+        'select[name="field_type"]' => ['value' => 'manufactured'],
+      ],
+    ];
+
+    $form['field_service_product']['#states'] = [
+      'visible' => [
+        'select[name="field_type"]' => ['value' => 'service'],
+      ],
+    ];
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'supplier_add';
+      }
+    }
+  }
+  elseif ($form_id == 'node_supplier_edit_form') {
+    $form['field_location']['widget']['add_more']['#value'] = new TranslatableMarkup("@type", array(
+       '@type' => 'Add Locations',
+    ));
+    $form['field_manufactured_products']['#states'] = [
+      'visible' => [
+        'select[name="field_type"]' => ['value' => 'manufactured'],
+      ],
+    ];
+
+    $form['field_service_product']['#states'] = [
+      'visible' => [
+        'select[name="field_type"]' => ['value' => 'service'],
+      ],
+    ];
+    $form['field_refere']['#access'] = FALSE;
   }
   if($form_id == 'holidays_holidays_form'){
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
@@ -1587,7 +1627,6 @@ function aps_general_link_alter(&$variables) {
     $id = $uri[1];
     if($id){
       $variables['url']->setRouteParameter('unit_reference', $id);
-      $variables['url']->setRouteParameter('destination', $current_uri);
     }
   }
 }
@@ -1766,6 +1805,14 @@ function customer_add(array $form, \Drupal\Core\Form\FormStateInterface $form_st
   $destination = \Drupal::request()->query->get('destination');
   $unit_reference = \Drupal::request()->query->get('unit_reference');
   $response = Url::fromUserInput('/node/add/customers_manual?unit_reference='.$unit_reference);
+  $form_state->setRedirectUrl($response);
+}
+
+function supplier_add(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
+  $destination = \Drupal::request()->query->get('destination');
+  $unit_reference = \Drupal::request()->query->get('unit_reference');
+  $response = Url::fromUserInput('/node/add/supplier?unit_reference='.$unit_reference);
   $form_state->setRedirectUrl($response);
 }
 

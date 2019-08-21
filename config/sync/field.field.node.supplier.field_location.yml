@@ -1,18 +1,18 @@
-uuid: 4541853b-49c9-4f23-9927-cc1f970ed8d4
+uuid: 7aea30e0-e3d9-4144-8f38-7e8202a9a360
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_product_list
+    - field.storage.node.field_location
     - node.type.supplier
-id: node.supplier.field_product_list
-field_name: field_product_list
+id: node.supplier.field_location
+field_name: field_location
 entity_type: node
 bundle: supplier
-label: 'Product List'
+label: Location
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

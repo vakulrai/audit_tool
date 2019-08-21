@@ -12,7 +12,7 @@ bundle: customer_manual_parts
 mode: default
 content:
   field_part_no:
-    weight: 1
+    weight: 0
     settings:
       size: 60
       placeholder: ''
@@ -20,7 +20,7 @@ content:
     type: string_textfield
     region: content
   field_s_no:
-    weight: 0
+    weight: 1
     settings:
       placeholder: ''
     third_party_settings: {  }

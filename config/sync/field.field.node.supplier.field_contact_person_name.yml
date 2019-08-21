@@ -1,16 +1,17 @@
-uuid: da5e1b47-9fff-4b83-b937-91160565bc27
+uuid: 9a24a84a-c8ff-4417-81d3-e24fdeed8cc7
 langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.field_contact_person_name
     - node.type.supplier
-id: node.supplier.title
-field_name: title
+id: node.supplier.field_contact_person_name
+field_name: field_contact_person_name
 entity_type: node
 bundle: supplier
-label: 'Customer Name'
+label: 'Contact Person Name'
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

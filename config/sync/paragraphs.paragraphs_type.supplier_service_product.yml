@@ -1,0 +1,9 @@
+uuid: a64199bd-5dca-441e-b379-1882783dca63
+langcode: en
+status: true
+dependencies: {  }
+id: supplier_service_product
+label: 'Service Product'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

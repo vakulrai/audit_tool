@@ -11,13 +11,13 @@ id: node.supplier.field_address_url
 field_name: field_address_url
 entity_type: node
 bundle: supplier
-label: Address
-description: ''
+label: 'Product Url'
+description: 'Add External Document URl.'
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  title: 1
   link_type: 17
+  title: 1
 field_type: link

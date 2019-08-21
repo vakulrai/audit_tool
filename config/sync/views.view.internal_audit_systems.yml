@@ -4,17 +4,17 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.storage.node.field_address_url
     - field.storage.node.field_attach_control_plan
     - field.storage.node.field_audit_type
     - field.storage.node.field_create_procedure
     - field.storage.node.field_department
     - field.storage.node.field_file
     - field.storage.node.field_ia_section
-    - field.storage.node.field_product_list
+    - field.storage.node.field_location
+    - field.storage.node.field_manufactured_products
     - field.storage.node.field_section_type
+    - field.storage.node.field_service_product
     - field.storage.node.field_start_date
-    - field.storage.node.field_supplier_city
     - field.storage.paragraph.field_number
     - node.type.assembly
     - node.type.business_process
@@ -28,10 +28,8 @@ dependencies:
     - node.type.unit
     - workflows.workflow.workflow_for_audit_planning
   module:
-    - address
     - content_moderation
     - entity_reference_revisions
-    - link
     - node
     - options
     - paragraphs
@@ -817,6 +815,7 @@ display:
         filters: false
         filter_groups: false
         fields: false
+        use_ajax: false
       arguments:
         nid:
           id: nid
@@ -914,6 +913,56 @@ display:
         groups:
           1: AND
       fields:
+        counter:
+          id: counter
+          table: views
+          field: counter
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'S no.'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          counter_start: 1
+          plugin_id: counter
         title:
           id: title
           table: node_field_data
@@ -921,7 +970,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
+          label: 'Customer Name'
           exclude: false
           alter:
             alter_text: false
@@ -979,243 +1028,14 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        counter:
-          id: counter
-          table: views
-          field: counter
+        field_location:
+          id: field_location
+          table: node__field_location
+          field: field_location
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'S no.'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          counter_start: 1
-          plugin_id: counter
-        field_remote_address_administrative_area:
-          id: field_remote_address_administrative_area
-          table: node__field_remote_address
-          field: field_remote_address_administrative_area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: State
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          display_name: true
-          plugin_id: subdivision
-        field_supplier_city:
-          id: field_supplier_city
-          table: node__field_supplier_city
-          field: field_supplier_city
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: City
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: langcode
-          type: address_default
-          settings: {  }
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        field_address_url:
-          id: field_address_url
-          table: node__field_address_url
-          field: field_address_url
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Address
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: uri
-          type: link
-          settings:
-            trim_length: 80
-            url_only: false
-            url_plain: false
-            rel: '0'
-            target: '0'
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        field_product_list:
-          id: field_product_list
-          table: node__field_product_list
-          field: field_product_list
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Product List'
+          label: Location
           exclude: false
           alter:
             alter_text: false
@@ -1271,6 +1091,133 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        field_manufactured_products:
+          id: field_manufactured_products
+          table: node__field_manufactured_products
+          field: field_manufactured_products
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Manufactured Products'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: 'Not found'
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_revisions_entity_view
+          settings:
+            view_mode: preview
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: ol
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_service_product:
+          id: field_service_product
+          table: node__field_service_product
+          field: field_service_product
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Service Product'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: 'Not found'
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_revisions_entity_view
+          settings:
+            view_mode: preview
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: ol
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+      use_ajax: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -1281,9 +1228,9 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_address_url'
-        - 'config:field.storage.node.field_product_list'
-        - 'config:field.storage.node.field_supplier_city'
+        - 'config:field.storage.node.field_location'
+        - 'config:field.storage.node.field_manufactured_products'
+        - 'config:field.storage.node.field_service_product'
   entity_reference_1:
     display_plugin: entity_reference
     id: entity_reference_1

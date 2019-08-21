@@ -5,28 +5,31 @@ dependencies:
   config:
     - field.field.node.supplier.body
     - field.field.node.supplier.field_address_url
-    - field.field.node.supplier.field_product_list
+    - field.field.node.supplier.field_contact_person_name
+    - field.field.node.supplier.field_location
+    - field.field.node.supplier.field_manufactured_products
     - field.field.node.supplier.field_refere
-    - field.field.node.supplier.field_supplier_city
+    - field.field.node.supplier.field_service_product
     - field.field.node.supplier.field_supplier_name
+    - field.field.node.supplier.field_type
     - node.type.supplier
   module:
-    - address
-    - link
+    - conditional_fields
+    - paragraphs
 id: node.supplier.default
 targetEntityType: node
 bundle: supplier
 mode: default
 content:
-  field_address_url:
-    weight: 4
+  field_contact_person_name:
+    weight: 1
     settings:
-      placeholder_url: ''
-      placeholder_title: ''
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: link_default
+    type: string_textfield
     region: content
-  field_product_list:
+  field_location:
     weight: 2
     settings:
       size: 60
@@ -34,8 +37,21 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_manufactured_products:
+    type: entity_reference_paragraphs
+    weight: 4
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings:
+      conditional_fields: {  }
+    region: content
   field_refere:
-    weight: 5
+    weight: 6
     settings:
       match_operator: CONTAINS
       size: 60
@@ -43,15 +59,28 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_supplier_city:
-    weight: 1
+  field_service_product:
+    type: entity_reference_paragraphs
+    weight: 5
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings:
+      conditional_fields: {  }
+    region: content
+  field_type:
+    weight: 3
     settings: {  }
     third_party_settings: {  }
-    type: address_default
+    type: options_select
     region: content
   moderation_state:
     type: string_textfield
-    weight: 3
+    weight: 7
     region: content
     settings:
       size: 60
@@ -68,6 +97,7 @@ content:
 hidden:
   body: true
   created: true
+  field_address_url: true
   field_supplier_name: true
   path: true
   promote: true

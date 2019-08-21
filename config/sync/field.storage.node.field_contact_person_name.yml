@@ -1,11 +1,11 @@
-uuid: 79bfdd07-24a1-451e-86ea-5913bef169cc
+uuid: 9111fd00-0bb4-4967-aff2-538e49f19075
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_product_list
-field_name: field_product_list
+id: node.field_contact_person_name
+field_name: field_contact_person_name
 entity_type: node
 type: string
 settings:
@@ -14,7 +14,7 @@ settings:
   case_sensitive: false
 module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

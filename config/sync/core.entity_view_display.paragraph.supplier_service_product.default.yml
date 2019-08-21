@@ -1,0 +1,21 @@
+uuid: 004550e6-fb38-495a-98b3-03a448e5e85e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.supplier_service_product.field_service_part_name
+    - paragraphs.paragraphs_type.supplier_service_product
+id: paragraph.supplier_service_product.default
+targetEntityType: paragraph
+bundle: supplier_service_product
+mode: default
+content:
+  field_service_part_name:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

@@ -1,0 +1,9 @@
+uuid: 8f57f601-d7b5-488f-81ac-3735bcebbf89
+langcode: en
+status: true
+dependencies: {  }
+id: supplier_manufactured_product
+label: 'Manufactured Product'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

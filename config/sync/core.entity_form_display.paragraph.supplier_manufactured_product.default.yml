@@ -1,0 +1,32 @@
+uuid: 83d1b68c-2b5f-4e21-ba31-0de0dcd33e6e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.supplier_manufactured_product.field_manufactured_product_id
+    - field.field.paragraph.supplier_manufactured_product.field_manufactured_product_name
+    - paragraphs.paragraphs_type.supplier_manufactured_product
+id: paragraph.supplier_manufactured_product.default
+targetEntityType: paragraph
+bundle: supplier_manufactured_product
+mode: default
+content:
+  field_manufactured_product_id:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_manufactured_product_name:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
