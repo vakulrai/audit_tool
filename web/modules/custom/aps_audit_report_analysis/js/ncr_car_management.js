@@ -7,6 +7,9 @@
       var unit_reference = drupalSettings.unitReference;
       var ncr_car_data = drupalSettings.ncr_car_data;
       var chart_a = Highcharts.chart('container-element-ncr-car', {
+      	    credits: {
+              enabled: false
+            },
 		    chart: {
 		        plotBackgroundColor: null,
 		        plotBorderWidth: null,

@@ -1,0 +1,22 @@
+uuid: 98c76e5a-9384-4599-9ba6-99b9df4d2b32
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.risk_legend
+    - field.field.block_content.risk_legend.field_risk_element
+  module:
+    - text
+id: block_content.risk_legend.default
+targetEntityType: block_content
+bundle: risk_legend
+mode: default
+content:
+  field_risk_element:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }

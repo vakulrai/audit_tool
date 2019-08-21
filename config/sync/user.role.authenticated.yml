@@ -16,4 +16,5 @@ permissions:
   - 'create transitions workflow_transition'
   - 'report questions and answers'
   - 'subscribe questions and answers'
+  - 'use text format full_html'
   - 'view media'

@@ -47,10 +47,11 @@ class AuditPlanningController extends ControllerBase {
            $paragraphs_answer_object = Paragraph::load($get_kpi_data['record_reference']);
            $paragraphs_answer_object->set('field_car_status', $get_kpi_data['value_selected']);
            $paragraphs_answer_object->save();
-           $respose['response'] = TRUE;
+           $respose['response'] = 'Updated';
+
         } 
         catch(\Exception $e) {
-          $respose['response'] = FALSE;
+          $respose['response'] = 'Failed';
         }
       }
     }

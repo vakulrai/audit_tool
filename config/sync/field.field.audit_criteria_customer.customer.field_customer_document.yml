@@ -10,7 +10,7 @@ id: audit_criteria_customer.customer.field_customer_document
 field_name: field_customer_document
 entity_type: audit_criteria_customer
 bundle: customer
-label: 'Customer Document'
+label: DOCUMENTS
 description: ''
 required: false
 translatable: false

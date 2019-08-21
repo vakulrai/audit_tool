@@ -11,7 +11,7 @@ dependencies:
 id: audit_tool_timeanalysisblock
 theme: audit_tool
 region: highlighted
-weight: -25
+weight: -31
 provider: null
 plugin: time_analysis_block
 settings:

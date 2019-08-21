@@ -1,13 +1,13 @@
-uuid: 6ca9526b-bb9a-4c7b-9f92-5fa7e218096e
+uuid: 3eb05993-bd94-4791-8631-f049755e5611
 langcode: en
 status: true
 dependencies:
   module:
     - eck
     - taxonomy
-id: audit_criteria_customer.field_customer_document
-field_name: field_customer_document
-entity_type: audit_criteria_customer
+id: audit_criteria.field_process_record
+field_name: field_process_record
+entity_type: audit_criteria
 type: entity_reference
 settings:
   target_type: taxonomy_term

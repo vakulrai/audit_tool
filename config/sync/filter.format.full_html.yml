@@ -1,0 +1,8 @@
+uuid: bbb30a63-6b33-4e48-a27f-9578750792f8
+langcode: en
+status: true
+dependencies: {  }
+name: 'Full Html'
+format: full_html
+weight: 0
+filters: {  }

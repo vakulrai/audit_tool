@@ -33,6 +33,7 @@ visibility:
   user_role:
     id: user_role
     roles:
+      auditor: auditor
       auditee: auditee
     negate: false
     context_mapping:

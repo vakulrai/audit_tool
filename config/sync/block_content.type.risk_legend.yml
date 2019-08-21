@@ -1,0 +1,8 @@
+uuid: 44321b70-8164-4b6c-b769-c2bdb67671df
+langcode: en
+status: true
+dependencies: {  }
+id: risk_legend
+label: 'Risk Legend'
+revision: 1
+description: 'Risk Meter Legend for Dashboard'

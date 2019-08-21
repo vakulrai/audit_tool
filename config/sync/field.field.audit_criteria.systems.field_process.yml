@@ -10,7 +10,7 @@ id: audit_criteria.systems.field_process
 field_name: field_process
 entity_type: audit_criteria
 bundle: systems
-label: Process
+label: DOCUMENTS
 description: ''
 required: false
 translatable: false

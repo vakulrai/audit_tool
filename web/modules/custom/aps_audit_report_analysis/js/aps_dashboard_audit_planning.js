@@ -6,6 +6,9 @@
       var audit_detail = drupalSettings.auditDetail;
       var unit_reference = drupalSettings.unitReference;
       var chart = new Highcharts.Chart('container', { 
+        credits: {
+          enabled: false
+        },
         chart: {
           plotBackgroundColor: null,
           plotBorderWidth: null,

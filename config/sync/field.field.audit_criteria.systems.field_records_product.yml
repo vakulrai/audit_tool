@@ -1,13 +1,13 @@
-uuid: 24d16f8d-0d7b-47e4-9fa7-5b401b888bfa
+uuid: b45ecd99-975f-4d13-9787-be15ffc3aa18
 langcode: en
 status: true
 dependencies:
   config:
     - eck.eck_type.audit_criteria.systems
-    - field.storage.audit_criteria.field_records
-    - taxonomy.vocabulary.system_documents
-id: audit_criteria.systems.field_records
-field_name: field_records
+    - field.storage.audit_criteria.field_records_product
+    - taxonomy.vocabulary.internal_audit_product_records
+id: audit_criteria.systems.field_records_product
+field_name: field_records_product
 entity_type: audit_criteria
 bundle: systems
 label: RECORDS
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      system_documents: system_documents
+      internal_audit_product_records: internal_audit_product_records
     sort:
       field: name
       direction: asc

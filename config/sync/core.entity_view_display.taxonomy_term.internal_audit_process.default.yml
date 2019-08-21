@@ -1,0 +1,30 @@
+uuid: 3f75012e-2d6f-48f8-baec-3811517547b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.internal_audit_process.field_type_of_record
+    - taxonomy.vocabulary.internal_audit_process
+  module:
+    - options
+    - text
+id: taxonomy_term.internal_audit_process.default
+targetEntityType: taxonomy_term
+bundle: internal_audit_process
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_type_of_record:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+hidden: {  }

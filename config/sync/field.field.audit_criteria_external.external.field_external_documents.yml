@@ -10,7 +10,7 @@ id: audit_criteria_external.external.field_external_documents
 field_name: field_external_documents
 entity_type: audit_criteria_external
 bundle: external
-label: 'External Documents'
+label: Records
 description: ''
 required: false
 translatable: false

@@ -10,7 +10,7 @@ id: audit_criteria_customer.customer.field_customer_records
 field_name: field_customer_records
 entity_type: audit_criteria_customer
 bundle: customer
-label: 'Customer Records'
+label: RECORDS
 description: ''
 required: false
 translatable: false

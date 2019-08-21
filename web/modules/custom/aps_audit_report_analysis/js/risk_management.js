@@ -71,6 +71,9 @@
 
 		// The speed gauge
 		var chartSpeed = Highcharts.chart('container-element-risk-report', Highcharts.merge(gaugeOptions, {
+		    credits: {
+              enabled: false
+            },
 		    yAxis: {
 		        min: 0,
 		        max: 100,
@@ -103,6 +106,9 @@
 		}));
         
         var legend = Highcharts.chart('container-element-risk-legend',{
+        credits: {
+          enabled: false
+        },
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: 0,

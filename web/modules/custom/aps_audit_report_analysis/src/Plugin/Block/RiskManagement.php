@@ -91,11 +91,11 @@ class RiskManagement extends BlockBase {
       t('RISK SCORE'),
     ];
 
-    $build['risk_management_fieldset']['risk_management']['#attached']['library'][] = 'aps_audit_report_analysis/aps_dashboard_risk_management_js';
+    // $build['risk_management_fieldset']['risk_management']['#attached']['library'][] = 'aps_audit_report_analysis/aps_dashboard_risk_management_js';
     // $build['risk_management_fieldset']['risk_management']['#attached']['drupalSettings']['auditor_data'] = json_encode($plot_data['data']);
     // $build['risk_management_fieldset']['risk_management']['#attached']['drupalSettings']['total_user'] = $first_last_date_monthly['total_user'];
     // $build['risk_management_fieldset']['risk_management']['#attached']['drupalSettings']['selected_user_count'] = $first_last_date_monthly['selected_user_count'];
-    $build['risk_management_fieldset']['risk_management']['container_element_risk_legend']['#markup'] = '<div id="container-element-risk-legend" style="min-width: 150px; height: 400px; max-width: 400px; margin: 0 auto"></div>';
+    // $build['risk_management_fieldset']['risk_management']['container_element_risk_legend']['#markup'] = '<div id="container-element-risk-legend" style="min-width: 150px; height: 400px; max-width: 400px; margin: 0 auto"></div>';
     $build['risk_management_fieldset']['risk_management']['container_element_risk_report']['#markup'] = '<div id="container-element-risk-report" style="min-width: 150px; height: 400px; max-width: 400px; margin: 0 auto"></div>';
 
     //Get data for Finding categories minor/major.

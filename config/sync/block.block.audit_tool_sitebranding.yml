@@ -9,7 +9,7 @@ dependencies:
 id: audit_tool_sitebranding
 theme: audit_tool
 region: header
-weight: -23
+weight: -32
 provider: null
 plugin: system_branding_block
 settings:

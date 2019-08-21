@@ -1,16 +1,16 @@
-uuid: 5cb2c234-79f3-43f4-9805-01c59c3d138c
+uuid: 042fccaa-c4c9-46ad-85a1-95847dbb27c9
 langcode: en
 status: true
 dependencies:
   config:
     - eck.eck_type.audit_criteria_supplier.supplier
-    - field.storage.audit_criteria_supplier.field_supplier_document
-    - taxonomy.vocabulary.supplier_audits
-id: audit_criteria_supplier.supplier.field_supplier_document
-field_name: field_supplier_document
+    - field.storage.audit_criteria_supplier.field_documents
+    - taxonomy.vocabulary.supplier_audits_documents
+id: audit_criteria_supplier.supplier.field_documents
+field_name: field_documents
 entity_type: audit_criteria_supplier
 bundle: supplier
-label: RECORDS
+label: DOCUMENTS
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      supplier_audits: supplier_audits
+      supplier_audits_documents: supplier_audits_documents
     sort:
       field: name
       direction: asc

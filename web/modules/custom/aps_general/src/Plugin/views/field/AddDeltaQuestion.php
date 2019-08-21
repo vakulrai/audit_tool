@@ -7,6 +7,7 @@ use Drupal\Component\Utility\Random;
 use Drupal\views\Plugin\views\field\FieldPluginBase;
 use Drupal\views\ResultRow;
 use Drupal\Core\Url;
+use Drupal\Core\Render\Markup;
 
 /**
  * A handler to provide a field that is completely custom by the administrator.
@@ -57,11 +58,12 @@ class AddDeltaQuestion extends FieldPluginBase {
     // the desired output.
     $nid = \Drupal::request()->query->get('ref');
     $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
+    $title = Markup::create('<span data-toggle="tooltip" data-placement="right" title="Auditor expert comments/view"><h1>dQ</h1></span>');
     $form['add_delta_qa'] = [
-	      '#type' => 'link',
-	      '#title' => t('ADD DELTA Q'),
-	      '#url' => Url::fromRoute('node.add',['node_type' => 'answers', 'destination' => $current_uri_destination, 'checklist_type' => 'delta']),
-        ];
+      '#type' => 'link',
+      '#title' => $title,
+      '#url' => Url::fromRoute('node.add',['node_type' => 'answers', 'destination' => $current_uri_destination, 'checklist_type' => 'delta']),
+    ];
     return $form;
   }
 

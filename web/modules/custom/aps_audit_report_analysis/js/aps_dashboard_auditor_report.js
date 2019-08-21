@@ -8,6 +8,9 @@
       var selected_user_count = drupalSettings.selected_user_count;
       var percentage_auditor = Math.round(selected_user_count/total_user * 100);
       Highcharts.chart('container-element-auditor-report', {
+      	    credits: {
+              enabled: false
+            },
 		    chart: {
 		        type: 'line'
 		    },

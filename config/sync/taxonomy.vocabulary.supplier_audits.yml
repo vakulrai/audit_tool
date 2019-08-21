@@ -2,7 +2,7 @@ uuid: c7110640-2208-4f46-8905-bcd11cf6df84
 langcode: en
 status: true
 dependencies: {  }
-name: 'Supplier Audits'
+name: 'Supplier Audits -Records'
 vid: supplier_audits
 description: ''
 weight: 0

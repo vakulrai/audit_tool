@@ -57,28 +57,22 @@ class NcrStatus extends FieldPluginBase {
     // Return a random text, here you can include your custom logic.
     // Include any namespace required to call the method required to generate
     // the desired output.
-    $nid  = $values->_entity;
-    $node_object  = Node::load($nid->id());
+    $paragraph_object  = $values->_entity;
     $options = [
       '_none' => '-None-',
       'implemented' => 'Implemented',
       'not-implemented' => 'Not Implemented',
     ];
-  
-    if(isset($node_object->field_report_reference->target_id)){
-      $node_report = Node::load($node_object->field_report_reference->target_id);
-      if(isset($node_report->field_audit_list->target_id)){
-        $car_paragraph_id = $node_report->field_audit_list->target_id;
-        $paragraphs_answer_object = Paragraph::load($car_paragraph_id);
-        $form['ncr_check'] = [
-          '#type' => 'select',
-          '#required' => TRUE,
-          '#title' => t('<b>NCR Status</b> :'),
-          '#options' => $options,
-          '#attributes' => ['id' => 'ncr-details', 'record_reference' => $car_paragraph_id],
-          '#value'=> $paragraphs_answer_object->field_car_status->value,
-        ];
-      }
+
+    if($paragraph_object->id()){
+      $form['ncr_check'] = [
+        '#type' => 'select',
+        '#required' => TRUE,
+        '#title' => t('<b>NCR Status</b> :'),
+        '#options' => $options,
+        '#attributes' => ['id' => 'ncr-details', 'record_reference' => $paragraph_object->id()],
+        '#value'=> $paragraph_object->field_car_status->value,
+      ];
     }
     return $form;
   }

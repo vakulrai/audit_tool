@@ -6,8 +6,10 @@ dependencies:
     - eck.eck_type.audit_criteria.systems
     - field.field.audit_criteria.systems.field_documents
     - field.field.audit_criteria.systems.field_process
+    - field.field.audit_criteria.systems.field_process_record
     - field.field.audit_criteria.systems.field_product
     - field.field.audit_criteria.systems.field_records
+    - field.field.audit_criteria.systems.field_records_product
     - field.field.audit_criteria.systems.field_score_level_set
     - field.field.audit_criteria.systems.field_score_level_set_100
     - field.field.audit_criteria.systems.field_score_settings
@@ -33,6 +35,7 @@ third_party_settings:
     group_process:
       children:
         - field_process
+        - field_process_record
       parent_name: ''
       weight: 1
       format_type: fieldset
@@ -45,6 +48,7 @@ third_party_settings:
     group_product:
       children:
         - field_product
+        - field_records_product
       parent_name: ''
       weight: 2
       format_type: fieldset
@@ -71,6 +75,12 @@ content:
     third_party_settings: {  }
     type: options_buttons
     region: content
+  field_process_record:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   field_product:
     weight: 10
     settings: {  }
@@ -79,6 +89,12 @@ content:
     region: content
   field_records:
     weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_records_product:
+    weight: 11
     settings: {  }
     third_party_settings: {  }
     type: options_buttons

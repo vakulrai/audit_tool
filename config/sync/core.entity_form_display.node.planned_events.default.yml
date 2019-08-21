@@ -111,11 +111,12 @@ third_party_settings:
       weight: 2
       format_type: fieldset
       format_settings:
-        id: ''
-        classes: ''
+        label: Resources
         description: ''
         required_fields: true
-      label: Who
+        id: ''
+        classes: ''
+      label: Resources
     group_planning_dates:
       children:
         - field_start_date
@@ -450,15 +451,18 @@ content:
             state: '!visible'
             condition: value
             grouping: AND
-            values_set: 1
+            values_set: 3
             value: ''
-            values: {  }
+            values: "internal\r\n_none"
             value_form:
               -
                 value: internal
             effect: show
             effect_options: {  }
             selector: ''
+            field_audit_type:
+              -
+                value: internal
           entity_type: node
           bundle: planned_events
     type: datetime_default

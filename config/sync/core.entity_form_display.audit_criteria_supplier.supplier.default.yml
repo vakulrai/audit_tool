@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - eck.eck_type.audit_criteria_supplier.supplier
+    - field.field.audit_criteria_supplier.supplier.field_documents
     - field.field.audit_criteria_supplier.supplier.field_supplier_document
     - field.field.audit_criteria_supplier.supplier.field_unit_reference
 id: audit_criteria_supplier.supplier.default
@@ -11,6 +12,12 @@ targetEntityType: audit_criteria_supplier
 bundle: supplier
 mode: default
 content:
+  field_documents:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   field_supplier_document:
     weight: 3
     settings: {  }

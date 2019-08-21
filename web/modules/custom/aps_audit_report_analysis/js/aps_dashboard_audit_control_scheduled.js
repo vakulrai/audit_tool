@@ -41,6 +41,9 @@
       	total_procedure_not = Math.round((procedure_data['total'] - procedure_data['completed'])/procedure_data['total'] * 100);
       }
       var chart_a = new Highcharts.Chart('container-scheduled-a',{
+      	  credits: {
+            enabled: false
+          },
 		  chart: {
 		    // renderTo: 'container-scheduled-a',
 		    type: 'bar',
@@ -102,6 +105,9 @@
 		});
 
       var chart_b = new Highcharts.Chart({
+      	  credits: {
+            enabled: false
+          },
 		  chart: {
 		    renderTo: 'container-scheduled-b',
 		    type: 'bar',
@@ -163,6 +169,9 @@
 		})
 
       var chart_c = new Highcharts.Chart({
+      	  credits: {
+            enabled: false
+          },
 		  chart: {
 		    renderTo: 'container-scheduled-c',
 		    type: 'bar',

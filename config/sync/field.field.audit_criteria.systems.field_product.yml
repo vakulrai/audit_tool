@@ -10,7 +10,7 @@ id: audit_criteria.systems.field_product
 field_name: field_product
 entity_type: audit_criteria
 bundle: systems
-label: Product
+label: DOCUMENTS
 description: ''
 required: false
 translatable: false
