@@ -58,29 +58,42 @@ class kpiStatus extends FieldPluginBase {
     // the desired output.
     $nid  = $values->_entity;
     $node_object  = Node::load($nid->id());
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    foreach ($roles as $key => $value) {
+      $user_role = $value;
+    }
+
     $options = [
       '_none' => '-None-',
       'achieved' => 'Achieved',
       'not-achieved' => 'Not Achieved',
     ];
-  
+    
+    if($user_role == 'auditor'){
+      $disable_field = FALSE;
+    }
+    else{
+      $disable_field = TRUE;
+    }
+
     if(isset($node_object->field_kpi_status->value)){
       $form['kpi_check'] = [
         '#type' => 'select',
-        '#required' => TRUE,
         '#title' => t('<b>KPI Status</b> :'),
         '#options' => $options,
         '#attributes' => ['id' => 'kpi-details', 'record_reference' => $nid->id()],
         '#value'=> $node_object->field_kpi_status->value,
+        '#disabled' => $disable_field,
       ];
     }
     else{
        $form['kpi_check'] = [
         '#type' => 'select',
-        '#required' => TRUE,
         '#title' => t('<b>KPI Status</b> :'),
         '#options' => $options,
         '#attributes' => ['id' => 'kpi-details', 'record_reference' => $nid->id()],
+        '#disabled' => $disable_field,
       ];
     }
     return $form;

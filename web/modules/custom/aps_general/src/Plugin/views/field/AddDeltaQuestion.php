@@ -58,7 +58,7 @@ class AddDeltaQuestion extends FieldPluginBase {
     // the desired output.
     $nid = \Drupal::request()->query->get('ref');
     $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
-    $title = Markup::create('<span data-toggle="tooltip" data-placement="right" title="Auditor expert comments/view"><h1>dQ</h1></span>');
+    $title = Markup::create('<span data-toggle="tooltip" data-placement="top" title="Auditor expert comments/view"><h1>dQ</h1></span>');
     $form['add_delta_qa'] = [
       '#type' => 'link',
       '#title' => $title,
