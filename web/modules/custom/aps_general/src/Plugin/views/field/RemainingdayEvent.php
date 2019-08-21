@@ -59,8 +59,13 @@ class RemainingdayEvent extends FieldPluginBase {
     $node = $values->_entity;
     $event_start_date_timestamp = $node->get('field_start_date')->value;
     $audit_cycle_settings = getAuditCycleObjectCurrentUnit($node->get('field_refere')->target_id);
-    if(isset($audit_cycle_settings->get('field_car_release_by_auidtee_')->value) && $audit_cycle_settings){
-      $days_before_event = $audit_cycle_settings->get('field_rescheduling_of_dates_')->value;
+    if($audit_cycle_settings){
+      if(isset($audit_cycle_settings->get('field_rescheduling_of_dates_')->value)){
+        $days_before_event = $audit_cycle_settings->get('field_rescheduling_of_dates_')->value;
+      }
+      else{
+        $days_before_event = 0;
+      }
     }
     else{
       $days_before_event = 0;
