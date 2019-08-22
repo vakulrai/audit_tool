@@ -15,14 +15,8 @@ settings:
       value: 'Yes'
       label: Yes/No/NA
     -
-      value: Pass
-      label: Pass/Fail/NA
-    -
       value: Pdef
       label: 'Pre Defined'
-    -
-      value: Ival
-      label: 'Input Value'
   allowed_values_function: ''
 module: options
 locked: false

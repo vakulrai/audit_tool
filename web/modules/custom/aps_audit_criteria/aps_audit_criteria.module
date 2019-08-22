@@ -11,6 +11,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\node\Entity\Node;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\user\Entity\User;
+use Drupal\Core\Entity;
 
 /**
  * Implements hook_help().
@@ -37,16 +38,35 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
-  
+
   if ($form_id == 'audit_criteria_customer_customer_form') {
     if($id= \Drupal::request()->query->get('unit_reference')){
       $node_object = Node::load($id);
       $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
     $form['field_unit_reference']['#access'] = FALSE;
+    $audit_criteria_customer = \Drupal::entityQuery('audit_criteria_customer');
+    $audit_criteria_customer->condition('field_unit_reference', $id);
+    $audit_criteria_customer_id = $audit_criteria_customer->execute();
+    if(count($audit_criteria_customer_id)){
+      $node_storage = \Drupal::entityTypeManager()->getStorage('audit_criteria_customer')->loadMultiple($audit_criteria_customer_id);
+      foreach ($node_storage as $node){
+         $field_merchant_id = $node->delete();
+      }
+    }
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'customer_config_redirect';
+      }
+    }
   }
   elseif ($form_id == 'audit_criteria_customer_customer_edit_form') {
     $form['field_unit_reference']['#access'] = FALSE;
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'customer_config_redirect';
+      }
+    }
   }
 
   if ($form_id == 'audit_criteria_supplier_supplier_form') {
@@ -55,9 +75,28 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
       $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
     $form['field_unit_reference']['#access'] = FALSE;
+    $audit_criteria_supplier = \Drupal::entityQuery('audit_criteria_supplier');
+    $audit_criteria_supplier->condition('field_unit_reference', $id);
+    $audit_criteria_supplier_id = $audit_criteria_supplier->execute();
+    if(count($audit_criteria_supplier_id)){
+      $node_storage = \Drupal::entityTypeManager()->getStorage('audit_criteria_supplier')->loadMultiple($audit_criteria_supplier_id);
+      foreach ($node_storage as $node){
+         $field_merchant_id = $node->delete();
+      }
+    }
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'supplier_config_redirect';
+      }
+    }
   }
   elseif ($form_id == 'audit_criteria_supplier_supplier_edit_form') {
     $form['field_unit_reference']['#access'] = FALSE;
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'supplier_config_redirect';
+      }
+    }
   }
 
   if ($form_id == 'audit_criteria_external_external_form') {
@@ -66,9 +105,28 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
       $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
     $form['field_unit_reference']['#access'] = FALSE;
+    $audit_criteria_external = \Drupal::entityQuery('audit_criteria_external');
+    $audit_criteria_external->condition('field_unit_reference', $id);
+    $audit_criteria_external_id = $audit_criteria_external->execute();
+    if(count($audit_criteria_external_id)){
+      $node_storage = \Drupal::entityTypeManager()->getStorage('audit_criteria_external')->loadMultiple($audit_criteria_external_id);
+      foreach ($node_storage as $node){
+         $field_merchant_id = $node->delete();
+      }
+    }
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'external_config_redirect';
+      }
+    }
   }
   elseif ($form_id == 'audit_criteria_external_external_edit_form') {
     $form['field_unit_reference']['#access'] = FALSE;
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'external_config_redirect';
+      }
+    }
   }
 
   if ($form_id == 'audit_criteria_process_process_form') {
@@ -95,6 +153,17 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
 
 
   if ($form_id == 'audit_criteria_score_score_form' || $form_id == 'audit_criteria_score_score_edit_form') {
+    if($form_id == 'audit_criteria_score_score_form'){
+      $audit_criteria_score = \Drupal::entityQuery('audit_criteria_score');
+      $audit_criteria_score->condition('field_unit_reference', $id);
+      $audit_criteria_score_id = $audit_criteria_score->execute();
+      if(count($audit_criteria_score_id)){
+        $node_storage = \Drupal::entityTypeManager()->getStorage('audit_criteria_score')->loadMultiple($audit_criteria_score_id);
+        foreach ($node_storage as $node){
+           $field_merchant_id = $node->delete();
+        }
+      }
+    }
     $form['field_score_level_set_10']['#attributes'] = ['id' => ['set-10']];
     $form['field_score_level_set_100']['#attributes'] = ['id' => ['set-100']];
     $options_score = getVids('system_documents', 31);
@@ -130,6 +199,11 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
         '#edit-field-score-settings-33' => ['checked' => FALSE],
         ],
       ];
+      foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'score_config_redirect';
+        }
+      }
   }
   elseif ($form_id == 'audit_criteria_score_score_edit_form') {
     $form['field_unit_reference']['#access'] = FALSE;
@@ -153,9 +227,24 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
         $node_object = Node::load($id);
         $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
       }
+      $audit_criteria_query = \Drupal::entityQuery('audit_criteria');
+      $audit_criteria_query->condition('field_unit_reference', $id);
+      $audit_criteria_id = $audit_criteria_query->execute();
+      if(count($audit_criteria_id)){
+        $node_storage = \Drupal::entityTypeManager()->getStorage('audit_criteria')->loadMultiple($audit_criteria_id);
+        foreach ($node_storage as $node){
+           $field_merchant_id = $node->delete();
+        }
+      }
     }
-   if($form_id == 'audit_criteria_systems_form' || $form_id == 'audit_criteria_systems_edit_form'){
+
+    if($form_id == 'audit_criteria_systems_form' || $form_id == 'audit_criteria_systems_edit_form'){
       $form['field_unit_reference']['#access'] = FALSE;
+      foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'system_config_redirect';
+        }
+      }
     }
 	  $options_document = getVids('system_documents', 27);
 	  $options_records = getVids('system_documents', 28);
@@ -197,11 +286,6 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
       ];
       
       unset($form['field_customer_audit']);
-      foreach (array_keys($form['actions']) as $action) {
-        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-          $form['actions'][$action]['#submit'][] = 'audit_criteria_redirect';
-        }
-      }
 	}
   elseif (condition) {
     # code...
@@ -214,7 +298,16 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
         $node_object = Node::load($id);
         $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
       }
-      // $form['field_unit_reference']['#access'] = FALSE;
+      $audit_cycle= \Drupal::entityQuery('audit_cycle');
+      $audit_cycle->condition('field_unit_reference', $id);
+      $audit_cycle_id = $audit_cycle->execute();
+      if(count($audit_cycle_id)){
+        $node_storage = \Drupal::entityTypeManager()->getStorage('audit_cycle')->loadMultiple($audit_cycle_id);
+        foreach ($node_storage as $node){
+           $field_merchant_id = $node->delete();
+        }
+      }
+      $form['field_unit_reference']['#access'] = FALSE;
     }
 	  $form['#attached']['library'][] = 'aps_audit_criteria/aps_audit_criteria_js';
 
@@ -249,6 +342,11 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
       foreach (array_keys($form['actions']) as $action) {
         if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
           $form['actions'][$action]['#submit'][] = 'audit_cycle_redirect';
+        }
+      }
+      foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'time_cycle_config_redirect';
         }
       }
 	}
@@ -325,6 +423,74 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
 }
 
 /**
+ * Implements Callbacks for Audit criteria Settings.
+ */
+function system_config_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $unit_reference = \Drupal::request()->query->get('unit_reference');
+  $audit_criteria_query = \Drupal::entityQuery('audit_criteria');
+  $audit_criteria_query->condition('field_unit_reference', $unit_reference);
+  $audit_criteria_id = $audit_criteria_query->execute();
+  $response = Url::fromUserInput('/audit_criteria/'.key($audit_criteria_id).'/edit?type=edit&unit_reference='.$unit_reference);
+  $messenger = \Drupal::messenger();
+  $messenger->addMessage('Settings Saved Successfully.', $messenger::TYPE_STATUS);
+  $form_state->setRedirectUrl($response);
+}
+
+function external_config_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $unit_reference = \Drupal::request()->query->get('unit_reference');
+  $audit_criteria_external = \Drupal::entityQuery('audit_criteria_external');
+  $audit_criteria_external->condition('field_unit_reference', $unit_reference);
+  $audit_criteria_external_id = $audit_criteria_external->execute();
+  $response = Url::fromUserInput('/audit_criteria_external/'.key($audit_criteria_external_id).'/edit?type=edit&unit_reference='.$unit_reference);
+  $messenger = \Drupal::messenger();
+  $messenger->addMessage('Settings Saved Successfully.', $messenger::TYPE_STATUS);
+  $form_state->setRedirectUrl($response);
+}
+
+function customer_config_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $unit_reference = \Drupal::request()->query->get('unit_reference');
+  $audit_criteria_customer = \Drupal::entityQuery('audit_criteria_customer');
+  $audit_criteria_customer->condition('field_unit_reference', $unit_reference);
+  $audit_criteria_customer_id = $audit_criteria_customer->execute();
+  $response = Url::fromUserInput('/audit_criteria_customer/'.key($audit_criteria_customer_id).'/edit?type=edit&unit_reference='.$unit_reference);
+  $messenger = \Drupal::messenger();
+  $messenger->addMessage('Settings Saved Successfully.', $messenger::TYPE_STATUS);
+  $form_state->setRedirectUrl($response);
+}
+
+function supplier_config_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $unit_reference = \Drupal::request()->query->get('unit_reference');
+  $audit_criteria_supplier = \Drupal::entityQuery('audit_criteria_supplier');
+  $audit_criteria_supplier->condition('field_unit_reference', $unit_reference);
+  $audit_criteria_supplier_id = $audit_criteria_supplier->execute();
+  $response = Url::fromUserInput('/audit_criteria_supplier/'.key($audit_criteria_supplier_id).'/edit?type=edit&unit_reference='.$unit_reference);
+  $messenger = \Drupal::messenger();
+  $messenger->addMessage('Settings Saved Successfully.', $messenger::TYPE_STATUS);
+  $form_state->setRedirectUrl($response);
+}
+
+function score_config_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $unit_reference = \Drupal::request()->query->get('unit_reference');
+  $audit_criteria_score = \Drupal::entityQuery('audit_criteria_score');
+  $audit_criteria_score->condition('field_unit_reference', $unit_reference);
+  $audit_criteria_score_id = $audit_criteria_score->execute();
+  $response = Url::fromUserInput('/audit_criteria_score/'.key($audit_criteria_score_id).'/edit?type=edit&unit_reference='.$unit_reference);
+  $messenger = \Drupal::messenger();
+  $messenger->addMessage('Settings Saved Successfully.', $messenger::TYPE_STATUS);
+  $form_state->setRedirectUrl($response);
+}
+
+function time_cycle_config_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $unit_reference = \Drupal::request()->query->get('unit_reference');
+  $audit_cycle= \Drupal::entityQuery('audit_cycle');
+  $audit_cycle->condition('field_unit_reference', $unit_reference);
+  $audit_cycle_id = $audit_cycle->execute();
+  $response = Url::fromUserInput('/audit_cycle/'.key($audit_cycle_id).'/edit?type=edit&unit_reference='.$unit_reference);
+
+  $form_state->setRedirectUrl($response);
+}
+
+/**
  * Implements  hook_preprocess_page().
  */
 function aps_audit_criteria_preprocess_page(&$variables) {
@@ -342,6 +508,10 @@ function aps_audit_criteria_inline_entity_form_entity_form_alter(&$entity_form, 
 }
 
 function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+  $uri = explode('/', $current_uri);
+  $content_type = explode('?', $uri[2]);
   $field_definition = $context['items']->getFieldDefinition();
   if($field_definition->getName() == 'field_defined_option_yes_no'){
      $key_yes_no = $context['form']['#parents'][1];
@@ -354,6 +524,14 @@ function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form
             'input[name="field_queries['.$key_yes_no.'][inline_entity_form][field_select_query_type]"]' => ['value' => 'Yes']
           ],
         ];
+
+        if($route_name == 'node.add' && $content_type[0] == 'internal_audit'){
+          $element['subform']['field_selected_value']['#access'] = FALSE;
+          $element['subform']['field_evidence']['#access'] = FALSE;
+          $element['subform']['field_kpi_status']['#access'] = FALSE;
+          $element['subform']['field_total_score']['#access'] = FALSE;
+          $element['subform']['field_checked']['#access'] = FALSE;
+        }
         $element['subform']['field_s_no']['widget'][0]['value']['#default_value'] = $key_yes_no;
       }
   }
@@ -378,6 +556,14 @@ function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form
       $element['subform']['field_answer_optimised']['#disabled'] = TRUE;
       $element['subform']['field_answer_qualified']['#disabled'] = TRUE;
       $element['subform']['field_answers_defined']['#disabled'] = TRUE;
+      if($route_name == 'node.add' && $content_type[0] == 'internal_audit'){
+        $element['subform']['field_clause_no']['#access'] = FALSE;
+        $element['subform']['field_evidence']['#access'] = FALSE;
+        $element['subform']['field_finding_categories']['#access'] = FALSE;
+        $element['subform']['field_kpi_status']['#access'] = FALSE;
+        $element['subform']['field_total_score']['#access'] = FALSE;
+        $element['subform']['field_checked']['#access'] = FALSE;
+      }
       $element['subform']['field_sub_s_no_']['widget'][0]['value']['#default_value'] = $key_pdef;
     }
   }
@@ -426,14 +612,6 @@ function getVids($vid, $parent_id){
     $term_data[$term->tid] = $term->name;
   }
   return $term_data;
-}
-
-/**
- * Callback method after audit criteria form submits.
- */
-function audit_criteria_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
-  $response = Url::fromUserInput('/');
-  $form_state->setRedirectUrl($response);
 }
 
 /**

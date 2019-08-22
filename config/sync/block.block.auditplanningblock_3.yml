@@ -1,33 +1,28 @@
-uuid: 4cf1476a-cfef-4d12-83b9-49ed0ba7fb39
+uuid: 8fe15bfd-9a0f-406d-8139-72c11bd4bc6b
 langcode: en
 status: true
 dependencies:
-  config:
-    - views.view.customer_manual_parts
   module:
+    - aps_audit_planning
     - system
     - user
-    - views
   theme:
     - audit_tool
-id: views_block__customer_manual_parts_parts
+id: auditplanningblock_3
 theme: audit_tool
 region: content
-weight: 1
+weight: 0
 provider: null
-plugin: 'views_block:customer_manual_parts-parts'
+plugin: audit_planning_block
 settings:
-  id: 'views_block:customer_manual_parts-parts'
-  label: ''
-  provider: views
+  id: audit_planning_block
+  label: 'Audit planning block'
+  provider: aps_audit_planning
   label_display: '0'
-  views_label: ''
-  items_per_page: none
-  context_mapping: {  }
 visibility:
   request_path:
     id: request_path
-    pages: /admin/content/customer_manual_parts/add/parts
+    pages: '/audit-planning/*'
     negate: false
     context_mapping: {  }
   user_role:

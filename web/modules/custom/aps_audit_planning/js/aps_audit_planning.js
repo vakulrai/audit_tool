@@ -7,6 +7,7 @@
     	var calendarEl = document.getElementById('demo');
       var base_url = drupalSettings.siteBaseUrl;
       var unit_id = drupalSettings.unitId;
+      console.log('ll');
       var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'googleCalendar'],
       googleCalendarApiKey: 'AIzaSyDAhieDD1LZNmnuFROsxhJQAGZP6amv-cg',
@@ -24,6 +25,14 @@
       //      return event.rendering === 'background';
       //   }
       // },
+      validRange: function(nowDate) {
+        var startDate = new Date(nowDate.valueOf());
+        var endDate = new Date(nowDate.valueOf());
+        var month_range = 12 - nowDate.getMonth();
+        startDate.setDate(nowDate.getDate()); // One day in the past
+        endDate.setMonth(nowDate.getMonth()+ month_range); // one month into the future
+        return { start: startDate, end: endDate };
+      },
       eventSources: [
         base_url+'/generate-events/'+unit_id,
         base_url+'/list-of-unit-holidays/'+unit_id,

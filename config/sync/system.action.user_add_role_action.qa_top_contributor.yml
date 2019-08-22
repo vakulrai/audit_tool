@@ -1,0 +1,14 @@
+uuid: 9078764b-d5af-4316-8760-5930973d3d70
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.qa_top_contributor
+  module:
+    - user
+id: user_add_role_action.qa_top_contributor
+label: 'Add the Questions and Answers Top Contributor role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: qa_top_contributor
