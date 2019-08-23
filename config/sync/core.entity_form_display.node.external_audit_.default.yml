@@ -122,10 +122,9 @@ content:
     region: content
   field_validity:
     weight: 4
-    settings:
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-    type: number
+    type: datetime_default
     region: content
   moderation_state:
     type: moderation_state_default
