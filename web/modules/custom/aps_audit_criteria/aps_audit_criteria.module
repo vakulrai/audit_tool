@@ -507,6 +507,13 @@ function aps_audit_criteria_inline_entity_form_entity_form_alter(&$entity_form, 
   $entity_form['field_add_to_checklist']['#access'] = FALSE;
 }
 
+/**
+ * Implements  hook_field_widget_form_alter().
+ */
+function aps_audit_criteria_field_widget_address_default_form_alter(&$element, &$form_state, $context) {
+  $element['#type'] = 'fieldset';
+}
+
 function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
   $route_name = \Drupal::routeMatch()->getRouteName();
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
@@ -579,6 +586,7 @@ function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form
       $element['subform']['field_car_status']['#access'] = FALSE;
     }
   }
+
 }
 
 function aps_audit_criteria_form_paragraphs_subform_alter(array &$subform, \Drupal\Core\Form\FormStateInterface &$form_state, $delta) {
