@@ -38,7 +38,11 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
-
+  
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if($route_name == 'node.add' && count($form['actions'])){
+    unset($form['actions']['preview']);
+  }
   if ($form_id == 'audit_criteria_customer_customer_form') {
     if($id= \Drupal::request()->query->get('unit_reference')){
       $node_object = Node::load($id);
