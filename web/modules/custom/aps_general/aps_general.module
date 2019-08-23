@@ -1061,6 +1061,12 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     elseif ($uri[2] == 'customers_manual?destination=node') {
       unset($data['tabs']);
     }
+    elseif ($uri[2] == 'customers_manual') {
+      unset($data['tabs']);
+    }
+     elseif ($uri[2] == 'customer_manual_parts') {
+      unset($data['tabs']);
+    }
     elseif (stripos(strtolower($uri[2]), 'customers_manual?') !== false) {
         unset($data['tabs']);
     }
@@ -1633,6 +1639,13 @@ function aps_general_link_alter(&$variables) {
       $variables['url']->setRouteParameter('unit_reference', $id);
     }
   }
+
+  if ($cleanLinkText == 'Add New') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('unit_reference', $id);
+    }
+  }
 }
 
 function get_user_roles(){
@@ -1767,7 +1780,8 @@ function aps_assembly_user_redirect_default(array $form, \Drupal\Core\Form\FormS
  * Callback method after user form submits.
  */
 function aps_assembly_user_redirect_auditor(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
-  $response = Url::fromUserInput('/user-listing-auditor');
+  $unit_reference = \Drupal::request()->query->get('unit_reference');
+  $response = Url::fromUserInput('/user-listing-auditor?unit_reference='.$unit_reference);
   $form_state->setRedirectUrl($response);
 }
 
@@ -1822,7 +1836,7 @@ function customer_add(array $form, \Drupal\Core\Form\FormStateInterface $form_st
   $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
   $destination = \Drupal::request()->query->get('destination');
   $unit_reference = \Drupal::request()->query->get('unit_reference');
-  $response = Url::fromUserInput('/node/add/customers_manual?unit_reference='.$unit_reference);
+  $response = Url::fromUserInput('/node/add/customers_manual',['query' => ['unit_reference' => $unit_reference]]);
   $form_state->setRedirectUrl($response);
 }
 

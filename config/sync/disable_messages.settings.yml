@@ -1,5 +1,5 @@
 disable_messages_enable: '1'
-disable_messages_filter_by_page: 2
+disable_messages_filter_by_page: 0
 disable_messages_page_filter_paths: /home
 disable_messages_enable_debug: '0'
 disable_messages_debug_visible_div: '0'

@@ -1,9 +1,9 @@
-uuid: 1e6caf9f-163b-4e2d-9dc3-2730d60f9a07
+uuid: 9c921f64-685f-4364-9408-e4cc2199bd9a
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:risk_legend:c24b94eb-875f-4a77-99af-21cd2ee6ae8a'
+    - 'block_content:risk_legend:7f2a91e5-3f8c-4cdb-ba15-8590aee4f29f'
   module:
     - block_content
     - system
@@ -13,11 +13,11 @@ dependencies:
 id: risklegendelementblock
 theme: audit_tool
 region: highlighted
-weight: -30
+weight: 0
 provider: null
-plugin: 'block_content:c24b94eb-875f-4a77-99af-21cd2ee6ae8a'
+plugin: 'block_content:7f2a91e5-3f8c-4cdb-ba15-8590aee4f29f'
 settings:
-  id: 'block_content:c24b94eb-875f-4a77-99af-21cd2ee6ae8a'
+  id: 'block_content:7f2a91e5-3f8c-4cdb-ba15-8590aee4f29f'
   label: 'Risk Legend Element Block'
   provider: block_content
   label_display: '0'

@@ -47,21 +47,21 @@
         }
       ],
       select: function(arg) {
-        var title = prompt('Enter A Title:');
-        if (title) {
+        // var title = prompt('Enter A Title:');
+        // if (title) {
           var current = formatDate(arg.start);
           var start = formatDate(arg.start);
           var end = formatDate(arg.end);
-          var url = base_url + '/node/add/planned_events?field_start_date='+start+'&field_end_date='+end+'&current='+current+'&title='+title+'&unit_reference='+url_param[2];
-          calendar.addEvent({
-            title: title,
-            start: arg.start,
-            url: url,
-            end: arg.end,
-            allDay: false,
-            editable: false,
-          })
-        }
+          window.location.href = base_url + '/node/add/planned_events?field_start_date='+start+'&field_end_date='+end+'&current='+current+'&unit_reference='+url_param[2];
+          // calendar.addEvent({
+          //   title: title,
+          //   start: arg.start,
+          //   url: url,
+          //   end: arg.end,
+          //   allDay: false,
+          //   editable: false,
+          // })
+        // }
       },
       eventLimit: true,
     });

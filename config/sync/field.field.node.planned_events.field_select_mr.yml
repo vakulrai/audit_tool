@@ -1,0 +1,25 @@
+uuid: 523568f1-3aaa-4bd5-801e-dae9927e82e8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_select_mr
+    - node.type.planned_events
+id: node.planned_events.field_select_mr
+field_name: field_select_mr
+entity_type: node
+bundle: planned_events
+label: 'Select MR'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: user_listing_and_roles
+      display_name: entity_reference_2
+      arguments: {  }
+field_type: entity_reference
