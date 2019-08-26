@@ -33,6 +33,7 @@
         "drupal/disable_messages": "^1.1",
         "drupal/eck": "^1.0@alpha",
         "drupal/entity_conditional_fields": "1.x-dev",
+        "drupal/entity_limit": "^2.0@alpha",
         "drupal/examples": "1.x-dev",
         "drupal/field_group": "^1.0",
         "drupal/formtips": "^1.2",

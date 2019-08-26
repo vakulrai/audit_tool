@@ -940,7 +940,13 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
-
+  
+  if($route_name == 'user.login'){
+    unset($data['tabs'][0]['user.pass']);
+  }
+  elseif($route_name == 'user.register'){
+    unset($data['tabs'][0]['user.pass']);
+  }
   if($route_name == 'eck.entity.add'){  
     if($uri[2] == 'audit_criteria'){
       $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_internal']['#active'] = TRUE;

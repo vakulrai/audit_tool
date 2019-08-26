@@ -54,13 +54,13 @@ class GenerateReports extends ControllerBase {
       $cycle_type = $entity_audit_cycle->get('field_cycle_type')->value;
       if($cycle_type == 0){
         $cycle_type_name = 'Financial';
-        $audit_cycle_start_date = $entity_audit_cycle->get('field_financial_dates')->value;
-        $audit_cycle_end_date = $entity_audit_cycle->get('field_financial_dates')->end_value;
+        $audit_cycle_start_date = $entity_audit_cycle->get('field_financial_dates')->value ? $entity_audit_cycle->get('field_financial_dates')->value : 'N/A';
+        $audit_cycle_end_date = $entity_audit_cycle->get('field_financial_dates')->end_value ? $entity_audit_cycle->get('field_financial_dates')->end_value : 'N/A';
       }
       elseif ($cycle_type == 1) {
         $cycle_type_name = 'Calendar';
-        $audit_cycle_start_date = $entity_audit_cycle->get('field_calendar_date')->value;
-        $audit_cycle_end_date = $entity_audit_cycle->get('field_calendar_date')->end_value;
+        $audit_cycle_start_date = $entity_audit_cycle->get('field_calendar_date')->value != '' ? $entity_audit_cycle->get('field_calendar_date')->value : 'N/A';
+        $audit_cycle_end_date = $entity_audit_cycle->get('field_calendar_date')->end_value != '' ? $entity_audit_cycle->get('field_calendar_date')->end_value : 'N/A';
       }
     }
     $html = '<html>';
@@ -101,11 +101,11 @@ class GenerateReports extends ControllerBase {
     // First Section.
     $html .= '<div class="infowrap" style="width:100%; ">';
       // Name
-    $html .= '<div class="audit-cycle-cycle">'.$this->t('<span class="label">Cycle Type: </span>').'<span class="customer-info">'.$this->t($cycle_type_name).'</span></div>';
+    $html .= '<div class="audit-cycle-cycle">'.$this->t('<span class="label">Cycle Type: </span>').'<span class="customer-info">'.$cycle_type_name.'</span></div>';
 
-    $html .= '<div class="audit-cycle-date-start">'.$this->t('<span class="label">Start Date: </span>').'<span class="start-info">'.$this->t($audit_cycle_start_date).'</span></div>';
+    $html .= '<div class="audit-cycle-date-start">'.$this->t('<span class="label">Start Date: </span>').'<span class="start-info">'.$audit_cycle_start_date.'</span></div>';
     // Account ID.
-    $html .= '<div class="audit-cycle-end-start">'.$this->t('<span class="label">End Date: </span>').'<span class="end-info">'.$this->t($audit_cycle_end_date).'</span></div>';
+    $html .= '<div class="audit-cycle-end-start">'.$this->t('<span class="label">End Date: </span>').'<span class="end-info">'.$audit_cycle_end_date.'</span></div>';
     $html .= '</div>';
     $html .= '</br>';
 
@@ -115,6 +115,7 @@ class GenerateReports extends ControllerBase {
       $html .= '<h1>Annual calendar plan</h1>';
       //Detail: A *****Get Annual calendar plan****//.
       $data_planned_event = $this->getdatafromuri('event','/ncr-car-management-details/'.$unit_reference.'?type[]=planned_events'.$date_range_query);
+      echo '<pre>';
       if(count($data_planned_event)){
         $html .= '<table id = "annual-planned-events" style="width:100%;box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); border-collapse: collapse;">
           <thead>

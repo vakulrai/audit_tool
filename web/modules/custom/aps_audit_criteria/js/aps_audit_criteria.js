@@ -8,9 +8,13 @@
           $("div.field--name-field-calendar-date").hide();
           $("#edit-field-financial-dates-wrapper").show();
         }
-        else{
+        else if(id == '1'){
           $("div.field--name-field-financial-dates").hide();
           $("#edit-field-calendar-date-wrapper").show();
+        }
+        else{
+          $("div.field--name-field-financial-dates").hide();
+          $("div.field--name-field-calendar-date").hide();
         }
       });
     }

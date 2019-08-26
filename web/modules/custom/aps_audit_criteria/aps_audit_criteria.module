@@ -319,6 +319,7 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
         }
       }
       $form['field_unit_reference']['#access'] = FALSE;
+      $form['field_cycle_type']['widget']['#default_value'] = '_none';
     }
 	  $form['#attached']['library'][] = 'aps_audit_criteria/aps_audit_criteria_js';
 
