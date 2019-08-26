@@ -10,6 +10,7 @@ use Drupal\Core\Ajax\RemoveCommand;
 use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Render\Markup;
 
 /**
  * Class SubscriptionForm.
@@ -42,10 +43,10 @@ class SubscriptionForm extends FormBase {
       '#attributes' => ['id' => 'end-date-license'],
       '#default_value' => $current_date,
     ];
-    
+    $terms_condition_messsage = Markup::create('<span data-toggle="tooltip" data-placement="top" title="Click here to indicate that you have read and agree to the terms presented in the Terms and Conditions agreement"><p>Standard Terms & Obligations for license agreement</p></span>');
     $form['terms'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Standard Terms & Obligations for license agreement'),
+      '#title' => $terms_condition_messsage,
       '#attributes' => ['id' => 'terms-condition'],
       '#default_value' => 0,
     ];
