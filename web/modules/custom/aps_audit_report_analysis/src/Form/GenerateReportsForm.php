@@ -81,6 +81,8 @@ class GenerateReportsForm extends FormBase {
       '#title' => $this->t('Start Date'),
       '#attributes' => ['id' => 'start-date-report'],
       '#default_value' => $audit_cycle_start_date,
+      '#required' => 1,
+      '#suffix'=> '<p id="start-check" class="form-group error-description"></p>',
     ];
 
     $form['end_date'] = [
@@ -88,6 +90,8 @@ class GenerateReportsForm extends FormBase {
       '#title' => $this->t('End Date'),
       '#attributes' => ['id' => 'end-date-report'],
       '#default_value' => $audit_cycle_end_date,
+      '#required' => 1,
+      '#suffix'=> '<p id="end-check" class="form-group error-description"></p>',
     ];
 
     $form['submit'] = [
@@ -143,7 +147,20 @@ class GenerateReportsForm extends FormBase {
       $response->addCommand(new HtmlCommand('#generate-report', t('Please Select A Value.')));
     }
     else{
-      $response->addCommand(new RedirectCommand('/generate_reports/'.$form_values['audit_type'].'/'.$form_values['start_date'].'/'.$form_values['end_date'].'/'.$uri[1]));
+      if($form_values['start_date'] != '' && $form_values['end_date'] != ''){
+        $response->addCommand(new RedirectCommand('/generate_reports/'.$form_values['audit_type'].'/'.$form_values['start_date'].'/'.$form_values['end_date'].'/'.$uri[1]));
+      }
+      else{
+        if($form_values['start_date'] == ''){
+          $response->addCommand(new HtmlCommand('#start-check', t('Please Select Start Date.')));
+        }
+        elseif($form_values['end_date'] == ''){
+          $response->addCommand(new HtmlCommand('#end-check', t('Please Select End Date.')));
+        }
+        else{
+          $response->addCommand(new HtmlCommand('#end-check', t('Please Select Date Range')));
+        }
+      }
     }
     return $response;
   }
