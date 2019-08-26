@@ -49,6 +49,8 @@ class SubscriptionForm extends FormBase {
       '#title' => $terms_condition_messsage,
       '#attributes' => ['id' => 'terms-condition'],
       '#default_value' => 0,
+      '#required' => 1,
+      '#suffix'=> '<p  id="terms-check" class="form-group error-description"></p>',
     ];
 
     $form['actions']['submit'] = [
@@ -95,7 +97,12 @@ class SubscriptionForm extends FormBase {
    */
   public function UpdateSubscription(array $form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
-    $response->addCommand(new RemoveCommand('.ui-dialog'));
+    if ($form_state->getValue('terms') == 0) {
+      $response->addCommand(new HtmlCommand('#terms-check', t('Please Select terms and Condition')));
+    }
+    else{
+      $response->addCommand(new RemoveCommand('.ui-dialog'));
+    }
     return $response;
   }
 
