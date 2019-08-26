@@ -303,6 +303,17 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
   }
 
 	if($form_id == 'audit_cycle_settings_form' || $form_id == 'audit_cycle_settings_edit_form'){
+    $form['field_calendar_date']['#states'] = [
+      'visible' => [
+        'input[name="field_cycle_type"]' => ['value' => '1'],
+      ],
+    ];
+
+    $form['field_financial_dates']['#states'] = [
+      'visible' => [
+        'input[name="field_cycle_type"]' => ['value' => '0'],
+      ],
+    ];
     $form['field_unit_reference']['#access'] = FALSE;
     if ($form_id == 'audit_cycle_settings_form') {
       if($id= \Drupal::request()->query->get('unit_reference')){
@@ -319,7 +330,8 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
         }
       }
       $form['field_unit_reference']['#access'] = FALSE;
-      $form['field_cycle_type']['widget']['#default_value'] = '_none';
+      unset($form['field_cycle_type']['widget']['#options']['_none']);
+      $form['field_cycle_type']['widget']['#default_value'] = '0';
     }
 	  $form['#attached']['library'][] = 'aps_audit_criteria/aps_audit_criteria_js';
 

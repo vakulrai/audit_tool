@@ -54,15 +54,16 @@ class GenerateReports extends ControllerBase {
       $cycle_type = $entity_audit_cycle->get('field_cycle_type')->value;
       if($cycle_type == 0){
         $cycle_type_name = 'Financial';
-        $audit_cycle_start_date = $entity_audit_cycle->get('field_financial_dates')->value ? $entity_audit_cycle->get('field_financial_dates')->value : 'N/A';
-        $audit_cycle_end_date = $entity_audit_cycle->get('field_financial_dates')->end_value ? $entity_audit_cycle->get('field_financial_dates')->end_value : 'N/A';
+        $audit_cycle_start_date = $entity_audit_cycle->get('field_financial_dates')->value ? $entity_audit_cycle->get('field_financial_dates')->value : date('Y-m-d');
+        $audit_cycle_end_date = $entity_audit_cycle->get('field_financial_dates')->end_value ? $entity_audit_cycle->get('field_financial_dates')->end_value : date('Y-m-d');
       }
       elseif ($cycle_type == 1) {
         $cycle_type_name = 'Calendar';
-        $audit_cycle_start_date = $entity_audit_cycle->get('field_calendar_date')->value != '' ? $entity_audit_cycle->get('field_calendar_date')->value : 'N/A';
-        $audit_cycle_end_date = $entity_audit_cycle->get('field_calendar_date')->end_value != '' ? $entity_audit_cycle->get('field_calendar_date')->end_value : 'N/A';
+        $audit_cycle_start_date = $entity_audit_cycle->get('field_calendar_date')->value != '' ? $entity_audit_cycle->get('field_calendar_date')->value : date('Y-m-d');
+        $audit_cycle_end_date = $entity_audit_cycle->get('field_calendar_date')->end_value != '' ? $entity_audit_cycle->get('field_calendar_date')->end_value : date('Y-m-d');
       }
     }
+
     $html = '<html>';
     $html .= '<head>';
     $html .= '<style>

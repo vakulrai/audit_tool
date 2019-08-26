@@ -12,6 +12,7 @@ use Drupal\Core\Session\AccountProxy;
 use Drupal\user\Entity\User;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Drupal\user\Entity\Role;
 
 /**
  * RoleBasedUserRedirect event subscriber.
@@ -60,6 +61,11 @@ class DefaultSubscriber implements EventSubscriberInterface {
     $roles = $current_user->getRoles();
     foreach ($roles as $key => $value) {
       $user_role = $value;
+    }
+    if($user_role == 'mr_admin'){
+      // $role_object = Role::load('mr_admin');
+      // $role_object->revokePermission('create unit content');
+      // $role_object->save();
     }
     $user_unit = $user->field_reference_id->target_id;
     $front = \Drupal::service('path.matcher')->isFrontPage();
