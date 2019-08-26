@@ -12,6 +12,13 @@ use Drupal\node\Entity\Node;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\user\Entity\User;
 use Drupal\Core\Entity;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\ChangedCommand;
+use Drupal\Core\Ajax\CssCommand;
+use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\RemoveCommand;
+
 
 /**
  * Implements hook_help().
@@ -509,6 +516,48 @@ function aps_audit_criteria_inline_entity_form_entity_form_alter(&$entity_form, 
   $entity_form['title']['widget'][0]['value']['#default_value'] = 'Add a title Here';
   $entity_form['field_answer_type']['#access'] = FALSE;
   $entity_form['field_add_to_checklist']['#access'] = FALSE;
+  $entity_form['field_select_query_type']['widget']['#default_value'] = '_none';
+  
+  $entity_form['field_select_query_type']['widget']['#ajax'] = [
+    'callback' => 'resetForm',
+    'wrapper' => 'section',
+    'event' => 'change',
+  ];
+  $entity_form['field_defined_option_yes_no']['#attributes'] = ['id' => ['yes-no']];
+  $entity_form['field_defined_options_default']['#attributes'] = ['id' => ['predefined']];
+  $entity_form['field_defined_options_default']['widget']['add_more']['add_more_button_internal_audit_qa']['#attributes'] = ['class' => ['add-pdef']];
+  $entity_form['field_defined_option_yes_no']['widget']['add_more']['add_more_button_new_sub_question_yes_no']['#attributes'] = ['class' => ['add-yes']];
+// kint($entity_form['field_defined_option_yes_no']);
+  $entity_form['field_defined_options_default']['widget'][0]['subform']['field_sub_s_no_']['widget'][0]['value']['#default_value'] = $entity_form['#ief_row_delta'];
+  $entity_form['field_defined_option_yes_no']['widget']['#states'] = [
+    'visible' => [
+      'input[name="field_queries['.$entity_form['#ief_row_delta'].'][inline_entity_form][field_select_query_type]"]' => ['value' => 'Yes']
+    ],
+    // 'disabled' => [
+    //   ['input[name="field_queries['.$entity_form['#ief_row_delta'].'][inline_entity_form][field_select_query_type]"]' => ['value' => 'Pdef']]
+    //   ,'or',
+    //   ['input[name="field_queries['.$entity_form['#ief_row_delta'].'][inline_entity_form][field_select_query_type]"]' => ['value' => '_none']]
+    // ],
+  ];
+
+  $entity_form['field_defined_options_default']['widget']['#states'] = [
+    'visible' => [
+      'input[name="field_queries['.$entity_form['#ief_row_delta'].'][inline_entity_form][field_select_query_type]"]' => ['value' => 'Pdef']
+    ],
+    // 'disabled' => [
+    //   ['input[name="field_queries['.$entity_form['#ief_row_delta'].'][inline_entity_form][field_select_query_type]"]' => ['value' => 'Yes']]
+    //   ,'or',
+    //   ['input[name="field_queries['.$entity_form['#ief_row_delta'].'][inline_entity_form][field_select_query_type]"]' => ['value' => '_none']]
+    // ],
+  ];
+}
+
+function resetForm(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $ajax_response = new AjaxResponse();
+  $form_values = $form_state->getUserInput();
+  $ajax_response->addCommand(new InvokeCommand('.add-pdef', 'val' , ['Add New Sub Question Predefined']));
+  $ajax_response->addCommand(new InvokeCommand('.add-yes', 'val' , ['Add New Sub Question Yes/no']));
+  return $ajax_response;
 }
 
 /**
@@ -530,12 +579,6 @@ function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form
      $paragraph_instance_yes_no = $widget_state_yes_no['paragraphs'][$element['#delta']]['entity'];
      $paragraph_type_yes_no = $paragraph_instance_yes_no->bundle();
       if($paragraph_type_yes_no == 'new_sub_question_yes_no'){
-        $element['subform']['#states'] = [
-          'visible' => [
-            'input[name="field_queries['.$key_yes_no.'][inline_entity_form][field_select_query_type]"]' => ['value' => 'Yes']
-          ],
-        ];
-
         if($route_name == 'node.add' && $content_type[0] == 'internal_audit'){
           $element['subform']['field_selected_value']['#access'] = FALSE;
           $element['subform']['field_evidence']['#access'] = FALSE;
@@ -553,12 +596,6 @@ function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form
     $paragraph_instance_pdef = $widget_state_pdef['paragraphs'][$element['#delta']]['entity'];
     $paragraph_type_pdef = $paragraph_instance_pdef->bundle();
     if($paragraph_type_pdef == 'internal_audit_qa'){
-      $element['#states'] = [
-        'visible' => [
-          'input[name="field_queries['.$key_pdef.'][inline_entity_form][field_select_query_type]"]' => ['value' => 'Pdef']
-        ],
-      ];
-      
       $element['subform']['field_answers_poor']['widget'][0]['value']['#placeholder'] = 'POOR';
       $element['subform']['field_answer_optimised']['widget'][0]['value']['#placeholder'] = 'OPTIMISED';
       $element['subform']['field_answer_qualified']['widget'][0]['value']['#placeholder'] = 'QUALIFIED';
@@ -575,7 +612,8 @@ function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form
         $element['subform']['field_total_score']['#access'] = FALSE;
         $element['subform']['field_checked']['#access'] = FALSE;
       }
-      $element['subform']['field_sub_s_no_']['widget'][0]['value']['#default_value'] = $key_pdef;
+
+      $element['subform']['field_sub_s_no_']['widget'][0]['value']['#default_value'] = $element['#delta'];
     }
   }
 
@@ -593,25 +631,57 @@ function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form
 
 }
 
-function aps_audit_criteria_form_paragraphs_subform_alter(array &$subform, \Drupal\Core\Form\FormStateInterface &$form_state, $delta) {
-  $paragraph = $form_state->get('paragraph');
-  $paragraph_type = $paragraph->getType();
-  if($paragraph_type == 'internal_audit_qa'){
-    // $subform['field_answers_poor']['#disabled'] = TRUE;
-    // $subform['field_answer_optimised']['#disabled'] = TRUE;
-    // $subform['field_answer_qualified']['#disabled'] = TRUE;
-    // $subform['field_answers_defined']['#disabled'] = TRUE;
-    // $subform['field_clause_no']['#access'] = FALSE;
-  }
-}
-
 /**  
  * Implements hook_field_widget_WIDGET_TYPE_form_alter().  
  */  
 function aps_audit_criteria_field_widget_entity_reference_paragraphs_form_alter(&$element, &$form_state, $context) {
-  if ($element['#paragraph_type'] == 'altered_paragraph') {
-    $element['subform']['field_text']['widget'][0]['#title'] = 'Altered title';
+  if ($element['#paragraph_type'] == 'supplier_manufactured_product' || $element['#paragraph_type'] == 'supplier_service_product') {
+    unset($element['top']['links']['remove_button']);
   }
+
+  if ($element['#paragraph_type'] == 'supplier_product_type') {
+    $element['subform']['field_product_type']['widget']['#ajax'] = [
+      'callback' => 'resetFormdata',
+      'event' => 'change',
+    ];
+    $element['subform']['field_manufactured_product']['widget'][0]['subform']['field_manufactured_product_id']['#attributes'] = ['id' => ['manufactured'.$element['#delta']]];
+    $element['subform']['field_manufactured_product']['widget'][0]['subform']['field_manufactured_product_name']['#attributes'] = ['id' => ['product'.$element['#delta']]];
+    $element['subform']['field_service_product']['widget'][0]['subform']['field_service_part_name']['#attributes'] = ['id' => ['service-name'.$element['#delta']]];
+
+    $element['subform']['field_manufactured_product']['#states'] = [
+      'visible' => [
+        'select[name="field_add_products['.$element['#delta'].'][subform][field_product_type]"]' => ['value' => 'manufactured'],
+      ],
+      'disabled' => [
+        'select[name="field_add_products['.$element['#delta'].'][subform][field_product_type]"]' => ['value' => 'service'],
+      ],
+    ];
+
+    $element['subform']['field_service_product']['#states'] = [
+      'visible' => [
+        'select[name="field_add_products['.$element['#delta'].'][subform][field_product_type]"]' => ['value' => 'service'],
+      ],
+      'disabled' => [
+        'select[name="field_add_products['.$element['#delta'].'][subform][field_product_type]"]' => ['value' => 'manufactured'],
+      ],
+    ];
+  }
+}
+
+function resetFormdata(&$element, &$form_state, $context){
+  $ajax_response = new AjaxResponse();
+  $form_values = $form_state->getUserInput();
+  foreach ($form_values['field_add_products'] as $i => $j) {
+    if($form_values['field_add_products'][$i]['subform']['field_product_type'] == 'service'){
+      $ajax_response->addCommand(new InvokeCommand('#manufactured'.$i.' input', 'val' , ['']));
+      $ajax_response->addCommand(new InvokeCommand('#product'.$i.' input', 'val' , ['']));
+    }
+    elseif ($form_values['field_add_products'][$i]['subform']['field_product_type'] == 'manufactured') {
+      $ajax_response->addCommand(new InvokeCommand('#service-name'.$i.' input', 'val' , ['']));
+    }
+
+  }
+  return $ajax_response;
 }
 
 /**

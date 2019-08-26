@@ -1,17 +1,17 @@
-uuid: 70856f54-6c27-481a-82b4-c999a2ff73e1
+uuid: dc2705c3-eced-4c77-a303-86da4aee4252
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_service_product
-    - node.type.supplier
+    - field.storage.paragraph.field_service_product
+    - paragraphs.paragraphs_type.supplier_product_type
     - paragraphs.paragraphs_type.supplier_service_product
   module:
     - entity_reference_revisions
-id: node.supplier.field_service_product
+id: paragraph.supplier_product_type.field_service_product
 field_name: field_service_product
-entity_type: node
-bundle: supplier
+entity_type: paragraph
+bundle: supplier_product_type
 label: 'Service Product'
 description: ''
 required: false
@@ -26,63 +26,66 @@ settings:
       supplier_service_product: supplier_service_product
     target_bundles_drag_drop:
       audit_cycle_other:
-        weight: 21
-        enabled: false
-      audit_cycle_schedule_release:
         weight: 22
         enabled: false
-      audit_report:
+      audit_cycle_schedule_release:
         weight: 23
         enabled: false
-      audit_score_settings:
+      audit_report:
         weight: 24
         enabled: false
-      audit_score_settings_range_100:
+      audit_score_settings:
         weight: 25
         enabled: false
-      auditor_functional_details:
+      audit_score_settings_range_100:
         weight: 26
         enabled: false
-      business_process_effectiveness:
+      auditor_functional_details:
         weight: 27
         enabled: false
-      business_process_effieciency:
+      business_process_effectiveness:
         weight: 28
         enabled: false
-      corrective_action:
+      business_process_effieciency:
         weight: 29
         enabled: false
-      customer_audit:
+      corrective_action:
         weight: 30
         enabled: false
-      customer_manual_parts:
+      customer_audit:
         weight: 31
         enabled: false
-      holidays:
+      customer_manual_parts:
         weight: 32
         enabled: false
-      internal_audit_qa:
+      holidays:
         weight: 33
         enabled: false
-      interrim_action:
+      internal_audit_qa:
         weight: 34
         enabled: false
-      new_answer:
+      interrim_action:
         weight: 35
         enabled: false
-      new_sub_question_yes_no:
+      new_answer:
         weight: 36
         enabled: false
-      procedures:
+      new_sub_question_yes_no:
         weight: 37
         enabled: false
-      report_reason:
+      procedures:
         weight: 38
         enabled: false
-      supplier_manufactured_product:
+      report_reason:
         weight: 39
+        enabled: false
+      supplier_manufactured_product:
+        weight: 40
+        enabled: false
+      supplier_product_type:
+        weight: 41
         enabled: false
       supplier_service_product:
         enabled: true
-        weight: 40
+        weight: 42
 field_type: entity_reference_revisions

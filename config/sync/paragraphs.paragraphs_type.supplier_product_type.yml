@@ -1,0 +1,9 @@
+uuid: f878f44f-d1d7-4943-99a1-493c8e134c3a
+langcode: en
+status: true
+dependencies: {  }
+id: supplier_product_type
+label: 'Supplier product type'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

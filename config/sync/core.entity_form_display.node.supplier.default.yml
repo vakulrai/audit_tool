@@ -4,23 +4,32 @@ status: true
 dependencies:
   config:
     - field.field.node.supplier.body
+    - field.field.node.supplier.field_add_products
     - field.field.node.supplier.field_address_url
     - field.field.node.supplier.field_contact_person_name
     - field.field.node.supplier.field_location
-    - field.field.node.supplier.field_manufactured_products
     - field.field.node.supplier.field_refere
-    - field.field.node.supplier.field_service_product
     - field.field.node.supplier.field_supplier_name
-    - field.field.node.supplier.field_type
     - node.type.supplier
   module:
-    - conditional_fields
     - paragraphs
 id: node.supplier.default
 targetEntityType: node
 bundle: supplier
 mode: default
 content:
+  field_add_products:
+    type: entity_reference_paragraphs
+    weight: 26
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
   field_contact_person_name:
     weight: 1
     settings:
@@ -37,19 +46,6 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_manufactured_products:
-    type: entity_reference_paragraphs
-    weight: 4
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings:
-      conditional_fields: {  }
-    region: content
   field_refere:
     weight: 6
     settings:
@@ -58,25 +54,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
-    region: content
-  field_service_product:
-    type: entity_reference_paragraphs
-    weight: 5
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings:
-      conditional_fields: {  }
-    region: content
-  field_type:
-    weight: 3
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
     region: content
   moderation_state:
     type: string_textfield

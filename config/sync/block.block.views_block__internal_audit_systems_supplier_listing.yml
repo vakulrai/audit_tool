@@ -1,4 +1,4 @@
-uuid: 508f3252-7dd0-4ba7-a5b7-5294df94eb51
+uuid: 83d71b76-b30b-4a58-b3b3-9546b4dffaff
 langcode: en
 status: true
 dependencies:
@@ -10,14 +10,14 @@ dependencies:
     - views
   theme:
     - audit_tool
-id: audit_tool_views_block__internal_audit_systems_block_1
+id: views_block__internal_audit_systems_supplier_listing
 theme: audit_tool
 region: content
-weight: -12
+weight: 0
 provider: null
-plugin: 'views_block:internal_audit_systems-block_1'
+plugin: 'views_block:internal_audit_systems-supplier_listing'
 settings:
-  id: 'views_block:internal_audit_systems-block_1'
+  id: 'views_block:internal_audit_systems-supplier_listing'
   label: ''
   provider: views
   label_display: '0'

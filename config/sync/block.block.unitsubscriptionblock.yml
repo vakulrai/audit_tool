@@ -1,0 +1,42 @@
+uuid: 85a16d87-3ff8-4aad-a8f8-79119af1219c
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_general
+    - node
+    - system
+    - user
+  theme:
+    - audit_tool
+id: unitsubscriptionblock
+theme: audit_tool
+region: breadcrumb
+weight: 0
+provider: null
+plugin: unit_subscription_block
+settings:
+  id: unit_subscription_block
+  label: 'Unit subscription block'
+  provider: aps_general
+  label_display: '0'
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      unit: unit
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  request_path:
+    id: request_path
+    pages: '/node/*'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

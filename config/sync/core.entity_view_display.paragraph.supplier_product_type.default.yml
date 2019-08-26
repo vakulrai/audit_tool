@@ -1,0 +1,43 @@
+uuid: 666c62c7-3d86-4281-b58d-705a9ba5c0c8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.supplier_product_type.field_manufactured_product
+    - field.field.paragraph.supplier_product_type.field_product_type
+    - field.field.paragraph.supplier_product_type.field_service_product
+    - paragraphs.paragraphs_type.supplier_product_type
+  module:
+    - entity_reference_revisions
+    - options
+id: paragraph.supplier_product_type.default
+targetEntityType: paragraph
+bundle: supplier_product_type
+mode: default
+content:
+  field_manufactured_product:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_product_type:
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_service_product:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

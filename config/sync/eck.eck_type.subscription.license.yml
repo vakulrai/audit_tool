@@ -1,0 +1,9 @@
+uuid: a2363f1c-f5ed-45a5-b3f5-0326b2d21bbf
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.subscription
+name: license
+type: license
+description: ''

@@ -9,7 +9,6 @@ rid_executive:
   weigth: '0'
   path: ''
 rid_auditor:
-  enabled: '1'
   weigth: '0'
   path: /home
 rid_auditee:
@@ -18,4 +17,10 @@ rid_auditee:
 rid_mr_admin:
   weigth: '0'
   path: ''
-home_link_path: home
+home_link_path: ''
+rid_qa_staff_member:
+  weigth: '0'
+  path: ''
+rid_qa_top_contributor:
+  weigth: '0'
+  path: ''

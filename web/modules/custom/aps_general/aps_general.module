@@ -492,17 +492,17 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
        '@type' => 'Add Locations',
     ));
     
-    $form['field_manufactured_products']['#states'] = [
-      'visible' => [
-        'select[name="field_type"]' => ['value' => 'manufactured'],
-      ],
-    ];
+    // $form['field_manufactured_products']['#states'] = [
+    //   'visible' => [
+    //     'select[name="field_type"]' => ['value' => 'manufactured'],
+    //   ],
+    // ];
 
-    $form['field_service_product']['#states'] = [
-      'visible' => [
-        'select[name="field_type"]' => ['value' => 'service'],
-      ],
-    ];
+    // $form['field_service_product']['#states'] = [
+    //   'visible' => [
+    //     'select[name="field_type"]' => ['value' => 'service'],
+    //   ],
+    // ];
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'supplier_add';
@@ -513,17 +513,17 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $form['field_location']['widget']['add_more']['#value'] = new TranslatableMarkup("@type", array(
        '@type' => 'Add Locations',
     ));
-    $form['field_manufactured_products']['#states'] = [
-      'visible' => [
-        'select[name="field_type"]' => ['value' => 'manufactured'],
-      ],
-    ];
+    // $form['field_manufactured_products']['#states'] = [
+    //   'visible' => [
+    //     'select[name="field_type"]' => ['value' => 'manufactured'],
+    //   ],
+    // ];
 
-    $form['field_service_product']['#states'] = [
-      'visible' => [
-        'select[name="field_type"]' => ['value' => 'service'],
-      ],
-    ];
+    // $form['field_service_product']['#states'] = [
+    //   'visible' => [
+    //     'select[name="field_type"]' => ['value' => 'service'],
+    //   ],
+    // ];
     $form['field_refere']['#access'] = FALSE;
   }
   if($form_id == 'holidays_holidays_form'){
