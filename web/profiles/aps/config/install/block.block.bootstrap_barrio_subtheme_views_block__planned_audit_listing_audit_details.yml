@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.planned_audit_listing
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - bootstrap_barrio_subtheme
+id: bootstrap_barrio_subtheme_views_block__planned_audit_listing_audit_details
+theme: bootstrap_barrio_subtheme
+region: content
+weight: -18
+provider: null
+plugin: 'views_block:planned_audit_listing-audit_details'
+settings:
+  id: 'views_block:planned_audit_listing-audit_details'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: "/preaudit/*\r\n"
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      auditor: auditor
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

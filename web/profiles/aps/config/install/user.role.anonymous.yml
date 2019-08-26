@@ -1,14 +1,12 @@
-uuid: 1b883ce0-a367-4278-90c4-16d3e911cf06
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
 id: anonymous
 label: 'Anonymous user'
 weight: 0
 is_admin: false
 permissions:
   - 'access content'
+  - 'administer questions and answers'
   - 'create transitions workflow_transition'
   - 'view media'

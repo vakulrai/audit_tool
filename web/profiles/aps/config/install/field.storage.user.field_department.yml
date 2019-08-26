@@ -1,16 +1,15 @@
-uuid: 820f184c-569a-4a22-ab9d-7923b2f6c084
 langcode: en
 status: true
 dependencies:
   module:
-    - taxonomy
+    - node
     - user
 id: user.field_department
 field_name: field_department
 entity_type: user
 type: entity_reference
 settings:
-  target_type: taxonomy_term
+  target_type: node
 module: core
 locked: false
 cardinality: 1

@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.external_audit_listing
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - seven
+id: views_block__external_audit_listing_clauses
+theme: seven
+region: content
+weight: 5
+provider: null
+plugin: 'views_block:external_audit_listing-clauses'
+settings:
+  id: 'views_block:external_audit_listing-clauses'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: /node/add/clauses
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      executive: executive
+      auditor: auditor
+      auditee: auditee
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

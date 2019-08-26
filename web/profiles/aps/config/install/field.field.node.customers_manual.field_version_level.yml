@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_version_level
+    - node.type.customers_manual
+id: node.customers_manual.field_version_level
+field_name: field_version_level
+entity_type: node
+bundle: customers_manual
+label: 'Version Level'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: !!float 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

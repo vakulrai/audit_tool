@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: audit_score_settings_range_100
+label: 'Audit score settings Range 100'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

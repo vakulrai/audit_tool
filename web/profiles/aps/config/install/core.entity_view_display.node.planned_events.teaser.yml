@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.planned_events.body
+    - node.type.planned_events
+  module:
+    - text
+    - user
+id: node.planned_events.teaser
+targetEntityType: node
+bundle: planned_events
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_audit_type: true
+  field_auditor: true
+  field_department: true
+  field_end_date: true
+  field_remote_location_name: true
+  field_section: true
+  field_select_audit: true
+  field_shift: true
+  field_start_date: true
+  field_time: true
+  field_unit: true

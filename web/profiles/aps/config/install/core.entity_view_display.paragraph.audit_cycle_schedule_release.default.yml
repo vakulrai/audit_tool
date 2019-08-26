@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.audit_cycle_schedule_release.field_annual_calendar
+    - field.field.paragraph.audit_cycle_schedule_release.field_conclusion_of_audit_execut
+    - field.field.paragraph.audit_cycle_schedule_release.field_conclusion_of_pre_audit_ex
+    - field.field.paragraph.audit_cycle_schedule_release.field_department
+    - paragraphs.paragraphs_type.audit_cycle_schedule_release
+id: paragraph.audit_cycle_schedule_release.default
+targetEntityType: paragraph
+bundle: audit_cycle_schedule_release
+mode: default
+content:
+  field_annual_calendar:
+    weight: 0
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_conclusion_of_audit_execut:
+    weight: 3
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_conclusion_of_pre_audit_ex:
+    weight: 2
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_department:
+    weight: 1
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+hidden: {  }

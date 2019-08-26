@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.mr_admin
+  module:
+    - user
+id: user_add_role_action.mr_admin
+label: 'Add the MR Admin role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: mr_admin

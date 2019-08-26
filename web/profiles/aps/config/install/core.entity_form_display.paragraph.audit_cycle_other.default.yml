@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.audit_cycle_other.field_title_other
+    - paragraphs.paragraphs_type.audit_cycle_other
+id: paragraph.audit_cycle_other.default
+targetEntityType: paragraph
+bundle: audit_cycle_other
+mode: default
+content:
+  field_title_other:
+    weight: 0
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+hidden:
+  created: true
+  status: true

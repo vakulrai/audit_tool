@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sr_no
+    - node.type.manufacturing_process
+id: node.manufacturing_process.field_sr_no
+field_name: field_sr_no
+entity_type: node
+bundle: manufacturing_process
+label: 'Sr. No.'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -1,14 +1,17 @@
-uuid: 3229c2b7-80df-47e2-a8dc-5d9551a4edab
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
 id: authenticated
 label: 'Authenticated user'
 weight: 1
 is_admin: false
 permissions:
   - 'access content'
+  - 'administer questions and answers'
+  - 'answer questions and answers'
+  - 'ask questions and answers'
   - 'create transitions workflow_transition'
+  - 'report questions and answers'
+  - 'subscribe questions and answers'
+  - 'use text format full_html'
   - 'view media'

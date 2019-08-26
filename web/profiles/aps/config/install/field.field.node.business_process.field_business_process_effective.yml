@@ -1,4 +1,3 @@
-uuid: 66b5695d-e23e-4019-b005-dbf660393aac
 langcode: en
 status: true
 dependencies:
@@ -12,9 +11,9 @@ id: node.business_process.field_business_process_effective
 field_name: field_business_process_effective
 entity_type: node
 bundle: business_process
-label: 'Business Process Effectiveness'
+label: 'Effectiveness Target'
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -30,5 +29,59 @@ settings:
         weight: 3
       business_process_effieciency:
         weight: 4
+        enabled: false
+      auditor_functional_details:
+        weight: 19
+        enabled: false
+      audit_cycle_other:
+        weight: 20
+        enabled: false
+      audit_cycle_schedule_release:
+        weight: 21
+        enabled: false
+      audit_report:
+        weight: 22
+        enabled: false
+      audit_score_settings:
+        weight: 23
+        enabled: false
+      audit_score_settings_range_100:
+        weight: 24
+        enabled: false
+      corrective_action:
+        weight: 27
+        enabled: false
+      customer_audit:
+        weight: 28
+        enabled: false
+      customer_manual_parts:
+        weight: 29
+        enabled: false
+      holidays:
+        weight: 30
+        enabled: false
+      internal_audit_qa:
+        weight: 31
+        enabled: false
+      interrim_action:
+        weight: 32
+        enabled: false
+      new_answer:
+        weight: 33
+        enabled: false
+      new_sub_question_yes_no:
+        weight: 34
+        enabled: false
+      procedures:
+        weight: 35
+        enabled: false
+      report_reason:
+        weight: 36
+        enabled: false
+      supplier_manufactured_product:
+        weight: 39
+        enabled: false
+      supplier_service_product:
+        weight: 40
         enabled: false
 field_type: entity_reference_revisions

@@ -1,4 +1,3 @@
-uuid: abe0dbf9-30de-4361-8ed9-7e4b8c571b10
 langcode: en
 status: true
 dependencies:
@@ -7,7 +6,7 @@ dependencies:
 id: primaryadminactions
 theme: seven
 region: content
-weight: -4
+weight: -12
 provider: null
 plugin: local_actions_block
 settings:

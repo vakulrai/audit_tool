@@ -1,29 +1,20 @@
-uuid: 7169eb45-935c-4d97-af98-0de057c4b0f1
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_assembly
     - node.type.section
-    - taxonomy.vocabulary.assembly_type
+  module:
+    - options
 id: node.section.field_assembly
 field_name: field_assembly
 entity_type: node
 bundle: section
-label: Assembly
+label: Type
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:
-  handler: 'default:taxonomy_term'
-  handler_settings:
-    target_bundles:
-      assembly_type: assembly_type
-    sort:
-      field: name
-      direction: asc
-    auto_create: false
-    auto_create_bundle: ''
-field_type: entity_reference
+settings: {  }
+field_type: list_string

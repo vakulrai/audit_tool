@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_annual_calendar
+    - paragraphs.paragraphs_type.audit_cycle_schedule_release
+id: paragraph.audit_cycle_schedule_release.field_annual_calendar
+field_name: field_annual_calendar
+entity_type: paragraph
+bundle: audit_cycle_schedule_release
+label: 'Annual Calendar'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: 100
+  prefix: ''
+  suffix: 'Days Before start of the year'
+field_type: integer

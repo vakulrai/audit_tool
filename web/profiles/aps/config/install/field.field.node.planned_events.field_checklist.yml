@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_checklist
+    - node.type.internal_audit
+    - node.type.planned_events
+id: node.planned_events.field_checklist
+field_name: field_checklist
+entity_type: node
+bundle: planned_events
+label: Checklist
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      internal_audit: internal_audit
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

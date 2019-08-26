@@ -1,4 +1,3 @@
-uuid: 14e22091-3cef-4a00-8b64-2d9950ab184d
 langcode: en
 status: true
 dependencies:
@@ -11,7 +10,7 @@ entity_type: paragraph
 bundle: business_process_effieciency
 label: Efficiency
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''

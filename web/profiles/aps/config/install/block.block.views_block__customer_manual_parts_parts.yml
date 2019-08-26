@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.customer_manual_parts
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - audit_tool
+id: views_block__customer_manual_parts_parts
+theme: audit_tool
+region: content
+weight: 1
+provider: null
+plugin: 'views_block:customer_manual_parts-parts'
+settings:
+  id: 'views_block:customer_manual_parts-parts'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: /admin/content/customer_manual_parts/add/parts
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_level_category
+    - paragraphs.paragraphs_type.audit_score_settings_range_100
+id: paragraph.audit_score_settings_range_100.field_level_category
+field_name: field_level_category
+entity_type: paragraph
+bundle: audit_score_settings_range_100
+label: Level
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_audit_report_analysis
+    - system
+    - user
+  theme:
+    - bootstrap_barrio_subtheme
+id: bootstrap_barrio_subtheme_mradmindashboardcoverage
+theme: bootstrap_barrio_subtheme
+region: content
+weight: -3
+provider: null
+plugin: mradmin_dashboard_coverage
+settings:
+  id: mradmin_dashboard_coverage
+  label: 'Mradmin dashboard coverage'
+  provider: aps_audit_report_analysis
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: '/unit-registration-view/*'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

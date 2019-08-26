@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_total_score
+    - paragraphs.paragraphs_type.new_sub_question_yes_no
+id: paragraph.new_sub_question_yes_no.field_total_score
+field_name: field_total_score
+entity_type: paragraph
+bundle: new_sub_question_yes_no
+label: 'Total Score'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -1,0 +1,170 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.answers.body
+    - field.field.node.answers.field_add_to_checklist
+    - field.field.node.answers.field_answer_optimised
+    - field.field.node.answers.field_answer_qualified
+    - field.field.node.answers.field_answer_type
+    - field.field.node.answers.field_answers_defined
+    - field.field.node.answers.field_answers_poor
+    - field.field.node.answers.field_defined_option_yes_no
+    - field.field.node.answers.field_defined_options_default
+    - field.field.node.answers.field_description_defined
+    - field.field.node.answers.field_description_optimised
+    - field.field.node.answers.field_description_poor
+    - field.field.node.answers.field_description_qualified
+    - field.field.node.answers.field_evidence
+    - field.field.node.answers.field_question
+    - field.field.node.answers.field_select_query_type
+    - field.field.node.answers.field_sub_s_no_
+    - node.type.answers
+  module:
+    - entity_reference_revisions
+    - file
+    - options
+    - text
+    - user
+id: node.answers.default
+targetEntityType: node
+bundle: answers
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_add_to_checklist:
+    weight: 117
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_answer_optimised:
+    weight: 105
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_answer_qualified:
+    weight: 104
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_answer_type:
+    weight: 116
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_answers_defined:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_answers_poor:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_defined_option_yes_no:
+    type: entity_reference_revisions_entity_view
+    weight: 113
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_defined_options_default:
+    type: entity_reference_revisions_entity_view
+    weight: 114
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_description_defined:
+    weight: 107
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_description_optimised:
+    weight: 109
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_description_poor:
+    weight: 106
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_description_qualified:
+    weight: 108
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_evidence:
+    weight: 112
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_question:
+    weight: 111
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_select_query_type:
+    weight: 115
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_sub_s_no_:
+    weight: 110
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

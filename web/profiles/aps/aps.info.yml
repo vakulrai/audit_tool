@@ -9,6 +9,15 @@ distribution:
 
 dependencies:
   - automated_cron
+  - address
+  - aps_audit_criteria
+  - aps_audit_planning
+  - aps_audit_report_analysis
+  - aps_custom_tables
+  - aps_general
+  - aps_pre_audit
+  - aps_audit_planning
+  - content_moderation
   - block
   - block_content
   - breakpoint
@@ -59,6 +68,12 @@ dependencies:
   - conditional_fields
   - range
   - datetime_range
+  - disable_messages
+  - disable_messages
+  - disable_messages
+  - disable_messages
+  - disable_messages
+  - disable_messages
 
 dependencies:
   - node
@@ -70,3 +85,4 @@ themes:
   - classy
   - bartik
   - seven
+  - audit_tool

@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Report Categories'
+vid: report_categories
+description: 'Contain Report Categories to Be exported on Homepage'
+weight: 0

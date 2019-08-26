@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.planned_audit_listing
+  module:
+    - system
+    - views
+  theme:
+    - seven
+id: views_block__planned_audit_listing_remaining_days
+theme: seven
+region: content
+weight: -20
+provider: null
+plugin: 'views_block:planned_audit_listing-remaining_days'
+settings:
+  id: 'views_block:planned_audit_listingremaining_days'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: "/pre-audit/\r\n/pre-audit/*\r\n/pre-audit/*?ref=*"
+    negate: false
+    context_mapping: {  }

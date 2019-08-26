@@ -1,19 +1,15 @@
-uuid: 7f26e4ff-f78a-435d-b5ef-0b966ffcd428
 langcode: en
-status: true
+status: false
 dependencies:
-  config:
-    - views.view.department_view
   module:
     - system
     - user
-    - views
   theme:
     - seven
 id: views_block__department_view_block_2
 theme: seven
 region: content
-weight: 1
+weight: 13
 provider: null
 plugin: 'views_block:department_view-block_2'
 settings:

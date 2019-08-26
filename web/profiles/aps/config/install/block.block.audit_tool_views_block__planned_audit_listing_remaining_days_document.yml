@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.planned_audit_listing
+  module:
+    - system
+    - views
+  theme:
+    - audit_tool
+id: audit_tool_views_block__planned_audit_listing_remaining_days_document
+theme: audit_tool
+region: content
+weight: -28
+provider: null
+plugin: 'views_block:planned_audit_listing-remaining_days_document'
+settings:
+  id: 'views_block:planned_audit_listing-remaining_days_document'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '/document-internal-records/*'
+    negate: false
+    context_mapping: {  }

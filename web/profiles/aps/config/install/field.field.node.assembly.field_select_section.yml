@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_select_section
+    - node.type.assembly
+id: node.assembly.field_select_section
+field_name: field_select_section
+entity_type: node
+bundle: assembly
+label: 'Select Section'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: registration_entity_reference
+      display_name: entity_reference_5
+      arguments: {  }
+field_type: entity_reference

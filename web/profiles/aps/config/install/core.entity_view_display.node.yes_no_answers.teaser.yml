@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.yes_no_answers
+  module:
+    - user
+id: node.yes_no_answers.teaser
+targetEntityType: node
+bundle: yes_no_answers
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

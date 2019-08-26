@@ -1,56 +1,114 @@
-uuid: fef6994c-d803-4de0-a42a-eaa4279bb884
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.node.unit.body
     - field.field.node.unit.field_address
+    - field.field.node.unit.field_contributed_sales
+    - field.field.node.unit.field_frequency
+    - field.field.node.unit.field_months_for_the_audit
     - field.field.node.unit.field_remote_address
     - field.field.node.unit.field_remote_location_name
+    - field.field.node.unit.field_sales_turnover
     - field.field.node.unit.field_shift
     - field.field.node.unit.field_time_g
     - field.field.node.unit.field_time_s1
     - field.field.node.unit.field_time_s3
     - field.field.node.unit.field_time_s4
+    - field.field.node.unit.field_total_mandays
+    - field.field.node.unit.field_total_members
     - field.field.node.unit.field_unit_name
+    - field.field.node.unit.field_updated_mandays
     - node.type.unit
   module:
     - address
+    - aps_general
     - conditional_fields
+    - content_moderation
+    - field_group
     - time_range
+third_party_settings:
+  field_group:
+    group_unit:
+      children:
+        - title
+        - field_address
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Unit Details'
+    group_remote_location_details:
+      children:
+        - field_remote_address
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        label: 'Support Location Details'
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'Support Location Details'
 id: node.unit.default
 targetEntityType: node
 bundle: unit
 mode: default
 content:
   field_address:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    type: address_default
-    region: content
-  field_remote_address:
     weight: 2
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
-  field_remote_location_name:
-    weight: 3
+  field_contributed_sales:
+    weight: 8
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_frequency:
+    weight: 10
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_months_for_the_audit:
+    weight: 11
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
+    type: month_only_widget
+    region: content
+  field_remote_address:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_sales_turnover:
+    weight: 7
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
     region: content
   field_shift:
-    weight: 4
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_time_g:
-    weight: 26
+    weight: 3
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -77,7 +135,7 @@ content:
     type: time_range
     region: content
   field_time_s1:
-    weight: 27
+    weight: 4
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -99,7 +157,7 @@ content:
     type: time_range
     region: content
   field_time_s3:
-    weight: 28
+    weight: 5
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -121,7 +179,7 @@ content:
     type: time_range
     region: content
   field_time_s4:
-    weight: 29
+    weight: 6
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -142,9 +200,36 @@ content:
           bundle: unit
     type: time_range
     region: content
+  field_total_mandays:
+    weight: 12
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_total_members:
+    weight: 9
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_updated_mandays:
+    weight: 13
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 14
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 0
+    weight: 1
     region: content
     settings:
       size: 60
@@ -153,6 +238,7 @@ content:
 hidden:
   body: true
   created: true
+  field_remote_location_name: true
   field_unit_name: true
   path: true
   promote: true

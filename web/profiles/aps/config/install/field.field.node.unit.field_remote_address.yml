@@ -1,4 +1,3 @@
-uuid: e9a01ad5-2c8a-492c-a1fd-05ef10fb6c82
 langcode: en
 status: true
 dependencies:
@@ -17,19 +16,19 @@ required: false
 translatable: false
 default_value:
   -
-    country_code: IN
     langcode: ''
-    given_name: ''
-    family_name: ''
-    organization: ''
+    country_code: IN
+    administrative_area: null
+    locality: ''
+    dependent_locality: null
+    postal_code: null
+    sorting_code: null
     address_line1: ''
     address_line2: ''
-    locality: ''
-    postal_code: ''
-    administrative_area: ''
+    organization: null
+    given_name: null
     additional_name: null
-    sorting_code: null
-    dependent_locality: null
+    family_name: null
 default_value_callback: ''
 settings:
   available_countries:
@@ -42,15 +41,11 @@ settings:
       override: hidden
     familyName:
       override: hidden
-    organization:
-      override: hidden
     postalCode:
       override: hidden
     sortingCode:
       override: hidden
     dependentLocality:
-      override: hidden
-    locality:
       override: hidden
     administrativeArea:
       override: hidden

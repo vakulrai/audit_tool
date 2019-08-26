@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_external_auditor_name
+    - node.type.planned_events
+id: node.planned_events.field_external_auditor_name
+field_name: field_external_auditor_name
+entity_type: node
+bundle: planned_events
+label: 'External Auditor Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

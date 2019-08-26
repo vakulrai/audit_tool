@@ -1,9 +1,0 @@
-uuid: c86baee1-eac2-4dcf-aa40-8e4a86f3b5fd
-langcode: en
-status: true
-dependencies:
-  config:
-    - eck.eck_entity_type.unit
-name: 'Business Process'
-type: business_process
-description: 'Add Business Process'

@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.customer_audit.field_documents
+    - field.field.paragraph.customer_audit.field_records
+    - paragraphs.paragraphs_type.customer_audit
+id: paragraph.customer_audit.default
+targetEntityType: paragraph
+bundle: customer_audit
+mode: default
+content:
+  field_documents:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_records:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+hidden:
+  created: true
+  status: true

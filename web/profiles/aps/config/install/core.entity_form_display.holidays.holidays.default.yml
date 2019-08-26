@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.holidays.holidays
+    - field.field.holidays.holidays.field_list
+    - field.field.holidays.holidays.field_unit_reference
+  module:
+    - paragraphs
+id: holidays.holidays.default
+targetEntityType: holidays
+bundle: holidays
+mode: default
+content:
+  field_list:
+    type: entity_reference_paragraphs
+    weight: 3
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_unit_reference:
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden: {  }

@@ -1,0 +1,57 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_cycle.settings
+    - field.storage.audit_cycle.field_other
+    - paragraphs.paragraphs_type.audit_cycle_other
+  module:
+    - entity_reference_revisions
+id: audit_cycle.settings.field_other
+field_name: field_other
+entity_type: audit_cycle
+bundle: settings
+label: OTHER
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      audit_cycle_other: audit_cycle_other
+    target_bundles_drag_drop:
+      audit_cycle_other:
+        enabled: true
+        weight: 11
+      audit_cycle_schedule_release:
+        weight: 12
+        enabled: false
+      audit_cycle_year:
+        weight: 13
+        enabled: false
+      audit_score_settings:
+        weight: 14
+        enabled: false
+      audit_score_settings_range_100:
+        weight: 15
+        enabled: false
+      auditor_functional_details:
+        weight: 16
+        enabled: false
+      business_process_effectiveness:
+        weight: 17
+        enabled: false
+      business_process_effieciency:
+        weight: 18
+        enabled: false
+      customer_audit:
+        weight: 19
+        enabled: false
+      procedures:
+        weight: 20
+        enabled: false
+field_type: entity_reference_revisions

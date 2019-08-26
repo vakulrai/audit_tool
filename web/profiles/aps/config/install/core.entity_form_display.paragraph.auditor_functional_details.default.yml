@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.auditor_functional_details.field_functions_qualified
+    - field.field.paragraph.auditor_functional_details.field_score
+    - paragraphs.paragraphs_type.auditor_functional_details
+id: paragraph.auditor_functional_details.default
+targetEntityType: paragraph
+bundle: auditor_functional_details
+mode: default
+content:
+  field_functions_qualified:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_score:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.interrim_action.field_description_poor
+    - field.field.paragraph.interrim_action.field_s_no
+    - paragraphs.paragraphs_type.interrim_action
+id: paragraph.interrim_action.default
+targetEntityType: paragraph
+bundle: interrim_action
+mode: default
+content:
+  field_description_poor:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_s_no:
+    weight: 0
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+hidden: {  }

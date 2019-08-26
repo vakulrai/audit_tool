@@ -1,0 +1,56 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_score.score
+    - field.field.audit_criteria_score.score.field_score_level_set_10
+    - field.field.audit_criteria_score.score.field_score_level_set_100
+    - field.field.audit_criteria_score.score.field_score_settings
+    - field.field.audit_criteria_score.score.field_unit_reference
+  module:
+    - paragraphs
+id: audit_criteria_score.score.default
+targetEntityType: audit_criteria_score
+bundle: score
+mode: default
+content:
+  field_score_level_set_10:
+    type: entity_reference_paragraphs
+    weight: 5
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_score_level_set_100:
+    type: entity_reference_paragraphs
+    weight: 6
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_score_settings:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_unit_reference:
+    weight: 7
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden: {  }

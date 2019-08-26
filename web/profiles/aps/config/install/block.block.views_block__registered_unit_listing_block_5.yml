@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.registered_unit_listing
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - seven
+id: views_block__registered_unit_listing_block_5
+theme: seven
+region: content
+weight: -8
+provider: null
+plugin: 'views_block:registered_unit_listing-block_5'
+settings:
+  id: 'views_block:registered_unit_listing-block_5'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      auditor: auditor
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

@@ -1,4 +1,3 @@
-uuid: e9dc7a92-5d2b-4541-8f3e-6d3ff820f6cc
 langcode: en
 status: true
 dependencies:
@@ -6,13 +5,16 @@ dependencies:
     - field.field.node.section.body
     - field.field.node.section.field_assembly
     - field.field.node.section.field_attach_control_plan
-    - field.field.node.section.field_business_head
+    - field.field.node.section.field_business_head_dept
     - field.field.node.section.field_file
+    - field.field.node.section.field_location_address
     - field.field.node.section.field_refere
-    - field.field.node.section.field_section
+    - field.field.node.section.field_section_head
+    - field.field.node.section.field_select_department_type
     - field.field.node.section.field_shift
     - node.type.section
   module:
+    - options
     - text
     - user
 id: node.section.default
@@ -28,12 +30,11 @@ content:
     third_party_settings: {  }
     region: content
   field_assembly:
-    weight: 104
+    weight: 113
     label: above
-    settings:
-      link: true
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_label
+    type: list_default
     region: content
   field_attach_control_plan:
     type: entity_reference_entity_view
@@ -44,8 +45,8 @@ content:
       link: false
     third_party_settings: {  }
     region: content
-  field_business_head:
-    weight: 103
+  field_business_head_dept:
+    weight: 110
     label: above
     settings:
       link: true
@@ -60,6 +61,13 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_location_address:
+    weight: 114
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
   field_refere:
     weight: 108
     label: above
@@ -68,8 +76,16 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_section:
-    weight: 102
+  field_section_head:
+    weight: 115
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_select_department_type:
+    weight: 112
     label: above
     settings:
       link: true

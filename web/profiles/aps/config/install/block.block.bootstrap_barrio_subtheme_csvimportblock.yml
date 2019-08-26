@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_general
+    - node
+    - system
+  theme:
+    - bootstrap_barrio_subtheme
+id: bootstrap_barrio_subtheme_csvimportblock
+theme: bootstrap_barrio_subtheme
+region: content
+weight: 11
+provider: null
+plugin: csv_import_block
+settings:
+  id: csv_import_block
+  label: 'Csv import block'
+  provider: aps_general
+  label_display: '0'
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      assembly: assembly
+      manufacturing_process: manufacturing_process
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  request_path:
+    id: request_path
+    pages: '/import/*'
+    negate: false
+    context_mapping: {  }

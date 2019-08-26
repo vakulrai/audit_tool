@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_audit_report_analysis
+    - system
+  theme:
+    - seven
+id: ncrandcarmanagement
+theme: seven
+region: content
+weight: 1
+provider: null
+plugin: ncrand_car_management
+settings:
+  id: ncrand_car_management
+  label: 'Ncrand car management'
+  provider: aps_audit_report_analysis
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: '/unit-registration-view/*'
+    negate: false
+    context_mapping: {  }

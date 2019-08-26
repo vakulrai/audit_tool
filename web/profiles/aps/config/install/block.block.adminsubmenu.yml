@@ -1,4 +1,3 @@
-uuid: 635c0cd0-438a-4f1a-98c8-dc7dd65a3b1c
 langcode: en
 status: true
 dependencies:
@@ -12,8 +11,8 @@ dependencies:
     - seven
 id: adminsubmenu
 theme: seven
-region: content
-weight: -5
+region: pre_content
+weight: -16
 provider: null
 plugin: 'superfish:admin-sub-menu'
 settings:
@@ -24,8 +23,8 @@ settings:
   level: '1'
   depth: '0'
   expand_all_items: false
-  menu_type: vertical
-  style: none
+  menu_type: horizontal
+  style: blue
   arrow: 1
   shadow: 1
   speed: fast
@@ -71,17 +70,15 @@ settings:
   custom_item_class: ''
   custom_link_class: ''
 visibility:
-  request_path:
-    id: request_path
-    pages: /home
-    negate: false
-    context_mapping: {  }
   user_role:
     id: user_role
     roles:
-      executive: executive
-      auditor: auditor
-      auditee: auditee
+      mr_admin: mr_admin
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'
+  request_path:
+    id: request_path
+    pages: '/unit-registration-view/*'
+    negate: false
+    context_mapping: {  }

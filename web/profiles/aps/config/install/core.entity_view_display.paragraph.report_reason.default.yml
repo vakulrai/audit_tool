@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.report_reason.field_others
+    - field.field.paragraph.report_reason.field_reason
+    - paragraphs.paragraphs_type.report_reason
+id: paragraph.report_reason.default
+targetEntityType: paragraph
+bundle: report_reason
+mode: default
+content:
+  field_others:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_reason:
+    weight: 0
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden: {  }

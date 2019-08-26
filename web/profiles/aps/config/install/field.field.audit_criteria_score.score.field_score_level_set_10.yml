@@ -1,0 +1,81 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_score.score
+    - field.storage.audit_criteria_score.field_score_level_set_10
+    - paragraphs.paragraphs_type.audit_score_settings
+  module:
+    - entity_reference_revisions
+id: audit_criteria_score.score.field_score_level_set_10
+field_name: field_score_level_set_10
+entity_type: audit_criteria_score
+bundle: score
+label: 'Score Level Settings 10'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      audit_score_settings: audit_score_settings
+    target_bundles_drag_drop:
+      auditor_functional_details:
+        weight: 19
+        enabled: false
+      audit_cycle_other:
+        weight: 20
+        enabled: false
+      audit_cycle_schedule_release:
+        weight: 21
+        enabled: false
+      audit_report:
+        weight: 22
+        enabled: false
+      audit_score_settings:
+        enabled: true
+        weight: 23
+      audit_score_settings_range_100:
+        weight: 24
+        enabled: false
+      business_process_effectiveness:
+        weight: 25
+        enabled: false
+      business_process_effieciency:
+        weight: 26
+        enabled: false
+      corrective_action:
+        weight: 27
+        enabled: false
+      customer_audit:
+        weight: 28
+        enabled: false
+      customer_manual_parts:
+        weight: 29
+        enabled: false
+      holidays:
+        weight: 30
+        enabled: false
+      internal_audit_qa:
+        weight: 31
+        enabled: false
+      interrim_action:
+        weight: 32
+        enabled: false
+      new_answer:
+        weight: 33
+        enabled: false
+      new_sub_question_yes_no:
+        weight: 34
+        enabled: false
+      procedures:
+        weight: 35
+        enabled: false
+      report_reason:
+        weight: 36
+        enabled: false
+field_type: entity_reference_revisions

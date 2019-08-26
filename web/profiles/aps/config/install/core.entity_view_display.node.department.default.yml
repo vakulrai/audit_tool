@@ -1,16 +1,18 @@
-uuid: 6a7f75e1-abbe-4748-a8ce-b1094cca63de
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.node.department.body
-    - field.field.node.department.field_business_head
+    - field.field.node.department.field_business_head_dept
+    - field.field.node.department.field_department_head
     - field.field.node.department.field_department_type
     - field.field.node.department.field_file
-    - field.field.node.department.field_location
+    - field.field.node.department.field_location_address
     - field.field.node.department.field_refere
+    - field.field.node.department.field_select_business_process
     - node.type.department
   module:
+    - options
     - text
     - user
 id: node.department.default
@@ -25,8 +27,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-  field_business_head:
+  field_business_head_dept:
     weight: 106
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_department_head:
+    weight: 111
     label: above
     settings:
       link: true
@@ -50,16 +60,23 @@ content:
       link: false
     third_party_settings: {  }
     region: content
-  field_location:
-    weight: 103
+  field_location_address:
+    weight: 110
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_refere:
+    weight: 105
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_refere:
-    weight: 105
+  field_select_business_process:
+    weight: 109
     label: above
     settings:
       link: true

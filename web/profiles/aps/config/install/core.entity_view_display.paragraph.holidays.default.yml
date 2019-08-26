@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.holidays.field_holiday_date
+    - field.field.paragraph.holidays.field_holiday_description
+    - paragraphs.paragraphs_type.holidays
+  module:
+    - datetime
+id: paragraph.holidays.default
+targetEntityType: paragraph
+bundle: holidays
+mode: default
+content:
+  field_holiday_date:
+    weight: 0
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_holiday_description:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

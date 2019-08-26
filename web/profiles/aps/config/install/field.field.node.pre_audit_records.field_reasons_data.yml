@@ -1,0 +1,66 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reasons_data
+    - node.type.pre_audit_records
+    - paragraphs.paragraphs_type.report_reason
+  module:
+    - entity_reference_revisions
+id: node.pre_audit_records.field_reasons_data
+field_name: field_reasons_data
+entity_type: node
+bundle: pre_audit_records
+label: Reasons
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      report_reason: report_reason
+    target_bundles_drag_drop:
+      audit_cycle_other:
+        weight: 14
+        enabled: false
+      audit_cycle_schedule_release:
+        weight: 15
+        enabled: false
+      audit_score_settings:
+        weight: 16
+        enabled: false
+      audit_score_settings_range_100:
+        weight: 17
+        enabled: false
+      auditor_functional_details:
+        weight: 18
+        enabled: false
+      business_process_effectiveness:
+        weight: 19
+        enabled: false
+      business_process_effieciency:
+        weight: 20
+        enabled: false
+      customer_audit:
+        weight: 21
+        enabled: false
+      customer_manual_parts:
+        weight: 22
+        enabled: false
+      internal_audit_qa:
+        weight: 23
+        enabled: false
+      new_answer:
+        weight: 24
+        enabled: false
+      procedures:
+        weight: 25
+        enabled: false
+      report_reason:
+        enabled: true
+        weight: 26
+field_type: entity_reference_revisions

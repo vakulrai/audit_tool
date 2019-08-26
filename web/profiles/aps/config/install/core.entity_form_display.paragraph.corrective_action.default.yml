@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.corrective_action.field_description_answer
+    - field.field.paragraph.corrective_action.field_s_no
+    - paragraphs.paragraphs_type.corrective_action
+id: paragraph.corrective_action.default
+targetEntityType: paragraph
+bundle: corrective_action
+mode: default
+content:
+  field_description_answer:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_s_no:
+    weight: 0
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+hidden:
+  created: true
+  status: true

@@ -1,4 +1,3 @@
-uuid: e10146b0-b463-4ec7-99c4-838de4f955e0
 langcode: en
 status: true
 dependencies:
@@ -13,7 +12,7 @@ dependencies:
 id: adminmainmenu
 theme: seven
 region: pre_content
-weight: -7
+weight: -19
 provider: null
 plugin: 'superfish:admin-main-menu'
 settings:
@@ -25,7 +24,7 @@ settings:
   depth: '0'
   expand_all_items: false
   menu_type: horizontal
-  style: none
+  style: blue
   arrow: 1
   shadow: 1
   speed: fast
@@ -71,17 +70,15 @@ settings:
   custom_item_class: ''
   custom_link_class: ''
 visibility:
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
   request_path:
     id: request_path
     pages: /home
     negate: false
     context_mapping: {  }
-  user_role:
-    id: user_role
-    roles:
-      executive: executive
-      auditor: auditor
-      auditee: auditee
-    negate: false
-    context_mapping:
-      user: '@user.current_user_context:current_user'

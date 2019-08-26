@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: auditor_functional_details
+label: 'Auditor Functional Details'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

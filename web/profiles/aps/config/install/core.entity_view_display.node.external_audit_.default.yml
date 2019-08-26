@@ -1,0 +1,149 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.external_audit_.body
+    - field.field.node.external_audit_.field__lead_auditor
+    - field.field.node.external_audit_.field_audit_cycle
+    - field.field.node.external_audit_.field_audit_month
+    - field.field.node.external_audit_.field_audit_type_external
+    - field.field.node.external_audit_.field_auditor_s_name
+    - field.field.node.external_audit_.field_certification_std
+    - field.field.node.external_audit_.field_decision
+    - field.field.node.external_audit_.field_issue_date
+    - field.field.node.external_audit_.field_next_due_date
+    - field.field.node.external_audit_.field_refere
+    - field.field.node.external_audit_.field_scope
+    - field.field.node.external_audit_.field_score
+    - field.field.node.external_audit_.field_validity
+    - node.type.external_audit_
+  module:
+    - aps_general
+    - datetime
+    - options
+    - text
+    - user
+    - yearonly
+id: node.external_audit_.default
+targetEntityType: node
+bundle: external_audit_
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field__lead_auditor:
+    weight: 113
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_audit_cycle:
+    weight: 105
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: yearonly_default
+    region: content
+  field_audit_month:
+    weight: 111
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: month_only_formatter
+    region: content
+  field_audit_type_external:
+    weight: 116
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_auditor_s_name:
+    weight: 114
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_certification_std:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_decision:
+    weight: 109
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_issue_date:
+    weight: 103
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_next_due_date:
+    weight: 115
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_refere:
+    weight: 112
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_scope:
+    weight: 107
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_score:
+    weight: 108
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_validity:
+    weight: 117
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

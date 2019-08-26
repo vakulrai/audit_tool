@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_select_users
+    - node.type.planned_events
+  module:
+    - options
+id: node.planned_events.field_select_users
+field_name: field_select_users
+entity_type: node
+bundle: planned_events
+label: 'Select Users'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

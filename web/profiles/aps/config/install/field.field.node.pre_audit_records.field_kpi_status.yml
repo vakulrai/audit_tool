@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kpi_status
+    - node.type.pre_audit_records
+  module:
+    - options
+id: node.pre_audit_records.field_kpi_status
+field_name: field_kpi_status
+entity_type: node
+bundle: pre_audit_records
+label: 'KPI Status'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

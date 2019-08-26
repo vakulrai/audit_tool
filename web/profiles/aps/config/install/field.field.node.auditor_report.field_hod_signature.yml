@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hod_signature
+    - node.type.auditor_report
+  module:
+    - file
+id: node.auditor_report.field_hod_signature
+field_name: field_hod_signature
+entity_type: node
+bundle: auditor_report
+label: 'HOD Signature'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt png jpg pdf'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

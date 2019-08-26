@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_functions_qualified
+    - paragraphs.paragraphs_type.auditor_functional_details
+id: paragraph.auditor_functional_details.field_functions_qualified
+field_name: field_functions_qualified
+entity_type: paragraph
+bundle: auditor_functional_details
+label: 'Functions Qualified'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

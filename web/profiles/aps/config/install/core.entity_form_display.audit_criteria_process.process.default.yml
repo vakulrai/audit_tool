@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_process.process
+    - field.field.audit_criteria_process.process.field_documents
+    - field.field.audit_criteria_process.process.field_unit_reference
+id: audit_criteria_process.process.default
+targetEntityType: audit_criteria_process
+bundle: process
+mode: default
+content:
+  field_documents:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_unit_reference:
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden: {  }

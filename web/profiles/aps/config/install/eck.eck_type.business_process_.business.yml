@@ -1,9 +1,0 @@
-uuid: 5ad15565-2e67-46a7-9086-e4ca35dfda9d
-langcode: en
-status: true
-dependencies:
-  config:
-    - eck.eck_entity_type.business_process_
-name: 'Business Process'
-type: business
-description: ''

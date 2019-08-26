@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_internal_audit_type
+    - node.type.planned_events
+  module:
+    - options
+id: node.planned_events.field_internal_audit_type
+field_name: field_internal_audit_type
+entity_type: node
+bundle: planned_events
+label: 'Internal Audit Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

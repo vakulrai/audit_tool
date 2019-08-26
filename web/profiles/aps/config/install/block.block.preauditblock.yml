@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_pre_audit
+    - system
+    - user
+  theme:
+    - seven
+id: preauditblock
+theme: seven
+region: content
+weight: 4
+provider: null
+plugin: pre_audit_block
+settings:
+  id: pre_audit_block
+  label: 'PRE AUDIT'
+  provider: aps_pre_audit
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/preaudit/\r\n/preaudit/*"
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      auditor: auditor
+      auditee: auditee
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

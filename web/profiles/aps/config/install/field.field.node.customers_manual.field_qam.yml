@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_qam
+    - node.type.customers_manual
+  module:
+    - link
+id: node.customers_manual.field_qam
+field_name: field_qam
+entity_type: node
+bundle: customers_manual
+label: QAM
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

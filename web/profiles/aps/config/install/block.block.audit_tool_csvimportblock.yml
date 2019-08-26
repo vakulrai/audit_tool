@@ -1,0 +1,19 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - aps_general
+  theme:
+    - audit_tool
+id: audit_tool_csvimportblock
+theme: audit_tool
+region: content
+weight: 3
+provider: null
+plugin: csv_import_block
+settings:
+  id: csv_import_block
+  label: 'Csv import block'
+  provider: aps_general
+  label_display: '0'
+visibility: {  }

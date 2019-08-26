@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - options
+id: subscription.field_subscription_type
+field_name: field_subscription_type
+entity_type: subscription
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: group
+      label: 'Group Subscription'
+    -
+      value: single
+      label: 'Single Subscription'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

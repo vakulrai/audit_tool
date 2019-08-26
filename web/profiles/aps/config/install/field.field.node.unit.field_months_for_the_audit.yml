@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_months_for_the_audit
+    - node.type.unit
+  module:
+    - aps_general
+id: node.unit.field_months_for_the_audit
+field_name: field_months_for_the_audit
+entity_type: node
+bundle: unit
+label: 'Months for the Audit'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '1'
+default_value_callback: ''
+settings: {  }
+field_type: month_only

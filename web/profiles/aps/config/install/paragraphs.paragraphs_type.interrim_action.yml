@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: interrim_action
+label: 'Interrim Action'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

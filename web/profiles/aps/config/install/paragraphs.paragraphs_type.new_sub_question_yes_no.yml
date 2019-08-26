@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: new_sub_question_yes_no
+label: 'New Sub Question Yes/no'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

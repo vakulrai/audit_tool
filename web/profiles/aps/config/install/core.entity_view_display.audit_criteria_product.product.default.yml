@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_product.product
+    - field.field.audit_criteria_product.product.field_documents
+    - field.field.audit_criteria_product.product.field_unit_reference
+id: audit_criteria_product.product.default
+targetEntityType: audit_criteria_product
+bundle: product
+mode: default
+content:
+  field_documents:
+    weight: 0
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_unit_reference:
+    weight: 1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden: {  }

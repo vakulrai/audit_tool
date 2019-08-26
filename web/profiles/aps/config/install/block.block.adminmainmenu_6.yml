@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.admin-main-menu
+  module:
+    - system
+    - user
+  theme:
+    - audit_tool
+id: adminmainmenu_6
+theme: audit_tool
+region: drawer
+weight: -30
+provider: null
+plugin: 'system_menu_block:admin-main-menu'
+settings:
+  id: 'system_menu_block:admin-main-menu'
+  label: 'Admin main menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

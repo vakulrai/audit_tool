@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_other
+    - paragraphs.paragraphs_type.business_process_effieciency
+id: paragraph.business_process_effieciency.field_other
+field_name: field_other
+entity_type: paragraph
+bundle: business_process_effieciency
+label: Other
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

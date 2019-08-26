@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.auditor_selection_export
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - seven
+id: views_block__auditor_selection_export_auditor_selection_detail
+theme: seven
+region: content
+weight: -1
+provider: null
+plugin: 'views_block:auditor_selection_export-auditor_selection_detail'
+settings:
+  id: 'views_block:auditor_selection_export-auditor_selection_detail'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '/unit-registration-view/*'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

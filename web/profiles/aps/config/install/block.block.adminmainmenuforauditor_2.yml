@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.admin-main-menu-for-auditor
+  module:
+    - system
+    - user
+  theme:
+    - audit_tool
+id: adminmainmenuforauditor_2
+theme: audit_tool
+region: drawer
+weight: -29
+provider: null
+plugin: 'system_menu_block:admin-main-menu-for-auditor'
+settings:
+  id: 'system_menu_block:admin-main-menu-for-auditor'
+  label: 'Admin main menu for Auditor'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      auditor: auditor
+      auditee: auditee
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

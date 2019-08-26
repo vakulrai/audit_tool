@@ -1,17 +1,23 @@
-uuid: 02f93374-db55-4cee-b6f8-559ba1aa80d4
 langcode: en
 status: true
 dependencies:
   module:
     - node
-    - taxonomy
+    - options
 id: node.field_assembly
 field_name: field_assembly
 entity_type: node
-type: entity_reference
+type: list_string
 settings:
-  target_type: taxonomy_term
-module: core
+  allowed_values:
+    -
+      value: assembly
+      label: 'Assembly Process'
+    -
+      value: manufacturing
+      label: 'Manufacturing Process'
+  allowed_values_function: ''
+module: options
 locked: false
 cardinality: 1
 translatable: true

@@ -1,10 +1,9 @@
-uuid: 11ac7b69-e81b-4547-838c-fc13aea6658b
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.node.business_process.body
-    - field.field.node.business_process.field_business_head
+    - field.field.node.business_process.field_business_head_name
     - field.field.node.business_process.field_business_process_effective
     - field.field.node.business_process.field_business_process_efficienc
     - field.field.node.business_process.field_name
@@ -26,13 +25,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-  field_business_head:
-    weight: 102
+  field_business_head_name:
+    weight: 107
     label: above
     settings:
-      link: true
+      link_to_entity: false
     third_party_settings: {  }
-    type: entity_reference_label
+    type: string
     region: content
   field_business_process_effective:
     type: entity_reference_revisions_entity_view

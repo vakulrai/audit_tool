@@ -1,11 +1,11 @@
-uuid: 31982d77-0591-405c-a98e-ebb2156f716a
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.paragraph.business_process_effieciency.field_efficiency
+    - field.field.paragraph.business_process_effieciency.field_other
     - field.field.paragraph.business_process_effieciency.field_target
-    - field.field.paragraph.business_process_effieciency.field_uom
+    - field.field.paragraph.business_process_effieciency.field_uom_text
     - paragraphs.paragraphs_type.business_process_effieciency
 id: paragraph.business_process_effieciency.default
 targetEntityType: paragraph
@@ -20,6 +20,15 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_other:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields: {  }
+    type: string_textfield
+    region: content
   field_target:
     weight: 2
     settings:
@@ -27,11 +36,13 @@ content:
     third_party_settings: {  }
     type: number
     region: content
-  field_uom:
+  field_uom_text:
     weight: 1
-    settings: {  }
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: options_select
+    type: string_textfield
     region: content
 hidden:
   created: true
