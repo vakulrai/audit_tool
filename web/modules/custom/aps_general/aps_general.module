@@ -1212,6 +1212,11 @@ function aps_general_views_query_alter(ViewExecutable $view, QueryPluginBase $qu
 function aps_general_views_pre_render(ViewExecutable $view) {
 }
 
+function aps_general_preprocess_breadcrumb(&$variables) { 
+  if(\Drupal::routeMatch()->getRouteName() == 'user.admin_create'){
+    unset($variables['breadcrumb'][1]['url']);
+  }
+}
 /**
  * Implements hook_link_alter().
  */
@@ -1787,7 +1792,7 @@ function aps_assembly_user_redirect_default(array $form, \Drupal\Core\Form\FormS
  */
 function aps_assembly_user_redirect_auditor(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
   $unit_reference = \Drupal::request()->query->get('unit_reference');
-  $response = Url::fromUserInput('/user-listing-auditor?unit_reference='.$unit_reference);
+  $response = Url::fromUserInput(\Drupal::request()->getRequestUri());
   $form_state->setRedirectUrl($response);
 }
 
