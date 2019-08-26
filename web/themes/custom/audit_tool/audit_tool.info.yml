@@ -1,48 +1,34 @@
 name: Audit Tool
 type: theme
-description: Main Theme for Audit Tool.
-# core: 8.x
+description: 'Basic structure for a Bootstrap Barrio SubTheme.'
+version: VERSION
+core: 8.x
+base theme: bootstrap_barrio
 
-# Defines the base theme
-base theme: material_base
-# Defines libraries group in which we can add css/js.
-libraries-override:
-# Remove an asset, it will be replaced by subtheme's one
-material_base/styles:
-  css:
-    theme:
-      css/styles.css: false
-        
-# Remove libraries, which will not be used in most cases 
-material_base/color-themes: true
-material_base/theme-dark: false
-# Defines libraries group in which we can add css/js.
 libraries:
-  - audit_tool/custom
+  - bootstrap_barrio_subtheme/bootstrap_cdn
+  - bootstrap_barrio_subtheme/global-styling
 
-# Regions
 regions:
-  page_top: 'Page top'
+  top_header: 'Top Header'
+  top_header_form: "Top Header Form"
   header: Header
-  help: Help
-  breadcrumb: Breadcrumb
-  highlighted: Highlighted
-  content: Content
-  sidebar_first: 'First sidebar'
-  sidebar_second: 'Second sidebar'
-  footer: Footer
+  header_form: "Header Form"
+  primary_menu: 'Primary menu'
+  secondary_menu: 'Secondary menu'
+  page_top: 'Page top'
   page_bottom: 'Page bottom'
-  navbar: Navbar
-  drawer: Drawer
-  header_bg: 'Header background'
-  actions: 'Actions'
-  before_main: 'Before main content'
-  after_main: 'After main content'
-  content_secondary: 'Content secondary'
-  footer_content: 'Footer content'
-
-# Information added by Drupal.org packaging script on 2019-06-12
-version: '8.x-1.7'
-core: '8.x'
-project: 'material_base'
-datestamp: 1560380595
+  highlighted: Highlighted
+  featured_top: 'Featured top'
+  breadcrumb: Breadcrumb
+  content: Content
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  featured_bottom_first: 'Featured bottom first'
+  featured_bottom_second: 'Featured bottom second'
+  featured_bottom_third: 'Featured bottom third'
+  footer_first: 'Footer first'
+  footer_second: 'Footer second'
+  footer_third: 'Footer third'
+  footer_fourth: 'Footer fourth'
+  footer_fifth: 'Footer fifth'
