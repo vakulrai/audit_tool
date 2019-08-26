@@ -1,0 +1,20 @@
+uuid: 4481a0c2-fbc4-4d62-b59c-66004219f364
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - eck
+id: subscription.field_subscription_end_date
+field_name: field_subscription_end_date
+entity_type: subscription
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

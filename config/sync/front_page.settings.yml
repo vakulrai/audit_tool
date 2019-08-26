@@ -15,9 +15,10 @@ rid_auditee:
   weigth: '0'
   path: ''
 rid_mr_admin:
+  enabled: '1'
   weigth: '0'
-  path: ''
-home_link_path: ''
+  path: /home
+home_link_path: home
 rid_qa_staff_member:
   weigth: '0'
   path: ''

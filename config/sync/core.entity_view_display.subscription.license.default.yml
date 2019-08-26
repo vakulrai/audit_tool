@@ -1,0 +1,52 @@
+uuid: eb01d348-11e1-4360-b7c8-915f7e111362
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.subscription.license
+    - field.field.subscription.license.field_site_uuid
+    - field.field.subscription.license.field_subscription_end_date
+    - field.field.subscription.license.field_subscription_start_date
+    - field.field.subscription.license.field_subscription_type
+  module:
+    - datetime
+    - options
+id: subscription.license.default
+targetEntityType: subscription
+bundle: license
+mode: default
+content:
+  field_site_uuid:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_subscription_end_date:
+    weight: 2
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_subscription_start_date:
+    weight: 1
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_subscription_type:
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+hidden: {  }

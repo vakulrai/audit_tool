@@ -1,0 +1,24 @@
+uuid: b0e0bfb7-a416-42a2-bab6-29be5e940fa2
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.subscription.license
+    - field.storage.subscription.field_subscription_start_date
+  module:
+    - datetime
+id: subscription.license.field_subscription_start_date
+field_name: field_subscription_start_date
+entity_type: subscription
+bundle: license
+label: 'Subscription Start Date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

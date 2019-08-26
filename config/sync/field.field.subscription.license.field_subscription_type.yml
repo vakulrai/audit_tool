@@ -1,0 +1,21 @@
+uuid: f3fbaf60-0a17-4b7a-ab6a-e46ec6d8631a
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.subscription.license
+    - field.storage.subscription.field_subscription_type
+  module:
+    - options
+id: subscription.license.field_subscription_type
+field_name: field_subscription_type
+entity_type: subscription
+bundle: license
+label: 'Subscription Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
