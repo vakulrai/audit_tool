@@ -98,7 +98,7 @@ class SubscriptionForm extends FormBase {
   public function UpdateSubscription(array $form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
     if ($form_state->getValue('terms') == 0) {
-      $response->addCommand(new HtmlCommand('#terms-check', t('Please Select terms and Condition')));
+      $response->addCommand(new HtmlCommand('#terms-check', t('Please Select terms and Condition.')));
     }
     else{
       $response->addCommand(new RemoveCommand('.ui-dialog'));
