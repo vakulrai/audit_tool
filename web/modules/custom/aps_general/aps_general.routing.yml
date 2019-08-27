@@ -12,6 +12,13 @@ aps_general.get_subscription:
   requirements:
     _access: 'TRUE'
 
+aps_general.update_score:
+  path: '/score'
+  defaults:  
+    _controller: '\Drupal\aps_general\Controller\RedirectFormController::updateFunctionModalForm'
+  requirements:
+    _access: 'TRUE'
+
 aps_general.csv_import:
   path: '/aps_general/form/csv_import'
   defaults:

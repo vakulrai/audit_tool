@@ -7,6 +7,7 @@ use Drupal\Core\Ajax\OpenModalDialogCommand;
 use Drupal\Core\Form\FormBuilder;
 use Drupal\aps_general\Form\ReportDocument;
 use Drupal\aps_general\Form\SubscriptionForm;
+use Drupal\aps_general\Form\UpdateFunctionForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Ajax\RedirectCommand;
@@ -66,6 +67,16 @@ class RedirectFormController extends ControllerBase {
     $response = new AjaxResponse();
     $modal_form = $this->formBuilder->getForm(SubscriptionForm::class);
     $response->addCommand(new OpenModalDialogCommand('License Period', $modal_form, ['width' => '800']));
+    return $response;
+  }
+
+  /**
+   * Callback for Update Function form.
+   */
+  public function updateFunctionModalForm() {
+    $response = new AjaxResponse();
+    $modal_form = $this->formBuilder->getForm(UpdateFunctionForm::class);
+    $response->addCommand(new OpenModalDialogCommand('Write a Message.', $modal_form, ['width' => '800']));
     return $response;
   }
 
