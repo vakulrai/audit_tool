@@ -68,12 +68,35 @@ dependencies:
   - conditional_fields
   - range
   - datetime_range
+  - paragraphs
+  - yearonly
+  - views_autocomplete_filters
   - disable_messages
-  - disable_messages
-  - disable_messages
-  - disable_messages
-  - disable_messages
-  - disable_messages
+  - time_range
+  - structure_sync
+  - workflow
+  - workflow_access
+  - workflow_operations
+  - workflow_ui
+  - workflows
+  - superfish
+  - smtp
+  - sendgrid_integration
+  - restui
+  - rest
+  - paragraphs_type_permissions
+  - mobile_number
+  - inline_entity_form
+  - inline_form_errors
+  - mailsystem
+  - backup_migrate
+  - block_class
+  - media
+  - media_library
+  - basic_auth
+  - hal
+  - devel
+  - questions_answers
 
 dependencies:
   - node
@@ -86,3 +109,5 @@ themes:
   - bartik
   - seven
   - audit_tool
+  - bootstrap_barrio_subtheme
+  - bootstrap_barrio
