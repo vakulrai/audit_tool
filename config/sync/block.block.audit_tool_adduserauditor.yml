@@ -1,6 +1,6 @@
 uuid: 4adc56eb-d2da-4293-ba11-38d8585b7d67
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.add-user-auditor
