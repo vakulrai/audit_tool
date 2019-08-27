@@ -1219,6 +1219,21 @@ function aps_general_preprocess_breadcrumb(&$variables) {
   elseif(\Drupal::routeMatch()->getRouteName() == 'view.user_listing.page_2'){
     $variables['breadcrumb'][] = ['text' => t('Auditors List')];
   }
+  elseif(\Drupal::routeMatch()->getRouteName() == 'view.user_registration_view.registration'){
+    $variables['breadcrumb'][] = ['text' => t('Dashboard')];
+  }
+  elseif(\Drupal::routeMatch()->getRouteName() == 'view.registered_unit_listing.bp'){
+    $variables['breadcrumb'][] = ['text' => t('Business Processes')];
+  }
+  elseif(\Drupal::routeMatch()->getRouteName() == 'view.registered_unit_listing.department_listing'){
+    $variables['breadcrumb'][] = ['text' => t('Departments')];
+  }
+  elseif(\Drupal::routeMatch()->getRouteName() == 'view.registered_unit_listing.section_list'){
+    $variables['breadcrumb'][] = ['text' => t('Sections')];
+  }
+  elseif(\Drupal::routeMatch()->getRouteName() == 'aps_audit_planning.audit_planning_controller_build'){
+    $variables['breadcrumb'][] = ['text' => t('Event Planning')];
+  }
 }
 /**
  * Implements hook_link_alter().
