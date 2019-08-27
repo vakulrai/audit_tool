@@ -298,9 +298,9 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
       
       unset($form['field_customer_audit']);
 	}
-  elseif (condition) {
-    # code...
-  }
+  // elseif (condition) {
+  //   # code...
+  // }
 
 	if($form_id == 'audit_cycle_settings_form' || $form_id == 'audit_cycle_settings_edit_form'){
     $form['field_calendar_date']['#states'] = [

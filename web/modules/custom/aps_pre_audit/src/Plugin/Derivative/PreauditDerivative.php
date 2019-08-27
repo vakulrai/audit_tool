@@ -323,19 +323,19 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       'route_parameters' => ['unit_reference' => $id],
     ] + $base_plugin_definition;
 
-    if($user_role == 'mr_admin' && \Drupal::request()->query->get('type') == 'auditor'){
+    if($user_role == 'mr_admin'){
       $links['auditor_add'] = [
         'title' => 'Auditor Listing',
         'route_name' => 'view.user_listing.page_2',
         'base_route' => 'user.admin_create',
-        'route_parameters' => ['unit_reference' => $id],
+        'route_parameters' => ['unit_reference' => $id, 'type' => $type],
       ] + $base_plugin_definition;
 
       $links['auditor_list'] = [
         'title' => 'Add Auditor',
         'route_name' => 'user.admin_create',
         'base_route' => 'user.admin_create',
-        'route_parameters' => ['unit_reference' => $id],
+        'route_parameters' => ['unit_reference' => $id, 'type' => $type],
       ] + $base_plugin_definition;
     }    
     return $links;
