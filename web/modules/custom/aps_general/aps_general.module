@@ -1212,9 +1212,12 @@ function aps_general_views_query_alter(ViewExecutable $view, QueryPluginBase $qu
 function aps_general_views_pre_render(ViewExecutable $view) {
 }
 
-function aps_general_preprocess_breadcrumb(&$variables) { 
+function aps_general_preprocess_breadcrumb(&$variables) {
   if(\Drupal::routeMatch()->getRouteName() == 'user.admin_create'){
     unset($variables['breadcrumb'][1]['url']);
+  }
+  elseif(\Drupal::routeMatch()->getRouteName() == 'view.user_listing.page_2'){
+    $variables['breadcrumb'][] = ['text' => t('Auditors List')];
   }
 }
 /**
