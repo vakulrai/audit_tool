@@ -1028,6 +1028,9 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
         unset($data['tabs']);
       }
     }
+    elseif ($uri[2] == 'holidays') {
+      unset($data['tabs']);
+    }
      elseif (stripos(strtolower($uri[2]), 'department?') !== false) {
         unset($data['tabs']);
     }
@@ -1213,6 +1216,8 @@ function aps_general_views_pre_render(ViewExecutable $view) {
 }
 
 function aps_general_preprocess_breadcrumb(&$variables) {
+  $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+  $uri = explode('/', $current_uri);
   if(\Drupal::routeMatch()->getRouteName() == 'user.admin_create'){
     unset($variables['breadcrumb'][1]['url']);
   }
@@ -1233,6 +1238,19 @@ function aps_general_preprocess_breadcrumb(&$variables) {
   }
   elseif(\Drupal::routeMatch()->getRouteName() == 'aps_audit_planning.audit_planning_controller_build'){
     $variables['breadcrumb'][] = ['text' => t('Event Planning')];
+  }
+  elseif(\Drupal::routeMatch()->getRouteName() == 'node.add'){
+    unset($variables['breadcrumb'][1]['url']);
+    unset($variables['breadcrumb'][2]['url']);
+    $variables['breadcrumb'][1]['text'] = 'Registration';
+    $variables['breadcrumb'][2]['text'] = \Drupal::routeMatch()->getParameters()->get('node_type')->get('name');
+  }
+  elseif(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form'){
+    unset($variables['breadcrumb'][1]['url']);
+    unset($variables['breadcrumb'][2]['url']);
+  }
+   elseif(\Drupal::routeMatch()->getRouteName() == 'view.list_of_holidays.holidays'){
+     $variables['breadcrumb'][] = ['text' => t('Holidays')];
   }
 }
 /**
@@ -1655,9 +1673,10 @@ function aps_general_link_alter(&$variables) {
       }
       else{
         $url =Url::fromUserInput('/admin/content/holidays/add/holidays');
+        $url->setRouteParameter('unit_reference', $id);
       }
       unset($variables['url']);
-      $url->setRouteParameter('unit_reference', $id);
+      $url->setRouteParameter('destination', $current_uri);
       $variables['url'] = $url;
     }
   }
