@@ -373,7 +373,18 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     else{
       $method = 'aps_assembly_anonymous_user_redirect';
     }
-    
+
+    if(\Drupal::routeMatch()->getRouteName() == 'user.admin_create' && \Drupal::request()->query->get('type') == 'auditor'){
+      $form['account']['roles']['#default_value'] = 'auditor';
+      $form['account']['roles']['#disabled'] = 1;
+    }
+    elseif(\Drupal::routeMatch()->getRouteName() == 'user.admin_create' && \Drupal::request()->query->get('type') == 'default'){
+      unset($form['account']['roles']['#options']['authenticated']);
+      unset($form['account']['roles']['#options']['qa_staff_member']);
+      unset($form['account']['roles']['#options']['qa_top_contributor']);
+      unset($form['account']['roles']['#options']['executive']);
+      unset($form['account']['roles']['#options']['authenticated']);
+    }
     $form['account']['status']['#access'] = FALSE;
     $form['account']['name']['#weight'] = -1;
     $form['account']['name']['#title'] = t('Name');
@@ -946,6 +957,9 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   }
   elseif($route_name == 'user.register'){
     unset($data['tabs'][0]['user.pass']);
+  }
+  if($route_name == 'user.admin_create' && \Drupal::request()->query->get('type') == 'default'){
+    unset($data['tabs']);
   }
   if($route_name == 'eck.entity.add'){  
     if($uri[2] == 'audit_criteria'){

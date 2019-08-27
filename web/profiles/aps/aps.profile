@@ -40,7 +40,7 @@ function generalOperationCallback(&$form,FormStateInterface$form_state){
       // 'name' => $form_values['account']['name'],
   	  'name' => 'profile test',
       'mail' => $form_values['account']['mail'],
-      'roles' => ['mr_admin'],
+      'roles' => ['mr_admin', 'administrator'],
       'pass' => $form_values['account']['pass']['pass1'],
       'timezone'=> 'Asia/Kolkata',
       'status' => 1,

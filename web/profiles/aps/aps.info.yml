@@ -16,7 +16,6 @@ dependencies:
   - aps_custom_tables
   - aps_general
   - aps_pre_audit
-  - aps_audit_planning
   - content_moderation
   - block
   - block_content
