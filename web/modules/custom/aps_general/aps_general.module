@@ -962,8 +962,11 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   elseif($route_name == 'user.register'){
     unset($data['tabs'][0]['user.pass']);
   }
-  if($route_name == 'user.admin_create' && \Drupal::request()->query->get('type') == 'default'){
-    unset($data['tabs']);
+  if(\Drupal::request()->query->get('type') == 'default'){
+    $unit_reference = \Drupal::request()->query->get('unit_reference');
+    $type = \Drupal::request()->query->get('type');
+    $data['tabs'][0]['aps_pre_audit.manuals:auditor_add']['#link']['title'] = 'Registered Roles';
+    $data['tabs'][0]['aps_pre_audit.manuals:auditor_list']['#link']['title'] = 'Add Roles';
   }
   if($route_name == 'eck.entity.add'){  
     if($uri[2] == 'audit_criteria'){

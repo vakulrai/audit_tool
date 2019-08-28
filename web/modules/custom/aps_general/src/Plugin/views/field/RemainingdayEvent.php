@@ -72,7 +72,8 @@ class RemainingdayEvent extends FieldPluginBase {
     }
     $audit_cycle_time = date('Y-m-d H:i:s',strtotime('-'.$days_before_event.'day', $event_start_date_timestamp));
     $date1 = new \DateTime($audit_cycle_time);
-    $date2 = new \DateTime();
+    $date2 = new \DateTime(); //current date
+    // $date2 = new \DateTime(date('Y-m-d H:i:s',strtotime('08/22/2019')));
     $diff = $date2->diff($date1);
     $months = $diff->m;
     $days = $diff->days; 

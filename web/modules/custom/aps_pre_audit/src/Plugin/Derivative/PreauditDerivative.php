@@ -46,6 +46,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
   public function getDerivativeDefinitions($base_plugin_definition) {
     $links = [];
     $current_user = \Drupal::currentUser();
+    $route_name = \Drupal::routeMatch()->getRouteName();
     $roles = $current_user->getRoles();
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     foreach ($roles as $key => $value) {
@@ -324,18 +325,24 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
     ] + $base_plugin_definition;
 
     if($user_role == 'mr_admin'){
+      if($type == 'default'){
+        $route = 'view.user_listing.page_1';
+      }
+      elseif($type == 'auditor'){
+        $route = 'view.user_listing.page_2';
+      }
       $links['auditor_add'] = [
         'title' => 'Auditor Listing',
-        'route_name' => 'view.user_listing.page_2',
+        'route_name' => $route,
         'base_route' => 'user.admin_create',
-        'route_parameters' => ['unit_reference' => $id, 'type' => $type],
+        'route_parameters' => ['type' => $type, 'unit_reference' => $id],
       ] + $base_plugin_definition;
 
       $links['auditor_list'] = [
         'title' => 'Add Auditor',
         'route_name' => 'user.admin_create',
         'base_route' => 'user.admin_create',
-        'route_parameters' => ['unit_reference' => $id, 'type' => $type],
+        'route_parameters' => ['type' => $type, 'unit_reference' => $id],
       ] + $base_plugin_definition;
     }    
     return $links;
