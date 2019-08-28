@@ -1,6 +1,6 @@
 uuid: dc896c98-6fd1-48f8-908a-4d93d32ab38e
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.admin-main-menu-for-auditor
@@ -15,8 +15,8 @@ third_party_settings:
     classes: ' visible-sm  main-navigation-menu'
 id: audit_tool_adminmainmenuforauditor
 theme: audit_tool
-region: navbar
-weight: -27
+region: sidebar_first
+weight: -14
 provider: null
 plugin: 'superfish:admin-main-menu-for-auditor'
 settings:

@@ -14,8 +14,8 @@ third_party_settings:
     classes: 'navbar-item navbar-menu visible-sm pull-right'
 id: audit_tool_useraccountmenu
 theme: audit_tool
-region: navbar
-weight: -28
+region: top_header
+weight: -31
 provider: null
 plugin: 'system_menu_block:account'
 settings:

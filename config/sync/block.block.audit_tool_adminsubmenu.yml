@@ -6,7 +6,6 @@ dependencies:
     - system.menu.admin-sub-menu
   module:
     - superfish
-    - system
     - user
   theme:
     - audit_tool
@@ -78,8 +77,3 @@ visibility:
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'
-  request_path:
-    id: request_path
-    pages: '/unit-registration-view/*'
-    negate: false
-    context_mapping: {  }

@@ -13,7 +13,7 @@ bundle: risk_legend
 mode: default
 content:
   field_risk_element:
-    weight: 27
+    weight: 26
     settings:
       rows: 9
       summary_rows: 3

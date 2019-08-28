@@ -1,4 +1,4 @@
-uuid: d66ab79a-402e-4e51-9200-95097a12a6dc
+uuid: 6a644e24-22ab-4545-891c-e082fdf27a88
 langcode: en
 status: true
 dependencies:
@@ -15,11 +15,7 @@ label: 'Risk Element'
 description: ''
 required: false
 translatable: false
-default_value:
-  -
-    summary: ''
-    value: '<div id="container-element-risk-legend" style="min-width: 150px; height: 400px; max-width: 400px; margin: 0 auto"></div>'
-    format: plain_text
+default_value: {  }
 default_value_callback: ''
 settings:
   display_summary: false

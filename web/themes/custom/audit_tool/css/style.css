@@ -133,9 +133,24 @@ img {
 .container-fluid {
   max-width: 1360px; }
 
-header #navbar-main {
+#page > header {
   background: #ffffff;
-  max-width: 1360px; }
+  box-shadow: 0 0 5px #ccc;
+  margin-bottom: 10px; }
+  #page > header #navbar-main {
+    max-width: 1360px;
+    margin: 0 auto;
+    background: #ffffff; }
+  #page > header #navbar-top {
+    background: #fadb23;
+    padding: 0px; }
+  #page > header .menu--account {
+    width: 100%; }
+    #page > header .menu--account .account-menu {
+      float: right;
+      margin-bottom: 0px; }
+      #page > header .menu--account .account-menu a {
+        display: inline-block; }
 
 #sidebar_first .block {
   background: transparent;
@@ -165,9 +180,7 @@ header #navbar-main {
       #sidebar_first .block ul > li ul li:hover a {
         background: #fafafa; }
 
-body #main-wrapper {
-  background: #fafafa; }
-body .container {
+.container {
   max-width: 1360px; }
 
 /*# sourceMappingURL=style.css.map */

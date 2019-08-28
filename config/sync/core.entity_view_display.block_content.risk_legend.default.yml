@@ -13,7 +13,7 @@ bundle: risk_legend
 mode: default
 content:
   field_risk_element:
-    weight: 1
+    weight: 0
     label: hidden
     settings: {  }
     third_party_settings: {  }
