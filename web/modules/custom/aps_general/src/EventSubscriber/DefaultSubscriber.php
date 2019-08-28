@@ -95,7 +95,7 @@ class DefaultSubscriber implements EventSubscriberInterface {
       $response = new RedirectResponse('/home', 301);  
       $response->send(); 
     }
-    elseif ($front && $user_role == 'mr_admin') {
+    if ($user_role == 'mr_admin' && $route_name == 'entity.user.canonical') {
       $query = \Drupal::database()->select('node__field_deputy_mr', 'n');
       $query->fields('n',['field_deputy_mr_target_id', 'bundle', 'entity_id']);
       $query->condition('n.bundle', 'unit');
