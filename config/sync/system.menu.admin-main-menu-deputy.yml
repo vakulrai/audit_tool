@@ -1,0 +1,8 @@
+uuid: 7868b57a-e084-40af-b2f7-4d091f1d45e3
+langcode: en
+status: true
+dependencies: {  }
+id: admin-main-menu-deputy
+label: 'Admin Main menu Deputy'
+description: ''
+locked: false

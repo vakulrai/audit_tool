@@ -578,6 +578,16 @@ function resetForm(array $form, \Drupal\Core\Form\FormStateInterface $form_state
  */
 function aps_audit_criteria_field_widget_address_default_form_alter(&$element, &$form_state, $context) {
   $element['#type'] = 'fieldset';
+  // $field_definition = $context['items']->getFieldDefinition();
+  // $current_user = \Drupal::currentUser();
+  // $roles = $current_user->getRoles();
+  // foreach ($roles as $key => $value) {
+  //   $user_role = $value;
+  // }
+  // if($field_definition->getName() == 'field_remote_address' && $user_role == 'group_mr'){
+    
+  // }
+  
 }
 
 function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {

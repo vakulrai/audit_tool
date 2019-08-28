@@ -112,6 +112,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
           }
         }
       }
+      $form['field_remote_address']['#access'] = FALSE;
     }
     $form['title']['widget'][0]['value']['#title'] = t('Unit name');
     foreach (array_keys($form['actions']) as $action) {
@@ -1745,6 +1746,38 @@ function aps_general_link_alter(&$variables) {
     $id = $uri[1];
     if($id){
       $variables['url']->setRouteParameter('unit_reference', $id);
+    }
+  }
+
+  if ($cleanLinkText == 'Create Business Process') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('id', $id);
+    }
+  }
+
+  if ($cleanLinkText == 'Create Department') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('id', $id);
+      $variables['url']->setRouteParameter('unit_ref', $id);
+    }
+  }
+
+  if ($cleanLinkText == 'Create Section') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('id', $id);
+      $variables['url']->setRouteParameter('unit_ref', $id);
+    }
+  }
+
+  if ($cleanLinkText == 'Unit Details' && $user_role == 'mr_admin') {
+    $id = $uri[1];
+    if($id){
+      $url = Url::fromRoute('entity.node.edit_form',['node' => $id]);
+      unset($variables['url']);
+      $variables['url'] = $url;
     }
   }
 }

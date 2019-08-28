@@ -105,6 +105,16 @@ class DefaultSubscriber implements EventSubscriberInterface {
       $response->send();
     }
 
+    if ($user_role == 'mr_admin' && $front) {
+      $query = \Drupal::database()->select('node__field_deputy_mr', 'n');
+      $query->fields('n',['field_deputy_mr_target_id', 'bundle', 'entity_id']);
+      $query->condition('n.bundle', 'unit');
+      $query->condition('n.field_deputy_mr_target_id', $uid);
+      $unit_id_ref = $query->execute()->fetchAll();
+      $response = new RedirectResponse('/unit-registration-view/'.$unit_id_ref[0]->entity_id, 301);  
+      $response->send();
+    }
+
   }
 
   public function checkAuthStatus(GetResponseEvent $event) {
@@ -117,7 +127,7 @@ class DefaultSubscriber implements EventSubscriberInterface {
         return;
       }
 
-      $response = new RedirectResponse('/user/login', 301);
+      $response = new RedirectResponse('/user/login');
       $event->setResponse($response);
       $event->stopPropagation();
     }
