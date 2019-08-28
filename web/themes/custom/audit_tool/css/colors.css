@@ -29,11 +29,6 @@ body {
     background-color: #1d84c3;
 }
 
-a,
-.link {
-    color: #0071b3;
-}
-
 a:hover,
 a:focus,
 .link:hover,

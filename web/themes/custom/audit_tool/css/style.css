@@ -1,5 +1,173 @@
-/**
- * @file
- * Subtheme specific CSS.
- */
+html {
+  font-size: 16px; }
 
+body {
+  font-family: "Open Sans", sans-serif;
+  -webkit-font-smoothing: auto;
+  background: #fafafa;
+  color: #414141; }
+
+a, .link {
+  color: #657d89; }
+  a:hover, .link:hover {
+    text-decoration: none; }
+
+img {
+  max-width: 100%; }
+
+.p-tb-100 {
+  padding-top: 100px;
+  padding-bottom: 100px; }
+
+.dropdown-hover {
+  margin: 0px;
+  padding: 0px;
+  list-style: none; }
+  .dropdown-hover .menu-line {
+    padding: 0.6rem 0rem;
+    border-right: 1px solid #d9d9d9;
+    height: 40px; }
+  .dropdown-hover li {
+    position: relative;
+    display: inline-block;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    vertical-align: middle; }
+    .dropdown-hover li a {
+      color: #414141; }
+    .dropdown-hover li .fa-angle-down {
+      font-size: 1.4rem;
+      display: inline-block;
+      vertical-align: bottom;
+      margin-left: 0.4rem; }
+    .dropdown-hover li .dropdown-menu-hover {
+      display: none;
+      position: absolute;
+      top: 100%;
+      background: #ffffff;
+      border: 1px solid #ececec;
+      min-width: 150px;
+      margin: 0px;
+      padding: 0px;
+      list-style: none;
+      z-index: 9; }
+      .dropdown-hover li .dropdown-menu-hover li {
+        display: block;
+        padding: 0rem; }
+        .dropdown-hover li .dropdown-menu-hover li .dropdown-item-hover {
+          display: block;
+          padding: 0.6rem 1rem; }
+          .dropdown-hover li .dropdown-menu-hover li .dropdown-item-hover:hover {
+            background: #ececec; }
+    .dropdown-hover li:hover .dropdown-menu-hover {
+      display: block; }
+
+.p-lr-5 {
+  padding-left: 5px;
+  padding-right: 5px; }
+
+.grey-bg {
+  background: #fafafa; }
+
+.readmore-link {
+  text-transform: uppercase; }
+
+.arrow-icon-arrow {
+  position: relative;
+  width: 34px;
+  display: inline-block;
+  vertical-align: middle; }
+
+.arrow-arrow {
+  position: absolute;
+  top: -3px;
+  width: 65%;
+  height: 3px;
+  right: 10px;
+  background-color: #005e98;
+  animation: arrow 700ms linear infinite; }
+
+.arrow-arrow::after {
+  content: '';
+  position: absolute;
+  width: 40%;
+  height: 3px;
+  top: -2px;
+  right: -2px;
+  background-color: #005e98;
+  transform: rotate(45deg); }
+
+.arrow-arrow::before {
+  content: '';
+  position: absolute;
+  width: 40%;
+  height: 3px;
+  top: 2px;
+  right: -2px;
+  background-color: #005e98;
+  transform: rotate(-45deg); }
+
+.blue-bg {
+  background: #003486; }
+
+.white-button button {
+  background: #ffffff;
+  color: #3d288d;
+  padding: 0.7rem 2.4rem;
+  text-transform: uppercase; }
+  .white-button button:hover {
+    text-decoration: none;
+    opacity: 0.8; }
+
+.light-blue-bg {
+  background-color: #476cc3; }
+
+.m-tb-15 {
+  margin-top: 1rem;
+  margin-bottom: 1rem; }
+
+.p-tb-15 {
+  padding-top: 1rem;
+  padding-bottom: 1rem; }
+
+.container-fluid {
+  max-width: 1360px; }
+
+header #navbar-main {
+  background: #ffffff;
+  max-width: 1360px; }
+
+#sidebar_first .block {
+  background: transparent;
+  border: none; }
+  #sidebar_first .block ul > li {
+    margin-bottom: 10px;
+    background: none !important; }
+    #sidebar_first .block ul > li:hover {
+      background: none; }
+      #sidebar_first .block ul > li:hover a {
+        background: none; }
+    #sidebar_first .block ul > li > a {
+      padding: 1em 0em;
+      color: #657d89;
+      border-bottom: 1px solid #dee5e8;
+      font-weight: 600; }
+      #sidebar_first .block ul > li > a .sf-sub-indicator {
+        right: 0px; }
+      #sidebar_first .block ul > li > a .sf-sub-indicator:after {
+        font-size: 8px; }
+    #sidebar_first .block ul > li ul li {
+      margin-bottom: 0px;
+      padding: 0em;
+      background: #ffffff !important; }
+      #sidebar_first .block ul > li ul li a {
+        padding: 1em; }
+      #sidebar_first .block ul > li ul li:hover a {
+        background: #fafafa; }
+
+body #main-wrapper {
+  background: #fafafa; }
+body .container {
+  max-width: 1360px; }
+
+/*# sourceMappingURL=style.css.map */

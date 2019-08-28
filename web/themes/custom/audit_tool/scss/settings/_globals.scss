@@ -5,12 +5,12 @@ html {
 body {
   font-family: $font-primary;
   -webkit-font-smoothing: auto;
-  background: $white;
+  background: $bg-grey;
   color: $dark-grey;
 }
 
-a {
-	color: $text-blue;
+a, .link {
+	color: $link-color;
 	&:hover {
 		text-decoration: none;
 	}
@@ -165,4 +165,8 @@ img {
 .p-tb-15 {
 	padding-top: 1rem;
 	padding-bottom: 1rem;
+}
+
+.container-fluid  {
+  max-width: 1360px;
 }
