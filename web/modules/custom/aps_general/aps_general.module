@@ -519,6 +519,10 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
         $form['actions'][$action]['#submit'][] = 'supplier_add';
       }
     }
+    $submit_functions =  $form['actions']['submit']['#submit'];
+    array_unshift($submit_functions, 'alter_supplier_data');
+    $form['actions']['submit']['#submit'] = $submit_functions;
+
   }
   elseif ($form_id == 'node_supplier_edit_form') {
     $form['field_location']['widget']['add_more']['#value'] = new TranslatableMarkup("@type", array(
@@ -1908,6 +1912,19 @@ function supplier_add(array $form, \Drupal\Core\Form\FormStateInterface $form_st
   $unit_reference = \Drupal::request()->query->get('unit_reference');
   $response = Url::fromUserInput('/node/add/supplier?unit_reference='.$unit_reference);
   $form_state->setRedirectUrl($response);
+}
+
+function alter_supplier_data(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+   $form_values = $form_state->getUserInput();
+   foreach ($form_values['field_add_products'] as $i => $j) {
+      if($form_values['field_add_products'][$i]['subform']['field_product_type'] == 'service'){
+        $form_state->setValue(['field_add_products', $i ,'subform', 'field_manufactured_product',0, 'subform', 'field_manufactured_product_name', 0,'value'], '');
+        $form_state->setValue(['field_add_products', $i ,'subform', 'field_manufactured_product',0, 'subform', 'field_manufactured_product_id', 0,'value'], '');
+      }
+      elseif ($form_values['field_add_products'][$i]['subform']['field_product_type'] == 'manufactured') {
+        $form_state->setValue(['field_add_products', $i ,'subform', 'field_service_product',0, 'subform', 'field_service_part_name', 0,'value'], '');
+      }
+  }
 }
 
 function checklist_submission(array $form, \Drupal\Core\Form\FormStateInterface $form_state){

@@ -78,6 +78,10 @@ class DefaultSubscriber implements EventSubscriberInterface {
       $response = new RedirectResponse(URL::fromUserInput('/planned-audit-listing-auditee/'.$user_unit)->toString());  
       $response->send(); 
     }
+    elseif($user_role == 'mr_admin' && $route_name == 'entity.user.canonical'){
+      $response = new RedirectResponse('/home', 301);  
+      $response->send(); 
+    }
 
   }
 
