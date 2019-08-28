@@ -324,26 +324,31 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       'route_parameters' => ['unit_reference' => $id],
     ] + $base_plugin_definition;
 
-    if($user_role == 'mr_admin'){
+    if($user_role == 'mr_admin' || $user_role == 'group_mr'){
       if($type == 'default'){
         $route = 'view.user_listing.page_1';
       }
       elseif($type == 'auditor'){
         $route = 'view.user_listing.page_2';
       }
-      $links['auditor_add'] = [
-        'title' => 'Auditor Listing',
-        'route_name' => $route,
-        'base_route' => 'user.admin_create',
-        'route_parameters' => ['type' => $type, 'unit_reference' => $id],
-      ] + $base_plugin_definition;
+      elseif($type == 'mr'){
+        $route = 'view.user_listing.page_3';
+      }
+      if($route != ''){
+        $links['auditor_add'] = [
+          'title' => 'Auditor Listing',
+          'route_name' => $route,
+          'base_route' => 'user.admin_create',
+          'route_parameters' => ['type' => $type, 'unit_reference' => $id],
+        ] + $base_plugin_definition;
 
-      $links['auditor_list'] = [
-        'title' => 'Add Auditor',
-        'route_name' => 'user.admin_create',
-        'base_route' => 'user.admin_create',
-        'route_parameters' => ['type' => $type, 'unit_reference' => $id],
-      ] + $base_plugin_definition;
+        $links['auditor_list'] = [
+          'title' => 'Add Auditor',
+          'route_name' => 'user.admin_create',
+          'base_route' => 'user.admin_create',
+          'route_parameters' => ['type' => $type, 'unit_reference' => $id],
+        ] + $base_plugin_definition;
+      }
     }    
     return $links;
   }

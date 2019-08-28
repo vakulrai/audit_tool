@@ -1,10 +1,10 @@
-uuid: 27f7d62c-272f-49a3-8c36-a02a7fcd398c
+uuid: 5f9bb660-2f92-4b48-b963-f6b28f51f7ba
 langcode: en
 status: true
 dependencies: {  }
-id: mr_admin
-label: 'Deputy Mr'
-weight: 5
+id: group_mr
+label: 'Group Mr'
+weight: 6
 is_admin: null
 permissions:
   - 'access holidays entity listing'

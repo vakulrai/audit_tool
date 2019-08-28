@@ -63,7 +63,16 @@ class DefaultSubscriber implements EventSubscriberInterface {
       $user_role = $value;
     }
     if($user_role == 'mr_admin'){
+      // $role = Role::load('group_mr'); 
+      // // // kint($create);
+      // // // $create->
       // $role_object = Role::load('mr_admin');
+      // $perm = $role_object->getPermissions();
+      // foreach ($perm as $key => $value) {
+      //   $role->grantPermission($value);
+      // }
+      // $role->save();
+      // kint($role);
       // $role_object->revokePermission('create unit content');
       // $role_object->save();
     }
@@ -78,9 +87,22 @@ class DefaultSubscriber implements EventSubscriberInterface {
       $response = new RedirectResponse(URL::fromUserInput('/planned-audit-listing-auditee/'.$user_unit)->toString());  
       $response->send(); 
     }
-    elseif($user_role == 'mr_admin' && $route_name == 'entity.user.canonical'){
+    // elseif($user_role == 'mr_admin' && $route_name == 'entity.user.canonical'){
+    //   $response = new RedirectResponse('/home', 301);  
+    //   $response->send(); 
+    // }
+    elseif($user_role == 'group_mr' && $route_name == 'entity.user.canonical'){
       $response = new RedirectResponse('/home', 301);  
       $response->send(); 
+    }
+    elseif ($front && $user_role == 'mr_admin') {
+      $query = \Drupal::database()->select('node__field_deputy_mr', 'n');
+      $query->fields('n',['field_deputy_mr_target_id', 'bundle', 'entity_id']);
+      $query->condition('n.bundle', 'unit');
+      $query->condition('n.field_deputy_mr_target_id', $uid);
+      $unit_id_ref = $query->execute()->fetchAll();
+      $response = new RedirectResponse('/unit-registration-view/'.$unit_id_ref[0]->entity_id, 301);  
+      $response->send();
     }
 
   }

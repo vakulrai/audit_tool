@@ -35,6 +35,7 @@ visibility:
       auditor: auditor
       auditee: auditee
       mr_admin: mr_admin
+      group_mr: group_mr
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'

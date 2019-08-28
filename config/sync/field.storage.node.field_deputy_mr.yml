@@ -1,0 +1,20 @@
+uuid: d7be1e89-5e08-4519-b016-799f48e15517
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - user
+id: node.field_deputy_mr
+field_name: field_deputy_mr
+entity_type: node
+type: entity_reference
+settings:
+  target_type: user
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

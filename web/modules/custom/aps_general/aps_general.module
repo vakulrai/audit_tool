@@ -96,6 +96,23 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   if($form_id == 'node_unit_form'){
     $form['field_total_mandays']['#access'] = FALSE;
     $form['field_updated_mandays']['#access'] = FALSE;
+    if($user_role == 'mr_admin'){
+      $form['field_deputy_mr']['#access'] = FALSE;
+    }
+    if($user_role == 'group_mr'){
+      $entity_type_id = 'node';
+      $bundle = 'unit';
+      foreach (\Drupal::entityManager()->getFieldDefinitions($entity_type_id, $bundle) as $field_name => $field_definition) {
+        if (!empty($field_definition->getTargetBundle())) {
+          $bundleFields[$field_name]['type'] = $field_definition->getType();
+          $bundleFields[$field_name]['label'] = $field_definition->getLabel();
+          $form[$field_name]['#disabled'] = TRUE;
+          if($field_name == 'title' || $field_name == 'field_address' || $field_name == 'field_deputy_mr'){
+            $form[$field_name]['#disabled'] = FALSE;
+          }
+        }
+      }
+    }
     $form['title']['widget'][0]['value']['#title'] = t('Unit name');
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
@@ -107,6 +124,9 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $form['title']['widget'][0]['value']['#title'] = t('Unit name');
     $form['field_total_mandays']['#access'] = FALSE;
     $form['field_updated_mandays']['#access'] = FALSE;
+    if($user_role == 'mr_admin'){
+      $form['field_deputy_mr']['#access'] = FALSE;
+    }
   }
 
   //Condition for Procedure Add form
@@ -384,6 +404,13 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       unset($form['account']['roles']['#options']['qa_top_contributor']);
       unset($form['account']['roles']['#options']['executive']);
       unset($form['account']['roles']['#options']['authenticated']);
+    }
+    elseif(\Drupal::routeMatch()->getRouteName() == 'user.admin_create' && \Drupal::request()->query->get('type') == 'mr'){
+      $form['account']['roles']['#default_value'] = 'mr_admin';
+      $form['account']['roles']['#disabled'] = 1;
+      $form['field_functions']['#access'] = FALSE;
+      $form['field_department']['#access'] = FALSE;
+      $form['field_employee_id']['#access'] = FALSE;
     }
     $form['account']['status']['#access'] = FALSE;
     $form['account']['name']['#weight'] = -1;
@@ -963,10 +990,12 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     unset($data['tabs'][0]['user.pass']);
   }
   if(\Drupal::request()->query->get('type') == 'default'){
-    $unit_reference = \Drupal::request()->query->get('unit_reference');
-    $type = \Drupal::request()->query->get('type');
     $data['tabs'][0]['aps_pre_audit.manuals:auditor_add']['#link']['title'] = 'Registered Roles';
     $data['tabs'][0]['aps_pre_audit.manuals:auditor_list']['#link']['title'] = 'Add Roles';
+  }
+  if(\Drupal::request()->query->get('type') == 'mr'){
+    $data['tabs'][0]['aps_pre_audit.manuals:auditor_add']['#link']['title'] = 'Registered Mr';
+    $data['tabs'][0]['aps_pre_audit.manuals:auditor_list']['#link']['title'] = 'Add Mr';
   }
   if($route_name == 'eck.entity.add'){  
     if($uri[2] == 'audit_criteria'){
@@ -1240,6 +1269,9 @@ function aps_general_preprocess_breadcrumb(&$variables) {
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $uri = explode('/', $current_uri);
   if(\Drupal::routeMatch()->getRouteName() == 'user.admin_create'){
+    if(\Drupal::request()->query->get('type') == 'mr'){
+      $variables['breadcrumb'][1]['text'] = t('Register Deputy MR');
+    }
     unset($variables['breadcrumb'][1]['url']);
   }
   elseif(\Drupal::routeMatch()->getRouteName() == 'view.user_listing.page_2'){

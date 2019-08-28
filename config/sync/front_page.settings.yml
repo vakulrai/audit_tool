@@ -15,7 +15,6 @@ rid_auditee:
   weigth: '0'
   path: ''
 rid_mr_admin:
-  enabled: '1'
   weigth: '0'
   path: /home
 home_link_path: ''
@@ -25,3 +24,6 @@ rid_qa_staff_member:
 rid_qa_top_contributor:
   weigth: '0'
   path: ''
+rid_group_mr:
+  weigth: '0'
+  path: /home

@@ -1,0 +1,36 @@
+uuid: 92187677-c935-4a27-9e69-33db10e3304b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_deputy_mr
+    - node.type.unit
+id: node.unit.field_deputy_mr
+field_name: field_deputy_mr
+entity_type: node
+bundle: unit
+label: 'Deputy Mr'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: role
+      role:
+        mr_admin: mr_admin
+        qa_staff_member: '0'
+        qa_top_contributor: '0'
+        executive: '0'
+        auditor: '0'
+        auditee: '0'
+        group_mr: '0'
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference
