@@ -69,30 +69,21 @@ content:
     type: address_default
     region: content
   field_contributed_sales:
-    weight: 9
+    weight: 8
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
-  field_deputy_mr:
-    weight: 2
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_frequency:
-    weight: 11
+    weight: 10
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_months_for_the_audit:
-    weight: 12
+    weight: 11
     settings:
       size: 60
       placeholder: ''
@@ -106,20 +97,20 @@ content:
     type: address_default
     region: content
   field_sales_turnover:
-    weight: 8
+    weight: 7
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_shift:
-    weight: 3
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_time_g:
-    weight: 4
+    weight: 3
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -146,7 +137,7 @@ content:
     type: time_range
     region: content
   field_time_s1:
-    weight: 5
+    weight: 4
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -168,7 +159,7 @@ content:
     type: time_range
     region: content
   field_time_s3:
-    weight: 6
+    weight: 5
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -190,7 +181,7 @@ content:
     type: time_range
     region: content
   field_time_s4:
-    weight: 7
+    weight: 6
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -212,21 +203,21 @@ content:
     type: time_range
     region: content
   field_total_mandays:
-    weight: 13
+    weight: 12
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_total_members:
-    weight: 10
+    weight: 9
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_updated_mandays:
-    weight: 14
+    weight: 13
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -234,7 +225,7 @@ content:
     region: content
   moderation_state:
     type: moderation_state_default
-    weight: 15
+    weight: 14
     settings: {  }
     region: content
     third_party_settings: {  }
@@ -249,6 +240,7 @@ content:
 hidden:
   body: true
   created: true
+  field_deputy_mr: true
   field_remote_location_name: true
   field_unit_name: true
   path: true

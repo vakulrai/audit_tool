@@ -584,7 +584,7 @@ function aps_audit_criteria_field_widget_address_default_form_alter(&$element, &
  * Implements  hook_field_widget_form_alter().
  */
 function aps_audit_criteria_field_widget_month_only_widget_form_alter(&$element, &$form_state, $context) {
-  kint('kk');
+  // kint('kk');
 }
 
 function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {

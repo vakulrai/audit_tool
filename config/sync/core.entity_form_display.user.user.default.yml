@@ -3,11 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_assigned
     - field.field.user.user.field_department
     - field.field.user.user.field_employee_id
     - field.field.user.user.field_functions
     - field.field.user.user.field_phone
     - field.field.user.user.field_reference_id
+    - field.field.user.user.field_unit
   module:
     - mobile_number
     - paragraphs
@@ -18,18 +20,24 @@ bundle: user
 mode: default
 content:
   account:
-    weight: 1
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_assigned:
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   field_department:
-    weight: 2
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_employee_id:
-    weight: 0
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -38,7 +46,7 @@ content:
     region: content
   field_functions:
     type: entity_reference_paragraphs
-    weight: 4
+    weight: 5
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -49,7 +57,7 @@ content:
     third_party_settings: {  }
     region: content
   field_phone:
-    weight: 3
+    weight: 4
     settings:
       default_country: US
       countries: {  }
@@ -58,13 +66,19 @@ content:
     type: mobile_number_default
     region: content
   field_reference_id:
-    weight: 5
+    weight: 6
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_unit:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
 hidden:
   contact: true

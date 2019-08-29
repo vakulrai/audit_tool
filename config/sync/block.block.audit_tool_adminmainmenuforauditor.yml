@@ -15,7 +15,7 @@ third_party_settings:
     classes: ' visible-sm  main-navigation-menu'
 id: audit_tool_adminmainmenuforauditor
 theme: audit_tool
-region: navbar
+region: top_header
 weight: -27
 provider: null
 plugin: 'superfish:admin-main-menu-for-auditor'

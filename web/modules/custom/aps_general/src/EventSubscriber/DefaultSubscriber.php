@@ -96,12 +96,8 @@ class DefaultSubscriber implements EventSubscriberInterface {
       $response->send(); 
     }
     if ($user_role == 'mr_admin' && $route_name == 'entity.user.canonical') {
-      $query = \Drupal::database()->select('node__field_deputy_mr', 'n');
-      $query->fields('n',['field_deputy_mr_target_id', 'bundle', 'entity_id']);
-      $query->condition('n.bundle', 'unit');
-      $query->condition('n.field_deputy_mr_target_id', $uid);
-      $unit_id_ref = $query->execute()->fetchAll();
-      $response = new RedirectResponse('/unit-registration-view/'.$unit_id_ref[0]->entity_id, 301);  
+      $unit_reference = User::load($uid);
+      $response = new RedirectResponse('/unit-registration-view/'.$unit_reference->field_unit->target_id, 301);  
       $response->send();
     }
 
@@ -118,7 +114,7 @@ class DefaultSubscriber implements EventSubscriberInterface {
   }
 
   public function checkAuthStatus(GetResponseEvent $event) {
-    if ($this->account->isAnonymous() && \Drupal::routeMatch()->getRouteName() != 'user.login'&& \Drupal::routeMatch()->getRouteName() != 'user.register') {
+    if ($this->account->isAnonymous() && \Drupal::routeMatch()->getRouteName() != 'user.login'&& \Drupal::routeMatch()->getRouteName() != 'user.register' && \Drupal::routeMatch()->getRouteName() != 'user.logout') {
 
       // add logic to check other routes you want available to anonymous users,
       // otherwise, redirect to login page.

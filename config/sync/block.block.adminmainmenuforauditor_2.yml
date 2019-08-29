@@ -11,7 +11,7 @@ dependencies:
     - audit_tool
 id: adminmainmenuforauditor_2
 theme: audit_tool
-region: drawer
+region: top_header
 weight: -29
 provider: null
 plugin: 'system_menu_block:admin-main-menu-for-auditor'

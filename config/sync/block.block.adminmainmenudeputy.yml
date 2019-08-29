@@ -15,7 +15,7 @@ third_party_settings:
     classes: ' visible-sm  main-navigation-menu'
 id: adminmainmenudeputy
 theme: audit_tool
-region: navbar
+region: top_header
 weight: 0
 provider: null
 plugin: 'superfish:admin-main-menu-deputy'

@@ -10,7 +10,7 @@ dependencies:
     - audit_tool
 id: useraccountmenu_2
 theme: audit_tool
-region: drawer
+region: top_header
 weight: -28
 provider: null
 plugin: 'system_menu_block:account'

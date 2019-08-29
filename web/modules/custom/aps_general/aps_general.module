@@ -390,6 +390,9 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
         $method = 'aps_assembly_user_redirect_default';
         $form['field_functions']['#access'] = FALSE;
       }
+      elseif(\Drupal::request()->query->get('type') == 'mr'){
+        $method = 'aps_group_mr_redirect';
+      }
       else{
         $method = 'aps_assembly_user_redirect_auditor';
         $form['field_functions']['#access'] = TRUE;
@@ -402,13 +405,18 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     if(\Drupal::routeMatch()->getRouteName() == 'user.admin_create' && \Drupal::request()->query->get('type') == 'auditor'){
       $form['account']['roles']['#default_value'] = 'auditor';
       $form['account']['roles']['#disabled'] = 1;
+      $form['field_unit']['#access'] = FALSE;
+      $form['field_assigned']['#access'] = FALSE;
     }
     elseif(\Drupal::routeMatch()->getRouteName() == 'user.admin_create' && \Drupal::request()->query->get('type') == 'default'){
       unset($form['account']['roles']['#options']['authenticated']);
       unset($form['account']['roles']['#options']['qa_staff_member']);
       unset($form['account']['roles']['#options']['qa_top_contributor']);
-      unset($form['account']['roles']['#options']['executive']);
       unset($form['account']['roles']['#options']['authenticated']);
+      unset($form['account']['roles']['#options']['mr_admin']);
+      unset($form['account']['roles']['#options']['group_mr']);
+      $form['field_unit']['#access'] = FALSE;
+      $form['field_assigned']['#access'] = FALSE;
     }
     elseif(\Drupal::routeMatch()->getRouteName() == 'user.admin_create' && \Drupal::request()->query->get('type') == 'mr'){
       $form['account']['roles']['#default_value'] = 'mr_admin';
@@ -416,6 +424,9 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $form['field_functions']['#access'] = FALSE;
       $form['field_department']['#access'] = FALSE;
       $form['field_employee_id']['#access'] = FALSE;
+      $form['field_unit']['#disabled'] = 1;
+      $form['field_assigned']['#access'] = FALSE;
+      $form['field_unit']['widget']['#default_value'] = $unit_reference;
     }
     $form['account']['status']['#access'] = FALSE;
     $form['account']['name']['#weight'] = -1;
@@ -433,6 +444,11 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
         $form['actions'][$action]['#submit'][] = $method;
       }
     }
+  }
+  elseif($form_id == 'user_form'){
+    $form['field_unit']['#disabled'] = 1;
+    $form['field_assigned']['#disabled'] = 1;
+    $form['field_reference_id']['#disabled'] = FALSE;
   }
 
   if($form_id == 'node_customers_manual_edit_form'){
@@ -1811,7 +1827,7 @@ function aps_general_unit_page_redirect(array $form, \Drupal\Core\Form\FormState
   $node_object = Node::load($nid);
   $node_object->set('field_total_mandays', $total_system_mandays);
   $node_object->save();
-  $response = Url::fromUserInput('/unit-registration-view/'.$nid);
+  $response = Url::fromRoute('user.admin_create',['type' => 'mr', 'unit_reference' => $nid]);
 
   //Saving mandays in aps_audit_planning.mandaysettings.yml
   $config_factory = \Drupal::configFactory();
@@ -1913,7 +1929,7 @@ function aps_assembly_page_redirect(array $form, \Drupal\Core\Form\FormStateInte
  */
 function aps_assembly_user_redirect_default(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
   $unit_reference = \Drupal::request()->query->get('unit_reference');
-  $response = Url::fromUserInput('/user-listing-all?unit_reference='.$unit_reference);
+  $response = Url::fromUserInput(\Drupal::request()->getRequestUri());
   $form_state->setRedirectUrl($response);
 }
 
@@ -1934,6 +1950,22 @@ function aps_assembly_anonymous_user_redirect(array $form, \Drupal\Core\Form\For
   $messenger = \Drupal::messenger();
   $response = Url::fromUserInput('/user/login');
   $messenger->addMessage('An E-mail Has been Sent to the registered email.', $messenger::TYPE_STATUS);
+  $form_state->setRedirectUrl($response);
+}
+
+
+/**
+ * Callback method after anonymous user form submits.
+ */
+function aps_group_mr_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $user_form_data = $form_state->getValues();
+  $uid = $user_form_data['uid'];
+  if(isset($uid) && count($user_form_data['field_unit'])){
+    $user_object = User::load($uid);
+    $user_object->set('field_assigned', 'yes');
+    $user_object->save();
+  }
+  $response = Url::fromUserInput('/home');
   $form_state->setRedirectUrl($response);
 }
 
