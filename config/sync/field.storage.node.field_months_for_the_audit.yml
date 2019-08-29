@@ -17,7 +17,7 @@ settings:
   month: ''
 module: aps_general
 locked: false
-cardinality: 12
+cardinality: -1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false
