@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_step
+    - paragraphs.paragraphs_type.audit_report
+id: paragraph.audit_report.field_step
+field_name: field_step
+entity_type: paragraph
+bundle: audit_report
+label: Step
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

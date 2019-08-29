@@ -1,0 +1,14 @@
+uuid: e21781aa-fb41-4457-a838-6f83776d1e16
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.group_mr
+  module:
+    - user
+id: user_add_role_action.group_mr
+label: 'Add the Group Mr role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: group_mr

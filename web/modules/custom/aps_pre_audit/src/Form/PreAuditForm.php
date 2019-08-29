@@ -37,22 +37,34 @@ class PreAuditForm extends FormBase {
     if(isset($path_args[1])){
       $node_object = Node::load($path_args[1]);
       $event_timestamp = $node_object->get('field_start_date')->value;
+      $event_end_date_timestamp = $node_object->get('field_end_date')->value;
+      //Start Date of audit.
       $date1 = new \DateTime(date('Y-m-d H:i:s', $event_timestamp));
-      $date2 = new \DateTime();
+      // $date2 = new \DateTime();
+      $date2 = new \DateTime(date('Y-m-d H:i:s',strtotime('09/6/2019 7:30:20')));
       $diff = $date2->diff($date1);
       $months = $diff->m;
       $days = $diff->days;
       $hours = $diff->h;
       $check_invert_time = $diff->invert;
       $total_hours = $days * 24 + $hours;
+      //End date of audit.
+      $end_date_of_audit = new \DateTime(date('Y-m-d H:i:s',$event_end_date_timestamp));
+      $end_date_diff = $date2->diff($end_date_of_audit);
+      $end_date_invert = $end_date_diff->invert;
     }
     $get_score_settings = getScoreSettings($node_object->get('field_refere')->target_id);
     $get_score_options_for_selectlist = $this->getScoreLevels($get_score_settings);
-    if ($days == 0 && $check_invert_time != 1) {
-      $disable_fields = FALSE;
+    if ($total_hours > 0 && $check_invert_time != 1) {
+      $disable_fields = TRUE;
     }
     else{
-      $disable_fields = TRUE;
+      if($end_date_invert != 1 && $check_invert_time == 1){
+        $disable_fields = FALSE;
+      }
+      else{
+        $disable_fields = TRUE;
+      }
     }
 
     $procedure_no = aps_pre_audit_get_node_value($nid, 'field_procedure_no');

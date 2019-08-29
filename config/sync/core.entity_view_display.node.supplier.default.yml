@@ -4,19 +4,16 @@ status: true
 dependencies:
   config:
     - field.field.node.supplier.body
+    - field.field.node.supplier.field_add_products
     - field.field.node.supplier.field_address_url
     - field.field.node.supplier.field_contact_person_name
     - field.field.node.supplier.field_location
-    - field.field.node.supplier.field_manufactured_products
     - field.field.node.supplier.field_refere
-    - field.field.node.supplier.field_service_product
     - field.field.node.supplier.field_supplier_name
-    - field.field.node.supplier.field_type
     - node.type.supplier
   module:
     - entity_reference_revisions
     - link
-    - options
     - text
     - user
 id: node.supplier.default
@@ -29,6 +26,15 @@ content:
     type: text_default
     weight: 101
     settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_add_products:
+    type: entity_reference_revisions_entity_view
+    weight: 109
+    label: above
+    settings:
+      view_mode: default
+      link: ''
     third_party_settings: {  }
     region: content
   field_address_url:
@@ -59,15 +65,6 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_manufactured_products:
-    type: entity_reference_revisions_entity_view
-    weight: 110
-    label: above
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    region: content
   field_refere:
     weight: 106
     label: above
@@ -76,15 +73,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_service_product:
-    type: entity_reference_revisions_entity_view
-    weight: 111
-    label: above
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    region: content
   field_supplier_name:
     weight: 102
     label: above
@@ -92,13 +80,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
-    region: content
-  field_type:
-    weight: 109
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
     region: content
   links:
     weight: 100

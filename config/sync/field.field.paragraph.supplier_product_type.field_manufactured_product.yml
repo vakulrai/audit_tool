@@ -1,0 +1,91 @@
+uuid: b7991ef3-7134-489d-80ee-d8a50a4082ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_manufactured_product
+    - paragraphs.paragraphs_type.supplier_manufactured_product
+    - paragraphs.paragraphs_type.supplier_product_type
+  module:
+    - entity_reference_revisions
+id: paragraph.supplier_product_type.field_manufactured_product
+field_name: field_manufactured_product
+entity_type: paragraph
+bundle: supplier_product_type
+label: 'Manufactured Product'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      supplier_manufactured_product: supplier_manufactured_product
+    target_bundles_drag_drop:
+      audit_cycle_other:
+        weight: 22
+        enabled: false
+      audit_cycle_schedule_release:
+        weight: 23
+        enabled: false
+      audit_report:
+        weight: 24
+        enabled: false
+      audit_score_settings:
+        weight: 25
+        enabled: false
+      audit_score_settings_range_100:
+        weight: 26
+        enabled: false
+      auditor_functional_details:
+        weight: 27
+        enabled: false
+      business_process_effectiveness:
+        weight: 28
+        enabled: false
+      business_process_effieciency:
+        weight: 29
+        enabled: false
+      corrective_action:
+        weight: 30
+        enabled: false
+      customer_audit:
+        weight: 31
+        enabled: false
+      customer_manual_parts:
+        weight: 32
+        enabled: false
+      holidays:
+        weight: 33
+        enabled: false
+      internal_audit_qa:
+        weight: 34
+        enabled: false
+      interrim_action:
+        weight: 35
+        enabled: false
+      new_answer:
+        weight: 36
+        enabled: false
+      new_sub_question_yes_no:
+        weight: 37
+        enabled: false
+      procedures:
+        weight: 38
+        enabled: false
+      report_reason:
+        weight: 39
+        enabled: false
+      supplier_manufactured_product:
+        enabled: true
+        weight: 40
+      supplier_product_type:
+        weight: 41
+        enabled: false
+      supplier_service_product:
+        weight: 42
+        enabled: false
+field_type: entity_reference_revisions

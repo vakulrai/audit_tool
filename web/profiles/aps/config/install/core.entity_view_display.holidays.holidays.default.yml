@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.holidays.holidays
+    - field.field.holidays.holidays.field_list
+    - field.field.holidays.holidays.field_unit_reference
+  module:
+    - entity_reference_revisions
+id: holidays.holidays.default
+targetEntityType: holidays
+bundle: holidays
+mode: default
+content:
+  field_list:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_unit_reference:
+    weight: 1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden: {  }

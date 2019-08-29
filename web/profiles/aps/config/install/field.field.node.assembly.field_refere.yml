@@ -1,4 +1,3 @@
-uuid: 5d1dfe21-d166-48c2-832c-86eb30baf95e
 langcode: en
 status: true
 dependencies:
@@ -6,6 +5,7 @@ dependencies:
     - field.storage.node.field_refere
     - node.type.assembly
     - node.type.section
+    - node.type.unit
 id: node.assembly.field_refere
 field_name: field_refere
 entity_type: node
@@ -21,8 +21,9 @@ settings:
   handler_settings:
     target_bundles:
       section: section
+      unit: unit
     sort:
       field: _none
     auto_create: false
-    auto_create_bundle: ''
+    auto_create_bundle: section
 field_type: entity_reference

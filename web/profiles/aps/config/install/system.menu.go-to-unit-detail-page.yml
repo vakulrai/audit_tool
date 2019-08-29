@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: go-to-unit-detail-page
+label: 'Go to Unit Detail Page'
+description: 'The menu is added to registration flow pages'
+locked: false

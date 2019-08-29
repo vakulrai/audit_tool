@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_audit_report_analysis
+    - system
+    - user
+  theme:
+    - bootstrap_barrio_subtheme
+id: generatereports
+theme: bootstrap_barrio_subtheme
+region: content
+weight: 0
+provider: null
+plugin: generate_reports
+settings:
+  id: generate_reports
+  label: 'Generate reports'
+  provider: aps_audit_report_analysis
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: '/unit-registration-view/*'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

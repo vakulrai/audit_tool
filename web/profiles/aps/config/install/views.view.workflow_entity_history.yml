@@ -1,11 +1,8 @@
-uuid: d871c929-2ec8-464b-8734-d73765cdb520
 langcode: en
 status: true
 dependencies:
   module:
     - workflow
-_core:
-  default_config_hash: WVVYWpOBeHeRgm3vCHP0lY65aX-UZx-E_8g6qpFrsHA
 id: workflow_entity_history
 label: 'Workflow Entity history'
 module: views

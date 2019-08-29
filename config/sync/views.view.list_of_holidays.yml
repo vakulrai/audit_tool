@@ -341,6 +341,21 @@ display:
           plugin_id: numeric
       defaults:
         arguments: false
+        empty: false
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'No Holidays Added Yet.'
+            format: full_html
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:

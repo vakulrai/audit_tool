@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_supplier.supplier
+    - field.storage.audit_criteria_supplier.field_documents
+    - taxonomy.vocabulary.supplier_audits_documents
+id: audit_criteria_supplier.supplier.field_documents
+field_name: field_documents
+entity_type: audit_criteria_supplier
+bundle: supplier
+label: DOCUMENTS
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      supplier_audits_documents: supplier_audits_documents
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

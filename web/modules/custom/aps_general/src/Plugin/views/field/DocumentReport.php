@@ -88,7 +88,8 @@ class DocumentReport extends FieldPluginBase {
         $date_of_audit = new \DateTime(date('Y-m-d H:i:s', $event_start_date_timestamp));
         $audit_date_current_date_diff = $current_date->diff($date_of_audit);
         $current_date_invert = $audit_date_current_date_diff->invert;
-        if ($audit_date_current_date_diff->days > 0  && $current_date_invert != 1) {
+        $total_hours_to_audit = $audit_date_current_date_diff->days * 24 + $audit_date_current_date_diff->h;
+        if ($total_hours_to_audit > 0  && $current_date_invert != 1) {
           $form['report'] = [
             '#type' => 'link',
             '#title' => t('Report/Execute'),

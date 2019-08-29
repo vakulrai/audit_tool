@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_select_query_type
+    - node.type.answers
+  module:
+    - options
+id: node.answers.field_select_query_type
+field_name: field_select_query_type
+entity_type: node
+bundle: answers
+label: 'Select Query type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

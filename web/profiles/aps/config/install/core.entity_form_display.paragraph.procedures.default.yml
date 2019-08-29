@@ -1,0 +1,77 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.procedures.field_date
+    - field.field.paragraph.procedures.field_issue_number
+    - field.field.paragraph.procedures.field_number
+    - field.field.paragraph.procedures.field_procedure_document
+    - field.field.paragraph.procedures.field_revision_date
+    - field.field.paragraph.procedures.field_revision_number
+    - field.field.paragraph.procedures.field_s_no
+    - field.field.paragraph.procedures.field_title
+    - paragraphs.paragraphs_type.procedures
+  module:
+    - datetime
+    - media_library
+id: paragraph.procedures.default
+targetEntityType: paragraph
+bundle: procedures
+mode: default
+content:
+  field_date:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_issue_number:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_number:
+    weight: 2
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_procedure_document:
+    type: media_library_widget
+    weight: 0
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    region: content
+  field_revision_date:
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_revision_number:
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_s_no:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_title:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

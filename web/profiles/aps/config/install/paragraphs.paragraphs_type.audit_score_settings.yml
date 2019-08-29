@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: audit_score_settings
+label: 'Audit score settings Range 10'
+icon_uuid: null
+description: 'Provide score range settings'
+behavior_plugins: {  }

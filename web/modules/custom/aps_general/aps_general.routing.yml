@@ -5,6 +5,20 @@ aps_general.create_reports:
   requirements:
     _access: 'TRUE'
 
+aps_general.get_subscription:
+  path: '/subscription'
+  defaults:  
+    _controller: '\Drupal\aps_general\Controller\RedirectFormController::openSubscriptionForm'
+  requirements:
+    _access: 'TRUE'
+
+aps_general.update_score:
+  path: '/score'
+  defaults:  
+    _controller: '\Drupal\aps_general\Controller\RedirectFormController::updateFunctionModalForm'
+  requirements:
+    _access: 'TRUE'
+
 aps_general.csv_import:
   path: '/aps_general/form/csv_import'
   defaults:
@@ -60,4 +74,13 @@ aps_general.drop_tables:
   requirements:
     _access: 'TRUE'
     _role: 'administrator'
+  
+
+aps_general.subscription_form:
+  path: '/aps_general/form/subscription'
+  defaults:
+    _form: '\Drupal\aps_general\Form\SubscriptionForm'
+    _title: 'SubscriptionForm'
+  requirements:
+    _access: 'TRUE'
   

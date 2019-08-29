@@ -1,0 +1,9 @@
+theme: current
+defaults:
+  sender: SMTPMailSystem
+  formatter: SMTPMailSystem
+modules:
+  sendgrid_integration:
+    none:
+      formatter: SMTPMailSystem
+      sender: SMTPMailSystem

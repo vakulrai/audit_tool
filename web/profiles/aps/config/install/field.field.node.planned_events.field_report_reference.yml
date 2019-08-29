@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_report_reference
+    - node.type.auditor_report
+    - node.type.planned_events
+id: node.planned_events.field_report_reference
+field_name: field_report_reference
+entity_type: node
+bundle: planned_events
+label: 'Report Reference'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      auditor_report: auditor_report
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

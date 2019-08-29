@@ -1,0 +1,34 @@
+uuid: 0310a618-08ef-4c66-80d8-019d8fee277d
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_general
+    - system
+    - user
+  theme:
+    - audit_tool
+id: updatefunctions
+theme: audit_tool
+region: content
+weight: 0
+provider: null
+plugin: update_functions
+settings:
+  id: update_functions
+  label: 'Update functions'
+  provider: aps_general
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /user/score
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      auditor: auditor
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

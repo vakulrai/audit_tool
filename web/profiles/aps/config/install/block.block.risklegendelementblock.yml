@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:risk_legend:7f2a91e5-3f8c-4cdb-ba15-8590aee4f29f'
+  module:
+    - block_content
+    - system
+    - user
+  theme:
+    - audit_tool
+id: risklegendelementblock
+theme: audit_tool
+region: highlighted
+weight: 0
+provider: null
+plugin: 'block_content:7f2a91e5-3f8c-4cdb-ba15-8590aee4f29f'
+settings:
+  id: 'block_content:7f2a91e5-3f8c-4cdb-ba15-8590aee4f29f'
+  label: 'Risk Legend Element Block'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: '/unit-registration-view/*'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

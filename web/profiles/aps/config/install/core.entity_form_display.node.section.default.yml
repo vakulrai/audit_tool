@@ -1,4 +1,3 @@
-uuid: 34e71ee9-daa7-49da-ba8a-68c3102a5154
 langcode: en
 status: true
 dependencies:
@@ -6,13 +5,16 @@ dependencies:
     - field.field.node.section.body
     - field.field.node.section.field_assembly
     - field.field.node.section.field_attach_control_plan
-    - field.field.node.section.field_business_head
+    - field.field.node.section.field_business_head_dept
     - field.field.node.section.field_file
+    - field.field.node.section.field_location_address
     - field.field.node.section.field_refere
-    - field.field.node.section.field_section
+    - field.field.node.section.field_section_head
+    - field.field.node.section.field_select_department_type
     - field.field.node.section.field_shift
     - node.type.section
   module:
+    - content_moderation
     - media_library
 id: node.section.default
 targetEntityType: node
@@ -20,33 +22,33 @@ bundle: section
 mode: default
 content:
   field_assembly:
-    weight: 3
+    weight: 2
     settings: {  }
     third_party_settings: {  }
-    type: options_select
+    type: options_buttons
     region: content
   field_attach_control_plan:
     type: media_library_widget
+    weight: 7
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    region: content
+  field_file:
     weight: 6
     settings:
       media_types: {  }
     third_party_settings: {  }
+    type: media_library_widget
     region: content
-  field_business_head:
-    weight: 2
+  field_location_address:
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
-  field_file:
-    weight: 5
-    settings:
-      media_types: {  }
-    third_party_settings: {  }
-    type: media_library_widget
-    region: content
   field_refere:
-    weight: 26
+    weight: 8
     settings:
       match_operator: CONTAINS
       size: 60
@@ -54,18 +56,33 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_section:
+  field_section_head:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_select_department_type:
     weight: 1
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_shift:
-    weight: 4
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 9
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -77,6 +94,7 @@ content:
 hidden:
   body: true
   created: true
+  field_business_head_dept: true
   path: true
   promote: true
   status: true

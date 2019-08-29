@@ -1,0 +1,535 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.planned_events.body
+    - field.field.node.planned_events.field_audit_reasons
+    - field.field.node.planned_events.field_audit_type
+    - field.field.node.planned_events.field_auditor
+    - field.field.node.planned_events.field_checklist
+    - field.field.node.planned_events.field_customer_type
+    - field.field.node.planned_events.field_department
+    - field.field.node.planned_events.field_end_date
+    - field.field.node.planned_events.field_external_auditor_name
+    - field.field.node.planned_events.field_internal_audit_type
+    - field.field.node.planned_events.field_list_of_process
+    - field.field.node.planned_events.field_list_of_product
+    - field.field.node.planned_events.field_list_of_systems
+    - field.field.node.planned_events.field_pre_audit_status
+    - field.field.node.planned_events.field_proceed_with_audit
+    - field.field.node.planned_events.field_refere
+    - field.field.node.planned_events.field_release_status
+    - field.field.node.planned_events.field_remote_location_name
+    - field.field.node.planned_events.field_report_reference
+    - field.field.node.planned_events.field_sections
+    - field.field.node.planned_events.field_select_audit
+    - field.field.node.planned_events.field_select_auditee
+    - field.field.node.planned_events.field_select_mr
+    - field.field.node.planned_events.field_select_users
+    - field.field.node.planned_events.field_shift
+    - field.field.node.planned_events.field_start_date
+    - field.field.node.planned_events.field_suggested_date
+    - field.field.node.planned_events.field_time
+    - field.field.node.planned_events.field_tolerance
+    - field.field.node.planned_events.field_total_mandays
+    - field.field.node.planned_events.field_unit
+    - field.field.node.planned_events.field_year_frequency
+    - node.type.planned_events
+    - workflows.workflow.workflow_for_audit_planning
+  module:
+    - conditional_fields
+    - content_moderation
+    - datetime
+    - datetime_range
+    - field_group
+    - paragraphs
+third_party_settings:
+  field_group:
+    group_auditor:
+      children:
+        - field_remote_location_name
+        - field_auditor
+        - field_external_auditor_name
+      parent_name: group_who
+      weight: 13
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Auditor
+    group_when:
+      children:
+        - title
+        - field_time
+        - field_shift
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: When
+    group_what:
+      children:
+        - field_audit_type
+        - field_customer_type
+        - field_internal_audit_type
+        - field_list_of_systems
+        - field_list_of_process
+        - field_list_of_product
+        - field_checklist
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        label: Coverage
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: Coverage
+    group_where:
+      children: {  }
+      parent_name: ''
+      weight: 4
+      format_type: fieldset
+      format_settings:
+        label: 'Time Period'
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'Time Period'
+    group_who:
+      children:
+        - field_select_auditee
+        - field_select_mr
+        - group_auditor
+      parent_name: ''
+      weight: 2
+      format_type: fieldset
+      format_settings:
+        label: Resources
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: Resources
+    group_planning_dates:
+      children:
+        - field_start_date
+        - field_end_date
+        - field_suggested_date
+        - field_tolerance
+      parent_name: ''
+      weight: 3
+      format_type: html_element
+      format_settings:
+        label: 'Planning Dates'
+        element: div
+        show_label: false
+        label_element: h3
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+        id: planning-dates
+        classes: ''
+      label: 'Planning Dates'
+id: node.planned_events.default
+targetEntityType: node
+bundle: planned_events
+mode: default
+content:
+  field_audit_reasons:
+    type: entity_reference_paragraphs
+    weight: 13
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_audit_type:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_auditor:
+    weight: 33
+    settings: {  }
+    third_party_settings:
+      conditional_fields: {  }
+    type: options_select
+    region: content
+  field_checklist:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_customer_type:
+    weight: 4
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        36e51ad8-4116-4be1-afc1-5db6b012a19d:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: customer
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: options_select
+    region: content
+  field_end_date:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_timestamp
+    region: content
+  field_external_auditor_name:
+    weight: 34
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        fe68906c-217e-40f7-a394-338c00ed1be5:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: external
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+        331c6384-7afc-4d0d-99e3-86dccd1f4221:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: external
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: string_textfield
+    region: content
+  field_internal_audit_type:
+    weight: 5
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        59122d7f-2dd2-4a90-a7bc-33ed6ebbf788:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: internal
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+        056461a6-6e7e-49dc-913c-445fb297b47e:
+          dependee: field_audit_type
+          settings:
+            state: required
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: internal
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: options_select
+    region: content
+  field_list_of_process:
+    weight: 7
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        ac4dfc15-afba-45df-a9b0-dc3bbbd1de3b:
+          dependee: field_internal_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: process
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: options_select
+    region: content
+  field_list_of_product:
+    weight: 8
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        eaa303c9-d2d2-47ff-80bc-518596e64ded:
+          dependee: field_internal_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: product
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: options_select
+    region: content
+  field_list_of_systems:
+    weight: 6
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        97562d89-f610-41f2-bb29-4668e11138ec:
+          dependee: field_internal_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: systems
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: options_select
+    region: content
+  field_pre_audit_status:
+    weight: 12
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_proceed_with_audit:
+    weight: 14
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_refere:
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_release_status:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_remote_location_name:
+    weight: 32
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        43ebf909-78b7-47c2-b18d-2bf1d40004de:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: internal
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: string_textfield
+    region: content
+  field_report_reference:
+    weight: 7
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_select_auditee:
+    weight: 11
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_select_mr:
+    weight: 12
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_select_users:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_shift:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_start_date:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_timestamp
+    region: content
+  field_suggested_date:
+    weight: 11
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_time:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_tolerance:
+    weight: 12
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        384073c7-56e2-4a4a-8b3d-67d254727b77:
+          dependee: field_audit_type
+          settings:
+            state: '!visible'
+            condition: value
+            grouping: AND
+            values_set: 3
+            value: ''
+            values: "internal\r\n_none"
+            value_form:
+              -
+                value: internal
+            effect: show
+            effect_options: {  }
+            selector: ''
+            field_audit_type:
+              -
+                value: internal
+          entity_type: node
+          bundle: planned_events
+    type: datetime_default
+    region: content
+  field_total_mandays:
+    weight: 11
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_year_frequency:
+    weight: 10
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 6
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  field_department: true
+  field_sections: true
+  field_select_audit: true
+  field_unit: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

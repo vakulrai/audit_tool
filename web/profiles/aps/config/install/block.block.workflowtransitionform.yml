@@ -1,4 +1,3 @@
-uuid: 8f445273-41e9-4b9d-bd1e-ef20888e0a4f
 langcode: en
 status: true
 dependencies:
@@ -6,8 +5,6 @@ dependencies:
     - workflow
   theme:
     - bartik
-_core:
-  default_config_hash: Vlu0W1a-S5N7EuSAx6SrVtfAkv0TdnMZV5WagVaBvJk
 id: workflowtransitionform
 theme: bartik
 region: sidebar_second

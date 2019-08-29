@@ -77,7 +77,7 @@ visibility:
   user_role:
     id: user_role
     roles:
-      mr_admin: mr_admin
+      group_mr: group_mr
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'

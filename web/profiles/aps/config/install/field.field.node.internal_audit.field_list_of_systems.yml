@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_list_of_systems
+    - node.type.internal_audit
+id: node.internal_audit.field_list_of_systems
+field_name: field_list_of_systems
+entity_type: node
+bundle: internal_audit
+label: 'List of Systems'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: internal_audit_systems
+      display_name: entity_reference_system
+      arguments: {  }
+field_type: entity_reference

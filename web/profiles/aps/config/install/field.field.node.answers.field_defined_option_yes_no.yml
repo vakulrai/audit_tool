@@ -1,0 +1,69 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_defined_option_yes_no
+    - node.type.answers
+    - paragraphs.paragraphs_type.new_sub_question_yes_no
+  module:
+    - entity_reference_revisions
+id: node.answers.field_defined_option_yes_no
+field_name: field_defined_option_yes_no
+entity_type: node
+bundle: answers
+label: 'Defined option Yes/No'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      new_sub_question_yes_no: new_sub_question_yes_no
+    target_bundles_drag_drop:
+      audit_cycle_other:
+        weight: 15
+        enabled: false
+      audit_cycle_schedule_release:
+        weight: 16
+        enabled: false
+      audit_score_settings:
+        weight: 17
+        enabled: false
+      audit_score_settings_range_100:
+        weight: 18
+        enabled: false
+      auditor_functional_details:
+        weight: 19
+        enabled: false
+      business_process_effectiveness:
+        weight: 20
+        enabled: false
+      business_process_effieciency:
+        weight: 21
+        enabled: false
+      customer_audit:
+        weight: 22
+        enabled: false
+      customer_manual_parts:
+        weight: 23
+        enabled: false
+      internal_audit_qa:
+        weight: 24
+        enabled: false
+      new_answer:
+        weight: 25
+        enabled: false
+      new_sub_question_yes_no:
+        enabled: true
+        weight: 26
+      procedures:
+        weight: 27
+        enabled: false
+      report_reason:
+        weight: 28
+        enabled: false
+field_type: entity_reference_revisions

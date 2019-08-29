@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_cycle.settings
+    - field.storage.audit_cycle.field_car_release_by_auidtee_
+id: audit_cycle.settings.field_car_release_by_auidtee_
+field_name: field_car_release_by_auidtee_
+entity_type: audit_cycle
+bundle: settings
+label: 'CAR release by Auidtee '
+description: 'Days after the last day of audit'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

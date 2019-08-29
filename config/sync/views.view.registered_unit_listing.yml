@@ -12,6 +12,7 @@ dependencies:
     - node.type.unit
     - user.role.auditee
     - user.role.auditor
+    - user.role.group_mr
     - user.role.mr_admin
   module:
     - address
@@ -1569,6 +1570,7 @@ display:
         options:
           role:
             mr_admin: mr_admin
+            group_mr: group_mr
       query:
         type: views_query
         options:

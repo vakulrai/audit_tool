@@ -1,4 +1,3 @@
-uuid: 0fafc294-d588-4cc6-a0b9-ef6c8a700677
 langcode: en
 status: true
 dependencies:
@@ -9,7 +8,13 @@ id: node.home_page.default
 targetEntityType: node
 bundle: home_page
 mode: default
-content: {  }
+content:
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
 hidden:
   body: true
   created: true

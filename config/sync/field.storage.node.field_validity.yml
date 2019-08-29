@@ -1,17 +1,17 @@
-uuid: 12f9a541-e8e7-4bbb-8e28-829700de4660
+uuid: bc4a76d3-ed7e-439e-8265-480828d29552
 langcode: en
 status: true
 dependencies:
   module:
+    - datetime
     - node
 id: node.field_validity
 field_name: field_validity
 entity_type: node
-type: integer
+type: datetime
 settings:
-  unsigned: false
-  size: normal
-module: core
+  datetime_type: date
+module: datetime
 locked: false
 cardinality: 1
 translatable: true

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_cycle.settings
+    - field.storage.audit_cycle.field_financial_dates
+  module:
+    - datetime_range
+id: audit_cycle.settings.field_financial_dates
+field_name: field_financial_dates
+entity_type: audit_cycle
+bundle: settings
+label: 'Financial Dates'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

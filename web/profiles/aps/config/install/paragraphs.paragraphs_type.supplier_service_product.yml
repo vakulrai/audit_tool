@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: supplier_service_product
+label: 'Service Product'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

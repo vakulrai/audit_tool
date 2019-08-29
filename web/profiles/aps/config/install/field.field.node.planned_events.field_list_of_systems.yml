@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_list_of_systems
+    - node.type.planned_events
+id: node.planned_events.field_list_of_systems
+field_name: field_list_of_systems
+entity_type: node
+bundle: planned_events
+label: 'List of Systems'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: internal_audit_systems
+      display_name: entity_reference_system
+      arguments: {  }
+field_type: entity_reference

@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: supplier_product_type
+label: 'Supplier product type'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

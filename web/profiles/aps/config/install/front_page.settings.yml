@@ -1,0 +1,27 @@
+enable: 0
+rid_anonymous:
+  weigth: '0'
+  path: ''
+rid_authenticated:
+  weigth: '0'
+  path: ''
+rid_executive:
+  weigth: '0'
+  path: ''
+rid_auditor:
+  weigth: '0'
+  path: /home
+rid_auditee:
+  weigth: '0'
+  path: ''
+rid_mr_admin:
+  enabled: '1'
+  weigth: '0'
+  path: /home
+home_link_path: home
+rid_qa_staff_member:
+  weigth: '0'
+  path: ''
+rid_qa_top_contributor:
+  weigth: '0'
+  path: ''

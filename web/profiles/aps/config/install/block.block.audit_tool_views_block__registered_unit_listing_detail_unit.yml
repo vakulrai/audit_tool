@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.registered_unit_listing
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - audit_tool
+id: audit_tool_views_block__registered_unit_listing_detail_unit
+theme: audit_tool
+region: content
+weight: -29
+provider: null
+plugin: 'views_block:registered_unit_listing-detail_unit'
+settings:
+  id: 'views_block:registered_unit_listing-detail_unit'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: "/node/add/business_process/*\r\n/node/add/business_process"
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

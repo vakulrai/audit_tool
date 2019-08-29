@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_product_type
+    - paragraphs.paragraphs_type.supplier_product_type
+  module:
+    - options
+id: paragraph.supplier_product_type.field_product_type
+field_name: field_product_type
+entity_type: paragraph
+bundle: supplier_product_type
+label: 'Product Type'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

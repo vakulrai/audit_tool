@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - user
+  theme:
+    - bootstrap_barrio_subtheme
+id: exposedformplanned_audit_listingbusiness_ps_listing
+theme: bootstrap_barrio_subtheme
+region: content
+weight: 0
+provider: null
+plugin: 'views_exposed_filter_block:planned_audit_listing-business_ps_listing'
+settings:
+  id: 'views_exposed_filter_block:planned_audit_listing-business_ps_listing'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: '/documentrecords/*?unit_reference=*'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      auditor: auditor
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

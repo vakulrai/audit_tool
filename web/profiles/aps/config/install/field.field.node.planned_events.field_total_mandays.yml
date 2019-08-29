@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_total_mandays
+    - node.type.planned_events
+id: node.planned_events.field_total_mandays
+field_name: field_total_mandays
+entity_type: node
+bundle: planned_events
+label: 'Total Mandays'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: 50
+  prefix: ''
+  suffix: ''
+field_type: integer

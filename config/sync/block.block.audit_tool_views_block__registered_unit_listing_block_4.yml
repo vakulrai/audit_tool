@@ -13,7 +13,7 @@ dependencies:
 id: audit_tool_views_block__registered_unit_listing_block_4
 theme: audit_tool
 region: content
-weight: -18
+weight: -20
 provider: null
 plugin: 'views_block:registered_unit_listing-block_4'
 settings:
@@ -35,6 +35,7 @@ visibility:
       auditor: auditor
       auditee: auditee
       mr_admin: mr_admin
+      group_mr: group_mr
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'

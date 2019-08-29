@@ -1,4 +1,3 @@
-uuid: 57e42f63-156e-4802-90a7-edc89fcf49da
 langcode: en
 status: true
 dependencies:
@@ -10,7 +9,7 @@ dependencies:
 id: userlogin
 theme: seven
 region: content
-weight: 3
+weight: 7
 provider: null
 plugin: user_login_block
 settings:

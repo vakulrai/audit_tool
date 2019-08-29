@@ -1,4 +1,3 @@
-uuid: 9eb101d4-1cd1-42c3-af48-953012cef6fa
 langcode: en
 status: true
 dependencies: {  }
@@ -7,6 +6,8 @@ label: Executive
 weight: 2
 is_admin: null
 permissions:
-  - 'access devel information'
   - 'access user profiles'
   - 'administer users'
+  - 'create terms in certification_standard'
+  - 'create terms in decision'
+  - 'create terms in scope'

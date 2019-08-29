@@ -1,0 +1,132 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.audit_report.field_car_status
+    - field.field.paragraph.audit_report.field_casualty_number
+    - field.field.paragraph.audit_report.field_clause
+    - field.field.paragraph.audit_report.field_corrective_action
+    - field.field.paragraph.audit_report.field_evidence
+    - field.field.paragraph.audit_report.field_finding_categories
+    - field.field.paragraph.audit_report.field_interim_action
+    - field.field.paragraph.audit_report.field_kpi_status
+    - field.field.paragraph.audit_report.field_observation
+    - field.field.paragraph.audit_report.field_question
+    - field.field.paragraph.audit_report.field_remarks
+    - field.field.paragraph.audit_report.field_result
+    - field.field.paragraph.audit_report.field_step
+    - paragraphs.paragraphs_type.audit_report
+  module:
+    - entity_reference_revisions
+    - file
+    - options
+id: paragraph.audit_report.default
+targetEntityType: paragraph
+bundle: audit_report
+mode: default
+content:
+  field_car_status:
+    weight: 13
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_casualty_number:
+    weight: 11
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_clause:
+    weight: 5
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_corrective_action:
+    type: entity_reference_revisions_entity_view
+    weight: 8
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_evidence:
+    weight: 2
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_finding_categories:
+    weight: 4
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_interim_action:
+    type: entity_reference_revisions_entity_view
+    weight: 6
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_kpi_status:
+    weight: 12
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_observation:
+    weight: 9
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_question:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_remarks:
+    weight: 10
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_result:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_step:
+    weight: 0
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+hidden: {  }

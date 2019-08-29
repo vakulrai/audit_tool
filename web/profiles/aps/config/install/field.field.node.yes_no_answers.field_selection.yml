@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_selection
+    - node.type.yes_no_answers
+  module:
+    - options
+id: node.yes_no_answers.field_selection
+field_name: field_selection
+entity_type: node
+bundle: yes_no_answers
+label: Selection
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: na
+default_value_callback: ''
+settings: {  }
+field_type: list_string

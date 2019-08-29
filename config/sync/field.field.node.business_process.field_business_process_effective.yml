@@ -14,7 +14,7 @@ entity_type: node
 bundle: business_process
 label: 'Effectiveness Target'
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -78,5 +78,11 @@ settings:
         enabled: false
       report_reason:
         weight: 36
+        enabled: false
+      supplier_manufactured_product:
+        weight: 39
+        enabled: false
+      supplier_service_product:
+        weight: 40
         enabled: false
 field_type: entity_reference_revisions

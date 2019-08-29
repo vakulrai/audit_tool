@@ -1,0 +1,10 @@
+uuid: bbc94e18-2e73-40c7-be45-2dee77a14c71
+langcode: en
+status: true
+dependencies: {  }
+id: subscription
+label: Subscription
+created: false
+changed: false
+uid: false
+title: false

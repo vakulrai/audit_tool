@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: audit_report
+label: 'Audit Report'
+icon_uuid: null
+description: 'Contain Summary of audit report'
+behavior_plugins: {  }

@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.customer_manual_parts.parts
+    - field.field.customer_manual_parts.parts.field_add_parts
+    - field.field.customer_manual_parts.parts.field_reference_id
+  module:
+    - entity_reference_revisions
+id: customer_manual_parts.parts.default
+targetEntityType: customer_manual_parts
+bundle: parts
+mode: default
+content:
+  field_add_parts:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_reference_id:
+    weight: 1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden: {  }

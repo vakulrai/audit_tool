@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: mr_admin
-label: 'MR Admin'
+label: 'Deputy Mr'
 weight: 5
 is_admin: null
 permissions:
@@ -64,7 +64,6 @@ permissions:
   - 'create terms in certification_standard'
   - 'create terms in decision'
   - 'create terms in scope'
-  - 'create unit content'
   - 'create yes_no_answers content'
   - 'delete any answers content'
   - 'delete any assembly content'

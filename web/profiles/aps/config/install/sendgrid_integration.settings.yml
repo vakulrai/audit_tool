@@ -1,0 +1,10 @@
+apikey: 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
+test_defaults:
+  to: vakul.r@opensenselabs.com
+  subject: 'Test Email from SendGrid Module'
+  body:
+    value: 'Test Message for SendGrid.'
+    format: plain_text
+  from_name: test
+  to_name: vakul
+  reply_to: ''

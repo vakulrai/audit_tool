@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_cycle.settings
+    - field.storage.audit_cycle.field_calendar_date
+  module:
+    - datetime_range
+id: audit_cycle.settings.field_calendar_date
+field_name: field_calendar_date
+entity_type: audit_cycle
+bundle: settings
+label: 'Calendar Date'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

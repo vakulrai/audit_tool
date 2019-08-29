@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Functions Qualified'
+vid: functions_qualified
+description: ''
+weight: 0

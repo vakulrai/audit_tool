@@ -1,0 +1,78 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_interim_action
+    - paragraphs.paragraphs_type.audit_report
+    - paragraphs.paragraphs_type.interrim_action
+  module:
+    - entity_reference_revisions
+id: paragraph.audit_report.field_interim_action
+field_name: field_interim_action
+entity_type: paragraph
+bundle: audit_report
+label: 'Interim Action'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      interrim_action: interrim_action
+    target_bundles_drag_drop:
+      audit_cycle_other:
+        weight: 18
+        enabled: false
+      audit_cycle_schedule_release:
+        weight: 19
+        enabled: false
+      audit_report:
+        weight: 20
+        enabled: false
+      audit_score_settings:
+        weight: 21
+        enabled: false
+      audit_score_settings_range_100:
+        weight: 22
+        enabled: false
+      auditor_functional_details:
+        weight: 23
+        enabled: false
+      business_process_effectiveness:
+        weight: 24
+        enabled: false
+      business_process_effieciency:
+        weight: 25
+        enabled: false
+      corrective_action:
+        weight: 26
+        enabled: false
+      customer_audit:
+        weight: 27
+        enabled: false
+      customer_manual_parts:
+        weight: 28
+        enabled: false
+      internal_audit_qa:
+        weight: 29
+        enabled: false
+      interrim_action:
+        enabled: true
+        weight: 30
+      new_answer:
+        weight: 31
+        enabled: false
+      new_sub_question_yes_no:
+        weight: 32
+        enabled: false
+      procedures:
+        weight: 33
+        enabled: false
+      report_reason:
+        weight: 34
+        enabled: false
+field_type: entity_reference_revisions

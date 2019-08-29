@@ -1,9 +1,6 @@
-uuid: 2be1efbe-8ca8-4381-a74e-91917b1f4f17
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: 4iy5jeoTP0Y4BqSaV1C6cz4GKLFea1tWzk3ez1_CMVU
 id: private_files
 label: 'Private Files Directory'
 type: Directory

@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria.systems
+    - field.storage.audit_criteria.field_records_product
+    - taxonomy.vocabulary.internal_audit_product_records
+id: audit_criteria.systems.field_records_product
+field_name: field_records_product
+entity_type: audit_criteria
+bundle: systems
+label: RECORDS
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      internal_audit_product_records: internal_audit_product_records
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

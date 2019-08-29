@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.customer_manual_listing
+  module:
+    - system
+    - views
+  theme:
+    - bootstrap_barrio_subtheme
+id: bootstrap_barrio_subtheme_views_block__customer_manual_listing_manual
+theme: bootstrap_barrio_subtheme
+region: content
+weight: 10
+provider: null
+plugin: 'views_block:customer_manual_listing-manual'
+settings:
+  id: 'views_block:customer_manual_listing-manual'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: /node/add/customers_manual
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - aps_audit_report_analysis
+    - system
+    - user
+  theme:
+    - seven
+id: timeanalysisblock
+theme: seven
+region: highlighted
+weight: -25
+provider: null
+plugin: time_analysis_block
+settings:
+  id: time_analysis_block
+  label: 'Time analysis block'
+  provider: aps_audit_report_analysis
+  label_display: '0'
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      auditor: auditor
+      auditee: auditee
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+  request_path:
+    id: request_path
+    pages: "/planned-audit-listing-auditee/*/ncr/*\r\n/planned-audit-listing/*/ncr/*\r\n/planned-mr-audit-listing/*/ncr/*"
+    negate: false
+    context_mapping: {  }

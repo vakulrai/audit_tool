@@ -141,6 +141,10 @@ img {
     max-width: 1360px;
     margin: 0 auto;
     background: #ffffff; }
+    #page > header #navbar-main .main-navigation-menu ul li a {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 19px; }
   #page > header #navbar-top {
     background: #fadb23;
     padding: 0px; }
@@ -165,6 +169,7 @@ img {
     #sidebar_first .block ul > li > a {
       padding: 1em 0em;
       color: #657d89;
+      font-size: 14px;
       border-bottom: 1px solid #dee5e8;
       font-weight: 600; }
       #sidebar_first .block ul > li > a .sf-sub-indicator {

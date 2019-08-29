@@ -1,0 +1,61 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.manufacturing_process.body
+    - field.field.node.manufacturing_process.field_refere
+    - field.field.node.manufacturing_process.field_section
+    - field.field.node.manufacturing_process.field_sr_no
+    - node.type.manufacturing_process
+    - workflows.workflow.workflow_for_audit_planning
+  module:
+    - content_moderation
+id: node.manufacturing_process.default
+targetEntityType: node
+bundle: manufacturing_process
+mode: default
+content:
+  field_refere:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete_tags
+    region: content
+  field_section:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_sr_no:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

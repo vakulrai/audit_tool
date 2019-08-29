@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.yes_no_answers.field_description
+    - field.field.node.yes_no_answers.field_selection
+    - node.type.yes_no_answers
+  module:
+    - options
+    - user
+id: node.yes_no_answers.default
+targetEntityType: node
+bundle: yes_no_answers
+mode: default
+content:
+  field_description:
+    weight: 101
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_selection:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

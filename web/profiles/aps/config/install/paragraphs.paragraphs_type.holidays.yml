@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: holidays
+label: Holidays
+icon_uuid: null
+description: 'Paragraph for unit holidays'
+behavior_plugins: {  }

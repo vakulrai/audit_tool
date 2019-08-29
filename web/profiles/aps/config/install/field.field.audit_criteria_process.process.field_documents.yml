@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria_process.process
+    - field.storage.audit_criteria_process.field_documents
+    - taxonomy.vocabulary.internal_audit_process
+id: audit_criteria_process.process.field_documents
+field_name: field_documents
+entity_type: audit_criteria_process
+bundle: process
+label: DOCUMENTS
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      internal_audit_process: internal_audit_process
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

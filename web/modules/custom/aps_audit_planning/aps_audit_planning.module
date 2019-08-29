@@ -62,11 +62,11 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $get_department_options = getDepartmenttypeUnderunit('department', $id);
     $form['field_department']['widget']['#options'] = $get_department_options;
     
-    $form['field_audit_type']['widget']['#ajax'] = [
-      'callback' => 'changeAuditeeOptions',
-      'wrapper' => 'auditee',
-      'event' => 'change',
-    ];
+    // $form['field_audit_type']['widget']['#ajax'] = [
+    //   'callback' => 'changeAuditeeOptions',
+    //   'wrapper' => 'auditee',
+    //   'event' => 'change',
+    // ];
 
 	  $form['field_department']['widget']['#ajax'] = [
       'callback' => 'getSectionfromdepartment',
@@ -81,6 +81,32 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     ];
     
     $form['field_auditor']['#states'] = [
+      'visible' => [
+        'select[name="field_audit_type"]' => ['value' => 'internal'],
+      ],
+      'required' => [
+        'select[name="field_audit_type"]' => ['value' => 'internal'],
+      ],
+    ];
+
+    $form['field_select_mr']['#states'] = [
+      'visible' => [
+        ['select[name="field_audit_type"]' => ['value' => 'external']],
+        'or',
+        ['select[name="field_audit_type"]' => ['value' => 'supplier']],
+        'or',
+        ['select[name="field_audit_type"]' => ['value' => 'customer']],
+      ],
+      'required' => [
+        ['select[name="field_audit_type"]' => ['value' => 'external']],
+        'or',
+        ['select[name="field_audit_type"]' => ['value' => 'supplier']],
+        'or',
+        ['select[name="field_audit_type"]' => ['value' => 'customer']],
+      ],
+    ];
+
+    $form['field_select_auditee']['#states'] = [
       'visible' => [
         'select[name="field_audit_type"]' => ['value' => 'internal'],
       ],
@@ -145,7 +171,6 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       $form['field_end_date']['widget'][0]['value']['#default_value'] = $end_date_timestamp_object;
       $form['field_time']['widget'][0]['value']['#default_value'] = $start_date_timestamp_object;
       $form['field_time']['widget'][0]['end_value']['#default_value'] = $end_date_timestamp_object;
-      $form['title']['widget'][0]['value']['#title'] = t('Audit Reference');
       $form['title']['widget'][0]['value']['#default_value'] = $title;
       $form['title']['#disabled'] = TRUE;
       
@@ -193,6 +218,11 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     }
   }
   if($form_id == 'node_planned_events_form'){
+    $form['title']['widget'][0]['value']['#default_value'] = 'Audit Reference';
+    $form['title']['#access'] = FALSE;
+    $form['field_checklist']['#disabled'] = TRUE;
+    $form['field_audit_reasons']['#access'] = FALSE;
+    $form['field_proceed_with_audit']['#access'] = FALSE;
     if($id = \Drupal::request()->query->get('unit_reference')){
       $node_object = Node::load($id);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
@@ -223,6 +253,8 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     ];
   }
   if ($form_id == 'node_planned_events_edit_form'){
+    $form['field_audit_reasons']['#access'] = TRUE;
+    $form['field_proceed_with_audit']['#access'] = TRUE;
     if($user_role == 'auditor' || $user_role == 'auditee'){
       $form['field_audit_reasons']['#access'] = FALSE;
       $form['field_proceed_with_audit']['#access'] = FALSE;
@@ -585,7 +617,7 @@ function getMRlist($select_value){
   $data['_none'] = "- None -";
   foreach ($users as $key => $value) {
     $mr_user = User::load($value->entity_id);
-    if($select_value == 'internal'){
+    if($select_value == 'internal' || $select_value == ''){
        if($mr_user->roles->target_id == 'auditee'){
          $data[$mr_user->uid->value] = $mr_user->name->value;
        }

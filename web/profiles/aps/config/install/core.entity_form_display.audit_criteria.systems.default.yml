@@ -1,0 +1,113 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.audit_criteria.systems
+    - field.field.audit_criteria.systems.field_documents
+    - field.field.audit_criteria.systems.field_process
+    - field.field.audit_criteria.systems.field_process_record
+    - field.field.audit_criteria.systems.field_product
+    - field.field.audit_criteria.systems.field_records
+    - field.field.audit_criteria.systems.field_records_product
+    - field.field.audit_criteria.systems.field_score_level_set
+    - field.field.audit_criteria.systems.field_score_level_set_100
+    - field.field.audit_criteria.systems.field_score_settings
+    - field.field.audit_criteria.systems.field_unit_reference
+  module:
+    - field_group
+third_party_settings:
+  field_group:
+    group_system:
+      children:
+        - field_documents
+        - field_records
+        - field_unit_reference
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: System
+    group_process:
+      children:
+        - field_process
+        - field_process_record
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Process
+    group_product:
+      children:
+        - field_product
+        - field_records_product
+      parent_name: ''
+      weight: 2
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Product
+id: audit_criteria.systems.default
+targetEntityType: audit_criteria
+bundle: systems
+mode: default
+content:
+  field_documents:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_process:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_process_record:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_product:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_records:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_records_product:
+    weight: 11
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_unit_reference:
+    weight: 6
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden:
+  field_score_level_set: true
+  field_score_level_set_100: true
+  field_score_settings: true

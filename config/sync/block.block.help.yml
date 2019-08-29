@@ -1,0 +1,20 @@
+uuid: d3b7292d-3cf4-40bf-b2fc-94d75efdccca
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - audit_tool
+id: help
+theme: audit_tool
+region: content
+weight: -11
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

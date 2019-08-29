@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_year_frequency
+    - node.type.planned_events
+id: node.planned_events.field_year_frequency
+field_name: field_year_frequency
+entity_type: node
+bundle: planned_events
+label: 'Year Frequency'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: 12
+  prefix: ''
+  suffix: ''
+field_type: integer

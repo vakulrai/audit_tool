@@ -9,6 +9,14 @@ distribution:
 
 dependencies:
   - automated_cron
+  - address
+  - aps_audit_criteria
+  - aps_audit_planning
+  - aps_audit_report_analysis
+  - aps_custom_tables
+  - aps_general
+  - aps_pre_audit
+  - content_moderation
   - block
   - block_content
   - breakpoint
@@ -59,6 +67,35 @@ dependencies:
   - conditional_fields
   - range
   - datetime_range
+  - paragraphs
+  - yearonly
+  - views_autocomplete_filters
+  - disable_messages
+  - time_range
+  - structure_sync
+  - workflow
+  - workflow_access
+  - workflow_operations
+  - workflow_ui
+  - workflows
+  - superfish
+  - smtp
+  - sendgrid_integration
+  - restui
+  - rest
+  - paragraphs_type_permissions
+  - mobile_number
+  - inline_entity_form
+  - inline_form_errors
+  - mailsystem
+  - backup_migrate
+  - block_class
+  - media
+  - media_library
+  - basic_auth
+  - hal
+  - devel
+  - questions_answers
 
 dependencies:
   - node
@@ -70,3 +107,6 @@ themes:
   - classy
   - bartik
   - seven
+  - audit_tool
+  - bootstrap_barrio_subtheme
+  - bootstrap_barrio

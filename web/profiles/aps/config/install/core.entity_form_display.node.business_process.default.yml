@@ -1,10 +1,9 @@
-uuid: c9691353-f04c-4300-884b-b33f3f1956aa
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.node.business_process.body
-    - field.field.node.business_process.field_business_head
+    - field.field.node.business_process.field_business_head_name
     - field.field.node.business_process.field_business_process_effective
     - field.field.node.business_process.field_business_process_efficienc
     - field.field.node.business_process.field_name
@@ -17,18 +16,17 @@ targetEntityType: node
 bundle: business_process
 mode: default
 content:
-  field_business_head:
+  field_business_head_name:
     weight: 1
     settings:
-      match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: string_textfield
     region: content
   field_business_process_effective:
     type: entity_reference_paragraphs
-    weight: 2
+    weight: 3
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -40,7 +38,7 @@ content:
     region: content
   field_business_process_efficienc:
     type: entity_reference_paragraphs
-    weight: 3
+    weight: 2
     settings:
       title: Paragraph
       title_plural: Paragraphs

@@ -1,0 +1,141 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.assembly
+    - node.type.auditor_report
+    - node.type.customers_manual
+    - node.type.internal_audit
+    - node.type.manufacturing_process
+    - node.type.planned_events
+    - node.type.procedures
+  module:
+    - content_moderation
+id: workflow_for_audit_planning
+label: 'Workflow for Audit Planning'
+type: content_moderation
+type_settings:
+  states:
+    auditee_post_audit:
+      published: true
+      default_revision: true
+      label: 'Auditee Post Audit'
+      weight: 9
+    draft:
+      label: Draft
+      published: false
+      default_revision: false
+      weight: 0
+    post_audit:
+      published: true
+      default_revision: true
+      label: 'Post Audit'
+      weight: 6
+    pre_audit:
+      published: true
+      default_revision: true
+      label: 'Pre Audit'
+      weight: 2
+    published:
+      label: Published
+      published: true
+      default_revision: true
+      weight: 1
+    release_audit:
+      published: true
+      default_revision: true
+      label: 'Release Audit'
+      weight: 8
+    reschedule:
+      published: true
+      default_revision: true
+      label: Reschedule
+      weight: 4
+    scheduled:
+      published: true
+      default_revision: true
+      label: Scheduled
+      weight: 5
+    submit_audit:
+      published: true
+      default_revision: true
+      label: 'Submit Audit'
+      weight: 7
+  transitions:
+    auditee_post_audit:
+      label: 'Auditee Post Audit'
+      from:
+        - draft
+        - post_audit
+        - pre_audit
+        - published
+        - release_audit
+        - reschedule
+        - scheduled
+        - submit_audit
+      to: auditee_post_audit
+      weight: 10
+    post_audit:
+      label: 'Post Audit'
+      from:
+        - pre_audit
+        - release_audit
+        - scheduled
+        - submit_audit
+      to: post_audit
+      weight: 7
+    pre_audit:
+      label: 'Pre Audit'
+      from:
+        - draft
+      to: pre_audit
+      weight: 4
+    release_audit:
+      label: 'Release Audit'
+      from:
+        - auditee_post_audit
+        - draft
+        - pre_audit
+        - reschedule
+        - scheduled
+      to: release_audit
+      weight: 9
+    reschedule:
+      label: Reschedule
+      from:
+        - auditee_post_audit
+        - release_audit
+        - scheduled
+      to: reschedule
+      weight: 5
+    scheduled:
+      label: Scheduled
+      from:
+        - draft
+        - post_audit
+        - pre_audit
+        - published
+        - release_audit
+        - reschedule
+        - scheduled
+      to: scheduled
+      weight: 6
+    submit:
+      label: Submit
+      from:
+        - auditee_post_audit
+        - post_audit
+        - release_audit
+        - scheduled
+      to: submit_audit
+      weight: 8
+  entity_types:
+    node:
+      - assembly
+      - auditor_report
+      - customers_manual
+      - internal_audit
+      - manufacturing_process
+      - planned_events
+      - procedures
+  default_moderation_state: draft

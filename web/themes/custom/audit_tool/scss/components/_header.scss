@@ -8,6 +8,18 @@
       max-width: 1360px;
       margin: 0 auto;
       background: $white;
+
+      .main-navigation-menu {
+        ul {
+          li {
+            a {
+              font-size: 16px;
+              font-weight: 600;
+              line-height: 19px;
+            }
+          }
+        }
+      }
     }
 
     #navbar-top {

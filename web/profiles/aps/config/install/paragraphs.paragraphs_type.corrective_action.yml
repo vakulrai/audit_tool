@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: corrective_action
+label: 'Corrective Action'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

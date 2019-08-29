@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_valid_upto
+    - node.type.pre_audit_records
+  module:
+    - datetime_range
+id: node.pre_audit_records.field_valid_upto
+field_name: field_valid_upto
+entity_type: node
+bundle: pre_audit_records
+label: 'Valid upto'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

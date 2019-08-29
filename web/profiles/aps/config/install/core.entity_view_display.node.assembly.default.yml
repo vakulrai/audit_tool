@@ -1,4 +1,3 @@
-uuid: ff63427d-6c6b-438d-b699-eceaa2f0c84e
 langcode: en
 status: true
 dependencies:
@@ -6,6 +5,7 @@ dependencies:
     - field.field.node.assembly.body
     - field.field.node.assembly.field_mp_assembly_name
     - field.field.node.assembly.field_refere
+    - field.field.node.assembly.field_select_section
     - field.field.node.assembly.field_shift
     - node.type.assembly
   module:
@@ -33,6 +33,14 @@ content:
     region: content
   field_refere:
     weight: 104
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_select_section:
+    weight: 105
     label: above
     settings:
       link: true

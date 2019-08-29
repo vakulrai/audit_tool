@@ -46,6 +46,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
   public function getDerivativeDefinitions($base_plugin_definition) {
     $links = [];
     $current_user = \Drupal::currentUser();
+    $route_name = \Drupal::routeMatch()->getRouteName();
     $roles = $current_user->getRoles();
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     foreach ($roles as $key => $value) {
@@ -203,7 +204,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
           'title' => 'Internal',
           'route_name' => 'entity.audit_criteria.edit_form',
           'base_route' => $base_route,
-          'route_parameters' => ['audit_criteria' => key($audit_criteria_id), 'unit_reference' => $id, 'type' => $type, 'destination' => $current_uri],
+          'route_parameters' => ['audit_criteria' => key($audit_criteria_id), 'unit_reference' => $id, 'type' => $type],
         ] + $base_plugin_definition;
       }
       else{
@@ -211,7 +212,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
           'title' => 'Internal',
           'route_name' => 'eck.entity.add',
           'base_route' => $base_route,
-          'route_parameters' => ['eck_entity_type' => 'audit_criteria', 'eck_entity_bundle' => 'systems', 'unit_reference' => $id, 'type' => $type, 'destination' => $current_uri],
+          'route_parameters' => ['eck_entity_type' => 'audit_criteria', 'eck_entity_bundle' => 'systems', 'unit_reference' => $id, 'type' => $type],
         ] + $base_plugin_definition;
       }
 
@@ -220,7 +221,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
           'title' => 'External',
           'route_name' => 'entity.audit_criteria_external.edit_form',
           'base_route' => $base_route,
-          'route_parameters' => ['audit_criteria_external' => key($audit_criteria_external_id), 'unit_reference' => $id, 'type' => $type, 'destination' => $current_uri],
+          'route_parameters' => ['audit_criteria_external' => key($audit_criteria_external_id), 'unit_reference' => $id, 'type' => $type],
         ] + $base_plugin_definition;
       }
       else{
@@ -228,7 +229,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
           'title' => 'External',
           'route_name' => 'eck.entity.add',
           'base_route' => $base_route,
-          'route_parameters' => ['eck_entity_type' => 'audit_criteria_external', 'eck_entity_bundle' => 'external', 'unit_reference' => $id, 'type' => $type, 'destination' => $current_uri],
+          'route_parameters' => ['eck_entity_type' => 'audit_criteria_external', 'eck_entity_bundle' => 'external', 'unit_reference' => $id, 'type' => $type],
         ] + $base_plugin_definition;
       }
 
@@ -237,7 +238,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
           'title' => 'Customer',
           'route_name' => 'entity.audit_criteria_customer.edit_form',
           'base_route' => $base_route,
-          'route_parameters' => ['audit_criteria_customer' => key($audit_criteria_customer_id), 'unit_reference' => $id, 'type' => $type, 'destination' => $current_uri],
+          'route_parameters' => ['audit_criteria_customer' => key($audit_criteria_customer_id), 'unit_reference' => $id, 'type' => $type],
         ] + $base_plugin_definition;
       }
       else{
@@ -245,7 +246,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
           'title' => 'Customer',
           'route_name' => 'eck.entity.add',
           'base_route' => $base_route,
-          'route_parameters' => ['eck_entity_type' => 'audit_criteria_customer', 'eck_entity_bundle' => 'customer', 'unit_reference' => $id, 'type' => $type, 'destination' => $current_uri],
+          'route_parameters' => ['eck_entity_type' => 'audit_criteria_customer', 'eck_entity_bundle' => 'customer', 'unit_reference' => $id, 'type' => $type],
         ] + $base_plugin_definition;
       }
 
@@ -254,7 +255,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
           'title' => 'Supplier',
           'route_name' => 'entity.audit_criteria_supplier.edit_form',
           'base_route' => $base_route,
-          'route_parameters' => ['audit_criteria_supplier' => key($audit_criteria_supplier_id), 'unit_reference' => $id, 'type' => $type, 'destination' => $current_uri],
+          'route_parameters' => ['audit_criteria_supplier' => key($audit_criteria_supplier_id), 'unit_reference' => $id, 'type' => $type],
         ] + $base_plugin_definition;
       }
       else{
@@ -262,7 +263,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
           'title' => 'Supplier',
           'route_name' => 'eck.entity.add',
           'base_route' => $base_route,
-          'route_parameters' => ['eck_entity_type' => 'audit_criteria_supplier', 'eck_entity_bundle' => 'supplier', 'unit_reference' => $id, 'type' => $type, 'destination' => $current_uri],
+          'route_parameters' => ['eck_entity_type' => 'audit_criteria_supplier', 'eck_entity_bundle' => 'supplier', 'unit_reference' => $id, 'type' => $type],
         ] + $base_plugin_definition;
       }
 
@@ -271,7 +272,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
           'title' => 'Score Settings',
           'route_name' => 'entity.audit_criteria_score.edit_form',
           'base_route' => $base_route,
-          'route_parameters' => ['audit_criteria_score' => key($audit_criteria_score_id), 'unit_reference' => $id, 'type' => $type, 'destination' => $current_uri],
+          'route_parameters' => ['audit_criteria_score' => key($audit_criteria_score_id), 'unit_reference' => $id, 'type' => $type],
         ] + $base_plugin_definition;
       }
       else{
@@ -279,7 +280,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
           'title' => 'Score Settings',
           'route_name' => 'eck.entity.add',
           'base_route' => $base_route,
-          'route_parameters' => ['eck_entity_type' => 'audit_criteria_score', 'eck_entity_bundle' => 'score', 'unit_reference' => $id, 'type' => $type, 'destination' => $current_uri],
+          'route_parameters' => ['eck_entity_type' => 'audit_criteria_score', 'eck_entity_bundle' => 'score', 'unit_reference' => $id, 'type' => $type],
         ] + $base_plugin_definition;
       }
 
@@ -288,7 +289,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
           'title' => 'Time Cycle Settings',
           'route_name' => 'entity.audit_cycle.edit_form',
           'base_route' => $base_route,
-          'route_parameters' => ['audit_cycle' => key($audit_cycle_id), 'unit_reference' => $id, 'type' => $type, 'destination' => $current_uri],
+          'route_parameters' => ['audit_cycle' => key($audit_cycle_id), 'unit_reference' => $id, 'type' => $type],
         ] + $base_plugin_definition;
       }
       else{
@@ -296,7 +297,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
           'title' => 'Time Cycle Settings',
           'route_name' => 'eck.entity.add',
           'base_route' => $base_route,
-          'route_parameters' => ['eck_entity_type' => 'audit_cycle', 'eck_entity_bundle' => 'settings', 'unit_reference' => $id, 'type' => $type, 'destination' => $current_uri],
+          'route_parameters' => ['eck_entity_type' => 'audit_cycle', 'eck_entity_bundle' => 'settings', 'unit_reference' => $id, 'type' => $type],
         ] + $base_plugin_definition;
       }
 
@@ -321,7 +322,34 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       'route_name' => 'view.internal_audit_systems.ia_product',
       'base_route' => 'view.internal_audit_systems.ia_systems',
       'route_parameters' => ['unit_reference' => $id],
-    ] + $base_plugin_definition;    
+    ] + $base_plugin_definition;
+
+    if($user_role == 'mr_admin' || $user_role == 'group_mr'){
+      if($type == 'default'){
+        $route = 'view.user_listing.page_1';
+      }
+      elseif($type == 'auditor'){
+        $route = 'view.user_listing.page_2';
+      }
+      elseif($type == 'mr'){
+        $route = 'view.user_listing.page_3';
+      }
+      if($route != ''){
+        $links['auditor_add'] = [
+          'title' => 'Auditor Listing',
+          'route_name' => $route,
+          'base_route' => 'user.admin_create',
+          'route_parameters' => ['type' => $type, 'unit_reference' => $id],
+        ] + $base_plugin_definition;
+
+        $links['auditor_list'] = [
+          'title' => 'Add Auditor',
+          'route_name' => 'user.admin_create',
+          'base_route' => 'user.admin_create',
+          'route_parameters' => ['type' => $type, 'unit_reference' => $id],
+        ] + $base_plugin_definition;
+      }
+    }    
     return $links;
   }
 }

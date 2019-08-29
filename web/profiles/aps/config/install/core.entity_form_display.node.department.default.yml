@@ -1,33 +1,32 @@
-uuid: e8fbc28f-a623-42ca-8420-c9583ba21367
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.node.department.body
-    - field.field.node.department.field_business_head
+    - field.field.node.department.field_business_head_dept
+    - field.field.node.department.field_department_head
     - field.field.node.department.field_department_type
     - field.field.node.department.field_file
-    - field.field.node.department.field_location
+    - field.field.node.department.field_location_address
     - field.field.node.department.field_refere
+    - field.field.node.department.field_select_business_process
     - node.type.department
   module:
+    - content_moderation
     - media_library
 id: node.department.default
 targetEntityType: node
 bundle: department
 mode: default
 content:
-  field_business_head:
-    weight: 3
-    settings: {  }
+  field_department_head:
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: options_select
-    region: content
-  field_department_type:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
+    type: entity_reference_autocomplete
     region: content
   field_file:
     type: media_library_widget
@@ -36,8 +35,8 @@ content:
       media_types: {  }
     third_party_settings: {  }
     region: content
-  field_location:
-    weight: 2
+  field_location_address:
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -51,6 +50,18 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_select_business_process:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 6
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -62,6 +73,8 @@ content:
 hidden:
   body: true
   created: true
+  field_business_head_dept: true
+  field_department_type: true
   path: true
   promote: true
   status: true

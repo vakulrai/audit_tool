@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_department
+    - paragraphs.paragraphs_type.audit_cycle_schedule_release
+id: paragraph.audit_cycle_schedule_release.field_department
+field_name: field_department
+entity_type: paragraph
+bundle: audit_cycle_schedule_release
+label: Department
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: 'Days Before start of the year'
+field_type: integer

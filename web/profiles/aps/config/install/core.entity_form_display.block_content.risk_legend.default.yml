@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.risk_legend
+    - field.field.block_content.risk_legend.field_risk_element
+  module:
+    - text
+id: block_content.risk_legend.default
+targetEntityType: block_content
+bundle: risk_legend
+mode: default
+content:
+  field_risk_element:
+    weight: 27
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

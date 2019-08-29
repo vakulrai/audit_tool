@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_questions
+    - paragraphs.paragraphs_type.internal_audit_qa
+id: paragraph.internal_audit_qa.field_questions
+field_name: field_questions
+entity_type: paragraph
+bundle: internal_audit_qa
+label: Question
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

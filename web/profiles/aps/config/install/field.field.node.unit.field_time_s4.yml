@@ -1,4 +1,3 @@
-uuid: 1749111c-5000-49de-aa89-546992c4c9e1
 langcode: en
 status: true
 dependencies:
@@ -11,7 +10,7 @@ id: node.unit.field_time_s4
 field_name: field_time_s4
 entity_type: node
 bundle: unit
-label: 'Time S4'
+label: 'Time S3'
 description: ''
 required: false
 translatable: false

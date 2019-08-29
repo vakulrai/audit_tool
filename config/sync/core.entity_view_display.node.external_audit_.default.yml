@@ -134,13 +134,13 @@ content:
     type: number_integer
     region: content
   field_validity:
-    weight: 104
+    weight: 117
     label: above
     settings:
-      thousand_separator: ''
-      prefix_suffix: true
+      format_type: medium
+      timezone_override: ''
     third_party_settings: {  }
-    type: number_integer
+    type: datetime_default
     region: content
   links:
     weight: 100

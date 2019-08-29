@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Customer Audit Records'
+vid: customer_audit_records
+description: ''
+weight: 0

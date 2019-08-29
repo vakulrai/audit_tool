@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: risk_legend
+label: 'Risk Legend'
+revision: 1
+description: 'Risk Meter Legend for Dashboard'
