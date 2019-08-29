@@ -232,6 +232,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $form['field_shift']['widget']['#options'] = $selected_option;
       $form['field_shift']['widget']['#default_value'] = $def_values;
       $form['field_shift']['widget']['#disabled'] = TRUE;
+      unset($form['field_assembly']['widget']['#options']['_none']);
     }
     if($id= \Drupal::request()->query->get('id')){
       $node_object = Node::load($id);
@@ -253,7 +254,13 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
   }
   elseif ($form_id == 'node_section_edit_form') {//Edit form
+    unset($form['field_assembly']['widget']['#options']['_none']);
     $form['field_refere']['#access'] = FALSE;
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'aps_section_page_redirect';
+      }
+    }
   }
 
   //Condition for External Audit Add form
@@ -1893,6 +1900,10 @@ function aps_section_page_redirect(array $form, \Drupal\Core\Form\FormStateInter
   $unit_ref = \Drupal::request()->query->get('id');
   $form_values = $form_state->getValues();
   $nid = $form_values['nid'];
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if($node instanceof \Drupal\node\NodeInterface) {
+     $nid_type = $node->bundle();
+  }
   if($form_values['field_assembly'][0]['value'] == 'assembly'){
     $response = Url::fromRoute('node.add',['node_type' => 'assembly', 'id' => $unit_ref, 'section_reference' => $nid]);
   }
@@ -1900,9 +1911,14 @@ function aps_section_page_redirect(array $form, \Drupal\Core\Form\FormStateInter
     $response = Url::fromRoute('node.add',['node_type' => 'manufacturing_process', 'id' => $unit_ref, 'section_reference' => $nid]);
   }
   else{
-    $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
-    $id = \Drupal::request()->query->get('id');
-    $response = Url::fromRoute('node.add',['node_type' => 'section', 'id' => $unit_ref]);
+    if($nid_type == 'section' && \Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form'){
+      $response = Url::fromRoute('view.registered_unit_listing.section_list',['arg_0' => $unit_ref]);
+    }
+    else{
+      $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
+      $id = \Drupal::request()->query->get('id');
+      $response = Url::fromRoute('node.add',['node_type' => 'section', 'id' => $unit_ref]);
+    }
   }
   $form_state->setRedirectUrl($response);
 }

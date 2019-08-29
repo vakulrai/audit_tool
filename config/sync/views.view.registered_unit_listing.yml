@@ -3134,7 +3134,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/node/{{nid}}/edit?id={{field_refere}}&destination={{current_uri}}">Edit</a>'
+            text: '<a href="/node/{{nid}}/edit?id={{field_refere}}">Edit</a>'
             make_link: false
             path: ''
             absolute: false
@@ -3789,7 +3789,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/node/{{nid}}/edit?id={{field_refere}}&destination={{current_uri}}">Edit</a>'
+            text: '<a href="/node/{{nid}}/edit?id={{field_refere}}">Edit</a>'
             make_link: false
             path: ''
             absolute: false
