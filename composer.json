@@ -38,6 +38,7 @@
         "drupal/formtips": "^1.2",
         "drupal/front": "^1.0@beta",
         "drupal/inline_entity_form": "^1.0@RC",
+        "drupal/limited_field_widgets": "^1.2",
         "drupal/link_attributes": "^1.9",
         "drupal/material_base": "^1.7",
         "drupal/menu_trail_by_path": "^1.1",
