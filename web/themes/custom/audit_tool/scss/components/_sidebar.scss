@@ -1,0 +1,48 @@
+#sidebar_first {
+  .block {
+    background: transparent;
+    border: none;
+    ul {
+      > li {
+        margin-bottom: 10px;
+        background: none!important;
+        &:hover {
+          background: none;
+          a {
+            background: none;
+          }
+        }
+
+        > a {
+          padding: 1em 0em;
+          color: $link-color;
+          font-size: 14px;
+          border-bottom: 1px solid $border-grey;
+          font-weight: 600;
+          .sf-sub-indicator {
+            right: 0px;
+          }
+
+          .sf-sub-indicator:after {
+            font-size: 8px;
+          }
+        }
+        ul {
+          li {
+            margin-bottom: 0px;
+            padding: 0em;
+            background: $white!important;
+            a {
+              padding: 1em;
+            }
+            &:hover {
+              a {
+                background: $bg-grey;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

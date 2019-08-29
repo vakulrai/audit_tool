@@ -1,6 +1,6 @@
 uuid: 74cc92e5-be91-48e3-874c-cfb71ac0a5e1
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.account
@@ -10,8 +10,8 @@ dependencies:
     - audit_tool
 id: useraccountmenu_2
 theme: audit_tool
-region: drawer
-weight: -28
+region: sidebar_first
+weight: -15
 provider: null
 plugin: 'system_menu_block:account'
 settings:

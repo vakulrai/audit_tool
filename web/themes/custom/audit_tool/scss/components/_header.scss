@@ -1,0 +1,40 @@
+#page {
+  > header {
+    background: $white;
+    box-shadow: 0 0 5px #ccc;
+    margin-bottom: 10px;
+
+    #navbar-main {
+      max-width: 1360px;
+      margin: 0 auto;
+      background: $white;
+
+      .main-navigation-menu {
+        ul {
+          li {
+            a {
+              font-size: 16px;
+              font-weight: 600;
+              line-height: 19px;
+            }
+          }
+        }
+      }
+    }
+
+    #navbar-top {
+      background: $yellow-color;
+      padding: 0px;
+    }
+    .menu--account {
+      width: 100%;
+      .account-menu {
+        float: right;
+        margin-bottom: 0px;
+        a {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
