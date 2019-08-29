@@ -114,7 +114,7 @@ class DefaultSubscriber implements EventSubscriberInterface {
   }
 
   public function checkAuthStatus(GetResponseEvent $event) {
-    if ($this->account->isAnonymous() && \Drupal::routeMatch()->getRouteName() != 'user.login'&& \Drupal::routeMatch()->getRouteName() != 'user.register' && \Drupal::routeMatch()->getRouteName() != 'user.logout') {
+    if ($this->account->isAnonymous() && \Drupal::routeMatch()->getRouteName() != 'user.login'&& \Drupal::routeMatch()->getRouteName() != 'user.register' && \Drupal::routeMatch()->getRouteName() == 'user.logout') {
 
       // add logic to check other routes you want available to anonymous users,
       // otherwise, redirect to login page.
