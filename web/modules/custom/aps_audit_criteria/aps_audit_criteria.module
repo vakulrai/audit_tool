@@ -578,16 +578,13 @@ function resetForm(array $form, \Drupal\Core\Form\FormStateInterface $form_state
  */
 function aps_audit_criteria_field_widget_address_default_form_alter(&$element, &$form_state, $context) {
   $element['#type'] = 'fieldset';
-  // $field_definition = $context['items']->getFieldDefinition();
-  // $current_user = \Drupal::currentUser();
-  // $roles = $current_user->getRoles();
-  // foreach ($roles as $key => $value) {
-  //   $user_role = $value;
-  // }
-  // if($field_definition->getName() == 'field_remote_address' && $user_role == 'group_mr'){
-    
-  // }
-  
+}
+
+/**
+ * Implements  hook_field_widget_form_alter().
+ */
+function aps_audit_criteria_field_widget_month_only_widget_form_alter(&$element, &$form_state, $context) {
+  kint('kk');
 }
 
 function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
@@ -651,7 +648,7 @@ function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form
       $element['subform']['field_car_status']['#access'] = FALSE;
     }
   }
-
+  
 }
 
 /**  
@@ -688,6 +685,10 @@ function aps_audit_criteria_field_widget_entity_reference_paragraphs_form_alter(
         'select[name="field_add_products['.$element['#delta'].'][subform][field_product_type]"]' => ['value' => 'manufactured'],
       ],
     ];
+  }
+  
+  if ($element['#paragraph_type'] == 'business_process_effectiveness' || $element['#paragraph_type'] == 'business_process_effieciency') {
+    unset($element['top']['links']['remove_button']);
   }
 }
 

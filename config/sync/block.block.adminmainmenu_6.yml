@@ -1,6 +1,6 @@
 uuid: 939440d7-727d-445e-b612-5fa9b2161c2a
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - system.menu.admin-main-menu
@@ -11,8 +11,8 @@ dependencies:
     - audit_tool
 id: adminmainmenu_6
 theme: audit_tool
-region: sidebar_first
-weight: -17
+region: drawer
+weight: -30
 provider: null
 plugin: 'system_menu_block:admin-main-menu'
 settings:

@@ -1,6 +1,6 @@
 uuid: 5beabe85-3ec7-401e-8864-b7eded0cf2e4
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.manage-users

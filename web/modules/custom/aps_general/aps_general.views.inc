@@ -97,5 +97,13 @@ function aps_general_views_data() {
         ],
     ];
 
+    $data['views']['current_uri'] = [
+        'title' => t('Get Current URI form url.'),
+        'help' => t('Get Current URI form url.'),
+        'field' => [
+            'id' => 'current_uri',
+        ],
+    ];
+
     return $data;
 }

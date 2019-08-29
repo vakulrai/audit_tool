@@ -221,7 +221,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   //Condition for Section Add form
   if($form_id == 'node_section_form'){
     $form['field_refere']['#access'] = FALSE;
-    if($unit_ref= \Drupal::request()->query->get('unit_ref')){
+    if($unit_ref= \Drupal::request()->query->get('id')){
       $unit_ref_object = Node::load($unit_ref);
       $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
       foreach ($unit_refernced_shift as $key => $value) {
@@ -324,6 +324,8 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $node_referenced = [$section_reference, $unit_reference];
       $node_object= node_load_multiple($node_referenced);
       $form['field_refere']['widget']['target_id']['#default_value'] = $node_object;
+      $form['field_select_section']['widget']['#disabled'] = TRUE;
+      $form['field_select_section']['widget']['#default_value'] = (int)$section_reference;
     }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
@@ -344,6 +346,8 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $node_referenced = [$section_reference, $unit_reference];
       $node_object= node_load_multiple($node_referenced);
       $form['field_refere']['widget']['target_id']['#default_value'] = $node_object;
+      $form['field_section']['widget']['#disabled'] = TRUE;
+      $form['field_section']['widget']['#default_value'] = (int)$section_reference;
     }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
@@ -984,6 +988,9 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     $user_role = $value;
   }
   
+  if($route_name == 'entity.node.edit_form'){
+    unset($data['tabs']);
+  }
   if($route_name == 'user.login'){
     unset($data['tabs'][0]['user.pass']);
   }
@@ -2046,7 +2053,22 @@ function get_location_from_unit(FieldStorageConfig $definition, ContentEntityInt
     $options = array_merge($field_address , $support_locations);
   }
   else{
-    $options = [];
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if($node instanceof \Drupal\node\NodeInterface) {
+       $nid_type = $node->bundle();
+    }
+    if(($nid_type == 'department' || $nid_type == 'section') && \Drupal::request()->query->get('id')){
+      $address_option = [];
+      $id = \Drupal::request()->query->get('id');
+      $node_object = Node::load($id);
+      foreach ($node_object->field_remote_address->getValue() as $key => $value) {
+        $support_locations[] = $value['locality'];
+      }
+      $field_address[] = $node_object->field_address->locality;
+      $options = array_merge($field_address , $support_locations);
+    }else{
+      $options = [];
+    }
   }
   return $options;
 }
