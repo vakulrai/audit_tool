@@ -68,6 +68,7 @@ class DefaultSubscriber implements EventSubscriberInterface {
     $user_unit = $user->field_reference_id->target_id;
     $front = \Drupal::service('path.matcher')->isFrontPage();
     $route_name = \Drupal::routeMatch()->getRouteName();
+
     if(!$this->account->isAnonymous()){
       if ($front && $user_role == 'auditor' || $user_role == 'auditor' && $route_name == 'entity.user.canonical') {
         $response = new RedirectResponse(URL::fromUserInput('/planned-audit-listing/'.$user_unit)->toString());  
@@ -85,7 +86,7 @@ class DefaultSubscriber implements EventSubscriberInterface {
         }
       }
       elseif($user_role == 'mr_admin') {
-        if($route_name == 'entity.user.canonical'){
+        if($route_name == 'entity.user.canonical' || $current_path == '/node/1'){
           $user_object = User::load($uid);
           $response = new RedirectResponse('/unit-registration-view/'.$user_object->field_unit->target_id, 301);
           $response->send();

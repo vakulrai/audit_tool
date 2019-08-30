@@ -10,13 +10,13 @@ rid_executive:
   path: ''
 rid_auditor:
   weigth: '0'
-  path: /home
+  path: ''
 rid_auditee:
   weigth: '0'
   path: ''
 rid_mr_admin:
   weigth: '0'
-  path: /home
+  path: ''
 home_link_path: ''
 rid_qa_staff_member:
   weigth: '0'
@@ -26,4 +26,4 @@ rid_qa_top_contributor:
   path: ''
 rid_group_mr:
   weigth: '0'
-  path: /home
+  path: ''

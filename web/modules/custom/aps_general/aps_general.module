@@ -597,6 +597,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $form['field_refere']['#access'] = FALSE;
   }
   if($form_id == 'holidays_holidays_form'){
+    $form['field_unit_reference']['#access'] = FALSE;
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $query_parameters = UrlHelper::parse($current_uri);
     $uri = explode('=', $query_parameters['query']['unit_reference']);
@@ -605,6 +606,9 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $node_object = Node::load($id);
       $form['field_unit_reference']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
+  }
+  elseif($form_id == 'holidays_holidays_edit_form'){
+    $form['field_unit_reference']['#access'] = FALSE;
   }
 }
 /**
@@ -1011,7 +1015,10 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
-  
+
+  if($route_name == 'entity.holidays.edit_form'){
+    unset($data['tabs']);
+  }
   if($route_name == 'entity.node.edit_form'){
     unset($data['tabs']);
   }
