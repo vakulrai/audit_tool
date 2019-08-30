@@ -1305,6 +1305,12 @@ function aps_general_views_pre_render(ViewExecutable $view) {
 }
 
 function aps_general_preprocess_breadcrumb(&$variables) {
+  $current_user = \Drupal::currentUser();
+  $current_user_id = $current_user->id();
+  $roles = $current_user->getRoles();
+  foreach ($roles as $key => $value) {
+    $user_role = $value;
+  }
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $uri = explode('/', $current_uri);
   $node = \Drupal::routeMatch()->getParameter('node_type');
@@ -1349,17 +1355,17 @@ function aps_general_preprocess_breadcrumb(&$variables) {
      $variables['breadcrumb'][] = ['text' => t('Holidays')];
   }
 
-  if($nid_type == 'business_process'){
+  if($nid_type == 'business_process' && $user_role == 'mr_admin'){
     $variables['breadcrumb'][1] = ['text' => t('Business Processes Listing')];
     $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.bp',['arg_0' => \Drupal::request()->query->get('id')]);
   }
 
-  if($nid_type == 'department'){
+  if($nid_type == 'department' && $user_role == 'mr_admin'){
     $variables['breadcrumb'][1] = ['text' => t('Department Listing')];
     $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.department_listing',['arg_0' => \Drupal::request()->query->get('id')]);
   }
 
-  if($nid_type == 'section'){
+  if($nid_type == 'section' && $user_role == 'mr_admin'){
     $variables['breadcrumb'][1] = ['text' => t('Section Listing')];
     $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.section_list',['arg_0' => \Drupal::request()->query->get('id')]);
   }
