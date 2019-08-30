@@ -580,6 +580,14 @@ function aps_audit_criteria_field_widget_address_default_form_alter(&$element, &
   $element['#type'] = 'fieldset';
 }
 
+/**
+ * Implements  hook_field_widget_form_alter().
+ */
+function aps_audit_criteria_field_widget_datetime_default_form_alter(&$element, &$form_state, $context) {
+  $element['value']['#attributes'] = [
+        'min' =>  date('Y-m-d'),
+    ];
+}
 
 function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
   $route_name = \Drupal::routeMatch()->getRouteName();
@@ -642,7 +650,6 @@ function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form
       $element['subform']['field_car_status']['#access'] = FALSE;
     }
   }
-  
 }
 
 /**  

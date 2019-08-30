@@ -79,7 +79,20 @@ class DefaultSubscriber implements EventSubscriberInterface {
     $user_unit = $user->field_reference_id->target_id;
     $front = \Drupal::service('path.matcher')->isFrontPage();
     $route_name = \Drupal::routeMatch()->getRouteName();
-    if ($front && $user_role == 'auditor' || $user_role == 'auditor' && $route_name == 'entity.user.canonical') {
+    if($this->account->isAnonymous() && \Drupal::routeMatch()->getRouteName() != 'user.login'&& \Drupal::routeMatch()->getRouteName() != 'user.register' && \Drupal::routeMatch()->getRouteName() == 'user.logout') {
+
+      // add logic to check other routes you want available to anonymous users,
+      // otherwise, redirect to login page.
+      // $route_name = \Drupal::routeMatch()->getRouteName();
+      // if (strpos($route_name, 'view') === 0 && strpos($route_name, 'rest_') !== FALSE) {
+      //   return;
+      // }
+
+      $response = new RedirectResponse('/user/login');
+      $event->setResponse($response);
+      $event->stopPropagation();
+    }
+    elseif ($front && $user_role == 'auditor' || $user_role == 'auditor' && $route_name == 'entity.user.canonical') {
       $response = new RedirectResponse(URL::fromUserInput('/planned-audit-listing/'.$user_unit)->toString());  
       $response->send(); 
     }
@@ -92,41 +105,40 @@ class DefaultSubscriber implements EventSubscriberInterface {
     //   $response->send(); 
     // }
     elseif($user_role == 'group_mr' && $route_name == 'entity.user.canonical'){
-      $response = new RedirectResponse('/home', 301);  
+      $response = new RedirectResponse('/home');  
       $response->send(); 
     }
-    if ($user_role == 'mr_admin' && $route_name == 'entity.user.canonical') {
+    elseif ($user_role == 'mr_admin' && $route_name == 'entity.user.canonical') {
       $unit_reference = User::load($uid);
       $response = new RedirectResponse('/unit-registration-view/'.$unit_reference->field_unit->target_id, 301);  
       $response->send();
     }
-
-    if ($user_role == 'mr_admin' && $front) {
+    elseif ($user_role == 'mr_admin' && $front && !$this->account->isAnonymous()) {
       $query = \Drupal::database()->select('node__field_deputy_mr', 'n');
       $query->fields('n',['field_deputy_mr_target_id', 'bundle', 'entity_id']);
       $query->condition('n.bundle', 'unit');
       $query->condition('n.field_deputy_mr_target_id', $uid);
       $unit_id_ref = $query->execute()->fetchAll();
-      $response = new RedirectResponse('/unit-registration-view/'.$unit_id_ref[0]->entity_id, 301);  
+      $response = new RedirectResponse('/unit-registration-view/'.$unit_id_ref[0]->entity_id, 301);
       $response->send();
     }
 
   }
 
   public function checkAuthStatus(GetResponseEvent $event) {
-    if ($this->account->isAnonymous() && \Drupal::routeMatch()->getRouteName() != 'user.login'&& \Drupal::routeMatch()->getRouteName() != 'user.register' && \Drupal::routeMatch()->getRouteName() == 'user.logout') {
+    // if ($this->account->isAnonymous() && \Drupal::routeMatch()->getRouteName() != 'user.login'&& \Drupal::routeMatch()->getRouteName() != 'user.register' && \Drupal::routeMatch()->getRouteName() == 'user.logout') {
 
-      // add logic to check other routes you want available to anonymous users,
-      // otherwise, redirect to login page.
-      $route_name = \Drupal::routeMatch()->getRouteName();
-      if (strpos($route_name, 'view') === 0 && strpos($route_name, 'rest_') !== FALSE) {
-        return;
-      }
+    //   // add logic to check other routes you want available to anonymous users,
+    //   // otherwise, redirect to login page.
+    //   // $route_name = \Drupal::routeMatch()->getRouteName();
+    //   // if (strpos($route_name, 'view') === 0 && strpos($route_name, 'rest_') !== FALSE) {
+    //   //   return;
+    //   // }
 
-      $response = new RedirectResponse('/user/login');
-      $event->setResponse($response);
-      $event->stopPropagation();
-    }
+    //   $response = new RedirectResponse('/user/login');
+    //   $event->setResponse($response);
+    //   $event->stopPropagation();
+    // }
   }
   /**
    * {@inheritdoc}
