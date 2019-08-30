@@ -1,6 +1,6 @@
 uuid: 6d92984e-bf0d-428e-a6e4-4793a6d0c58e
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - views.view.registered_unit_listing
