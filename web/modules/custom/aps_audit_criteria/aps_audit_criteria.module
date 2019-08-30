@@ -580,6 +580,7 @@ function aps_audit_criteria_field_widget_address_default_form_alter(&$element, &
   $element['#type'] = 'fieldset';
 }
 
+
 function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
   $route_name = \Drupal::routeMatch()->getRouteName();
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');

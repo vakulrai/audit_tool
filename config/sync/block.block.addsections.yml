@@ -1,0 +1,38 @@
+uuid: cae5e1a7-b28d-401a-8fb0-d01ba5bde209
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.add-sections
+  module:
+    - system
+    - user
+  theme:
+    - audit_tool
+id: addsections
+theme: audit_tool
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'system_menu_block:add-sections'
+settings:
+  id: 'system_menu_block:add-sections'
+  label: 'Add Sections'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+  request_path:
+    id: request_path
+    pages: '/section-listing-all/*'
+    negate: false
+    context_mapping: {  }

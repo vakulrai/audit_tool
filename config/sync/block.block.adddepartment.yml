@@ -1,0 +1,38 @@
+uuid: 87965f62-c394-4ffc-bcb0-2bfe60ae772a
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.add-department
+  module:
+    - system
+    - user
+  theme:
+    - audit_tool
+id: adddepartment
+theme: audit_tool
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'system_menu_block:add-department'
+settings:
+  id: 'system_menu_block:add-department'
+  label: 'Add Department'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+  request_path:
+    id: request_path
+    pages: '/department-listing-all/*'
+    negate: false
+    context_mapping: {  }

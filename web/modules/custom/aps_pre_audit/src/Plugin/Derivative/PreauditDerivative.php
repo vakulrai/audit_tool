@@ -116,29 +116,29 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       'route_parameters' => ['unit_reference' => $id, 'reference' => $id],
     ] + $base_plugin_definition;
 
-    $links['unit'] = [
-      'title' => 'Unit',
-      'route_name' => 'view.user_registration_view.registration',
-      'base_route' => 'view.user_registration_view.registration',
-    ] + $base_plugin_definition;
+    // $links['unit'] = [
+    //   'title' => 'Unit',
+    //   'route_name' => 'view.user_registration_view.registration',
+    //   'base_route' => 'view.user_registration_view.registration',
+    // ] + $base_plugin_definition;
 
-    $links['business_process'] = [
-      'title' => 'Business Processes',
-      'route_name' => 'view.registered_unit_listing.bp',
-      'base_route' => 'view.user_registration_view.registration',
-    ] + $base_plugin_definition;
+    // $links['business_process'] = [
+    //   'title' => 'Business Processes',
+    //   'route_name' => 'view.registered_unit_listing.bp',
+    //   'base_route' => 'view.user_registration_view.registration',
+    // ] + $base_plugin_definition;
 
-    $links['department'] = [
-      'title' => 'Departments',
-      'route_name' => 'view.registered_unit_listing.department_listing',
-      'base_route' => 'view.user_registration_view.registration',
-    ] + $base_plugin_definition;
+    // $links['department'] = [
+    //   'title' => 'Departments',
+    //   'route_name' => 'view.registered_unit_listing.department_listing',
+    //   'base_route' => 'view.user_registration_view.registration',
+    // ] + $base_plugin_definition;
 
-    $links['sections'] = [
-      'title' => 'Sections',
-      'route_name' => 'view.registered_unit_listing.section_list',
-      'base_route' => 'view.user_registration_view.registration',
-    ] + $base_plugin_definition;
+    // $links['sections'] = [
+    //   'title' => 'Sections',
+    //   'route_name' => 'view.registered_unit_listing.section_list',
+    //   'base_route' => 'view.user_registration_view.registration',
+    // ] + $base_plugin_definition;
     
     $links['audit_list'] = [
       'title' => 'Audit List',

@@ -927,6 +927,7 @@ function aps_general_node_create(Node $entity) {
  * Implements  hook_preprocess_page().
  */
 function aps_general_preprocess_page(&$variables) {
+  $variables['#attached']['library'][] = 'aps_general/aps_general_bootstrap_datepicker_js';
   global $base_url;
   $current_user = \Drupal::currentUser();
   $roles = $current_user->getRoles();
@@ -1299,6 +1300,10 @@ function aps_general_views_pre_render(ViewExecutable $view) {
 function aps_general_preprocess_breadcrumb(&$variables) {
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $uri = explode('/', $current_uri);
+  $node = \Drupal::routeMatch()->getParameter('node_type');
+  if ($node instanceof \Drupal\node\Entity\NodeType) {
+    $nid_type = $node->get('type');
+  }
   if(\Drupal::routeMatch()->getRouteName() == 'user.admin_create'){
     if(\Drupal::request()->query->get('type') == 'mr'){
       $variables['breadcrumb'][1]['text'] = t('Register Deputy MR');
@@ -1335,6 +1340,21 @@ function aps_general_preprocess_breadcrumb(&$variables) {
   }
    elseif(\Drupal::routeMatch()->getRouteName() == 'view.list_of_holidays.holidays'){
      $variables['breadcrumb'][] = ['text' => t('Holidays')];
+  }
+
+  if($nid_type == 'business_process'){
+    $variables['breadcrumb'][1] = ['text' => t('Business Processes Listing')];
+    $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.bp',['arg_0' => \Drupal::request()->query->get('id')]);
+  }
+
+  if($nid_type == 'department'){
+    $variables['breadcrumb'][1] = ['text' => t('Department Listing')];
+    $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.department_listing',['arg_0' => \Drupal::request()->query->get('id')]);
+  }
+
+  if($nid_type == 'section'){
+    $variables['breadcrumb'][1] = ['text' => t('Section Listing')];
+    $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.section_list',['arg_0' => \Drupal::request()->query->get('id')]);
   }
 }
 /**
@@ -1779,14 +1799,32 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
-  if ($cleanLinkText == 'Create Business Process') {
+  if ($cleanLinkText == 'Business Process') {
+    $id = $uri[1];
+    if($id){
+      $url = Url::fromRoute('view.registered_unit_listing.bp',['arg_0' => $id]);
+      unset($variables['url']);
+      $variables['url'] = $url;
+    }
+  }
+
+  if ($cleanLinkText == 'Add Business Process') {
     $id = $uri[1];
     if($id){
       $variables['url']->setRouteParameter('id', $id);
     }
   }
 
-  if ($cleanLinkText == 'Create Department') {
+  if ($cleanLinkText == 'Department') {
+    $id = $uri[1];
+    if($id){
+      $url = Url::fromRoute('view.registered_unit_listing.department_listing',['arg_0' => $id]);
+      unset($variables['url']);
+      $variables['url'] = $url;
+    }
+  }
+
+  if ($cleanLinkText == 'Add Department') {
     $id = $uri[1];
     if($id){
       $variables['url']->setRouteParameter('id', $id);
@@ -1794,7 +1832,16 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
-  if ($cleanLinkText == 'Create Section') {
+  if ($cleanLinkText == 'Section') {
+    $id = $uri[1];
+    if($id){
+      $url = Url::fromRoute('view.registered_unit_listing.section_list',['arg_0' => $id]);
+      unset($variables['url']);
+      $variables['url'] = $url;
+    }
+  }
+
+  if ($cleanLinkText == 'Add Section') {
     $id = $uri[1];
     if($id){
       $variables['url']->setRouteParameter('id', $id);
