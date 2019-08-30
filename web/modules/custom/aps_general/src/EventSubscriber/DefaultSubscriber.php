@@ -63,82 +63,44 @@ class DefaultSubscriber implements EventSubscriberInterface {
       $user_role = $value;
     }
     if($user_role == 'mr_admin'){
-      // $role = Role::load('group_mr'); 
-      // // // kint($create);
-      // // // $create->
-      // $role_object = Role::load('mr_admin');
-      // $perm = $role_object->getPermissions();
-      // foreach ($perm as $key => $value) {
-      //   $role->grantPermission($value);
-      // }
-      // $role->save();
-      // kint($role);
-      // $role_object->revokePermission('create unit content');
-      // $role_object->save();
+
     }
     $user_unit = $user->field_reference_id->target_id;
     $front = \Drupal::service('path.matcher')->isFrontPage();
     $route_name = \Drupal::routeMatch()->getRouteName();
-    if($this->account->isAnonymous() && \Drupal::routeMatch()->getRouteName() != 'user.login'&& \Drupal::routeMatch()->getRouteName() != 'user.register' && \Drupal::routeMatch()->getRouteName() == 'user.logout') {
+    if(!$this->account->isAnonymous()){
+      if ($front && $user_role == 'auditor' || $user_role == 'auditor' && $route_name == 'entity.user.canonical') {
+        $response = new RedirectResponse(URL::fromUserInput('/planned-audit-listing/'.$user_unit)->toString());  
+        $response->send(); 
+      }
+      elseif($front && $user_role == 'auditee'|| $user_role == 'auditee' && $route_name == 'entity.user.canonical') {
+        $response = new RedirectResponse(URL::fromUserInput('/planned-audit-listing-auditee/'.$user_unit)->toString());  
+        $response->send(); 
+      }
 
-      // add logic to check other routes you want available to anonymous users,
-      // otherwise, redirect to login page.
-      // $route_name = \Drupal::routeMatch()->getRouteName();
-      // if (strpos($route_name, 'view') === 0 && strpos($route_name, 'rest_') !== FALSE) {
-      //   return;
-      // }
-
-      $response = new RedirectResponse('/user/login');
-      $event->setResponse($response);
-      $event->stopPropagation();
+      if($user_role == 'group_mr'){
+        if($route_name == 'entity.user.canonical'){
+          $response = new RedirectResponse('/home');
+          $response->send();
+        }
+      }
+      elseif($user_role == 'mr_admin') {
+        if($route_name == 'entity.user.canonical'){
+          $user_object = User::load($uid);
+          $response = new RedirectResponse('/unit-registration-view/'.$user_object->field_unit->target_id, 301);
+          $response->send();
+        }
+      }
     }
-    elseif ($front && $user_role == 'auditor' || $user_role == 'auditor' && $route_name == 'entity.user.canonical') {
-      $response = new RedirectResponse(URL::fromUserInput('/planned-audit-listing/'.$user_unit)->toString());  
-      $response->send(); 
-    }
-    elseif ($front && $user_role == 'auditee'|| $user_role == 'auditee' && $route_name == 'entity.user.canonical') {
-      $response = new RedirectResponse(URL::fromUserInput('/planned-audit-listing-auditee/'.$user_unit)->toString());  
-      $response->send(); 
-    }
-    // elseif($user_role == 'mr_admin' && $route_name == 'entity.user.canonical'){
-    //   $response = new RedirectResponse('/home', 301);  
-    //   $response->send(); 
-    // }
-    elseif($user_role == 'group_mr' && $route_name == 'entity.user.canonical'){
-      $response = new RedirectResponse('/home');  
-      $response->send(); 
-    }
-    elseif ($user_role == 'mr_admin' && $route_name == 'entity.user.canonical') {
-      $unit_reference = User::load($uid);
-      $response = new RedirectResponse('/unit-registration-view/'.$unit_reference->field_unit->target_id, 301);  
-      $response->send();
-    }
-    elseif ($user_role == 'mr_admin' && $front && !$this->account->isAnonymous()) {
-      $query = \Drupal::database()->select('node__field_deputy_mr', 'n');
-      $query->fields('n',['field_deputy_mr_target_id', 'bundle', 'entity_id']);
-      $query->condition('n.bundle', 'unit');
-      $query->condition('n.field_deputy_mr_target_id', $uid);
-      $unit_id_ref = $query->execute()->fetchAll();
-      $response = new RedirectResponse('/unit-registration-view/'.$unit_id_ref[0]->entity_id, 301);
-      $response->send();
-    }
-
   }
 
   public function checkAuthStatus(GetResponseEvent $event) {
-    // if ($this->account->isAnonymous() && \Drupal::routeMatch()->getRouteName() != 'user.login'&& \Drupal::routeMatch()->getRouteName() != 'user.register' && \Drupal::routeMatch()->getRouteName() == 'user.logout') {
-
-    //   // add logic to check other routes you want available to anonymous users,
-    //   // otherwise, redirect to login page.
-    //   // $route_name = \Drupal::routeMatch()->getRouteName();
-    //   // if (strpos($route_name, 'view') === 0 && strpos($route_name, 'rest_') !== FALSE) {
-    //   //   return;
-    //   // }
-
-    //   $response = new RedirectResponse('/user/login');
-    //   $event->setResponse($response);
-    //   $event->stopPropagation();
-    // }
+   if ($this->account->isAnonymous()
+      && \Drupal::routeMatch()->getRouteName() == 'entity.node.canonical') {
+      $response = new RedirectResponse('/user/login', 301);
+      $event->setResponse($response);
+    }
+    return;
   }
   /**
    * {@inheritdoc}
