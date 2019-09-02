@@ -1,0 +1,20 @@
+uuid: aea5000f-994a-4bfa-8b7a-5bb80b4a27bf
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: unit_mandays.field_system_mandays_standard
+field_name: field_system_mandays_standard
+entity_type: unit_mandays
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

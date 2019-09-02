@@ -1,0 +1,25 @@
+uuid: 9f8ed84e-85c2-4b97-b690-d45102216efc
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.unit_mandays.mandays
+    - field.storage.unit_mandays.field_process_mandays_standard
+id: unit_mandays.mandays.field_process_mandays_standard
+field_name: field_process_mandays_standard
+entity_type: unit_mandays
+bundle: mandays
+label: 'Process mandays standard'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

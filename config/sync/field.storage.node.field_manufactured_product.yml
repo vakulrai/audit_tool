@@ -1,4 +1,4 @@
-uuid: 80d3134e-ec59-4698-b8c0-ff249cff393f
+uuid: eb2f7455-7091-45bd-9f8c-5002baa4bb39
 langcode: en
 status: true
 dependencies:
@@ -6,8 +6,8 @@ dependencies:
     - entity_reference_revisions
     - node
     - paragraphs
-id: node.field_add_products
-field_name: field_add_products
+id: node.field_manufactured_product
+field_name: field_manufactured_product
 entity_type: node
 type: entity_reference_revisions
 settings:

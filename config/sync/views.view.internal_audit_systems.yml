@@ -11,12 +11,11 @@ dependencies:
     - field.storage.node.field_file
     - field.storage.node.field_ia_section
     - field.storage.node.field_location
+    - field.storage.node.field_manufactured_product
     - field.storage.node.field_section_type
+    - field.storage.node.field_service_product
     - field.storage.node.field_start_date
-    - field.storage.paragraph.field_manufactured_product
     - field.storage.paragraph.field_number
-    - field.storage.paragraph.field_product_type
-    - field.storage.paragraph.field_service_product
     - node.type.assembly
     - node.type.business_process
     - node.type.customers_manual
@@ -98,11 +97,7 @@ display:
       style:
         type: table
         options:
-          grouping:
-            -
-              field: title
-              rendered: true
-              rendered_strip: false
+          grouping: {  }
           row_class: ''
           default_row_class: true
           override: true
@@ -114,9 +109,9 @@ display:
             counter: counter
             title: title
             field_location: field_location
-            field_product_type: field_product_type
             field_manufactured_product: field_manufactured_product
             field_service_product: field_service_product
+            edit_node: edit_node
           info:
             counter:
               sortable: false
@@ -137,21 +132,17 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_product_type:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
             field_manufactured_product:
-              sortable: false
-              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_service_product:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            edit_node:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -4007,15 +3998,6 @@ display:
           admin_label: 'field_refere: Content'
           required: false
           plugin_id: standard
-        field_add_products:
-          id: field_add_products
-          table: node__field_add_products
-          field: field_add_products
-          relationship: none
-          group_type: group
-          admin_label: 'field_add_products: Paragraph'
-          required: false
-          plugin_id: standard
       defaults:
         relationships: false
         arguments: false
@@ -4298,73 +4280,11 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_product_type:
-          id: field_product_type
-          table: paragraph__field_product_type
-          field: field_product_type
-          relationship: field_add_products
-          group_type: group
-          admin_label: ''
-          label: 'Product Type'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: list_default
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
         field_manufactured_product:
           id: field_manufactured_product
-          table: paragraph__field_manufactured_product
+          table: node__field_manufactured_product
           field: field_manufactured_product
-          relationship: field_add_products
+          relationship: none
           group_type: group
           admin_label: ''
           label: 'Manufactured Product'
@@ -4405,7 +4325,7 @@ display:
           element_wrapper_class: ''
           element_default_classes: true
           empty: N/A
-          hide_empty: true
+          hide_empty: false
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
@@ -4419,15 +4339,15 @@ display:
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
-          multi_type: separator
-          separator: ', '
+          multi_type: ol
+          separator: ''
           field_api_classes: false
           plugin_id: field
         field_service_product:
           id: field_service_product
-          table: paragraph__field_service_product
+          table: node__field_service_product
           field: field_service_product
-          relationship: field_add_products
+          relationship: none
           group_type: group
           admin_label: ''
           label: 'Service Product'
@@ -4467,8 +4387,8 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
-          empty: N/A
-          hide_empty: true
+          empty: ''
+          hide_empty: false
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
@@ -4482,7 +4402,7 @@ display:
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
-          multi_type: separator
+          multi_type: ol
           separator: ', '
           field_api_classes: false
           plugin_id: field
@@ -4551,6 +4471,5 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.field_location'
-        - 'config:field.storage.paragraph.field_manufactured_product'
-        - 'config:field.storage.paragraph.field_product_type'
-        - 'config:field.storage.paragraph.field_service_product'
+        - 'config:field.storage.node.field_manufactured_product'
+        - 'config:field.storage.node.field_service_product'

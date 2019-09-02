@@ -1,0 +1,25 @@
+uuid: 144d8213-4264-429c-8606-89a144ad7166
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.unit_mandays.mandays
+    - field.storage.unit_mandays.field_process_mandays_updated
+id: unit_mandays.mandays.field_process_mandays_updated
+field_name: field_process_mandays_updated
+entity_type: unit_mandays
+bundle: mandays
+label: 'Process mandays updated'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -4,32 +4,23 @@ status: true
 dependencies:
   config:
     - field.field.node.supplier.body
-    - field.field.node.supplier.field_add_products
     - field.field.node.supplier.field_address_url
     - field.field.node.supplier.field_contact_person_name
     - field.field.node.supplier.field_location
+    - field.field.node.supplier.field_manufactured_product
+    - field.field.node.supplier.field_product_type
     - field.field.node.supplier.field_refere
+    - field.field.node.supplier.field_service_product
     - field.field.node.supplier.field_supplier_name
     - node.type.supplier
   module:
+    - conditional_fields
     - paragraphs
 id: node.supplier.default
 targetEntityType: node
 bundle: supplier
 mode: default
 content:
-  field_add_products:
-    type: entity_reference_paragraphs
-    weight: 26
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-    region: content
   field_contact_person_name:
     weight: 1
     settings:
@@ -46,8 +37,44 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_manufactured_product:
+    type: entity_reference_paragraphs
+    weight: 27
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings:
+      conditional_fields:
+        16335742-5c84-4d1a-9db1-2238aad2bc8b:
+          dependee: field_product_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: manufactured
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: supplier
+    region: content
+  field_product_type:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_refere:
-    weight: 6
+    weight: 3
     settings:
       match_operator: CONTAINS
       size: 60
@@ -55,9 +82,39 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_service_product:
+    type: entity_reference_paragraphs
+    weight: 26
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings:
+      conditional_fields:
+        39947be7-7ba6-4eca-ba38-a4c8e923b6cc:
+          dependee: field_product_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: service
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: supplier
+    region: content
   moderation_state:
     type: string_textfield
-    weight: 7
+    weight: 6
     region: content
     settings:
       size: 60

@@ -1,0 +1,20 @@
+uuid: 4d5408d2-daaa-4a23-a2ef-b4d16ba6f7e7
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: unit_mandays.field_product_mandays_standard
+field_name: field_product_mandays_standard
+entity_type: unit_mandays
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

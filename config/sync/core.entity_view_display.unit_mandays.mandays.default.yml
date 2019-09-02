@@ -1,0 +1,81 @@
+uuid: 85ac521e-b986-4abc-91de-76d33d5a9c91
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.unit_mandays.mandays
+    - field.field.unit_mandays.mandays.field_process_mandays_standard
+    - field.field.unit_mandays.mandays.field_process_mandays_updated
+    - field.field.unit_mandays.mandays.field_product_mandays_standard
+    - field.field.unit_mandays.mandays.field_product_mandays_updated
+    - field.field.unit_mandays.mandays.field_system_mandays_standard
+    - field.field.unit_mandays.mandays.field_system_mandays_updated
+    - field.field.unit_mandays.mandays.field_unit_reference
+id: unit_mandays.mandays.default
+targetEntityType: unit_mandays
+bundle: mandays
+mode: default
+content:
+  field_process_mandays_standard:
+    weight: 1
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_process_mandays_updated:
+    weight: 3
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_product_mandays_standard:
+    weight: 2
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_product_mandays_updated:
+    weight: 5
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_system_mandays_standard:
+    weight: 0
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_system_mandays_updated:
+    weight: 4
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_unit_reference:
+    weight: 6
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden: {  }

@@ -1,19 +1,20 @@
-uuid: 2aaf8944-28ae-4fa5-aa76-80371c34025f
+uuid: 391f8aca-d262-4567-809d-44cc27f04918
 langcode: en
 status: true
 dependencies:
   module:
     - entity_reference_revisions
+    - node
     - paragraphs
-id: paragraph.field_service_product
+id: node.field_service_product
 field_name: field_service_product
-entity_type: paragraph
+entity_type: node
 type: entity_reference_revisions
 settings:
   target_type: paragraph
 module: entity_reference_revisions
 locked: false
-cardinality: 1
+cardinality: -1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

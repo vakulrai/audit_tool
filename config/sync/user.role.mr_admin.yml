@@ -64,6 +64,7 @@ permissions:
   - 'create terms in certification_standard'
   - 'create terms in decision'
   - 'create terms in scope'
+  - 'create unit_mandays entities'
   - 'create yes_no_answers content'
   - 'delete any answers content'
   - 'delete any assembly content'

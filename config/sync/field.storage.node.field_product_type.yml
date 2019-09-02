@@ -1,13 +1,13 @@
-uuid: 5d29baf5-cab4-4c26-8ffb-708e6a50673e
+uuid: 384ef08a-333a-42b6-a126-0063e6b2bdf8
 langcode: en
 status: true
 dependencies:
   module:
+    - node
     - options
-    - paragraphs
-id: paragraph.field_product_type
+id: node.field_product_type
 field_name: field_product_type
-entity_type: paragraph
+entity_type: node
 type: list_string
 settings:
   allowed_values:

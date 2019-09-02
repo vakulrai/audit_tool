@@ -1,0 +1,23 @@
+uuid: 9ec9b600-45c2-447e-84ab-3b251adeef5a
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.unit_mandays.mandays
+    - field.storage.unit_mandays.field_product_mandays_standard
+id: unit_mandays.mandays.field_product_mandays_standard
+field_name: field_product_mandays_standard
+entity_type: unit_mandays
+bundle: mandays
+label: 'Product mandays standard'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

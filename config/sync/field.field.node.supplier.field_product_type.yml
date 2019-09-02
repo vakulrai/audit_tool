@@ -1,0 +1,21 @@
+uuid: 22b0b838-d212-4ed8-a90a-e4677e4cddc2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_product_type
+    - node.type.supplier
+  module:
+    - options
+id: node.supplier.field_product_type
+field_name: field_product_type
+entity_type: node
+bundle: supplier
+label: 'Product Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

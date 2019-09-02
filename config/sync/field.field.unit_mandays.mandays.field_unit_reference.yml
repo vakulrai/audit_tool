@@ -1,0 +1,28 @@
+uuid: 31b91eb1-3d8f-40f0-8a7b-ccf47b0d55fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.unit_mandays.mandays
+    - field.storage.unit_mandays.field_unit_reference
+    - node.type.unit
+id: unit_mandays.mandays.field_unit_reference
+field_name: field_unit_reference
+entity_type: unit_mandays
+bundle: mandays
+label: 'Unit Reference'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      unit: unit
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,70 @@
+uuid: 4c73fc05-4c41-4c4f-88d2-c16aaa62f700
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.unit_mandays.mandays
+    - field.field.unit_mandays.mandays.field_process_mandays_standard
+    - field.field.unit_mandays.mandays.field_process_mandays_updated
+    - field.field.unit_mandays.mandays.field_product_mandays_standard
+    - field.field.unit_mandays.mandays.field_product_mandays_updated
+    - field.field.unit_mandays.mandays.field_system_mandays_standard
+    - field.field.unit_mandays.mandays.field_system_mandays_updated
+    - field.field.unit_mandays.mandays.field_unit_reference
+id: unit_mandays.mandays.default
+targetEntityType: unit_mandays
+bundle: mandays
+mode: default
+content:
+  field_process_mandays_standard:
+    weight: 4
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_process_mandays_updated:
+    weight: 6
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_product_mandays_standard:
+    weight: 5
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_product_mandays_updated:
+    weight: 8
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_system_mandays_standard:
+    weight: 3
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_system_mandays_updated:
+    weight: 7
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_unit_reference:
+    weight: 9
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden: {  }

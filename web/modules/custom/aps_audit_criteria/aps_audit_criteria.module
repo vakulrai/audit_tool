@@ -661,31 +661,25 @@ function aps_audit_criteria_field_widget_entity_reference_paragraphs_form_alter(
   }
 
   if ($element['#paragraph_type'] == 'supplier_product_type') {
-    $element['subform']['field_product_type']['widget']['#ajax'] = [
-      'callback' => 'resetFormdata',
-      'event' => 'change',
-    ];
-    $element['subform']['field_manufactured_product']['widget'][0]['subform']['field_manufactured_product_id']['#attributes'] = ['id' => ['manufactured'.$element['#delta']]];
-    $element['subform']['field_manufactured_product']['widget'][0]['subform']['field_manufactured_product_name']['#attributes'] = ['id' => ['product'.$element['#delta']]];
-    $element['subform']['field_service_product']['widget'][0]['subform']['field_service_part_name']['#attributes'] = ['id' => ['service-name'.$element['#delta']]];
+    // $element['subform']['field_product_type']['widget']['#ajax'] = [
+    //   'callback' => 'resetFormdata',
+    //   'event' => 'change',
+    // ];
+    // $element['subform']['field_manufactured_product']['widget'][0]['subform']['field_manufactured_product_id']['#attributes'] = ['id' => ['manufactured'.$element['#delta']]];
+    // $element['subform']['field_manufactured_product']['widget'][0]['subform']['field_manufactured_product_name']['#attributes'] = ['id' => ['product'.$element['#delta']]];
+    // $element['subform']['field_service_product']['widget'][0]['subform']['field_service_part_name']['#attributes'] = ['id' => ['service-name'.$element['#delta']]];
 
-    $element['subform']['field_manufactured_product']['#states'] = [
-      'visible' => [
-        'select[name="field_add_products['.$element['#delta'].'][subform][field_product_type]"]' => ['value' => 'manufactured'],
-      ],
-      'disabled' => [
-        'select[name="field_add_products['.$element['#delta'].'][subform][field_product_type]"]' => ['value' => 'service'],
-      ],
-    ];
+    // $element['subform']['field_manufactured_product']['#states'] = [
+    //   'visible' => [
+    //     'select[name="field_product_type"]' => ['value' => 'manufactured'],
+    //   ]
+    // ];
 
-    $element['subform']['field_service_product']['#states'] = [
-      'visible' => [
-        'select[name="field_add_products['.$element['#delta'].'][subform][field_product_type]"]' => ['value' => 'service'],
-      ],
-      'disabled' => [
-        'select[name="field_add_products['.$element['#delta'].'][subform][field_product_type]"]' => ['value' => 'manufactured'],
-      ],
-    ];
+    // $element['subform']['field_service_product']['#states'] = [
+    //   'visible' => [
+    //     'select[name="field_product_type"]' => ['value' => 'service'],
+    //   ]
+    // ];
   }
   
   if ($element['#paragraph_type'] == 'business_process_effectiveness' || $element['#paragraph_type'] == 'business_process_effieciency') {
@@ -693,21 +687,21 @@ function aps_audit_criteria_field_widget_entity_reference_paragraphs_form_alter(
   }
 }
 
-function resetFormdata(&$element, &$form_state, $context){
-  $ajax_response = new AjaxResponse();
-  $form_values = $form_state->getUserInput();
-  foreach ($form_values['field_add_products'] as $i => $j) {
-    if($form_values['field_add_products'][$i]['subform']['field_product_type'] == 'service'){
-      $ajax_response->addCommand(new InvokeCommand('#manufactured'.$i.' input', 'val' , ['']));
-      $ajax_response->addCommand(new InvokeCommand('#product'.$i.' input', 'val' , ['']));
-    }
-    elseif ($form_values['field_add_products'][$i]['subform']['field_product_type'] == 'manufactured') {
-      $ajax_response->addCommand(new InvokeCommand('#service-name'.$i.' input', 'val' , ['']));
-    }
+// function resetFormdata(&$element, &$form_state, $context){
+//   $ajax_response = new AjaxResponse();
+//   $form_values = $form_state->getUserInput();
+//   foreach ($form_values['field_add_products'] as $i => $j) {
+//     if($form_values['field_add_products'][$i]['subform']['field_product_type'] == 'service'){
+//       $ajax_response->addCommand(new InvokeCommand('#manufactured'.$i.' input', 'val' , ['']));
+//       $ajax_response->addCommand(new InvokeCommand('#product'.$i.' input', 'val' , ['']));
+//     }
+//     elseif ($form_values['field_add_products'][$i]['subform']['field_product_type'] == 'manufactured') {
+//       $ajax_response->addCommand(new InvokeCommand('#service-name'.$i.' input', 'val' , ['']));
+//     }
 
-  }
-  return $ajax_response;
-}
+//   }
+//   return $ajax_response;
+// }
 
 /**
  * Callback to get terms.

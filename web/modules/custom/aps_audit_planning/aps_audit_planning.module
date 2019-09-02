@@ -632,12 +632,16 @@ function getMRlist($select_value){
 }
 
 function releaseAuditCallback(&$form, \Drupal\Core\Form\FormStateInterface &$form_state){
+  $unit_reference = \Drupal::request()->query->get('unit_reference');
   $form_input_values = $form_state->getUserInput();
   $response = new AjaxResponse();
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $uri = explode('/', $current_uri);
-  $config_factory = \Drupal::configFactory();
-  $config = $config_factory->getEditable('aps_audit_planning.mandaysettings');
+  $mandays_settings = \Drupal::entityQuery('unit_mandays');
+  $mandays_settings->condition('field_unit_reference', $unit_reference);
+  $mandays_settings_id = $mandays_settings->execute();
+  $node_storage = \Drupal::entityManager()->getStorage('unit_mandays');
+  $config = $node_storage->load(key($mandays_settings_id));
   $field_start_date = timestampFromDate($form_input_values['field_start_date'][0]['value']['date']);
   $field_end_date = timestampFromDate($form_input_values['field_end_date'][0]['value']['date']);
   if($uri[1]){
@@ -652,14 +656,14 @@ function releaseAuditCallback(&$form, \Drupal\Core\Form\FormStateInterface &$for
     $years = floor($date_difference / (365*60*60*24));
     $months = floor(($date_difference - $years * 365*60*60*24) / (30*60*60*24));
     $total_mandays = floor(($date_difference - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24)); 
-    $get_system_mandays_from_unit = $config->get('system_mandays_updated', $total_system_mandays);
+    $get_system_mandays_from_unit = $config->get('field_system_mandays_updated')->value;
     if($get_system_mandays_from_unit >= $total_mandays ){
       $node_object->set('field_total_mandays', $total_mandays);
-      $config->set('system_mandays_updated',  $get_system_mandays_from_unit - $total_mandays);
+      $config->set('field_system_mandays_updated',  $get_system_mandays_from_unit - $total_mandays);
     }
     else{
       $node_object->set('field_total_mandays', 0);
-      $config->set('system_mandays_updated', 0);
+      $config->set('field_system_mandays_updated', 0);
     }
   }
   elseif ($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'process') {
@@ -667,10 +671,10 @@ function releaseAuditCallback(&$form, \Drupal\Core\Form\FormStateInterface &$for
     $get_total_process_assembly = count(getAuditOPtions('process','/rest-export-system/'.$unit_reference.'?type[]=assembly'));
     $get_total_process_manufacturing = count(getAuditOPtions('process','/rest-export-system/'.$unit_reference.'?type[]=manufacturing_process'));
     $total_process_mandays = getMandaysFromAuditType('process', $get_total_process_manufacturing, $get_total_process_assembly, NULL);
-    $config->set('process_mandays_standard', $total_process_mandays);
-    $config->set('process_mandays_updated', $total_process_mandays);
-    $get_process_mandays_standard = $config->get('process_mandays_updated');
-    $config->set('system_mandays_updated', $get_process_mandays_standard - $total_process_mandays);
+    $config->set('field_process_mandays_standard', $total_process_mandays);
+    $config->set('field_process_mandays_updated', $total_process_mandays);
+    $get_process_mandays_standard = $config->get('field_process_mandays_updated');
+    $config->set('field_process_mandays_updated', $get_process_mandays_standard - $total_mandays);
   }
   elseif ($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'product') {
     $unit_reference = $node_object->field_refere->target_id;
@@ -680,10 +684,10 @@ function releaseAuditCallback(&$form, \Drupal\Core\Form\FormStateInterface &$for
     $nids = $query->execute()->fetchAll();
     $get_total_product = count($nids);
     $total_product_mandays = getMandaysFromAuditType('product', $get_total_product, NULL, NULL);
-    $config->set('product_mandays_standard', $total_product_mandays);
-    $config->set('product_mandays_updated', $total_product_mandays);
-    $get_product_mandays_standard = $config->get('product_mandays_updated');
-    $config->set('product_mandays_updated', $get_product_mandays_standard - $total_process_mandays);
+    $config->set('field_product_mandays_standard', $total_product_mandays);
+    $config->set('field_product_mandays_updated', $total_product_mandays);
+    $get_product_mandays_standard = $config->get('field_product_mandays_updated');
+    $config->set('field_product_mandays_updated', $get_product_mandays_standard - $total_mandays);
   }
   $config->save();
   $node_object->save();

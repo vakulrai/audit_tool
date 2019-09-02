@@ -128,6 +128,11 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     if($user_role == 'mr_admin'){
       $form['field_deputy_mr']['#access'] = FALSE;
     }
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'aps_general_unit_edit_page_redirect';
+      }
+    }
   }
 
   //Condition for Procedure Add form
@@ -557,6 +562,11 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $form['field_location']['widget']['add_more']['#value'] = new TranslatableMarkup("@type", array(
        '@type' => 'Add Locations',
     ));
+
+    // $form['field_product_type']['widget']['#ajax'] = [
+    //   'callback' => 'resetFormdata',
+    //   'event' => 'change',
+    // ];
     
     // $form['field_manufactured_products']['#states'] = [
     //   'visible' => [
@@ -611,6 +621,26 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $form['field_unit_reference']['#access'] = FALSE;
   }
 }
+
+/**
+ * Callback to reset Supplier form.
+ */
+function resetFormdata(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $ajax_response = new AjaxResponse();
+  $form_values = $form_state->getUserInput();
+  foreach ($form_values['field_add_products'] as $i => $j) {
+    if($form_values['field_add_products'][$i]['subform']['field_product_type'] == 'service'){
+      $ajax_response->addCommand(new InvokeCommand('#manufactured'.$i.' input', 'val' , ['']));
+      $ajax_response->addCommand(new InvokeCommand('#product'.$i.' input', 'val' , ['']));
+    }
+    elseif ($form_values['field_add_products'][$i]['subform']['field_product_type'] == 'manufactured') {
+      $ajax_response->addCommand(new InvokeCommand('#service-name'.$i.' input', 'val' , ['']));
+    }
+
+  }
+  return $ajax_response;
+}
+
 /**
  * Implements  hook_entity_insert().
  */
@@ -1866,6 +1896,7 @@ function aps_general_link_alter(&$variables) {
     $id = $uri[1];
     if($id){
       $url = Url::fromRoute('entity.node.edit_form',['node' => $id]);
+      $url->setRouteParameter('destination', $current_uri);
       unset($variables['url']);
       $variables['url'] = $url;
     }
@@ -1885,6 +1916,7 @@ function test(){
  * Callback method after unit form submits.
  */
 function aps_general_unit_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $manday_data = [];
   $form_values = $form_state->getValues();
   $field_sales_turnover = $form_values['field_sales_turnover'][0]['value'];
   $field_total_members = $form_values['field_total_members'][0]['value'];
@@ -1901,17 +1933,41 @@ function aps_general_unit_page_redirect(array $form, \Drupal\Core\Form\FormState
   $config = $config_factory->getEditable('aps_audit_planning.mandaysettings.yml');
   $config->set('system_mandays_standard', $total_system_mandays);
   $config->set('system_mandays_updated', $total_system_mandays);
-
-  // $unit_data = [
-  //   $node->id() => ['system_mandays_standard' => 0, 'process_mandays_standard' => 0, 'product_mandays_standard' => 0, 'system_mandays_updated' => 0, 'process_mandays_updated' => 0, 'product_mandays_updated' => 0],
-  // ];
-
-  // $yaml = Yaml::dump($unit_data);
-
-  // file_put_contents('/path/to/file.yaml', $yaml);
   $config->save(TRUE);
 
   $form_state->setRedirectUrl($response);
+}
+
+/**
+ * Callback method after unit Edit form submits.
+ */
+function aps_general_unit_edit_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $manday_data = [];
+  $form_values = $form_state->getValues();
+  $nid = $form_values['nid'];
+  $field_sales_turnover = $form_values['field_sales_turnover'][0]['value'];
+  $field_total_members = $form_values['field_total_members'][0]['value'];
+  $field_contributed_sales = $form_values['field_contributed_sales'][0]['value'];
+  $total_system_mandays = getMandaysFromAuditType('systems', $field_sales_turnover, $field_total_members, $field_contributed_sales);
+
+  //Check entity already exist or not.
+  $mandays_settings = \Drupal::entityQuery('unit_mandays');
+  $mandays_settings->condition('field_unit_reference', $nid);
+  $mandays_settings_id = $mandays_settings->execute();
+
+  //Save Mandays settings in "manday" entity.
+  if(count($mandays_settings_id) == 0){
+    $manday_data['field_system_mandays_updated'] = $total_system_mandays;
+    $manday_data['field_system_mandays_standard'] = $total_system_mandays;
+    $manday_data['field_process_mandays_standard'] = 0;
+    $manday_data['field_process_mandays_updated'] = 0;
+    $manday_data['field_product_mandays_standard'] = 0;
+    $manday_data['field_product_mandays_updated'] = 0;
+    $manday_data['field_unit_reference'] = $nid;
+    $manday_data['type'] = 'mandays';
+    $save_submission = entity_create('unit_mandays', $manday_data);
+    $save_submission->save();
+  }
 }
 
 /**

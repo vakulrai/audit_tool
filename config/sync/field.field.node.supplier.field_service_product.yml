@@ -1,18 +1,18 @@
-uuid: 722c6a25-b5d5-4bd6-a2af-bc6d7d371abc
+uuid: d343a9ec-b51d-495c-91f7-69ce4f879b49
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_add_products
+    - field.storage.node.field_service_product
     - node.type.supplier
-    - paragraphs.paragraphs_type.supplier_product_type
+    - paragraphs.paragraphs_type.supplier_service_product
   module:
     - entity_reference_revisions
-id: node.supplier.field_add_products
-field_name: field_add_products
+id: node.supplier.field_service_product
+field_name: field_service_product
 entity_type: node
 bundle: supplier
-label: 'Add Products'
+label: 'Service Product'
 description: ''
 required: false
 translatable: false
@@ -23,8 +23,11 @@ settings:
   handler_settings:
     negate: 0
     target_bundles:
-      supplier_product_type: supplier_product_type
+      supplier_service_product: supplier_service_product
     target_bundles_drag_drop:
+      auditor_functional_details:
+        weight: 21
+        enabled: false
       audit_cycle_other:
         weight: 22
         enabled: false
@@ -40,52 +43,46 @@ settings:
       audit_score_settings_range_100:
         weight: 26
         enabled: false
-      auditor_functional_details:
+      business_process_effectiveness:
         weight: 27
         enabled: false
-      business_process_effectiveness:
+      business_process_effieciency:
         weight: 28
         enabled: false
-      business_process_effieciency:
+      corrective_action:
         weight: 29
         enabled: false
-      corrective_action:
+      customer_audit:
         weight: 30
         enabled: false
-      customer_audit:
+      customer_manual_parts:
         weight: 31
         enabled: false
-      customer_manual_parts:
+      holidays:
         weight: 32
         enabled: false
-      holidays:
+      internal_audit_qa:
         weight: 33
         enabled: false
-      internal_audit_qa:
+      interrim_action:
         weight: 34
         enabled: false
-      interrim_action:
+      new_answer:
         weight: 35
         enabled: false
-      new_answer:
+      new_sub_question_yes_no:
         weight: 36
         enabled: false
-      new_sub_question_yes_no:
+      procedures:
         weight: 37
         enabled: false
-      procedures:
+      report_reason:
         weight: 38
         enabled: false
-      report_reason:
+      supplier_manufactured_product:
         weight: 39
         enabled: false
-      supplier_manufactured_product:
-        weight: 40
-        enabled: false
-      supplier_product_type:
-        enabled: true
-        weight: 41
       supplier_service_product:
-        weight: 42
-        enabled: false
+        enabled: true
+        weight: 40
 field_type: entity_reference_revisions

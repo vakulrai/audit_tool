@@ -1,0 +1,25 @@
+uuid: cd74793a-4fb1-4235-8368-cc1ce298b819
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.unit_mandays.mandays
+    - field.storage.unit_mandays.field_system_mandays_standard
+id: unit_mandays.mandays.field_system_mandays_standard
+field_name: field_system_mandays_standard
+entity_type: unit_mandays
+bundle: mandays
+label: 'System mandays standard'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

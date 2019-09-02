@@ -1,0 +1,25 @@
+uuid: c0ccbe02-e5c7-4bdd-88bf-5adca3b0efd3
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.unit_mandays.mandays
+    - field.storage.unit_mandays.field_system_mandays_updated
+id: unit_mandays.mandays.field_system_mandays_updated
+field_name: field_system_mandays_updated
+entity_type: unit_mandays
+bundle: mandays
+label: 'System mandays updated'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

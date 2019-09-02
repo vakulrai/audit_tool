@@ -1,0 +1,9 @@
+uuid: 15356fc5-0aca-4330-8191-e7b1b537a603
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.unit_mandays
+name: mandays
+type: mandays
+description: 'Mandays calculations for planning'
