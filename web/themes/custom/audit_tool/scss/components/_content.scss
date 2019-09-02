@@ -28,10 +28,25 @@
             color: #657D89;
             font-size: 14px;
             border-bottom: 1px solid #F2F2F2;
+            .sf-sub-indicator{
+              &:after{
+                font-size: 11px;
+              }
+            }
+          }
+          ul{
+            background: #FAFAFA ;
+            font-size: 14px;
+            left: 14em;
+            a{
+              color: #657D89;
+              text-transform: capitalize;
+            }
           }
         }
       }
     }
+
   }
 }
 
