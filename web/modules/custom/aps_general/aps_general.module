@@ -1807,7 +1807,7 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
-  if ($cleanLinkText == 'Add Holidays') {
+  if ($cleanLinkText == 'Add/Edit Holidays') {
     $id = $uri[1];
     if($id){
       $query = \Drupal::database()->select('holidays__field_unit_reference', 'h');

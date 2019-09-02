@@ -1,34 +1,29 @@
-uuid: 9fc546e1-a17d-4d51-ac99-ba10673d4bf0
+uuid: 498debd0-3b5f-4ed3-87f8-1b704332688b
 langcode: en
-status: false
+status: true
 dependencies:
   config:
-    - system.menu.admin-sub-menu
+    - system.menu.add-sections
   module:
     - system
     - user
   theme:
     - audit_tool
-id: adminsubmenu_4
+id: addsections
 theme: audit_tool
 region: sidebar_first
 weight: 0
 provider: null
-plugin: 'system_menu_block:admin-sub-menu'
+plugin: 'system_menu_block:add-sections'
 settings:
-  id: 'system_menu_block:admin-sub-menu'
-  label: 'Admin Sub Menu'
+  id: 'system_menu_block:add-sections'
+  label: 'Add Sections'
   provider: system
   label_display: '0'
   level: 1
   depth: 0
   expand_all_items: false
 visibility:
-  request_path:
-    id: request_path
-    pages: '/unit-registration-view/*'
-    negate: false
-    context_mapping: {  }
   user_role:
     id: user_role
     roles:
@@ -36,3 +31,8 @@ visibility:
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'
+  request_path:
+    id: request_path
+    pages: '/section-listing-all/*'
+    negate: false
+    context_mapping: {  }
