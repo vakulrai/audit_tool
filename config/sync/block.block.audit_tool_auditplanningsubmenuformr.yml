@@ -13,7 +13,7 @@ dependencies:
 id: audit_tool_auditplanningsubmenuformr
 theme: audit_tool
 region: sidebar_first
-weight: -20
+weight: -25
 provider: null
 plugin: 'superfish:audit-planning-sub-menu'
 settings:

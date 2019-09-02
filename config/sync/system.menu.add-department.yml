@@ -1,8 +1,0 @@
-uuid: ef5c0e17-d7d3-4a72-9622-1aef1aa18c14
-langcode: en
-status: true
-dependencies: {  }
-id: add-department
-label: 'Add Department'
-description: ''
-locked: false

@@ -1,40 +1,79 @@
-#page {
-  > header {
-    background: $white;
-    box-shadow: 0 0 5px #ccc;
-    margin-bottom: 10px;
+.header {
+  box-shadow: 0px 0px 9px #00000017;
+  .user-login-header {
+    width: 100%;
+    margin: 0;
 
-    #navbar-main {
-      max-width: 1360px;
-      margin: 0 auto;
-      background: $white;
+    .menu--account {
+      width: 100%;
+      max-height: 30px;
+      background-color: #FADB23;
 
-      .main-navigation-menu {
-        ul {
-          li {
-            a {
-              font-size: 16px;
-              font-weight: 600;
-              line-height: 19px;
+      .nav {
+        font-size: 12px;
+
+        .nav-link {
+          color: #657D89;
+          font-weight: bold;
+          position: relative;
+
+          &:nth-child(2) {
+            &:after {
+              content: " ";
+              background-image: url("/themes/custom/audit_tool/images/logout-icon.svg");
+              position: absolute;
+              width: 100px;
+              height: 100px;
+              background-repeat: no-repeat;
+              margin: 0px 5px;
             }
           }
         }
       }
-    }
 
-    #navbar-top {
-      background: $yellow-color;
-      padding: 0px;
+      .user-header-text {
+        width: 80%;
+    text-transform: uppercase;
+    float: left;
+    font-weight: 500;
+    padding: 8px 96px 0;
+    font-size: 12px;
+    color: #657D89;
+      }
     }
-    .menu--account {
-      width: 100%;
-      .account-menu {
-        float: right;
-        margin-bottom: 0px;
-        a {
-          display: inline-block;
+    .navbar-brand{
+      width: 118.97px;
+      height: 50px;
+    }
+    .site-branding-logo{
+      width: 18%;
+    float: left;
+    padding: 10px 0px 10px 103px;
+    }
+    #block-adminmainmenudeputy{
+      width: 53%;
+      padding: 15px 0px;
+    #superfish-admin-main-menu-deputy{
+      .sf-depth-1{
+        color:#657D89;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      li:nth-child(2){
+        right: 0px;
+        background-image: url("/themes/custom/audit_tool/images/notitification-icon.svg");
+        position: absolute;
+        background-repeat: no-repeat;
+        margin: 12px 73px;
+        .material-icons{
+          display: none;
         }
       }
     }
+    }
+  }
+
+  .navbar {
+    padding: 0;
   }
 }

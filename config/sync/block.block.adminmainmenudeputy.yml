@@ -16,7 +16,7 @@ third_party_settings:
 id: adminmainmenudeputy
 theme: audit_tool
 region: top_header
-weight: 0
+weight: -31
 provider: null
 plugin: 'superfish:admin-main-menu-deputy'
 settings:

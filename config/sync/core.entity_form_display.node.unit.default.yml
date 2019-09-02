@@ -28,7 +28,6 @@ dependencies:
     - conditional_fields
     - content_moderation
     - field_group
-    - limited_field_widgets
     - time_range
 third_party_settings:
   field_group:
@@ -86,11 +85,9 @@ content:
   field_months_for_the_audit:
     weight: 11
     settings:
-      size: '60'
+      size: 60
       placeholder: ''
-    third_party_settings:
-      limited_field_widgets:
-        limit_values: '12'
+    third_party_settings: {  }
     type: month_only_widget
     region: content
   field_remote_address:
