@@ -12,7 +12,7 @@ dependencies:
 id: adminmainmenu_6
 theme: audit_tool
 region: top_header
-weight: -30
+weight: -27
 provider: null
 plugin: 'system_menu_block:admin-main-menu'
 settings:

@@ -16,7 +16,7 @@ third_party_settings:
 id: audit_tool_adminmainmenuforauditor
 theme: audit_tool
 region: top_header
-weight: -27
+weight: -28
 provider: null
 plugin: 'superfish:admin-main-menu-for-auditor'
 settings:
