@@ -1250,6 +1250,42 @@ taxonomies:
       uuid: 61dd72da-b5a6-4226-b6d4-7abb5344b835
 menus:
   -
+    menu_name: add-sections
+    title: 'Add Section'
+    parent: null
+    uri: 'internal:/node/add/section'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '0'
+    langcode: en
+    uuid: 8d27ab91-fe4e-407a-bdfc-b34c9a079bed
+  -
+    menu_name: add-bu
+    title: 'Add Business Process'
+    parent: null
+    uri: 'internal:/node/add/business_process'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '0'
+    langcode: en
+    uuid: 5f1dc837-b0a0-4028-ad93-8fb38782c55a
+  -
+    menu_name: add-de
+    title: 'Add Department'
+    parent: null
+    uri: 'internal:/node/add/department'
+    link_title: ''
+    description: null
+    enabled: '1'
+    expanded: '0'
+    weight: '0'
+    langcode: en
+    uuid: e985588b-7a99-4d59-a9a9-444180e90cb6
+  -
     menu_name: admin-main-menu-deputy
     title: Notification
     parent: null
@@ -1287,7 +1323,7 @@ menus:
     uuid: cbb8fcc8-2a28-4ade-bd25-9ebbaa6b23c2
   -
     menu_name: add-holidays
-    title: 'Add Holidays'
+    title: 'Add/Edit Holidays'
     parent: null
     uri: 'internal:/admin/content/holidays/add/holidays'
     link_title: ''
@@ -1618,7 +1654,7 @@ menus:
     description: null
     enabled: '1'
     expanded: '1'
-    weight: '-49'
+    weight: '-47'
     langcode: en
     uuid: 30b3f803-be41-4d87-9ca7-2cbae4adea43
   -
@@ -1652,9 +1688,9 @@ menus:
     uri: 'internal:/procedure-listing'
     link_title: ''
     description: null
-    enabled: '1'
+    enabled: '0'
     expanded: '0'
-    weight: '-45'
+    weight: '-49'
     langcode: en
     uuid: c0645561-66fb-4ff1-8800-a9a41e5015c0
   -
@@ -1666,7 +1702,7 @@ menus:
     description: null
     enabled: '1'
     expanded: '0'
-    weight: '-50'
+    weight: '-49'
     langcode: en
     uuid: 567d25ef-303b-4e03-94c1-1404d89381c1
   -
@@ -1678,7 +1714,7 @@ menus:
     description: null
     enabled: '1'
     expanded: '0'
-    weight: '-49'
+    weight: '-48'
     langcode: en
     uuid: 88993e2a-8212-422a-8190-d52bb62d20b2
   -
@@ -1798,7 +1834,7 @@ menus:
     description: null
     enabled: '0'
     expanded: '0'
-    weight: '-47'
+    weight: '-45'
     langcode: en
     uuid: 48a2faf6-7ce2-4fdf-81ff-1a4c04a5e590
   -
@@ -1822,7 +1858,7 @@ menus:
     description: null
     enabled: '1'
     expanded: '0'
-    weight: '-48'
+    weight: '-46'
     langcode: en
     uuid: 08fc58c9-6a93-4b24-9f32-6f664495cd3b
   -
@@ -1839,7 +1875,7 @@ menus:
     uuid: 3313f226-01e2-446d-af83-12d2838bc963
   -
     menu_name: admin-sub-menu
-    title: 'Create Business Process'
+    title: 'Business Process'
     parent: 'menu_link_content:38545cab-ef9a-4810-8bd4-a6decea18410'
     uri: 'internal:/node/add/business_process'
     link_title: ''
@@ -1851,7 +1887,7 @@ menus:
     uuid: 25bd9267-9eac-465b-8495-fc38694963fb
   -
     menu_name: admin-sub-menu
-    title: 'Create Department'
+    title: Department
     parent: 'menu_link_content:38545cab-ef9a-4810-8bd4-a6decea18410'
     uri: 'internal:/node/add/department'
     link_title: ''
@@ -1863,7 +1899,7 @@ menus:
     uuid: ec98a70a-8308-471e-ae22-24753009c6f7
   -
     menu_name: admin-sub-menu
-    title: 'Create Section'
+    title: Section
     parent: 'menu_link_content:38545cab-ef9a-4810-8bd4-a6decea18410'
     uri: 'internal:/node/add/section'
     link_title: ''
@@ -1888,7 +1924,7 @@ menus:
   -
     menu_name: admin-sub-menu
     title: 'Unit Settings'
-    parent: 'menu_link_content:c0645561-66fb-4ff1-8800-a9a41e5015c0'
+    parent: 'menu_link_content:efc675fe-2723-4df0-bb76-246ef34007cd'
     uri: 'internal:/'
     link_title: ''
     description: null
@@ -1940,7 +1976,7 @@ menus:
     uri: 'internal:/home'
     link_title: ''
     description: null
-    enabled: '0'
+    enabled: '1'
     expanded: '1'
     weight: '-50'
     langcode: en
@@ -1976,7 +2012,7 @@ menus:
     uri: 'internal:/admin/people/create?type=mr'
     link_title: ''
     description: null
-    enabled: '1'
+    enabled: '0'
     expanded: '0'
     weight: '-49'
     langcode: en
