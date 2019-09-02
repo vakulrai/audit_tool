@@ -15,6 +15,14 @@ aps_audit_planning.audit_planning_get_scheduled_events:
   requirements:
     _access: 'TRUE'
 
+aps_audit_planning.audit_planning_get_unit_pressure_months:
+  path: '/get-pressure-months/{unit_reference}'
+  defaults:
+    _controller: '\Drupal\aps_audit_planning\Controller\AuditPlanningController::getPressureMonths'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'
+
 aps_audit_planning.title_list:
   path: '/get-title'
   defaults:

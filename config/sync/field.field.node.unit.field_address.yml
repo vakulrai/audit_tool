@@ -19,8 +19,8 @@ default_value:
   -
     langcode: ''
     country_code: IN
-    administrative_area: ''
-    locality: null
+    administrative_area: null
+    locality: ''
     dependent_locality: null
     postal_code: null
     sorting_code: null
@@ -32,8 +32,7 @@ default_value:
     family_name: null
 default_value_callback: ''
 settings:
-  available_countries:
-    IN: IN
+  available_countries: {  }
   langcode_override: ''
   field_overrides:
     givenName:

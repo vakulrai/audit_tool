@@ -1,5 +1,6 @@
 aps_audit_planning_js:
   js:
+    js/tooltip.min.js: {}
     js/fullcalendar/packages/core/main.js: {}
     js/fullcalendar/packages/interaction/main.js: {}
     js/fullcalendar/packages/daygrid/main.js: {}

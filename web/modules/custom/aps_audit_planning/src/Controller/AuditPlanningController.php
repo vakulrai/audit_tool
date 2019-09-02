@@ -58,7 +58,29 @@ class AuditPlanningController extends ControllerBase {
     return new JsonResponse( $response );
   }
 
-   public function generateEvents(Request $request, $unit_reference) {
+  public function getPressureMonths(Request $request, $unit_reference) {
+    if($unit_reference){
+      $unit_object = Node::load($unit_reference);
+      $first_last_date_monthly = [];
+      $i = 0;
+      foreach ($unit_object->field_months_for_the_audit->getValue() as $key => $value) {
+        $num_padded = sprintf("%02d", $value['value']);
+        $format_for_first_day = 'Y-'. $num_padded . '-01';
+        $format_for_last_day = 'Y-'.$num_padded.'-t';
+        $first_last_date_monthly[$i]['id'] = $num_padded;
+        $first_last_date_monthly[$i]['start'] = date($format_for_first_day);
+        $first_last_date_monthly[$i]['end'] = date($format_for_last_day);
+        $first_last_date_monthly[$i]['rendering'] = 'background';
+        $first_last_date_monthly[$i]['color'] = '#7048e8';
+        $first_last_date_monthly[$i]['description'] = 'Pressure Months';
+        $i++;
+      }
+      $data  = $first_last_date_monthly;
+      return new JsonResponse($data);
+    }
+  }
+
+  public function generateEvents(Request $request, $unit_reference) {
     $query = \Drupal::database()->select('node_field_data', 'n');
     $query->join('node__field_start_date', 'st', 'n.nid = st.entity_id');
     $query->join('node__field_end_date', 'ed', 'st.entity_id = ed.entity_id');
@@ -77,7 +99,7 @@ class AuditPlanningController extends ControllerBase {
       $list[$key]['start'] = date('Y-m-d h:m:i', $value->field_start_date_value);
       $list[$key]['end'] = date('Y-m-d h:m:i', $value->field_end_date_value);
       $list[$key]['url'] = '/node/'.$value->nid.'/edit?unit_reference='.$unit_reference;
-      $list[$key]['color'] = 'pink';
+      $list[$key]['color'] = '#4dabf7';
       $list[$key]['textColor'] = 'black';
     }
     $data  = $list;

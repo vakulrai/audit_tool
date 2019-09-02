@@ -26,14 +26,13 @@ default_value:
     sorting_code: null
     address_line1: ''
     address_line2: ''
-    organization: null
+    organization: ''
     given_name: null
     additional_name: null
     family_name: null
 default_value_callback: ''
 settings:
-  available_countries:
-    IN: IN
+  available_countries: {  }
   langcode_override: ''
   field_overrides:
     givenName:
