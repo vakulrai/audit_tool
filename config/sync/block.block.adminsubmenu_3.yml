@@ -1,6 +1,6 @@
-uuid: a621e9fb-88e1-44a5-bc44-a47d23f48789
+uuid: 106bc72c-6b19-436c-9ce8-8ddb03f1d52c
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.admin-sub-menu
@@ -10,10 +10,10 @@ dependencies:
     - user
   theme:
     - audit_tool
-id: audit_tool_adminsubmenu
+id: adminsubmenu_3
 theme: audit_tool
 region: sidebar_first
-weight: -30
+weight: 0
 provider: null
 plugin: 'superfish:admin-sub-menu'
 settings:
@@ -24,17 +24,17 @@ settings:
   level: '1'
   depth: '0'
   expand_all_items: false
-  menu_type: vertical
-  style: white
+  menu_type: horizontal
+  style: none
   arrow: 1
   shadow: 1
   speed: fast
   delay: '800'
-  slide: horizontal
+  slide: vertical
   supposition: 1
   hoverintent: 1
   touch: '0'
-  touchbh: '0'
+  touchbh: '2'
   touchbp: '768'
   touchua: '0'
   touchual: ''
@@ -71,6 +71,11 @@ settings:
   custom_item_class: ''
   custom_link_class: ''
 visibility:
+  request_path:
+    id: request_path
+    pages: '/unit-registration-view/*'
+    negate: false
+    context_mapping: {  }
   user_role:
     id: user_role
     roles:
@@ -78,8 +83,3 @@ visibility:
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'
-  request_path:
-    id: request_path
-    pages: '/unit-registration-view/*'
-    negate: false
-    context_mapping: {  }

@@ -113,24 +113,24 @@
 {% endblock %}
 
 {% block content %}
-        <div id="main" class="{{ container }}">
+        <div id="main" class="{{ container }} audit-dashboard">
           {{ page.breadcrumb }}
-          <div class="row row-offcanvas row-offcanvas-left clearfix">
+          <div class="row audit-dashboard-page">
             {% if page.sidebar_first %}
-              <div{{ sidebar_first_attributes }}>
-                <aside class="section" role="complementary">
+              <div class="col-md-2 sidebar_first">
+                <aside role="complementary">
                   {{ page.sidebar_first }}
                 </aside>
               </div>
             {% endif %}
-              <main{{ content_attributes }}>
-                <section class="section">
-                  <a id="main-content" tabindex="-1"></a>
-                  {{ page.content }}
-                </section>
-              </main>
+            <main class="col-md-7">
+              <section class="section">
+                <a id="main-content" tabindex="-1"></a>
+                {{ page.content }}
+              </section>
+            </main>
             {% if page.sidebar_second %}
-              <div{{ sidebar_second_attributes }}>
+              <div class="col-md-3 sidebar_second">
                 <aside class="section" role="complementary">
                   {{ page.sidebar_second }}
                 </aside>

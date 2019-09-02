@@ -2,12 +2,9 @@ uuid: 568ebbba-4698-4453-8c2d-309c3e070403
 langcode: en
 status: true
 dependencies:
-  config:
-    - views.view.internal_audit_systems
   module:
     - node
     - user
-    - views
   theme:
     - bootstrap_barrio_subtheme
 id: bootstrap_barrio_subtheme_views_block__internal_audit_systems_block_1

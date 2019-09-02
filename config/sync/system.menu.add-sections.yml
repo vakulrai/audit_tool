@@ -1,8 +1,0 @@
-uuid: 0cca45a8-1a1b-4d5d-ba86-eea94cc9ae88
-langcode: en
-status: true
-dependencies: {  }
-id: add-sections
-label: 'Add Sections'
-description: ''
-locked: false

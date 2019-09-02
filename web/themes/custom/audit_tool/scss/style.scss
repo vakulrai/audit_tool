@@ -1,31 +1,17 @@
 // Tools
 // @import 'tools/';
-@import 'tools/mixins';
-@import 'tools/variables';
-
 // Elements
 // @import 'elements/';
-@import 'elements/fonts';
-@import 'elements/headings';
-
 // Settings
 // @import 'settings/';
-@import 'settings/globals';
-
 // Objects
 // @import 'objects/';
-@import 'objects/wrappers';
-
 // Components
 // @import 'components/';
 @import 'components/header';
-@import 'components/footer';
-@import 'components/sidebar';
-@import 'components/main-content';
-
-
+@import 'components/content';
+@import 'components/page';
 // Generic
 // @import 'generic/';
-
 // Utilities
 // @import 'utilities/';

@@ -1,39 +1,40 @@
-uuid: a404de88-fd01-45e3-809f-df6cbc2539cb
+uuid: 00ddd5fd-7e10-41f5-803d-465f42df4237
 langcode: en
 status: true
 dependencies:
   config:
-    - system.menu.add-clauses
+    - system.menu.admin-sub-menu
   module:
     - superfish
     - system
+    - user
   theme:
-    - audit_tool
-id: audit_tool_addclauses
-theme: audit_tool
+    - bootstrap_barrio_subtheme
+id: adminsubmenu_2
+theme: bootstrap_barrio_subtheme
 region: sidebar_first
-weight: -28
+weight: 0
 provider: null
-plugin: 'superfish:add-clauses'
+plugin: 'superfish:admin-sub-menu'
 settings:
-  id: 'superfish:add-clauses'
-  label: 'Add Clauses'
+  id: 'superfish:admin-sub-menu'
+  label: 'Admin Sub Menu'
   provider: superfish
-  label_display: '0'
+  label_display: visible
   level: '1'
   depth: '0'
   expand_all_items: false
-  menu_type: vertical
-  style: white
+  menu_type: horizontal
+  style: none
   arrow: 1
   shadow: 1
   speed: fast
   delay: '800'
-  slide: horizontal
+  slide: vertical
   supposition: 1
   hoverintent: 1
-  touch: '1'
-  touchbh: '1'
+  touch: '0'
+  touchbh: '2'
   touchbp: '768'
   touchua: '0'
   touchual: ''
@@ -72,6 +73,13 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/external-audit-clauses\r\n"
+    pages: '/unit-registration-view/*'
     negate: false
     context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
