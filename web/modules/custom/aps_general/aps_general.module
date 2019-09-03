@@ -421,6 +421,11 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $form['account']['roles']['#disabled'] = 1;
       $form['field_unit']['#access'] = FALSE;
       $form['field_assigned']['#access'] = FALSE;
+      $form['field_sections']['#states'] = [
+        'invisible' => [
+          'select[name="field_department"]' => ['value' => '_none'],
+        ],
+      ];
       $form['field_department']['widget']['#ajax'] = [
         'callback' => 'getSectionfromdepartment',
         'wrapper' => 'auditor-section',
@@ -666,6 +671,8 @@ function aps_general_node_insert(Node $node) {
       'name' => $title, 
       'vid' => 'assembly_type',
     ])->save();
+    $node->set('moderation_state', 'published');
+    $node->save();
   }
   if($node->bundle() == 'auditor_report'){
     $message = 'Audit report Has been Sumbitted Successfully.';
@@ -745,6 +752,10 @@ function aps_general_node_insert(Node $node) {
     $node->save();
   }
   if($node->bundle() == 'procedures'){
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+  if($node->bundle() == 'manufacturing_process'){
     $node->set('moderation_state', 'published');
     $node->save();
   }

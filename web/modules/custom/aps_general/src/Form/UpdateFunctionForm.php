@@ -80,6 +80,7 @@ class UpdateFunctionForm extends FormBase {
    * AJAX Callback to update Auditor Score.
    */
   public function UpdateFunctions(array $form, FormStateInterface $form_state) {
+    global $base_url;
     $response = new AjaxResponse();
     if ($form_state->getValue('function_name') == '') {
       $response->addCommand(new HtmlCommand('#function-apply', t('Please Enter a Valid function name')));
@@ -92,7 +93,8 @@ class UpdateFunctionForm extends FormBase {
       $get_mr_id = Node::load($get_unit_reference);
       $function_name = $form_state->getValue('function_name');
       $message = $form_state->getValue('description')['value'];
-      $notification = '<b>'.$user->name->value.'</b>, Has Applied for <b>'.$function_name.'.</b><br>Message:<br>'.$message;
+      $user_url = $base_url.'/user/'.$current_user_id.'/edit?type=auditor';
+      $notification = '<b>'.$user->name->value.'</b>, Has Applied for <b>'.$function_name.'.</b> Please follow the Action link:'.$user_url.'<br>Message:<br>'.$message;
       notify($get_mr_id->getOwner()->id(), $current_user_id, Markup::create($notification));
       $response->addCommand(new RemoveCommand('.ui-dialog'));
     }
