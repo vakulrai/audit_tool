@@ -92,6 +92,18 @@
   font-size: 14px;
   border-bottom: 1px solid #F2F2F2;
 }
+.audit-dashboard .sidebar_first .block-superfishadmin-sub-menu #superfish-admin-sub-menu .sf-depth-1 .sf-depth-1 .sf-sub-indicator:after {
+  font-size: 11px;
+}
+.audit-dashboard .sidebar_first .block-superfishadmin-sub-menu #superfish-admin-sub-menu .sf-depth-1 ul {
+  background: #FAFAFA;
+  font-size: 14px;
+  left: 14em;
+}
+.audit-dashboard .sidebar_first .block-superfishadmin-sub-menu #superfish-admin-sub-menu .sf-depth-1 ul a {
+  color: #657D89;
+  text-transform: capitalize;
+}
 
 .audit-dashboard-page {
   margin: 31px 0;
@@ -172,6 +184,16 @@
 
 .site-footer {
   background: #FAFAFA 0% 0% no-repeat padding-box;
+}
+
+.breadcrumb {
+  padding: 0.25rem 1rem;
+}
+.breadcrumb li a {
+  color: #A7B5BC;
+}
+.breadcrumb li.active {
+  color: #657D89;
 }
 
 /*# sourceMappingURL=style.css.map */
