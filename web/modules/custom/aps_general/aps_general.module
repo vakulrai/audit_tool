@@ -1373,9 +1373,15 @@ function aps_general_preprocess_breadcrumb(&$variables) {
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $uri = explode('/', $current_uri);
   $node = \Drupal::routeMatch()->getParameter('node_type');
+  $node_id = \Drupal::routeMatch()->getParameter('node');
   if ($node instanceof \Drupal\node\Entity\NodeType) {
     $nid_type = $node->get('type');
   }
+  if ($node_id instanceof \Drupal\node\Entity\Node) {
+    $nid_id_type = $node_id->bundle();
+    $nid_id = $node_id->id();
+  }
+  
   if(\Drupal::routeMatch()->getRouteName() == 'user.admin_create'){
     if(\Drupal::request()->query->get('type') == 'mr'){
       $variables['breadcrumb'][1]['text'] = t('Register Deputy MR');
@@ -1428,6 +1434,22 @@ function aps_general_preprocess_breadcrumb(&$variables) {
     $variables['breadcrumb'][1] = ['text' => t('Section Listing')];
     $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.section_list',['arg_0' => \Drupal::request()->query->get('id')]);
   }
+  
+  if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'business_process'){
+    $variables['breadcrumb'][1] = ['text' => t('Business Processes Listing')];
+    $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.bp',['arg_0' => $node_id->field_refere->target_id]);
+  }
+
+  if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'section'){
+    $variables['breadcrumb'][1] = ['text' => t('Department Listing')];
+    $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.department_listing',['arg_0' => $node_id->field_refere->target_id]);
+  }
+
+  if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'department'){
+    $variables['breadcrumb'][1] = ['text' => t('Section Listing')];
+    $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.section_list',['arg_0' => $node_id->field_refere->target_id]);
+  }
+  
 }
 /**
  * Implements hook_link_alter().
