@@ -9,7 +9,7 @@ dependencies:
 id: audit_tool_mainpagecontent
 theme: audit_tool
 region: content
-weight: -19
+weight: -24
 provider: null
 plugin: system_main_block
 settings:

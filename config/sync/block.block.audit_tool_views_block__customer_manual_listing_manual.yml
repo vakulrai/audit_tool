@@ -12,7 +12,7 @@ dependencies:
 id: audit_tool_views_block__customer_manual_listing_manual
 theme: audit_tool
 region: content
-weight: 2
+weight: -2
 provider: null
 plugin: 'views_block:customer_manual_listing-manual'
 settings:

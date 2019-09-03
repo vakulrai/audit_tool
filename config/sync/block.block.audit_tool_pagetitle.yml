@@ -1,15 +1,16 @@
 uuid: cf4a0db7-05c6-411e-a221-f049874bf023
 langcode: en
-status: false
+status: true
 dependencies:
   module:
+    - node
     - system
   theme:
     - audit_tool
 id: audit_tool_pagetitle
 theme: audit_tool
 region: content
-weight: 6
+weight: -35
 provider: null
 plugin: page_title_block
 settings:
@@ -23,3 +24,10 @@ visibility:
     pages: /home
     negate: true
     context_mapping: {  }
+  node_type:
+    id: node_type
+    bundles:
+      business_process: business_process
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

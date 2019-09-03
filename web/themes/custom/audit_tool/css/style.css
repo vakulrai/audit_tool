@@ -72,15 +72,21 @@
   font-size: 16px;
   font-weight: bold;
 }
-.header .user-login-header #block-adminmainmenu-4 #superfish-admin-main-menu li:last-child {
+.header .user-login-header #block-adminmainmenu-4 #superfish-admin-main-menu .menu-bar-class.sf-depth-1:last-child {
   right: 0;
   background-image: url("/themes/custom/audit_tool/images/notitification-icon.svg");
   position: absolute;
   background-repeat: no-repeat;
   margin: 12px 78px;
 }
-.header .user-login-header #block-adminmainmenu-4 #superfish-admin-main-menu li:last-child .material-icons {
+.header .user-login-header #block-adminmainmenu-4 #superfish-admin-main-menu .menu-bar-class.sf-depth-1:last-child .material-icons {
   display: none;
+}
+.header .user-login-header #block-adminmainmenu-4 #superfish-admin-main-menu .menu-bar-class ul {
+  background: #ffffff;
+}
+.header .user-login-header #block-adminmainmenu-4 #superfish-admin-main-menu .menu-bar-class ul a {
+  color: #657D89;
 }
 .header .navbar {
   padding: 0;
@@ -242,6 +248,87 @@
   margin: auto;
 }
 
+.audit-business-process .node-business-process-form, .audit-business-process .node-department-form {
+  background: #FFFFFF 0 0 no-repeat padding-box;
+  border: 1px solid #F2F4F6;
+  border-radius: 4px;
+  padding: 24px;
+}
+.audit-business-process .node-business-process-form label, .audit-business-process .node-business-process-form legend, .audit-business-process .node-business-process-form .media-library-widget-empty-text, .audit-business-process .node-department-form label, .audit-business-process .node-department-form legend, .audit-business-process .node-department-form .media-library-widget-empty-text {
+  color: #9BA6B3;
+  font-size: 12px;
+}
+.audit-business-process .field--name-title, .audit-business-process .field--name-field-business-head-name, .audit-business-process .field--type-entity-reference, .audit-business-process .field--type-list-integer {
+  width: 25%;
+  float: left;
+}
+.audit-business-process .field--name-title .js-form-type-select label, .audit-business-process .field--name-field-business-head-name .js-form-type-select label, .audit-business-process .field--type-entity-reference .js-form-type-select label, .audit-business-process .field--type-list-integer .js-form-type-select label {
+  margin-bottom: 11px;
+}
+.audit-business-process .field--widget-media-library-widget {
+  width: 100%;
+}
+.audit-business-process .field--type-language {
+  display: none;
+}
+.audit-business-process .field--type-entity-reference-revisions .table-responsive .tabledrag-toggle-weight-wrapper, .audit-business-process .field--type-entity-reference-revisions .table-responsive .paragraph-type-title {
+  display: none;
+}
+.audit-business-process .field--type-entity-reference-revisions .table-responsive .field-label {
+  background: #F8F9FA 0% 0% no-repeat padding-box;
+  border: 0px;
+  padding: 8px 18px;
+}
+.audit-business-process .field--type-entity-reference-revisions .table-responsive .field-label .label {
+  font-size: 15px;
+  margin: 0px;
+  color: #23272D;
+}
+.audit-business-process .field--type-entity-reference-revisions .table-responsive .field-multiple-drag {
+  display: none;
+}
+.audit-business-process .field--type-entity-reference-revisions .table-responsive tr {
+  border: 0px;
+}
+.audit-business-process .field--type-entity-reference-revisions .table-responsive td, .audit-business-process .field--type-entity-reference-revisions .table-responsive .col-auto {
+  padding: 0px;
+  margin: 0px;
+  background: #ffffff;
+  border: 0px;
+}
+.audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-string, .audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-integer {
+  width: 22%;
+  float: left;
+  margin: 15px;
+}
+.audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-string .form-text, .audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-integer .form-text {
+  margin-top: 0px;
+}
+.audit-business-process .field-add-more-submit, .audit-business-process .media-library-open-button {
+  color: #7E8E9D;
+  font-size: 12px;
+  background: #ffffff;
+  border: 1px dotted;
+  text-align: inherit;
+  width: 20%;
+  margin: 0px 14px;
+}
+.audit-business-process #edit-submit {
+  width: 10%;
+  float: left;
+  margin: 0px 10px;
+  border: 1px solid #5D62E6;
+  color: #5D62E6;
+  background: #ffffff;
+  border-radius: 4px;
+}
+.audit-business-process #edit-continue-dept {
+  width: 17%;
+  background: #5D62E6 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  color: #ffffff;
+}
+
 .breadcrumb {
   padding: 0.25rem 1rem;
 }
@@ -250,6 +337,11 @@
 }
 .breadcrumb li.active {
   color: #657D89;
+}
+
+#block-audit-tool-pagetitle .title {
+  font-size: 22px;
+  padding: 24px 0px;
 }
 
 /*# sourceMappingURL=style.css.map */

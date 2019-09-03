@@ -10,7 +10,7 @@ dependencies:
 id: audit_tool_ncrandcarmanagement
 theme: audit_tool
 region: content
-weight: -8
+weight: -14
 provider: null
 plugin: ncrand_car_management
 settings:
