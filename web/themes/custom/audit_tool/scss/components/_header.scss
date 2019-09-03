@@ -90,15 +90,27 @@
           font-weight: bold;
         }
 
-        li:last-child {
-          right: 0;
-          background-image: url("/themes/custom/audit_tool/images/notitification-icon.svg");
-          position: absolute;
-          background-repeat: no-repeat;
-          margin: 12px 78px;
+        .menu-bar-class {
+          &.sf-depth-1 {
+            &:last-child {
+              right: 0;
+              background-image: url("/themes/custom/audit_tool/images/notitification-icon.svg");
+              position: absolute;
+              background-repeat: no-repeat;
+              margin: 12px 78px;
 
-          .material-icons {
-            display: none;
+              .material-icons {
+                display: none;
+              }
+            }
+          }
+
+          ul {
+            background: #ffffff;
+
+            a {
+              color: #657D89;
+            }
           }
         }
       }

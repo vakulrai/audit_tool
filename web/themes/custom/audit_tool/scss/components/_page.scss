@@ -7,11 +7,101 @@
   background: #FAFAFA 0 0 no-repeat padding-box;
 }
 //Listing page css
+
 .audittool-front-page {
   background: #FCFDFF 0 0 no-repeat padding-box;
 
   .audittool-front-page-container {
     max-width: 1274px;
     margin: auto;
+  }
+}
+//Business_process css and Department css
+.audit-business-process{
+  .node-business-process-form, .node-department-form {
+    background: #FFFFFF 0 0 no-repeat padding-box;
+    border: 1px solid #F2F4F6;
+    border-radius: 4px;
+    padding: 24px;
+    label, legend, .media-library-widget-empty-text{
+      color: #9BA6B3;
+      font-size: 12px;
+    }
+  }
+  .field--name-title, .field--name-field-business-head-name, .field--type-entity-reference, .field--type-list-integer{
+    width: 25%;
+    float:left;
+    .js-form-type-select {
+      label{
+        margin-bottom: 11px;
+      }
+    }
+  }
+  .field--widget-media-library-widget{
+    width: 100%;
+  }
+  .field--type-language{
+    display: none;
+  }
+  .field--type-entity-reference-revisions{
+    .table-responsive{
+      .tabledrag-toggle-weight-wrapper, .paragraph-type-title{
+        display: none;
+      }
+      .field-label{
+        background: #F8F9FA 0% 0% no-repeat padding-box;
+        border: 0px;
+        padding: 8px 18px;
+        .label{
+          font-size: 15px;
+          margin: 0px;
+          color: #23272D;
+        }
+      }
+      .field-multiple-drag{
+        display: none;
+      }
+      tr{
+        border: 0px;
+      }
+      td, .col-auto{
+        padding: 0px;
+        margin: 0px;
+        background: #ffffff;
+        border: 0px;
+      }
+      .field--type-string, .field--type-integer{
+        width: 22%;
+        float: left;
+        margin: 15px;
+        .form-text{
+          margin-top: 0px;
+        }
+      }
+    }
+  }
+  .field-add-more-submit, .media-library-open-button{
+    color: #7E8E9D;
+    font-size: 12px;
+    background: #ffffff;
+    border: 1px dotted;
+    text-align: inherit;
+    width: 20%;
+    margin: 0px 14px;
+  }
+  #edit-submit{
+    width: 10%;
+    float: left;
+    margin: 0px 10px;
+    border: 1px solid #5D62E6;
+    color: #5D62E6;
+    background: #ffffff;
+    border-radius: 4px;
+  }
+  #edit-continue-dept{
+    width: 17%;
+    background: #5D62E6 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    color: #ffffff;
   }
 }
