@@ -1,9 +1,7 @@
-.header {
-  box-shadow: 0px 0px 9px #00000017;
-}
 .header .user-login-header {
   width: 100%;
   margin: 0;
+  box-shadow: 0 0 9px #00000017;
 }
 .header .user-login-header .menu--account {
   width: 100%;
@@ -18,17 +16,17 @@
   font-weight: bold;
   position: relative;
 }
-.header .user-login-header .menu--account .nav .nav-link:nth-child(2):after {
+.header .user-login-header .menu--account .nav .nav-link:first-child:after {
   content: " ";
   background-image: url("/themes/custom/audit_tool/images/logout-icon.svg");
   position: absolute;
   width: 100px;
   height: 100px;
   background-repeat: no-repeat;
-  margin: 0px 5px;
+  margin: 0 5px;
 }
 .header .user-login-header .menu--account .user-header-text {
-  width: 80%;
+  width: 87%;
   text-transform: uppercase;
   float: left;
   font-weight: 500;
@@ -43,11 +41,11 @@
 .header .user-login-header .site-branding-logo {
   width: 18%;
   float: left;
-  padding: 10px 0px 10px 103px;
+  padding: 10px 0 10px 96px;
 }
 .header .user-login-header #block-adminmainmenudeputy {
   width: 53%;
-  padding: 15px 0px;
+  padding: 15px 0;
 }
 .header .user-login-header #block-adminmainmenudeputy #superfish-admin-main-menu-deputy .sf-depth-1 {
   color: #657D89;
@@ -55,13 +53,33 @@
   font-weight: bold;
 }
 .header .user-login-header #block-adminmainmenudeputy #superfish-admin-main-menu-deputy li:nth-child(2) {
-  right: 0px;
+  right: 0;
   background-image: url("/themes/custom/audit_tool/images/notitification-icon.svg");
   position: absolute;
   background-repeat: no-repeat;
   margin: 12px 73px;
 }
 .header .user-login-header #block-adminmainmenudeputy #superfish-admin-main-menu-deputy li:nth-child(2) .material-icons {
+  display: none;
+}
+.header .user-login-header #block-adminmainmenu-4 {
+  width: 82%;
+  float: right;
+  padding: 15px 0;
+}
+.header .user-login-header #block-adminmainmenu-4 #superfish-admin-main-menu .sf-depth-1 {
+  color: #657D89;
+  font-size: 16px;
+  font-weight: bold;
+}
+.header .user-login-header #block-adminmainmenu-4 #superfish-admin-main-menu li:last-child {
+  right: 0;
+  background-image: url("/themes/custom/audit_tool/images/notitification-icon.svg");
+  position: absolute;
+  background-repeat: no-repeat;
+  margin: 12px 78px;
+}
+.header .user-login-header #block-adminmainmenu-4 #superfish-admin-main-menu li:last-child .material-icons {
   display: none;
 }
 .header .navbar {
@@ -71,15 +89,6 @@
 .audit-dashboard {
   max-width: 1274px;
   margin: auto;
-}
-.audit-dashboard .block-system-breadcrumb-block .breadcrumb {
-  padding: 0.25rem 1rem;
-}
-.audit-dashboard .block-system-breadcrumb-block .breadcrumb li a {
-  color: #A7B5BC;
-}
-.audit-dashboard .block-system-breadcrumb-block .breadcrumb li.active {
-  color: #657D89;
 }
 .audit-dashboard .sidebar_first {
   padding-left: 0;
@@ -156,10 +165,10 @@
   color: #657D89;
 }
 .audit-dashboard-page .sidebar_second {
-  padding-right: 0px;
+  padding-right: 0;
 }
 
-#block-audit-tool-mainpagecontent {
+#block-audit-tool-mainpagecontent .views-element-container .view-content {
   font-size: 32px;
 }
 
@@ -177,13 +186,60 @@
   font-size: 20px;
 }
 
-#main-wrapper {
-  padding: 30px 0px;
-  background: #FAFAFA 0% 0% no-repeat padding-box;
+.audittool-front-page .audit-listing-block {
+  background: #FFFFFF 0 0 no-repeat padding-box;
+  border: 1px solid #F2F4F6;
+  border-radius: 4px;
+  max-width: 21%;
+  margin: 21px;
+  padding: 24px;
+}
+.audittool-front-page .audit-listing-block .views-field-title {
+  color: #23272D;
+  font-weight: bold;
+  font-size: 16px;
+}
+.audittool-front-page .audit-listing-block .views-label {
+  display: none;
+}
+.audittool-front-page .audit-listing-block .views-field-aggregate-unit-address {
+  color: #7E8E9D;
+  font-size: 14px;
+  margin: 8px 0;
+}
+.audittool-front-page .audit-listing-block .views-field-aggregate-unit-address b {
+  font-weight: normal;
+}
+.audittool-front-page .audit-listing-block .views-field-edit-node {
+  padding: 15px 0;
+}
+.audittool-front-page .audit-listing-block .views-field-edit-node .button {
+  background: #FFFFFF 0 0 no-repeat padding-box;
+  border: 1px solid #5D62E6;
+  border-radius: 4px;
+  color: #5D62E6;
+  padding: 8px 17px;
+}
+.audittool-front-page .audit-listing-block .views-field-edit-node .button:hover {
+  background: #5D62E6 0 0 no-repeat padding-box;
+  color: #ffffff;
+}
+
+.layout-main-wrapper {
+  padding: 30px 0;
+  background: #FAFAFA 0 0 no-repeat padding-box;
 }
 
 .site-footer {
-  background: #FAFAFA 0% 0% no-repeat padding-box;
+  background: #FAFAFA 0 0 no-repeat padding-box;
+}
+
+.audittool-front-page {
+  background: #FCFDFF 0 0 no-repeat padding-box;
+}
+.audittool-front-page .audittool-front-page-container {
+  max-width: 1274px;
+  margin: auto;
 }
 
 .breadcrumb {

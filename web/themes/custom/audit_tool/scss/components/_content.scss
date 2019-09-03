@@ -1,20 +1,8 @@
+//Dashboard css
+
 .audit-dashboard {
   max-width: 1274px;
   margin: auto;
-
-  .block-system-breadcrumb-block {
-    .breadcrumb {
-      padding: 0.25rem 1rem;
-      li{
-        a{
-          color: #A7B5BC;
-        }
-        &.active{
-          color: #657D89;
-        }
-      }
-    }
-  }
 
   .sidebar_first {
     padding-left: 0;
@@ -28,17 +16,20 @@
             color: #657D89;
             font-size: 14px;
             border-bottom: 1px solid #F2F2F2;
-            .sf-sub-indicator{
-              &:after{
+
+            .sf-sub-indicator {
+              &:after {
                 font-size: 11px;
               }
             }
           }
-          ul{
-            background: #FAFAFA ;
+
+          ul {
+            background: #FAFAFA;
             font-size: 14px;
             left: 14em;
-            a{
+
+            a {
               color: #657D89;
               text-transform: capitalize;
             }
@@ -46,7 +37,6 @@
         }
       }
     }
-
   }
 }
 
@@ -101,22 +91,28 @@
       color: #657D89;
       font-size: 12px;
     }
-      #display-status-reports {
-        .btn-primary {
-          background: #FFFFFF 0 0 no-repeat padding-box;
-          border: 1px solid #657D89;
-          border-radius: 4px;
-          color: #657D89;
-        }
+
+    #display-status-reports {
+      .btn-primary {
+        background: #FFFFFF 0 0 no-repeat padding-box;
+        border: 1px solid #657D89;
+        border-radius: 4px;
+        color: #657D89;
       }
+    }
   }
-  .sidebar_second{
-    padding-right: 0px;
+
+  .sidebar_second {
+    padding-right: 0;
   }
 }
 
 #block-audit-tool-mainpagecontent {
-  font-size: 32px;
+  .views-element-container {
+    .view-content {
+      font-size: 32px;
+    }
+  }
 }
 
 #block-audit-tool-mradmindashboardcoverage,
@@ -131,6 +127,55 @@
   .content {
     h1 {
       font-size: 20px;
+    }
+  }
+}
+//Listing page css
+
+.audittool-front-page {
+  .audit-listing-block {
+    background: #FFFFFF 0 0 no-repeat padding-box;
+    border: 1px solid #F2F4F6;
+    border-radius: 4px;
+    max-width: 21%;
+    margin: 21px;
+    padding: 24px;
+
+    .views-field-title {
+      color: #23272D;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .views-label {
+      display: none;
+    }
+
+    .views-field-aggregate-unit-address {
+      color: #7E8E9D;
+      font-size: 14px;
+      margin: 8px 0;
+
+      b {
+        font-weight: normal;
+      }
+    }
+
+    .views-field-edit-node {
+      padding: 15px 0;
+
+      .button {
+        background: #FFFFFF 0 0 no-repeat padding-box;
+        border: 1px solid #5D62E6;
+        border-radius: 4px;
+        color: #5D62E6;
+        padding: 8px 17px;
+
+        &:hover {
+          background: #5D62E6 0 0 no-repeat padding-box;
+          color: #ffffff;
+        }
+      }
     }
   }
 }

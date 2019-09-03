@@ -1,8 +1,8 @@
 .header {
-  box-shadow: 0px 0px 9px #00000017;
   .user-login-header {
     width: 100%;
     margin: 0;
+    box-shadow: 0 0 9px #00000017;
 
     .menu--account {
       width: 100%;
@@ -17,7 +17,7 @@
           font-weight: bold;
           position: relative;
 
-          &:nth-child(2) {
+          &:first-child {
             &:after {
               content: " ";
               background-image: url("/themes/custom/audit_tool/images/logout-icon.svg");
@@ -25,51 +25,83 @@
               width: 100px;
               height: 100px;
               background-repeat: no-repeat;
-              margin: 0px 5px;
+              margin: 0 5px;
             }
           }
         }
       }
 
       .user-header-text {
-        width: 80%;
-    text-transform: uppercase;
-    float: left;
-    font-weight: 500;
-    padding: 8px 96px 0;
-    font-size: 12px;
-    color: #657D89;
+        width: 87%;
+        text-transform: uppercase;
+        float: left;
+        font-weight: 500;
+        padding: 8px 96px 0;
+        font-size: 12px;
+        color: #657D89;
       }
     }
-    .navbar-brand{
+
+    .navbar-brand {
       width: 118.97px;
       height: 50px;
     }
-    .site-branding-logo{
+
+    .site-branding-logo {
       width: 18%;
-    float: left;
-    padding: 10px 0px 10px 103px;
+      float: left;
+      padding: 10px 0 10px 96px;
     }
-    #block-adminmainmenudeputy{
+
+    #block-adminmainmenudeputy {
       width: 53%;
-      padding: 15px 0px;
-    #superfish-admin-main-menu-deputy{
-      .sf-depth-1{
-        color:#657D89;
-        font-size: 16px;
-        font-weight: bold;
-      }
-      li:nth-child(2){
-        right: 0px;
-        background-image: url("/themes/custom/audit_tool/images/notitification-icon.svg");
-        position: absolute;
-        background-repeat: no-repeat;
-        margin: 12px 73px;
-        .material-icons{
-          display: none;
+      padding: 15px 0;
+
+      #superfish-admin-main-menu-deputy {
+        .sf-depth-1 {
+          color: #657D89;
+          font-size: 16px;
+          font-weight: bold;
+        }
+
+        li:nth-child(2) {
+          right: 0;
+          background-image: url("/themes/custom/audit_tool/images/notitification-icon.svg");
+          position: absolute;
+          background-repeat: no-repeat;
+          margin: 12px 73px;
+
+          .material-icons {
+            display: none;
+          }
         }
       }
     }
+
+    #block-adminmainmenu-4 {
+      width: 82%;
+      float: right;
+      padding: 15px 0;
+
+      #superfish-admin-main-menu {
+        .sf-depth-1 {
+          color: #657D89;
+          font-size: 16px;
+          font-weight: bold;
+        }
+
+        li:last-child {
+          right: 0;
+          background-image: url("/themes/custom/audit_tool/images/notitification-icon.svg");
+          position: absolute;
+          background-repeat: no-repeat;
+          margin: 12px 78px;
+
+          .material-icons {
+            display: none;
+          }
+        }
+      }
     }
   }
 
