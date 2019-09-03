@@ -1,5 +1,6 @@
 aps_audit_planning_js:
   js:
+    https://cdn.jsdelivr.net/npm/sweetalert2@8: { type: external, minified: true }
     js/tooltip.min.js: {}
     js/fullcalendar/packages/core/main.js: {}
     js/fullcalendar/packages/interaction/main.js: {}

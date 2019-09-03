@@ -1,0 +1,21 @@
+uuid: f42a2369-e2c0-4fec-911d-42e603c434ea
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_field_months_for_the_audit
+    - node.type.unit
+  module:
+    - options
+id: node.unit.field_field_months_for_the_audit
+field_name: field_field_months_for_the_audit
+entity_type: node
+bundle: unit
+label: 'Pressure Months For Audit'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

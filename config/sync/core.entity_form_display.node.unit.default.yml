@@ -7,8 +7,8 @@ dependencies:
     - field.field.node.unit.field_address
     - field.field.node.unit.field_contributed_sales
     - field.field.node.unit.field_deputy_mr
+    - field.field.node.unit.field_field_months_for_the_audit
     - field.field.node.unit.field_frequency
-    - field.field.node.unit.field_months_for_the_audit
     - field.field.node.unit.field_remote_address
     - field.field.node.unit.field_remote_location_name
     - field.field.node.unit.field_sales_turnover
@@ -24,7 +24,6 @@ dependencies:
     - node.type.unit
   module:
     - address
-    - aps_general
     - conditional_fields
     - content_moderation
     - field_group
@@ -75,20 +74,18 @@ content:
     third_party_settings: {  }
     type: number
     region: content
+  field_field_months_for_the_audit:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_frequency:
     weight: 10
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
-    region: content
-  field_months_for_the_audit:
-    weight: 11
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: month_only_widget
     region: content
   field_remote_address:
     weight: 4

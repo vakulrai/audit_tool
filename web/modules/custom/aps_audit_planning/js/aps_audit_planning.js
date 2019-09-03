@@ -7,7 +7,7 @@
     	var calendarEl = document.getElementById('demo');
       var base_url = drupalSettings.siteBaseUrl;
       var unit_id = drupalSettings.unitId;
-
+      
       var calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'googleCalendar'],
         googleCalendarApiKey: 'AIzaSyDAhieDD1LZNmnuFROsxhJQAGZP6amv-cg',
@@ -21,27 +21,16 @@
         selectable: true,
         selectMirror: true,
         selectOverlap: function(event) {
+          console.log(event);
           if (event._def.rendering === 'background' && event._def.url.indexOf('google') === -1){
-            if (confirm('The following Date comes under Pressure month.Are you sure you want to contine ?')) {
-              var title = prompt('Enter Event Title');
-              if (title) {
-                var today = event._instance.range.start;
-                var dd = today.getDate(); var mm = today.getMonth()+1;var yyyy = today.getFullYear();
-                var pressure_month_start = yyyy+'-'+mm+'-'+dd;
-                var pressure_month_end_date = event._instance.range.end.getMonth() + 1;
-                var pressure_month_end = event._instance.range.end.getFullYear()+'-'+pressure_month_end_date+'-'+event._instance.range.end.getDate();
-                var current = pressure_month_start;
-                var start = formatDate(current);
-                var end = formatDate(pressure_month_end);
-                window.location.href = base_url + '/node/add/planned_events?field_start_date='+start+'&field_end_date='+end+'&current='+current+'&unit_reference='+url_param[2];
-              }
-            } 
-            else {
-            }
+            return true;
           }
           else if(event._def.rendering === 'background' && event._def.url.indexOf('google') !== -1){
             var event_name = event._def.title +'\n\n Can\'t Proceed !!';
-            alert(event_name);
+            Swal.fire({
+              type: 'info',
+              title: event_name,
+            })
             return false;
           }
           else{
@@ -69,21 +58,35 @@
           }
         ],
         select: function(arg) {
-          // var title = prompt('Enter A Title:');
-          // if (title) {
             var current = formatDate(arg.start);
             var start = formatDate(arg.start);
             var end = formatDate(arg.end);
-            window.location.href = base_url + '/node/add/planned_events?field_start_date='+start+'&field_end_date='+end+'&current='+current+'&unit_reference='+url_param[2];
-            // calendar.addEvent({
-            //   title: title,
-            //   start: arg.start,
-            //   url: url,
-            //   end: arg.end,
-            //   allDay: false,
-            //   editable: false,
-            // })
-          // }
+            var get_current_selected_month = arg.start.getMonth() + 1;
+            $.ajax({
+              url: base_url + '/verify-pressure-months/'+unit_id+'/'+get_current_selected_month,
+              async:false,
+              success: function (result) {
+                if (result == true) {
+                  Swal.fire({
+                  title: 'The following Date comes under Pressure month.Are you sure you want to contine ?',
+                  // text: "You won't be able to revert this!",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes',
+                  cancelButtonText: 'No'
+                }).then((result) => {
+                  if (result.value) {
+                    window.location.href = base_url + '/node/add/planned_events?field_start_date='+start+'&field_end_date='+end+'&current='+current+'&unit_reference='+url_param[2];
+                  }
+                })
+                }
+                else{
+                  window.location.href = base_url + '/node/add/planned_events?field_start_date='+start+'&field_end_date='+end+'&current='+current+'&unit_reference='+url_param[2];
+                }
+              }
+            });
         },
         eventRender: function(info) {
           if (info.event._def.rendering === 'background'){

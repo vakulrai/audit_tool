@@ -1,0 +1,57 @@
+uuid: 761ae4b4-f9b2-4c95-aa07-f20c192807a8
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_field_months_for_the_audit
+field_name: field_field_months_for_the_audit
+entity_type: node
+type: list_integer
+settings:
+  allowed_values:
+    -
+      value: 1
+      label: January
+    -
+      value: 2
+      label: February
+    -
+      value: 3
+      label: March
+    -
+      value: 4
+      label: April
+    -
+      value: 5
+      label: May
+    -
+      value: 6
+      label: June
+    -
+      value: 7
+      label: July
+    -
+      value: 8
+      label: August
+    -
+      value: 9
+      label: September
+    -
+      value: 10
+      label: October
+    -
+      value: 11
+      label: November
+    -
+      value: 12
+      label: December
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

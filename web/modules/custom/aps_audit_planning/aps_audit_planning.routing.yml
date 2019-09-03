@@ -23,6 +23,22 @@ aps_audit_planning.audit_planning_get_unit_pressure_months:
   requirements:
     _access: 'TRUE'
 
+aps_audit_planning.audit_planning_check_pressure_months:
+  path: '/verify-pressure-months/{unit_reference}/{month}'
+  defaults:
+    _controller: '\Drupal\aps_audit_planning\Controller\AuditPlanningController::verifyPressureMonths'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'
+
+aps_audit_planning.audit_planning_check_google_holidays:
+  path: '/verify-google-holidays/{unit_reference}/{day}'
+  defaults:
+    _controller: '\Drupal\aps_audit_planning\Controller\AuditPlanningController::verifyGoogleHolidays'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'
+
 aps_audit_planning.title_list:
   path: '/get-title'
   defaults:

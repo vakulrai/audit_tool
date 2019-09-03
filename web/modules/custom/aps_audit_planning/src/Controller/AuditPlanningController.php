@@ -63,7 +63,8 @@ class AuditPlanningController extends ControllerBase {
       $unit_object = Node::load($unit_reference);
       $first_last_date_monthly = [];
       $i = 0;
-      foreach ($unit_object->field_months_for_the_audit->getValue() as $key => $value) {
+
+      foreach ($unit_object->field_field_months_for_the_audit->getValue() as $key => $value) {
         $num_padded = sprintf("%02d", $value['value']);
         $format_for_first_day = 'Y-'. $num_padded . '-01';
         $format_for_last_day = 'Y-'.$num_padded.'-t';
@@ -73,11 +74,42 @@ class AuditPlanningController extends ControllerBase {
         $first_last_date_monthly[$i]['rendering'] = 'background';
         $first_last_date_monthly[$i]['color'] = '#7048e8';
         $first_last_date_monthly[$i]['description'] = 'Pressure Months';
+        $first_last_date_monthly[$i]['className'] = 'pressuire';
         $i++;
       }
       $data  = $first_last_date_monthly;
       return new JsonResponse($data);
     }
+  }
+
+  public function verifyPressureMonths(Request $request, $unit_reference, $month) {
+    if($unit_reference){
+      $check_months =[];
+      $unit_object = Node::load($unit_reference);
+      foreach ($unit_object->field_field_months_for_the_audit->getValue() as $key => $value) {
+        $check_months[$key] = $value['value'];
+      }
+      if (in_array($month, $check_months)) {
+        $response = TRUE;
+      }
+      else{
+        $response = FALSE;
+      }
+      return new JsonResponse($response);
+    }
+  }
+
+  public function verifyGoogleHolidays(Request $request, $unit_reference, $day) {
+    $xml = simplexml_load_file("https://calendar.google.com/calendar/embed?src=en.indian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FKolkata");
+    $xml->asXML();
+    $holidays = array();
+    foreach ($xml->entry as $entry){
+      $a = $entry->children('http://schemas.google.com/g/2005');
+      $when = $a->when->attributes()->startTime;
+
+      $holidays[(string)$when]["title"] = $entry->title;
+    }
+      return new JsonResponse($holidays);
   }
 
   public function generateEvents(Request $request, $unit_reference) {
