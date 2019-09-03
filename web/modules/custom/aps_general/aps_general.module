@@ -433,6 +433,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       ];
     }
     elseif(\Drupal::routeMatch()->getRouteName() == 'user.admin_create' && \Drupal::request()->query->get('type') == 'default'){
+      $form['field_sections']['#attributes'] = ['id' => ['auditor-section']];
       unset($form['account']['roles']['#options']['authenticated']);
       unset($form['account']['roles']['#options']['qa_staff_member']);
       unset($form['account']['roles']['#options']['qa_top_contributor']);
@@ -441,6 +442,16 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       unset($form['account']['roles']['#options']['group_mr']);
       $form['field_unit']['#access'] = FALSE;
       $form['field_assigned']['#access'] = FALSE;
+      $form['field_sections']['#states'] = [
+        'invisible' => [
+          'select[name="field_department"]' => ['value' => '_none'],
+        ],
+      ];
+      $form['field_department']['widget']['#ajax'] = [
+        'callback' => 'getSectionfromdepartment',
+        'wrapper' => 'auditor-section',
+        'event' => 'change',
+      ];
     }
     elseif(\Drupal::routeMatch()->getRouteName() == 'user.admin_create' && \Drupal::request()->query->get('type') == 'mr'){
       $form['account']['roles']['#default_value'] = 'mr_admin';
