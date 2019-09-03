@@ -9,6 +9,7 @@ dependencies:
     - field.field.user.user.field_functions
     - field.field.user.user.field_phone
     - field.field.user.user.field_reference_id
+    - field.field.user.user.field_sections
     - field.field.user.user.field_unit
   module:
     - mobile_number
@@ -25,7 +26,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_assigned:
-    weight: 7
+    weight: 8
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
@@ -46,7 +47,7 @@ content:
     region: content
   field_functions:
     type: entity_reference_paragraphs
-    weight: 5
+    weight: 6
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -57,7 +58,7 @@ content:
     third_party_settings: {  }
     region: content
   field_phone:
-    weight: 4
+    weight: 5
     settings:
       default_country: US
       countries: {  }
@@ -66,13 +67,19 @@ content:
     type: mobile_number_default
     region: content
   field_reference_id:
-    weight: 6
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_sections:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_unit:
     weight: 0

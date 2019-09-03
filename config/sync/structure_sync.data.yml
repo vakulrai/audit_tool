@@ -1659,7 +1659,7 @@ menus:
     uuid: 30b3f803-be41-4d87-9ca7-2cbae4adea43
   -
     menu_name: admin-sub-menu
-    title: CUSTOMERS
+    title: Customers
     parent: 'menu_link_content:08fc58c9-6a93-4b24-9f32-6f664495cd3b'
     uri: 'internal:/node/add/customers_manual?destination=node/add/customers_manual'
     link_title: ''
@@ -1671,7 +1671,7 @@ menus:
     uuid: 03dd749f-6308-4a94-8be0-0f66e581772e
   -
     menu_name: admin-sub-menu
-    title: SUPPLIERS
+    title: Suppliers
     parent: 'menu_link_content:08fc58c9-6a93-4b24-9f32-6f664495cd3b'
     uri: 'internal:/node/add/supplier'
     link_title: ''
@@ -1803,7 +1803,7 @@ menus:
     uuid: 4651f765-8d22-4983-a9e4-b74b91b14661
   -
     menu_name: admin-sub-menu
-    title: SCHEDULING
+    title: Scheduling
     parent: 'menu_link_content:30b3f803-be41-4d87-9ca7-2cbae4adea43'
     uri: 'internal:/audit-planning'
     link_title: ''
@@ -1815,7 +1815,7 @@ menus:
     uuid: fbc5be1f-b90a-41e6-a671-11661ea85f6e
   -
     menu_name: admin-sub-menu
-    title: 'HOLIDAY LIST'
+    title: 'Holiday List'
     parent: 'menu_link_content:efc675fe-2723-4df0-bb76-246ef34007cd'
     uri: 'internal:/holidays-listing/%'
     link_title: ''
@@ -1863,7 +1863,7 @@ menus:
     uuid: 08fc58c9-6a93-4b24-9f32-6f664495cd3b
   -
     menu_name: admin-sub-menu
-    title: ORGANISATION
+    title: Organisation
     parent: 'menu_link_content:08fc58c9-6a93-4b24-9f32-6f664495cd3b'
     uri: 'internal:/node/add/procedures'
     link_title: ''

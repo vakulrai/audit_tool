@@ -201,6 +201,12 @@ content:
           bundle: planned_events
     type: options_select
     region: content
+  field_department:
+    type: options_select
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_end_date:
     weight: 10
     settings: {  }
@@ -313,6 +319,23 @@ content:
             selector: ''
           entity_type: node
           bundle: planned_events
+        b5e6f875-35a3-4b05-952a-685e72131341:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: internal
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
     type: options_select
     region: content
   field_list_of_product:
@@ -337,6 +360,23 @@ content:
             selector: ''
           entity_type: node
           bundle: planned_events
+        d08fd812-a2c0-4b6b-bf81-448f81f5fc06:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: internal
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
     type: options_select
     region: content
   field_list_of_systems:
@@ -356,6 +396,23 @@ content:
             value_form:
               -
                 value: systems
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+        a2bc1f31-102d-4c9c-8dd6-6c528bd1242c:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: internal
             effect: show
             effect_options: {  }
             selector: ''
@@ -425,6 +482,12 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_sections:
+    type: options_select
+    weight: 16
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_select_auditee:
     weight: 11
     settings: {  }
@@ -525,8 +588,6 @@ content:
 hidden:
   body: true
   created: true
-  field_department: true
-  field_sections: true
   field_select_audit: true
   field_unit: true
   path: true

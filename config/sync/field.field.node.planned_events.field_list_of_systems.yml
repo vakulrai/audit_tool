@@ -9,7 +9,7 @@ id: node.planned_events.field_list_of_systems
 field_name: field_list_of_systems
 entity_type: node
 bundle: planned_events
-label: 'List of Systems'
+label: 'List of Procedure'
 description: ''
 required: false
 translatable: false

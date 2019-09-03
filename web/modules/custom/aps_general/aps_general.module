@@ -387,6 +387,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $form['field_department']['widget']['#access'] = FALSE;
       $form['field_functions']['widget']['#access'] = FALSE;
     }
+    $selected_department['_none'] = '-None-';
      foreach ($nids as $i => $j) {
       $title = Node::load($j->entity_id);
       $selected_department[$j->entity_id] = $title->title->value;
@@ -415,10 +416,16 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
 
     if(\Drupal::routeMatch()->getRouteName() == 'user.admin_create' && \Drupal::request()->query->get('type') == 'auditor'){
+      $form['field_sections']['#attributes'] = ['id' => ['auditor-section']];
       $form['account']['roles']['#default_value'] = 'auditor';
       $form['account']['roles']['#disabled'] = 1;
       $form['field_unit']['#access'] = FALSE;
       $form['field_assigned']['#access'] = FALSE;
+      $form['field_department']['widget']['#ajax'] = [
+        'callback' => 'getSectionfromdepartment',
+        'wrapper' => 'auditor-section',
+        'event' => 'change',
+      ];
     }
     elseif(\Drupal::routeMatch()->getRouteName() == 'user.admin_create' && \Drupal::request()->query->get('type') == 'default'){
       unset($form['account']['roles']['#options']['authenticated']);
@@ -1483,7 +1490,7 @@ function aps_general_link_alter(&$variables) {
     }
   }
   
-  if ($cleanLinkText == 'ORGANISATION') {
+  if ($cleanLinkText == 'Organisation') {
     $id = $uri[1];
     if($id){
       $variables['url']->setRouteParameter('unit_reference', $id);
@@ -1732,7 +1739,7 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
-  if ($cleanLinkText == 'CUSTOMERS') {
+  if ($cleanLinkText == 'Customers') {
     $id = $uri[1];
     if($id){
       $variables['url']->setRouteParameter('unit_reference', $id);
@@ -1760,7 +1767,7 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
-  if ($cleanLinkText == 'SCHEDULING') {
+  if ($cleanLinkText == 'Scheduling') {
     $id = $uri[1];
     if($id){
       $url =Url::fromUserInput('/audit-planning/'.$id);
@@ -1796,7 +1803,7 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
-  if ($cleanLinkText == 'HOLIDAY LIST') {
+  if ($cleanLinkText == 'Holiday List') {
 
     $id = $uri[1];
     if($id){
@@ -1828,7 +1835,7 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
-   if ($cleanLinkText == 'SUPPLIERS') {
+   if ($cleanLinkText == 'Suppliers') {
     $id = $uri[1];
     if($id){
       $variables['url']->setRouteParameter('unit_reference', $id);
