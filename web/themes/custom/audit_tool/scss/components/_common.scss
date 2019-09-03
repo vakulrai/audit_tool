@@ -1,10 +1,12 @@
 .breadcrumb {
   padding: 0.25rem 1rem;
-  li{
-    a{
+
+  li {
+    a {
       color: #A7B5BC;
     }
-    &.active{
+
+    &.active {
       color: #657D89;
     }
   }
