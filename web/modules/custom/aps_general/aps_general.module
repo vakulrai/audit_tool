@@ -1440,12 +1440,12 @@ function aps_general_preprocess_breadcrumb(&$variables) {
     $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.bp',['arg_0' => $node_id->field_refere->target_id]);
   }
 
-  if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'section'){
+  if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'department'){
     $variables['breadcrumb'][1] = ['text' => t('Department Listing')];
     $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.department_listing',['arg_0' => $node_id->field_refere->target_id]);
   }
 
-  if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'department'){
+  if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'section'){
     $variables['breadcrumb'][1] = ['text' => t('Section Listing')];
     $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.section_list',['arg_0' => $node_id->field_refere->target_id]);
   }
