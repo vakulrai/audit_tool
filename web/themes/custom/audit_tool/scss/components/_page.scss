@@ -1,7 +1,17 @@
-#main-wrapper{
-  padding: 30px 0px;
-  background:  #FAFAFA 0% 0% no-repeat padding-box;
+.layout-main-wrapper {
+  padding: 30px 0;
+  background: #FAFAFA 0 0 no-repeat padding-box;
 }
-.site-footer{
-  background:  #FAFAFA 0% 0% no-repeat padding-box;
+
+.site-footer {
+  background: #FAFAFA 0 0 no-repeat padding-box;
+}
+//Listing page css
+.audittool-front-page {
+  background: #FCFDFF 0 0 no-repeat padding-box;
+
+  .audittool-front-page-container {
+    max-width: 1274px;
+    margin: auto;
+  }
 }
