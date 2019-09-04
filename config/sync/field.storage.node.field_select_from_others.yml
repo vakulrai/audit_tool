@@ -1,0 +1,24 @@
+uuid: 7c731a07-0870-447d-af23-ea1ac4e704a7
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_select_from_others
+field_name: field_select_from_others
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: others
+      label: 'Select from others'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

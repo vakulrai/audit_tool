@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.planned_events.field_list_of_process
     - field.field.node.planned_events.field_list_of_product
     - field.field.node.planned_events.field_list_of_systems
+    - field.field.node.planned_events.field_other_users
     - field.field.node.planned_events.field_pre_audit_status
     - field.field.node.planned_events.field_proceed_with_audit
     - field.field.node.planned_events.field_refere
@@ -25,6 +26,7 @@ dependencies:
     - field.field.node.planned_events.field_sections
     - field.field.node.planned_events.field_select_audit
     - field.field.node.planned_events.field_select_auditee
+    - field.field.node.planned_events.field_select_from_others
     - field.field.node.planned_events.field_select_mr
     - field.field.node.planned_events.field_select_users
     - field.field.node.planned_events.field_shift
@@ -57,9 +59,9 @@ content:
     region: content
   content_moderation_control:
     weight: -20
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   field_audit_reasons:
     type: entity_reference_revisions_entity_view
     weight: 129
@@ -156,6 +158,14 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_other_users:
+    weight: 134
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_pre_audit_status:
     weight: 128
     label: above
@@ -224,6 +234,13 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_select_from_others:
+    weight: 135
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_select_mr:
     weight: 133
@@ -314,7 +331,7 @@ content:
     region: content
   links:
     weight: 100
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden: {  }

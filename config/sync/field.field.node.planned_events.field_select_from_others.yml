@@ -1,20 +1,20 @@
-uuid: cc50aee2-dcef-42cf-8c06-9cb493c17580
+uuid: 4f2d5280-d28e-4c49-be70-dc99e7b213d0
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_audit_type
+    - field.storage.node.field_select_from_others
     - node.type.planned_events
   module:
     - options
-id: node.planned_events.field_audit_type
-field_name: field_audit_type
+id: node.planned_events.field_select_from_others
+field_name: field_select_from_others
 entity_type: node
 bundle: planned_events
-label: 'Audit Type'
+label: 'Select from Others'
 description: ''
-required: true
-translatable: true
+required: false
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }

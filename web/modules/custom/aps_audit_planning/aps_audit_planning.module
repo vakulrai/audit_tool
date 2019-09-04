@@ -60,6 +60,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_available_procedures']['#attributes'] = ['id' => ['procedure-type']];
     $form['field_auditor']['#attributes'] = ['id' => ['auditor-list']];
     $form['field_select_auditee']['#attributes'] = ['id' => ['auditee-list']];
+    $form['field_other_users']['#attributes'] = ['id' => ['auditee-other']];
     $get_department_options = getDepartmenttypeUnderunit('department', $id);
     $form['field_department']['widget']['#options'] = $get_department_options;
     
@@ -91,12 +92,14 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       if(count($element_dept['#value']) >= 0){
         $key = $element_dept['#value'];
         if($element_dept['#field_name'] == 'field_list_of_systems'){
-          $form['field_auditor']['widget']['#options'] = getAuditorList($key, 'system');
+          $form['field_auditor']['widget']['#options'] = getAuditorList($key, 'auditor');
           $form['field_select_auditee']['widget']['#options'] = getAuditorList($key, 'auditee');
+          $form['field_other_users']['widget']['#options'] = getAuditorList($key, 'auditee-others');
         }
         elseif($element_dept['#field_name'] == 'field_list_of_process'){
-          $form['field_auditor']['widget']['#options'] = getAuditorList($key, 'process');
+          $form['field_auditor']['widget']['#options'] = getAuditorList($key, 'auditor');
           $form['field_select_auditee']['widget']['#options'] = getAuditorList($key, 'auditee');
+          $form['field_other_users']['widget']['#options'] = getAuditorList($key, 'auditee-others');
         }
       }
     }
@@ -113,6 +116,45 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       ],
       'required' => [
         'select[name="field_audit_type"]' => ['value' => 'internal'],
+      ],
+    ];
+
+    $form['field_select_from_others']['#states'] = [
+      'visible' => [
+        ['select[name="field_list_of_systems"]' => ['!value' => '_none']]
+        ,'or',
+        ['select[name="field_list_of_process"]' => ['!value' => '_none']]
+        ,'or',
+        ['select[name="field_list_of_product"]' => ['!value' => '_none']]
+      ],
+      'invisible' => [
+        [
+          ['select[name="field_audit_type"]' => ['value' => '_none']]
+          ,'and',
+          ['select[name="field_list_of_systems"]' => ['value' => '_none']]
+        ]
+        ,'or',
+        [
+          ['select[name="field_audit_type"]' => ['value' => '_none']]
+           ,'and',
+          'select[name="field_list_of_process"]' => ['value' => '_none']
+        ]
+        ,'or',
+        [
+          ['select[name="field_audit_type"]' => ['value' => '_none']]
+           ,'and',
+          ['select[name="field_list_of_product"]' => ['value' => '_none']]
+        ]
+        ,'or',
+        [
+          ['select[name="field_audit_type"]' => ['value' => 'external']]
+           ,'or',
+          ['select[name="field_audit_type"]' => ['value' => 'supplier']]
+          ,'or',
+          ['select[name="field_audit_type"]' => ['value' => 'customer']]
+          ,'or',
+          ['select[name="field_audit_type"]' => ['value' => '_none']]
+        ]
       ],
     ];
 
@@ -135,10 +177,47 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
 
     $form['field_select_auditee']['#states'] = [
       'visible' => [
-        'select[name="field_audit_type"]' => ['value' => 'internal'],
+        ['select[name="field_list_of_systems"]' => ['!value' => '_none']]
+        ,'or',
+        ['select[name="field_list_of_process"]' => ['!value' => '_none']]
+        ,'or',
+        ['select[name="field_list_of_product"]' => ['!value' => '_none']]
+      ],
+      'invisible' => [
+        [
+          ['select[name="field_audit_type"]' => ['value' => '_none']]
+          ,'and',
+          ['select[name="field_list_of_systems"]' => ['value' => '_none']]
+        ]
+        ,'or',
+        [
+          ['select[name="field_audit_type"]' => ['value' => '_none']]
+           ,'and',
+          'select[name="field_list_of_process"]' => ['value' => '_none']
+        ]
+        ,'or',
+        [
+          ['select[name="field_audit_type"]' => ['value' => '_none']]
+           ,'and',
+          ['select[name="field_list_of_product"]' => ['value' => '_none']]
+        ]
+        ,'or',
+        [
+          ['select[name="field_audit_type"]' => ['value' => 'external']]
+           ,'or',
+          ['select[name="field_audit_type"]' => ['value' => 'supplier']]
+          ,'or',
+          ['select[name="field_audit_type"]' => ['value' => 'customer']]
+          ,'or',
+          ['select[name="field_audit_type"]' => ['value' => '_none']]
+        ]
       ],
       'required' => [
-        'select[name="field_audit_type"]' => ['value' => 'internal'],
+        ['select[name="field_list_of_systems"]' => ['!value' => '_none']]
+        ,'or',
+        ['select[name="field_list_of_process"]' => ['!value' => '_none']]
+        ,'or',
+        ['select[name="field_list_of_product"]' => ['!value' => '_none']]
       ],
     ];
 
@@ -360,6 +439,7 @@ function getAuditorfromProcess(array $form, FormStateInterface $form_state) {
   $ajax_response = new AjaxResponse();
   $ajax_response->addCommand(new HtmlCommand('#auditor-list',$form['field_auditor']));
   $ajax_response->addCommand(new HtmlCommand('#auditee-list',$form['field_select_auditee']));
+  $ajax_response->addCommand(new HtmlCommand('#auditee-other',$form['field_other_users']));
   return $ajax_response;
   // if(count($form_state->getValue('field_list_of_process')) >= 0){
   //   $department_array = $form_state->getValue('field_list_of_process')[0];
@@ -373,6 +453,7 @@ function getAuditorfromProcedure(array $form, FormStateInterface $form_state) {
   $ajax_response = new AjaxResponse();
   $ajax_response->addCommand(new HtmlCommand('#auditor-list',$form['field_auditor']));
   $ajax_response->addCommand(new HtmlCommand('#auditee-list',$form['field_select_auditee']));
+  $ajax_response->addCommand(new HtmlCommand('#auditee-other',$form['field_other_users']));
   return $ajax_response;
   // if(count($form_state->getValue('field_list_of_systems')) >= 0){
   //   $department_array = $form_state->getValue('field_list_of_systems')[0];
@@ -517,6 +598,7 @@ function getShift(array $form, FormStateInterface $form_state) {
 
 function getUserINfo(array $form, FormStateInterface $form_state) {
   // $ajax_response = new AjaxResponse();
+  $user_score = '';
   if($form_state->getValue('field_auditor')[0]){
     $user_array = $form_state->getValue('field_auditor')[0];
     $uid = $user_array['target_id'];
@@ -537,14 +619,17 @@ function getUserINfo(array $form, FormStateInterface $form_state) {
       }
     }
     
-    if($user_function = Paragraph::load($profile['field_functions'])){
-      $score = $user_function->get('field_score')->value;
-      $user_score = $score;
+    if($profile['field_functions']){
+      foreach ($profile['field_functions'] as $function_key => $function_value) {
+        $score = Paragraph::load($function_value)->get('field_score')->value;
+        $function = Paragraph::load($function_value)->get('field_functions_qualified')->value;
+        $user_score .= '<b>Function Name: </b>'.$function.'<br> <b>Score: </b>'.$score.'</br>-------------<br>';
+      }
     }
     else{
       $user_score = "Not Available";
     }
-
+// print_r($user_score);die;
     $form['user_details'] = array(
       '#type' => 'fieldset', 
       '#title' => t('User Details'), 
@@ -623,54 +708,32 @@ function getDeptDropdownOptions($key = '') {
 function getAuditorList($key = '',$type =NULL) {
   $auditor_list = [];
   $section_list = [];
-  if($type == 'process'){
+  if($type == 'auditor'){
     if($key){
       $node_object = Node::load($key);
       if($node_object->bundle() == 'assembly'){
         $section_reference = $node_object->field_select_section->target_id;
         $department_refe = Node::load($section_reference)->field_select_department_type->target_id;
       }
-      else{
+      elseif ($node_object->bundle() == 'manufacturing_process') {
         $section_reference = $node_object->field_section->target_id;
         $department_refe = Node::load($section_reference)->field_select_department_type->target_id;
       }
-      $query = \Drupal::database()->select('user__field_sections', 'n');
-      $query->fields('n',['entity_id', 'bundle', 'field_sections_target_id']);
-      $query->condition('n.bundle', 'user');
-      $query->condition('n.field_sections_target_id', $section_reference);
-      $section_users = $query->execute()->fetchAll();  
-      foreach ($section_users as $section_user_key => $section_user_val) {
-        $section_list[$section_user_val->entity_id] = $section_user_val->entity_id;
-      }
-      $users = \Drupal::entityQuery('user');
-      $users->condition('field_department', $department_refe);
-      $users_list = $users->execute();
-      $user_data = array_diff($users_list, $section_list);
-      $auditor_list['_none'] = '-None-';
-      foreach ($user_data as $user_id => $user_value) {
-        $auditor_list[$user_id] = User::load($user_id)->name->value;
-      }
-    }
-  }
-  elseif ($type == 'system') {
-    if($key){
-      $node_object = Node::load($key);
-      if($node_object->bundle() == 'procedures'){
+      elseif ($node_object->bundle() == 'procedures') {
         $section_reference = $node_object->field_section_type->target_id;
         $department_refe = $node_object->field_department->target_id;
       }
-      $query = \Drupal::database()->select('user__field_sections', 'n');
-      $query->fields('n',['entity_id', 'bundle', 'field_sections_target_id']);
-      $query->condition('n.bundle', 'user');
-      $query->condition('n.field_sections_target_id', $section_reference);
-      $section_users = $query->execute()->fetchAll();
-      foreach ($section_users as $section_user_key => $section_user_val) {
-        $section_list[$section_user_val->entity_id] = $section_user_val->entity_id;
-      }
+      $query = \Drupal::entityQuery('user');
+      $query->condition('field_sections', $section_reference);
+      $query->condition('roles', 'auditor');
+      $section_users = $query->execute();  
+
       $users = \Drupal::entityQuery('user');
       $users->condition('field_department', $department_refe);
+      $users->condition('roles', 'auditor');
       $users_list = $users->execute();
-      $user_data = array_diff($users_list, $section_list);
+
+      $user_data = array_diff($users_list, $section_users);
       $auditor_list['_none'] = '-None-';
       foreach ($user_data as $user_id => $user_value) {
         $auditor_list[$user_id] = User::load($user_id)->name->value;
@@ -680,23 +743,62 @@ function getAuditorList($key = '',$type =NULL) {
   elseif ($type == 'auditee') {
     if($key){
       $node_object = Node::load($key);
-      if($node_object->bundle() == 'procedures'){
+      if($node_object->bundle() == 'assembly'){
+        $section_reference = $node_object->field_select_section->target_id;
+        $department_refe = Node::load($section_reference)->field_select_department_type->target_id;
+      }
+      elseif ($node_object->bundle() == 'manufacturing_process') {
+        $section_reference = $node_object->field_section->target_id;
+        $department_refe = Node::load($section_reference)->field_select_department_type->target_id;
+      }
+      elseif ($node_object->bundle() == 'procedures') {
         $section_reference = $node_object->field_section_type->target_id;
         $department_refe = $node_object->field_department->target_id;
       }
-       $query = \Drupal::database()->select('user__field_sections', 'n');
-      $query->fields('n',['entity_id', 'bundle', 'field_sections_target_id']);
-      $query->condition('n.bundle', 'user');
-      $query->condition('n.field_sections_target_id', $section_reference);
-      $section_users = $query->execute()->fetchAll();
-      foreach ($section_users as $section_user_key => $section_user_val) {
-        $section_list[$section_user_val->entity_id] = $section_user_val->entity_id;
-      }
+      $query = \Drupal::entityQuery('user');
+      $query->condition('field_sections', $section_reference);
+      $query->condition('roles', 'auditee');
+      $section_users = $query->execute();
+
       $users = \Drupal::entityQuery('user');
       $users->condition('field_department', $department_refe);
+      $users->condition('roles', 'auditee');
       $users_list = $users->execute();
-      $user_data = array_merge($users_list, $section_list);
-      $auditor_list['_none'] = '-None-';
+  
+      $user_data = array_merge($users_list, $section_users);
+      foreach ($section_users as $user_id => $user_value) {
+        $auditor_list[$user_value] = User::load($user_value)->name->value;
+      }
+    }
+    $auditor_list = array_unique($auditor_list);
+  }
+  elseif ($type == 'auditee-others') {
+    if($key){
+      $node_object = Node::load($key);
+      if($node_object->bundle() == 'assembly'){
+        $section_reference = $node_object->field_select_section->target_id;
+        $department_refe = Node::load($section_reference)->field_select_department_type->target_id;
+      }
+      elseif ($node_object->bundle() == 'manufacturing_process') {
+        $section_reference = $node_object->field_section->target_id;
+        $department_refe = Node::load($section_reference)->field_select_department_type->target_id;
+      }
+      elseif ($node_object->bundle() == 'procedures') {
+        $section_reference = $node_object->field_section_type->target_id;
+        $department_refe = $node_object->field_department->target_id;
+      }
+      $query = \Drupal::entityQuery('user');
+      $query->condition('field_sections', $section_reference);
+      $query->condition('roles', 'auditee');
+      $section_users = $query->execute();
+
+      $users = \Drupal::entityQuery('user');
+      $users->condition('field_department', $department_refe);
+      $users->condition('roles', 'auditee');
+      $users_list = $users->execute();
+
+      $user_data = array_diff($users_list, $section_users);
+      
       foreach ($user_data as $user_id => $user_value) {
         $auditor_list[$user_value] = User::load($user_value)->name->value;
       }

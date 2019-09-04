@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.planned_events.field_list_of_process
     - field.field.node.planned_events.field_list_of_product
     - field.field.node.planned_events.field_list_of_systems
+    - field.field.node.planned_events.field_other_users
     - field.field.node.planned_events.field_pre_audit_status
     - field.field.node.planned_events.field_proceed_with_audit
     - field.field.node.planned_events.field_refere
@@ -25,6 +26,7 @@ dependencies:
     - field.field.node.planned_events.field_sections
     - field.field.node.planned_events.field_select_audit
     - field.field.node.planned_events.field_select_auditee
+    - field.field.node.planned_events.field_select_from_others
     - field.field.node.planned_events.field_select_mr
     - field.field.node.planned_events.field_select_users
     - field.field.node.planned_events.field_shift
@@ -52,7 +54,7 @@ third_party_settings:
         - field_auditor
         - field_external_auditor_name
       parent_name: group_who
-      weight: 13
+      weight: 15
       format_type: fieldset
       format_settings:
         id: ''
@@ -108,6 +110,8 @@ third_party_settings:
     group_who:
       children:
         - field_select_auditee
+        - field_select_from_others
+        - field_other_users
         - field_select_mr
         - group_auditor
       parent_name: ''
@@ -148,7 +152,7 @@ mode: default
 content:
   field_audit_reasons:
     type: entity_reference_paragraphs
-    weight: 13
+    weight: 15
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -414,14 +418,38 @@ content:
           bundle: planned_events
     type: options_select
     region: content
+  field_other_users:
+    weight: 13
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        7793781f-8265-4ecc-9508-23013b448fe4:
+          dependee: field_select_from_others
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: others
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: options_select
+    region: content
   field_pre_audit_status:
-    weight: 12
+    weight: 14
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_proceed_with_audit:
-    weight: 14
+    weight: 16
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -482,8 +510,15 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
-  field_select_mr:
+  field_select_from_others:
     weight: 12
+    settings: {  }
+    third_party_settings:
+      conditional_fields: {  }
+    type: options_buttons
+    region: content
+  field_select_mr:
+    weight: 14
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -507,7 +542,7 @@ content:
     type: datetime_timestamp
     region: content
   field_suggested_date:
-    weight: 11
+    weight: 13
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -519,7 +554,7 @@ content:
     type: daterange_default
     region: content
   field_tolerance:
-    weight: 12
+    weight: 14
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -546,14 +581,14 @@ content:
     type: datetime_default
     region: content
   field_total_mandays:
-    weight: 11
+    weight: 13
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_year_frequency:
-    weight: 10
+    weight: 12
     settings:
       placeholder: ''
     third_party_settings: {  }
