@@ -6,13 +6,13 @@
 .header .user-login-header .menu--account {
   width: 100%;
   max-height: 30px;
-  background-color: #FADB23;
+  background-color: #fadb23;
 }
 .header .user-login-header .menu--account .nav {
   font-size: 12px;
 }
 .header .user-login-header .menu--account .nav .nav-link {
-  color: #657D89;
+  color: #657d89;
   font-weight: bold;
   position: relative;
 }
@@ -32,7 +32,7 @@
   font-weight: 500;
   padding: 8px 96px 0;
   font-size: 12px;
-  color: #657D89;
+  color: #657d89;
 }
 .header .user-login-header .navbar-brand {
   width: 118.97px;
@@ -48,7 +48,7 @@
   padding: 15px 0;
 }
 .header .user-login-header #block-adminmainmenudeputy #superfish-admin-main-menu-deputy .sf-depth-1 {
-  color: #657D89;
+  color: #657d89;
   font-size: 16px;
   font-weight: bold;
 }
@@ -68,7 +68,7 @@
   padding: 15px 0;
 }
 .header .user-login-header #block-adminmainmenu-4 #superfish-admin-main-menu .sf-depth-1 {
-  color: #657D89;
+  color: #657d89;
   font-size: 16px;
   font-weight: bold;
 }
@@ -86,7 +86,7 @@
   background: #ffffff;
 }
 .header .user-login-header #block-adminmainmenu-4 #superfish-admin-main-menu .menu-bar-class ul a {
-  color: #657D89;
+  color: #657d89;
 }
 .header .navbar {
   padding: 0;
@@ -103,7 +103,7 @@
   float: none;
 }
 .audit-dashboard .sidebar_first .block-superfishadmin-sub-menu #superfish-admin-sub-menu .sf-depth-1 .sf-depth-1 {
-  color: #657D89;
+  color: #657d89;
   font-size: 14px;
   border-bottom: 1px solid #F2F2F2;
 }
@@ -111,12 +111,12 @@
   font-size: 11px;
 }
 .audit-dashboard .sidebar_first .block-superfishadmin-sub-menu #superfish-admin-sub-menu .sf-depth-1 ul {
-  background: #FAFAFA;
+  background: #fafafa;
   font-size: 14px;
   left: 14em;
 }
 .audit-dashboard .sidebar_first .block-superfishadmin-sub-menu #superfish-admin-sub-menu .sf-depth-1 ul a {
-  color: #657D89;
+  color: #657d89;
   text-transform: capitalize;
 }
 
@@ -124,7 +124,7 @@
   margin: 31px 0;
 }
 .audit-dashboard-page #block-audit-tool-views-block-user-registration-view-details {
-  background: #FAFAFA 0 0 no-repeat padding-box;
+  background: #fafafa 0 0 no-repeat padding-box;
   border: 1px solid #EAEAEA;
   border-radius: 4px;
 }
@@ -139,17 +139,17 @@
 .audit-dashboard-page #block-audit-tool-views-block-user-registration-view-details .table-responsive .table th,
 .audit-dashboard-page #block-audit-tool-views-block-user-registration-view-details .table-responsive .table thead,
 .audit-dashboard-page #block-audit-tool-views-block-user-registration-view-details .table-responsive .table tr {
-  background: #FAFAFA 0 0 no-repeat padding-box;
+  background: #fafafa 0 0 no-repeat padding-box;
   border: 0;
 }
 .audit-dashboard-page #block-audit-tool-views-block-user-registration-view-details .table-responsive .table th {
   color: #202020;
 }
 .audit-dashboard-page #block-audit-tool-views-block-user-registration-view-details .table-responsive .table td {
-  color: #657D89;
+  color: #657d89;
 }
 .audit-dashboard-page #block-audit-tool-generatereports {
-  background: #FFFFFF 0 0 no-repeat padding-box;
+  background: #ffffff 0 0 no-repeat padding-box;
   box-shadow: 0 3px 9px #0000000F;
   border: 1px solid #EAEAEA;
   border-radius: 4px;
@@ -161,14 +161,14 @@
   font-weight: bold;
 }
 .audit-dashboard-page #block-audit-tool-generatereports label {
-  color: #657D89;
+  color: #657d89;
   font-size: 12px;
 }
 .audit-dashboard-page #block-audit-tool-generatereports #display-status-reports .btn-primary {
-  background: #FFFFFF 0 0 no-repeat padding-box;
-  border: 1px solid #657D89;
+  background: #ffffff 0 0 no-repeat padding-box;
+  border: 1px solid #657d89;
   border-radius: 4px;
-  color: #657D89;
+  color: #657d89;
 }
 .audit-dashboard-page .sidebar_second {
   padding-right: 0;
@@ -180,7 +180,7 @@
 
 #block-audit-tool-mradmindashboardcoverage,
 #block-audit-tool-mradmindashboardplanningcontrol {
-  background: #FFFFFF 0 0 no-repeat padding-box;
+  background: #ffffff 0 0 no-repeat padding-box;
   box-shadow: 0 3px 9px #0000000F;
   border: 1px solid #EAEAEA;
   border-radius: 4px;
@@ -193,7 +193,7 @@
 }
 
 .audittool-front-page .audit-listing-block {
-  background: #FFFFFF 0 0 no-repeat padding-box;
+  background: #ffffff 0 0 no-repeat padding-box;
   border: 1px solid #F2F4F6;
   border-radius: 4px;
   max-width: 21%;
@@ -220,7 +220,7 @@
   padding: 15px 0;
 }
 .audittool-front-page .audit-listing-block .views-field-edit-node .button {
-  background: #FFFFFF 0 0 no-repeat padding-box;
+  background: #ffffff 0 0 no-repeat padding-box;
   border: 1px solid #5D62E6;
   border-radius: 4px;
   color: #5D62E6;
@@ -233,11 +233,11 @@
 
 .layout-main-wrapper {
   padding: 30px 0;
-  background: #FAFAFA 0 0 no-repeat padding-box;
+  background: #fafafa 0 0 no-repeat padding-box;
 }
 
 .site-footer {
-  background: #FAFAFA 0 0 no-repeat padding-box;
+  background: #fafafa 0 0 no-repeat padding-box;
 }
 
 .audittool-front-page {
@@ -248,21 +248,33 @@
   margin: auto;
 }
 
-.audit-business-process .node-business-process-form, .audit-business-process .node-department-form {
-  background: #FFFFFF 0 0 no-repeat padding-box;
+.audit-business-process .node-business-process-form,
+.audit-business-process .node-department-form {
+  background: #ffffff 0 0 no-repeat padding-box;
   border: 1px solid #F2F4F6;
   border-radius: 4px;
   padding: 24px;
 }
-.audit-business-process .node-business-process-form label, .audit-business-process .node-business-process-form legend, .audit-business-process .node-business-process-form .media-library-widget-empty-text, .audit-business-process .node-department-form label, .audit-business-process .node-department-form legend, .audit-business-process .node-department-form .media-library-widget-empty-text {
+.audit-business-process .node-business-process-form .media-library-widget-empty-text,
+.audit-business-process .node-business-process-form label,
+.audit-business-process .node-business-process-form legend,
+.audit-business-process .node-department-form .media-library-widget-empty-text,
+.audit-business-process .node-department-form label,
+.audit-business-process .node-department-form legend {
   color: #9BA6B3;
   font-size: 12px;
 }
-.audit-business-process .field--name-title, .audit-business-process .field--name-field-business-head-name, .audit-business-process .field--type-entity-reference, .audit-business-process .field--type-list-integer {
+.audit-business-process .field--name-field-business-head-name,
+.audit-business-process .field--name-title,
+.audit-business-process .field--type-entity-reference,
+.audit-business-process .field--type-list-integer {
   width: 25%;
   float: left;
 }
-.audit-business-process .field--name-title .js-form-type-select label, .audit-business-process .field--name-field-business-head-name .js-form-type-select label, .audit-business-process .field--type-entity-reference .js-form-type-select label, .audit-business-process .field--type-list-integer .js-form-type-select label {
+.audit-business-process .field--name-field-business-head-name .js-form-type-select label,
+.audit-business-process .field--name-title .js-form-type-select label,
+.audit-business-process .field--type-entity-reference .js-form-type-select label,
+.audit-business-process .field--type-list-integer .js-form-type-select label {
   margin-bottom: 11px;
 }
 .audit-business-process .field--widget-media-library-widget {
@@ -271,52 +283,57 @@
 .audit-business-process .field--type-language {
   display: none;
 }
-.audit-business-process .field--type-entity-reference-revisions .table-responsive .tabledrag-toggle-weight-wrapper, .audit-business-process .field--type-entity-reference-revisions .table-responsive .paragraph-type-title {
+.audit-business-process .field--type-entity-reference-revisions .table-responsive .paragraph-type-title,
+.audit-business-process .field--type-entity-reference-revisions .table-responsive .tabledrag-toggle-weight-wrapper {
   display: none;
 }
 .audit-business-process .field--type-entity-reference-revisions .table-responsive .field-label {
-  background: #F8F9FA 0% 0% no-repeat padding-box;
-  border: 0px;
+  background: #F8F9FA 0 0 no-repeat padding-box;
+  border: 0;
   padding: 8px 18px;
 }
 .audit-business-process .field--type-entity-reference-revisions .table-responsive .field-label .label {
   font-size: 15px;
-  margin: 0px;
+  margin: 0;
   color: #23272D;
 }
 .audit-business-process .field--type-entity-reference-revisions .table-responsive .field-multiple-drag {
   display: none;
 }
 .audit-business-process .field--type-entity-reference-revisions .table-responsive tr {
-  border: 0px;
+  border: 0;
 }
-.audit-business-process .field--type-entity-reference-revisions .table-responsive td, .audit-business-process .field--type-entity-reference-revisions .table-responsive .col-auto {
-  padding: 0px;
-  margin: 0px;
+.audit-business-process .field--type-entity-reference-revisions .table-responsive .col-auto,
+.audit-business-process .field--type-entity-reference-revisions .table-responsive td {
+  padding: 0;
+  margin: 0;
   background: #ffffff;
-  border: 0px;
+  border: 0;
 }
-.audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-string, .audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-integer {
+.audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-integer,
+.audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-string {
   width: 22%;
   float: left;
   margin: 15px;
 }
-.audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-string .form-text, .audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-integer .form-text {
-  margin-top: 0px;
+.audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-integer .form-text,
+.audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-string .form-text {
+  margin-top: 0;
 }
-.audit-business-process .field-add-more-submit, .audit-business-process .media-library-open-button {
+.audit-business-process .field-add-more-submit,
+.audit-business-process .media-library-open-button {
   color: #7E8E9D;
   font-size: 12px;
   background: #ffffff;
   border: 1px dotted;
   text-align: inherit;
   width: 20%;
-  margin: 0px 14px;
+  margin: 0 14px;
 }
 .audit-business-process #edit-submit {
   width: 10%;
   float: left;
-  margin: 0px 10px;
+  margin: 0 10px;
   border: 1px solid #5D62E6;
   color: #5D62E6;
   background: #ffffff;
@@ -324,9 +341,82 @@
 }
 .audit-business-process #edit-continue-dept {
   width: 17%;
-  background: #5D62E6 0% 0% no-repeat padding-box;
+  background: #5D62E6 0 0 no-repeat padding-box;
   border-radius: 4px;
   color: #ffffff;
+}
+
+.audit-section-process .node-section-form {
+  background: #ffffff 0 0 no-repeat padding-box;
+  border: 1px solid #F2F4F6;
+  border-radius: 4px;
+  padding: 24px;
+}
+.audit-section-process .node-section-form .layout-region-node-main {
+  padding: 0;
+}
+.audit-section-process .node-section-form .field--name-field-section-head,
+.audit-section-process .node-section-form .field--name-field-select-department-type,
+.audit-section-process .node-section-form .field--type-string {
+  width: 33.3%;
+  float: left;
+}
+.audit-section-process .node-section-form .media-library-widget-empty-text,
+.audit-section-process .node-section-form label,
+.audit-section-process .node-section-form legend {
+  color: #9BA6B3;
+  font-size: 12px;
+}
+.audit-section-process .node-section-form .js-form-item {
+  color: #212529;
+  font-size: 14px;
+}
+.audit-section-process .node-section-form .media-library-open-button {
+  color: #7E8E9D;
+  font-size: 12px;
+  background: #ffffff;
+  border: 1px dotted;
+  text-align: inherit;
+  width: 20%;
+  margin: 0 14px;
+}
+.audit-section-process .node-section-form #edit-submit {
+  width: 10%;
+  float: left;
+  margin: 0 10px;
+  border: 1px solid #5D62E6;
+  color: #5D62E6;
+  background: #ffffff;
+  border-radius: 4px;
+}
+.audit-section-process .node-section-form .field--name-field-assembly,
+.audit-section-process .node-section-form .field--name-field-shift {
+  width: 50%;
+  float: left;
+}
+.audit-section-process .node-section-form .field--name-field-shift {
+  margin-bottom: 69px;
+}
+
+.holiday_list_table .field__label {
+  display: none;
+}
+
+.node-unit-edit-form {
+  background: #ffffff 0 0 no-repeat padding-box;
+  border: 1px solid #F2F4F6;
+  border-radius: 4px;
+  padding: 24px;
+}
+.node-unit-edit-form .field--name-field-field-months-for-the-audit .checkbox {
+  display: flex;
+}
+
+.audit-add-role #block-audit-tool-mainpagecontent {
+  background: #ffffff 0 0 no-repeat padding-box;
+  border: 1px solid #F2F4F6;
+  border-radius: 4px;
+  padding: 24px;
 }
 
 .breadcrumb {
@@ -336,12 +426,12 @@
   color: #A7B5BC;
 }
 .breadcrumb li.active {
-  color: #657D89;
+  color: #657d89;
 }
 
 #block-audit-tool-pagetitle .title {
   font-size: 22px;
-  padding: 24px 0px;
+  padding: 24px 0;
 }
 
 /*# sourceMappingURL=style.css.map */

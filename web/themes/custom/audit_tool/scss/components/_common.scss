@@ -3,17 +3,18 @@
 
   li {
     a {
-      color: #A7B5BC;
+      color: $grey-color;
     }
 
     &.active {
-      color: #657D89;
+      color: $link-color;
     }
   }
 }
-#block-audit-tool-pagetitle{
-  .title{
+
+#block-audit-tool-pagetitle {
+  .title {
     font-size: 22px;
-    padding: 24px 0px;
+    padding: 24px 0;
   }
 }

@@ -23,7 +23,7 @@ bundle: section
 mode: default
 content:
   field_assembly:
-    weight: 2
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
@@ -52,7 +52,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_section_head:
-    weight: 3
+    weight: 2
     settings:
       match_operator: CONTAINS
       size: 60

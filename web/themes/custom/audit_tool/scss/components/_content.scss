@@ -13,9 +13,9 @@
           float: none;
 
           .sf-depth-1 {
-            color: #657D89;
+            color: $link-color;
             font-size: 14px;
-            border-bottom: 1px solid #F2F2F2;
+            border-bottom: 1px solid $lightest-grey;
 
             .sf-sub-indicator {
               &:after {
@@ -25,12 +25,12 @@
           }
 
           ul {
-            background: #FAFAFA;
+            background: $bg-grey;
             font-size: 14px;
             left: 14em;
 
             a {
-              color: #657D89;
+              color: $link-color;
               text-transform: capitalize;
             }
           }
@@ -44,13 +44,13 @@
   margin: 31px 0;
 
   #block-audit-tool-views-block-user-registration-view-details {
-    background: #FAFAFA 0 0 no-repeat padding-box;
-    border: 1px solid #EAEAEA;
+    background: $bg-grey 0 0 no-repeat padding-box;
+    border: 1px solid $bg-light-grey;
     border-radius: 4px;
 
     .table-responsive {
       padding: 0;
-      border: 1px solid #EAEAEA;
+      border: 1px solid $bg-light-grey;
 
       .table {
         margin: 0;
@@ -59,25 +59,25 @@
         th,
         thead,
         tr {
-          background: #FAFAFA 0 0 no-repeat padding-box;
+          background: $bg-grey 0 0 no-repeat padding-box;
           border: 0;
         }
 
         th {
-          color: #202020;
+          color: $light-black;
         }
 
         td {
-          color: #657D89;
+          color: $link-color;
         }
       }
     }
   }
 
   #block-audit-tool-generatereports {
-    background: #FFFFFF 0 0 no-repeat padding-box;
+    background: $white 0 0 no-repeat padding-box;
     box-shadow: 0 3px 9px #0000000F;
-    border: 1px solid #EAEAEA;
+    border: 1px solid $bg-light-grey;
     border-radius: 4px;
     margin: 30px 0;
     padding: 16px;
@@ -88,16 +88,16 @@
     }
 
     label {
-      color: #657D89;
+      color: $link-color;
       font-size: 12px;
     }
 
     #display-status-reports {
       .btn-primary {
-        background: #FFFFFF 0 0 no-repeat padding-box;
-        border: 1px solid #657D89;
+        background: $white 0 0 no-repeat padding-box;
+        border: 1px solid $link-color;
         border-radius: 4px;
-        color: #657D89;
+        color: $link-color;
       }
     }
   }
@@ -117,9 +117,9 @@
 
 #block-audit-tool-mradmindashboardcoverage,
 #block-audit-tool-mradmindashboardplanningcontrol {
-  background: #FFFFFF 0 0 no-repeat padding-box;
+  background: $white 0 0 no-repeat padding-box;
   box-shadow: 0 3px 9px #0000000F;
-  border: 1px solid #EAEAEA;
+  border: 1px solid $bg-light-grey;
   border-radius: 4px;
   padding: 16px;
   margin: 20px 0;
@@ -134,15 +134,15 @@
 
 .audittool-front-page {
   .audit-listing-block {
-    background: #FFFFFF 0 0 no-repeat padding-box;
-    border: 1px solid #F2F4F6;
+    background: $white 0 0 no-repeat padding-box;
+    border: 1px solid $border-color;
     border-radius: 4px;
     max-width: 21%;
     margin: 21px;
     padding: 24px;
 
     .views-field-title {
-      color: #23272D;
+      color: $black-text-color;
       font-weight: bold;
       font-size: 16px;
     }
@@ -152,7 +152,7 @@
     }
 
     .views-field-aggregate-unit-address {
-      color: #7E8E9D;
+      color: $text-color;
       font-size: 14px;
       margin: 8px 0;
 
@@ -165,15 +165,15 @@
       padding: 15px 0;
 
       .button {
-        background: #FFFFFF 0 0 no-repeat padding-box;
-        border: 1px solid #5D62E6;
+        background: $white 0 0 no-repeat padding-box;
+        border: 1px solid $voilet;
         border-radius: 4px;
-        color: #5D62E6;
+        color: $voilet;
         padding: 8px 17px;
 
         &:hover {
-          background: #5D62E6 0 0 no-repeat padding-box;
-          color: #ffffff;
+          background: $voilet 0 0 no-repeat padding-box;
+          color: $white;
         }
       }
     }

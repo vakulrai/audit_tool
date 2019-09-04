@@ -1,15 +1,15 @@
 .layout-main-wrapper {
   padding: 30px 0;
-  background: #FAFAFA 0 0 no-repeat padding-box;
+  background: $bg-grey 0 0 no-repeat padding-box;
 }
 
 .site-footer {
-  background: #FAFAFA 0 0 no-repeat padding-box;
+  background: $bg-grey 0 0 no-repeat padding-box;
 }
 //Listing page css
 
 .audittool-front-page {
-  background: #FCFDFF 0 0 no-repeat padding-box;
+  background: $lightest-blue 0 0 no-repeat padding-box;
 
   .audittool-front-page-container {
     max-width: 1274px;
@@ -17,91 +17,210 @@
   }
 }
 //Business_process css and Department css
-.audit-business-process{
-  .node-business-process-form, .node-department-form {
-    background: #FFFFFF 0 0 no-repeat padding-box;
-    border: 1px solid #F2F4F6;
+
+.audit-business-process {
+  .node-business-process-form,
+  .node-department-form {
+    background: $white 0 0 no-repeat padding-box;
+    border: 1px solid $border-color;
     border-radius: 4px;
     padding: 24px;
-    label, legend, .media-library-widget-empty-text{
+
+    .media-library-widget-empty-text,
+    label,
+    legend {
       color: #9BA6B3;
       font-size: 12px;
     }
   }
-  .field--name-title, .field--name-field-business-head-name, .field--type-entity-reference, .field--type-list-integer{
+
+  .field--name-field-business-head-name,
+  .field--name-title,
+  .field--type-entity-reference,
+  .field--type-list-integer {
     width: 25%;
-    float:left;
+    float: left;
+
     .js-form-type-select {
-      label{
+      label {
         margin-bottom: 11px;
       }
     }
   }
-  .field--widget-media-library-widget{
+
+  .field--widget-media-library-widget {
     width: 100%;
   }
-  .field--type-language{
+
+  .field--type-language {
     display: none;
   }
-  .field--type-entity-reference-revisions{
-    .table-responsive{
-      .tabledrag-toggle-weight-wrapper, .paragraph-type-title{
+
+  .field--type-entity-reference-revisions {
+    .table-responsive {
+      .paragraph-type-title,
+      .tabledrag-toggle-weight-wrapper {
         display: none;
       }
-      .field-label{
-        background: #F8F9FA 0% 0% no-repeat padding-box;
-        border: 0px;
+
+      .field-label {
+        background: #F8F9FA 0 0 no-repeat padding-box;
+        border: 0;
         padding: 8px 18px;
-        .label{
+
+        .label {
           font-size: 15px;
-          margin: 0px;
+          margin: 0;
           color: #23272D;
         }
       }
-      .field-multiple-drag{
+
+      .field-multiple-drag {
         display: none;
       }
-      tr{
-        border: 0px;
+
+      tr {
+        border: 0;
       }
-      td, .col-auto{
-        padding: 0px;
-        margin: 0px;
-        background: #ffffff;
-        border: 0px;
+
+      .col-auto,
+      td {
+        padding: 0;
+        margin: 0;
+        background: $white;
+        border: 0;
       }
-      .field--type-string, .field--type-integer{
+
+      .field--type-integer,
+      .field--type-string {
         width: 22%;
         float: left;
         margin: 15px;
-        .form-text{
-          margin-top: 0px;
+
+        .form-text {
+          margin-top: 0;
         }
       }
     }
   }
-  .field-add-more-submit, .media-library-open-button{
+
+  .field-add-more-submit,
+  .media-library-open-button {
     color: #7E8E9D;
     font-size: 12px;
-    background: #ffffff;
+    background: $white;
     border: 1px dotted;
     text-align: inherit;
     width: 20%;
-    margin: 0px 14px;
+    margin: 0 14px;
   }
-  #edit-submit{
+
+  #edit-submit {
     width: 10%;
     float: left;
-    margin: 0px 10px;
+    margin: 0 10px;
     border: 1px solid #5D62E6;
     color: #5D62E6;
-    background: #ffffff;
+    background: $white;
     border-radius: 4px;
   }
-  #edit-continue-dept{
+
+  #edit-continue-dept {
     width: 17%;
-    background: #5D62E6 0% 0% no-repeat padding-box;
+    background: #5D62E6 0 0 no-repeat padding-box;
     border-radius: 4px;
-    color: #ffffff;
+    color: $white;
+  }
+}
+
+.audit-section-process {
+  .node-section-form {
+    background: $white 0 0 no-repeat padding-box;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    padding: 24px;
+    .layout-region-node-main {
+      padding: 0;
+    }
+
+    .field--name-field-section-head,
+    .field--name-field-select-department-type,
+    .field--type-string {
+      width: 33.3%;
+      float: left;
+    }
+
+    .media-library-widget-empty-text,
+    label,
+    legend {
+      color: #9BA6B3;
+      font-size: 12px;
+    }
+
+    .js-form-item {
+      color: #212529;
+      font-size: 14px;
+    }
+
+    .media-library-open-button {
+      color: #7E8E9D;
+      font-size: 12px;
+      background: #ffffff;
+      border: 1px dotted;
+      text-align: inherit;
+      width: 20%;
+      margin: 0 14px;
+    }
+
+    #edit-submit {
+      width: 10%;
+      float: left;
+      margin: 0 10px;
+      border: 1px solid #5D62E6;
+      color: #5D62E6;
+      background: $white;
+      border-radius: 4px;
+    }
+
+    .field--name-field-assembly,
+    .field--name-field-shift {
+      width: 50%;
+      float: left;
+    }
+
+    .field--name-field-shift {
+      margin-bottom: 69px;
+    }
+  }
+}
+
+//Section page css
+.holiday_list_table{
+  .field__label{
+    display: none;
+  }
+}
+
+//unit node page css
+.node-unit-edit-form {
+  background: #ffffff 0 0 no-repeat padding-box;
+    border: 1px solid #F2F4F6;
+    border-radius: 4px;
+    padding: 24px;
+
+    .field--name-field-field-months-for-the-audit{
+      .checkbox{
+        display: flex;
+      }
+    }
+}
+
+//Add Roles css
+.audit-add-role{
+  #block-audit-tool-mainpagecontent{
+    background: #ffffff 0 0 no-repeat padding-box;
+      border: 1px solid #F2F4F6;
+      border-radius: 4px;
+      padding: 24px;
   }
 }
