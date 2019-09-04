@@ -1,5 +1,5 @@
-// Tools
-// @import 'tools/';
+
+@import 'tools/variables';
 // Elements
 // @import 'elements/';
 // Settings
@@ -11,9 +11,4 @@
 @import 'components/header';
 @import 'components/content';
 @import 'components/page';
-@import 'components/common';
-
-// Generic
-// @import 'generic/';
-// Utilities
-// @import 'utilities/';
+@import 'components/common'; 

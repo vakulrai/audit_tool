@@ -7,13 +7,13 @@
     .menu--account {
       width: 100%;
       max-height: 30px;
-      background-color: #FADB23;
+      background-color: $yellow-color;
 
       .nav {
         font-size: 12px;
 
         .nav-link {
-          color: #657D89;
+          color: $link-color;
           font-weight: bold;
           position: relative;
 
@@ -38,7 +38,7 @@
         font-weight: 500;
         padding: 8px 96px 0;
         font-size: 12px;
-        color: #657D89;
+        color: $link-color;
       }
     }
 
@@ -59,7 +59,7 @@
 
       #superfish-admin-main-menu-deputy {
         .sf-depth-1 {
-          color: #657D89;
+          color: $link-color;
           font-size: 16px;
           font-weight: bold;
         }
@@ -85,7 +85,7 @@
 
       #superfish-admin-main-menu {
         .sf-depth-1 {
-          color: #657D89;
+          color: $link-color;
           font-size: 16px;
           font-weight: bold;
         }
@@ -106,10 +106,10 @@
           }
 
           ul {
-            background: #ffffff;
+            background: $white;
 
             a {
-              color: #657D89;
+              color: $link-color;
             }
           }
         }
