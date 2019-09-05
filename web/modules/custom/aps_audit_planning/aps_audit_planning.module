@@ -123,35 +123,35 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
         ,'or',
         ['select[name="field_list_of_product"]' => ['!value' => '_none']]
       ],
-      'invisible' => [
-        [
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-          ,'and',
-          ['select[name="field_list_of_systems"]' => ['value' => '_none']]
-        ]
-        ,'or',
-        [
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-           ,'and',
-          'select[name="field_list_of_process"]' => ['value' => '_none']
-        ]
-        ,'or',
-        [
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-           ,'and',
-          ['select[name="field_list_of_product"]' => ['value' => '_none']]
-        ]
-        ,'or',
-        [
-          ['select[name="field_audit_type"]' => ['value' => 'external']]
-           ,'or',
-          ['select[name="field_audit_type"]' => ['value' => 'supplier']]
-          ,'or',
-          ['select[name="field_audit_type"]' => ['value' => 'customer']]
-          ,'or',
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-        ]
-      ],
+      // 'invisible' => [
+      //   [
+      //     ['select[name="field_audit_type"]' => ['value' => '_none']]
+      //     ,'and',
+      //     ['select[name="field_list_of_systems"]' => ['value' => '_none']]
+      //   ]
+      //   ,'or',
+      //   [
+      //     ['select[name="field_audit_type"]' => ['value' => '_none']]
+      //      ,'and',
+      //     'select[name="field_list_of_process"]' => ['value' => '_none']
+      //   ]
+      //   ,'or',
+      //   [
+      //     ['select[name="field_audit_type"]' => ['value' => '_none']]
+      //      ,'and',
+      //     ['select[name="field_list_of_product"]' => ['value' => '_none']]
+      //   ]
+      //   ,'or',
+      //   [
+      //     ['select[name="field_audit_type"]' => ['value' => 'external']]
+      //      ,'or',
+      //     ['select[name="field_audit_type"]' => ['value' => 'supplier']]
+      //     ,'or',
+      //     ['select[name="field_audit_type"]' => ['value' => 'customer']]
+      //     ,'or',
+      //     ['select[name="field_audit_type"]' => ['value' => '_none']]
+      //   ]
+      // ],
       'required' => [
         ['select[name="field_list_of_systems"]' => ['!value' => '_none']]
         ,'or',
@@ -225,42 +225,42 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
         ,'or',
         ['select[name="field_list_of_product"]' => ['!value' => '_none']]
       ],
-      'invisible' => [
-        [
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-          ,'and',
-          ['select[name="field_list_of_systems"]' => ['value' => '_none']]
-        ]
-        ,'or',
-        [
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-           ,'and',
-          'select[name="field_list_of_process"]' => ['value' => '_none']
-        ]
-        ,'or',
-        [
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-           ,'and',
-          ['select[name="field_list_of_product"]' => ['value' => '_none']]
-        ]
-        ,'or',
-        [
-          ['select[name="field_audit_type"]' => ['value' => 'external']]
-           ,'or',
-          ['select[name="field_audit_type"]' => ['value' => 'supplier']]
-          ,'or',
-          ['select[name="field_audit_type"]' => ['value' => 'customer']]
-          ,'or',
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-        ]
-      ],
-      'required' => [
-        ['select[name="field_list_of_systems"]' => ['!value' => '_none']]
-        ,'or',
-        ['select[name="field_list_of_process"]' => ['!value' => '_none']]
-        ,'or',
-        ['select[name="field_list_of_product"]' => ['!value' => '_none']]
-      ],
+    //   'invisible' => [
+    //     [
+    //       ['select[name="field_audit_type"]' => ['value' => '_none']]
+    //       ,'and',
+    //       ['select[name="field_list_of_systems"]' => ['value' => '_none']]
+    //     ]
+    //     ,'or',
+    //     [
+    //       ['select[name="field_audit_type"]' => ['value' => '_none']]
+    //        ,'and',
+    //       'select[name="field_list_of_process"]' => ['value' => '_none']
+    //     ]
+    //     ,'or',
+    //     [
+    //       ['select[name="field_audit_type"]' => ['value' => '_none']]
+    //        ,'and',
+    //       ['select[name="field_list_of_product"]' => ['value' => '_none']]
+    //     ]
+    //     ,'or',
+    //     [
+    //       ['select[name="field_audit_type"]' => ['value' => 'external']]
+    //        ,'or',
+    //       ['select[name="field_audit_type"]' => ['value' => 'supplier']]
+    //       ,'or',
+    //       ['select[name="field_audit_type"]' => ['value' => 'customer']]
+    //       ,'or',
+    //       ['select[name="field_audit_type"]' => ['value' => '_none']]
+    //     ]
+    //   ],
+    //   'required' => [
+    //     ['select[name="field_list_of_systems"]' => ['!value' => '_none']]
+    //     ,'or',
+    //     ['select[name="field_list_of_process"]' => ['!value' => '_none']]
+    //     ,'or',
+    //     ['select[name="field_list_of_product"]' => ['!value' => '_none']]
+    //   ],
     ];
 
     $form['field_auditor']['widget']['#ajax'] = [
@@ -811,7 +811,7 @@ function getAuditorList($key = '',$type =NULL) {
       $users->condition('field_department', $department_refe);
       $users->condition('roles', 'auditee');
       $users_list = $users->execute();
-  
+      
       $user_data = array_merge($users_list, $section_users);
       foreach ($section_users as $user_id => $user_value) {
         $auditor_list[$user_value] = User::load($user_value)->name->value;
