@@ -7,6 +7,9 @@
 //Business_process css and Department css
 
 .audit-business-process {
+  .js-form-item {
+    float: left;
+  }
   .field--name-field-business-head-name,
   .field--name-title,
   .field--type-entity-reference,
@@ -121,6 +124,13 @@
   }
 }
 
+.node-section-form {
+  .field--widget-media-library-widget {
+    float: left;
+    width: 100%;
+  }
+}
+
 //unit node page css
 .node-unit-edit-form {
     .field--name-field-field-months-for-the-audit{
@@ -128,4 +138,25 @@
         display: flex;
       }
     }
+}
+
+.main-content {
+  .block {
+    table {
+      thead {
+        tr {
+          padding: 10px;
+          th {
+            background: #F8F9FA;
+            font-size: 11px;
+            color: #23272D;
+            font-weight: bold;
+            line-height: 15px;
+            font-family: Open Sans;
+            border: none;
+          }
+        }
+      }
+    }
+  }
 }
