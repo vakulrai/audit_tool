@@ -459,6 +459,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $form['field_functions']['#access'] = FALSE;
       $form['field_department']['#access'] = FALSE;
       $form['field_employee_id']['#access'] = FALSE;
+      $form['field_sections']['#access'] = FALSE;
       $form['field_unit']['#disabled'] = 1;
       $form['field_assigned']['#access'] = FALSE;
       $form['field_unit']['widget']['#default_value'] = $unit_reference;
@@ -610,7 +611,13 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $submit_functions =  $form['actions']['submit']['#submit'];
     array_unshift($submit_functions, 'alter_supplier_data');
     $form['actions']['submit']['#submit'] = $submit_functions;
-
+    $form['field_manufactured_product']['widget']['add_more']['add_more_button_supplier_manufactured_product']['#attributes'] = ['class' => ['manufactured']];
+    $form['field_service_product']['widget']['add_more']['add_more_button_supplier_service_product']['#attributes'] = ['class' => ['service']];
+    $form['field_product_type']['widget']['#ajax'] = [
+      'callback' => 'addValuetoButton',
+      'event' => 'change',
+      'wrapper' => 'section',
+    ];
   }
   elseif ($form_id == 'node_supplier_edit_form') {
     $form['field_location']['widget']['add_more']['#value'] = new TranslatableMarkup("@type", array(
@@ -861,6 +868,17 @@ function aps_general_node_insert(Node $node) {
   }
 }
 
+/**
+ * Callback to set button value on ajax.
+ */
+function addValuetoButton(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $ajax_response = new AjaxResponse();
+  $form_values = $form_state->getUserInput();
+  $ajax_response->addCommand(new InvokeCommand('.manufactured', 'val' , ['Add Manufactured Product']));
+  $ajax_response->addCommand(new InvokeCommand('.service', 'val' , ['Add Service Product']));
+  return $ajax_response;
+}
+
 function getListofMonths($unit_reference){
   $get_all_months_name = DateHelper::monthNamesUntranslated();
   $query = \Drupal::database()->select('audit_cycle__field_unit_reference', 'h');
@@ -1045,6 +1063,10 @@ function aps_general_preprocess_page(&$variables) {
   if($user_role == 'auditor' || $user_role == 'auditee' ){
     $block__notification_id = '#block-audit-tool-adminmainmenuforauditor';
     $menu__notification_id = '#superfish-admin-main-menu-for-auditor';
+  }
+  elseif($user_role == 'mr_admin'){
+    $block__notification_id = '#block-adminmainmenudeputy';
+    $menu__notification_id = '#superfish-admin-main-menu-deputy';
   }
   else{
     $block__notification_id = '#block-adminmainmenu-4';
@@ -2147,6 +2169,9 @@ function aps_group_mr_redirect(array $form, \Drupal\Core\Form\FormStateInterface
     $user_object = User::load($uid);
     $user_object->set('field_assigned', 'yes');
     $user_object->save();
+    $unit = Node::load($user_form_data['field_unit'][0]['target_id']);
+    $unit->setOwnerId($uid);
+    $unit->save();
   }
   $response = Url::fromUserInput('/home');
   $form_state->setRedirectUrl($response);

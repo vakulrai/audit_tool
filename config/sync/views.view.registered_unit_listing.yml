@@ -1513,52 +1513,11 @@ display:
           entity_type: node
           plugin_id: entity_link_edit
       style:
-        type: table
+        type: default
         options:
           grouping: {  }
-          row_class: ''
+          row_class: 'col-md-3 audit-listing-block'
           default_row_class: true
-          override: true
-          sticky: false
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            title: title
-            nid: nid
-            edit_node: edit_node
-            aggregate_unit_address: aggregate_unit_address
-          info:
-            title:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            nid:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            edit_node:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            aggregate_unit_address:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: '-1'
-          empty_table: false
       row:
         type: fields
         options:
