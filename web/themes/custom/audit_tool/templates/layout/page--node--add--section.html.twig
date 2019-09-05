@@ -131,7 +131,7 @@
     {% endif %}
     <div id="main-wrapper" class="audittool-front-page layout-main-wrapper clearfix">
       {% block content %}
-        <div id="main" class="audittool-front-page-container audit-section-process">
+        <div id="main" class="audittool-front-page-container audit-section-process {{ container }}">
           {{ page.breadcrumb }}
           <div class="row row-offcanvas row-offcanvas-left clearfix">
               <main{{ content_attributes }}>

@@ -92,10 +92,6 @@
   padding: 0;
 }
 
-.audit-dashboard {
-  max-width: 1274px;
-  margin: auto;
-}
 .audit-dashboard .sidebar_first {
   padding-left: 0;
 }
@@ -231,39 +227,10 @@
   color: #ffffff;
 }
 
-.layout-main-wrapper {
-  padding: 30px 0;
-  background: #fafafa 0 0 no-repeat padding-box;
-}
-
-.site-footer {
-  background: #fafafa 0 0 no-repeat padding-box;
-}
-
 .audittool-front-page {
   background: #FCFDFF 0 0 no-repeat padding-box;
 }
-.audittool-front-page .audittool-front-page-container {
-  max-width: 1274px;
-  margin: auto;
-}
 
-.audit-business-process .node-business-process-form,
-.audit-business-process .node-department-form {
-  background: #ffffff 0 0 no-repeat padding-box;
-  border: 1px solid #F2F4F6;
-  border-radius: 4px;
-  padding: 24px;
-}
-.audit-business-process .node-business-process-form .media-library-widget-empty-text,
-.audit-business-process .node-business-process-form label,
-.audit-business-process .node-business-process-form legend,
-.audit-business-process .node-department-form .media-library-widget-empty-text,
-.audit-business-process .node-department-form label,
-.audit-business-process .node-department-form legend {
-  color: #9BA6B3;
-  font-size: 12px;
-}
 .audit-business-process .field--name-field-business-head-name,
 .audit-business-process .field--name-title,
 .audit-business-process .field--type-entity-reference,
@@ -320,25 +287,6 @@
 .audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-string .form-text {
   margin-top: 0;
 }
-.audit-business-process .field-add-more-submit,
-.audit-business-process .media-library-open-button {
-  color: #7E8E9D;
-  font-size: 12px;
-  background: #ffffff;
-  border: 1px dotted;
-  text-align: inherit;
-  width: 20%;
-  margin: 0 14px;
-}
-.audit-business-process #edit-submit {
-  width: 10%;
-  float: left;
-  margin: 0 10px;
-  border: 1px solid #5D62E6;
-  color: #5D62E6;
-  background: #ffffff;
-  border-radius: 4px;
-}
 .audit-business-process #edit-continue-dept {
   width: 17%;
   background: #5D62E6 0 0 no-repeat padding-box;
@@ -346,12 +294,6 @@
   color: #ffffff;
 }
 
-.audit-section-process .node-section-form {
-  background: #ffffff 0 0 no-repeat padding-box;
-  border: 1px solid #F2F4F6;
-  border-radius: 4px;
-  padding: 24px;
-}
 .audit-section-process .node-section-form .layout-region-node-main {
   padding: 0;
 }
@@ -361,33 +303,9 @@
   width: 33.3%;
   float: left;
 }
-.audit-section-process .node-section-form .media-library-widget-empty-text,
-.audit-section-process .node-section-form label,
-.audit-section-process .node-section-form legend {
-  color: #9BA6B3;
-  font-size: 12px;
-}
 .audit-section-process .node-section-form .js-form-item {
   color: #212529;
   font-size: 14px;
-}
-.audit-section-process .node-section-form .media-library-open-button {
-  color: #7E8E9D;
-  font-size: 12px;
-  background: #ffffff;
-  border: 1px dotted;
-  text-align: inherit;
-  width: 20%;
-  margin: 0 14px;
-}
-.audit-section-process .node-section-form #edit-submit {
-  width: 10%;
-  float: left;
-  margin: 0 10px;
-  border: 1px solid #5D62E6;
-  color: #5D62E6;
-  background: #ffffff;
-  border-radius: 4px;
 }
 .audit-section-process .node-section-form .field--name-field-assembly,
 .audit-section-process .node-section-form .field--name-field-shift {
@@ -402,21 +320,8 @@
   display: none;
 }
 
-.node-unit-edit-form {
-  background: #ffffff 0 0 no-repeat padding-box;
-  border: 1px solid #F2F4F6;
-  border-radius: 4px;
-  padding: 24px;
-}
 .node-unit-edit-form .field--name-field-field-months-for-the-audit .checkbox {
   display: flex;
-}
-
-.audit-add-role #block-audit-tool-mainpagecontent {
-  background: #ffffff 0 0 no-repeat padding-box;
-  border: 1px solid #F2F4F6;
-  border-radius: 4px;
-  padding: 24px;
 }
 
 .breadcrumb {
@@ -432,6 +337,56 @@
 #block-audit-tool-pagetitle .title {
   font-size: 22px;
   padding: 24px 0;
+}
+
+label,
+legend,
+.fieldset-legend,
+.media-library-widget-empty-text {
+  color: #9BA6B3;
+  font-size: 12px;
+}
+
+#block-audit-tool-mainpagecontent {
+  background: #ffffff 0 0 no-repeat padding-box;
+  border: 1px solid #F2F4F6;
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.container {
+  max-width: 1274px;
+  margin: auto;
+}
+
+.layout-main-wrapper {
+  padding: 30px 0;
+  background: #fafafa 0 0 no-repeat padding-box;
+}
+
+.site-footer {
+  background: #fafafa 0 0 no-repeat padding-box;
+}
+
+#edit-submit {
+  width: auto;
+  float: left;
+  margin: 0 10px;
+  border: 1px solid #5D62E6;
+  color: #5D62E6;
+  background: #ffffff;
+  border-radius: 4px;
+}
+
+.media-library-open-button,
+.field-add-more-submit {
+  color: #7E8E9D;
+  font-size: 12px;
+  background: #ffffff;
+  border: 1px dotted;
+  text-align: inherit;
+  width: 20%;
+  margin: 0 14px;
 }
 
 /*# sourceMappingURL=style.css.map */
