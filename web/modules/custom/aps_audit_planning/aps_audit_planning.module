@@ -114,13 +114,50 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     //   'wrapper' => 'checklist',
     //   'event' => 'change',
     // ];
-    
+
     $form['field_auditor']['#states'] = [
       'visible' => [
-        'select[name="field_audit_type"]' => ['value' => 'internal'],
+        ['select[name="field_list_of_systems"]' => ['!value' => '_none']]
+        ,'or',
+        ['select[name="field_list_of_process"]' => ['!value' => '_none']]
+        ,'or',
+        ['select[name="field_list_of_product"]' => ['!value' => '_none']]
+      ],
+      'invisible' => [
+        [
+          ['select[name="field_audit_type"]' => ['value' => '_none']]
+          ,'and',
+          ['select[name="field_list_of_systems"]' => ['value' => '_none']]
+        ]
+        ,'or',
+        [
+          ['select[name="field_audit_type"]' => ['value' => '_none']]
+           ,'and',
+          'select[name="field_list_of_process"]' => ['value' => '_none']
+        ]
+        ,'or',
+        [
+          ['select[name="field_audit_type"]' => ['value' => '_none']]
+           ,'and',
+          ['select[name="field_list_of_product"]' => ['value' => '_none']]
+        ]
+        ,'or',
+        [
+          ['select[name="field_audit_type"]' => ['value' => 'external']]
+           ,'or',
+          ['select[name="field_audit_type"]' => ['value' => 'supplier']]
+          ,'or',
+          ['select[name="field_audit_type"]' => ['value' => 'customer']]
+          ,'or',
+          ['select[name="field_audit_type"]' => ['value' => '_none']]
+        ]
       ],
       'required' => [
-        'select[name="field_audit_type"]' => ['value' => 'internal'],
+        ['select[name="field_list_of_systems"]' => ['!value' => '_none']]
+        ,'or',
+        ['select[name="field_list_of_process"]' => ['!value' => '_none']]
+        ,'or',
+        ['select[name="field_list_of_product"]' => ['!value' => '_none']]
       ],
     ];
 
