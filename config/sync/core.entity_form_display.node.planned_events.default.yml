@@ -422,18 +422,17 @@ content:
     settings: {  }
     third_party_settings:
       conditional_fields:
-        7793781f-8265-4ecc-9508-23013b448fe4:
+        e84df43e-a060-48d9-80f1-9985a2450697:
           dependee: field_select_from_others
           settings:
             state: visible
-            condition: value
+            condition: checked
             grouping: AND
             values_set: 1
             value: ''
             values: {  }
             value_form:
-              -
-                value: others
+              value: 1
             effect: show
             effect_options: {  }
             selector: ''
@@ -511,10 +510,10 @@ content:
     region: content
   field_select_from_others:
     weight: 12
-    settings: {  }
-    third_party_settings:
-      conditional_fields: {  }
-    type: options_buttons
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_select_mr:
     weight: 14
