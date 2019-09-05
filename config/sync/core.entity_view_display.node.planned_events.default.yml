@@ -237,10 +237,13 @@ content:
     region: content
   field_select_from_others:
     weight: 135
-    label: visually_hidden
-    settings: {  }
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
     third_party_settings: {  }
-    type: list_default
+    type: boolean
     region: content
   field_select_mr:
     weight: 133

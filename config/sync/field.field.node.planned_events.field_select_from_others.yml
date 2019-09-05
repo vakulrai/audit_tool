@@ -1,12 +1,10 @@
-uuid: 4f2d5280-d28e-4c49-be70-dc99e7b213d0
+uuid: 1de84704-71c3-450f-942b-e4b481f5ab47
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_select_from_others
     - node.type.planned_events
-  module:
-    - options
 id: node.planned_events.field_select_from_others
 field_name: field_select_from_others
 entity_type: node
@@ -15,7 +13,11 @@ label: 'Select from Others'
 description: ''
 required: false
 translatable: false
-default_value: {  }
+default_value:
+  -
+    value: 0
 default_value_callback: ''
-settings: {  }
-field_type: list_string
+settings:
+  on_label: 'Select From Others'
+  off_label: 'Off'
+field_type: boolean

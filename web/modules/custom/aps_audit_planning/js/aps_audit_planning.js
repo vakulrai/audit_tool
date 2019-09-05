@@ -98,7 +98,7 @@
             });
           }
           if(info.event._def.url.indexOf('google') !== -1){
-            info.event._def.rendering = 'background';
+            // info.event._def.rendering = 'background';
             info.event._def.ui.color = '#fff85b';
           }
         },
