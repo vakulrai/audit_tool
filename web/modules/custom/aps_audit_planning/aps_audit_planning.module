@@ -718,6 +718,7 @@ function getDeptDropdownOptions($key = '') {
 function getAuditorList($key = '',$type =NULL) {
   $auditor_list = [];
   $section_list = [];
+  $auditor_list['_none'] = '-None-';
   if($type == 'auditor'){
     if($key){
       $node_object = Node::load($key);
@@ -733,18 +734,18 @@ function getAuditorList($key = '',$type =NULL) {
         $section_reference = $node_object->field_section_type->target_id;
         $department_refe = $node_object->field_department->target_id;
       }
+      $unit_reference = \Drupal::request()->query->get('unit_reference');
       $query = \Drupal::entityQuery('user');
       $query->condition('field_sections', $section_reference);
       $query->condition('roles', 'auditor');
       $section_users = $query->execute();  
 
       $users = \Drupal::entityQuery('user');
-      $users->condition('field_department', $department_refe);
+      $users->condition('field_reference_id', $unit_reference);
       $users->condition('roles', 'auditor');
       $users_list = $users->execute();
 
       $user_data = array_diff($users_list, $section_users);
-      $auditor_list['_none'] = '-None-';
       foreach ($user_data as $user_id => $user_value) {
         $auditor_list[$user_id] = User::load($user_id)->name->value;
       }
