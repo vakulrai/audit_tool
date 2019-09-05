@@ -1,3 +1,276 @@
-#block-audit-tool-mainpagecontent {
-  
+.node-unit-edit-form {
+  .field-group-fieldset {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  #edit-field-address-wrapper {
+    .fieldset-wrapper, #edit-field-address-0-address {
+      float: left;
+      width: 100%;
+      clear: both;
+      padding: 0px;
+
+      .js-form-item-field-address-0-address-address-line2, .js-form-item-field-address-0-address-locality {
+        float: left;
+        width: 25%;
+      }
+
+      .js-form-item-field-address-0-address-address-line1 {
+        width: 50%;
+        float: left;
+        padding-right: 15px;
+      }
+
+      #edit-field-address-0-address-country-code {
+        float: left;
+        width: 25%;
+        padding-left: 0px;
+        padding-top: 5px;
+      }
+    }
+
+    .js-form-item-field-address-0-address-country-code {
+      padding: 0px;
+    }
+  }
+  fieldset {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 0px;
+  }
+}
+
+#edit-field-address-wrapper {
+  padding-left: 0px;
+  padding-right: 0px;
+
+  #edit-field-address-0 {
+    padding: 0px;
+    legend {
+      background: $grey-bg;
+      padding: 8px;
+      border-radius: 4px;
+      .fieldset-legend {
+        color: $black;
+        font-weight: bold;
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+#edit-title-wrapper  {
+  padding: 0px;
+  border-bottom: 1px solid  $grey-bg;
+  margin-bottom: 20px;
+  fieldset {
+    margin-bottom: 15px;
+  }
+}
+
+#edit-field-remote-address-wrapper {
+  padding: 0px;
+  table {
+    thead {
+      tr {
+        th {
+          background: $grey-bg;
+          padding: 10px;
+          border-radius: 4px;
+          border: none;
+          border-bottom: 1px solid transparent;
+
+          h4 {
+            color: $black;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 0px;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        background: none;
+        td.field-multiple-drag {
+          display: none;
+        }
+        td {
+          padding: 0px;
+          .js-form-wrapper {
+            padding: 0px;
+          }
+           fieldset {
+             .form-group {
+               .form-group {
+                float: left;
+                width: 25%;
+                padding: 0 15px;
+              }
+            }
+            .form-group {
+              .js-form-type-select {
+                width: 100%;
+                padding: 0px;
+                margin-top: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.field--type-daterange {
+  legend {
+    background: $grey-bg;
+    padding: 8px;
+    border-radius: 4px;
+
+    .fieldset-legend {
+      color: $black;
+      font-weight: bold;
+      font-size: 11px;
+    }
+  }
+}
+
+#edit-field-shift-wrapper {
+  float: left;
+  clear: both;
+  width: 100%;
+
+  #edit-field-shift--wrapper {
+    border-bottom: 2px solid $grey-bg;
+    padding-bottom: 15px;
+  }
+
+  .fieldset-wrapper {
+    #edit-field-shift {
+      > div {
+        margin-bottom: 5px;
+        .form-check {
+          padding-left: 5px;
+        }
+      }
+    }
+    .form-check-input {
+      margin-top: 0px;
+    }
+  }
+}
+
+#edit-field-time-g-wrapper {
+  margin-top: 30px;
+}
+
+#edit-field-sales-turnover-wrapper, #edit-field-frequency-wrapper, #edit-field-total-members-wrapper  {
+  float: left;
+  width: 30%;
+  min-height: 110px;
+}
+
+#edit-field-contributed-sales-wrapper {
+  float: left;
+  width: 40%;
+  min-height: 110px;
+}
+
+#edit-field-field-months-for-the-audit-wrapper {
+  float: left;
+  width: 70%;
+  padding-top: 5px;
+
+  legend {
+    margin-bottom: 20px;
+  }
+  #edit-field-field-months-for-the-audit--wrapper {
+    .js-form-type-checkbox {
+      margin-right: 10px;
+      .form-check-input {
+        margin-top: 0px;
+      }
+      .form-check {
+        padding-left: 5px;
+      }
+    }
+  }
+}
+
+.user-register-form {
+  #edit-account {
+    clear: both;
+
+    .form-item-name, .form-item-mail {
+      float: left;
+      width: 50%;
+    }
+    .form-type-password-confirm {
+      padding-left: 0px;
+      padding-right: 0px;
+      clear: both;
+      width: 100%;
+
+      fieldset {
+        width: 40%;
+        float: left;
+        clear: initial;
+      }
+    }
+    #edit-pass--description {
+      display: none;
+    }
+  }
+
+  #edit-field-department-wrapper, #auditor-section, #edit-field-phone-wrapper {
+    display: inline-block;
+    width: 30%;
+    vertical-align: top;
+  }
+
+  #edit-field-phone-wrapper {
+    padding-top: 5px;
+
+    label {
+      display: block;
+    }
+
+    .js-form-type-select {
+      padding: 0px;
+      display: inline-block;
+      vertical-align: bottom;
+
+      .country-select {
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        padding: 2px 10px;
+        height: auto;
+      }
+    }
+
+    .js-form-type-textfield {
+      display: inline-block;
+
+      .local-number {
+        border: 1px solid #ced4da;
+        padding: 5px 10px;
+        height: auto;
+      }
+    }
+  }
+  .form-actions {
+    display: block;
+    margin-bottom: 30px;
+  }
+}
+
+.block-help {
+  border: 1px solid $bg-grey;
+  padding: 0 1.5em;
+  margin-bottom: 30px;
+  background: #fff;
+  padding: 10px;
+  padding-bottom: 0;
 }

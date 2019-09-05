@@ -261,9 +261,9 @@
 .node-unit-edit-form .field--name-field-field-months-for-the-audit .checkbox {
   display: flex; }
 
-.main-content .block table thead tr {
+.main-contentt .block table thead tr {
   padding: 10px; }
-  .main-content .block table thead tr th {
+  .main-contentt .block table thead tr th {
     background: #F8F9FA;
     font-size: 11px;
     color: #23272D;
@@ -326,7 +326,198 @@ legend,
   width: 20%;
   margin: 0 14px; }
 
+.field-add-more-submit {
+  display: inline-block;
+  width: auto;
+  position: relative;
+  background-image: url(/themes/custom/audit_tool/images/plus-icon.png);
+  background-repeat: no-repeat;
+  background-size: 17px;
+  background-position: 9px;
+  padding-left: 34px; }
+  .field-add-more-submit:hover {
+    background-color: transparent;
+    color: #000000; }
+
 .tabledrag-toggle-weight-wrapper, .form-item-revision {
   display: none; }
+
+.node-unit-edit-form .field-group-fieldset {
+  padding-left: 15px;
+  padding-right: 15px; }
+.node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper, .node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address {
+  float: left;
+  width: 100%;
+  clear: both;
+  padding: 0px; }
+  .node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper .js-form-item-field-address-0-address-address-line2, .node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper .js-form-item-field-address-0-address-locality, .node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address .js-form-item-field-address-0-address-address-line2, .node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address .js-form-item-field-address-0-address-locality {
+    float: left;
+    width: 25%; }
+  .node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper .js-form-item-field-address-0-address-address-line1, .node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address .js-form-item-field-address-0-address-address-line1 {
+    width: 50%;
+    float: left;
+    padding-right: 15px; }
+  .node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper #edit-field-address-0-address-country-code, .node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address #edit-field-address-0-address-country-code {
+    float: left;
+    width: 25%;
+    padding-left: 0px;
+    padding-top: 5px; }
+.node-unit-edit-form #edit-field-address-wrapper .js-form-item-field-address-0-address-country-code {
+  padding: 0px; }
+.node-unit-edit-form fieldset {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-bottom: 0px; }
+
+#edit-field-address-wrapper {
+  padding-left: 0px;
+  padding-right: 0px; }
+  #edit-field-address-wrapper #edit-field-address-0 {
+    padding: 0px; }
+    #edit-field-address-wrapper #edit-field-address-0 legend {
+      background: #f8f9fa;
+      padding: 8px;
+      border-radius: 4px; }
+      #edit-field-address-wrapper #edit-field-address-0 legend .fieldset-legend {
+        color: #000000;
+        font-weight: bold;
+        font-size: 11px; }
+
+#edit-title-wrapper {
+  padding: 0px;
+  border-bottom: 1px solid #f8f9fa;
+  margin-bottom: 20px; }
+  #edit-title-wrapper fieldset {
+    margin-bottom: 15px; }
+
+#edit-field-remote-address-wrapper {
+  padding: 0px; }
+  #edit-field-remote-address-wrapper table thead tr th {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent; }
+    #edit-field-remote-address-wrapper table thead tr th h4 {
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 0px; }
+  #edit-field-remote-address-wrapper table tbody tr {
+    background: none; }
+    #edit-field-remote-address-wrapper table tbody tr td.field-multiple-drag {
+      display: none; }
+    #edit-field-remote-address-wrapper table tbody tr td {
+      padding: 0px; }
+      #edit-field-remote-address-wrapper table tbody tr td .js-form-wrapper {
+        padding: 0px; }
+      #edit-field-remote-address-wrapper table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 25%;
+        padding: 0 15px; }
+      #edit-field-remote-address-wrapper table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+
+.field--type-daterange legend {
+  background: #f8f9fa;
+  padding: 8px;
+  border-radius: 4px; }
+  .field--type-daterange legend .fieldset-legend {
+    color: #000000;
+    font-weight: bold;
+    font-size: 11px; }
+
+#edit-field-shift-wrapper {
+  float: left;
+  clear: both;
+  width: 100%; }
+  #edit-field-shift-wrapper #edit-field-shift--wrapper {
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 15px; }
+  #edit-field-shift-wrapper .fieldset-wrapper #edit-field-shift > div {
+    margin-bottom: 5px; }
+    #edit-field-shift-wrapper .fieldset-wrapper #edit-field-shift > div .form-check {
+      padding-left: 5px; }
+  #edit-field-shift-wrapper .fieldset-wrapper .form-check-input {
+    margin-top: 0px; }
+
+#edit-field-time-g-wrapper {
+  margin-top: 30px; }
+
+#edit-field-sales-turnover-wrapper, #edit-field-frequency-wrapper, #edit-field-total-members-wrapper {
+  float: left;
+  width: 30%;
+  min-height: 110px; }
+
+#edit-field-contributed-sales-wrapper {
+  float: left;
+  width: 40%;
+  min-height: 110px; }
+
+#edit-field-field-months-for-the-audit-wrapper {
+  float: left;
+  width: 70%;
+  padding-top: 5px; }
+  #edit-field-field-months-for-the-audit-wrapper legend {
+    margin-bottom: 20px; }
+  #edit-field-field-months-for-the-audit-wrapper #edit-field-field-months-for-the-audit--wrapper .js-form-type-checkbox {
+    margin-right: 10px; }
+    #edit-field-field-months-for-the-audit-wrapper #edit-field-field-months-for-the-audit--wrapper .js-form-type-checkbox .form-check-input {
+      margin-top: 0px; }
+    #edit-field-field-months-for-the-audit-wrapper #edit-field-field-months-for-the-audit--wrapper .js-form-type-checkbox .form-check {
+      padding-left: 5px; }
+
+.user-register-form #edit-account {
+  clear: both; }
+  .user-register-form #edit-account .form-item-name, .user-register-form #edit-account .form-item-mail {
+    float: left;
+    width: 50%; }
+  .user-register-form #edit-account .form-type-password-confirm {
+    padding-left: 0px;
+    padding-right: 0px;
+    clear: both;
+    width: 100%; }
+    .user-register-form #edit-account .form-type-password-confirm fieldset {
+      width: 40%;
+      float: left;
+      clear: initial; }
+  .user-register-form #edit-account #edit-pass--description {
+    display: none; }
+.user-register-form #edit-field-department-wrapper, .user-register-form #auditor-section, .user-register-form #edit-field-phone-wrapper {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top; }
+.user-register-form #edit-field-phone-wrapper {
+  padding-top: 5px; }
+  .user-register-form #edit-field-phone-wrapper label {
+    display: block; }
+  .user-register-form #edit-field-phone-wrapper .js-form-type-select {
+    padding: 0px;
+    display: inline-block;
+    vertical-align: bottom; }
+    .user-register-form #edit-field-phone-wrapper .js-form-type-select .country-select {
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      padding: 2px 10px;
+      height: auto; }
+  .user-register-form #edit-field-phone-wrapper .js-form-type-textfield {
+    display: inline-block; }
+    .user-register-form #edit-field-phone-wrapper .js-form-type-textfield .local-number {
+      border: 1px solid #ced4da;
+      padding: 5px 10px;
+      height: auto; }
+.user-register-form .form-actions {
+  display: block;
+  margin-bottom: 30px; }
+
+.block-help {
+  border: 1px solid #fafafa;
+  padding: 0 1.5em;
+  margin-bottom: 30px;
+  background: #fff;
+  padding: 10px;
+  padding-bottom: 0; }
 
 /*# sourceMappingURL=style.css.map */

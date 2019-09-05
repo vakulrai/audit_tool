@@ -65,6 +65,21 @@ legend,
   margin: 0 14px;
 }
 
+.field-add-more-submit {
+  display: inline-block;
+  width: auto;
+  position: relative;
+  background-image: url(/themes/custom/audit_tool/images/plus-icon.png);
+  background-repeat: no-repeat;
+  background-size: 17px;
+  background-position: 9px;
+  padding-left: 34px;
+  &:hover {
+    background-color: transparent;
+    color: $black;
+  }
+}
+
 .tabledrag-toggle-weight-wrapper, .form-item-revision {
   display: none;
 }
