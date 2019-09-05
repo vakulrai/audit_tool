@@ -18,3 +18,49 @@
     padding: 24px 0;
   }
 }
+label,
+legend,
+.fieldset-legend,
+.media-library-widget-empty-text {
+  color: #9BA6B3;
+  font-size: 12px;
+}
+#block-audit-tool-mainpagecontent{
+    background: $white 0 0 no-repeat padding-box;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    padding: 24px;
+}
+.container{
+  max-width: 1274px;
+  margin: auto;
+}
+.layout-main-wrapper {
+  padding: 30px 0;
+  background: $bg-grey 0 0 no-repeat padding-box;
+}
+
+.site-footer {
+  background: $bg-grey 0 0 no-repeat padding-box;
+}
+
+#edit-submit {
+  width: auto;
+  float: left;
+  margin: 0 10px;
+  border: 1px solid $voilet;
+  color: $voilet;
+  background: $white;
+  border-radius: 4px;
+}
+
+.media-library-open-button,
+.field-add-more-submit {
+  color: $text-color;
+  font-size: 12px;
+  background: $white;
+  border: 1px dotted;
+  text-align: inherit;
+  width: 20%;
+  margin: 0 14px;
+}
