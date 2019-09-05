@@ -37,7 +37,7 @@ legend,
 }
 .layout-main-wrapper {
   padding: 30px 0;
-  background: $bg-grey 0 0 no-repeat padding-box;
+  background: $lightest-blue 0 0 no-repeat padding-box;
 }
 
 .site-footer {
@@ -63,4 +63,8 @@ legend,
   text-align: inherit;
   width: 20%;
   margin: 0 14px;
+}
+
+.tabledrag-toggle-weight-wrapper, .form-item-revision {
+  display: none;
 }
