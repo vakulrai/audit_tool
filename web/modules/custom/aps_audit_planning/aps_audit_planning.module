@@ -12,6 +12,7 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Field\FieldFilteredMarkup;
 use Drupal\Core\Ajax\ChangedCommand;
 use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\AppendCommand;
 use Drupal\Core\Url;
 use Drupal\Core\Render\Markup;
 
@@ -454,17 +455,19 @@ function getSectionfromdepartment(array $form, FormStateInterface $form_state) {
 
 function getAuditorfromProcess(array $form, FormStateInterface $form_state) {
   $ajax_response = new AjaxResponse();
-  $ajax_response->addCommand(new HtmlCommand('#auditor-list',$form['field_auditor']));
-  $ajax_response->addCommand(new HtmlCommand('#auditee-list',$form['field_select_auditee']));
-  $ajax_response->addCommand(new HtmlCommand('#auditee-other',$form['field_other_users']));
+  $ajax_response->addCommand(new HtmlCommand('#auditor-list',$form['field_auditor']['widget']));
+  $ajax_response->addCommand(new AppendCommand('#auditor-list', '<div id="user-details" data-drupal-selector="edit-user-details" class="js-form-wrapper form-group col-auto"></div>'));
+  $ajax_response->addCommand(new HtmlCommand('#auditee-list',$form['field_select_auditee']['widget']));
+  $ajax_response->addCommand(new HtmlCommand('#auditee-other',$form['field_other_users']['widget']));
   return $ajax_response;
 }
 
 function getAuditorfromProcedure(array $form, FormStateInterface $form_state) {
   $ajax_response = new AjaxResponse();
-  $ajax_response->addCommand(new HtmlCommand('#auditor-list',$form['field_auditor']));
-  $ajax_response->addCommand(new HtmlCommand('#auditee-list',$form['field_select_auditee']));
-  $ajax_response->addCommand(new HtmlCommand('#auditee-other',$form['field_other_users']));
+  $ajax_response->addCommand(new HtmlCommand('#auditor-list',$form['field_auditor']['widget']));
+   $ajax_response->addCommand(new AppendCommand('#auditor-list', '<div id="user-details" data-drupal-selector="edit-user-details" class="js-form-wrapper form-group col-auto"></div>'));
+  $ajax_response->addCommand(new HtmlCommand('#auditee-list',$form['field_select_auditee']['widget']));
+  $ajax_response->addCommand(new HtmlCommand('#auditee-other',$form['field_other_users']['widget']));
   return $ajax_response;
 }
 
@@ -474,9 +477,13 @@ function emptyFieldItem(array $form, FormStateInterface $form_state) {
   if($form_values['field_select_from_others']['value'] == 1){
     $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'val' , ['_none']));
     $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'attr', array('disabled', true)));
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list', 'removeAttr', array('required')));
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'removeAttr', array('required')));
   }
   else{
     $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'attr', array('disabled', false)));
+     $ajax_response->addCommand(new InvokeCommand('#auditee-list', 'attr', array('required', true)));
+     $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'attr', array('required', true)));
   }
 
   if($form_values['field_list_of_systems'] == '_none'){
@@ -651,7 +658,7 @@ function getUserINfo(array $form, FormStateInterface $form_state) {
     else{
       $user_score = "Not Available";
     }
-// print_r($user_score);die;
+
     $form['user_details'] = array(
       '#type' => 'fieldset', 
       '#title' => t('User Details'), 
