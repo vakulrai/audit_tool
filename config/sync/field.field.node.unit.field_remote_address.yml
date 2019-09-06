@@ -41,6 +41,8 @@ settings:
       override: hidden
     familyName:
       override: hidden
+    addressLine2:
+      override: hidden
     postalCode:
       override: hidden
     sortingCode:

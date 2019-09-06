@@ -9,7 +9,7 @@ dependencies:
 id: help
 theme: audit_tool
 region: content
-weight: -17
+weight: -16
 provider: null
 plugin: help_block
 settings:
