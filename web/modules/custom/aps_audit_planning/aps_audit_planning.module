@@ -62,6 +62,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_auditor']['#attributes'] = ['id' => ['auditor-list']];
     $form['field_select_auditee']['#attributes'] = ['id' => ['auditee-list']];
     $form['field_other_users']['#attributes'] = ['id' => ['auditee-other']];
+    $form['field_select_from_others']['#attributes'] = ['id' => ['select-other']];
     $get_department_options = getDepartmenttypeUnderunit('department', $id);
     $form['field_department']['widget']['#options'] = $get_department_options;
     
@@ -88,6 +89,12 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       'event' => 'change',
     ];
 
+    $form['field_select_from_others']['widget']['value']['#ajax'] = [
+      'callback' => 'emptyFieldItem',
+      'wrapper' => 'test',
+      'effect' => 'fade',
+    ];
+;
     $element_dept = $form_state->getTriggeringElement();
     if($element_dept){
       if(count($element_dept['#value']) >= 0){
@@ -132,35 +139,35 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
         ,'or',
         ['select[name="field_list_of_product"]' => ['!value' => '_none']]
       ],
-      'invisible' => [
-        [
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-          ,'and',
-          ['select[name="field_list_of_systems"]' => ['value' => '_none']]
-        ]
-        ,'or',
-        [
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-           ,'and',
-          'select[name="field_list_of_process"]' => ['value' => '_none']
-        ]
-        ,'or',
-        [
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-           ,'and',
-          ['select[name="field_list_of_product"]' => ['value' => '_none']]
-        ]
-        ,'or',
-        [
-          ['select[name="field_audit_type"]' => ['value' => 'external']]
-           ,'or',
-          ['select[name="field_audit_type"]' => ['value' => 'supplier']]
-          ,'or',
-          ['select[name="field_audit_type"]' => ['value' => 'customer']]
-          ,'or',
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-        ]
-      ],
+      // 'invisible' => [
+      //   [
+      //     ['select[name="field_audit_type"]' => ['value' => '_none']]
+      //     ,'and',
+      //     ['select[name="field_list_of_systems"]' => ['value' => '_none']]
+      //   ]
+      //   ,'or',
+      //   [
+      //     ['select[name="field_audit_type"]' => ['value' => '_none']]
+      //      ,'and',
+      //     'select[name="field_list_of_process"]' => ['value' => '_none']
+      //   ]
+      //   ,'or',
+      //   [
+      //     ['select[name="field_audit_type"]' => ['value' => '_none']]
+      //      ,'and',
+      //     ['select[name="field_list_of_product"]' => ['value' => '_none']]
+      //   ]
+      //   ,'or',
+      //   [
+      //     ['select[name="field_audit_type"]' => ['value' => 'external']]
+      //      ,'or',
+      //     ['select[name="field_audit_type"]' => ['value' => 'supplier']]
+      //     ,'or',
+      //     ['select[name="field_audit_type"]' => ['value' => 'customer']]
+      //     ,'or',
+      //     ['select[name="field_audit_type"]' => ['value' => '_none']]
+      //   ]
+      // ],
     ];
 
     $form['field_select_mr']['#states'] = [
@@ -188,35 +195,35 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
         ,'or',
         ['select[name="field_list_of_product"]' => ['!value' => '_none']]
       ],
-      'invisible' => [
-        [
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-          ,'and',
-          ['select[name="field_list_of_systems"]' => ['value' => '_none']]
-        ]
-        ,'or',
-        [
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-           ,'and',
-          'select[name="field_list_of_process"]' => ['value' => '_none']
-        ]
-        ,'or',
-        [
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-           ,'and',
-          ['select[name="field_list_of_product"]' => ['value' => '_none']]
-        ]
-        ,'or',
-        [
-          ['select[name="field_audit_type"]' => ['value' => 'external']]
-           ,'or',
-          ['select[name="field_audit_type"]' => ['value' => 'supplier']]
-          ,'or',
-          ['select[name="field_audit_type"]' => ['value' => 'customer']]
-          ,'or',
-          ['select[name="field_audit_type"]' => ['value' => '_none']]
-        ]
-      ],
+      // 'invisible' => [
+      //   [
+      //     ['select[name="field_audit_type"]' => ['value' => '_none']]
+      //     ,'and',
+      //     ['select[name="field_list_of_systems"]' => ['value' => '_none']]
+      //   ]
+      //   ,'or',
+      //   [
+      //     ['select[name="field_audit_type"]' => ['value' => '_none']]
+      //      ,'and',
+      //     'select[name="field_list_of_process"]' => ['value' => '_none']
+      //   ]
+      //   ,'or',
+      //   [
+      //     ['select[name="field_audit_type"]' => ['value' => '_none']]
+      //      ,'and',
+      //     ['select[name="field_list_of_product"]' => ['value' => '_none']]
+      //   ]
+      //   ,'or',
+      //   [
+      //     ['select[name="field_audit_type"]' => ['value' => 'external']]
+      //      ,'or',
+      //     ['select[name="field_audit_type"]' => ['value' => 'supplier']]
+      //     ,'or',
+      //     ['select[name="field_audit_type"]' => ['value' => 'customer']]
+      //     ,'or',
+      //     ['select[name="field_audit_type"]' => ['value' => '_none']]
+      //   ]
+      // ],
       'required' => [
         ['select[name="field_list_of_systems"]' => ['!value' => '_none']]
         ,'or',
@@ -451,12 +458,6 @@ function getAuditorfromProcess(array $form, FormStateInterface $form_state) {
   $ajax_response->addCommand(new HtmlCommand('#auditee-list',$form['field_select_auditee']));
   $ajax_response->addCommand(new HtmlCommand('#auditee-other',$form['field_other_users']));
   return $ajax_response;
-  // if(count($form_state->getValue('field_list_of_process')) >= 0){
-  //   $department_array = $form_state->getValue('field_list_of_process')[0];
-  //   $key = $department_array['target_id'];
-  //   $form['field_auditor']['widget']['#options'] = getAuditorList($key,'process');
-  //  }
-  //  return $form['field_auditor'];
 }
 
 function getAuditorfromProcedure(array $form, FormStateInterface $form_state) {
@@ -465,12 +466,23 @@ function getAuditorfromProcedure(array $form, FormStateInterface $form_state) {
   $ajax_response->addCommand(new HtmlCommand('#auditee-list',$form['field_select_auditee']));
   $ajax_response->addCommand(new HtmlCommand('#auditee-other',$form['field_other_users']));
   return $ajax_response;
-  // if(count($form_state->getValue('field_list_of_systems')) >= 0){
-  //   $department_array = $form_state->getValue('field_list_of_systems')[0];
-  //   $key = $department_array['target_id'];
-  //   $form['field_auditor']['widget']['#options'] = getAuditorList($key,'system');
-  //  }
-  //  return $form['field_auditor'];
+}
+
+function emptyFieldItem(array $form, FormStateInterface $form_state) {
+  $ajax_response = new AjaxResponse();
+  $form_values = $form_state->getUserInput();
+  if($form_values['field_select_from_others']['value'] == 1){
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'val' , ['_none']));
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'attr', array('disabled', true)));
+  }
+  else{
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'attr', array('disabled', false)));
+  }
+
+  if($form_values['field_list_of_systems'] == '_none'){
+    $ajax_response->addCommand(new InvokeCommand('#select-other input', 'val' , [0]));
+  }
+  return $ajax_response;
 }
 
 
@@ -719,7 +731,15 @@ function getAuditorList($key = '',$type =NULL) {
   $auditor_list = [];
   $section_list = [];
   $auditor_list['_none'] = '-None-';
-  if($type == 'auditor'){
+  if($key == '_none'){
+    $check_key = FALSE;
+    return $auditor_list;
+  }
+  else{
+    $check_key = TRUE;
+  }
+  
+  if($type == 'auditor' && $check_key == TRUE){
     if($key){
       $node_object = Node::load($key);
       if($node_object->bundle() == 'assembly'){
@@ -751,7 +771,7 @@ function getAuditorList($key = '',$type =NULL) {
       }
     }
   }
-  elseif ($type == 'auditee') {
+  elseif ($type == 'auditee'&& $check_key == TRUE) {
     if($key){
       $node_object = Node::load($key);
       if($node_object->bundle() == 'assembly'){
@@ -783,7 +803,7 @@ function getAuditorList($key = '',$type =NULL) {
     }
     $auditor_list = array_unique($auditor_list);
   }
-  elseif ($type == 'auditee-others') {
+  elseif ($type == 'auditee-others' && $check_key == TRUE) {
     if($key){
       $node_object = Node::load($key);
       if($node_object->bundle() == 'assembly'){
@@ -951,6 +971,7 @@ function planned_event_redirect(array $form, \Drupal\Core\Form\FormStateInterfac
   //Send Mail to the Assigned Auditee And auditor About the audit.
   global $base_url;
   $form_values = $form_state->getValues();
+  echo '<pre>';print_r($form_values);die;
   $id = \Drupal::request()->query->get('unit_reference');
   if(count($form_values['field_auditor']) > 0){
     $auditor = User::load($form_values['field_auditor'][0]['target_id']);
