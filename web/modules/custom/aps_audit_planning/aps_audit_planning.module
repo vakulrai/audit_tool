@@ -54,7 +54,8 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_total_mandays']['#access'] = FALSE;
     $form['field_pre_audit_status']['#access'] = FALSE;
     $form['field_refere']['#access'] = FALSE;
-    $form['field_selected_auditee']['#access'] = FALSE;
+    // $form['field_selected_auditee']['#access'] = FALSE;
+    $form['field_checklist']['#disabled'] = TRUE;
     $form['#cache']['max-age'] = 0;
     $form['field_sections']['#attributes'] = ['id' => ['section']];
     $form['field_checklist']['#attributes'] = ['id' => ['checklist']];
@@ -383,13 +384,37 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     ];
   }
   if ($form_id == 'node_planned_events_edit_form'){
+    // $node = \Drupal::routeMatch()->getParameter('node');
+    // $event_id = (int)$node->id();
+    // $node_data_obj = Node::load($event_id);
+    // if($node_data_obj->field_internal_audit_type->value == 'systems'){
+    //   $field_ = 'field_list_of_systems';
+    // }
+    // elseif ($node_data_obj->field_internal_audit_type->value == 'process') {
+    //   $field_ = 'field_list_of_process';
+    // }
+    // else{
+    //   $field_ = 'field_list_of_product';
+    // }
+    // if($field_){
+    //   $key_to_check = $node_data_obj->$field_->target_id;
+    // }
+    
+    // $form['field_auditor']['widget']['#options'] = getAuditorList($key_to_check, 'auditor');
+    // $form['field_select_auditee']['widget']['#options'] = getAuditorList($key_to_check, 'auditee');
+    // $form['field_other_users']['widget']['#options'] = getAuditorList($key_to_check, 'auditee-others');
     if($user_role == 'mr_admin'){
-      $form['field_select_auditee']['#disabled'] = TRUE;
-      $form['field_auditor']['#disabled'] = TRUE;
-      $form['field_other_users']['#disabled'] = TRUE;
+      // $form['field_select_auditee']['#disabled'] = TRUE;
+      // $form['field_auditor']['#disabled'] = TRUE;
+      // $form['field_other_users']['#disabled'] = TRUE;
       $form['field_audit_reasons']['#access'] = FALSE;
       $form['field_proceed_with_audit']['#access'] = FALSE;
       $form['field_suggested_date']['#access'] = FALSE;
+      foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'save_user_data';
+        }
+      }
     }
     if($user_role == 'auditor' || $user_role == 'auditee'){
       $form['field_audit_reasons']['#access'] = FALSE;
@@ -477,6 +502,9 @@ function getAuditorfromProcess(array $form, FormStateInterface $form_state) {
     $ajax_response->addCommand(new InvokeCommand('#auditor-list select', 'removeAttr', array('disabled')));
     $ajax_response->addCommand(new InvokeCommand('#auditee-other select', 'removeAttr', array('disabled')));
   }
+  if($form_values['field_list_of_systems'] != '_none' || $form_values['field_list_of_process'] != '_none'){
+    $ajax_response->addCommand(new InvokeCommand('#select-other input', 'removeAttr' , ['checked']));
+  }
   return $ajax_response;
 }
 
@@ -491,6 +519,9 @@ function getAuditorfromProcedure(array $form, FormStateInterface $form_state) {
     $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'removeAttr', array('disabled')));
     $ajax_response->addCommand(new InvokeCommand('#auditor-list select', 'removeAttr', array('disabled')));
     $ajax_response->addCommand(new InvokeCommand('#auditee-other select', 'removeAttr', array('disabled')));
+  }
+  if($form_values['field_list_of_systems'] != '_none' || $form_values['field_list_of_process'] != '_none'){
+    $ajax_response->addCommand(new InvokeCommand('#select-other input', 'removeAttr' , ['checked']));
   }
   return $ajax_response;
 }
@@ -510,7 +541,7 @@ function emptyFieldItem(array $form, FormStateInterface $form_state) {
      $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'attr', array('required', true)));
   }
 
-  if($form_values['field_list_of_systems'] == '_none'){
+  if($form_values['field_list_of_systems'] == '_none' || $form_values['field_list_of_process'] == '_none'){
     $ajax_response->addCommand(new InvokeCommand('#select-other input', 'removeAttr' , ['checked']));
   }
   return $ajax_response;
@@ -999,6 +1030,26 @@ function releaseAuditCallback(&$form, \Drupal\Core\Form\FormStateInterface &$for
   }
 }
 
+function save_user_data(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  global $base_url;
+  $form_values = $form_state->getValues();
+  $id = \Drupal::request()->query->get('unit_reference');
+  $node = \Drupal::routeMatch()->getParameter('node');
+  $event_id = (int)$node->id();
+  if($form_values['field_select_from_others']['value'] == 1){
+    $curent_nid = Node::load($event_id);
+    $curent_nid->set('field_selected_auditee', $form_values['field_other_users'][0]['target_id']);
+    $curent_nid->save();
+  }
+  else{
+    $curent_nid = Node::load($event_id);
+    $curent_nid->set('field_selected_auditee', $form_values['field_select_auditee'][0]['target_id']);
+    $curent_nid->save();
+  }
+  $response = Url::fromUserInput('/audit-planning/'.$id);
+  $form_state->setRedirectUrl($response);
+}
+
 function planned_event_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
   //Send Mail to the Assigned Auditee And auditor About the audit.
   global $base_url;
@@ -1011,7 +1062,7 @@ function planned_event_redirect(array $form, \Drupal\Core\Form\FormStateInterfac
   }
   else{
     $curent_nid = Node::load($form_values['nid']);
-    $curent_nid->set('field_select_auditee', $form_values['field_other_users'][0]['target_id']);
+    $curent_nid->set('field_selected_auditee', $form_values['field_select_auditee'][0]['target_id']);
     $curent_nid->save();
   }
   if(count($form_values['field_auditor']) > 0){
