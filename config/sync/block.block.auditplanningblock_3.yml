@@ -11,7 +11,7 @@ dependencies:
 id: auditplanningblock_3
 theme: audit_tool
 region: content
-weight: -6
+weight: -5
 provider: null
 plugin: audit_planning_block
 settings:

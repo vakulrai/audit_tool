@@ -11,7 +11,7 @@ dependencies:
 id: audit_tool_riskmanagement
 theme: audit_tool
 region: content
-weight: -15
+weight: -14
 provider: null
 plugin: risk_management
 settings:

@@ -36,19 +36,19 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 101
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     region: content
   field_address:
-    weight: 102
+    weight: 2
     label: above
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
   field_contributed_sales:
-    weight: 112
+    weight: 12
     label: above
     settings:
       thousand_separator: ''
@@ -57,7 +57,7 @@ content:
     type: number_integer
     region: content
   field_deputy_mr:
-    weight: 118
+    weight: 17
     label: above
     settings:
       link: true
@@ -65,14 +65,14 @@ content:
     type: entity_reference_label
     region: content
   field_field_months_for_the_audit:
-    weight: 119
+    weight: 18
     label: above
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_frequency:
-    weight: 114
+    weight: 14
     label: above
     settings:
       thousand_separator: ''
@@ -81,14 +81,14 @@ content:
     type: number_integer
     region: content
   field_remote_address:
-    weight: 103
+    weight: 3
     label: above
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
   field_remote_location_name:
-    weight: 104
+    weight: 4
     label: above
     settings:
       link_to_entity: false
@@ -96,7 +96,7 @@ content:
     type: string
     region: content
   field_sales_turnover:
-    weight: 111
+    weight: 11
     label: above
     settings:
       thousand_separator: ''
@@ -105,7 +105,7 @@ content:
     type: number_integer
     region: content
   field_shift:
-    weight: 105
+    weight: 10
     label: above
     settings:
       link: true
@@ -113,7 +113,7 @@ content:
     type: entity_reference_label
     region: content
   field_time_g:
-    weight: 107
+    weight: 6
     label: above
     settings:
       separator: '-'
@@ -123,7 +123,7 @@ content:
     type: daterange_default
     region: content
   field_time_s1:
-    weight: 108
+    weight: 7
     label: above
     settings:
       separator: '-'
@@ -133,7 +133,7 @@ content:
     type: daterange_default
     region: content
   field_time_s3:
-    weight: 109
+    weight: 8
     label: above
     settings:
       separator: '-'
@@ -143,7 +143,7 @@ content:
     type: daterange_default
     region: content
   field_time_s4:
-    weight: 110
+    weight: 9
     label: above
     settings:
       separator: '-'
@@ -153,7 +153,7 @@ content:
     type: daterange_default
     region: content
   field_total_mandays:
-    weight: 116
+    weight: 15
     label: above
     settings:
       thousand_separator: ''
@@ -162,7 +162,7 @@ content:
     type: number_integer
     region: content
   field_total_members:
-    weight: 113
+    weight: 13
     label: above
     settings:
       thousand_separator: ''
@@ -171,7 +171,7 @@ content:
     type: number_integer
     region: content
   field_unit_name:
-    weight: 106
+    weight: 5
     label: above
     settings:
       link_to_entity: false
@@ -179,7 +179,7 @@ content:
     type: string
     region: content
   field_updated_mandays:
-    weight: 117
+    weight: 16
     label: above
     settings:
       thousand_separator: ''
@@ -188,8 +188,8 @@ content:
     type: number_integer
     region: content
   links:
-    weight: 100
+    weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden: {  }
