@@ -29,6 +29,7 @@ dependencies:
     - field.field.node.planned_events.field_select_from_others
     - field.field.node.planned_events.field_select_mr
     - field.field.node.planned_events.field_select_users
+    - field.field.node.planned_events.field_selected_auditee
     - field.field.node.planned_events.field_shift
     - field.field.node.planned_events.field_start_date
     - field.field.node.planned_events.field_suggested_date
@@ -259,6 +260,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: list_default
+    region: content
+  field_selected_auditee:
+    weight: 136
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_shift:
     weight: 103

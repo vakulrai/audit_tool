@@ -4698,44 +4698,7 @@ display:
           id: uid_current
           table: users
           field: uid_current
-          relationship: field_select_auditee
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value: '1'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: user
-          plugin_id: user_current
-        uid_current_1:
-          id: uid_current_1
-          table: users
-          field: uid_current
-          relationship: field_other_users
+          relationship: field_selected_auditee
           group_type: group
           admin_label: ''
           operator: '='
@@ -4832,6 +4795,15 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_other_users: User'
+          required: false
+          plugin_id: standard
+        field_selected_auditee:
+          id: field_selected_auditee
+          table: node__field_selected_auditee
+          field: field_selected_auditee
+          relationship: none
+          group_type: group
+          admin_label: 'field_selected_auditee: User'
           required: false
           plugin_id: standard
       arguments:
@@ -5467,8 +5439,8 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<a class="button" href="/node/{{nid}}/edit?unit_reference={{field_refere}}">Release Audit Date</a>'
             make_link: false
             path: ''
             absolute: false
@@ -5505,7 +5477,7 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          text: 'Release Audit Date'
+          text: ''
           output_url_as_text: false
           absolute: false
           entity_type: node

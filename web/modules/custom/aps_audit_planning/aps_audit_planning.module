@@ -54,6 +54,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_total_mandays']['#access'] = FALSE;
     $form['field_pre_audit_status']['#access'] = FALSE;
     $form['field_refere']['#access'] = FALSE;
+    $form['field_selected_auditee']['#access'] = FALSE;
     $form['#cache']['max-age'] = 0;
     $form['field_sections']['#attributes'] = ['id' => ['section']];
     $form['field_checklist']['#attributes'] = ['id' => ['checklist']];
@@ -357,6 +358,11 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       array_unshift($submit_functions, 'planned_audit_frequency_check');
       $form['#validate'] = $submit_functions;
     }
+    if($user_role == 'mr_admin'){
+      $form['field_audit_reasons']['#access'] = FALSE;
+      $form['field_proceed_with_audit']['#access'] = FALSE;
+      $form['field_suggested_date']['#access'] = FALSE;
+    }
   }
   if($form['#id'] == 'views-exposed-form-customer-manual-parts-product-listing'){
      $form['title']['#autocomplete_route_name'] = 'aps_audit_planning.title_list';
@@ -377,8 +383,14 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     ];
   }
   if ($form_id == 'node_planned_events_edit_form'){
-    $form['field_audit_reasons']['#access'] = TRUE;
-    $form['field_proceed_with_audit']['#access'] = TRUE;
+    if($user_role == 'mr_admin'){
+      $form['field_select_auditee']['#disabled'] = TRUE;
+      $form['field_auditor']['#disabled'] = TRUE;
+      $form['field_other_users']['#disabled'] = TRUE;
+      $form['field_audit_reasons']['#access'] = FALSE;
+      $form['field_proceed_with_audit']['#access'] = FALSE;
+      $form['field_suggested_date']['#access'] = FALSE;
+    }
     if($user_role == 'auditor' || $user_role == 'auditee'){
       $form['field_audit_reasons']['#access'] = FALSE;
       $form['field_proceed_with_audit']['#access'] = FALSE;
@@ -455,19 +467,31 @@ function getSectionfromdepartment(array $form, FormStateInterface $form_state) {
 
 function getAuditorfromProcess(array $form, FormStateInterface $form_state) {
   $ajax_response = new AjaxResponse();
+  $form_values = $form_state->getUserInput();
   $ajax_response->addCommand(new HtmlCommand('#auditor-list',$form['field_auditor']['widget']));
   $ajax_response->addCommand(new AppendCommand('#auditor-list', '<div id="user-details" data-drupal-selector="edit-user-details" class="js-form-wrapper form-group col-auto"></div>'));
   $ajax_response->addCommand(new HtmlCommand('#auditee-list',$form['field_select_auditee']['widget']));
   $ajax_response->addCommand(new HtmlCommand('#auditee-other',$form['field_other_users']['widget']));
+  if($form_values['field_list_of_process'] != '_none'){
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'removeAttr', array('disabled')));
+    $ajax_response->addCommand(new InvokeCommand('#auditor-list select', 'removeAttr', array('disabled')));
+    $ajax_response->addCommand(new InvokeCommand('#auditee-other select', 'removeAttr', array('disabled')));
+  }
   return $ajax_response;
 }
 
 function getAuditorfromProcedure(array $form, FormStateInterface $form_state) {
   $ajax_response = new AjaxResponse();
+  $form_values = $form_state->getUserInput();
   $ajax_response->addCommand(new HtmlCommand('#auditor-list',$form['field_auditor']['widget']));
    $ajax_response->addCommand(new AppendCommand('#auditor-list', '<div id="user-details" data-drupal-selector="edit-user-details" class="js-form-wrapper form-group col-auto"></div>'));
   $ajax_response->addCommand(new HtmlCommand('#auditee-list',$form['field_select_auditee']['widget']));
   $ajax_response->addCommand(new HtmlCommand('#auditee-other',$form['field_other_users']['widget']));
+  if($form_values['field_list_of_systems'] != '_none'){
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'removeAttr', array('disabled')));
+    $ajax_response->addCommand(new InvokeCommand('#auditor-list select', 'removeAttr', array('disabled')));
+    $ajax_response->addCommand(new InvokeCommand('#auditee-other select', 'removeAttr', array('disabled')));
+  }
   return $ajax_response;
 }
 
@@ -487,7 +511,7 @@ function emptyFieldItem(array $form, FormStateInterface $form_state) {
   }
 
   if($form_values['field_list_of_systems'] == '_none'){
-    $ajax_response->addCommand(new InvokeCommand('#select-other input', 'val' , [0]));
+    $ajax_response->addCommand(new InvokeCommand('#select-other input', 'removeAttr' , ['checked']));
   }
   return $ajax_response;
 }
@@ -912,66 +936,67 @@ function getMRlist($select_value){
 }
 
 function releaseAuditCallback(&$form, \Drupal\Core\Form\FormStateInterface &$form_state){
-  $unit_reference = \Drupal::request()->query->get('unit_reference');
-  $form_input_values = $form_state->getUserInput();
-  $response = new AjaxResponse();
-  $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
-  $uri = explode('/', $current_uri);
-  $mandays_settings = \Drupal::entityQuery('unit_mandays');
-  $mandays_settings->condition('field_unit_reference', $unit_reference);
-  $mandays_settings_id = $mandays_settings->execute();
-  $node_storage = \Drupal::entityManager()->getStorage('unit_mandays');
-  $config = $node_storage->load(key($mandays_settings_id));
-  $field_start_date = timestampFromDate($form_input_values['field_start_date'][0]['value']['date']);
-  $field_end_date = timestampFromDate($form_input_values['field_end_date'][0]['value']['date']);
-  if($uri[1]){
-    $node_object = Node::load($uri[1]);
-    $node_object->set('field_start_date', $field_start_date);
-    $node_object->set('field_end_date', $field_end_date);
-    $node_object->set('moderation_state', 'release_audit');
-  }
+  if($unit_reference = \Drupal::request()->query->get('unit_reference')){
+    $form_input_values = $form_state->getUserInput();
+    $response = new AjaxResponse();
+    $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
+    $uri = explode('/', $current_uri);
+    $mandays_settings = \Drupal::entityQuery('unit_mandays');
+    $mandays_settings->condition('field_unit_reference', $unit_reference);
+    $mandays_settings_id = $mandays_settings->execute();
+    $node_storage = \Drupal::entityManager()->getStorage('unit_mandays');
+    $config = $node_storage->load(key($mandays_settings_id));
+    $field_start_date = timestampFromDate($form_input_values['field_start_date'][0]['value']['date']);
+    $field_end_date = timestampFromDate($form_input_values['field_end_date'][0]['value']['date']);
+    if($uri[1]){
+      $node_object = Node::load($uri[1]);
+      $node_object->set('field_start_date', $field_start_date);
+      $node_object->set('field_end_date', $field_end_date);
+      $node_object->set('moderation_state', 'release_audit');
+    }
 
-  if($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'systems'){
-    $date_difference =  abs($field_end_date - $field_start_date);
-    $years = floor($date_difference / (365*60*60*24));
-    $months = floor(($date_difference - $years * 365*60*60*24) / (30*60*60*24));
-    $total_mandays = floor(($date_difference - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24)); 
-    $get_system_mandays_from_unit = $config->get('field_system_mandays_updated')->value;
-    if($get_system_mandays_from_unit >= $total_mandays ){
-      $node_object->set('field_total_mandays', $total_mandays);
-      $config->set('field_system_mandays_updated',  $get_system_mandays_from_unit - $total_mandays);
+    if($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'systems'){
+      $date_difference =  abs($field_end_date - $field_start_date);
+      $years = floor($date_difference / (365*60*60*24));
+      $months = floor(($date_difference - $years * 365*60*60*24) / (30*60*60*24));
+      $total_mandays = floor(($date_difference - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24)); 
+      $get_system_mandays_from_unit = $config->get('field_system_mandays_updated')->value;
+      if($get_system_mandays_from_unit >= $total_mandays ){
+        $node_object->set('field_total_mandays', $total_mandays);
+        $config->set('field_system_mandays_updated',  $get_system_mandays_from_unit - $total_mandays);
+      }
+      else{
+        $node_object->set('field_total_mandays', 0);
+        $config->set('field_system_mandays_updated', 0);
+      }
     }
-    else{
-      $node_object->set('field_total_mandays', 0);
-      $config->set('field_system_mandays_updated', 0);
+    elseif ($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'process') {
+      $unit_reference = $node_object->field_refere->target_id;
+      $get_total_process_assembly = count(getAuditOPtions('process','/rest-export-system/'.$unit_reference.'?type[]=assembly'));
+      $get_total_process_manufacturing = count(getAuditOPtions('process','/rest-export-system/'.$unit_reference.'?type[]=manufacturing_process'));
+      $total_process_mandays = getMandaysFromAuditType('process', $get_total_process_manufacturing, $get_total_process_assembly, NULL);
+      $config->set('field_process_mandays_standard', $total_process_mandays);
+      $config->set('field_process_mandays_updated', $total_process_mandays);
+      $get_process_mandays_standard = $config->get('field_process_mandays_updated');
+      $config->set('field_process_mandays_updated', $get_process_mandays_standard - $total_mandays);
     }
+    elseif ($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'product') {
+      $unit_reference = $node_object->field_refere->target_id;
+      $query = \Drupal::database()->select('customer_manual_parts__field_reference_id', 'cm');
+      $query->fields('cm',['field_reference_id_target_id', 'entity_id']);
+      $query->condition('cm.field_reference_id_target_id', $unit_reference);
+      $nids = $query->execute()->fetchAll();
+      $get_total_product = count($nids);
+      $total_product_mandays = getMandaysFromAuditType('product', $get_total_product, NULL, NULL);
+      $config->set('field_product_mandays_standard', $total_product_mandays);
+      $config->set('field_product_mandays_updated', $total_product_mandays);
+      $get_product_mandays_standard = $config->get('field_product_mandays_updated');
+      $config->set('field_product_mandays_updated', $get_product_mandays_standard - $total_mandays);
+    }
+    $config->save();
+    $node_object->save();
+    return $response;
   }
-  elseif ($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'process') {
-    $unit_reference = $node_object->field_refere->target_id;
-    $get_total_process_assembly = count(getAuditOPtions('process','/rest-export-system/'.$unit_reference.'?type[]=assembly'));
-    $get_total_process_manufacturing = count(getAuditOPtions('process','/rest-export-system/'.$unit_reference.'?type[]=manufacturing_process'));
-    $total_process_mandays = getMandaysFromAuditType('process', $get_total_process_manufacturing, $get_total_process_assembly, NULL);
-    $config->set('field_process_mandays_standard', $total_process_mandays);
-    $config->set('field_process_mandays_updated', $total_process_mandays);
-    $get_process_mandays_standard = $config->get('field_process_mandays_updated');
-    $config->set('field_process_mandays_updated', $get_process_mandays_standard - $total_mandays);
-  }
-  elseif ($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'product') {
-    $unit_reference = $node_object->field_refere->target_id;
-    $query = \Drupal::database()->select('customer_manual_parts__field_reference_id', 'cm');
-    $query->fields('cm',['field_reference_id_target_id', 'entity_id']);
-    $query->condition('cm.field_reference_id_target_id', $unit_reference);
-    $nids = $query->execute()->fetchAll();
-    $get_total_product = count($nids);
-    $total_product_mandays = getMandaysFromAuditType('product', $get_total_product, NULL, NULL);
-    $config->set('field_product_mandays_standard', $total_product_mandays);
-    $config->set('field_product_mandays_updated', $total_product_mandays);
-    $get_product_mandays_standard = $config->get('field_product_mandays_updated');
-    $config->set('field_product_mandays_updated', $get_product_mandays_standard - $total_mandays);
-  }
-  $config->save();
-  $node_object->save();
-  return $response;
 }
 
 function planned_event_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
@@ -979,6 +1004,16 @@ function planned_event_redirect(array $form, \Drupal\Core\Form\FormStateInterfac
   global $base_url;
   $form_values = $form_state->getValues();
   $id = \Drupal::request()->query->get('unit_reference');
+  if($form_values['field_select_from_others']['value'] == 1){
+    $curent_nid = Node::load($form_values['nid']);
+    $curent_nid->set('field_selected_auditee', $form_values['field_other_users'][0]['target_id']);
+    $curent_nid->save();
+  }
+  else{
+    $curent_nid = Node::load($form_values['nid']);
+    $curent_nid->set('field_select_auditee', $form_values['field_other_users'][0]['target_id']);
+    $curent_nid->save();
+  }
   if(count($form_values['field_auditor']) > 0){
     $auditor = User::load($form_values['field_auditor'][0]['target_id']);
     $user_load[$form_values['field_auditor'][0]['target_id']] = $auditor->mail->value;
