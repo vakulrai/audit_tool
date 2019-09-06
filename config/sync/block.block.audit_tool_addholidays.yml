@@ -12,8 +12,8 @@ dependencies:
     - audit_tool
 id: audit_tool_addholidays
 theme: audit_tool
-region: sidebar_first
-weight: -26
+region: content
+weight: -34
 provider: null
 plugin: 'superfish:add-holidays'
 settings:
