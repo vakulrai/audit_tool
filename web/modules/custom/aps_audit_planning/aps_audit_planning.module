@@ -971,7 +971,6 @@ function planned_event_redirect(array $form, \Drupal\Core\Form\FormStateInterfac
   //Send Mail to the Assigned Auditee And auditor About the audit.
   global $base_url;
   $form_values = $form_state->getValues();
-  echo '<pre>';print_r($form_values);die;
   $id = \Drupal::request()->query->get('unit_reference');
   if(count($form_values['field_auditor']) > 0){
     $auditor = User::load($form_values['field_auditor'][0]['target_id']);
