@@ -54,7 +54,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_total_mandays']['#access'] = FALSE;
     $form['field_pre_audit_status']['#access'] = FALSE;
     $form['field_refere']['#access'] = FALSE;
-    // $form['field_selected_auditee']['#access'] = FALSE;
+    $form['field_selected_auditee']['#access'] = FALSE;
     $form['field_checklist']['#disabled'] = TRUE;
     $form['#cache']['max-age'] = 0;
     $form['field_sections']['#attributes'] = ['id' => ['section']];
