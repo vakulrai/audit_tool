@@ -531,11 +531,11 @@ function aps_audit_criteria_inline_entity_form_entity_form_alter(&$entity_form, 
   $entity_form['field_add_to_checklist']['#access'] = FALSE;
   $entity_form['field_select_query_type']['widget']['#default_value'] = '_none';
   
-  $entity_form['field_select_query_type']['widget']['#ajax'] = [
-    'callback' => 'resetForm',
-    'wrapper' => 'section',
-    'event' => 'change',
-  ];
+  // $entity_form['field_select_query_type']['widget']['#ajax'] = [
+  //   'callback' => 'resetForm',
+  //   'wrapper' => 'section',
+  //   'event' => 'change',
+  // ];
   $entity_form['field_defined_option_yes_no']['#attributes'] = ['id' => ['yes-no']];
   $entity_form['field_defined_options_default']['#attributes'] = ['id' => ['predefined']];
   $entity_form['field_defined_options_default']['widget']['add_more']['add_more_button_internal_audit_qa']['#attributes'] = ['class' => ['add-pdef']];
