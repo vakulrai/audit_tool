@@ -48,13 +48,12 @@ class AuditorSelection extends BlockBase {
           $first_last_date_monthly['total'] = $total;
 	    }
     }
-    
-    $user_count_query = \Drupal::database()->select('user__field_reference_id', 'n');
-    $user_count_query->fields('n', ['field_reference_id_target_id','entity_id']);
-    $user_count_query->condition('n.bundle', 'user');
-    $user_count_query->condition('n.field_reference_id_target_id', $uri[1]);
-    $users = $user_count_query->execute()->fetchAll();
-    $user_count = count($users);
+
+    $user_count_query = \Drupal::entityQuery('user');
+    $user_count_query->condition('field_reference_id', $uri[1]);
+    $user_count_query->condition('roles', 'auditor');
+    $user_count_query = $user_count_query->execute();
+    $user_count = count($user_count_query);
 
     $query = \Drupal::database()->select('user__field_reference_id', 'n');
     $query->join('node__field_auditor', 'rf', 'n.entity_id = rf.field_auditor_target_id');
@@ -64,9 +63,11 @@ class AuditorSelection extends BlockBase {
     $query->condition('n.field_reference_id_target_id', $uri[1]);
     $unique_users_audit = $query->execute()->fetchAll();
     foreach ($unique_users_audit as $key => $value) {
-      $user_[$value->entity_id] = $value->rf_entity_id;
+      // $user_[$value->entity_id] = $value->rf_entity_id;//for unique users.
+      $user_[] = $value->rf_entity_id;//for all users
     }
-    $unique_user_ids = count(array_unique($user_));
+    // $unique_user_ids = count(array_unique($user_));
+    $unique_user_ids = count($user_);
     $build['audit_auditor_report']['auditor_report'] = [
       '#type' => 'fieldset',
     ];
