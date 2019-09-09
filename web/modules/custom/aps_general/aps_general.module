@@ -1258,7 +1258,11 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
       unset($data['tabs']);
     }
     elseif (stripos(strtolower($uri[2]), 'customers_manual?') !== false) {
-        unset($data['tabs']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:add_procedures']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:systems']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:audit_list']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:csv_operations']);
     }
     elseif (stripos(strtolower($uri[2]), 'section?') !== false) {
         unset($data['tabs']);
@@ -1326,6 +1330,11 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     unset($data['tabs'][0]['aps_pre_audit.manuals:external_audit_systems']);
     unset($data['tabs'][0]['aps_pre_audit.manuals:external_audit_clauses']);
     $data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']['#active'] = TRUE;
+  }
+  if(stripos(strtolower($current_uri), 'customer-listing?') !== false){
+      unset($data['tabs'][0]['aps_pre_audit.manuals:add_procedures']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:csv_operations']);
   }
   if($uri[0] = 'import'){
     unset($data['tabs'][0]['aps_pre_audit.manuals:external_audit_systems']);
