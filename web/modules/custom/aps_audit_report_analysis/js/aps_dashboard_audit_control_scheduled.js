@@ -19,7 +19,7 @@
         total_product_not = 100;
       }
       else{
-      	total_product_covered = Math.round(product_data['completed']/product_data['total'] * 100);
+      	total_product_covered = Math.round((product_data['completed']/product_data['total']) * 100);
       	total_product_not = Math.round((product_data['total'] - product_data['completed'])/product_data['total'] * 100);
       }
 
@@ -28,7 +28,7 @@
         total_process_not = 100;
       }
       else{
-      	total_process_covered = Math.round(process_data['completed']/process_data['total'] * 100);
+      	total_process_covered = Math.round((process_data['completed']/process_data['total']) * 100);
       	total_process_not = Math.round((process_data['total'] - process_data['completed'])/process_data['total'] * 100);
       }
 
@@ -37,7 +37,7 @@
         total_procedure_not = 100;
       }
       else{
-      	total_procedure_covered = Math.round(procedure_data['completed']/procedure_data['total'] * 100);
+      	total_procedure_covered = Math.round((procedure_data['completed']/procedure_data['total']) * 100);
       	total_procedure_not = Math.round((procedure_data['total'] - procedure_data['completed'])/procedure_data['total'] * 100);
       }
       var chart_a = new Highcharts.Chart('container-scheduled-a',{
@@ -46,7 +46,7 @@
           },
 		  chart: {
 		    // renderTo: 'container-scheduled-a',
-		    type: 'bar',
+		    type: 'column',
             "height": 200,
 		  },
 		  title: {
@@ -57,47 +57,45 @@
 		  },
 		  colors: ['#173c64'],
 		  xAxis: {
-            lineWidth: 0,
-		    minorGridLineWidth: 0,
-		    lineColor: 'transparent',
-		    minorTickLength: 0,
+      //       lineWidth: 0,
+		    // minorGridLineWidth: 0,
+		    // lineColor: 'transparent',
+		    // minorTickLength: 0,
 
-		    tickLength: 0,
-		    labels: {
-		      enabled: false
-		    }
+		    // tickLength: 0,
+		    // labels: {
+		    //   enabled: false
+		    // }
 		  },
 		  yAxis: {
 		    min: 0,
-		    title: '',
+		    title: 'Systems',
 		    max: 100,
-		    offset: -60,
-		    gridLineColor: '',
-		    labels: {
-		      format: '{value}%'
-		    },
-		    tickPositions: [0, 100],
-		    enabled: true
+		    // offset: -60,
+		    // gridLineColor: '',
+		    // labels: {
+		    //   format: '{value}%'
+		    // },
+		    // tickPositions: [0, 100],
+		    // enabled: true
 		  },
 		  plotOptions: {
-		    bar: {
-		      stacking: "normal",
-		      //groupPadding: 0, //add here
-		      //pointPadding: 0, //add here,
-		      dataLabels: {
-		        enabled: true,
-		        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
-		      },
-		    },
-		  },
+	        series: {
+	            borderWidth: 0,
+	            dataLabels: {
+	                enabled: true,
+	                format: '{point.y:.1f}%'
+	            }
+	        }
+	     },
 		  series: [{
-		    "name": "Products covered",
+		    "name": "Products covered: "+product_data['completed'],
 		    "data": [total_product_covered],
 		    "color": "#33fff9",
 		    "showInLegend": true
 		  },
 		  {
-		    "name": "Products not covered",
+		    "name": "Products not covered :"+(product_data['total'] - product_data['completed']),
 		    "data": [total_product_not],
 		    "color": "#ff8c1a",
 		    "showInLegend": true	
@@ -110,7 +108,7 @@
           },
 		  chart: {
 		    renderTo: 'container-scheduled-b',
-		    type: 'bar',
+		    type: 'column',
             "height": 200,
 		  },
 		  title: {
@@ -121,47 +119,45 @@
 		  },
 		  colors: ['#173c64'],
 		  xAxis: {
-            lineWidth: 0,
-		    minorGridLineWidth: 0,
-		    lineColor: 'transparent',
-		    minorTickLength: 0,
+      //       lineWidth: 0,
+		    // minorGridLineWidth: 0,
+		    // lineColor: 'transparent',
+		    // minorTickLength: 0,
 
-		    tickLength: 0,
-		    labels: {
-		      enabled: false
-		    }
+		    // tickLength: 0,
+		    // labels: {
+		    //   enabled: false
+		    // }
 		  },
 		  yAxis: {
 		    min: 0,
-		    title: '',
+		    title: 'Process',
 		    max: 100,
-		    offset: -60,
-		    gridLineColor: '',
+		    // offset: -60,
+		    // gridLineColor: '',
 		    labels: {
 		      format: '{value}%'
 		    },
-		    tickPositions: [0, 100],
-		    enabled: true
+		    // tickPositions: [0, 100],
+		    // enabled: true
 		  },
 		  plotOptions: {
-		    bar: {
-		      stacking: "normal",
-		      //groupPadding: 0, //add here
-		      //pointPadding: 0, //add here,
-		      dataLabels: {
-		        enabled: true,
-		        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
-		      }
-		    }
-		  },
+	        series: {
+	            borderWidth: 0,
+	            dataLabels: {
+	                enabled: true,
+	                format: '{point.y:.1f}%'
+	            }
+	        }
+	    },
 		  series: [{
-		    "name": "Process covered",
+		    "name": "Process covered: "+process_data['completed'],
 		    "data": [total_process_covered],
 		    "color": "#33fff9",
 		    "showInLegend": true
 		  },
 		  {
-		   "name": "Process not covered",
+		   "name": "Process not covered: "+(process_data['total'] - process_data['completed']),
 		    "data": [total_process_not],
 		    "color": "#ff8c1a",
 		    "showInLegend": true	
@@ -174,7 +170,7 @@
           },
 		  chart: {
 		    renderTo: 'container-scheduled-c',
-		    type: 'bar',
+		    type: 'column',
             "height": 200,
 		  },
 		  title: {
@@ -185,47 +181,45 @@
 		  },
 		  colors: ['#173c64'],
 		  xAxis: {
-            lineWidth: 0,
-		    minorGridLineWidth: 0,
-		    lineColor: 'transparent',
-		    minorTickLength: 0,
+      //       lineWidth: 0,
+		    // minorGridLineWidth: 0,
+		    // lineColor: 'transparent',
+		    // minorTickLength: 0,
 
-		    tickLength: 0,
-		    labels: {
-		      enabled: false
-		    }
+		    // tickLength: 0,
+		    // labels: {
+		    //   format: '{value}%'
+		    // }
 		  },
 		  yAxis: {
 		    min: 0,
-		    title: '',
+		    title: 'Procedures',
 		    max: 100,
-		    offset: -60,
-		    gridLineColor: '',
+		    // offset: -60,
+		    // gridLineColor: '',
 		    labels: {
 		      format: '{value}%'
 		    },
-		    tickPositions: [0, 100],
-		    enabled: true
+		    // tickPositions: [0, 100],
+		    // enabled: true
 		  },
-		  plotOptions: {
-		    bar: {
-		      stacking: "normal",
-		      //groupPadding: 0, //add here
-		      //pointPadding: 0, //add here,
-		      dataLabels: {
-		        enabled: true,
-		        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
-		      }
-		    }
-		  },
+		   plotOptions: {
+	        series: {
+	            borderWidth: 0,
+	            dataLabels: {
+	                enabled: true,
+	                format: '{point.y:.1f}%'
+	            }
+	        }
+	    },
 		  series: [{
-		    "name": "Procedures Covered",
+		    "name": "Procedures Covered: "+procedure_data['completed'],
 		    "data": [total_procedure_covered],
 		    "color": "#33fff9",
 		    "showInLegend": true
 		  },
 		  {
-		    "name": "Procedures not Covered",
+		    "name": "Procedures not Covered: "+(procedure_data['total'] - procedure_data['completed']),
 		    "data": [total_procedure_not],
 		    "color": "#ff8c1a",
 		    "showInLegend": true	
