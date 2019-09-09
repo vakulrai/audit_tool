@@ -40,8 +40,8 @@ class PreAuditForm extends FormBase {
       $event_end_date_timestamp = $node_object->get('field_end_date')->value;
       //Start Date of audit.
       $date1 = new \DateTime(date('Y-m-d H:i:s', $event_timestamp));
-      // $date2 = new \DateTime();
-      $date2 = new \DateTime(date('Y-m-d H:i:s',strtotime('09/6/2019 7:30:20')));
+      $date2 = new \DateTime();
+      // $date2 = new \DateTime(date('Y-m-d H:i:s',strtotime('09/6/2019 7:30:20')));
       $diff = $date2->diff($date1);
       $months = $diff->m;
       $days = $diff->days;
@@ -55,6 +55,7 @@ class PreAuditForm extends FormBase {
     }
     $get_score_settings = getScoreSettings($node_object->get('field_refere')->target_id);
     $get_score_options_for_selectlist = $this->getScoreLevels($get_score_settings);
+
     if ($total_hours > 0 && $check_invert_time != 1) {
       $disable_fields = TRUE;
     }

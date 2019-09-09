@@ -631,7 +631,6 @@ class UpdateAuditFindings extends PreAuditForm {
     $paragraph_['paragraph_data'] = $list;
     $tid = [];
     $cat_count = 0;
-    
     foreach ($paragraph_['paragraph_data'] as $q => $a) {
       if($a['field_finding_categories'] != '' && $a['question_type'] == 'non-delta'){
         foreach ($a['field_finding_categories'] as $cat_key => $cat_value) {

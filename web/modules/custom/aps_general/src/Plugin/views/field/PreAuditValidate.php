@@ -123,7 +123,7 @@ class PreAuditValidate extends FieldPluginBase {
       }
     }
 
-    if ($total_hours_to_audit > 0  && $current_date_invert != 1 && $end_date_invert != 1) {
+    if ($total_hours_to_audit > 0  && $current_date_invert != 1 && $end_date_invert != 1 && $check_invert_time == 0) {
       if($user_role == 'auditor'){
         if($node->field_proceed_with_audit->value == 'no'){
           $add_report_message = '<br><b>Audit Has been Reported with: '.$name.'</b>';
