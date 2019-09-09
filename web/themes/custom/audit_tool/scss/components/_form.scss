@@ -38,6 +38,12 @@
     padding-right: 0px;
     margin-bottom: 0px;
   }
+  .field--name-field-field-months-for-the-audit {
+    .checkbox {
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
 }
 
 #edit-field-address-wrapper {
@@ -164,6 +170,8 @@
 
 #edit-field-time-g-wrapper {
   margin-top: 30px;
+  float: left;
+  width: 100%;
 }
 
 #edit-field-sales-turnover-wrapper, #edit-field-frequency-wrapper, #edit-field-total-members-wrapper  {
@@ -198,6 +206,8 @@
     }
   }
 }
+
+/*********************** User Register Form *******************************/
 
 .user-register-form {
   #edit-account {
@@ -263,6 +273,323 @@
   .form-actions {
     display: block;
     margin-bottom: 30px;
+    margin-top: 30px;
+  }
+
+  #edit-field-functions-wrapper {
+    table {
+      thead {
+        tr {
+          padding: 0 15px ;
+          th {
+            background: $grey-bg;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            border-bottom: 1px solid transparent;
+
+            h4 {
+              color: $black;
+              font-size: 11px;
+              font-weight: bold;
+              margin: 0px;
+            }
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          background: none;
+          td.field-multiple-drag {
+            display: none;
+          }
+          td {
+            padding: 0px;
+            .js-form-wrapper {
+              padding: 0px;
+            }
+             fieldset {
+               .form-group {
+                 .form-group {
+                  float: left;
+                  width: 25%;
+                  padding: 0 15px;
+                }
+              }
+              .form-group {
+                .js-form-type-select {
+                  width: 100%;
+                  padding: 0px;
+                  margin-top: 5px;
+                }
+              }
+            }
+            .paragraph-type-top {
+              padding: 30px 15px 0;
+            }
+
+            .paragraphs-subform {
+              .field--name-field-score, .field--name-field-functions-qualified  {
+                float: left;
+                width: 50%;
+              }
+              .field--name-field-score {
+                margin-top: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .password-suggestions {
+    border: none;
+  }
+}
+
+/*********************** holidays Form *******************************/
+
+.holidays-holidays-edit-form {
+  table {
+    thead {
+      tr {
+        padding: 0 15px ;
+        background-color: $white;
+        th {
+          background: $grey-bg;
+          padding: 10px;
+          border-radius: 4px;
+          border: none;
+          border-bottom: 1px solid transparent;
+
+          h4 {
+            color: $black;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 0px;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        background: none;
+        background-color: $white!important;
+        td.field-multiple-drag {
+          display: none;
+        }
+        td {
+          padding: 0px;
+          .js-form-wrapper {
+            padding: 0px;
+          }
+           fieldset {
+             .form-group {
+               .form-group {
+                float: left;
+                width: 25%;
+                padding: 0 15px;
+              }
+            }
+            .form-group {
+              .js-form-type-select {
+                width: 100%;
+                padding: 0px;
+                margin-top: 5px;
+              }
+            }
+          }
+          .paragraph-type-top {
+            padding: 15px 15px 0;
+          }
+
+          .paragraphs-subform {
+            .field--name-field-score, .field--name-field-functions-qualified  {
+              float: left;
+              width: 50%;
+            }
+            .field--name-field-score {
+              margin-top: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .paragraphs-subform {
+    .field--type-datetime, .field--type-string {
+      float: left;
+      width: 50%;
+    }
+    .field--type-datetime {
+      label {
+        margin-left: 15px;
+      }
+      .form-type-date {
+        width: 100%;
+        input {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .form-actions {
+    margin-top: 40px;
+  }
+}
+
+#edit-field-shift--wrapper {
+  float: left;
+  clear: both;
+  width: 100%;
+
+  .fieldset-wrapper {
+    #edit-field-shift {
+      > div {
+        margin-bottom: 5px;
+        .form-check {
+          padding-left: 5px;
+        }
+      }
+    }
+    .form-check-input {
+      margin-top: 0px;
+    }
+  }
+}
+
+/*********************** Planned Events Form *******************************/
+
+.node-planned-events-form {
+  #edit-field-shift--wrapper {
+    .fieldset-wrapper {
+      padding: 0 20px;
+    }
+  }
+
+  fieldset {
+    .fieldset-wrapper {
+      max-width: 500px;
+      div {
+        padding-left: 0px;
+        padding-right: 0px;
+        fieldset {
+          padding-left: 0px;
+          padding-right: 0px;
+        }
+      }
+    }
+  }
+  #planning-dates {
+    #edit-field-start-date-wrapper, #edit-field-end-date-wrapper, #edit-field-suggested-date-wrapper, #edit-field-tolerance-wrapper {
+    fieldset {
+        &:first-child {
+          padding-left: 0px;
+        }
+      }
+    }
+
+    #edit-field-suggested-date-wrapper {
+      .form-type-date {
+        margin-right: 15px;
+      }
+    }
+  }
+
+  #edit-submit  {
+    margin-left: 0px;
+  }
+
+  #edit-field-select-mr-wrapper {
+    fieldset {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+  }
+
+  #edit-field-select-from-others--wrapper {
+    .fieldset-wrapper {
+      margin-left: 20px;
+    }
+  }
+
+  #user-details {
+    table {
+      thead {
+        tr {
+          padding: 0 15px ;
+          background-color: $white;
+          th {
+            background: $grey-bg;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            border-bottom: 1px solid transparent;
+            color: $black;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 0px;
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          background: none;
+          background-color: $white!important;
+          td.field-multiple-drag {
+            display: none;
+          }
+          td {
+            padding: 0px;
+            .js-form-wrapper {
+              padding: 0px;
+            }
+             fieldset {
+               padding-top: 10px;
+               .form-group {
+                 .form-group {
+                  float: left;
+                  width: 25%;
+                  padding: 0 15px;
+                }
+              }
+              .form-group {
+                .js-form-type-select {
+                  width: 100%;
+                  padding: 0px;
+                  margin-top: 5px;
+                }
+              }
+            }
+            .paragraph-type-top {
+              padding: 15px 15px 0;
+            }
+
+            .paragraphs-subform {
+              .field--name-field-score, .field--name-field-functions-qualified  {
+                float: left;
+                width: 50%;
+              }
+              .field--name-field-score {
+                margin-top: 5px;
+              }
+            }
+
+            div {
+              padding-top: 10px;
+              .form-check-input {
+                margin-left: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
