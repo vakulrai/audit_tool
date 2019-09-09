@@ -484,7 +484,15 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   elseif($form_id == 'user_form'){
     $form['field_unit']['#disabled'] = 1;
     $form['field_assigned']['#disabled'] = 1;
-    $form['field_reference_id']['#disabled'] = FALSE;
+    $form['field_reference_id']['#disabled'] = 1;
+    if(\Drupal::routeMatch()->getRouteName() == 'entity.user.edit_form'){
+      $user = \Drupal::routeMatch()->getParameter('user');
+      if(in_array('auditee', $user->getRoles($exclude_locked_roles = false))){
+        $form['field_functions']['#access'] = FALSE;
+        $form['field_reference_id']['#access'] = FALSE;
+        $form['field_assigned']['#access'] = FALSE;
+      }
+    }
   }
 
   if($form_id == 'node_customers_manual_edit_form'){
@@ -1096,7 +1104,10 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
-
+  
+  if($route_name == 'entity.user.edit_form'){
+    unset($data['tabs']);
+  }
   if($route_name == 'entity.holidays.edit_form'){
     unset($data['tabs']);
   }
