@@ -2012,7 +2012,11 @@ function aps_general_link_alter(&$variables) {
   if ($cleanLinkText == 'Unit Details' && $user_role == 'mr_admin') {
     $id = $uri[1];
     if($id){
-      $url = Url::fromRoute('entity.node.edit_form',['node' => $id]);
+      $user = User::load($current_user_id);
+      if($user_role == 'mr_admin'){
+        $user_unit = $user->field_reference_id->target_id;
+      }
+      $url = Url::fromRoute('entity.node.edit_form',['node' => $user_unit]);
       $url->setRouteParameter('destination', $current_uri);
       unset($variables['url']);
       $variables['url'] = $url;
