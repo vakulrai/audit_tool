@@ -1,0 +1,233 @@
+.procedures-wrapper {
+  #edit-title-wrapper {
+    padding: 0px;
+    border-bottom: 1px solid #f8f9fa;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    margin-right: 30px;
+    fieldset {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+  }
+  #edit-field-business-process-wrapper, #department, #section {
+    float: left;
+    width: 33%;
+    padding: 0px;
+  }
+  #edit-field-create-procedure-wrapper, #edit-field-refere-wrapper {
+    float: left;
+    width: 100%;
+    clear: both;
+  }
+  #edit-langcode-wrapper {
+    margin: 0px;
+  }
+  #edit-field-create-procedure-wrapper {
+    table {
+      thead {
+        tr {
+          padding: 0 15px ;
+          background-color: $white;
+          th {
+            background: $grey-bg;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            border-bottom: 1px solid transparent;
+            color: $black;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 0px;
+            h4 {
+              color: $black;
+              font-size: 11px;
+              font-weight: bold;
+              margin: 0px;
+            }
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          background: none;
+          background-color: $white!important;
+          td.field-multiple-drag {
+            display: none;
+          }
+          td {
+            padding: 0px;
+            .js-form-wrapper {
+              padding: 0px;
+            }
+             fieldset {
+               padding-top: 10px;
+               .form-group {
+                 .form-group {
+                  float: left;
+                  width: 25%;
+                  padding: 0 15px;
+                }
+              }
+              .form-group {
+                .js-form-type-select {
+                  width: 100%;
+                  padding: 0px;
+                  margin-top: 5px;
+                }
+              }
+            }
+            .paragraph-type-top {
+              padding: 15px 15px 0;
+            }
+
+            .paragraphs-subform {
+              .field--name-field-score, .field--name-field-functions-qualified  {
+                float: left;
+                width: 50%;
+              }
+              .field--name-field-score {
+                margin-top: 5px;
+              }
+            }
+
+            div {
+              padding-top: 10px;
+              .form-check-input {
+                margin-left: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .paragraphs-subform {
+      .field--name-field-s-no, .field--name-field-number,
+      .field--name-field-title, .field--name-field-issue-number {
+        float: left;
+        width: 25%;
+      }
+    }
+
+    .field--name-field-procedure-document {
+      text-align: center;
+    }
+
+    .paragraph-type-top {
+      .paragraph-type-title {
+        margin-top: 20px;
+      }
+    }
+
+    .field--type-datetime, .field--name-field-revision-number, .field--name-field-revision-date {
+      float: left;
+      width: 33%;
+      fieldset {
+        width: 100%;
+        input {
+          width: 100%;
+        }
+      }
+    }
+    .field--type-datetime, .field--name-field-revision-date {
+      label {
+        margin-left: 15px;
+        margin-bottom: 0px;
+        margin-top: 9px;
+      }
+      .form-inline {
+        padding-top: 0px;
+      }
+    }
+  }
+
+  #edit-field-refere-wrapper {
+    padding-left: 30px;
+    padding-right: 30px;
+    table {
+      margin-bottom: 0px;
+      thead {
+        tr {
+          padding: 0 15px ;
+          background-color: $white;
+          th {
+            background: $grey-bg;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            border-bottom: 1px solid transparent;
+            color: $black;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 0px;
+            h4 {
+              color: $black;
+              font-size: 11px;
+              font-weight: bold;
+              margin: 0px;
+            }
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          background: none;
+          background-color: $white!important;
+          border: none;
+          td.field-multiple-drag {
+            display: none;
+          }
+          td {
+            padding: 0px;
+            border: none;
+            .js-form-wrapper {
+              padding: 0px;
+            }
+            input {
+              width: 100%;
+            }
+             fieldset {
+               padding: 10px 0px 0px;
+               .form-group {
+                 .form-group {
+                  float: left;
+                  width: 25%;
+                  padding: 0 15px;
+                }
+              }
+              .form-group {
+                .js-form-type-select {
+                  width: 100%;
+                  padding: 0px;
+                  margin-top: 5px;
+                }
+              }
+            }
+            .paragraph-type-top {
+              padding: 15px 15px 0;
+            }
+
+            .paragraphs-subform {
+              .field--name-field-score, .field--name-field-functions-qualified  {
+                float: left;
+                width: 50%;
+              }
+              .field--name-field-score {
+                margin-top: 5px;
+              }
+            }
+
+            div {
+              padding-top: 10px;
+              .form-check-input {
+                margin-left: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
