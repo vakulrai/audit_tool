@@ -294,7 +294,9 @@ legend,
   background: #ffffff 0 0 no-repeat padding-box;
   border: 1px solid #F2F4F6;
   border-radius: 4px;
-  padding: 24px; }
+  padding: 24px;
+  float: left;
+  width: 100%; }
 
 .container {
   max-width: 1274px;
@@ -403,6 +405,26 @@ table#field-location-values tbody tr {
       padding-top: 10px; }
       table#field-location-values tbody tr td div .form-check-input {
         margin-left: 10px; }
+
+.main-content nav.tabs .nav-tabs {
+  border-color: #F2F2F2; }
+  .main-content nav.tabs .nav-tabs .nav-item a {
+    color: #23272D;
+    opacity: 0.3;
+    border: none;
+    border-bottom: 2px solid transparent; }
+    .main-content nav.tabs .nav-tabs .nav-item a:hover {
+      opacity: 1;
+      border: none;
+      border-color: #5D62E6;
+      background: none; }
+  .main-content nav.tabs .nav-tabs .active {
+    opacity: 1;
+    border: none;
+    background: none;
+    border-bottom: 2px solid #5D62E6; }
+    .main-content nav.tabs .nav-tabs .active a {
+      opacity: 1; }
 
 .node-unit-edit-form .field-group-fieldset {
   padding-left: 15px;
@@ -1200,5 +1222,246 @@ table#field-location-values tbody tr {
   margin-bottom: 30px; }
 .audit-criteria-add-wrapper #block-audit-tool-mainpagecontent {
   padding-bottom: 50px; }
+
+#edit-field-score-settings-wrapper #edit-field-score-settings--wrapper {
+  padding-left: 0px;
+  padding-right: 0px; }
+  #edit-field-score-settings-wrapper #edit-field-score-settings--wrapper legend {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 20px; }
+#edit-field-score-settings-wrapper #edit-field-score-settings {
+  padding-left: 15px; }
+  #edit-field-score-settings-wrapper #edit-field-score-settings div {
+    margin-bottom: 10px; }
+  #edit-field-score-settings-wrapper #edit-field-score-settings input {
+    margin-top: 0px; }
+  #edit-field-score-settings-wrapper #edit-field-score-settings label {
+    padding-left: 15px; }
+
+.audit-criteria-score-score-form .paragraph-type-title {
+  margin-top: 15px; }
+.audit-criteria-score-score-form .field-add-more-submit, .audit-criteria-score-score-form #edit-submit {
+  margin-left: 0px; }
+.audit-criteria-score-score-form table thead tr {
+  padding: 0 15px;
+  background-color: #ffffff; }
+  .audit-criteria-score-score-form table thead tr th {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0px; }
+    .audit-criteria-score-score-form table thead tr th h4 {
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 0px; }
+.audit-criteria-score-score-form table tbody tr {
+  background: none;
+  background-color: #ffffff !important; }
+  .audit-criteria-score-score-form table tbody tr td.field-multiple-drag {
+    display: none; }
+  .audit-criteria-score-score-form table tbody tr td {
+    padding: 0px; }
+    .audit-criteria-score-score-form table tbody tr td .js-form-wrapper {
+      padding: 0px; }
+    .audit-criteria-score-score-form table tbody tr td fieldset {
+      padding-top: 10px;
+      padding-left: 0px;
+      padding-right: 0px; }
+      .audit-criteria-score-score-form table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 25%;
+        padding: 0 15px; }
+      .audit-criteria-score-score-form table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+    .audit-criteria-score-score-form table tbody tr td .paragraph-type-top {
+      padding: 0;
+      margin-bottom: 0px; }
+    .audit-criteria-score-score-form table tbody tr td .paragraphs-subform .field--name-field-score, .audit-criteria-score-score-form table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+      float: left;
+      width: 50%; }
+    .audit-criteria-score-score-form table tbody tr td .paragraphs-subform .field--name-field-score {
+      margin-top: 5px; }
+    .audit-criteria-score-score-form table tbody tr td div {
+      padding-top: 10px; }
+      .audit-criteria-score-score-form table tbody tr td div .form-check-input {
+        margin-left: 10px; }
+    .audit-criteria-score-score-form table tbody tr td .field--type-entity-reference {
+      float: left;
+      width: 100%; }
+    .audit-criteria-score-score-form table tbody tr td .field--type-integer {
+      float: left;
+      width: 50%;
+      padding-left: 15px;
+      padding-right: 15px; }
+    .audit-criteria-score-score-form table tbody tr td .field--type-string {
+      float: left;
+      width: 50%;
+      padding-right: 15px;
+      padding-left: 15px; }
+      .audit-criteria-score-score-form table tbody tr td .field--type-string input {
+        margin-top: 0px; }
+    .audit-criteria-score-score-form table tbody tr td .paragraphs-subform div:last-child {
+      padding-right: 0px; }
+    .audit-criteria-score-score-form table tbody tr td .paragraphs-subform div:nth-child(2) {
+      padding-left: 0px; }
+
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year > legend {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year fieldset {
+  padding-left: 0px;
+  padding-right: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-field-cycle-type-wrapper {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-top: 15px;
+  margin-bottom: 15px; }
+  .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-field-cycle-type-wrapper .fieldset-wrapper div {
+    margin-top: 10px; }
+    .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-field-cycle-type-wrapper .fieldset-wrapper div input {
+      margin-top: 0px; }
+    .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-field-cycle-type-wrapper .fieldset-wrapper div label {
+      padding-left: 15px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form .field--type-daterange {
+  padding: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr legend {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0px;
+  margin-bottom: 20px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr div, .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr fieldset {
+  padding-left: 0px;
+  padding-right: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr .paragraphs-subform .field--type-integer {
+  float: left;
+  width: 50%;
+  padding-left: 15px;
+  padding-right: 15px; }
+  .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr .paragraphs-subform .field--type-integer:first-child, .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr .paragraphs-subform .field--type-integer:nth-child(3) {
+    padding-left: 0px; }
+  .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr .paragraphs-subform .field--type-integer:nth-child(2), .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr .paragraphs-subform .field--type-integer:last-child {
+    padding-right: 0px; }
+  .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr .paragraphs-subform .field--type-integer .field-suffix {
+    display: none; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-other > legend {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0px 0 15px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-other fieldset, .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-other div {
+  padding-left: 0px;
+  padding-right: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form .field--type-integer fieldset, .cycle-add-setting-wrapper .audit-cycle-settings-form .field--type-integer div {
+  padding-left: 0px;
+  padding-right: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form > fieldset.field-group-fieldset legend {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0px 0 15px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form > fieldset.field-group-fieldset .field--type-integer {
+  float: left;
+  width: 25%; }
+  .cycle-add-setting-wrapper .audit-cycle-settings-form > fieldset.field-group-fieldset .field--type-integer:first-child {
+    padding-left: 0px; }
+  .cycle-add-setting-wrapper .audit-cycle-settings-form > fieldset.field-group-fieldset .field--type-integer:last-child {
+    padding-right: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-submit {
+  margin-left: 0px; }
+
+.node-internal-audit-edit-form #edit-title-wrapper {
+  border-bottom: 0px; }
+
+.procedure-listing-wrapper #block-audit-tool-mainpagecontent {
+  float: left;
+  background: none;
+  padding: 0px;
+  width: 100%; }
+  .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive {
+    padding: 0px; }
+    .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive table {
+      padding: 0px;
+      margin: 0px; }
+      .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr {
+        border: none; }
+        .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr th {
+          background: #f8f9fa;
+          border: none;
+          font: Bold 11px/15px Open Sans;
+          color: #23272D; }
+      .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr {
+        background: #ffffff;
+        border-bottom: 2px solid #f8f9fa; }
+        .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr:hover {
+          background: #EBECFF; }
+        .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr td {
+          font-size: 13px;
+          line-height: 19px;
+          font-weight: Semibold;
+          color: #4F5A67;
+          border: none; }
+
+.block-audit-planning-block .fc-ltr {
+  margin-top: 20px; }
+  .block-audit-planning-block .fc-ltr .fc-header-toolbar .fc-button-group button {
+    background: #5D62E6;
+    border: none; }
+  .block-audit-planning-block .fc-ltr .fc-header-toolbar .fc-today-button {
+    background: #5D62E6;
+    border: none; }
+  .block-audit-planning-block .fc-ltr .fc-header-toolbar h2 {
+    font-size: 24px; }
+  .block-audit-planning-block .fc-ltr .fc-header-toolbar .fc-right .fc-button-group {
+    background: #5D62E6;
+    padding: 8px;
+    border-radius: 3px; }
+    .block-audit-planning-block .fc-ltr .fc-header-toolbar .fc-right .fc-button-group button {
+      padding: 0px 15px;
+      margin-right: 5px; }
+    .block-audit-planning-block .fc-ltr .fc-header-toolbar .fc-right .fc-button-group .fc-button-active {
+      background: #ffffff;
+      border-radius: 5px;
+      color: #5D62E6; }
+  .block-audit-planning-block .fc-ltr .fc-header-toolbar button:focus {
+    box-shadow: none;
+    outline: none; }
 
 /*# sourceMappingURL=style.css.map */

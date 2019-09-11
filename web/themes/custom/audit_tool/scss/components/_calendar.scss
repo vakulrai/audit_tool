@@ -1,0 +1,45 @@
+.block-audit-planning-block {
+  .fc-ltr {
+    margin-top: 20px;
+
+    .fc-header-toolbar {
+      .fc-button-group {
+       button {
+         background: $voilet;
+         border: none;
+       }
+      }
+      .fc-today-button {
+        background: $voilet;
+        border: none;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .fc-right {
+        .fc-button-group {
+          background: $voilet;
+          padding: 8px;
+          border-radius: 3px;
+          button {
+            padding: 0px 15px;
+            margin-right: 5px;
+          }
+          .fc-button-active {
+            background: $white;
+            border-radius: 5px;
+            color: $voilet;
+          }
+        }
+      }
+      button {
+        &:focus {
+          box-shadow: none;
+          outline: none;
+        }
+      }
+    }
+  }
+}
