@@ -116,6 +116,21 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       'route_parameters' => ['unit_reference' => $id, 'reference' => $id],
     ] + $base_plugin_definition;
 
+    $links['customer_listing'] = [
+      'title' => 'Customer Listing',
+      'route_name' => 'view.customer_listing.customer_listing',
+      'base_route' => 'node.add',
+      'route_parameters' => ['unit_reference' => $id],
+    ] + $base_plugin_definition;
+
+    $links['add_customer'] = [
+      'title' => 'Add Customer',
+      'weight' => 0,
+      'route_name' => 'node.add',
+      'base_route' => 'node.add',
+      'route_parameters' => ['node_type' => 'customers_manual', 'unit_reference' => $id],
+    ] + $base_plugin_definition;
+
     // $links['unit'] = [
     //   'title' => 'Unit',
     //   'route_name' => 'view.user_registration_view.registration',
