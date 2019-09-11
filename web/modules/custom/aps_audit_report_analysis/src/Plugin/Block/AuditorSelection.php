@@ -44,8 +44,8 @@ class AuditorSelection extends BlockBase {
 	      $selected_user_count = $first_last_date_monthly[$month_name]['count_underscore_auditor'];
 	      $first_last_date_monthly[$month_name]['selected_user_count'] = $selected_user_count;
 	      $plot_data['data'][] = [$first_last_date_monthly[$month_name]['count_underscore_auditor']];
-          $total += $first_last_date_monthly[$month_name]['count_underscore_auditor'];
-          $first_last_date_monthly['total'] = $total;
+        $total += $first_last_date_monthly[$month_name]['count_underscore_auditor'];
+        $first_last_date_monthly['total'] = $total;
 	    }
     }
 

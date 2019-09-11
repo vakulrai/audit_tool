@@ -202,6 +202,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       if(count($audit_criteria_id)){
         $links['audit_criteria_internal'] = [
           'title' => 'Internal',
+          'weight' => 1,
           'route_name' => 'entity.audit_criteria.edit_form',
           'base_route' => $base_route,
           'route_parameters' => ['audit_criteria' => key($audit_criteria_id), 'unit_reference' => $id, 'type' => $type],
@@ -210,6 +211,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       else{
         $links['audit_criteria_internal'] = [
           'title' => 'Internal',
+          'weight' => 1,
           'route_name' => 'eck.entity.add',
           'base_route' => $base_route,
           'route_parameters' => ['eck_entity_type' => 'audit_criteria', 'eck_entity_bundle' => 'systems', 'unit_reference' => $id, 'type' => $type],
@@ -219,6 +221,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       if(count($audit_criteria_external_id)){
         $links['audit_criteria_external'] = [
           'title' => 'External',
+          'weight' => 2,
           'route_name' => 'entity.audit_criteria_external.edit_form',
           'base_route' => $base_route,
           'route_parameters' => ['audit_criteria_external' => key($audit_criteria_external_id), 'unit_reference' => $id, 'type' => $type],
@@ -227,6 +230,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       else{
         $links['audit_criteria_external'] = [
           'title' => 'External',
+          'weight' => 2,
           'route_name' => 'eck.entity.add',
           'base_route' => $base_route,
           'route_parameters' => ['eck_entity_type' => 'audit_criteria_external', 'eck_entity_bundle' => 'external', 'unit_reference' => $id, 'type' => $type],
@@ -236,6 +240,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       if(count($audit_criteria_customer_id)){
          $links['audit_criteria_customer'] = [
           'title' => 'Customer',
+          'weight' => 3,
           'route_name' => 'entity.audit_criteria_customer.edit_form',
           'base_route' => $base_route,
           'route_parameters' => ['audit_criteria_customer' => key($audit_criteria_customer_id), 'unit_reference' => $id, 'type' => $type],
@@ -244,6 +249,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       else{
         $links['audit_criteria_customer'] = [
           'title' => 'Customer',
+          'weight' => 3,
           'route_name' => 'eck.entity.add',
           'base_route' => $base_route,
           'route_parameters' => ['eck_entity_type' => 'audit_criteria_customer', 'eck_entity_bundle' => 'customer', 'unit_reference' => $id, 'type' => $type],
@@ -253,6 +259,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
        if(count($audit_criteria_supplier_id)){
          $links['audit_criteria_product_supplier'] = [
           'title' => 'Supplier',
+          'weight' => 4,
           'route_name' => 'entity.audit_criteria_supplier.edit_form',
           'base_route' => $base_route,
           'route_parameters' => ['audit_criteria_supplier' => key($audit_criteria_supplier_id), 'unit_reference' => $id, 'type' => $type],
@@ -261,6 +268,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       else{
         $links['audit_criteria_product_supplier'] = [
           'title' => 'Supplier',
+          'weight' => 4,
           'route_name' => 'eck.entity.add',
           'base_route' => $base_route,
           'route_parameters' => ['eck_entity_type' => 'audit_criteria_supplier', 'eck_entity_bundle' => 'supplier', 'unit_reference' => $id, 'type' => $type],
@@ -270,6 +278,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       if(count($audit_criteria_score_id)){
          $links['audit_criteria_score'] = [
           'title' => 'Score Settings',
+          'weight' => 5,
           'route_name' => 'entity.audit_criteria_score.edit_form',
           'base_route' => $base_route,
           'route_parameters' => ['audit_criteria_score' => key($audit_criteria_score_id), 'unit_reference' => $id, 'type' => $type],
@@ -278,6 +287,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       else{
         $links['audit_criteria_score'] = [
           'title' => 'Score Settings',
+          'weight' => 5,
           'route_name' => 'eck.entity.add',
           'base_route' => $base_route,
           'route_parameters' => ['eck_entity_type' => 'audit_criteria_score', 'eck_entity_bundle' => 'score', 'unit_reference' => $id, 'type' => $type],
@@ -287,6 +297,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       if(count($audit_cycle_id)){
          $links['audit_time_cycle'] = [
           'title' => 'Time Cycle Settings',
+          'weight' => 6,
           'route_name' => 'entity.audit_cycle.edit_form',
           'base_route' => $base_route,
           'route_parameters' => ['audit_cycle' => key($audit_cycle_id), 'unit_reference' => $id, 'type' => $type],
@@ -295,6 +306,7 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       else{
         $links['audit_time_cycle'] = [
           'title' => 'Time Cycle Settings',
+          'weight' => 6,
           'route_name' => 'eck.entity.add',
           'base_route' => $base_route,
           'route_parameters' => ['eck_entity_type' => 'audit_cycle', 'eck_entity_bundle' => 'settings', 'unit_reference' => $id, 'type' => $type],
