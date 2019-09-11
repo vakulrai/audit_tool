@@ -1,0 +1,33 @@
+.audit-criteria-add-wrapper {
+  .audit-criteria-systems-form {
+    fieldset {
+      >legend {
+        background: $grey-bg;
+        padding: 10px;
+        border-radius: 4px;
+        border: none;
+        border-bottom: 1px solid transparent;
+        color: $black;
+        font-size: 11px;
+        font-weight: bold;
+      }
+
+      .fieldset-wrapper {
+        legend {
+          background: none;
+          padding: 0px;
+        }
+      }
+
+      fieldset {
+        padding: 0px;
+      }
+    }
+  }
+  #edit-submit {
+    margin-bottom: 30px;
+  }
+  #block-audit-tool-mainpagecontent {
+    padding-bottom: 50px;
+  }
+}
