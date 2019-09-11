@@ -1,0 +1,126 @@
+.cycle-add-setting-wrapper {
+  .audit-cycle-settings-form {
+    #edit-audit-cycle-year {
+      > legend {
+        background: $grey-bg;
+        padding: 10px;
+        border-radius: 4px;
+        border: none;
+        border-bottom: 1px solid transparent;
+        color: $black;
+        font-size: 11px;
+        font-weight: bold;
+        margin: 0px;
+      }
+      fieldset {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+    }
+    #edit-field-cycle-type-wrapper {
+      padding-left: 0px;
+      padding-right: 0px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      .fieldset-wrapper {
+        div {
+          margin-top: 10px;
+          input {
+            margin-top: 0px;
+          }
+          label {
+            padding-left: 15px;
+          }
+        }
+      }
+    }
+    .field--type-daterange {
+      padding: 0px;
+    }
+
+    #edit-audit-cycle-year-sr {
+      legend {
+        background: $grey-bg;
+        padding: 10px;
+        border-radius: 4px;
+        border: none;
+        border-bottom: 1px solid transparent;
+        color: $black;
+        font-size: 11px;
+        font-weight: bold;
+        margin: 0px;
+        margin-bottom: 20px;
+      }
+      div, fieldset {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+      .paragraphs-subform {
+        .field--type-integer {
+          float: left;
+          width: 50%;
+          padding-left: 15px;
+          padding-right: 15px;
+          &:first-child, &:nth-child(3) {
+            padding-left: 0px;
+          }
+          &:nth-child(2), &:last-child {
+            padding-right: 0px;
+          }
+          .field-suffix {
+            display: none;
+          }
+        }
+      }
+    }
+    #edit-audit-cycle-other {
+      > legend {
+        background: $grey-bg;
+        padding: 10px;
+        border-radius: 4px;
+        border: none;
+        border-bottom: 1px solid transparent;
+        color: $black;
+        font-size: 11px;
+        font-weight: bold;
+        margin: 0px 0 15px;
+      }
+      fieldset, div {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+    }
+    .field--type-integer {
+      fieldset, div {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+    }
+     > fieldset.field-group-fieldset {
+       legend {
+         background: $grey-bg;
+         padding: 10px;
+         border-radius: 4px;
+         border: none;
+         border-bottom: 1px solid transparent;
+         color: $black;
+         font-size: 11px;
+         font-weight: bold;
+         margin: 0px 0 15px;
+       }
+       .field--type-integer {
+         float: left;
+         width: 25%;
+         &:first-child {
+           padding-left: 0px;
+         }
+         &:last-child {
+           padding-right: 0px;
+         }
+       }
+     }
+     #edit-submit {
+       margin-left: 0px;
+     }
+  }
+}
