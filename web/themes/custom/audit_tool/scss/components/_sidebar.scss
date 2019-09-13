@@ -1,0 +1,17 @@
+.sidebar {
+  #block-audit-tool-manageexternalaudit.block,  #block-audit-tool-auditplanningsubmenuformr.block {
+    padding: 0;
+    border: none;
+    margin: 0;
+    ul {
+      li {
+        a {
+          color: $text-color;
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}

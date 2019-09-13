@@ -1407,8 +1407,88 @@ table#field-location-values tbody tr {
 .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-submit {
   margin-left: 0px; }
 
+.node-internal-audit-edit-form > div, .node-internal-audit-edit-form .js-form-wrapper {
+  padding-left: 0px;
+  padding-right: 0px; }
 .node-internal-audit-edit-form #edit-title-wrapper {
-  border-bottom: 0px; }
+  padding: 0px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  margin-right: 15px; }
+  .node-internal-audit-edit-form #edit-title-wrapper label {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0 0 15px;
+    width: 100%; }
+  .node-internal-audit-edit-form #edit-title-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.node-internal-audit-edit-form #edit-field-ia-department-wrapper, .node-internal-audit-edit-form #edit-field-unit-wrapper,
+.node-internal-audit-edit-form #edit-field-ia-section-wrapper, .node-internal-audit-edit-form #edit-field-audit-type-wrapper {
+  float: left;
+  width: 50%; }
+.node-internal-audit-edit-form #edit-field-internal-audit-type-wrapper, .node-internal-audit-edit-form #edit-field-audit-date-wrapper, .node-internal-audit-edit-form #edit-field-queries-wrapper {
+  float: left;
+  width: 100%; }
+.node-internal-audit-edit-form #edit-field-audit-date-wrapper {
+  padding: 0 15px; }
+  .node-internal-audit-edit-form #edit-field-audit-date-wrapper fieldset:first-child {
+    padding-left: 0px; }
+  .node-internal-audit-edit-form #edit-field-audit-date-wrapper .description {
+    display: none; }
+.node-internal-audit-edit-form #edit-field-queries-wrapper {
+  padding: 0 15px; }
+  .node-internal-audit-edit-form #edit-field-queries-wrapper table thead tr {
+    padding: 0 15px; }
+    .node-internal-audit-edit-form #edit-field-queries-wrapper table thead tr th {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      border-bottom: 1px solid transparent; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table thead tr th h4 {
+        color: #000000;
+        font-size: 11px;
+        font-weight: bold;
+        margin: 0px; }
+  .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr {
+    background: none; }
+    .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td.field-multiple-drag {
+      display: none; }
+    .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td {
+      padding: 0px; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td .js-form-wrapper {
+        padding: 0px; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 100%;
+        padding: 0; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td .paragraph-type-top {
+        padding: 30px 15px 0;
+        margin-top: 20px; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td .paragraphs-subform .field--name-field-score, .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+        float: left;
+        width: 50%; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td .paragraphs-subform .field--name-field-score {
+        margin-top: 5px; }
+  .node-internal-audit-edit-form #edit-field-queries-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.node-internal-audit-edit-form #edit-field-queries-add-more {
+  margin-left: 0px; }
+.node-internal-audit-edit-form .paragraphs-subform .field--type-string {
+  float: left;
+  width: 50%; }
 
 .procedure-listing-wrapper #block-audit-tool-mainpagecontent {
   float: left;
@@ -1463,5 +1543,117 @@ table#field-location-values tbody tr {
   .block-audit-planning-block .fc-ltr .fc-header-toolbar button:focus {
     box-shadow: none;
     outline: none; }
+  .block-audit-planning-block .fc-ltr .fc-view-container {
+    background: #ffffff; }
+    .block-audit-planning-block .fc-ltr .fc-view-container table .fc-head tr th {
+      background: #efefef;
+      color: #7E8E9D; }
+  .block-audit-planning-block .fc-ltr .fc-body tr {
+    background: none; }
+    .block-audit-planning-block .fc-ltr .fc-body tr td a.fc-day-grid-event {
+      background: #5D62E6 !important;
+      border: none;
+      color: #ffffff; }
+    .block-audit-planning-block .fc-ltr .fc-body tr a.fc-day-grid-event.gcal-event {
+      background: transparent !important;
+      border: 1px solid #efefef !important; }
+      .block-audit-planning-block .fc-ltr .fc-body tr a.fc-day-grid-event.gcal-event span {
+        color: #414141; }
+
+.sidebar #block-audit-tool-manageexternalaudit.block, .sidebar #block-audit-tool-auditplanningsubmenuformr.block {
+  padding: 0;
+  border: none;
+  margin: 0; }
+  .sidebar #block-audit-tool-manageexternalaudit.block ul li a, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a {
+    color: #7E8E9D; }
+    .sidebar #block-audit-tool-manageexternalaudit.block ul li a:hover, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a:hover {
+      text-decoration: none; }
+
+.external-audit-wrapper .node-external-audit__form #edit-title-wrapper {
+  padding: 0px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  margin-right: 15px; }
+  .external-audit-wrapper .node-external-audit__form #edit-title-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-field-certification-std-wrapper {
+  padding: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-body-wrapper {
+  padding: 0px;
+  margin-top: 30px; }
+  .external-audit-wrapper .node-external-audit__form #edit-body-wrapper .cke_contents {
+    max-height: 60px; }
+.external-audit-wrapper .node-external-audit__form #edit-field-issue-date-wrapper, .external-audit-wrapper .node-external-audit__form #edit-field-validity-wrapper {
+  float: left;
+  width: 25%; }
+  .external-audit-wrapper .node-external-audit__form #edit-field-issue-date-wrapper fieldset, .external-audit-wrapper .node-external-audit__form #edit-field-validity-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-field-validity-wrapper {
+  padding-left: 0px; }
+  .external-audit-wrapper .node-external-audit__form #edit-field-validity-wrapper fieldset {
+    width: 100%; }
+    .external-audit-wrapper .node-external-audit__form #edit-field-validity-wrapper fieldset input {
+      width: 100%; }
+.external-audit-wrapper .node-external-audit__form #edit-field-audit-cycle-wrapper {
+  float: left;
+  width: 50%; }
+  .external-audit-wrapper .node-external-audit__form #edit-field-audit-cycle-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-field-audit-type-external-wrapper, .external-audit-wrapper .node-external-audit__form #edit-field-decision-wrapper, .external-audit-wrapper .node-external-audit__form #edit-field-score-wrapper {
+  float: left;
+  width: 33%; }
+  .external-audit-wrapper .node-external-audit__form #edit-field-audit-type-external-wrapper fieldset, .external-audit-wrapper .node-external-audit__form #edit-field-decision-wrapper fieldset, .external-audit-wrapper .node-external-audit__form #edit-field-score-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-field-scope-wrapper {
+  float: left;
+  width: 100%; }
+  .external-audit-wrapper .node-external-audit__form #edit-field-scope-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-field-audit-month-wrapper, .external-audit-wrapper .node-external-audit__form #edit-field-lead-auditor-wrapper,
+.external-audit-wrapper .node-external-audit__form #edit-field-auditor-s-name-wrapper, .external-audit-wrapper .node-external-audit__form #edit-field-next-due-date-wrapper {
+  float: left;
+  width: 25%; }
+  .external-audit-wrapper .node-external-audit__form #edit-field-audit-month-wrapper fieldset, .external-audit-wrapper .node-external-audit__form #edit-field-lead-auditor-wrapper fieldset,
+  .external-audit-wrapper .node-external-audit__form #edit-field-auditor-s-name-wrapper fieldset, .external-audit-wrapper .node-external-audit__form #edit-field-next-due-date-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-submit {
+  margin-left: 0px; }
+
+.document-records-wrapper #block-audit-tool-mainpagecontent {
+  float: left;
+  background: none;
+  padding: 0px;
+  width: 100%; }
+  .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive {
+    padding: 0px; }
+    .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table {
+      padding: 0px;
+      margin: 0px; }
+      .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr {
+        border: none; }
+        .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr th {
+          background: #f8f9fa;
+          border: none;
+          font: Bold 11px/15px Open Sans;
+          color: #23272D; }
+      .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr {
+        background: #ffffff;
+        border-bottom: 2px solid #f8f9fa; }
+        .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr:hover {
+          background: #EBECFF; }
+        .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr td {
+          font-size: 13px;
+          line-height: 19px;
+          font-weight: Semibold;
+          color: #4F5A67;
+          border: none; }
+          .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr td .file {
+            padding-left: 0px; }
 
 /*# sourceMappingURL=style.css.map */

@@ -41,5 +41,39 @@
         }
       }
     }
+    .fc-view-container {
+      background: $white;
+      table {        
+        .fc-head {
+          tr {
+            th {
+              background: $table-grey;
+              color: $text-color;
+            }
+          }
+        }
+      }
+    }
+
+    .fc-body {
+      tr {
+        background: none;
+        td {
+          a.fc-day-grid-event {
+            background: $voilet!important;
+            border: none;
+            color: $white;
+          }
+        }
+        a.fc-day-grid-event.gcal-event {
+          background: transparent!important;
+          border: 1px solid $table-grey!important;
+          span {
+            color: $dark-grey;
+          }
+        }
+
+      }
+    }
   }
 }
