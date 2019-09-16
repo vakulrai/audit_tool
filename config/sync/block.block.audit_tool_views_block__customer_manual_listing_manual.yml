@@ -22,9 +22,10 @@ settings:
   label_display: '0'
   views_label: ''
   items_per_page: none
+  context_mapping: {  }
 visibility:
   request_path:
     id: request_path
-    pages: /node/add/customers_manual
+    pages: /customer-listing
     negate: false
     context_mapping: {  }
