@@ -1,27 +1,13 @@
-.page-planned-listing, .user-listing-auditor-wrapper {
+.notification-wrapper {
   #block-audit-tool-mainpagecontent {
-    float: left;
-    background: none;
-    padding: 0px;
-    width: 100%;
-    border: none;
-
-    .views-element-container {
-      padding: 0px;
-
-      .views-exposed-form {
-        background: #ffffff;
-        padding: 15px;
-        margin-bottom: 15px;
-
-        .form-type-select {
-          margin-top: 5px;
-        }
-      }
-    }
-    .view-content {
+      float: left;
+      background: $white;
+      padding: 0px 0 15px;
+      width: 100%;
       .table-responsive {
-
+        padding: 0px;
+        margin-bottom: 30px;
+        background: #fff;
         table {
           padding: 0px;
           margin: 0px;
@@ -49,11 +35,17 @@
                 font-weight: Semibold;
                 color: #4F5A67;
                 border: none;
+                .file {
+                  padding-left: 0px;
+                }
               }
             }
           }
         }
       }
+      .pagination {
+        margin-bottom: 0px;
+        margin-left: 15px;
+      }
     }
-  }
 }

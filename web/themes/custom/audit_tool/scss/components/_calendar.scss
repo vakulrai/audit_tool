@@ -1,0 +1,79 @@
+.block-audit-planning-block {
+  .fc-ltr {
+    margin-top: 20px;
+
+    .fc-header-toolbar {
+      .fc-button-group {
+       button {
+         background: $voilet;
+         border: none;
+       }
+      }
+      .fc-today-button {
+        background: $voilet;
+        border: none;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .fc-right {
+        .fc-button-group {
+          background: $voilet;
+          padding: 8px;
+          border-radius: 3px;
+          button {
+            padding: 0px 15px;
+            margin-right: 5px;
+          }
+          .fc-button-active {
+            background: $white;
+            border-radius: 5px;
+            color: $voilet;
+          }
+        }
+      }
+      button {
+        &:focus {
+          box-shadow: none;
+          outline: none;
+        }
+      }
+    }
+    .fc-view-container {
+      background: $white;
+      table {        
+        .fc-head {
+          tr {
+            th {
+              background: $table-grey;
+              color: $text-color;
+            }
+          }
+        }
+      }
+    }
+
+    .fc-body {
+      tr {
+        background: none;
+        td {
+          a.fc-day-grid-event {
+            background: $voilet!important;
+            border: none;
+            color: $white;
+          }
+        }
+        a.fc-day-grid-event.gcal-event {
+          background: transparent!important;
+          border: 1px solid $table-grey!important;
+          span {
+            color: $dark-grey;
+          }
+        }
+
+      }
+    }
+  }
+}

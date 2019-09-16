@@ -294,7 +294,9 @@ legend,
   background: #ffffff 0 0 no-repeat padding-box;
   border: 1px solid #F2F4F6;
   border-radius: 4px;
-  padding: 24px; }
+  padding: 24px;
+  float: left;
+  width: 100%; }
 
 .container {
   max-width: 1274px;
@@ -352,6 +354,77 @@ legend,
   #edit-delete:hover {
     text-decoration: none;
     background: #676deb; }
+
+table#field-location-values thead tr {
+  padding: 0 15px;
+  background-color: #ffffff; }
+  table#field-location-values thead tr th {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0px; }
+    table#field-location-values thead tr th h4 {
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 0px; }
+table#field-location-values tbody tr {
+  background: none;
+  background-color: #ffffff !important; }
+  table#field-location-values tbody tr td.field-multiple-drag {
+    display: none; }
+  table#field-location-values tbody tr td {
+    padding: 0px; }
+    table#field-location-values tbody tr td .js-form-wrapper {
+      padding: 0px; }
+    table#field-location-values tbody tr td fieldset {
+      padding-top: 10px;
+      padding-left: 0px;
+      padding-right: 0px; }
+      table#field-location-values tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 25%;
+        padding: 0 15px; }
+      table#field-location-values tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+    table#field-location-values tbody tr td .paragraph-type-top {
+      padding: 15px 15px 0; }
+    table#field-location-values tbody tr td .paragraphs-subform .field--name-field-score, table#field-location-values tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+      float: left;
+      width: 50%; }
+    table#field-location-values tbody tr td .paragraphs-subform .field--name-field-score {
+      margin-top: 5px; }
+    table#field-location-values tbody tr td div {
+      padding-top: 10px; }
+      table#field-location-values tbody tr td div .form-check-input {
+        margin-left: 10px; }
+
+.main-content nav.tabs .nav-tabs {
+  border-color: #F2F2F2; }
+  .main-content nav.tabs .nav-tabs .nav-item a {
+    color: #23272D;
+    opacity: 0.3;
+    border: none;
+    border-bottom: 2px solid transparent; }
+    .main-content nav.tabs .nav-tabs .nav-item a:hover {
+      opacity: 1;
+      border: none;
+      border-color: #5D62E6;
+      background: none; }
+  .main-content nav.tabs .nav-tabs .active {
+    opacity: 1;
+    border: none;
+    background: none;
+    border-bottom: 2px solid #5D62E6; }
+    .main-content nav.tabs .nav-tabs .active a {
+      opacity: 1; }
 
 .node-unit-edit-form .field-group-fieldset {
   padding-left: 15px;
@@ -766,36 +839,36 @@ legend,
           color: #4F5A67;
           border: none; }
 
-.page-planned-listing #block-audit-tool-mainpagecontent {
+.page-planned-listing #block-audit-tool-mainpagecontent, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent {
   float: left;
   background: none;
   padding: 0px;
   width: 100%;
   border: none; }
-  .page-planned-listing #block-audit-tool-mainpagecontent .views-element-container {
+  .page-planned-listing #block-audit-tool-mainpagecontent .views-element-container, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .views-element-container {
     padding: 0px; }
-    .page-planned-listing #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form {
+    .page-planned-listing #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form {
       background: #ffffff;
       padding: 15px;
       margin-bottom: 15px; }
-      .page-planned-listing #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form .form-type-select {
+      .page-planned-listing #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form .form-type-select, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form .form-type-select {
         margin-top: 5px; }
-  .page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table {
+  .page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table {
     padding: 0px;
     margin: 0px; }
-    .page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr {
+    .page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr {
       border: none; }
-      .page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr th {
+      .page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr th, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr th {
         background: #f8f9fa;
         border: none;
         font: Bold 11px/15px Open Sans;
         color: #23272D; }
-    .page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr {
+    .page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr {
       background: #ffffff;
       border-bottom: 2px solid #f8f9fa; }
-      .page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr:hover {
+      .page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr:hover, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr:hover {
         background: #EBECFF; }
-      .page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr td {
+      .page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr td, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr td {
         font-size: 13px;
         line-height: 19px;
         font-weight: Semibold;
@@ -917,5 +990,810 @@ legend,
     padding-right: 0px; }
 .customer-manual-wrapper #edit-submit {
   margin-left: 0px; }
+
+.supplier-page-wrapper #edit-field-contact-person-name-wrapper {
+  padding-left: 0px;
+  padding-right: 0px; }
+.supplier-page-wrapper #edit-field-location-add-more {
+  margin-left: 0px; }
+.supplier-page-wrapper #edit-field-product-type-wrapper .form-type-select {
+  padding-left: 0px;
+  padding-right: 0px; }
+.supplier-page-wrapper table thead tr {
+  padding: 0 15px;
+  background-color: #ffffff; }
+  .supplier-page-wrapper table thead tr th {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0px; }
+    .supplier-page-wrapper table thead tr th h4 {
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 0px; }
+.supplier-page-wrapper table tbody tr {
+  background: none;
+  background-color: #ffffff !important; }
+  .supplier-page-wrapper table tbody tr td.field-multiple-drag {
+    display: none; }
+  .supplier-page-wrapper table tbody tr td {
+    padding: 0px; }
+    .supplier-page-wrapper table tbody tr td .js-form-wrapper {
+      padding: 0px; }
+    .supplier-page-wrapper table tbody tr td fieldset {
+      padding-top: 10px;
+      padding-left: 0px;
+      padding-right: 0px; }
+      .supplier-page-wrapper table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 25%;
+        padding: 0 15px; }
+      .supplier-page-wrapper table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+    .supplier-page-wrapper table tbody tr td .paragraph-type-top {
+      padding: 15px 15px 0; }
+    .supplier-page-wrapper table tbody tr td .paragraphs-subform .field--name-field-score, .supplier-page-wrapper table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+      float: left;
+      width: 50%; }
+    .supplier-page-wrapper table tbody tr td .paragraphs-subform .field--name-field-score {
+      margin-top: 5px; }
+    .supplier-page-wrapper table tbody tr td div {
+      padding-top: 10px; }
+      .supplier-page-wrapper table tbody tr td div .form-check-input {
+        margin-left: 10px; }
+.supplier-page-wrapper #edit-submit {
+  margin-left: 0px; }
+.supplier-page-wrapper .paragraphs-dropbutton-wrapper {
+  display: block; }
+  .supplier-page-wrapper .paragraphs-dropbutton-wrapper input {
+    display: inline-block;
+    width: auto;
+    background: #5D62E6; }
+
+.procedures-wrapper #edit-title-wrapper {
+  padding: 0px;
+  border-bottom: 1px solid #f8f9fa;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  margin-right: 30px; }
+  .procedures-wrapper #edit-title-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.procedures-wrapper #edit-field-business-process-wrapper, .procedures-wrapper #department, .procedures-wrapper #section {
+  float: left;
+  width: 33%;
+  padding: 0px; }
+.procedures-wrapper #edit-field-create-procedure-wrapper, .procedures-wrapper #edit-field-refere-wrapper {
+  float: left;
+  width: 100%;
+  clear: both; }
+.procedures-wrapper #edit-langcode-wrapper {
+  margin: 0px; }
+.procedures-wrapper #edit-field-create-procedure-wrapper table thead tr {
+  padding: 0 15px;
+  background-color: #ffffff; }
+  .procedures-wrapper #edit-field-create-procedure-wrapper table thead tr th {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0px; }
+    .procedures-wrapper #edit-field-create-procedure-wrapper table thead tr th h4 {
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 0px; }
+.procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr {
+  background: none;
+  background-color: #ffffff !important; }
+  .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td.field-multiple-drag {
+    display: none; }
+  .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td {
+    padding: 0px; }
+    .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td .js-form-wrapper {
+      padding: 0px; }
+    .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td fieldset {
+      padding-top: 10px; }
+      .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 25%;
+        padding: 0 15px; }
+      .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+    .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td .paragraph-type-top {
+      padding: 15px 15px 0; }
+    .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td .paragraphs-subform .field--name-field-score, .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+      float: left;
+      width: 50%; }
+    .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td .paragraphs-subform .field--name-field-score {
+      margin-top: 5px; }
+    .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td div {
+      padding-top: 10px; }
+      .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td div .form-check-input {
+        margin-left: 10px; }
+.procedures-wrapper #edit-field-create-procedure-wrapper .paragraphs-subform .field--name-field-s-no, .procedures-wrapper #edit-field-create-procedure-wrapper .paragraphs-subform .field--name-field-number,
+.procedures-wrapper #edit-field-create-procedure-wrapper .paragraphs-subform .field--name-field-title, .procedures-wrapper #edit-field-create-procedure-wrapper .paragraphs-subform .field--name-field-issue-number {
+  float: left;
+  width: 25%; }
+.procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-procedure-document {
+  text-align: center; }
+.procedures-wrapper #edit-field-create-procedure-wrapper .paragraph-type-top .paragraph-type-title {
+  margin-top: 20px; }
+.procedures-wrapper #edit-field-create-procedure-wrapper .field--type-datetime, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-number, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-date {
+  float: left;
+  width: 33%; }
+  .procedures-wrapper #edit-field-create-procedure-wrapper .field--type-datetime fieldset, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-number fieldset, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-date fieldset {
+    width: 100%; }
+    .procedures-wrapper #edit-field-create-procedure-wrapper .field--type-datetime fieldset input, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-number fieldset input, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-date fieldset input {
+      width: 100%; }
+.procedures-wrapper #edit-field-create-procedure-wrapper .field--type-datetime label, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-date label {
+  margin-left: 15px;
+  margin-bottom: 0px;
+  margin-top: 9px; }
+.procedures-wrapper #edit-field-create-procedure-wrapper .field--type-datetime .form-inline, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-date .form-inline {
+  padding-top: 0px; }
+.procedures-wrapper #edit-field-refere-wrapper {
+  padding-left: 30px;
+  padding-right: 30px; }
+  .procedures-wrapper #edit-field-refere-wrapper table {
+    margin-bottom: 0px; }
+    .procedures-wrapper #edit-field-refere-wrapper table thead tr {
+      padding: 0 15px;
+      background-color: #ffffff; }
+      .procedures-wrapper #edit-field-refere-wrapper table thead tr th {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 4px;
+        border: none;
+        border-bottom: 1px solid transparent;
+        color: #000000;
+        font-size: 11px;
+        font-weight: bold;
+        margin: 0px; }
+        .procedures-wrapper #edit-field-refere-wrapper table thead tr th h4 {
+          color: #000000;
+          font-size: 11px;
+          font-weight: bold;
+          margin: 0px; }
+    .procedures-wrapper #edit-field-refere-wrapper table tbody tr {
+      background: none;
+      background-color: #ffffff !important;
+      border: none; }
+      .procedures-wrapper #edit-field-refere-wrapper table tbody tr td.field-multiple-drag {
+        display: none; }
+      .procedures-wrapper #edit-field-refere-wrapper table tbody tr td {
+        padding: 0px;
+        border: none; }
+        .procedures-wrapper #edit-field-refere-wrapper table tbody tr td .js-form-wrapper {
+          padding: 0px; }
+        .procedures-wrapper #edit-field-refere-wrapper table tbody tr td input {
+          width: 100%; }
+        .procedures-wrapper #edit-field-refere-wrapper table tbody tr td fieldset {
+          padding: 10px 0px 0px; }
+          .procedures-wrapper #edit-field-refere-wrapper table tbody tr td fieldset .form-group .form-group {
+            float: left;
+            width: 25%;
+            padding: 0 15px; }
+          .procedures-wrapper #edit-field-refere-wrapper table tbody tr td fieldset .form-group .js-form-type-select {
+            width: 100%;
+            padding: 0px;
+            margin-top: 5px; }
+        .procedures-wrapper #edit-field-refere-wrapper table tbody tr td .paragraph-type-top {
+          padding: 15px 15px 0; }
+        .procedures-wrapper #edit-field-refere-wrapper table tbody tr td .paragraphs-subform .field--name-field-score, .procedures-wrapper #edit-field-refere-wrapper table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+          float: left;
+          width: 50%; }
+        .procedures-wrapper #edit-field-refere-wrapper table tbody tr td .paragraphs-subform .field--name-field-score {
+          margin-top: 5px; }
+        .procedures-wrapper #edit-field-refere-wrapper table tbody tr td div {
+          padding-top: 10px; }
+          .procedures-wrapper #edit-field-refere-wrapper table tbody tr td div .form-check-input {
+            margin-left: 10px; }
+
+.audit-criteria-add-wrapper .audit-criteria-systems-form fieldset > legend {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold; }
+.audit-criteria-add-wrapper .audit-criteria-systems-form fieldset .fieldset-wrapper legend {
+  background: none;
+  padding: 0px; }
+.audit-criteria-add-wrapper .audit-criteria-systems-form fieldset fieldset {
+  padding: 0px; }
+.audit-criteria-add-wrapper #edit-submit {
+  margin-bottom: 30px; }
+.audit-criteria-add-wrapper #block-audit-tool-mainpagecontent {
+  padding-bottom: 50px; }
+
+#edit-field-score-settings-wrapper #edit-field-score-settings--wrapper {
+  padding-left: 0px;
+  padding-right: 0px; }
+  #edit-field-score-settings-wrapper #edit-field-score-settings--wrapper legend {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 20px; }
+#edit-field-score-settings-wrapper #edit-field-score-settings {
+  padding-left: 15px; }
+  #edit-field-score-settings-wrapper #edit-field-score-settings div {
+    margin-bottom: 10px; }
+  #edit-field-score-settings-wrapper #edit-field-score-settings input {
+    margin-top: 0px; }
+  #edit-field-score-settings-wrapper #edit-field-score-settings label {
+    padding-left: 15px; }
+
+.audit-criteria-score-score-form .paragraph-type-title {
+  margin-top: 15px; }
+.audit-criteria-score-score-form .field-add-more-submit, .audit-criteria-score-score-form #edit-submit {
+  margin-left: 0px; }
+.audit-criteria-score-score-form table thead tr {
+  padding: 0 15px;
+  background-color: #ffffff; }
+  .audit-criteria-score-score-form table thead tr th {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0px; }
+    .audit-criteria-score-score-form table thead tr th h4 {
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 0px; }
+.audit-criteria-score-score-form table tbody tr {
+  background: none;
+  background-color: #ffffff !important; }
+  .audit-criteria-score-score-form table tbody tr td.field-multiple-drag {
+    display: none; }
+  .audit-criteria-score-score-form table tbody tr td {
+    padding: 0px; }
+    .audit-criteria-score-score-form table tbody tr td .js-form-wrapper {
+      padding: 0px; }
+    .audit-criteria-score-score-form table tbody tr td fieldset {
+      padding-top: 10px;
+      padding-left: 0px;
+      padding-right: 0px; }
+      .audit-criteria-score-score-form table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 25%;
+        padding: 0 15px; }
+      .audit-criteria-score-score-form table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+    .audit-criteria-score-score-form table tbody tr td .paragraph-type-top {
+      padding: 0;
+      margin-bottom: 0px; }
+    .audit-criteria-score-score-form table tbody tr td .paragraphs-subform .field--name-field-score, .audit-criteria-score-score-form table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+      float: left;
+      width: 50%; }
+    .audit-criteria-score-score-form table tbody tr td .paragraphs-subform .field--name-field-score {
+      margin-top: 5px; }
+    .audit-criteria-score-score-form table tbody tr td div {
+      padding-top: 10px; }
+      .audit-criteria-score-score-form table tbody tr td div .form-check-input {
+        margin-left: 10px; }
+    .audit-criteria-score-score-form table tbody tr td .field--type-entity-reference {
+      float: left;
+      width: 100%; }
+    .audit-criteria-score-score-form table tbody tr td .field--type-integer {
+      float: left;
+      width: 50%;
+      padding-left: 15px;
+      padding-right: 15px; }
+    .audit-criteria-score-score-form table tbody tr td .field--type-string {
+      float: left;
+      width: 50%;
+      padding-right: 15px;
+      padding-left: 15px; }
+      .audit-criteria-score-score-form table tbody tr td .field--type-string input {
+        margin-top: 0px; }
+    .audit-criteria-score-score-form table tbody tr td .paragraphs-subform div:last-child {
+      padding-right: 0px; }
+    .audit-criteria-score-score-form table tbody tr td .paragraphs-subform div:nth-child(2) {
+      padding-left: 0px; }
+
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year > legend {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year fieldset {
+  padding-left: 0px;
+  padding-right: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-field-cycle-type-wrapper {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-top: 15px;
+  margin-bottom: 15px; }
+  .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-field-cycle-type-wrapper .fieldset-wrapper div {
+    margin-top: 10px; }
+    .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-field-cycle-type-wrapper .fieldset-wrapper div input {
+      margin-top: 0px; }
+    .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-field-cycle-type-wrapper .fieldset-wrapper div label {
+      padding-left: 15px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form .field--type-daterange {
+  padding: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr legend {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0px;
+  margin-bottom: 20px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr div, .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr fieldset {
+  padding-left: 0px;
+  padding-right: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr .paragraphs-subform .field--type-integer {
+  float: left;
+  width: 50%;
+  padding-left: 15px;
+  padding-right: 15px; }
+  .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr .paragraphs-subform .field--type-integer:first-child, .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr .paragraphs-subform .field--type-integer:nth-child(3) {
+    padding-left: 0px; }
+  .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr .paragraphs-subform .field--type-integer:nth-child(2), .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr .paragraphs-subform .field--type-integer:last-child {
+    padding-right: 0px; }
+  .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-year-sr .paragraphs-subform .field--type-integer .field-suffix {
+    display: none; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-other > legend {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0px 0 15px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-other fieldset, .cycle-add-setting-wrapper .audit-cycle-settings-form #edit-audit-cycle-other div {
+  padding-left: 0px;
+  padding-right: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form .field--type-integer fieldset, .cycle-add-setting-wrapper .audit-cycle-settings-form .field--type-integer div {
+  padding-left: 0px;
+  padding-right: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form > fieldset.field-group-fieldset legend {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0px 0 15px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form > fieldset.field-group-fieldset .field--type-integer {
+  float: left;
+  width: 25%; }
+  .cycle-add-setting-wrapper .audit-cycle-settings-form > fieldset.field-group-fieldset .field--type-integer:first-child {
+    padding-left: 0px; }
+  .cycle-add-setting-wrapper .audit-cycle-settings-form > fieldset.field-group-fieldset .field--type-integer:last-child {
+    padding-right: 0px; }
+.cycle-add-setting-wrapper .audit-cycle-settings-form #edit-submit {
+  margin-left: 0px; }
+
+.node-internal-audit-edit-form > div, .node-internal-audit-edit-form .js-form-wrapper {
+  padding-left: 0px;
+  padding-right: 0px; }
+.node-internal-audit-edit-form #edit-title-wrapper {
+  padding: 0px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  margin-right: 15px; }
+  .node-internal-audit-edit-form #edit-title-wrapper label {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0 0 15px;
+    width: 100%; }
+  .node-internal-audit-edit-form #edit-title-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.node-internal-audit-edit-form #edit-field-ia-department-wrapper, .node-internal-audit-edit-form #edit-field-unit-wrapper,
+.node-internal-audit-edit-form #edit-field-ia-section-wrapper, .node-internal-audit-edit-form #edit-field-audit-type-wrapper {
+  float: left;
+  width: 50%; }
+.node-internal-audit-edit-form #edit-field-internal-audit-type-wrapper, .node-internal-audit-edit-form #edit-field-audit-date-wrapper, .node-internal-audit-edit-form #edit-field-queries-wrapper {
+  float: left;
+  width: 100%; }
+.node-internal-audit-edit-form #edit-field-audit-date-wrapper {
+  padding: 0 15px; }
+  .node-internal-audit-edit-form #edit-field-audit-date-wrapper fieldset:first-child {
+    padding-left: 0px; }
+  .node-internal-audit-edit-form #edit-field-audit-date-wrapper .description {
+    display: none; }
+.node-internal-audit-edit-form #edit-field-queries-wrapper {
+  padding: 0 15px; }
+  .node-internal-audit-edit-form #edit-field-queries-wrapper table thead tr {
+    padding: 0 15px; }
+    .node-internal-audit-edit-form #edit-field-queries-wrapper table thead tr th {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      border-bottom: 1px solid transparent; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table thead tr th h4 {
+        color: #000000;
+        font-size: 11px;
+        font-weight: bold;
+        margin: 0px; }
+  .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr {
+    background: none; }
+    .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td.field-multiple-drag {
+      display: none; }
+    .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td {
+      padding: 0px; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td .js-form-wrapper {
+        padding: 0px; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 100%;
+        padding: 0; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td .paragraph-type-top {
+        padding: 30px 15px 0;
+        margin-top: 20px; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td .paragraphs-subform .field--name-field-score, .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+        float: left;
+        width: 50%; }
+      .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td .paragraphs-subform .field--name-field-score {
+        margin-top: 5px; }
+  .node-internal-audit-edit-form #edit-field-queries-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.node-internal-audit-edit-form #edit-field-queries-add-more {
+  margin-left: 0px; }
+.node-internal-audit-edit-form .field--type-list-string .radio > div {
+  margin-bottom: 10px; }
+  .node-internal-audit-edit-form .field--type-list-string .radio > div input {
+    margin-top: 2px; }
+.node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td fieldset .js-form-wrapper .paragraphs-subform .field--name-field-description, .node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td fieldset .js-form-wrapper .paragraphs-subform .field--name-field-checked {
+  float: left;
+  width: 50%; }
+.node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td fieldset .js-form-wrapper .paragraphs-subform .field--name-field-description {
+  padding-right: 15px; }
+.node-internal-audit-edit-form #edit-field-queries-wrapper table tbody tr td fieldset .js-form-wrapper .paragraphs-subform .field--name-field-checked {
+  padding-left: 15px; }
+
+.procedure-listing-wrapper #block-audit-tool-mainpagecontent {
+  float: left;
+  background: none;
+  padding: 0px;
+  width: 100%; }
+  .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive {
+    padding: 0px; }
+    .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive table {
+      padding: 0px;
+      margin: 0px; }
+      .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr {
+        border: none; }
+        .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr th {
+          background: #f8f9fa;
+          border: none;
+          font: Bold 11px/15px Open Sans;
+          color: #23272D; }
+      .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr {
+        background: #ffffff;
+        border-bottom: 2px solid #f8f9fa; }
+        .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr:hover {
+          background: #EBECFF; }
+        .procedure-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr td {
+          font-size: 13px;
+          line-height: 19px;
+          font-weight: Semibold;
+          color: #4F5A67;
+          border: none; }
+
+.block-audit-planning-block .fc-ltr {
+  margin-top: 20px; }
+  .block-audit-planning-block .fc-ltr .fc-header-toolbar .fc-button-group button {
+    background: #5D62E6;
+    border: none; }
+  .block-audit-planning-block .fc-ltr .fc-header-toolbar .fc-today-button {
+    background: #5D62E6;
+    border: none; }
+  .block-audit-planning-block .fc-ltr .fc-header-toolbar h2 {
+    font-size: 24px; }
+  .block-audit-planning-block .fc-ltr .fc-header-toolbar .fc-right .fc-button-group {
+    background: #5D62E6;
+    padding: 8px;
+    border-radius: 3px; }
+    .block-audit-planning-block .fc-ltr .fc-header-toolbar .fc-right .fc-button-group button {
+      padding: 0px 15px;
+      margin-right: 5px; }
+    .block-audit-planning-block .fc-ltr .fc-header-toolbar .fc-right .fc-button-group .fc-button-active {
+      background: #ffffff;
+      border-radius: 5px;
+      color: #5D62E6; }
+  .block-audit-planning-block .fc-ltr .fc-header-toolbar button:focus {
+    box-shadow: none;
+    outline: none; }
+  .block-audit-planning-block .fc-ltr .fc-view-container {
+    background: #ffffff; }
+    .block-audit-planning-block .fc-ltr .fc-view-container table .fc-head tr th {
+      background: #efefef;
+      color: #7E8E9D; }
+  .block-audit-planning-block .fc-ltr .fc-body tr {
+    background: none; }
+    .block-audit-planning-block .fc-ltr .fc-body tr td a.fc-day-grid-event {
+      background: #5D62E6 !important;
+      border: none;
+      color: #ffffff; }
+    .block-audit-planning-block .fc-ltr .fc-body tr a.fc-day-grid-event.gcal-event {
+      background: transparent !important;
+      border: 1px solid #efefef !important; }
+      .block-audit-planning-block .fc-ltr .fc-body tr a.fc-day-grid-event.gcal-event span {
+        color: #414141; }
+
+.sidebar #block-audit-tool-manageexternalaudit.block, .sidebar #block-audit-tool-auditplanningsubmenuformr.block {
+  padding: 0;
+  border: none;
+  margin: 0; }
+  .sidebar #block-audit-tool-manageexternalaudit.block ul li a, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a {
+    color: #7E8E9D; }
+    .sidebar #block-audit-tool-manageexternalaudit.block ul li a:hover, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a:hover {
+      text-decoration: none; }
+
+.external-audit-wrapper .node-external-audit__form #edit-title-wrapper {
+  padding: 0px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  margin-right: 15px; }
+  .external-audit-wrapper .node-external-audit__form #edit-title-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-field-certification-std-wrapper {
+  padding: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-body-wrapper {
+  padding: 0px;
+  margin-top: 30px; }
+  .external-audit-wrapper .node-external-audit__form #edit-body-wrapper .cke_contents {
+    max-height: 60px; }
+.external-audit-wrapper .node-external-audit__form #edit-field-issue-date-wrapper, .external-audit-wrapper .node-external-audit__form #edit-field-validity-wrapper {
+  float: left;
+  width: 25%; }
+  .external-audit-wrapper .node-external-audit__form #edit-field-issue-date-wrapper fieldset, .external-audit-wrapper .node-external-audit__form #edit-field-validity-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-field-validity-wrapper {
+  padding-left: 0px; }
+  .external-audit-wrapper .node-external-audit__form #edit-field-validity-wrapper fieldset {
+    width: 100%; }
+    .external-audit-wrapper .node-external-audit__form #edit-field-validity-wrapper fieldset input {
+      width: 100%; }
+.external-audit-wrapper .node-external-audit__form #edit-field-audit-cycle-wrapper {
+  float: left;
+  width: 50%; }
+  .external-audit-wrapper .node-external-audit__form #edit-field-audit-cycle-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-field-audit-type-external-wrapper, .external-audit-wrapper .node-external-audit__form #edit-field-decision-wrapper, .external-audit-wrapper .node-external-audit__form #edit-field-score-wrapper {
+  float: left;
+  width: 33%; }
+  .external-audit-wrapper .node-external-audit__form #edit-field-audit-type-external-wrapper fieldset, .external-audit-wrapper .node-external-audit__form #edit-field-decision-wrapper fieldset, .external-audit-wrapper .node-external-audit__form #edit-field-score-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-field-scope-wrapper {
+  float: left;
+  width: 100%; }
+  .external-audit-wrapper .node-external-audit__form #edit-field-scope-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-field-audit-month-wrapper, .external-audit-wrapper .node-external-audit__form #edit-field-lead-auditor-wrapper,
+.external-audit-wrapper .node-external-audit__form #edit-field-auditor-s-name-wrapper, .external-audit-wrapper .node-external-audit__form #edit-field-next-due-date-wrapper {
+  float: left;
+  width: 25%; }
+  .external-audit-wrapper .node-external-audit__form #edit-field-audit-month-wrapper fieldset, .external-audit-wrapper .node-external-audit__form #edit-field-lead-auditor-wrapper fieldset,
+  .external-audit-wrapper .node-external-audit__form #edit-field-auditor-s-name-wrapper fieldset, .external-audit-wrapper .node-external-audit__form #edit-field-next-due-date-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.external-audit-wrapper .node-external-audit__form #edit-submit {
+  margin-left: 0px; }
+
+.document-records-wrapper #block-audit-tool-mainpagecontent {
+  float: left;
+  background: none;
+  padding: 0px;
+  width: 100%; }
+  .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive {
+    padding: 0px; }
+    .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table {
+      padding: 0px;
+      margin: 0px; }
+      .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr {
+        border: none; }
+        .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr th {
+          background: #f8f9fa;
+          border: none;
+          font: Bold 11px/15px Open Sans;
+          color: #23272D; }
+      .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr {
+        background: #ffffff;
+        border-bottom: 2px solid #f8f9fa; }
+        .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr:hover {
+          background: #EBECFF; }
+        .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr td {
+          font-size: 13px;
+          line-height: 19px;
+          font-weight: Semibold;
+          color: #4F5A67;
+          border: none; }
+          .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr td .file {
+            padding-left: 0px; }
+
+.node-answers-form > div, .node-answers-form .js-form-wrapper {
+  padding-left: 0px;
+  padding-right: 0px; }
+.node-answers-form #edit-title-wrapper {
+  padding: 0px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  margin-right: 15px; }
+  .node-answers-form #edit-title-wrapper label {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0 0 15px;
+    width: 100%; }
+  .node-answers-form #edit-title-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.node-answers-form #edit-field-ia-department-wrapper, .node-answers-form #edit-field-unit-wrapper,
+.node-answers-form #edit-field-ia-section-wrapper, .node-answers-form #edit-field-audit-type-wrapper {
+  float: left;
+  width: 50%; }
+.node-answers-form #edit-field-internal-audit-type-wrapper, .node-answers-form #edit-field-audit-date-wrapper, .node-answers-form #edit-field-queries-wrapper {
+  float: left;
+  width: 100%; }
+.node-answers-form #edit-field-audit-date-wrapper {
+  padding: 0 15px; }
+  .node-answers-form #edit-field-audit-date-wrapper fieldset:first-child {
+    padding-left: 0px; }
+  .node-answers-form #edit-field-audit-date-wrapper .description {
+    display: none; }
+.node-answers-form .field--type-entity-reference-revisions {
+  padding: 0 15px; }
+  .node-answers-form .field--type-entity-reference-revisions table thead tr {
+    padding: 0 15px; }
+    .node-answers-form .field--type-entity-reference-revisions table thead tr th {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      border-bottom: 1px solid transparent; }
+      .node-answers-form .field--type-entity-reference-revisions table thead tr th h4 {
+        color: #000000;
+        font-size: 11px;
+        font-weight: bold;
+        margin: 0px; }
+  .node-answers-form .field--type-entity-reference-revisions table tbody tr {
+    background: none; }
+    .node-answers-form .field--type-entity-reference-revisions table tbody tr td.field-multiple-drag {
+      display: none; }
+    .node-answers-form .field--type-entity-reference-revisions table tbody tr td {
+      padding: 0px; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .js-form-wrapper {
+        padding: 0px; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 100%;
+        padding: 0; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraph-type-top {
+        padding: 15px 0px 0;
+        margin-top: 20px; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--name-field-score, .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+        float: left;
+        width: 50%; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--name-field-score {
+        margin-top: 5px; }
+  .node-answers-form .field--type-entity-reference-revisions fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+.node-answers-form #edit-field-queries-add-more {
+  margin-left: 0px; }
+.node-answers-form .field--type-list-string {
+  padding-left: 15px;
+  padding-right: 15px; }
+  .node-answers-form .field--type-list-string .radio > div {
+    margin-bottom: 10px; }
+    .node-answers-form .field--type-list-string .radio > div input {
+      margin-top: 2px; }
+.node-answers-form #edit-field-add-to-checklist-wrapper {
+  padding: 0px; }
+.node-answers-form #edit-field-queries-wrapper table tbody tr td fieldset .js-form-wrapper .paragraphs-subform .field--name-field-description, .node-answers-form #edit-field-queries-wrapper table tbody tr td fieldset .js-form-wrapper .paragraphs-subform .field--name-field-checked {
+  float: left;
+  width: 50%; }
+.node-answers-form #edit-field-queries-wrapper table tbody tr td fieldset .js-form-wrapper .paragraphs-subform .field--name-field-description {
+  padding-right: 15px; }
+.node-answers-form #edit-field-queries-wrapper table tbody tr td fieldset .js-form-wrapper .paragraphs-subform .field--name-field-checked {
+  padding-left: 15px; }
+
+.notification-wrapper #block-audit-tool-mainpagecontent {
+  float: left;
+  background: #ffffff;
+  padding: 0px 0 15px;
+  width: 100%; }
+  .notification-wrapper #block-audit-tool-mainpagecontent .table-responsive {
+    padding: 0px;
+    margin-bottom: 30px;
+    background: #fff; }
+    .notification-wrapper #block-audit-tool-mainpagecontent .table-responsive table {
+      padding: 0px;
+      margin: 0px; }
+      .notification-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr {
+        border: none; }
+        .notification-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr th {
+          background: #f8f9fa;
+          border: none;
+          font: Bold 11px/15px Open Sans;
+          color: #23272D; }
+      .notification-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr {
+        background: #ffffff;
+        border-bottom: 2px solid #f8f9fa; }
+        .notification-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr:hover {
+          background: #EBECFF; }
+        .notification-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr td {
+          font-size: 13px;
+          line-height: 19px;
+          font-weight: Semibold;
+          color: #4F5A67;
+          border: none; }
+          .notification-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr td .file {
+            padding-left: 0px; }
+  .notification-wrapper #block-audit-tool-mainpagecontent .pagination {
+    margin-bottom: 0px;
+    margin-left: 15px; }
 
 /*# sourceMappingURL=style.css.map */

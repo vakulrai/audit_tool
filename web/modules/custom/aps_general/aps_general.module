@@ -1105,6 +1105,29 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     $user_role = $value;
   }
   
+  //Tabs later for roles and their listings.
+  if($route_name == 'user.admin_create' && \Drupal::request()->query->get('type') == 'default'){
+    $data['tabs'][0]['aps_pre_audit.manuals:auditor_list']['#active'] = TRUE;
+  }
+  elseif ($route_name == 'view.user_listing.page_1' && \Drupal::request()->query->get('type') == 'default') {
+    $data['tabs'][0]['aps_pre_audit.manuals:auditor_add']['#active'] = TRUE;
+  }
+  elseif ($route_name == 'view.user_listing.page_2' && \Drupal::request()->query->get('type') == 'auditor') {
+    $data['tabs'][0]['aps_pre_audit.manuals:auditor_add']['#active'] = TRUE;
+  }
+  elseif ($route_name == 'user.admin_create' && \Drupal::request()->query->get('type') == 'auditor') {
+    $data['tabs'][0]['aps_pre_audit.manuals:auditor_list']['#active'] = TRUE;
+  }
+  if(\Drupal::request()->query->get('type') == 'default'){
+    $data['tabs'][0]['aps_pre_audit.manuals:auditor_add']['#link']['title'] = 'Registered Roles';
+    $data['tabs'][0]['aps_pre_audit.manuals:auditor_list']['#link']['title'] = 'Add Roles';
+  }
+  if(\Drupal::request()->query->get('type') == 'mr'){
+    $data['tabs'][0]['aps_pre_audit.manuals:auditor_add']['#link']['title'] = 'Registered Mr';
+    $data['tabs'][0]['aps_pre_audit.manuals:auditor_list']['#link']['title'] = 'Add Mr';
+  }
+  
+  //Tabs alter for user form
   if($route_name == 'entity.user.edit_form'){
     unset($data['tabs']);
   }
@@ -1120,50 +1143,50 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   elseif($route_name == 'user.register'){
     unset($data['tabs'][0]['user.pass']);
   }
-  if(\Drupal::request()->query->get('type') == 'default'){
-    $data['tabs'][0]['aps_pre_audit.manuals:auditor_add']['#link']['title'] = 'Registered Roles';
-    $data['tabs'][0]['aps_pre_audit.manuals:auditor_list']['#link']['title'] = 'Add Roles';
-  }
-  if(\Drupal::request()->query->get('type') == 'mr'){
-    $data['tabs'][0]['aps_pre_audit.manuals:auditor_add']['#link']['title'] = 'Registered Mr';
-    $data['tabs'][0]['aps_pre_audit.manuals:auditor_list']['#link']['title'] = 'Add Mr';
-  }
+  
+  //Tabs alter for Audit criteria.
   if($route_name == 'eck.entity.add'){  
     if($uri[2] == 'audit_criteria'){
       $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_internal']['#active'] = TRUE;
-      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_external']['#active'] = FALSE;
-      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_customer']['#active'] = FALSE;
     }
-    elseif ($uri[2] == 'audit_criteria_process') {
+    elseif ($uri[2] == 'audit_criteria_external') {
       $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_external']['#active'] = TRUE;
-      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_internal']['#active'] = FALSE;
-      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_customer']['#active'] = FALSE;
     }
-    elseif ($uri[2] == 'audit_criteria_product') {
+    elseif ($uri[2] == 'audit_criteria_customer') {
       $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_customer']['#active'] = TRUE;
-      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_external']['#active'] = FALSE;
-      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_internal']['#active'] = FALSE;
+    }
+    elseif ($uri[2] == 'audit_criteria_supplier') {
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product_supplier']['#active'] = TRUE;
+    }
+    elseif ($uri[2] == 'audit_criteria_score') {
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_score']['#active'] = TRUE;
+    }
+    elseif ($uri[2] == 'audit_cycle') {
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_time_cycle']['#active'] = TRUE;
     }
     unset($data['tabs'][0]['devel.entities:audit_criteria.devel_tab']);
     unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_canonical_tab']);
     unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_edit_tab']);
     unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_delete_tab']); 
   }
-  elseif($route_name == 'entity.audit_criteria.edit_form' || $route_name == 'entity.audit_criteria_process.edit_form' || $route_name == 'entity.audit_criteria_product.edit_form'){
+  elseif($route_name == 'entity.audit_criteria.edit_form' || $route_name == 'entity.audit_criteria_external.edit_form' || $route_name == 'entity.audit_criteria_customer.edit_form' || $route_name == 'entity.audit_criteria_supplier.edit_form' || $route_name == 'entity.audit_criteria_score.edit_form' || $route_name == 'entity.audit_cycle.edit_form'){
     if($uri[0] == 'audit_criteria'){
       $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_internal']['#active'] = TRUE;
-      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_external']['#active'] = FALSE;
-      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_customer']['#active'] = FALSE;
     }
-    elseif ($uri[0] == 'audit_criteria_process') {
+    elseif ($uri[0] == 'audit_criteria_external') {
       $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_external']['#active'] = TRUE;
-      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_internal']['#active'] = FALSE;
-      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_customer']['#active'] = FALSE;
     }
-    elseif ($uri[0] == 'audit_criteria_product') {
+    elseif ($uri[0] == 'audit_criteria_customer') {
       $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_customer']['#active'] = TRUE;
-      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_external']['#active'] = FALSE;
-      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_internal']['#active'] = FALSE;
+    }
+    elseif ($uri[0] == 'audit_criteria_supplier') {
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_product_supplier']['#active'] = TRUE;
+    }
+    elseif ($uri[0] == 'audit_criteria_score') {
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_criteria_score']['#active'] = TRUE;
+    }
+    elseif ($uri[0] == 'audit_cycle') {
+      $data['tabs'][0]['aps_pre_audit.manuals:audit_time_cycle']['#active'] = TRUE;
     }
     unset($data['tabs'][0]['devel.entities:audit_criteria.devel_tab']);
     unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_canonical_tab']);
@@ -1171,6 +1194,7 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_delete_tab']);
   }
   
+  //Tabs alter for content types.
   if(isset($uri[2])){
     if (stripos(strtolower($uri[2]), 'external_audit_?') !== false) {
       unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
@@ -1988,7 +2012,11 @@ function aps_general_link_alter(&$variables) {
   if ($cleanLinkText == 'Unit Details' && $user_role == 'mr_admin') {
     $id = $uri[1];
     if($id){
-      $url = Url::fromRoute('entity.node.edit_form',['node' => $id]);
+      $user = User::load($current_user_id);
+      if($user_role == 'mr_admin'){
+        $user_unit = $user->field_reference_id->target_id;
+      }
+      $url = Url::fromRoute('entity.node.edit_form',['node' => $user_unit]);
       $url->setRouteParameter('destination', $current_uri);
       unset($variables['url']);
       $variables['url'] = $url;
