@@ -9,7 +9,7 @@ dependencies:
 id: audit_tool_breadcrumbs
 theme: audit_tool
 region: breadcrumb
-weight: -33
+weight: -36
 provider: null
 plugin: system_breadcrumb_block
 settings:

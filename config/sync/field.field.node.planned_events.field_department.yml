@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_department
-    - node.type.department
     - node.type.planned_events
 id: node.planned_events.field_department
 field_name: field_department
@@ -17,12 +16,10 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:node'
+  handler: views
   handler_settings:
-    target_bundles:
-      department: department
-    sort:
-      field: _none
-    auto_create: false
-    auto_create_bundle: ''
+    view:
+      view_name: internal_audit_systems
+      display_name: entity_reference_2
+      arguments: {  }
 field_type: entity_reference

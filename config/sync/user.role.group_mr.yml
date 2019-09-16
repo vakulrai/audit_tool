@@ -136,6 +136,7 @@ permissions:
   - 'edit own files media'
   - 'edit own home_page content'
   - 'edit own procedures content'
+  - 'execute php code'
   - 'update any media'
   - 'update paragraph content audit_cycle_other'
   - 'update paragraph content audit_cycle_schedule_release'

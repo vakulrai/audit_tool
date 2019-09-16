@@ -58,6 +58,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_checklist']['#disabled'] = TRUE;
     $form['#cache']['max-age'] = 0;
     $form['field_sections']['#attributes'] = ['id' => ['section']];
+    $form['field_list_of_process']['#attributes'] = ['id' => ['process-list']];
     $form['field_checklist']['#attributes'] = ['id' => ['checklist']];
     $form['field_shift']['#attributes'] = ['id' => ['shift']];
     $form['field_internal_audit_type']['#attributes'] = ['id' => ['audit-type']];
@@ -68,27 +69,35 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_select_from_others']['#attributes'] = ['id' => ['select-other']];
     $get_department_options = getDepartmenttypeUnderunit('department', $id);
     $form['field_department']['widget']['#options'] = $get_department_options;
-    
+    $get_section_from_department = getsectionDropdownOptionsfromDept($key);
+    $form['field_sections']['widget']['#options'] = $get_section_from_department;
+    $get_process_from_section = getProcessfromOptionfromsection($key);
+    $form['field_list_of_process']['widget']['#options'] = $get_process_from_section;
     // $form['field_audit_type']['widget']['#ajax'] = [
     //   'callback' => 'changeAuditeeOptions',
     //   'wrapper' => 'auditee',
     //   'event' => 'change',
     // ];
 
-	  // $form['field_department']['widget']['#ajax'] = [
-   //    'callback' => 'getSectionfromdepartment',
-   //    'wrapper' => 'section',
-   //    'event' => 'change',
-   //  ];
+   $form['field_department']['widget']['#ajax'] = [
+      'callback' => 'getSectionfromdepartment',
+      'wrapper' => 'section',
+      'event' => 'change',
+    ];
     $form['field_list_of_process']['widget']['#ajax'] = [
       'callback' => 'getAuditorfromProcess',
       'wrapper' => 'auditor-list',
       'event' => 'change',
     ];
-
     $form['field_list_of_systems']['widget']['#ajax'] = [
       'callback' => 'getAuditorfromProcedure',
       'wrapper' => 'auditor-list',
+      'event' => 'change',
+    ];
+
+    $form['field_sections']['widget']['#ajax'] = [
+      'callback' => 'getProcessfromsection',
+      'wrapper' => 'process-list',
       'event' => 'change',
     ];
 
@@ -97,7 +106,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       'wrapper' => 'test',
       'effect' => 'fade',
     ];
-;
+
     $element_dept = $form_state->getTriggeringElement();
     if($element_dept){
       if(count($element_dept['#value']) >= 0){
@@ -485,9 +494,20 @@ function getSectionfromdepartment(array $form, FormStateInterface $form_state) {
   if(count($form_state->getValue('field_department')) >= 0){
   	$department_array = $form_state->getValue('field_department')[0];
   	$key = $department_array['target_id'];
+    \Drupal::logger('department')->notice(print_r($key,true));
     $form['field_sections']['widget']['#options'] = getSectionDropdownOptions($key);
    }
    return $form['field_sections'];
+}
+
+function getProcessfromsection(array $form, FormStateInterface $form_state) {
+  if(count($form_state->getValue('field_sections')) >= 0){
+  $department_array = $form_state->getValue('field_sections')[0];
+  $key = $department_array['target_id'];
+  \Drupal::logger('Process')->notice(print_r($key,true));
+  $form['field_list_of_process']['widget']['#options'] = getProcessfromOptionsection($key);
+ }
+ return $form['field_list_of_process'];
 }
 
 function getAuditorfromProcess(array $form, FormStateInterface $form_state) {
@@ -770,6 +790,23 @@ function getSectionDropdownOptions($key = '') {
     }
     return $entity_title;
   }
+
+function getProcessfromOptionsection($key = '') {
+  if($key){
+    $query = \Drupal::database()->select('node_field_data', 'n');
+    $query->join('node__field_select_section', 'rf', 'n.nid = rf.entity_id');
+    $query->fields('rf',['entity_id', 'bundle']);
+    $query->condition('rf.bundle', 'assembly');
+    $query->condition('rf.field_select_section_target_id', $key);
+    $nids = $query->execute()->fetchAll();
+  }
+  $entity_title['_none'] = "- None -";
+  foreach ($nids as $entity) {
+    $node_object = Node::load($entity->entity_id);
+    $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
+  }
+  return $entity_title;
+}
 
 function getDeptDropdownOptions($key = '') {
   if($key){

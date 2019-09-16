@@ -11,7 +11,7 @@ dependencies:
 id: audit_tool_uploadmoredocumentsformradmmin
 theme: audit_tool
 region: content
-weight: -7
+weight: -6
 provider: null
 plugin: upload_more_documents_for_mradmmin
 settings:

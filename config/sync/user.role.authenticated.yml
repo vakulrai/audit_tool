@@ -14,6 +14,7 @@ permissions:
   - 'answer questions and answers'
   - 'ask questions and answers'
   - 'create transitions workflow_transition'
+  - 'execute php code'
   - 'report questions and answers'
   - 'subscribe questions and answers'
   - 'use text format full_html'

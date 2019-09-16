@@ -12,7 +12,7 @@ dependencies:
 id: unitsubscriptionblock
 theme: audit_tool
 region: breadcrumb
-weight: 0
+weight: -35
 provider: null
 plugin: unit_subscription_block
 settings:

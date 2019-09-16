@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.node.field_sections
     - node.type.planned_events
-    - node.type.section
 id: node.planned_events.field_sections
 field_name: field_sections
 entity_type: node
@@ -17,12 +16,10 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:node'
+  handler: views
   handler_settings:
-    target_bundles:
-      section: section
-    sort:
-      field: _none
-    auto_create: false
-    auto_create_bundle: ''
+    view:
+      view_name: internal_audit_systems
+      display_name: entity_reference_3
+      arguments: {  }
 field_type: entity_reference

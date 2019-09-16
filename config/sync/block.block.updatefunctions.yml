@@ -11,7 +11,7 @@ dependencies:
 id: updatefunctions
 theme: audit_tool
 region: content
-weight: -3
+weight: -2
 provider: null
 plugin: update_functions
 settings:

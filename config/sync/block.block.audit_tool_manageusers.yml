@@ -13,7 +13,7 @@ dependencies:
 id: audit_tool_manageusers
 theme: audit_tool
 region: breadcrumb
-weight: -32
+weight: -34
 provider: null
 plugin: 'superfish:manage-users'
 settings:
