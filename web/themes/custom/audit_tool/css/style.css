@@ -1796,4 +1796,79 @@ table#field-location-values tbody tr {
     margin-bottom: 0px;
     margin-left: 15px; }
 
+.node-planned-events-edit-form {
+  max-width: 550px; }
+  .node-planned-events-edit-form .js-form-wrapper {
+    padding-left: 0px;
+    padding-right: 0px; }
+  .node-planned-events-edit-form #edit-field-shift--wrapper, .node-planned-events-edit-form #select-other {
+    padding-left: 15px;
+    padding-right: 15px; }
+  .node-planned-events-edit-form #edit-title-wrapper {
+    padding: 0px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    margin-right: 15px; }
+    .node-planned-events-edit-form #edit-title-wrapper label {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      border-bottom: 1px solid transparent;
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 0 0 15px;
+      width: 100%; }
+    .node-planned-events-edit-form #edit-title-wrapper fieldset {
+      padding-left: 0px;
+      padding-right: 0px; }
+  .node-planned-events-edit-form #planning-dates label {
+    margin-left: 15px; }
+  .node-planned-events-edit-form #planning-dates .description {
+    display: none; }
+  .node-planned-events-edit-form #auditor-list {
+    margin-bottom: 0px; }
+    .node-planned-events-edit-form #auditor-list .user-details {
+      margin-left: 15px; }
+      .node-planned-events-edit-form #auditor-list .user-details table thead tr {
+        padding: 0 15px; }
+        .node-planned-events-edit-form #auditor-list .user-details table thead tr th {
+          background: #f8f9fa;
+          padding: 10px;
+          border-radius: 4px;
+          border: none;
+          border-bottom: 1px solid transparent; }
+          .node-planned-events-edit-form #auditor-list .user-details table thead tr th h4 {
+            color: #000000;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 0px; }
+      .node-planned-events-edit-form #auditor-list .user-details table tbody tr {
+        background: none; }
+        .node-planned-events-edit-form #auditor-list .user-details table tbody tr td.field-multiple-drag {
+          display: none; }
+        .node-planned-events-edit-form #auditor-list .user-details table tbody tr td {
+          padding: 0px; }
+          .node-planned-events-edit-form #auditor-list .user-details table tbody tr td .js-form-wrapper {
+            padding: 0px; }
+          .node-planned-events-edit-form #auditor-list .user-details table tbody tr td fieldset .form-group .form-group {
+            float: left;
+            width: 100%;
+            padding: 0; }
+          .node-planned-events-edit-form #auditor-list .user-details table tbody tr td fieldset .form-group .js-form-type-select {
+            width: 100%;
+            padding: 0px;
+            margin-top: 5px; }
+          .node-planned-events-edit-form #auditor-list .user-details table tbody tr td .paragraph-type-top {
+            padding: 30px 15px 0;
+            margin-top: 20px; }
+          .node-planned-events-edit-form #auditor-list .user-details table tbody tr td .paragraphs-subform .field--name-field-score, .node-planned-events-edit-form #auditor-list .user-details table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+            float: left;
+            width: 50%; }
+          .node-planned-events-edit-form #auditor-list .user-details table tbody tr td .paragraphs-subform .field--name-field-score {
+            margin-top: 5px; }
+  .node-planned-events-edit-form .form-actions {
+    margin-left: 6px; }
+
 /*# sourceMappingURL=style.css.map */
