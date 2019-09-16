@@ -1,4 +1,4 @@
-.node-internal-audit-edit-form {
+.node-answers-form {
   > div, .js-form-wrapper {
     padding-left: 0px;
     padding-right: 0px;
@@ -46,7 +46,7 @@
       display: none;
     }
   }
-  #edit-field-queries-wrapper {
+  .field--type-entity-reference-revisions {
     padding: 0 15px;
     table {
       thead {
@@ -97,7 +97,7 @@
               }
             }
             .paragraph-type-top {
-              padding: 30px 15px 0;
+              padding: 15px 0px 0;
               margin-top: 20px;
             }
 
@@ -123,6 +123,8 @@
     margin-left: 0px;
   }
   .field--type-list-string {
+    padding-left: 15px;
+    padding-right: 15px;
     .radio {
       >div {
         margin-bottom: 10px;
@@ -131,6 +133,9 @@
         }
       }
     }
+  }
+  #edit-field-add-to-checklist-wrapper {
+    padding: 0px;
   }
   #edit-field-queries-wrapper {
     table {
