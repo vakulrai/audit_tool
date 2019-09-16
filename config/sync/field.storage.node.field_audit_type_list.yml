@@ -1,0 +1,33 @@
+uuid: 4c64a925-ed0b-4577-8dfd-8fbfbedbc1bd
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_audit_type_list
+field_name: field_audit_type_list
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: system
+      label: System
+    -
+      value: process
+      label: Process
+    -
+      value: product
+      label: Product
+    -
+      value: all
+      label: All
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,29 @@
+uuid: 9f5bfacb-4c7e-4fc1-a053-d3fb949ac25d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_person_
+    - node.type.planned_events
+    - taxonomy.vocabulary.contact_person_name
+id: node.planned_events.field_contact_person_
+field_name: field_contact_person_
+entity_type: node
+bundle: planned_events
+label: 'Contact Person Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      contact_person_name: contact_person_name
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

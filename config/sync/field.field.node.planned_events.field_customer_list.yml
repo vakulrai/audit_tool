@@ -9,7 +9,7 @@ id: node.planned_events.field_customer_list
 field_name: field_customer_list
 entity_type: node
 bundle: planned_events
-label: 'Customer List'
+label: 'Customer Name'
 description: ''
 required: false
 translatable: false

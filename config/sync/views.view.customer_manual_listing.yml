@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.storage.node.field_document
     - field.storage.node.field_refere
-    - field.storage.node.field_sr_no
     - node.type.customers_manual
   module:
     - node
@@ -214,14 +213,14 @@ display:
           absolute: false
           entity_type: node
           plugin_id: entity_link_edit
-        field_sr_no:
-          id: field_sr_no
-          table: node__field_sr_no
-          field: field_sr_no
+        counter:
+          id: counter
+          table: views
+          field: counter
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Sr. No.'
+          label: S.No.
           exclude: false
           alter:
             alter_text: false
@@ -262,22 +261,8 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: number_integer
-          settings:
-            thousand_separator: ''
-            prefix_suffix: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
+          counter_start: 1
+          plugin_id: counter
         title_1:
           id: title_1
           table: node_field_data
@@ -757,7 +742,6 @@ display:
       tags:
         - 'config:field.storage.node.field_document'
         - 'config:field.storage.node.field_refere'
-        - 'config:field.storage.node.field_sr_no'
   manual:
     display_plugin: block
     id: manual
@@ -781,4 +765,3 @@ display:
       tags:
         - 'config:field.storage.node.field_document'
         - 'config:field.storage.node.field_refere'
-        - 'config:field.storage.node.field_sr_no'

@@ -1,0 +1,29 @@
+uuid: 7887257a-e910-4172-8cfd-31055bd924fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_location_customer
+    - node.type.planned_events
+    - taxonomy.vocabulary.location
+id: node.planned_events.field_location_customer
+field_name: field_location_customer
+entity_type: node
+bundle: planned_events
+label: Location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      location: location
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

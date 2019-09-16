@@ -1,0 +1,21 @@
+uuid: 94149316-4ca3-4613-93f1-defed0f8fa83
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audit_type_list
+    - node.type.planned_events
+  module:
+    - options
+id: node.planned_events.field_audit_type_list
+field_name: field_audit_type_list
+entity_type: node
+bundle: planned_events
+label: 'Audit Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

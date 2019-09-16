@@ -6,8 +6,11 @@ dependencies:
     - field.field.node.planned_events.body
     - field.field.node.planned_events.field_audit_reasons
     - field.field.node.planned_events.field_audit_type
+    - field.field.node.planned_events.field_audit_type_list
     - field.field.node.planned_events.field_auditor
+    - field.field.node.planned_events.field_auditor_customer
     - field.field.node.planned_events.field_checklist
+    - field.field.node.planned_events.field_contact_person_
     - field.field.node.planned_events.field_customer_list
     - field.field.node.planned_events.field_customer_type
     - field.field.node.planned_events.field_department
@@ -17,6 +20,7 @@ dependencies:
     - field.field.node.planned_events.field_list_of_process
     - field.field.node.planned_events.field_list_of_product
     - field.field.node.planned_events.field_list_of_systems
+    - field.field.node.planned_events.field_location_customer
     - field.field.node.planned_events.field_other_users
     - field.field.node.planned_events.field_pre_audit_status
     - field.field.node.planned_events.field_proceed_with_audit
@@ -80,6 +84,10 @@ third_party_settings:
         - field_audit_type
         - field_internal_audit_type
         - field_customer_list
+        - field_location_customer
+        - field_contact_person_
+        - field_audit_type_list
+        - field_auditor_customer
         - field_department
         - field_sections
         - field_list_of_process
@@ -169,6 +177,30 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_audit_type_list:
+    weight: 8
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        c3ced6cf-624e-4b52-a369-d57286d6ecdf:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: customer
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: options_select
+    region: content
   field_auditor:
     weight: 16
     settings: {  }
@@ -176,8 +208,58 @@ content:
       conditional_fields: {  }
     type: options_select
     region: content
+  field_auditor_customer:
+    weight: 9
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        b5aed064-99ff-4385-8b49-8f4a6a79f47b:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: customer
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: string_textfield
+    region: content
+  field_contact_person_:
+    weight: 7
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        40e09f34-7db0-4006-9963-384af87a25fd:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: customer
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: options_select
+    region: content
   field_customer_list:
-    weight: 6
+    weight: 5
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -202,7 +284,7 @@ content:
     region: content
   field_department:
     type: options_select
-    weight: 7
+    weight: 10
     region: content
     settings: {  }
     third_party_settings:
@@ -277,7 +359,7 @@ content:
     type: string_textfield
     region: content
   field_internal_audit_type:
-    weight: 5
+    weight: 4
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -318,7 +400,7 @@ content:
     type: options_select
     region: content
   field_list_of_process:
-    weight: 9
+    weight: 12
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -342,7 +424,7 @@ content:
     type: options_select
     region: content
   field_list_of_product:
-    weight: 10
+    weight: 13
     settings: {  }
     third_party_settings:
       conditional_fields:
@@ -392,6 +474,30 @@ content:
             value_form:
               -
                 value: product
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: planned_events
+    type: options_select
+    region: content
+  field_location_customer:
+    weight: 6
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        b228995b-deda-45c7-9e99-88821484c7f6:
+          dependee: field_audit_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: customer
             effect: show
             effect_options: {  }
             selector: ''
@@ -486,7 +592,7 @@ content:
     region: content
   field_sections:
     type: options_select
-    weight: 8
+    weight: 11
     region: content
     settings: {  }
     third_party_settings:
