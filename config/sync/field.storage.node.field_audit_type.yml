@@ -23,6 +23,9 @@ settings:
     -
       value: customer
       label: Customer
+    -
+      value: 'customer line'
+      label: 'Customer Line'
   allowed_values_function: ''
 module: options
 locked: false

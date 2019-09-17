@@ -38,6 +38,7 @@ dependencies:
     - field.field.node.planned_events.field_shift
     - field.field.node.planned_events.field_start_date
     - field.field.node.planned_events.field_suggested_date
+    - field.field.node.planned_events.field_supplier_name_list
     - field.field.node.planned_events.field_time
     - field.field.node.planned_events.field_tolerance
     - field.field.node.planned_events.field_total_mandays
@@ -339,6 +340,14 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: datetime_default
+    region: content
+  field_supplier_name_list:
+    weight: 142
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_time:
     weight: 104
