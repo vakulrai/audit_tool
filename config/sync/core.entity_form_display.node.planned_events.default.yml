@@ -226,15 +226,18 @@ content:
             state: visible
             condition: value
             grouping: AND
-            values_set: 1
+            values_set: 3
             value: ''
-            values: {  }
+            values: "supplier\r\ncustomer"
             value_form:
               -
                 value: customer
             effect: show
             effect_options: {  }
             selector: ''
+            field_audit_type:
+              -
+                value: supplier
           entity_type: node
           bundle: planned_events
     type: string_textfield

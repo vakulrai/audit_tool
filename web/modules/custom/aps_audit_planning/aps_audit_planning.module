@@ -78,9 +78,14 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_list_of_process']['widget']['#options'] = $get_process_from_section;
     if(!empty($form_state->getValues())){
       $customer_array = $form_state->getValue('field_customer_list')[0];
+      $supplier_array = $form_state->getValue('field_supplier_name_list')[0];
       $value = $form_state->getValue('field_internal_audit_type')[0]['value'];
-      if(!empty($customer_array)){
-        $key = $customer_array['target_id'];
+      if(!empty($customer_array) || !empty($supplier_array)){
+        if(!empty($customer_array)){
+          $key = $customer_array['target_id'];
+        } else {
+          $key = $supplier_array['target_id'];
+        }
         $node = Node::load($key);
         $location_options = $node->get('field_location')->getValue()[0]['value'];
         $customer_name = $node->get('field_contact_person_name')->getValue()[0]['value'];
@@ -105,6 +110,11 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_department']['widget']['#ajax'] = [
       'callback' => 'getSectionfromdepartment',
       'wrapper' => 'section',
+      'event' => 'change',
+    ];
+    $form['field_supplier_name_list']['widget']['#ajax'] = [
+      'callback' => 'getlocationFromcustomer',
+      'wrapper' => 'location-list',
       'event' => 'change',
     ];
     $form['field_customer_list']['widget']['#ajax'] = [
