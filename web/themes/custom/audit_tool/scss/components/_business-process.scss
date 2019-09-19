@@ -1,0 +1,83 @@
+.business-process-wrapper {
+  #block-audit-tool-mainpagecontent {
+      float: left;
+      background: $white;
+      padding: 0px 0 15px;
+      width: 100%;
+      .table-responsive {
+        padding: 0px;
+        background: #fff;
+        table {
+          padding: 0px;
+          margin: 0px;
+          thead {
+            tr {
+              border: none;
+              th {
+                background: $grey-bg;
+                border: none;
+                font: Bold 11px/15px Open Sans;
+                color: #23272D;
+              }
+            }
+          }
+          tbody {
+            tr {
+              background: #ffffff;
+              border-bottom: 2px solid $grey-bg;
+              &:hover {
+                background: #EBECFF;
+              }
+              td {
+                font-size: 13px;
+                line-height: 19px;
+                font-weight: Semibold;
+                color: #4F5A67;
+                border: none;
+                .file {
+                  padding-left: 0px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .pagination {
+        margin-bottom: 0px;
+        margin-left: 15px;
+      }
+    }
+}
+
+.audit-business-process {
+  .node-business-process-form {
+    .table-responsive {
+        .paragraphs-subform {
+          .field--type-string {
+            margin: 0px;
+            padding: 15px;
+            width: 25%;
+            fieldset {
+              width: 100%;
+            }
+            input {
+              width: 100%;
+            }
+            &:first-child {
+              padding-left: 0px;
+            }
+            &:last-child {
+              padding-right: 0px;
+            }
+          }
+        }
+      }
+      .field-add-more-submit {
+        margin-left: 0px;
+        margin-bottom: 30px;
+      }
+      #edit-submit {
+        margin-left: 0px;
+      }
+  }
+}

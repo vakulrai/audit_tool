@@ -67,7 +67,7 @@
  * @see html.html.twig
  */
 #}
-<div id="page-wrapper" class="add-section-wrapper">
+<div id="page-wrapper" class="department-listing-wrapper">
   <div id="page">
     <header id="header" class="header" role="banner" aria-label="{{ 'Site header'|t}}">
       {% block head %}
@@ -129,9 +129,9 @@
         </div>
       {% endblock %}
     {% endif %}
-    <div id="main-wrapper" class="audittool-front-page layout-main-wrapper clearfix">
+    <div id="main-wrapper" class="layout-main-wrapper clearfix">
       {% block content %}
-        <div id="main" class="audittool-front-page-container audit-section-process {{ container }}">
+        <div id="main" class="{{ container }}">
           {{ page.breadcrumb }}
           <div class="row row-offcanvas row-offcanvas-left clearfix">
               <main{{ content_attributes }}>
@@ -140,6 +140,13 @@
                   {{ page.content }}
                 </section>
               </main>
+            {% if page.sidebar_first %}
+              <div{{ sidebar_first_attributes }}>
+                <aside class="section" role="complementary">
+                  {{ page.sidebar_first }}
+                </aside>
+              </div>
+            {% endif %}
             {% if page.sidebar_second %}
               <div{{ sidebar_second_attributes }}>
                 <aside class="section" role="complementary">
