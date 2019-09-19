@@ -1,5 +1,6 @@
 .sidebar {
-  #block-audit-tool-manageexternalaudit.block,  #block-audit-tool-auditplanningsubmenuformr.block {
+  #block-audit-tool-manageexternalaudit.block,  #block-audit-tool-auditplanningsubmenuformr.block,
+  #block-addbusinessprocess.block, #block-adddepartment, #block-addsections {
     padding: 0;
     border: none;
     margin: 0;
@@ -7,8 +8,13 @@
       li {
         a {
           color: $text-color;
+          color: #657d89;
+          font-size: 14px;
+          cursor: pointer;
+          text-transform: uppercase;
           &:hover {
             text-decoration: none;
+            color: $text-color;
           }
         }
       }

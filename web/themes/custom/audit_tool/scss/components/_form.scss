@@ -67,8 +67,6 @@
 
 #edit-title-wrapper  {
   padding: 0px;
-  border-bottom: 1px solid  $grey-bg;
-  margin-bottom: 20px;
   fieldset {
     margin-bottom: 15px;
   }
@@ -600,4 +598,26 @@
   background: #fff;
   padding: 10px;
   padding-bottom: 0;
+}
+
+.media-library-widget__toggle-weight {
+  background: $voilet;
+  border: none;
+  padding: 5px 15px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.media-library-selection {
+  .media-library-item--grid {
+    padding-top: 30px;
+  }
+}
+
+.media-library-item__attributes {
+  bottom: -5px;
+}
+
+#edit-submit {
+  margin-left: 0px;
 }
