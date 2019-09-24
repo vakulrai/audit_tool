@@ -1,0 +1,31 @@
+.node-section-edit-form {
+  #edit-title-wrapper, #edit-field-select-department-type-wrapper, #edit-field-section-head-wrapper {
+    float: left;
+    width: 33%;
+    padding: 0px;
+  }
+  #edit-field-assembly-wrapper, #edit-field-shift-wrapper {
+    float: left;
+    width: 100%;
+    padding: 0px;
+  }
+  #edit-field-file-wrapper, #edit-field-attach-control-plan-wrapper {
+    float: left;
+    width: 50%;
+    padding-left: 0px;
+    .media-library-selection {
+      margin-left: 0px;
+      padding-left: 0px;
+      .media-library-item--grid {
+        width: auto;
+      }
+      fieldset {
+        padding-left: 0px;
+      }
+    }
+  }
+  #edit-field-select-department-type-wrapper {
+    margin-top: 5px;
+    padding: 0px;
+  }
+}
