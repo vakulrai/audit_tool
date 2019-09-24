@@ -210,3 +210,27 @@ table#field-location-values {
     }
 	}
 }
+
+table {
+  tbody {
+    tr {
+      td.views-field-edit-node {
+        a {
+          background: none;
+          display: block;
+          background-repeat: no-repeat;
+          background-size: 16px;
+          text-indent: -99999999999px;
+          background-position: center;
+        }
+      }
+      &:hover {
+        td {
+          a {
+            background-image: url(/themes/custom/audit_tool/images/edit-icon.png);
+          }
+        }
+      }
+    }
+  }
+}

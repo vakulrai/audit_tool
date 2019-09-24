@@ -79,5 +79,112 @@
       #edit-submit {
         margin-left: 0px;
       }
+      #edit-field-business-head-name-wrapper {
+        padding: 0px;
+      }
   }
+}
+
+.node-business-process-edit-form {
+  #edit-field-business-head-name-wrapper {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+.table-responsive  {
+  table {
+    thead {
+      tr {
+        padding: 0 15px ;
+        th {
+          background: $grey-bg;
+          padding: 10px;
+          border-radius: 4px;
+          border: none;
+          border-bottom: 1px solid transparent;
+
+          h4 {
+            color: $black;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 0px;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        background: none;
+        td.field-multiple-drag {
+          display: none;
+        }
+        td {
+          padding: 0px;
+          .js-form-wrapper {
+            padding: 0px;
+          }
+           fieldset {
+             padding-left: 0px;
+             padding-right: 0px;
+             .form-group {
+               .form-group {
+                float: left;
+                width: 100%;
+                padding: 0 ;
+              }
+            }
+            .form-group {
+              .js-form-type-select {
+                width: 100%;
+                padding: 0px;
+                margin-top: 5px;
+              }
+            }
+          }
+          .paragraph-type-top {
+            padding: 15px 0px 0;
+            margin-top: 20px;
+          }
+
+          .paragraphs-subform {
+            .field--name-field-score, .field--name-field-functions-qualified  {
+              float: left;
+              width: 50%;
+            }
+            .field--name-field-score {
+              margin-top: 5px;
+            }
+            div {
+              float: left;
+              width: 25%;
+              padding: 0 15px;
+              &:first-child {
+                padding-left: 0px;
+              }
+              &:last-child {
+                padding-right: 0px;
+              }
+            }
+            .field--name-field-target {
+              margin-top: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.paragraphs-dropbutton-wrapper {
+  input {
+    margin-left: 0px;
+  }
+}
+#edit-title-wrapper, #edit-field-business-head-name-wrapper {
+  float: left;
+  width: 50%;
+}
+.field--type-entity-reference-revisions {
+  float: left;
+  width: 100%;
+}
 }

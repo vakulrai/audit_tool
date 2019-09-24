@@ -189,7 +189,13 @@
 .audit-business-process .field--type-entity-reference,
 .audit-business-process .field--type-list-integer {
   width: 25%;
-  float: left; }
+  float: left;
+  padding: 0; }
+  .audit-business-process .field--name-field-business-head-name fieldset,
+  .audit-business-process .field--name-title fieldset,
+  .audit-business-process .field--type-entity-reference fieldset,
+  .audit-business-process .field--type-list-integer fieldset {
+    width: 100%; }
   .audit-business-process .field--name-field-business-head-name .js-form-type-select label,
   .audit-business-process .field--name-title .js-form-type-select label,
   .audit-business-process .field--type-entity-reference .js-form-type-select label,
@@ -222,9 +228,12 @@
   border: 0; }
 .audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-integer,
 .audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-string {
-  width: 22%;
+  width: 25%;
   float: left;
-  margin: 15px; }
+  padding: 15px; }
+  .audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-integer fieldset,
+  .audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-string fieldset {
+    width: 100%; }
   .audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-integer .form-text,
   .audit-business-process .field--type-entity-reference-revisions .table-responsive .field--type-string .form-text {
     margin-top: 0; }
@@ -240,7 +249,8 @@
 .audit-section-process .node-section-form .field--name-field-select-department-type,
 .audit-section-process .node-section-form .field--type-string {
   width: 33.3%;
-  float: left; }
+  float: left;
+  padding: 0px; }
 .audit-section-process .node-section-form .js-form-item {
   color: #212529;
   font-size: 14px; }
@@ -426,6 +436,16 @@ table#field-location-values tbody tr {
     .main-content nav.tabs .nav-tabs .active a {
       opacity: 1; }
 
+table tbody tr td.views-field-edit-node a {
+  background: none;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  text-indent: -99999999999px;
+  background-position: center; }
+table tbody tr:hover td a {
+  background-image: url(/themes/custom/audit_tool/images/edit-icon.png); }
+
 .node-unit-edit-form .field-group-fieldset {
   padding-left: 15px;
   padding-right: 15px; }
@@ -455,6 +475,8 @@ table#field-location-values tbody tr {
 .node-unit-edit-form .field--name-field-field-months-for-the-audit .checkbox {
   display: inline-block;
   vertical-align: top; }
+.node-unit-edit-form .field--type-daterange {
+  clear: both; }
 
 #edit-field-address-wrapper {
   padding-left: 0px;
@@ -1587,17 +1609,23 @@ table#field-location-values tbody tr {
   padding: 0;
   border: none;
   margin: 0; }
-  .sidebar #block-audit-tool-manageexternalaudit.block ul li a, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a,
-  .sidebar #block-addbusinessprocess.block ul li a, .sidebar #block-adddepartment ul li a, .sidebar #block-addsections ul li a {
-    color: #7E8E9D;
-    color: #657d89;
-    font-size: 14px;
-    cursor: pointer;
-    text-transform: uppercase; }
-    .sidebar #block-audit-tool-manageexternalaudit.block ul li a:hover, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a:hover,
-    .sidebar #block-addbusinessprocess.block ul li a:hover, .sidebar #block-adddepartment ul li a:hover, .sidebar #block-addsections ul li a:hover {
-      text-decoration: none;
-      color: #7E8E9D; }
+  .sidebar #block-audit-tool-manageexternalaudit.block ul li, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li,
+  .sidebar #block-addbusinessprocess.block ul li, .sidebar #block-adddepartment ul li, .sidebar #block-addsections ul li {
+    background: #f8f9fa; }
+    .sidebar #block-audit-tool-manageexternalaudit.block ul li a, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a,
+    .sidebar #block-addbusinessprocess.block ul li a, .sidebar #block-adddepartment ul li a, .sidebar #block-addsections ul li a {
+      color: #7E8E9D;
+      color: #657d89;
+      font-size: 14px;
+      cursor: pointer;
+      text-transform: uppercase; }
+      .sidebar #block-audit-tool-manageexternalaudit.block ul li a:hover, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a:hover,
+      .sidebar #block-addbusinessprocess.block ul li a:hover, .sidebar #block-adddepartment ul li a:hover, .sidebar #block-addsections ul li a:hover {
+        text-decoration: none;
+        color: #7E8E9D; }
+  .sidebar #block-audit-tool-manageexternalaudit.block ul.nav, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul.nav,
+  .sidebar #block-addbusinessprocess.block ul.nav, .sidebar #block-adddepartment ul.nav, .sidebar #block-addsections ul.nav {
+    margin: 0px; }
 
 .external-audit-wrapper .node-external-audit__form #edit-title-wrapper {
   padding: 0px;
@@ -1945,6 +1973,70 @@ table#field-location-values tbody tr {
   margin-bottom: 30px; }
 .audit-business-process .node-business-process-form #edit-submit {
   margin-left: 0px; }
+.audit-business-process .node-business-process-form #edit-field-business-head-name-wrapper {
+  padding: 0px; }
+
+.node-business-process-edit-form #edit-field-business-head-name-wrapper {
+  padding-left: 0px;
+  padding-right: 0px; }
+.node-business-process-edit-form .table-responsive table thead tr {
+  padding: 0 15px; }
+  .node-business-process-edit-form .table-responsive table thead tr th {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent; }
+    .node-business-process-edit-form .table-responsive table thead tr th h4 {
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 0px; }
+.node-business-process-edit-form .table-responsive table tbody tr {
+  background: none; }
+  .node-business-process-edit-form .table-responsive table tbody tr td.field-multiple-drag {
+    display: none; }
+  .node-business-process-edit-form .table-responsive table tbody tr td {
+    padding: 0px; }
+    .node-business-process-edit-form .table-responsive table tbody tr td .js-form-wrapper {
+      padding: 0px; }
+    .node-business-process-edit-form .table-responsive table tbody tr td fieldset {
+      padding-left: 0px;
+      padding-right: 0px; }
+      .node-business-process-edit-form .table-responsive table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 100%;
+        padding: 0; }
+      .node-business-process-edit-form .table-responsive table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+    .node-business-process-edit-form .table-responsive table tbody tr td .paragraph-type-top {
+      padding: 15px 0px 0;
+      margin-top: 20px; }
+    .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform .field--name-field-score, .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+      float: left;
+      width: 50%; }
+    .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform .field--name-field-score {
+      margin-top: 5px; }
+    .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform div {
+      float: left;
+      width: 25%;
+      padding: 0 15px; }
+      .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform div:first-child {
+        padding-left: 0px; }
+      .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform div:last-child {
+        padding-right: 0px; }
+    .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform .field--name-field-target {
+      margin-top: 3px; }
+.node-business-process-edit-form .paragraphs-dropbutton-wrapper input {
+  margin-left: 0px; }
+.node-business-process-edit-form #edit-title-wrapper, .node-business-process-edit-form #edit-field-business-head-name-wrapper {
+  float: left;
+  width: 50%; }
+.node-business-process-edit-form .field--type-entity-reference-revisions {
+  float: left;
+  width: 100%; }
 
 .department-listing-wrapper #block-audit-tool-mainpagecontent {
   float: left;
@@ -2038,5 +2130,47 @@ table#field-location-values tbody tr {
   margin-bottom: 30px; }
 .audit-business-process .node-business-process-form #edit-submit {
   margin-left: 0px; }
+
+.node-department-edit-form #edit-title-wrapper, .node-department-edit-form #edit-field-select-business-process-wrapper,
+.node-department-edit-form #edit-field-department-head-wrapper, .node-department-edit-form #edit-field-location-address-wrapper {
+  float: left;
+  width: 25%; }
+  .node-department-edit-form #edit-title-wrapper fieldset, .node-department-edit-form #edit-field-select-business-process-wrapper fieldset,
+  .node-department-edit-form #edit-field-department-head-wrapper fieldset, .node-department-edit-form #edit-field-location-address-wrapper fieldset {
+    padding: 0px; }
+.node-department-edit-form #edit-langcode-wrapper {
+  margin: 0px;
+  padding: 0px; }
+.node-department-edit-form #edit-field-select-business-process-wrapper {
+  margin-top: 5px; }
+.node-department-edit-form #edit-title-wrapper {
+  padding: 0 15px; }
+.node-department-edit-form #edit-field-file-wrapper {
+  width: 100%;
+  float: left;
+  padding: 0px; }
+
+.node-section-edit-form #edit-title-wrapper, .node-section-edit-form #edit-field-select-department-type-wrapper, .node-section-edit-form #edit-field-section-head-wrapper {
+  float: left;
+  width: 33%;
+  padding: 0px; }
+.node-section-edit-form #edit-field-assembly-wrapper, .node-section-edit-form #edit-field-shift-wrapper {
+  float: left;
+  width: 100%;
+  padding: 0px; }
+.node-section-edit-form #edit-field-file-wrapper, .node-section-edit-form #edit-field-attach-control-plan-wrapper {
+  float: left;
+  width: 50%;
+  padding-left: 0px; }
+  .node-section-edit-form #edit-field-file-wrapper .media-library-selection, .node-section-edit-form #edit-field-attach-control-plan-wrapper .media-library-selection {
+    margin-left: 0px;
+    padding-left: 0px; }
+    .node-section-edit-form #edit-field-file-wrapper .media-library-selection .media-library-item--grid, .node-section-edit-form #edit-field-attach-control-plan-wrapper .media-library-selection .media-library-item--grid {
+      width: auto; }
+    .node-section-edit-form #edit-field-file-wrapper .media-library-selection fieldset, .node-section-edit-form #edit-field-attach-control-plan-wrapper .media-library-selection fieldset {
+      padding-left: 0px; }
+.node-section-edit-form #edit-field-select-department-type-wrapper {
+  margin-top: 5px;
+  padding: 0px; }
 
 /*# sourceMappingURL=style.css.map */

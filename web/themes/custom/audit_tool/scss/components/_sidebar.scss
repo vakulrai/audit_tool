@@ -6,6 +6,8 @@
     margin: 0;
     ul {
       li {
+        background: $grey-bg;
+        width: 100%;
         a {
           color: $text-color;
           color: #657d89;
@@ -18,6 +20,9 @@
           }
         }
       }
+    }
+    ul.nav {
+      margin: 0px;
     }
   }
 }

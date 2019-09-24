@@ -1,0 +1,25 @@
+.node-department-edit-form {
+  #edit-title-wrapper, #edit-field-select-business-process-wrapper,
+  #edit-field-department-head-wrapper, #edit-field-location-address-wrapper {
+    float: left;
+    width: 25%;
+    fieldset {
+      padding: 0px;
+    }
+  }
+  #edit-langcode-wrapper {
+    margin: 0px;
+    padding: 0px;
+  }
+  #edit-field-select-business-process-wrapper {
+    margin-top: 5px;
+  }
+  #edit-title-wrapper {
+    padding: 0 15px;
+  }
+  #edit-field-file-wrapper {
+    width: 100%;
+    float: left;
+    padding: 0px;
+  }
+}
