@@ -562,6 +562,8 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       $unit_ref_object = Node::load($id);
       $unit_id = $unit_ref_object->id();
       $form['field_unit']['widget']['#default_value'] = $unit_id;
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $unit_ref_object;
+      $form['field_refere']['#access'] = FALSE;
     }
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
@@ -1994,6 +1996,12 @@ function aps_general_link_alter(&$variables) {
     }
   }
 
+  if ($cleanLinkText == 'Add Checklist') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('unit_reference', $id);
+    }
+  }
   if ($cleanLinkText == 'Department') {
     $id = $uri[1];
     if($id){
@@ -2310,7 +2318,6 @@ function alter_supplier_data(array $form, \Drupal\Core\Form\FormStateInterface $
 }
 
 function checklist_submission(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
-  $audit_reference = \Drupal::request()->query->get('audit_reference');
   $unit_reference = \Drupal::request()->query->get('unit_reference');
   $form_values = $form_state->getValues();
   $nid = $form_values['nid'];
@@ -2462,7 +2469,6 @@ function getsectionDropdownOptionsfromDept($key) {
     foreach ($nids as $entity) {
       $node_object = Node::load($entity->entity_id);
       $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
-      \Drupal::logger('Array')->notice(print_r($entity_title,true));
     }
     return $entity_title;
   }

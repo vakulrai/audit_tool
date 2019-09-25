@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.internal_audit.field_predefined_queries_yes_no
     - field.field.node.internal_audit.field_procedure_no
     - field.field.node.internal_audit.field_queries
+    - field.field.node.internal_audit.field_refere
     - field.field.node.internal_audit.field_select_result
     - field.field.node.internal_audit.field_unit
     - node.type.internal_audit
@@ -39,6 +40,15 @@ content:
       collapsed: false
     third_party_settings: {  }
     type: inline_entity_form_simple
+    region: content
+  field_refere:
+    weight: 32
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_upload_auditor_signatures:
     weight: 31
