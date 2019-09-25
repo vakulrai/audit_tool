@@ -57,7 +57,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_pre_audit_status']['#access'] = FALSE;
     $form['field_refere']['#access'] = FALSE;
     $form['field_selected_auditee']['#access'] = FALSE;
-    $form['field_checklist']['#disabled'] = TRUE;
+    //$form['field_checklist']['#disabled'] = TRUE;
     $form['#cache']['max-age'] = 0;
     $form['field_sections']['#attributes'] = ['id' => ['section']];
     $form['field_list_of_process']['#attributes'] = ['id' => ['process-list']];
@@ -386,7 +386,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
   if($form_id == 'node_planned_events_form'){
     $form['title']['widget'][0]['value']['#default_value'] = 'Audit Reference';
     $form['title']['#access'] = FALSE;
-    $form['field_checklist']['#disabled'] = TRUE;
+    //$form['field_checklist']['#disabled'] = TRUE;
     $form['field_audit_reasons']['#access'] = FALSE;
     $form['field_proceed_with_audit']['#access'] = FALSE;
     if($id = \Drupal::request()->query->get('unit_reference')){

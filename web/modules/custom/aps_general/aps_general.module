@@ -956,23 +956,23 @@ function getPlannedEventCount($unit_reference){
  * Implements  hook_entity_presave().
  */
 function aps_general_node_presave(Node $node) {
-  if($node->bundle() == 'planned_events'){
-    $checklist_nid = $node->get('field_checklist')->getValue()[0]['target_id'];
-    $node_checklist = Node::load($checklist_nid);
-    $original_node = $node_checklist->toArray();
-    $original_node['type'] = $node_checklist->bundle();
-    unset($original_node['nid']);
-    unset($original_node['uuid']);
-    unset($original_node['vid']);
-    unset($original_node['revision_translation_affected']);
-    unset($original_node['revision_uid']);
-    unset($original_node['revision_log']);
-    unset($original_node['revision_timestamp']);
-    $node_clone = Node::create($original_node);
-    $node_clone->save();
-    $nid_cloned = $node_clone->id();
-    $node->set('field_checklist', $nid_cloned);
-  }
+//  if($node->bundle() == 'planned_events'){
+//    $checklist_nid = $node->get('field_checklist')->getValue()[0]['target_id'];
+//    $node_checklist = Node::load($checklist_nid);
+//    $original_node = $node_checklist->toArray();
+//    $original_node['type'] = $node_checklist->bundle();
+//    unset($original_node['nid']);
+//    unset($original_node['uuid']);
+//    unset($original_node['vid']);
+//    unset($original_node['revision_translation_affected']);
+//    unset($original_node['revision_uid']);
+//    unset($original_node['revision_log']);
+//    unset($original_node['revision_timestamp']);
+//    $node_clone = Node::create($original_node);
+//    $node_clone->save();
+//    $nid_cloned = $node_clone->id();
+//    $node->set('field_checklist', $nid_cloned);
+//  }
  // if($node->bundle() == 'planned_events'){
  //    if($suggested_date = $node->get('field_suggested_date')->value){
  //      $current_user = \Drupal::currentUser();
