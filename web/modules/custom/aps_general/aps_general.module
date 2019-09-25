@@ -86,6 +86,8 @@ function sendEmail($module, $type, $to_address, $message, $subject){
  * Implements hook_form_alter().
  */
 function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+  //print_r($form_id);
   //Condition for Unit Add form
   $current_user = \Drupal::currentUser();
   $roles = $current_user->getRoles();
@@ -954,6 +956,23 @@ function getPlannedEventCount($unit_reference){
  * Implements  hook_entity_presave().
  */
 function aps_general_node_presave(Node $node) {
+  if($node->bundle() == 'planned_events'){
+    $checklist_nid = $node->get('field_checklist')->getValue()[0]['target_id'];
+    $node_checklist = Node::load($checklist_nid);
+    $original_node = $node_checklist->toArray();
+    $original_node['type'] = $node_checklist->bundle();
+    unset($original_node['nid']);
+    unset($original_node['uuid']);
+    unset($original_node['vid']);
+    unset($original_node['revision_translation_affected']);
+    unset($original_node['revision_uid']);
+    unset($original_node['revision_log']);
+    unset($original_node['revision_timestamp']);
+    $node_clone = Node::create($original_node);
+    $node_clone->save();
+    $nid_cloned = $node_clone->id();
+    $node->set('field_checklist', $nid_cloned);
+  }
  // if($node->bundle() == 'planned_events'){
  //    if($suggested_date = $node->get('field_suggested_date')->value){
  //      $current_user = \Drupal::currentUser();
@@ -2295,9 +2314,9 @@ function checklist_submission(array $form, \Drupal\Core\Form\FormStateInterface 
   $unit_reference = \Drupal::request()->query->get('unit_reference');
   $form_values = $form_state->getValues();
   $nid = $form_values['nid'];
-  $node_object = Node::load($audit_reference);
-  $node_object->set('field_checklist', $nid);
-  $node_object->save();
+  //$node_object = Node::load($audit_reference);
+  //$node_object->set('field_checklist', $nid);
+  //$node_object->save();
   $response = Url::fromUserInput('/planned-mr-audit-listing/'.$unit_reference);
   $form_state->setRedirectUrl($response);
 }
@@ -2430,22 +2449,23 @@ function getProcessfromOptionfromsection($key) {
   return $entity_title;
 }
 
-function getsectionDropdownOptionsfromDept($key) {
-  if($key){
-    $query = \Drupal::database()->select('node_field_data', 'n');
-    $query->join('node__field_select_department_type', 'rf', 'n.nid = rf.entity_id');
-    $query->fields('rf',['entity_id', 'bundle']);
-    $query->condition('rf.bundle', 'section');
-    $query->condition('rf.field_select_department_type_target_id', $key);
-    $nids = $query->execute()->fetchAll();
-  }
-    $entity_title['_none'] = "- None -";
-    foreach ($nids as $entity) {
-      $node_object = Node::load($entity->entity_id);
-      $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
-    }
-    return $entity_title;
-  }
+//function getsectionDropdownOptionsfromDept($key) {
+//  if($key){
+//    $query = \Drupal::database()->select('node_field_data', 'n');
+//    $query->join('node__field_select_department_type', 'rf', 'n.nid = rf.entity_id');
+//    $query->fields('rf',['entity_id', 'bundle']);
+//    $query->condition('rf.bundle', 'section');
+//    $query->condition('rf.field_select_department_type_target_id', $key);
+//    $nids = $query->execute()->fetchAll();
+//  }
+//    $entity_title['_none'] = "- None -";
+//    foreach ($nids as $entity) {
+//      $node_object = Node::load($entity->entity_id);
+//      $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
+//      \Drupal::logger('Array')->notice(print_r($entity_title,true));
+//    }
+//    return $entity_title;
+//  }
 
 /**
  * Implements hook_cron().

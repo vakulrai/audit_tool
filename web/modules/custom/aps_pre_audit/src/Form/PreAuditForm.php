@@ -30,7 +30,6 @@ class PreAuditForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $reference_id = \Drupal::request()->query->get('ref');
     $details = $this->getAuditDetails($reference_id);
-
     $nid = \Drupal::request()->query->get('ref');
     $current_path = trim(\Drupal::service('path.current')->getPath(), '/');
     $path_args = explode('/', $current_path);
@@ -67,7 +66,7 @@ class PreAuditForm extends FormBase {
         $disable_fields = TRUE;
       }
     }
-
+    $disable_fields = FALSE;
     $procedure_no = aps_pre_audit_get_node_value($nid, 'field_procedure_no');
     $procedure_title = aps_pre_audit_get_node_value($procedure_no, 'title');
 
@@ -92,7 +91,7 @@ class PreAuditForm extends FormBase {
       'achieved' => 'Achieved',
       'not-achieved' => 'Not Achieved',
     ];
-
+     
     foreach ($details as $key => $value) {
       $count_value = count($value['evidence_value']);
       if($count_value == 2){
@@ -364,7 +363,6 @@ class PreAuditForm extends FormBase {
     if($reference_id){
       $nid = $reference_id;
     }
-
     if($nid){
       $query = \Drupal::database()->select('node_revision__field_queries', 'n');
       $query->fields('n',['field_queries_target_id']);
@@ -531,7 +529,6 @@ class PreAuditForm extends FormBase {
       $form_data['answer'][$key]['score_effi'] = $form_state->getValue( 'score_level_efficient'.$key);
 
     }
-
     if(count($form_data['answer'])){
       $id = $this->getQandAid('answers');
       $empty_category = [];

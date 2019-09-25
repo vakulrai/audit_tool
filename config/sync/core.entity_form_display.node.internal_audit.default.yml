@@ -28,128 +28,8 @@ targetEntityType: node
 bundle: internal_audit
 mode: default
 content:
-  field_audit_date:
-    weight: 10
-    settings: {  }
-    third_party_settings: {  }
-    type: datetime_timestamp
-    region: content
-  field_audit_type:
-    type: options_select
-    weight: 4
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_ia_department:
-    weight: 2
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
-  field_ia_section:
-    weight: 3
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
-  field_internal_audit_type:
-    weight: 5
-    settings: {  }
-    third_party_settings:
-      conditional_fields:
-        ee17287a-a706-4319-9569-dffc40791e46:
-          dependee: field_audit_type
-          settings:
-            state: visible
-            condition: value
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form:
-              -
-                value: internal
-            effect: show
-            effect_options: {  }
-            selector: ''
-          entity_type: node
-          bundle: internal_audit
-    type: options_select
-    region: content
-  field_list_of_process:
-    weight: 7
-    settings: {  }
-    third_party_settings:
-      conditional_fields:
-        b9beca5c-87ab-4b9e-943c-33a1da915331:
-          dependee: field_internal_audit_type
-          settings:
-            state: visible
-            condition: value
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form:
-              -
-                value: process
-            effect: show
-            effect_options: {  }
-            selector: ''
-          entity_type: node
-          bundle: internal_audit
-    type: options_select
-    region: content
-  field_list_of_product:
-    weight: 9
-    settings: {  }
-    third_party_settings:
-      conditional_fields:
-        9ad0777a-d65d-4597-92e1-38c0e0bcaa06:
-          dependee: field_internal_audit_type
-          settings:
-            state: visible
-            condition: value
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form:
-              -
-                value: product
-            effect: show
-            effect_options: {  }
-            selector: ''
-          entity_type: node
-          bundle: internal_audit
-    type: options_select
-    region: content
-  field_list_of_systems:
-    weight: 6
-    settings: {  }
-    third_party_settings:
-      conditional_fields:
-        a5763fba-22db-487b-ab61-bd5489814b9c:
-          dependee: field_internal_audit_type
-          settings:
-            state: visible
-            condition: value
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form:
-              -
-                value: systems
-            effect: show
-            effect_options: {  }
-            selector: ''
-          entity_type: node
-          bundle: internal_audit
-    type: options_select
-    region: content
   field_queries:
-    weight: 11
+    weight: 1
     settings:
       form_mode: default
       override_labels: true
@@ -160,12 +40,6 @@ content:
     third_party_settings: {  }
     type: inline_entity_form_simple
     region: content
-  field_unit:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   field_upload_auditor_signatures:
     weight: 31
     settings:
@@ -175,7 +49,7 @@ content:
     region: content
   moderation_state:
     type: moderation_state_default
-    weight: 12
+    weight: 2
     settings: {  }
     region: content
     third_party_settings: {  }
@@ -190,10 +64,19 @@ content:
 hidden:
   body: true
   created: true
+  field_audit_date: true
+  field_audit_type: true
   field_general_queries: true
+  field_ia_department: true
+  field_ia_section: true
+  field_internal_audit_type: true
+  field_list_of_process: true
+  field_list_of_product: true
+  field_list_of_systems: true
   field_predefined_queries_yes_no: true
   field_procedure_no: true
   field_select_result: true
+  field_unit: true
   path: true
   promote: true
   status: true
