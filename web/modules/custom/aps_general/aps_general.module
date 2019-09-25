@@ -2449,23 +2449,23 @@ function getProcessfromOptionfromsection($key) {
   return $entity_title;
 }
 
-//function getsectionDropdownOptionsfromDept($key) {
-//  if($key){
-//    $query = \Drupal::database()->select('node_field_data', 'n');
-//    $query->join('node__field_select_department_type', 'rf', 'n.nid = rf.entity_id');
-//    $query->fields('rf',['entity_id', 'bundle']);
-//    $query->condition('rf.bundle', 'section');
-//    $query->condition('rf.field_select_department_type_target_id', $key);
-//    $nids = $query->execute()->fetchAll();
-//  }
-//    $entity_title['_none'] = "- None -";
-//    foreach ($nids as $entity) {
-//      $node_object = Node::load($entity->entity_id);
-//      $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
-//      \Drupal::logger('Array')->notice(print_r($entity_title,true));
-//    }
-//    return $entity_title;
-//  }
+function getsectionDropdownOptionsfromDept($key) {
+  if($key){
+    $query = \Drupal::database()->select('node_field_data', 'n');
+    $query->join('node__field_select_department_type', 'rf', 'n.nid = rf.entity_id');
+    $query->fields('rf',['entity_id', 'bundle']);
+    $query->condition('rf.bundle', 'section');
+    $query->condition('rf.field_select_department_type_target_id', $key);
+    $nids = $query->execute()->fetchAll();
+  }
+    $entity_title['_none'] = "- None -";
+    foreach ($nids as $entity) {
+      $node_object = Node::load($entity->entity_id);
+      $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
+      \Drupal::logger('Array')->notice(print_r($entity_title,true));
+    }
+    return $entity_title;
+  }
 
 /**
  * Implements hook_cron().
