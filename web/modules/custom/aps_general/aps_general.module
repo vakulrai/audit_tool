@@ -2443,8 +2443,8 @@ function getProcessfromOptionfromsection($key) {
   $entity_title['_none'] = "- None -";
   foreach ($nids as $entity) {
     $node_object = Node::load($entity->entity_id);
-    $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
-    $id[] = $node_object->get('title')->value;
+    $entity_title[$node_object->get('title')->value] = $node_object->get('title')->value;
+    $id[$entity->entity_id] = $node_object->get('title')->value;
   }
   return $entity_title;
 }
@@ -2458,7 +2458,7 @@ function getsectionDropdownOptionsfromDept($key) {
     $query->condition('rf.field_select_department_type_target_id', $key);
     $nids = $query->execute()->fetchAll();
   }
-    $entity_title['_none'] = "- None -";
+    // $entity_title['_none'] = "- None -";
     foreach ($nids as $entity) {
       $node_object = Node::load($entity->entity_id);
       $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
