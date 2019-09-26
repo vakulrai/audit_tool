@@ -764,13 +764,10 @@ function getUserINfo(array $form, FormStateInterface $form_state) {
         }
       }
     }
-    
     if($profile['field_functions']){
-      foreach ($profile['field_functions'] as $function_key => $function_value) {
-        $score = Paragraph::load($function_value)->get('field_score')->value;
-        $function = Paragraph::load($function_value)->get('field_functions_qualified')->value;
-        $user_score .= '<b>Function Name: </b>'.$function.'<br> <b>Score: </b>'.$score.'</br>-------------<br>';
-      }
+      $score = Paragraph::load($profile['field_functions'])->get('field_score')->value;
+      $function = Paragraph::load($profile['field_functions'])->get('field_functions_qualified')->value;
+      $user_score = '<b>Function Name: </b>'.$function.'<br> <b>Score: </b>'.$score.'</br>-------------<br>';
     }
     else{
       $user_score = "Not Available";
@@ -813,7 +810,6 @@ function getUserINfo(array $form, FormStateInterface $form_state) {
     );
    }
    return $form['user_details'];
-   // return $ajax_response;
 }
 
 function getSectionDropdownOptions($key = '') {
@@ -1230,4 +1226,3 @@ function planned_audit_frequency_check(array $form, \Drupal\Core\Form\FormStateI
     }
   }
 }
-?>
