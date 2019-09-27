@@ -282,6 +282,30 @@
     font-family: Open Sans;
     border: none; }
 
+#block-audit-tool-mradmindashboardcoverage .table-responsive-wrapper .table-responsive {
+  display: table; }
+
+html {
+  height: 100%; }
+
+body, #page-wrapper, .dialog-off-canvas-main-canvas {
+  height: 100%; }
+
+#page {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  background: #FCFDFF 0 0 no-repeat padding-box; }
+
+.site-footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 2rem 0;
+  text-align: center; }
+
 .breadcrumb {
   padding: 0.25rem 1rem; }
   .breadcrumb li a {
@@ -291,7 +315,7 @@
 
 #block-audit-tool-pagetitle .title {
   font-size: 22px;
-  padding: 24px 0; }
+  padding: 0 0 10px; }
 
 label,
 legend,
@@ -313,8 +337,7 @@ legend,
   margin: auto; }
 
 .layout-main-wrapper {
-  padding: 30px 0;
-  background: #FCFDFF 0 0 no-repeat padding-box; }
+  padding: 30px 0; }
 
 .site-footer {
   background: #fafafa 0 0 no-repeat padding-box; }
@@ -436,15 +459,20 @@ table#field-location-values tbody tr {
     .main-content nav.tabs .nav-tabs .active a {
       opacity: 1; }
 
-table tbody tr td.views-field-edit-node a {
+.table2 tbody tr td.views-field-edit-node a {
   background: none;
   display: block;
   background-repeat: no-repeat;
   background-size: 16px;
   text-indent: -99999999999px;
   background-position: center; }
-table tbody tr:hover td a {
+.table2 tbody tr:hover td a {
   background-image: url(/themes/custom/audit_tool/images/edit-icon.png); }
+
+.radio .js-form-type-radio {
+  margin-bottom: 5px; }
+  .radio .js-form-type-radio input {
+    margin-top: 0px; }
 
 .node-unit-edit-form .field-group-fieldset {
   padding-left: 15px;
@@ -811,6 +839,70 @@ table tbody tr:hover td a {
   bottom: -5px; }
 
 #edit-submit {
+  margin-left: 0px; }
+
+.holidays-holidays-form table thead tr {
+  padding: 0 15px;
+  background-color: #ffffff; }
+  .holidays-holidays-form table thead tr th {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0px; }
+    .holidays-holidays-form table thead tr th h4 {
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 0px; }
+.holidays-holidays-form table tbody tr {
+  background: none;
+  background-color: #ffffff !important; }
+  .holidays-holidays-form table tbody tr td.field-multiple-drag {
+    display: none; }
+  .holidays-holidays-form table tbody tr td {
+    padding: 0px; }
+    .holidays-holidays-form table tbody tr td .js-form-wrapper {
+      padding: 0px; }
+    .holidays-holidays-form table tbody tr td fieldset {
+      padding-top: 10px;
+      padding-left: 0px;
+      padding-right: 0px; }
+      .holidays-holidays-form table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 25%;
+        padding: 0 15px; }
+      .holidays-holidays-form table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+    .holidays-holidays-form table tbody tr td .paragraph-type-top {
+      padding: 15px 0px 0; }
+    .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-datetime, .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-string {
+      float: left;
+      width: 50%; }
+      .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-datetime fieldset, .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-string fieldset {
+        width: 100%; }
+        .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-datetime fieldset input, .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-string fieldset input {
+          width: 100%; }
+    .holidays-holidays-form table tbody tr td .paragraphs-subform .field--name-field-score {
+      margin-top: 5px; }
+    .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-datetime {
+      padding-right: 15px; }
+      .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-datetime label {
+        margin-bottom: 0px;
+        margin-top: 15px; }
+    .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-string {
+      padding-left: 15px; }
+    .holidays-holidays-form table tbody tr td div {
+      padding-top: 0px; }
+      .holidays-holidays-form table tbody tr td div .form-check-input {
+        margin-left: 10px; }
+.holidays-holidays-form .paragraphs-dropbutton-wrapper input {
   margin-left: 0px; }
 
 .add-content-listing .block-superfish {
@@ -1611,7 +1703,8 @@ table tbody tr:hover td a {
   margin: 0; }
   .sidebar #block-audit-tool-manageexternalaudit.block ul li, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li,
   .sidebar #block-addbusinessprocess.block ul li, .sidebar #block-adddepartment ul li, .sidebar #block-addsections ul li {
-    background: #f8f9fa; }
+    background: #f8f9fa;
+    width: 100%; }
     .sidebar #block-audit-tool-manageexternalaudit.block ul li a, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a,
     .sidebar #block-addbusinessprocess.block ul li a, .sidebar #block-adddepartment ul li a, .sidebar #block-addsections ul li a {
       color: #7E8E9D;
@@ -2172,5 +2265,308 @@ table tbody tr:hover td a {
 .node-section-edit-form #edit-field-select-department-type-wrapper {
   margin-top: 5px;
   padding: 0px; }
+
+.user-listing-all-wrapper #block-audit-tool-mainpagecontent {
+  float: left;
+  background: none;
+  padding: 0px;
+  width: 100%; }
+  .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive {
+    padding: 0px; }
+    .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive table {
+      padding: 0px;
+      margin: 0px; }
+      .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr {
+        border: none; }
+        .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr th {
+          background: #f8f9fa;
+          border: none;
+          font: Bold 11px/15px Open Sans;
+          color: #23272D; }
+      .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr {
+        background: #ffffff;
+        border-bottom: 2px solid #f8f9fa; }
+        .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr:hover {
+          background: #EBECFF; }
+        .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr td {
+          font-size: 13px;
+          line-height: 19px;
+          font-weight: Semibold;
+          color: #4F5A67;
+          border: none; }
+
+.user-adit-form .user-form > div {
+  padding-left: 0px;
+  padding-right: 0px; }
+.user-adit-form .user-form #edit-field-unit-wrapper, .user-adit-form .user-form #edit-field-employee-id-wrapper {
+  float: left;
+  width: 50%; }
+.user-adit-form .user-form #edit-field-unit-wrapper {
+  margin-top: 5px; }
+.user-adit-form .user-form #edit-account, .user-adit-form .user-form #edit-field-functions-wrapper,
+.user-adit-form .user-form #edit-field-reference-id-wrapper, .user-adit-form .user-form #edit-field-assigned-wrapper, .user-adit-form .user-form .form-actions {
+  float: left;
+  width: 100%; }
+.user-adit-form .user-form #edit-field-sections-wrapper {
+  float: left;
+  width: 50%; }
+.user-adit-form .user-form #edit-account .form-item-current-pass, .user-adit-form .user-form #edit-account .form-item-mail, .user-adit-form .user-form #edit-account .form-item-name {
+  float: left;
+  width: 33%; }
+.user-adit-form .user-form #edit-account #edit-pass {
+  float: left;
+  width: 100%;
+  clear: both;
+  padding-left: 0px;
+  padding-right: 0px; }
+  .user-adit-form .user-form #edit-account #edit-pass fieldset {
+    float: left;
+    width: 50%;
+    clear: none; }
+.user-adit-form .user-form #edit-account .description {
+  display: none !important; }
+.user-adit-form .user-form #edit-field-phone-wrapper, .user-adit-form .user-form #edit-field-sections-wrapper, .user-adit-form .user-form #edit-field-department-wrapper {
+  float: left;
+  width: 33%; }
+.user-adit-form .user-form #edit-field-phone-wrapper label {
+  float: left;
+  width: 100%;
+  padding-left: 15px; }
+.user-adit-form .user-form #edit-field-phone-wrapper .form-type-select {
+  float: left;
+  width: 25%;
+  padding: 0px;
+  padding-left: 15px;
+  margin-top: 10px; }
+.user-adit-form .user-form #edit-field-phone-wrapper .js-form-type-textfield {
+  float: left;
+  width: 75%;
+  padding-left: 0px;
+  margin-top: 10px; }
+  .user-adit-form .user-form #edit-field-phone-wrapper .js-form-type-textfield input {
+    width: 100%;
+    border-radius: 0px; }
+.user-adit-form .user-form #edit-field-functions-wrapper {
+  padding-left: 15px;
+  padding-right: 15px; }
+  .user-adit-form .user-form #edit-field-functions-wrapper table thead tr th {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent; }
+    .user-adit-form .user-form #edit-field-functions-wrapper table thead tr th h4 {
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 0px; }
+  .user-adit-form .user-form #edit-field-functions-wrapper table tbody tr {
+    background: none; }
+    .user-adit-form .user-form #edit-field-functions-wrapper table tbody tr td.field-multiple-drag {
+      display: none; }
+    .user-adit-form .user-form #edit-field-functions-wrapper table tbody tr td {
+      padding: 0px; }
+      .user-adit-form .user-form #edit-field-functions-wrapper table tbody tr td .js-form-wrapper {
+        padding: 0px; }
+      .user-adit-form .user-form #edit-field-functions-wrapper table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 25%;
+        padding: 0 15px; }
+      .user-adit-form .user-form #edit-field-functions-wrapper table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+      .user-adit-form .user-form #edit-field-functions-wrapper table tbody tr td .paragraph-type-top {
+        margin-top: 15px; }
+      .user-adit-form .user-form #edit-field-functions-wrapper table tbody tr td .paragraphs-subform .field--type-integer {
+        margin-top: 5px; }
+        .user-adit-form .user-form #edit-field-functions-wrapper table tbody tr td .paragraphs-subform .field--type-integer fieldset {
+          padding-left: 0px; }
+      .user-adit-form .user-form #edit-field-functions-wrapper table tbody tr td .paragraphs-subform .field--type-integer, .user-adit-form .user-form #edit-field-functions-wrapper table tbody tr td .paragraphs-subform .field--type-string {
+        float: left;
+        width: 50%; }
+      .user-adit-form .user-form #edit-field-functions-wrapper table tbody tr td .paragraphs-subform .field--type-string fieldset {
+        padding-right: 0px; }
+  .user-adit-form .user-form #edit-field-functions-wrapper .paragraphs-dropbutton-wrapper {
+    margin-bottom: 15px; }
+    .user-adit-form .user-form #edit-field-functions-wrapper .paragraphs-dropbutton-wrapper input {
+      margin-left: 0px; }
+.user-adit-form .checkbox .checkbox {
+  margin-bottom: 5px; }
+  .user-adit-form .checkbox .checkbox input {
+    margin-top: 0px; }
+.user-adit-form .form-actions {
+  margin-left: 15px; }
+  .user-adit-form .form-actions input {
+    display: inline-block;
+    margin-right: 10px;
+    width: auto;
+    padding: 0.375rem 0.75rem !important; }
+
+.node-internal-documents-form #edit-field-files-wrapper fieldset, .node-internal-documents-form #edit-field-verified-wrapper fieldset {
+  padding-left: 0px;
+  padding-right: 0px; }
+.node-internal-documents-form table thead tr {
+  padding: 0 15px;
+  background-color: #ffffff; }
+  .node-internal-documents-form table thead tr th {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0px; }
+    .node-internal-documents-form table thead tr th h4 {
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 0px; }
+.node-internal-documents-form table tbody tr {
+  background: none;
+  background-color: #ffffff !important; }
+  .node-internal-documents-form table tbody tr td.field-multiple-drag {
+    display: none; }
+  .node-internal-documents-form table tbody tr td {
+    padding: 0px; }
+    .node-internal-documents-form table tbody tr td .js-form-wrapper {
+      padding: 0px; }
+    .node-internal-documents-form table tbody tr td fieldset {
+      padding-top: 10px;
+      padding-left: 0px;
+      padding-right: 0px; }
+      .node-internal-documents-form table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 25%;
+        padding: 0 15px; }
+      .node-internal-documents-form table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+    .node-internal-documents-form table tbody tr td .paragraph-type-top {
+      padding: 15px 0px 0; }
+    .node-internal-documents-form table tbody tr td .paragraphs-subform .field--type-datetime, .node-internal-documents-form table tbody tr td .paragraphs-subform .field--type-string {
+      float: left;
+      width: 50%; }
+      .node-internal-documents-form table tbody tr td .paragraphs-subform .field--type-datetime fieldset, .node-internal-documents-form table tbody tr td .paragraphs-subform .field--type-string fieldset {
+        width: 100%; }
+        .node-internal-documents-form table tbody tr td .paragraphs-subform .field--type-datetime fieldset input, .node-internal-documents-form table tbody tr td .paragraphs-subform .field--type-string fieldset input {
+          width: 100%; }
+    .node-internal-documents-form table tbody tr td .paragraphs-subform .field--name-field-score {
+      margin-top: 5px; }
+    .node-internal-documents-form table tbody tr td .paragraphs-subform .field--type-datetime {
+      padding-right: 15px; }
+      .node-internal-documents-form table tbody tr td .paragraphs-subform .field--type-datetime label {
+        margin-bottom: 0px;
+        margin-top: 15px; }
+    .node-internal-documents-form table tbody tr td .paragraphs-subform .field--type-string {
+      padding-left: 15px; }
+    .node-internal-documents-form table tbody tr td div {
+      padding-top: 0px; }
+      .node-internal-documents-form table tbody tr td div .form-check-input {
+        margin-left: 10px; }
+.node-internal-documents-form .paragraphs-dropbutton-wrapper input {
+  margin-left: 0px; }
+
+.node-pre-audit-records-form #edit-field-files-wrapper, .node-pre-audit-records-form #edit-field-accumlative-kpi-wrapper {
+  padding-left: 0px;
+  padding-right: 0px; }
+.node-pre-audit-records-form #edit-field-valid-upto-wrapper fieldset, .node-pre-audit-records-form #edit-field-qam-wrapper fieldset {
+  padding-left: 0px;
+  padding-right: 0px; }
+.node-pre-audit-records-form #edit-field-qam-wrapper .fieldset-wrapper fieldset {
+  float: left;
+  width: 50%; }
+.node-pre-audit-records-form #edit-field-qam-wrapper .js-form-type-entity-autocomplete {
+  padding-right: 15px; }
+.node-pre-audit-records-form #edit-field-qam-wrapper .form-type-textfield {
+  padding-left: 15px; }
+.node-pre-audit-records-form #edit-field-verified-wrapper {
+  padding-left: 0px;
+  padding-right: 0px; }
+.node-pre-audit-records-form #edit-field-reasons-data-wrapper table thead tr {
+  padding: 0 15px;
+  background-color: #ffffff; }
+  .node-pre-audit-records-form #edit-field-reasons-data-wrapper table thead tr th {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0px; }
+    .node-pre-audit-records-form #edit-field-reasons-data-wrapper table thead tr th h4 {
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 0px; }
+.node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr {
+  background: none;
+  background-color: #ffffff !important; }
+  .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td.field-multiple-drag {
+    display: none; }
+  .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td {
+    padding: 0px; }
+    .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td .js-form-wrapper {
+      padding: 0px; }
+    .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td fieldset {
+      padding-top: 10px;
+      padding-left: 0px;
+      padding-right: 0px; }
+      .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 25%;
+        padding: 0 15px; }
+      .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+    .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td .paragraph-type-top {
+      padding: 15px 0px 0; }
+    .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td .paragraphs-subform .field--type-datetime, .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td .paragraphs-subform .field--type-string {
+      float: left;
+      width: 50%; }
+      .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td .paragraphs-subform .field--type-datetime fieldset, .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td .paragraphs-subform .field--type-string fieldset {
+        width: 100%; }
+        .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td .paragraphs-subform .field--type-datetime fieldset input, .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td .paragraphs-subform .field--type-string fieldset input {
+          width: 100%; }
+    .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td .paragraphs-subform .field--name-field-score {
+      margin-top: 5px; }
+    .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td .paragraphs-subform .field--type-datetime {
+      padding-right: 15px; }
+      .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td .paragraphs-subform .field--type-datetime label {
+        margin-bottom: 0px;
+        margin-top: 15px; }
+    .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td .paragraphs-subform .field--type-string {
+      padding-left: 15px; }
+    .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td div {
+      padding-top: 0px; }
+      .node-pre-audit-records-form #edit-field-reasons-data-wrapper table tbody tr td div .form-check-input {
+        margin-left: 10px; }
+.node-pre-audit-records-form .paragraphs-dropbutton-wrapper input {
+  margin-left: 0px; }
+.node-pre-audit-records-form #edit-field-kpi-status-wrapper {
+  padding-left: 0px; }
+
+.node-pre-audit-manuals-form #edit-title-wrapper, .node-pre-audit-manuals-form #edit-field-description-wrapper {
+  float: left;
+  width: 50%; }
+.node-pre-audit-manuals-form #edit-field-qam-wrapper {
+  float: left;
+  width: 100%; }
+  .node-pre-audit-manuals-form #edit-field-qam-wrapper fieldset {
+    padding-left: 0px;
+    padding-right: 0px; }
+  .node-pre-audit-manuals-form #edit-field-qam-wrapper .js-form-type-entity-autocomplete, .node-pre-audit-manuals-form #edit-field-qam-wrapper .form-type-textfield {
+    float: left;
+    width: 50%; }
+  .node-pre-audit-manuals-form #edit-field-qam-wrapper .js-form-type-entity-autocomplete {
+    padding-right: 15px; }
+  .node-pre-audit-manuals-form #edit-field-qam-wrapper .form-type-textfield {
+    padding: 0 15px 0 30px; }
 
 /*# sourceMappingURL=style.css.map */

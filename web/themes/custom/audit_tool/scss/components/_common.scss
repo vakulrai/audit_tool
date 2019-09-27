@@ -1,3 +1,28 @@
+html {
+  height: 100%;
+}
+
+body, #page-wrapper, .dialog-off-canvas-main-canvas {
+  height: 100%;
+}
+
+#page {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  background: $lightest-blue 0 0 no-repeat padding-box;
+}
+
+.site-footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 2rem 0;
+  text-align: center;
+}
+
 .breadcrumb {
   padding: 0.25rem 1rem;
 
@@ -15,7 +40,7 @@
 #block-audit-tool-pagetitle {
   .title {
     font-size: 22px;
-    padding: 24px 0;
+    padding: 0 0 10px;
   }
 }
 label,
@@ -39,7 +64,6 @@ legend,
 }
 .layout-main-wrapper {
   padding: 30px 0;
-  background: $lightest-blue 0 0 no-repeat padding-box;
 }
 
 .site-footer {
@@ -211,7 +235,7 @@ table#field-location-values {
 	}
 }
 
-table {
+.table2 {
   tbody {
     tr {
       td.views-field-edit-node {
@@ -231,6 +255,15 @@ table {
           }
         }
       }
+    }
+  }
+}
+
+.radio {
+  .js-form-type-radio {
+    margin-bottom: 5px;
+    input {
+      margin-top: 0px;
     }
   }
 }
