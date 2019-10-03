@@ -1697,27 +1697,32 @@ table#field-location-values tbody tr {
         color: #414141; }
 
 .sidebar #block-audit-tool-manageexternalaudit.block, .sidebar #block-audit-tool-auditplanningsubmenuformr.block,
-.sidebar #block-addbusinessprocess.block, .sidebar #block-adddepartment, .sidebar #block-addsections, .sidebar #block-audit-tool-auditplanningsubmenuforauditor {
+.sidebar #block-addbusinessprocess.block, .sidebar #block-adddepartment, .sidebar #block-addsections,
+.sidebar #block-audit-tool-auditplanningsubmenuforauditor, .sidebar #block-auiditcriteriamenu {
   padding: 0;
   border: none;
   margin: 0; }
   .sidebar #block-audit-tool-manageexternalaudit.block ul li, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li,
-  .sidebar #block-addbusinessprocess.block ul li, .sidebar #block-adddepartment ul li, .sidebar #block-addsections ul li, .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li {
+  .sidebar #block-addbusinessprocess.block ul li, .sidebar #block-adddepartment ul li, .sidebar #block-addsections ul li,
+  .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li, .sidebar #block-auiditcriteriamenu ul li {
     background: #f8f9fa;
     width: 100%; }
     .sidebar #block-audit-tool-manageexternalaudit.block ul li a, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a,
-    .sidebar #block-addbusinessprocess.block ul li a, .sidebar #block-adddepartment ul li a, .sidebar #block-addsections ul li a, .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li a {
+    .sidebar #block-addbusinessprocess.block ul li a, .sidebar #block-adddepartment ul li a, .sidebar #block-addsections ul li a,
+    .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li a, .sidebar #block-auiditcriteriamenu ul li a {
       color: #7E8E9D;
       color: #657d89;
       font-size: 14px;
       cursor: pointer;
       text-transform: uppercase; }
       .sidebar #block-audit-tool-manageexternalaudit.block ul li a:hover, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a:hover,
-      .sidebar #block-addbusinessprocess.block ul li a:hover, .sidebar #block-adddepartment ul li a:hover, .sidebar #block-addsections ul li a:hover, .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li a:hover {
+      .sidebar #block-addbusinessprocess.block ul li a:hover, .sidebar #block-adddepartment ul li a:hover, .sidebar #block-addsections ul li a:hover,
+      .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li a:hover, .sidebar #block-auiditcriteriamenu ul li a:hover {
         text-decoration: none;
         color: #7E8E9D; }
   .sidebar #block-audit-tool-manageexternalaudit.block ul.nav, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul.nav,
-  .sidebar #block-addbusinessprocess.block ul.nav, .sidebar #block-adddepartment ul.nav, .sidebar #block-addsections ul.nav, .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul.nav {
+  .sidebar #block-addbusinessprocess.block ul.nav, .sidebar #block-adddepartment ul.nav, .sidebar #block-addsections ul.nav,
+  .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul.nav, .sidebar #block-auiditcriteriamenu ul.nav {
     margin: 0px; }
 
 .external-audit-wrapper .node-external-audit__form #edit-title-wrapper {
@@ -2723,5 +2728,46 @@ table#field-location-values tbody tr {
           margin-left: 10px; }
   .node-supplier-edit-form #edit-field-manufactured-product-wrapper .field-add-more-submit {
     margin-left: 0px; }
+
+.user-scolre-wrapper #block-audit-tool-mainpagecontent {
+  float: left;
+  background: none;
+  padding: 0px;
+  width: 100%; }
+  .user-scolre-wrapper #block-audit-tool-mainpagecontent .table-responsive {
+    padding: 0px; }
+    .user-scolre-wrapper #block-audit-tool-mainpagecontent .table-responsive table {
+      padding: 0px;
+      margin: 0px; }
+      .user-scolre-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr {
+        border: none; }
+        .user-scolre-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr th {
+          background: #f8f9fa;
+          border: none;
+          font: Bold 11px/15px Open Sans;
+          color: #23272D; }
+      .user-scolre-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr {
+        background: #ffffff;
+        border-bottom: 2px solid #f8f9fa; }
+        .user-scolre-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr:hover {
+          background: #EBECFF; }
+        .user-scolre-wrapper #block-audit-tool-mainpagecontent .table-responsive table tbody tr td {
+          font-size: 13px;
+          line-height: 19px;
+          font-weight: Semibold;
+          color: #4F5A67;
+          border: none; }
+.user-scolre-wrapper #block-updatefunctions {
+  margin-top: 15px; }
+  .user-scolre-wrapper #block-updatefunctions a {
+    margin: 0 10px;
+    background: #8B90FA;
+    color: #ffffff;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 7px 20px; }
+    .user-scolre-wrapper #block-updatefunctions a:hover {
+      text-decoration: none;
+      background: #676deb; }
 
 /*# sourceMappingURL=style.css.map */
