@@ -78,6 +78,31 @@
       }
     }
 
+    #block-audit-tool-adminmainmenuforauditor {
+      width: 53%;
+      padding: 15px 0;
+
+      #superfish-admin-main-menu-for-auditor {
+        .sf-depth-1 {
+          color: $link-color;
+          font-size: 16px;
+          font-weight: bold;
+        }
+
+        li:last-child {
+          right: 0;
+          background-image: url("/themes/custom/audit_tool/images/notitification-icon.svg");
+          position: absolute;
+          background-repeat: no-repeat;
+          margin: 12px 73px;
+
+          .material-icons {
+            display: none;
+          }
+        }
+      }
+    }
+
     #block-adminmainmenu-4 {
       width: 82%;
       float: right;
