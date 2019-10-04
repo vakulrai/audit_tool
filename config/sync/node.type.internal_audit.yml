@@ -9,7 +9,7 @@ third_party_settings:
     available_menus:
       - main
     parent: 'main:'
-name: 'Internal Audit'
+name: Checklist
 type: internal_audit
 description: 'Create Internal Audits For System/Process/Product. Further it can be used for Audit Planning.'
 help: ''

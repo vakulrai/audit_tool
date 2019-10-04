@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - node
     - system
   theme:
     - audit_tool
@@ -24,10 +23,3 @@ visibility:
     pages: /home
     negate: true
     context_mapping: {  }
-  node_type:
-    id: node_type
-    bundles:
-      business_process: business_process
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'

@@ -1377,9 +1377,12 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     $data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']['#active'] = TRUE;
   }
   if(stripos(strtolower($current_uri), 'customer-listing?') !== false){
-      unset($data['tabs'][0]['aps_pre_audit.manuals:add_procedures']);
-      unset($data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']);
-      unset($data['tabs'][0]['aps_pre_audit.manuals:csv_operations']);
+    unset($data['tabs'][0]['aps_pre_audit.manuals:add_procedures']);
+    unset($data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']);
+    unset($data['tabs'][0]['aps_pre_audit.manuals:csv_operations']);
+  }
+  if(stripos(strtolower($current_uri), 'internal_audit?') !== false){
+    unset($data['tabs']);
   }
   if($uri[0] = 'import'){
     unset($data['tabs'][0]['aps_pre_audit.manuals:external_audit_systems']);

@@ -1,14 +1,14 @@
-uuid: eb465865-879a-433e-8b94-3d0855718532
+uuid: ce76f42e-f95d-45c4-832c-653c43fbdd2e
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.answers
-id: node.answers.title
+    - node.type.internal_audit
+id: node.internal_audit.title
 field_name: title
 entity_type: node
-bundle: answers
-label: Title
+bundle: internal_audit
+label: 'Checklist Title'
 description: ''
 required: true
 translatable: true
