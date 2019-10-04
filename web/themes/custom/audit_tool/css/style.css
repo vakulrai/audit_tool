@@ -721,11 +721,13 @@ table#field-location-values tbody tr {
       margin: 0px; }
 .holidays-holidays-edit-form table tbody tr {
   background: none;
-  background-color: #ffffff !important; }
+  background-color: #ffffff !important;
+  border: none; }
   .holidays-holidays-edit-form table tbody tr td.field-multiple-drag {
     display: none; }
   .holidays-holidays-edit-form table tbody tr td {
-    padding: 0px; }
+    padding: 0px;
+    border: none; }
     .holidays-holidays-edit-form table tbody tr td .js-form-wrapper {
       padding: 0px; }
     .holidays-holidays-edit-form table tbody tr td fieldset .form-group .form-group {
@@ -1240,10 +1242,12 @@ table#field-location-values tbody tr {
       margin: 0px; }
 .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr {
   background: none;
-  background-color: #ffffff !important; }
+  background-color: #ffffff !important;
+  border: none; }
   .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td.field-multiple-drag {
     display: none; }
   .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td {
+    border: none;
     padding: 0px; }
     .procedures-wrapper #edit-field-create-procedure-wrapper table tbody tr td .js-form-wrapper {
       padding: 0px; }
@@ -2106,11 +2110,13 @@ table#field-location-values tbody tr {
       font-weight: bold;
       margin: 0px; }
 .node-business-process-edit-form .table-responsive table tbody tr {
-  background: none; }
+  background: none;
+  border: none; }
   .node-business-process-edit-form .table-responsive table tbody tr td.field-multiple-drag {
     display: none; }
   .node-business-process-edit-form .table-responsive table tbody tr td {
-    padding: 0px; }
+    padding: 0px;
+    border: none; }
     .node-business-process-edit-form .table-responsive table tbody tr td .js-form-wrapper {
       padding: 0px; }
     .node-business-process-edit-form .table-responsive table tbody tr td fieldset {
@@ -2127,21 +2133,23 @@ table#field-location-values tbody tr {
     .node-business-process-edit-form .table-responsive table tbody tr td .paragraph-type-top {
       padding: 15px 0px 0;
       margin-top: 20px; }
-    .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform .field--name-field-score, .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
-      float: left;
-      width: 50%; }
-    .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform .field--name-field-score {
-      margin-top: 5px; }
-    .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform div {
-      float: left;
-      width: 25%;
-      padding: 0 15px; }
-      .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform div:first-child {
-        padding-left: 0px; }
-      .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform div:last-child {
-        padding-right: 0px; }
-    .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform .field--name-field-target {
-      margin-top: 3px; }
+    .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform {
+      overflow-x: hidden; }
+      .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform .field--name-field-score, .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+        float: left;
+        width: 50%; }
+      .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform .field--name-field-score {
+        margin-top: 5px; }
+      .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform div {
+        float: left;
+        width: 24%;
+        padding: 0 15px; }
+        .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform div:first-child {
+          padding-left: 0px; }
+        .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform div:last-child {
+          padding-right: 0px; }
+      .node-business-process-edit-form .table-responsive table tbody tr td .paragraphs-subform .field--name-field-target {
+        margin-top: 3px; }
 .node-business-process-edit-form .paragraphs-dropbutton-wrapper input {
   margin-left: 0px; }
 .node-business-process-edit-form #edit-title-wrapper, .node-business-process-edit-form #edit-field-business-head-name-wrapper {

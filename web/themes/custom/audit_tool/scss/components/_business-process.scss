@@ -115,11 +115,13 @@
     tbody {
       tr {
         background: none;
+        border: none;
         td.field-multiple-drag {
           display: none;
         }
         td {
           padding: 0px;
+          border: none;
           .js-form-wrapper {
             padding: 0px;
           }
@@ -147,6 +149,7 @@
           }
 
           .paragraphs-subform {
+            overflow-x: hidden;
             .field--name-field-score, .field--name-field-functions-qualified  {
               float: left;
               width: 50%;
@@ -156,7 +159,7 @@
             }
             div {
               float: left;
-              width: 25%;
+              width: 24%;
               padding: 0 15px;
               &:first-child {
                 padding-left: 0px;

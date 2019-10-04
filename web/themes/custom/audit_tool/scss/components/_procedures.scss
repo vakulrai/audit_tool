@@ -53,10 +53,12 @@
         tr {
           background: none;
           background-color: $white!important;
+          border: none;
           td.field-multiple-drag {
             display: none;
           }
           td {
+            border: none;
             padding: 0px;
             .js-form-wrapper {
               padding: 0px;
