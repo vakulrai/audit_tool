@@ -71,6 +71,21 @@
                 #answer-efficient {
                   padding-left: 0px;
                 }
+                div.field--type-string.field--name-field-questions {
+                  float: left;
+                  width: 50%;
+                  padding-right: 15px;
+                }
+                div.field--type-integer.field--widget-number {
+                  float: left;
+                  width: 50%;
+                  padding-left: 15px;
+                  margin-top: 4px;
+                }
+                #checklist-category {
+                  float: left;
+                  width: 100%;
+                }
               }
             }
           }

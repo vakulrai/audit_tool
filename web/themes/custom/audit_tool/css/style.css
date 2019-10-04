@@ -2930,6 +2930,18 @@ table#field-location-values tbody tr {
       padding-right: 0px; }
     .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-efficient {
       padding-left: 0px; }
+    .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform div.field--type-string.field--name-field-questions {
+      float: left;
+      width: 50%;
+      padding-right: 15px; }
+    .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform div.field--type-integer.field--widget-number {
+      float: left;
+      width: 50%;
+      padding-left: 15px;
+      margin-top: 4px; }
+    .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #checklist-category {
+      float: left;
+      width: 100%; }
 .add-internal-audit #edit-field-queries-wrapper .field-add-more-submit {
   margin-left: 0px; }
 .add-internal-audit #edit-field-queries-wrapper .paragraphs-dropbutton-wrapper .add-pdef {
