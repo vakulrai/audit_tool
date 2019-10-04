@@ -546,7 +546,6 @@ function getProcessfromsection(array $form, FormStateInterface $form_state) {
   if(count($form_state->getValue('field_sections')) >= 0){
   $department_array = $form_state->getValue('field_sections')[0];
   $key = $department_array['target_id'];
-  \Drupal::logger('Process')->notice(print_r($key,true));
   $form['field_list_of_process']['widget']['#options'] = getProcessfromOptionsection($key);
  }
  return $form['field_list_of_process'];

@@ -39,9 +39,9 @@ content:
     region: content
   content_moderation_control:
     weight: -20
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   field_audit_date:
     weight: 109
     label: above
@@ -173,7 +173,7 @@ content:
     region: content
   links:
     weight: 100
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden: {  }

@@ -526,7 +526,7 @@ function aps_audit_criteria_preprocess_page(&$variables) {
 }
 
 function aps_audit_criteria_inline_entity_form_entity_form_alter(&$entity_form, &$form_state, $context) {
-  $entity_form['title']['widget'][0]['value']['#default_value'] = 'Add a title Here';
+  $entity_form['title']['widget'][0]['value']['#default_value'] = 'General Requirements/Quality Requirement/etc.';
   $entity_form['field_answer_type']['#access'] = FALSE;
   $entity_form['field_add_to_checklist']['#access'] = FALSE;
   $entity_form['field_select_query_type']['widget']['#default_value'] = '_none';
@@ -622,6 +622,10 @@ function aps_audit_criteria_field_widget_form_alter(&$element, \Drupal\Core\Form
       $element['subform']['field_answer_qualified']['widget'][0]['value']['#placeholder'] = 'QUALIFIED';
       $element['subform']['field_answers_defined']['widget'][0]['value']['#placeholder'] = 'EFFECIENT';
       $element['subform']['field_answers_poor']['#disabled'] = TRUE;
+      $element['subform']['field_description_effecient']['#disabled'] = TRUE;
+      $element['subform']['field_description_optimised']['#disabled'] = TRUE;
+      $element['subform']['field_description_poor']['#disabled'] = TRUE;
+      $element['subform']['field_description_qualified']['#disabled'] = TRUE;
       $element['subform']['field_answer_optimised']['#disabled'] = TRUE;
       $element['subform']['field_answer_qualified']['#disabled'] = TRUE;
       $element['subform']['field_answers_defined']['#disabled'] = TRUE;

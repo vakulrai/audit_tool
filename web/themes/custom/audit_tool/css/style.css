@@ -50,6 +50,21 @@
       margin: 12px 73px; }
       .header .user-login-header #block-adminmainmenudeputy #superfish-admin-main-menu-deputy li:nth-child(2) .material-icons {
         display: none; }
+  .header .user-login-header #block-audit-tool-adminmainmenuforauditor {
+    width: 53%;
+    padding: 15px 0; }
+    .header .user-login-header #block-audit-tool-adminmainmenuforauditor #superfish-admin-main-menu-for-auditor .sf-depth-1 {
+      color: #657d89;
+      font-size: 16px;
+      font-weight: bold; }
+    .header .user-login-header #block-audit-tool-adminmainmenuforauditor #superfish-admin-main-menu-for-auditor li:last-child {
+      right: 0;
+      background-image: url("/themes/custom/audit_tool/images/notitification-icon.svg");
+      position: absolute;
+      background-repeat: no-repeat;
+      margin: 12px 73px; }
+      .header .user-login-header #block-audit-tool-adminmainmenuforauditor #superfish-admin-main-menu-for-auditor li:last-child .material-icons {
+        display: none; }
   .header .user-login-header #block-adminmainmenu-4 {
     width: 82%;
     float: right;
@@ -2274,13 +2289,13 @@ table#field-location-values tbody tr {
 .user-listing-all-wrapper #block-audit-tool-mainpagecontent {
   float: left;
   background: none;
-  padding: 0px;
+  padding: 0;
   width: 100%; }
   .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive {
-    padding: 0px; }
+    padding: 0; }
     .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive table {
-      padding: 0px;
-      margin: 0px; }
+      padding: 0;
+      margin: 0; }
       .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr {
         border: none; }
         .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr th {
@@ -2299,6 +2314,13 @@ table#field-location-values tbody tr {
           font-weight: Semibold;
           color: #4F5A67;
           border: none; }
+.user-listing-all-wrapper #block-audit-tool-uploadmoredocumentsformradmmin, .user-listing-all-wrapper #block-audit-tool-askmoreinformationblock {
+  margin: 30px 0; }
+  .user-listing-all-wrapper #block-audit-tool-uploadmoredocumentsformradmmin .button, .user-listing-all-wrapper #block-audit-tool-askmoreinformationblock .button {
+    background: #5D62E6 0 0 no-repeat padding-box;
+    border-radius: 4px;
+    color: #ffffff;
+    padding: 10px; }
 
 .user-adit-form .user-form > div {
   padding-left: 0px;
