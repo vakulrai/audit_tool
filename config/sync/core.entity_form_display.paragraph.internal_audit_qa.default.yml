@@ -28,7 +28,7 @@ third_party_settings:
     group_group_poor:
       children:
         - field_answers_poor
-        - field_description_effecient
+        - field_description_poor
       parent_name: group_checklist_category
       weight: 4
       format_type: html_element
@@ -47,7 +47,7 @@ third_party_settings:
     group_group_qualified:
       children:
         - field_answer_qualified
-        - field_description_poor
+        - field_description_effecient
       parent_name: group_checklist_category
       weight: 5
       format_type: html_element
@@ -66,7 +66,7 @@ third_party_settings:
     group_group_optimised:
       children:
         - field_answer_optimised
-        - field_description_qualified
+        - field_description_optimised
       parent_name: group_checklist_category
       weight: 6
       format_type: html_element
@@ -85,7 +85,7 @@ third_party_settings:
     group_group_effecient:
       children:
         - field_answers_defined
-        - field_description_optimised
+        - field_description_qualified
       parent_name: group_checklist_category
       weight: 3
       format_type: html_element
@@ -176,22 +176,6 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_description_effecient:
-    weight: 6
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textarea
-    region: content
-  field_description_optimised:
-    weight: 4
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textarea
-    region: content
-  field_description_poor:
     weight: 7
     settings:
       rows: 5
@@ -199,8 +183,24 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
-  field_description_qualified:
+  field_description_optimised:
     weight: 8
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_description_poor:
+    weight: 6
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_description_qualified:
+    weight: 4
     settings:
       rows: 5
       placeholder: ''
