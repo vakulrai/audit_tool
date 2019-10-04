@@ -1,0 +1,117 @@
+.add-internal-audit {
+  #edit-field-queries-wrapper {
+    .table-responsive  {
+      table {
+        thead {
+          tr {
+            padding: 0 15px ;
+            th {
+              background: $grey-bg;
+              padding: 10px;
+              border-radius: 4px;
+              border: none;
+              border-bottom: 1px solid transparent;
+
+              h4 {
+                color: $black;
+                font-size: 11px;
+                font-weight: bold;
+                margin: 0px;
+              }
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            background: none;
+            border: none;
+            td.field-multiple-drag {
+              display: none;
+            }
+            td {
+              padding: 0px;
+              border: none;
+              .js-form-wrapper {
+                padding: 0px;
+              }
+               fieldset {
+                 padding-left: 0px;
+                 padding-right: 0px;
+                 .form-group {
+                   .form-group {
+                    float: left;
+                    width: 100%;
+                    padding: 0 ;
+                  }
+                }
+                .form-group {
+                  .js-form-type-select {
+                    width: 100%;
+                    padding: 0px;
+                    margin-top: 5px;
+                  }
+                }
+              }
+              .paragraph-type-top {
+                padding: 15px 0px 0;
+                margin-top: 20px;
+              }
+
+              .paragraphs-subform {
+                #answer-efficient, #answer-poor, #answer-qualified, #answer-optimised {
+                  float: left;
+                  width: 25%;
+                  padding-left: 15px;
+                  padding-right: 15px;
+                }
+                #answer-optimised {
+                  padding-right: 0px;
+                }
+                #answer-efficient {
+                  padding-left: 0px;
+                }
+                div.field--type-string.field--name-field-questions {
+                  float: left;
+                  width: 50%;
+                  padding-right: 15px;
+                }
+                div.field--type-integer.field--widget-number {
+                  float: left;
+                  width: 50%;
+                  padding-left: 15px;
+                  margin-top: 4px;
+                }
+                #checklist-category {
+                  float: left;
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .field-add-more-submit {
+      margin-left: 0px;
+    }
+    .paragraphs-dropbutton-wrapper {
+      .add-pdef {
+        display: inline-block;
+        width: auto;
+        position: relative;
+        background-image: url(/themes/custom/audit_tool/images/plus-icon.png);
+        background-repeat: no-repeat;
+        background-size: 17px;
+        background-position: 9px;
+        padding-left: 34px;
+        color: #7E8E9D;
+        font-size: 12px;
+        background-color: #fff;
+        border: 1px dotted;
+        text-align: inherit;
+        margin: 0;
+      }
+    }
+  }
+}

@@ -378,11 +378,13 @@
       tr {
         background: none;
         background-color: $white!important;
+        border: none;
         td.field-multiple-drag {
           display: none;
         }
         td {
           padding: 0px;
+          border: none;
           .js-form-wrapper {
             padding: 0px;
           }
