@@ -376,6 +376,7 @@ function aps_audit_criteria_form_alter(&$form, \Drupal\Core\Form\FormStateInterf
 	}
 
   if($form_id == 'node_internal_audit_form'){
+    $form['field_queries']['widget']['add_more']['#value'] = t('Add Title');
     $form['field_further_actions']['#access'] = FALSE;
     $form['field_root_cause_analysis']['#access'] = FALSE;
     $form['field_significant_findings']['#access'] = FALSE;
