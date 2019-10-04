@@ -2884,4 +2884,68 @@ table#field-location-values tbody tr {
       padding-left: 0px;
       padding-right: 0px; }
 
+.add-internal-audit #edit-field-queries-wrapper .table-responsive table thead tr {
+  padding: 0 15px; }
+  .add-internal-audit #edit-field-queries-wrapper .table-responsive table thead tr th {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid transparent; }
+    .add-internal-audit #edit-field-queries-wrapper .table-responsive table thead tr th h4 {
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 0px; }
+.add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr {
+  background: none;
+  border: none; }
+  .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td.field-multiple-drag {
+    display: none; }
+  .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td {
+    padding: 0px;
+    border: none; }
+    .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .js-form-wrapper {
+      padding: 0px; }
+    .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td fieldset {
+      padding-left: 0px;
+      padding-right: 0px; }
+      .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 100%;
+        padding: 0; }
+      .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+    .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraph-type-top {
+      padding: 15px 0px 0;
+      margin-top: 20px; }
+    .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-efficient, .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-poor, .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-qualified, .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-optimised {
+      float: left;
+      width: 25%;
+      padding-left: 15px;
+      padding-right: 15px; }
+    .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-optimised {
+      padding-right: 0px; }
+    .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-efficient {
+      padding-left: 0px; }
+.add-internal-audit #edit-field-queries-wrapper .field-add-more-submit {
+  margin-left: 0px; }
+.add-internal-audit #edit-field-queries-wrapper .paragraphs-dropbutton-wrapper .add-pdef {
+  display: inline-block;
+  width: auto;
+  position: relative;
+  background-image: url(/themes/custom/audit_tool/images/plus-icon.png);
+  background-repeat: no-repeat;
+  background-size: 17px;
+  background-position: 9px;
+  padding-left: 34px;
+  color: #7E8E9D;
+  font-size: 12px;
+  background-color: #fff;
+  border: 1px dotted;
+  text-align: inherit;
+  margin: 0; }
+
 /*# sourceMappingURL=style.css.map */
