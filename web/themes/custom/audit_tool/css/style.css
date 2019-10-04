@@ -2955,15 +2955,15 @@ table#field-location-values tbody tr td div .form-check-input {
 .user-listing-all-wrapper #block-audit-tool-mainpagecontent {
   float: left;
   background: none;
-  padding: 0px;
+  padding: 0;
   width: 100%;
 }
 .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive {
-  padding: 0px;
+  padding: 0;
 }
 .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive table {
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
 }
 .user-listing-all-wrapper #block-audit-tool-mainpagecontent .table-responsive table thead tr {
   border: none;
@@ -2987,6 +2987,15 @@ table#field-location-values tbody tr td div .form-check-input {
   font-weight: Semibold;
   color: #4F5A67;
   border: none;
+}
+.user-listing-all-wrapper #block-audit-tool-uploadmoredocumentsformradmmin {
+  margin: 30px 0;
+}
+.user-listing-all-wrapper #block-audit-tool-uploadmoredocumentsformradmmin .button {
+  background: #5D62E6 0 0 no-repeat padding-box;
+  border-radius: 4px;
+  color: #ffffff;
+  padding: 10px;
 }
 
 .user-adit-form .user-form > div {
