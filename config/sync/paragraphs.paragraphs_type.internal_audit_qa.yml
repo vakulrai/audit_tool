@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: internal_audit_qa
-label: 'New Sub Question Predefined'
+label: Question
 icon_uuid: null
 description: ''
 behavior_plugins: {  }
