@@ -1698,18 +1698,18 @@ table#field-location-values tbody tr {
 
 .sidebar #block-audit-tool-manageexternalaudit.block, .sidebar #block-audit-tool-auditplanningsubmenuformr.block,
 .sidebar #block-addbusinessprocess.block, .sidebar #block-adddepartment, .sidebar #block-addsections,
-.sidebar #block-audit-tool-auditplanningsubmenuforauditor, .sidebar #block-auiditcriteriamenu {
+.sidebar #block-audit-tool-auditplanningsubmenuforauditor, .sidebar #block-auiditcriteriamenu, .sidebar #block-audit-tool-preaudit {
   padding: 0;
   border: none;
   margin: 0; }
   .sidebar #block-audit-tool-manageexternalaudit.block ul li, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li,
   .sidebar #block-addbusinessprocess.block ul li, .sidebar #block-adddepartment ul li, .sidebar #block-addsections ul li,
-  .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li, .sidebar #block-auiditcriteriamenu ul li {
+  .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li, .sidebar #block-auiditcriteriamenu ul li, .sidebar #block-audit-tool-preaudit ul li {
     background: #f8f9fa;
     width: 100%; }
     .sidebar #block-audit-tool-manageexternalaudit.block ul li a, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a,
     .sidebar #block-addbusinessprocess.block ul li a, .sidebar #block-adddepartment ul li a, .sidebar #block-addsections ul li a,
-    .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li a, .sidebar #block-auiditcriteriamenu ul li a {
+    .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li a, .sidebar #block-auiditcriteriamenu ul li a, .sidebar #block-audit-tool-preaudit ul li a {
       color: #7E8E9D;
       color: #657d89;
       font-size: 14px;
@@ -1717,12 +1717,12 @@ table#field-location-values tbody tr {
       text-transform: uppercase; }
       .sidebar #block-audit-tool-manageexternalaudit.block ul li a:hover, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a:hover,
       .sidebar #block-addbusinessprocess.block ul li a:hover, .sidebar #block-adddepartment ul li a:hover, .sidebar #block-addsections ul li a:hover,
-      .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li a:hover, .sidebar #block-auiditcriteriamenu ul li a:hover {
+      .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li a:hover, .sidebar #block-auiditcriteriamenu ul li a:hover, .sidebar #block-audit-tool-preaudit ul li a:hover {
         text-decoration: none;
         color: #7E8E9D; }
   .sidebar #block-audit-tool-manageexternalaudit.block ul.nav, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul.nav,
   .sidebar #block-addbusinessprocess.block ul.nav, .sidebar #block-adddepartment ul.nav, .sidebar #block-addsections ul.nav,
-  .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul.nav, .sidebar #block-auiditcriteriamenu ul.nav {
+  .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul.nav, .sidebar #block-auiditcriteriamenu ul.nav, .sidebar #block-audit-tool-preaudit ul.nav {
     margin: 0px; }
 
 .external-audit-wrapper .node-external-audit__form #edit-title-wrapper {
@@ -2574,6 +2574,37 @@ table#field-location-values tbody tr {
   .node-pre-audit-manuals-form #edit-field-qam-wrapper .form-type-textfield {
     padding: 0 15px 0 30px; }
 
+.view-planned-audit-listing .table-responsive {
+  padding: 0px;
+  background: #fff; }
+  .view-planned-audit-listing .table-responsive table {
+    padding: 0px;
+    margin: 0px; }
+    .view-planned-audit-listing .table-responsive table thead tr {
+      border: none; }
+      .view-planned-audit-listing .table-responsive table thead tr th {
+        background: #f8f9fa;
+        border: none;
+        font: Bold 11px/15px Open Sans;
+        color: #23272D; }
+    .view-planned-audit-listing .table-responsive table tbody tr {
+      background: #ffffff;
+      border-bottom: 2px solid #f8f9fa; }
+      .view-planned-audit-listing .table-responsive table tbody tr:hover {
+        background: #EBECFF; }
+      .view-planned-audit-listing .table-responsive table tbody tr td {
+        font-size: 13px;
+        line-height: 19px;
+        font-weight: Semibold;
+        color: #4F5A67;
+        border: none; }
+        .view-planned-audit-listing .table-responsive table tbody tr td .file {
+          padding-left: 0px; }
+
+.planned-audit-listing #block-audit-tool-mainpagecontent {
+  padding-left: 0px;
+  padding-right: 0px; }
+
 .node-customers-manual-edit-form #edit-field-contact-person-name-wrapper, .node-customers-manual-edit-form #edit-field-upload-type-wrapper {
   float: left;
   width: 50%;
@@ -2769,5 +2800,58 @@ table#field-location-values tbody tr {
     .user-scolre-wrapper #block-updatefunctions a:hover {
       text-decoration: none;
       background: #676deb; }
+
+.planned-audit-listing-details #block-audit-tool-views-block-planned-audit-listing-audit-details .table-responsive {
+  padding: 0px;
+  background: #fff; }
+  .planned-audit-listing-details #block-audit-tool-views-block-planned-audit-listing-audit-details .table-responsive table {
+    padding: 0px;
+    margin: 0px; }
+    .planned-audit-listing-details #block-audit-tool-views-block-planned-audit-listing-audit-details .table-responsive table thead tr {
+      border: none; }
+      .planned-audit-listing-details #block-audit-tool-views-block-planned-audit-listing-audit-details .table-responsive table thead tr th {
+        background: #f8f9fa;
+        border: none;
+        font: Bold 11px/15px Open Sans;
+        color: #23272D; }
+    .planned-audit-listing-details #block-audit-tool-views-block-planned-audit-listing-audit-details .table-responsive table tbody tr {
+      background: #ffffff;
+      border-bottom: 2px solid #f8f9fa; }
+      .planned-audit-listing-details #block-audit-tool-views-block-planned-audit-listing-audit-details .table-responsive table tbody tr:hover {
+        background: #EBECFF; }
+      .planned-audit-listing-details #block-audit-tool-views-block-planned-audit-listing-audit-details .table-responsive table tbody tr td {
+        font-size: 13px;
+        line-height: 19px;
+        font-weight: Semibold;
+        color: #4F5A67;
+        border: none; }
+        .planned-audit-listing-details #block-audit-tool-views-block-planned-audit-listing-audit-details .table-responsive table tbody tr td .file {
+          padding-left: 0px; }
+.planned-audit-listing-details #block-audit-tool-views-block-planned-audit-listing-audit-details .pagination {
+  margin-bottom: 0px;
+  margin-left: 15px; }
+
+#block-audit-tool-preauditblock {
+  background: #ffffff 0 0 no-repeat padding-box;
+  border: 1px solid #F2F4F6;
+  border-radius: 4px;
+  padding: 24px;
+  float: left;
+  width: 100%; }
+  #block-audit-tool-preauditblock .navbar .navbar-nav {
+    display: block; }
+    #block-audit-tool-preauditblock .navbar .navbar-nav .nav-item {
+      display: inline-block;
+      margin-right: 10px; }
+      #block-audit-tool-preauditblock .navbar .navbar-nav .nav-item .nav-link {
+        padding: 8px 30px; }
+  #block-audit-tool-preauditblock #edit-submit {
+    margin-top: 15px; }
+  #block-audit-tool-preauditblock .pre-audit-form {
+    max-width: 500px;
+    padding-left: 15px; }
+    #block-audit-tool-preauditblock .pre-audit-form fieldset {
+      padding-left: 0px;
+      padding-right: 0px; }
 
 /*# sourceMappingURL=style.css.map */

@@ -269,3 +269,51 @@
     }
   }
 }
+
+.view-planned-audit-listing {
+  .table-responsive {
+    padding: 0px;
+    background: #fff;
+    table {
+      padding: 0px;
+      margin: 0px;
+      thead {
+        tr {
+          border: none;
+          th {
+            background: $grey-bg;
+            border: none;
+            font: Bold 11px/15px Open Sans;
+            color: #23272D;
+          }
+        }
+      }
+      tbody {
+        tr {
+          background: #ffffff;
+          border-bottom: 2px solid $grey-bg;
+          &:hover {
+            background: #EBECFF;
+          }
+          td {
+            font-size: 13px;
+            line-height: 19px;
+            font-weight: Semibold;
+            color: #4F5A67;
+            border: none;
+            .file {
+              padding-left: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.planned-audit-listing {
+  #block-audit-tool-mainpagecontent {
+    padding-left: 0px;
+    padding-right: 0px; 
+  }
+}
