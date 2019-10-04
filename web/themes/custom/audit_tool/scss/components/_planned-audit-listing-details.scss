@@ -1,0 +1,78 @@
+.planned-audit-listing-details {
+  #block-audit-tool-views-block-planned-audit-listing-audit-details {
+    .table-responsive {
+      padding: 0px;
+      background: #fff;
+      table {
+        padding: 0px;
+        margin: 0px;
+        thead {
+          tr {
+            border: none;
+            th {
+              background: $grey-bg;
+              border: none;
+              font: Bold 11px/15px Open Sans;
+              color: #23272D;
+            }
+          }
+        }
+        tbody {
+          tr {
+            background: #ffffff;
+            border-bottom: 2px solid $grey-bg;
+            &:hover {
+              background: #EBECFF;
+            }
+            td {
+              font-size: 13px;
+              line-height: 19px;
+              font-weight: Semibold;
+              color: #4F5A67;
+              border: none;
+              .file {
+                padding-left: 0px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .pagination {
+      margin-bottom: 0px;
+      margin-left: 15px;
+    }
+}
+}
+
+#block-audit-tool-preauditblock {
+  background: $white 0 0 no-repeat padding-box;
+  border: 1px solid #F2F4F6;
+  border-radius: 4px;
+  padding: 24px;
+  float: left;
+  width: 100%;
+  .navbar {
+    .navbar-nav {
+      display: block;
+      .nav-item {
+        display: inline-block;
+        margin-right: 10px;
+        .nav-link {
+          padding: 8px 30px;
+        }
+      }
+    }
+  }
+  #edit-submit {
+    margin-top: 15px;
+  }
+  .pre-audit-form {
+    max-width: 500px;
+    padding-left: 15px;
+    fieldset {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+  }
+}
