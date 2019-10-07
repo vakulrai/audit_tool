@@ -3,6 +3,7 @@
     .table-responsive  {
       table {
         thead {
+            display: none;
           tr {
             padding: 0 15px ;
             th {
@@ -43,6 +44,7 @@
                     float: left;
                     width: 100%;
                     padding: 0 ;
+                    margin-bottom: 5px;
                   }
                 }
                 .form-group {
@@ -59,16 +61,25 @@
               }
 
               .paragraphs-subform {
+                .field--type-string {
+                  label {
+                    display: none;
+                  }
+                }
                 #answer-efficient, #answer-poor, #answer-qualified, #answer-optimised {
                   float: left;
                   width: 25%;
                   padding-left: 15px;
                   padding-right: 15px;
-                }
-                #answer-optimised {
-                  padding-right: 0px;
+                  margin-top: 10px;
+                  label {
+                    display: none;
+                  }
                 }
                 #answer-efficient {
+                  padding-right: 0px;
+                }
+                #answer-poor {
                   padding-left: 0px;
                 }
                 div.field--type-string.field--name-field-questions {

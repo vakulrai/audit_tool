@@ -1,0 +1,50 @@
+.update-audit-findings-wrapper {
+  .update-audit-findings {
+    .table-responsive {
+      padding: 0;
+
+      table {
+        padding: 0;
+        margin: 0;
+
+        thead {
+          tr {
+            border: none;
+            background: $grey-bg;
+
+            th {
+              background: $grey-bg;
+              border: none;
+              font: Bold 11px/15px Open Sans;
+              color: #23272D;
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            background: #ffffff;
+            border-bottom: 2px solid $grey-bg;
+
+            td {
+              font-size: 13px;
+              line-height: 19px;
+              font-weight: Semibold;
+              color: #4F5A67;
+              border: none;
+            }
+          }
+        }
+      }
+    }
+    > .preaudit-table-responsive-wrapper {
+      padding-left: 15px;
+      padding-right: 15px;
+      margin-bottom: 15px;
+    }
+    #edit-submit {
+      margin-top: 15px;
+      margin-left: 15px;
+    }
+  }
+}

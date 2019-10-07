@@ -1900,11 +1900,41 @@ table#field-location-values tbody tr {
       .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraph-type-top {
         padding: 15px 0px 0;
         margin-top: 20px; }
-      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--name-field-score, .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--type-string label {
+        display: none; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform #answer-efficient, .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform #answer-poor, .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform #answer-qualified, .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform #answer-optimised {
         float: left;
-        width: 50%; }
-      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--name-field-score {
-        margin-top: 5px; }
+        width: 25%;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-top: 10px; }
+        .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform #answer-efficient label, .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform #answer-poor label, .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform #answer-qualified label, .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform #answer-optimised label {
+          display: none; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform #answer-efficient {
+        padding-right: 0px; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform #answer-poor {
+        padding-left: 0px; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform div.field--type-string.field--name-field-questions {
+        padding-right: 15px; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform #checklist-category {
+        float: left;
+        width: 100%; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field-add-more-submit {
+        margin-left: 0px; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .form-type-managed-file {
+        padding-top: 15px; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--name-field-finding-categories thead {
+        margin-bottom: 15px; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--name-field-clause-no, .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--name-field-kpi-status, .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--name-field-total-score {
+        float: left;
+        width: 33%;
+        padding: 0 15px; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--name-field-clause-no {
+        padding-left: 0px; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--name-field-total-score {
+        padding-right: 0px; }
+      .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform .field--name-field-kpi-status {
+        margin-top: 3px; }
   .node-answers-form .field--type-entity-reference-revisions fieldset {
     padding-left: 0px;
     padding-right: 0px; }
@@ -2884,19 +2914,21 @@ table#field-location-values tbody tr {
       padding-left: 0px;
       padding-right: 0px; }
 
-.add-internal-audit #edit-field-queries-wrapper .table-responsive table thead tr {
-  padding: 0 15px; }
-  .add-internal-audit #edit-field-queries-wrapper .table-responsive table thead tr th {
-    background: #f8f9fa;
-    padding: 10px;
-    border-radius: 4px;
-    border: none;
-    border-bottom: 1px solid transparent; }
-    .add-internal-audit #edit-field-queries-wrapper .table-responsive table thead tr th h4 {
-      color: #000000;
-      font-size: 11px;
-      font-weight: bold;
-      margin: 0px; }
+.add-internal-audit #edit-field-queries-wrapper .table-responsive table thead {
+  display: none; }
+  .add-internal-audit #edit-field-queries-wrapper .table-responsive table thead tr {
+    padding: 0 15px; }
+    .add-internal-audit #edit-field-queries-wrapper .table-responsive table thead tr th {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      border-bottom: 1px solid transparent; }
+      .add-internal-audit #edit-field-queries-wrapper .table-responsive table thead tr th h4 {
+        color: #000000;
+        font-size: 11px;
+        font-weight: bold;
+        margin: 0px; }
 .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr {
   background: none;
   border: none; }
@@ -2913,7 +2945,8 @@ table#field-location-values tbody tr {
       .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td fieldset .form-group .form-group {
         float: left;
         width: 100%;
-        padding: 0; }
+        padding: 0;
+        margin-bottom: 5px; }
       .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td fieldset .form-group .js-form-type-select {
         width: 100%;
         padding: 0px;
@@ -2921,14 +2954,19 @@ table#field-location-values tbody tr {
     .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraph-type-top {
       padding: 15px 0px 0;
       margin-top: 20px; }
+    .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform .field--type-string label {
+      display: none; }
     .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-efficient, .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-poor, .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-qualified, .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-optimised {
       float: left;
       width: 25%;
       padding-left: 15px;
-      padding-right: 15px; }
-    .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-optimised {
-      padding-right: 0px; }
+      padding-right: 15px;
+      margin-top: 10px; }
+      .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-efficient label, .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-poor label, .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-qualified label, .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-optimised label {
+        display: none; }
     .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-efficient {
+      padding-right: 0px; }
+    .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform #answer-poor {
       padding-left: 0px; }
     .add-internal-audit #edit-field-queries-wrapper .table-responsive table tbody tr td .paragraphs-subform div.field--type-string.field--name-field-questions {
       float: left;
@@ -2959,5 +2997,35 @@ table#field-location-values tbody tr {
   border: 1px dotted;
   text-align: inherit;
   margin: 0; }
+
+.update-audit-findings-wrapper .update-audit-findings .table-responsive {
+  padding: 0; }
+  .update-audit-findings-wrapper .update-audit-findings .table-responsive table {
+    padding: 0;
+    margin: 0; }
+    .update-audit-findings-wrapper .update-audit-findings .table-responsive table thead tr {
+      border: none;
+      background: #f8f9fa; }
+      .update-audit-findings-wrapper .update-audit-findings .table-responsive table thead tr th {
+        background: #f8f9fa;
+        border: none;
+        font: Bold 11px/15px Open Sans;
+        color: #23272D; }
+    .update-audit-findings-wrapper .update-audit-findings .table-responsive table tbody tr {
+      background: #ffffff;
+      border-bottom: 2px solid #f8f9fa; }
+      .update-audit-findings-wrapper .update-audit-findings .table-responsive table tbody tr td {
+        font-size: 13px;
+        line-height: 19px;
+        font-weight: Semibold;
+        color: #4F5A67;
+        border: none; }
+.update-audit-findings-wrapper .update-audit-findings > .preaudit-table-responsive-wrapper {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 15px; }
+.update-audit-findings-wrapper .update-audit-findings #edit-submit {
+  margin-top: 15px;
+  margin-left: 15px; }
 
 /*# sourceMappingURL=style.css.map */
