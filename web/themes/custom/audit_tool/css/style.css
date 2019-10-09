@@ -1834,6 +1834,8 @@ table#field-location-values tbody tr {
 .node-answers-form > div, .node-answers-form .js-form-wrapper {
   padding-left: 0px;
   padding-right: 0px; }
+.node-answers-form .form-actions {
+  padding-left: 15px; }
 .node-answers-form #edit-title-wrapper {
   padding: 0px;
   margin-bottom: 20px;
@@ -1915,7 +1917,7 @@ table#field-location-values tbody tr {
       .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform #answer-poor {
         padding-left: 0px; }
       .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform div.field--type-string.field--name-field-questions {
-        padding-right: 15px; }
+        padding-right: 0px; }
       .node-answers-form .field--type-entity-reference-revisions table tbody tr td .paragraphs-subform #checklist-category {
         float: left;
         width: 100%; }
@@ -2898,8 +2900,12 @@ table#field-location-values tbody tr {
   padding: 24px;
   float: left;
   width: 100%; }
+  #block-audit-tool-preauditblock .details-wrapper label .formtip {
+    display: none; }
+    #block-audit-tool-preauditblock .details-wrapper label .formtip:first-child {
+      display: inline-block; }
   #block-audit-tool-preauditblock .navbar .navbar-nav {
-    display: block; }
+    display: none; }
     #block-audit-tool-preauditblock .navbar .navbar-nav .nav-item {
       display: inline-block;
       margin-right: 10px; }
@@ -2910,9 +2916,17 @@ table#field-location-values tbody tr {
   #block-audit-tool-preauditblock .pre-audit-form {
     max-width: 500px;
     padding-left: 15px; }
+    #block-audit-tool-preauditblock .pre-audit-form #edit-procedure-no {
+      display: none; }
     #block-audit-tool-preauditblock .pre-audit-form fieldset {
       padding-left: 0px;
       padding-right: 0px; }
+    #block-audit-tool-preauditblock .pre-audit-form #display [id*="edit-question-desc"], #block-audit-tool-preauditblock .pre-audit-form #display [id*="edit-question-sr-no"], #block-audit-tool-preauditblock .pre-audit-form #display [id*="edit-question"] {
+      display: none; }
+    #block-audit-tool-preauditblock .pre-audit-form summary {
+      margin-bottom: 10px; }
+    #block-audit-tool-preauditblock .pre-audit-form legend span {
+      font-size: 14px; }
 
 .add-internal-audit #edit-field-queries-wrapper .table-responsive table thead {
   display: none; }
@@ -3027,5 +3041,61 @@ table#field-location-values tbody tr {
 .update-audit-findings-wrapper .update-audit-findings #edit-submit {
   margin-top: 15px;
   margin-left: 15px; }
+
+.customer-manual-parts .customer-manual-parts-parts-form .table-responsive table thead {
+  display: none; }
+  .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table thead tr {
+    padding: 0 15px; }
+    .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table thead tr th {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      border-bottom: 1px solid transparent; }
+      .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table thead tr th h4 {
+        color: #000000;
+        font-size: 11px;
+        font-weight: bold;
+        margin: 0px; }
+.customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr {
+  background: none;
+  border: none; }
+  .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td.field-multiple-drag {
+    display: none; }
+  .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td {
+    padding: 0px;
+    border: none; }
+    .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td .js-form-wrapper {
+      padding: 0px; }
+    .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td fieldset {
+      padding-left: 0px;
+      padding-right: 0px; }
+      .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td fieldset .form-group .form-group {
+        float: left;
+        width: 100%;
+        padding: 0;
+        margin-bottom: 5px; }
+      .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td fieldset .form-group .js-form-type-select {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5px; }
+    .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td .paragraph-type-top {
+      padding: 15px 0px 0;
+      margin-top: 20px; }
+    .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td .paragraphs-subform #answer-efficient {
+      padding-right: 0px; }
+    .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td .paragraphs-subform #answer-poor {
+      padding-left: 0px; }
+    .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td .paragraphs-subform div.field--type-string {
+      float: left;
+      width: 50%;
+      padding-right: 15px; }
+    .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td .paragraphs-subform div.field--type-integer {
+      float: left;
+      width: 50%;
+      padding-left: 15px;
+      margin-top: 4px; }
+.customer-manual-parts .customer-manual-parts-parts-form .field-add-more-submit {
+  margin-left: 0px; }
 
 /*# sourceMappingURL=style.css.map */

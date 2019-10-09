@@ -52,9 +52,19 @@
   padding: 24px;
   float: left;
   width: 100%;
+  .details-wrapper {
+    label {
+      .formtip {
+        display: none;
+        &:first-child {
+          display: inline-block;
+        }
+      }
+    }
+  }
   .navbar {
     .navbar-nav {
-      display: block;
+      display: none;
       .nav-item {
         display: inline-block;
         margin-right: 10px;
@@ -70,9 +80,25 @@
   .pre-audit-form {
     max-width: 500px;
     padding-left: 15px;
+    #edit-procedure-no {
+      display: none;
+    }
     fieldset {
       padding-left: 0px;
       padding-right: 0px;
+    }
+    #display {
+      [id*="edit-question-desc"] , [id*="edit-question-sr-no"], [id*="edit-question"] {
+        display: none;
+      }
+    }
+    summary {
+      margin-bottom: 10px;
+    }
+    legend {
+      span {
+        font-size: 14px;
+      }
     }
   }
 }
