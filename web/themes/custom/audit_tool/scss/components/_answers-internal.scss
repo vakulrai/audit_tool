@@ -3,6 +3,9 @@
     padding-left: 0px;
     padding-right: 0px;
   }
+  .form-actions {
+    padding-left: 15px;
+  }
 
   #edit-title-wrapper {
     padding: 0px;
@@ -124,7 +127,7 @@
                 padding-left: 0px;
               }
               div.field--type-string.field--name-field-questions {
-                padding-right: 15px;
+                padding-right: 0px;
               }
               #checklist-category {
                 float: left;

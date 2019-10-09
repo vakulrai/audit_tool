@@ -1,0 +1,91 @@
+.customer-manual-parts {
+  .customer-manual-parts-parts-form {
+    .table-responsive  {
+      table {
+        thead {
+            display: none;
+          tr {
+            padding: 0 15px ;
+            th {
+              background: $grey-bg;
+              padding: 10px;
+              border-radius: 4px;
+              border: none;
+              border-bottom: 1px solid transparent;
+
+              h4 {
+                color: $black;
+                font-size: 11px;
+                font-weight: bold;
+                margin: 0px;
+              }
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            background: none;
+            border: none;
+            td.field-multiple-drag {
+              display: none;
+            }
+            td {
+              padding: 0px;
+              border: none;
+              .js-form-wrapper {
+                padding: 0px;
+              }
+               fieldset {
+                 padding-left: 0px;
+                 padding-right: 0px;
+                 .form-group {
+                   .form-group {
+                    float: left;
+                    width: 100%;
+                    padding: 0 ;
+                    margin-bottom: 5px;
+                  }
+                }
+                .form-group {
+                  .js-form-type-select {
+                    width: 100%;
+                    padding: 0px;
+                    margin-top: 5px;
+                  }
+                }
+              }
+              .paragraph-type-top {
+                padding: 15px 0px 0;
+                margin-top: 20px;
+              }
+
+              .paragraphs-subform {
+                #answer-efficient {
+                  padding-right: 0px;
+                }
+                #answer-poor {
+                  padding-left: 0px;
+                }
+                div.field--type-string {
+                  float: left;
+                  width: 50%;
+                  padding-right: 15px;
+                }
+                div.field--type-integer {
+                  float: left;
+                  width: 50%;
+                  padding-left: 15px;
+                  margin-top: 4px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .field-add-more-submit {
+      margin-left: 0px;
+    }
+  }
+}
