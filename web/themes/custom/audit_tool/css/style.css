@@ -1708,7 +1708,7 @@ table#field-location-values tbody tr {
     .block-audit-planning-block .fc-ltr .fc-body tr td a.fc-day-grid-event {
       background: #5D62E6 !important;
       border: none;
-      color: #ffffff; }
+      color: #ffffff !important; }
     .block-audit-planning-block .fc-ltr .fc-body tr a.fc-day-grid-event.gcal-event {
       background: transparent !important;
       border: 1px solid #efefef !important; }
@@ -2073,7 +2073,7 @@ table#field-location-values tbody tr {
 .business-process-wrapper #block-audit-tool-mainpagecontent {
   float: left;
   background: #ffffff;
-  padding: 0px 0 15px;
+  padding: 0px 0 0px;
   width: 100%; }
   .business-process-wrapper #block-audit-tool-mainpagecontent .table-responsive {
     padding: 0px;
@@ -2194,7 +2194,7 @@ table#field-location-values tbody tr {
 .department-listing-wrapper #block-audit-tool-mainpagecontent {
   float: left;
   background: #ffffff;
-  padding: 0px 0 15px;
+  padding: 0px 0 0px;
   width: 100%; }
   .department-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive {
     padding: 0px;

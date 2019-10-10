@@ -43,7 +43,7 @@
     }
     .fc-view-container {
       background: $white;
-      table {        
+      table {
         .fc-head {
           tr {
             th {
@@ -62,7 +62,7 @@
           a.fc-day-grid-event {
             background: $voilet!important;
             border: none;
-            color: $white;
+            color: $white!important;
           }
         }
         a.fc-day-grid-event.gcal-event {
