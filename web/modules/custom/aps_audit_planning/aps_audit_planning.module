@@ -830,16 +830,20 @@ function getSectionDropdownOptions($key = '') {
 
 function getProcessfromOptionsection($key = '') {
   if($key){
-    $query = \Drupal::database()->select('node_field_data', 'n');
-    $query->join('node__field_select_section', 'rf', 'n.nid = rf.entity_id');
-    $query->fields('rf',['entity_id', 'bundle']);
-    $query->condition('rf.bundle', 'assembly');
-    $query->condition('rf.field_select_section_target_id', $key);
-    $nids = $query->execute()->fetchAll();
+      $query = \Drupal::entityQuery('node');
+      $query->condition('type', 'process');
+      $query->condition('field_section', $key);
+      $nids = $query->execute();
+    // $query = \Drupal::database()->select('node_field_data', 'n');
+    // $query->join('node__field_select_section', 'rf', 'n.nid = rf.entity_id');
+    // $query->fields('rf',['entity_id', 'bundle']);
+    // $query->condition('rf.bundle', 'assembly');
+    // $query->condition('rf.field_select_section_target_id', $key);
+    // $nids = $query->execute()->fetchAll();
   }
   $entity_title['_none'] = "- None -";
   foreach ($nids as $entity) {
-    $node_object = Node::load($entity->entity_id);
+    $node_object = Node::load($entity);
     $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
   }
   return $entity_title;

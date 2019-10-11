@@ -86,8 +86,6 @@ function sendEmail($module, $type, $to_address, $message, $subject){
  * Implements hook_form_alter().
  */
 function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-
-  //print_r($form_id);
   //Condition for Unit Add form
   $current_user = \Drupal::currentUser();
   $roles = $current_user->getRoles();
@@ -496,6 +494,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
   }
   elseif($form_id == 'user_form'){
+    $form['account']['roles']['#access'] = FALSE;
     $form['field_unit']['#disabled'] = 1;
     $form['field_assigned']['#disabled'] = 1;
     $form['field_reference_id']['#disabled'] = 1;
@@ -1509,7 +1508,7 @@ function aps_general_preprocess_breadcrumb(&$variables) {
     $variables['breadcrumb'][] = ['text' => t('Sections')];
   }
   elseif(\Drupal::routeMatch()->getRouteName() == 'aps_audit_planning.audit_planning_controller_build'){
-    $variables['breadcrumb'][] = ['text' => t('Event Planning')];
+    $variables['breadcrumb'][] = ['text' => t('Audit Planning')];
   }
   elseif(\Drupal::routeMatch()->getRouteName() == 'node.add'){
     unset($variables['breadcrumb'][1]['url']);
@@ -2054,6 +2053,13 @@ function aps_general_link_alter(&$variables) {
     }
   }
   if ($cleanLinkText == 'Add Section') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('id', $id);
+      $variables['url']->setRouteParameter('unit_ref', $id);
+    }
+  }
+  if ($cleanLinkText == 'Add Process') {
     $id = $uri[1];
     if($id){
       $variables['url']->setRouteParameter('id', $id);

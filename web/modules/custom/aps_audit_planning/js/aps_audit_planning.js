@@ -21,7 +21,6 @@
         selectable: true,
         selectMirror: true,
         selectOverlap: function(event) {
-          console.log(event);
           if (event._def.rendering === 'background' && event._def.url.indexOf('google') === -1){
             return true;
           }
@@ -37,12 +36,15 @@
             return true;
           }
         },
+        dayRender: function(dayRenderInfo) {
+          $('.fc-past').css("background-color", "#f3f3f3");
+        },
         validRange: function(nowDate) {
           var startDate = new Date(nowDate.valueOf());
           var endDate = new Date(nowDate.valueOf());
           var month_range = 12 - nowDate.getMonth();
-          startDate.setDate(nowDate.getDate()); // One day in the past
-          endDate.setMonth(nowDate.getMonth()+ month_range); // one month into the future
+          startDate.setDate(nowDate.getMonth() - 11 + month_range); // One day in the past
+          endDate.setMonth(nowDate.getMonth() + month_range); // one month into the future
           return { start: startDate, end: endDate };
         },
         eventSources: [
@@ -58,10 +60,15 @@
           }
         ],
         select: function(arg) {
-            var current = formatDate(arg.start);
-            var start = formatDate(arg.start);
-            var end = formatDate(arg.end);
-            var get_current_selected_month = arg.start.getMonth() + 1;
+          var current = formatDate(arg.start);
+          var start = formatDate(arg.start);
+          var end = formatDate(arg.end);
+          var get_current_selected_month = arg.start.getMonth() + 1;
+          var check = formatDate(start,'yyyy-MM-dd');
+          var today = formatDate(new Date(),'yyyy-MM-dd');
+          if(check < today) {
+          }
+          else {
             $.ajax({
               url: base_url + '/verify-pressure-months/'+unit_id+'/'+get_current_selected_month,
               async:false,
@@ -87,6 +94,7 @@
                 }
               }
             });
+          }
         },
         eventRender: function(info) {
           if (info.event._def.rendering === 'background'){
