@@ -22,6 +22,7 @@
         "dompdf/dompdf": "^0.8.3",
         "drupal-composer/drupal-scaffold": "^2.5",
         "drupal/address": "^1.6",
+        "drupal/admin_toolbar": "^1.27",
         "drupal/backup_migrate": "^4.0",
         "drupal/block_class": "^1.0",
         "drupal/bootstrap_barrio": "^4.22",
