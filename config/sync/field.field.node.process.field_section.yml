@@ -1,0 +1,28 @@
+uuid: e6b393f8-d1ce-48ad-8d16-96b44cdd609d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_section
+    - node.type.process
+    - node.type.section
+id: node.process.field_section
+field_name: field_section
+entity_type: node
+bundle: process
+label: 'Select Section'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      section: section
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

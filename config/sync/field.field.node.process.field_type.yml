@@ -1,0 +1,21 @@
+uuid: 83caae9a-af2b-4f1d-8b31-f37764167219
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_type
+    - node.type.process
+  module:
+    - options
+id: node.process.field_type
+field_name: field_type
+entity_type: node
+bundle: process
+label: Type
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

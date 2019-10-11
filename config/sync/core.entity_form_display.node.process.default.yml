@@ -1,0 +1,60 @@
+uuid: 15bca374-5489-4c1d-845e-7e78e7f688da
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.process.field_documents
+    - field.field.node.process.field_section
+    - field.field.node.process.field_shift
+    - field.field.node.process.field_type
+    - node.type.process
+  module:
+    - file
+id: node.process.default
+targetEntityType: node
+bundle: process
+mode: default
+content:
+  field_documents:
+    weight: 3
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_section:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_shift:
+    weight: 2
+    settings: {  }
+    third_party_settings:
+      limited_field_widgets:
+        limit_values: '0'
+    type: options_buttons
+    region: content
+  field_type:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  moderation_state: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

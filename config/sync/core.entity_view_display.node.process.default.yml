@@ -1,0 +1,56 @@
+uuid: fad42974-04f5-4075-93c5-0efb12c9fceb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.process.field_documents
+    - field.field.node.process.field_section
+    - field.field.node.process.field_shift
+    - field.field.node.process.field_type
+    - node.type.process
+  module:
+    - file
+    - options
+    - user
+id: node.process.default
+targetEntityType: node
+bundle: process
+mode: default
+content:
+  field_documents:
+    weight: 105
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_section:
+    weight: 103
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_shift:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_type:
+    weight: 104
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

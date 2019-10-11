@@ -1,0 +1,28 @@
+uuid: 5edf007c-e585-43cc-aa52-e462ac707b1e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.process.field_documents
+    - field.field.node.process.field_section
+    - field.field.node.process.field_shift
+    - field.field.node.process.field_type
+    - node.type.process
+  module:
+    - user
+id: node.process.teaser
+targetEntityType: node
+bundle: process
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_documents: true
+  field_section: true
+  field_shift: true
+  field_type: true
