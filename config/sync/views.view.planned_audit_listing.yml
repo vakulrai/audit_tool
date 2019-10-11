@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_audit_type
+    - field.storage.node.field_auditor
     - field.storage.node.field_business_process_effective
     - field.storage.node.field_business_process_efficienc
     - field.storage.node.field_department
@@ -16,6 +17,7 @@ dependencies:
     - field.storage.node.field_report_reference
     - field.storage.node.field_sections
     - field.storage.node.field_select_audit
+    - field.storage.node.field_select_auditee
     - field.storage.node.field_start_date
     - field.storage.node.field_valid_upto
     - field.storage.node.field_verified
@@ -82,13 +84,13 @@ display:
       pager:
         type: mini
         options:
-          items_per_page: 5
+          items_per_page: 20
           offset: 0
           id: 0
           total_pages: null
           tags:
-            previous: â€¹â€¹
-            next: â€ºâ€º
+            previous: Prev
+            next: Next
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -5025,7 +5027,7 @@ display:
           group_type: group
           admin_label: ''
           label: 'Audit Type'
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -5152,7 +5154,7 @@ display:
           group_type: group
           admin_label: ''
           label: 'Remaining Days for event'
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -5326,7 +5328,7 @@ display:
           group_type: group
           admin_label: ''
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -5373,6 +5375,132 @@ display:
           group_columns: {  }
           group_rows: true
           delta_limit: 2
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_auditor:
+          id: field_auditor
+          table: node__field_auditor
+          field: field_auditor
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Auditor
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_select_auditee:
+          id: field_select_auditee
+          table: node__field_select_auditee
+          field: field_select_auditee
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Select Auditee'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
@@ -5552,7 +5680,7 @@ display:
           group_type: group
           admin_label: ''
           label: 'Custom text'
-          exclude: false
+          exclude: true
           alter:
             alter_text: true
             text: "{% if moderation_state == \"Submit Audit\" %}\r\n<a class=\"button\" href=\"planned-mr-audit-listing/{{nid}}/ncr/{{field_report_reference}}\">View Report</a>\r\n{% else %}\r\n<a class=\"button\" href=\"#\">Report Not submitted</a>\r\n{% endif %}"
@@ -5601,7 +5729,7 @@ display:
           group_type: group
           admin_label: ''
           label: Checklist
-          exclude: false
+          exclude: true
           alter:
             alter_text: true
             text: '<a class="button" href="/node/add/internal_audit?unit_reference={{field_refere}}&audit_reference={{nid}}">Add Checklist</a>'
@@ -5916,9 +6044,11 @@ display:
         - user.roles
       tags:
         - 'config:field.storage.node.field_audit_type'
+        - 'config:field.storage.node.field_auditor'
         - 'config:field.storage.node.field_refere'
         - 'config:field.storage.node.field_report_reference'
         - 'config:field.storage.node.field_select_audit'
+        - 'config:field.storage.node.field_select_auditee'
         - 'config:field.storage.node.field_start_date'
         - 'config:workflow_list'
       max-age: -1

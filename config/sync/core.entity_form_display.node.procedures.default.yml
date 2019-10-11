@@ -10,7 +10,9 @@ dependencies:
     - field.field.node.procedures.field_refere
     - field.field.node.procedures.field_section_type
     - node.type.procedures
+    - workflows.workflow.workflow_for_audit_planning
   module:
+    - content_moderation
     - paragraphs
 id: node.procedures.default
 targetEntityType: node
@@ -41,21 +43,18 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
-  field_refere:
-    weight: 26
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_section_type:
     weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 5
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -67,6 +66,7 @@ content:
 hidden:
   body: true
   created: true
+  field_refere: true
   path: true
   promote: true
   status: true

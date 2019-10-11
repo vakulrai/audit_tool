@@ -1136,7 +1136,6 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
-  
   //Tabs later for roles and their listings.
   if($route_name == 'user.admin_create' && \Drupal::request()->query->get('type') == 'default'){
     $data['tabs'][0]['aps_pre_audit.manuals:auditor_list']['#active'] = TRUE;
@@ -1174,6 +1173,9 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   }
   elseif($route_name == 'user.register'){
     unset($data['tabs'][0]['user.pass']);
+  }
+  if(strpos($current_uri, 'node/add/procedures?') !== FALSE) {
+    unset($data['tabs']);
   }
   
   //Tabs alter for Audit criteria.

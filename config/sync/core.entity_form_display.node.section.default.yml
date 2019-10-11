@@ -22,28 +22,22 @@ targetEntityType: node
 bundle: section
 mode: default
 content:
-  field_assembly:
-    weight: 3
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
   field_attach_control_plan:
     type: media_library_widget
-    weight: 6
+    weight: 4
     settings:
       media_types: {  }
     third_party_settings: {  }
     region: content
   field_file:
-    weight: 5
+    weight: 3
     settings:
       media_types: {  }
     third_party_settings: {  }
     type: media_library_widget
     region: content
   field_refere:
-    weight: 7
+    weight: 5
     settings:
       match_operator: CONTAINS
       size: 60
@@ -66,15 +60,9 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
-  field_shift:
-    weight: 4
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
   moderation_state:
     type: moderation_state_default
-    weight: 8
+    weight: 6
     settings: {  }
     region: content
     third_party_settings: {  }
@@ -89,8 +77,10 @@ content:
 hidden:
   body: true
   created: true
+  field_assembly: true
   field_business_head_dept: true
   field_location_address: true
+  field_shift: true
   path: true
   promote: true
   status: true
