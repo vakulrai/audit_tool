@@ -20,6 +20,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '<front>'
+    pages: "<front>\r\n/customer-listing"
     negate: true
     context_mapping: {  }

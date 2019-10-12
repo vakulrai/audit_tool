@@ -7,6 +7,7 @@ label: 'Deputy Mr'
 weight: 5
 is_admin: null
 permissions:
+  - 'access devel information'
   - 'access holidays entity listing'
   - 'access kint'
   - 'access media overview'

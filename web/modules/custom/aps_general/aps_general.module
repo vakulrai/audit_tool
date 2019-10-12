@@ -1044,18 +1044,36 @@ function aps_general_node_create(Node $entity) {
   }
 }
 
+function aps_general_preprocess_block(&$variables) {
+  $type = \Drupal::request()->query->get('type');
+  if (empty($type)) {
+    $type = 'User';
+  }
+
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name == 'user.admin_create') {
+    if ('page_title_block' == $variables['plugin_id']) {
+      $variables['content']['#title'] = 'Create ' . $type;
+    }
+  }
+  if ($route_name == 'entity.user.edit_form') {
+    if ('page_title_block' == $variables['plugin_id']) {
+      $variables['content']['#title'] = 'Edit User: ' . $variables['content']['#title']['#markup'];
+    }
+  }
+}
 /**
  * Implements  hook_preprocess_page().
  */
 function aps_general_preprocess_page(&$variables) {
   $variables['#attached']['library'][] = 'aps_general/aps_general_bootstrap_datepicker_js';
   global $base_url;
+  $route_name = \Drupal::routeMatch()->getRouteName();
   $current_user = \Drupal::currentUser();
   $roles = $current_user->getRoles();
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
-  $route_name = \Drupal::routeMatch()->getRouteName();
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $uri = explode('/', $current_uri);
   $node = \Drupal::routeMatch()->getParameter('node');
@@ -1390,6 +1408,9 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
     unset($data['tabs'][0]['aps_pre_audit.manuals:external_audit_systems']);
     unset($data['tabs'][0]['aps_pre_audit.manuals:external_audit_clauses']);
+    unset($data['tabs'][0]['aps_pre_audit.manuals:csv_operations']);
+    unset($data['tabs'][0]['aps_pre_audit.manuals:customer_listing']);
+    unset($data['tabs'][0]['aps_pre_audit.manuals:add_customer']);
     $data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']['#active'] = TRUE;
   }
   if(stripos(strtolower($current_uri), 'customer-listing?') !== false){

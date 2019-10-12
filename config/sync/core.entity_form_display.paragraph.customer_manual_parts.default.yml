@@ -3,7 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.customer_manual_parts.field_drawing_number
     - field.field.paragraph.customer_manual_parts.field_part_no
+    - field.field.paragraph.customer_manual_parts.field_revision_level
     - field.field.paragraph.customer_manual_parts.field_s_no
     - paragraphs.paragraphs_type.customer_manual_parts
 id: paragraph.customer_manual_parts.default
@@ -11,8 +13,24 @@ targetEntityType: paragraph
 bundle: customer_manual_parts
 mode: default
 content:
+  field_drawing_number:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_part_no:
     weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_revision_level:
+    weight: 3
     settings:
       size: 60
       placeholder: ''

@@ -9,7 +9,7 @@ id: node.supplier.field_supplier_name
 field_name: field_supplier_name
 entity_type: node
 bundle: supplier
-label: Name
+label: 'Supplier Name'
 description: ''
 required: false
 translatable: false

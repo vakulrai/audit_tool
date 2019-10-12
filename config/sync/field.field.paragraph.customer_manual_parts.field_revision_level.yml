@@ -1,0 +1,19 @@
+uuid: 8dbf13af-bbbc-4177-93f3-881b154a0c7e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_revision_level
+    - paragraphs.paragraphs_type.customer_manual_parts
+id: paragraph.customer_manual_parts.field_revision_level
+field_name: field_revision_level
+entity_type: paragraph
+bundle: customer_manual_parts
+label: 'Revision Level'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

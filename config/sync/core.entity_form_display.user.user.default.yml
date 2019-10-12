@@ -25,12 +25,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_assigned:
-    weight: 8
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
   field_department:
     weight: 3
     settings: {  }
@@ -89,5 +83,6 @@ content:
     region: content
 hidden:
   contact: true
+  field_assigned: true
   language: true
   timezone: true
