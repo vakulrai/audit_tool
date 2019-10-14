@@ -1,0 +1,19 @@
+uuid: 07559bcf-c91c-4f60-ad91-1ba444a49bc1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_standard
+    - node.type.planned_events
+id: node.planned_events.field_standard
+field_name: field_standard
+entity_type: node
+bundle: planned_events
+label: Standard
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

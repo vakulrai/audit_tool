@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.process.field_documents
+    - field.field.node.process.field_refere
     - field.field.node.process.field_section
     - field.field.node.process.field_shift
     - field.field.node.process.field_type
@@ -22,6 +23,15 @@ content:
     third_party_settings: {  }
     type: file_generic
     region: content
+  field_refere:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_section:
     weight: 4
     settings: {  }

@@ -1,0 +1,21 @@
+uuid: b67dcd8d-306a-4cf4-afa8-15d59b6b38b8
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_auditing_body
+field_name: field_auditing_body
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

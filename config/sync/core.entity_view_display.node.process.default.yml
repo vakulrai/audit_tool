@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.process.field_documents
+    - field.field.node.process.field_refere
     - field.field.node.process.field_section
     - field.field.node.process.field_shift
     - field.field.node.process.field_type
@@ -24,6 +25,14 @@ content:
       use_description_as_link_text: true
     third_party_settings: {  }
     type: file_default
+    region: content
+  field_refere:
+    weight: 106
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_section:
     weight: 103

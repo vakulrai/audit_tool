@@ -1,0 +1,19 @@
+uuid: bcd454b5-6240-43a4-8b8f-c0afe41e8b74
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_auditing_body
+    - node.type.planned_events
+id: node.planned_events.field_auditing_body
+field_name: field_auditing_body
+entity_type: node
+bundle: planned_events
+label: 'Auditing Body'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -20,6 +20,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "<front>\r\n/customer-listing"
+    pages: "<front>\r\n/customer-listing\r\n/audit-planning/*"
     negate: true
     context_mapping: {  }

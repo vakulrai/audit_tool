@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.planned_events.field_audit_reasons
     - field.field.node.planned_events.field_audit_type
     - field.field.node.planned_events.field_audit_type_list
+    - field.field.node.planned_events.field_auditing_body
     - field.field.node.planned_events.field_auditor
     - field.field.node.planned_events.field_auditor_customer
     - field.field.node.planned_events.field_checklist
@@ -36,6 +37,7 @@ dependencies:
     - field.field.node.planned_events.field_select_users
     - field.field.node.planned_events.field_selected_auditee
     - field.field.node.planned_events.field_shift
+    - field.field.node.planned_events.field_standard
     - field.field.node.planned_events.field_start_date
     - field.field.node.planned_events.field_suggested_date
     - field.field.node.planned_events.field_supplier_name_list
@@ -91,6 +93,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: list_default
+    region: content
+  field_auditing_body:
+    weight: 145
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
   field_auditor:
     weight: 109
@@ -321,6 +331,14 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_standard:
+    weight: 144
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
   field_start_date:
     weight: 111
