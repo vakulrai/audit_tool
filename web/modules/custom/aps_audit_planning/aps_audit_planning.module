@@ -74,7 +74,12 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_department']['widget']['#options'] = $get_department_options;
     $get_section_from_department = getsectionDropdownOptionsfromDept($key);
     $form['field_sections']['widget']['#options'] = $get_section_from_department;
-    $get_process_from_section = getProcessfromOptionfromsection($key);
+    if ($id = \Drupal::request()->query->get('unit_reference')) {
+      $get_process_from_section = getProcessforCustomerLine($id);
+    }
+    else {
+      $get_process_from_section = getProcessfromOptionfromsection($key);
+    }
     $form['field_list_of_process']['widget']['#options'] = $get_process_from_section;
     if(!empty($form_state->getValues())){
       $customer_array = $form_state->getValue('field_customer_list')[0];
@@ -541,6 +546,20 @@ function getlocationFromcustomer(array $form, FormStateInterface $form_state) {
 function sectionajaxrunvalidate(array $form, FormStateInterface $form_state){
   return $form;
 }
+
+function getProcessforCustomerLine($unit_reference) {
+  $query = \Drupal::entityQuery('node');
+  $query->condition('type', 'process');
+  $query->condition('field_refere', $unit_reference);
+  $nids = $query->execute();
+  $entity_title['_none'] = "- None -";
+  foreach ($nids as $entity) {
+    $node_object = Node::load($entity);
+    $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
+  }
+  return $entity_title;
+}
+
 
 function getProcessfromsection(array $form, FormStateInterface $form_state) {
   if(count($form_state->getValue('field_sections')) >= 0){

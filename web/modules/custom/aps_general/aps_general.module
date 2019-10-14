@@ -142,12 +142,19 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       }
     }
   }
-
+  if($form_id == 'node_process_form'){
+    if($id = \Drupal::request()->query->get('unit_ref')){
+      $node_object = Node::load($id);
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
+      $form['field_refere']['#access'] = FALSE;
+    }
+  }
   //Condition for Procedure Add form
   if($form_id == 'node_procedures_form'){
     if($id = \Drupal::request()->query->get('unit_reference')){
       $node_object = Node::load($id);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
+      $form['field_refere']['#access'] = FALSE;
     }
     $form['field_department']['#attributes'] = ['id' => ['department']];
     $form['field_section_type']['#attributes'] = ['id' => ['section']];
@@ -252,7 +259,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
         $title = $form['field_shift']['widget']['#options'][$value['target_id']];
-        $selected_option[$value['target_id']] = $title; 
+        $selected_option[$value['target_id']] = $title;
       }
       $form['field_shift']['widget']['#options'] = $selected_option;
       $form['field_shift']['widget']['#default_value'] = $def_values;
@@ -344,7 +351,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
         $title = $form['field_shift']['widget']['#options'][$value['target_id']];
-        $selected_option[$value['target_id']] = $title; 
+        $selected_option[$value['target_id']] = $title;
       }
       $form['field_shift']['widget']['#options'] = $selected_option;
       $form['field_shift']['widget']['#default_value'] = $def_values;
@@ -822,32 +829,32 @@ function aps_general_node_insert(Node $node) {
     $audit_frequency = getListofMonths($unit_reference);
     foreach ($node_load_multiple as $key => $value) {
       if($value->field_audit_type->value == 'internal' && $value->field_internal_audit_type->value == 'systems'){
-        $id_system[] = $key; 
+        $id_system[] = $key;
         $count_systems = count($id_system);
       }
       elseif ($value->field_audit_type->value == 'internal' && $value->field_internal_audit_type->value == 'process') {
-        $id_process[] = $key; 
+        $id_process[] = $key;
         $count_process = count($id_process);
       }
       elseif ($value->field_audit_type->value == 'internal' && $value->field_internal_audit_type->value == 'product') {
-        $id_product[] = $key; 
+        $id_product[] = $key;
         $count_product = count($id_product);
       }
       elseif ($value->field_audit_type->value == 'external') {
-        $id_external[] = $key; 
+        $id_external[] = $key;
         $count_external = count($id_external);
       }
       elseif ($value->field_audit_type->value == 'supplier') {
-        $id_supplier[] = $key; 
+        $id_supplier[] = $key;
         $count_supplier = count($id_supplier);
       }
-      elseif ($value->field_audit_type->value == 'customer' && $value->field_customer_type->value == 'internal_assessment') {
-        $id_ia[] = $key; 
-        $count_ia = count($id_ia);
+      elseif ($value->field_audit_type->value == 'customer') {
+        $id_customer[] = $key;
+        $count_customer = count($id_customer);
       }
-      elseif ($value->field_audit_type->value == 'customer' && $value->field_customer_type->value == 'external_assessment') {
-        $id_ea[] = $key; 
-        $count_ea = count($id_ea);
+      elseif ($value->field_audit_type->value == 'customer line') {
+        $id_cl[] = $key;
+        $count_cl = count($id_cl);
       }
       else{
         $title_val = 'Systems Audit';
@@ -857,15 +864,24 @@ function aps_general_node_insert(Node $node) {
     if($node->field_audit_type->value == 'internal'){
       if($node->field_internal_audit_type->value == 'systems'){
         $val = $count_systems;
-        $title_val = 'IS'.$val.'-D-'.$audit_frequency;
+        $section = Node::load($node->field_sections->target_id);
+        if ($section) {
+          $title_val = 'IS'.$val.'-'.$section->getTitle();
+        }
       }
       elseif ($node->field_internal_audit_type->value == 'process') {
         $val = $count_process;
-        $title_val = 'IP'.$val.'-D-'.$audit_frequency;
+        $process = Node::load($node->field_list_of_process->target_id);
+        if ($process) {
+          $title_val = 'IP'.$val.'-'.$process->getTitle();
+        }
       }
       elseif ($node->field_internal_audit_type->value == 'product') {
         $val = $count_product;
-        $title_val = 'IPR'.$val.'-D-'.$audit_frequency;
+        $product = Node::load($node->field_list_of_product->target_id);
+        if ($product) {
+          $title_val = 'IPR'.$val.'-'.$product->getTitle();
+        }
       }
       else{
         $title_val = 'Systems Audit';
@@ -873,20 +889,45 @@ function aps_general_node_insert(Node $node) {
     }
     elseif ($node->field_audit_type->value == 'external') {
       $val = $count_external;
-      $title_val = 'EA'.$val.'-E-'.$audit_frequency;
+      $title_val = 'E'.$val;
+      if ($node->field_auditing_body->value) {
+        $title_val .= '-'.$node->field_standard->value;
+      }
+      if ($node->field_standard->value) {
+        $title_val .= '-'.$node->field_standard->value;
+      }
     }
     elseif ($node->field_audit_type->value == 'supplier') {
       $val = $count_supplier;
-      $title_val = 'S'.$val.'-S-'.$audit_frequency;
+      $supplier = Node::load($node->field_supplier_name_list->target_id);
+      if ($supplier) {
+        $title_val = 'S'.$val.'-'.$supplier->getTitle().'-'.$node->field_audit_type->value;
+      }
     }
     elseif ($node->field_audit_type->value == 'customer') {
-      if($node->field_customer_type->value == 'internal_assessment'){
-        $val = $count_ia;
-        $title_val = 'ICA'.$val.'-C-IA-'.$audit_frequency;
+      $val = $count_customer;
+      $customer_name = Node::load($node->field_customer_list->target_id);
+      if ($customer_name) {
+        $title_val = 'C'.$val.'-'.$customer_name->getTitle().'-'.$node->field_audit_type_list->value;
       }
-      elseif ($node->field_customer_type->value == 'external_assessment') {
-        $val = $count_ea;
-        $title_val = 'ECA'.$val.'-C-EA-'.$audit_frequency;
+      // if($node->field_customer_type->value == 'internal_assessment'){
+      //   $val = $count_ia;
+      //   $title_val = 'ICA'.$val.'-C-IA-'.$audit_frequency;
+      // }
+      // elseif ($node->field_customer_type->value == 'external_assessment') {
+      //   $val = $count_ea;
+      //   $title_val = 'ECA'.$val.'-C-EA-'.$audit_frequency;
+      // }
+    }
+    elseif ($node->field_audit_type->value == 'customer line') {
+      $val = $count_cl;
+      $customer_name = Node::load($node->field_customer_list->target_id);
+      if ($customer_name) {
+        $title_val = 'CL'.$val.'-'.$customer_name->getTitle();
+      }
+      $process = Node::load($node->field_list_of_process->target_id);
+      if ($process) {
+        $title_val .= '-'.$process->getTitle();
       }
     }
     else{
@@ -1233,7 +1274,7 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     unset($data['tabs'][0]['devel.entities:audit_criteria.devel_tab']);
     unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_canonical_tab']);
     unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_edit_tab']);
-    unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_delete_tab']); 
+    unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_delete_tab']);
   }
   elseif($route_name == 'entity.audit_criteria.edit_form' || $route_name == 'entity.audit_criteria_external.edit_form' || $route_name == 'entity.audit_criteria_customer.edit_form' || $route_name == 'entity.audit_criteria_supplier.edit_form' || $route_name == 'entity.audit_criteria_score.edit_form' || $route_name == 'entity.audit_cycle.edit_form'){
     if($uri[0] == 'audit_criteria'){
@@ -1380,10 +1421,10 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     }
     elseif (stripos(strtolower($uri[2]), 'procedures?') !== false) {
       unset($data['tabs'][0]['aps_general.manual']);
-      unset($data['tabs'][0]['aps_general.manual_product']);  
-      unset($data['tabs'][0]['aps_general.clauses']); 
-      unset($data['tabs'][0]['aps_pre_audit.manuals:audit_list']); 
-      unset($data['tabs'][0]['aps_pre_audit.manuals:systems']); 
+      unset($data['tabs'][0]['aps_general.manual_product']);
+      unset($data['tabs'][0]['aps_general.clauses']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:audit_list']);
+      unset($data['tabs'][0]['aps_pre_audit.manuals:systems']);
       unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
       unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
       unset($data['tabs'][0]['aps_audit_criteria.audit_list']);
