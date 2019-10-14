@@ -1,9 +1,11 @@
 .document-records-wrapper {
   #block-audit-tool-mainpagecontent {
-    float: left;
-    background: none;
-    padding: 0px;
-    width: 100%;
+    .view-content{
+      float: left;
+      background: $white;
+      padding: 0;
+      width: 100%;
+    }
     .table-responsive {
       padding: 0px;
 
