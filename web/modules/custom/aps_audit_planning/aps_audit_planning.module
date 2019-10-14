@@ -419,6 +419,12 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
      $form['title']['#autocomplete_route_name'] = 'aps_audit_planning.title_list';
   }
   if($form_id == 'node_procedures_form'){
+    if($id = \Drupal::request()->query->get('id')){
+      $node_object = Node::load($id);
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
+    }
+    $form['title']['#type'] = 'hidden';
+    $form['title']['widget'][0]['value']['#default_value'] = 'Document';
     $form['field_section_type']['#attributes'] = ['id' => ['sections']];
     $form['field_department']['#attributes'] = ['id' => ['department']];
     $form['field_business_process']['widget']['#ajax'] = [

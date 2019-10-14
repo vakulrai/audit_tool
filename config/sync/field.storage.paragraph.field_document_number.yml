@@ -1,16 +1,17 @@
-uuid: 49fd537d-36a3-4741-82b8-b2de3786cacc
+uuid: 68287454-b570-4c0f-aa7f-b7cb1212388a
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
-id: paragraph.field_number
-field_name: field_number
+id: paragraph.field_document_number
+field_name: field_document_number
 entity_type: paragraph
-type: integer
+type: string
 settings:
-  unsigned: false
-  size: normal
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
 module: core
 locked: false
 cardinality: 1

@@ -1,0 +1,39 @@
+uuid: cd03c610-2138-43c4-bc6b-de673e859d4d
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.add-document
+  module:
+    - system
+    - user
+  theme:
+    - audit_tool
+id: adddocument
+theme: audit_tool
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'system_menu_block:add-document'
+settings:
+  id: 'system_menu_block:add-document'
+  label: 'Add Document'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  request_path:
+    id: request_path
+    pages: '/procedure-listing/*'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+      group_mr: group_mr
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

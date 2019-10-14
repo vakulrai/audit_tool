@@ -155,6 +155,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   }
   //Condition for Procedure Add form
   if($form_id == 'node_procedures_form'){
+    unset($form['field_create_procedure']['widget'][0]['top']['paragraph_type_title']['info']['#markup']);
     if($id = \Drupal::request()->query->get('unit_reference')){
       $node_object = Node::load($id);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
@@ -184,6 +185,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
   }
   elseif ($form_id == 'node_procedures_edit_form') {
+    unset($form['field_create_procedure']['widget'][0]['top']['paragraph_type_title']['info']['#markup']);
     $form['field_refere']['#access'] = FALSE;
   }
   
@@ -1266,9 +1268,7 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     unset($data['tabs'][0]['user.pass']);
   }
   if(strpos($current_uri, 'node/add/procedures?') !== FALSE) {
-    unset($data['tabs'][0]['aps_pre_audit.manuals:csv_operations']);
-    unset($data['tabs'][0]['aps_pre_audit.manuals:customer_listing']);
-    unset($data['tabs'][0]['aps_pre_audit.manuals:add_customer']);
+    unset($data['tabs'][0]);
   }
   
   //Tabs alter for Audit criteria.
@@ -1320,7 +1320,9 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_edit_tab']);
     unset($data['tabs'][0]['eck.entity_content:audit_criteria.eck_delete_tab']);
   }
-  
+  if ($route_name == 'view.procedure_listing.procedures_listing') {
+    unset($data['tabs'][0]);
+  }
   //Tabs alter for content types.
   if(isset($uri[2])){
     if (stripos(strtolower($uri[2]), 'external_audit_?') !== false) {
@@ -1612,6 +1614,8 @@ function aps_general_preprocess_breadcrumb(&$variables) {
     unset($variables['breadcrumb'][2]['url']);
     $variables['breadcrumb'][1]['text'] = 'Registration';
     $variables['breadcrumb'][2]['text'] = \Drupal::routeMatch()->getParameters()->get('node_type')->get('name');
+    if($nid_type == 'procedures') {
+    }
   }
   elseif(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form'){
     unset($variables['breadcrumb'][1]['url']);
@@ -1750,7 +1754,8 @@ function aps_general_link_alter(&$variables) {
   if ($cleanLinkText == 'Organisation') {
     $id = $uri[1];
     if($id){
-      $variables['url']->setRouteParameter('unit_reference', $id);
+      $url = Url::fromRoute('view.procedure_listing.procedures_listing',['arg_0' => $id]);
+      $variables['url'] = $url;
     }
   }
 
@@ -2176,6 +2181,13 @@ function aps_general_link_alter(&$variables) {
       $variables['url']->setRouteParameter('unit_ref', $id);
     }
   }
+  if ($cleanLinkText == 'Add Document') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('id', $id);
+      $variables['url']->setRouteParameter('unit_reference', $id);
+    }
+  }
   if ($cleanLinkText == 'Add Process') {
     $id = $uri[1];
     if($id){
@@ -2421,7 +2433,7 @@ function aps_group_mr_redirect(array $form, \Drupal\Core\Form\FormStateInterface
  */
 function aps_general_procedures_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
   $unit_reference = \Drupal::request()->query->get('unit_reference');
-  $response = Url::fromUserInput('/procedure-listing?unit_reference='.$unit_reference);
+  $response = Url::fromUserInput('/procedure-listing/'.$unit_reference.'?unit_reference='.$unit_reference);
   $form_state->setRedirectUrl($response);
 }
 

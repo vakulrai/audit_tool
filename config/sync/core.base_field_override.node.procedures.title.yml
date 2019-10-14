@@ -1,0 +1,18 @@
+uuid: a7a0ff88-1798-4bba-ace8-c0d74c1306a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.procedures
+id: node.procedures.title
+field_name: title
+entity_type: node
+bundle: procedures
+label: 'Document Name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

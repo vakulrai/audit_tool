@@ -1,11 +1,10 @@
-uuid: 1ab413be-3665-4546-a27f-3a2050b72fe6
+uuid: 390ebdcf-4cdf-4c6c-8a67-3af2c48497cd
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_issue_number
     - paragraphs.paragraphs_type.procedures
-    - taxonomy.vocabulary.issue_number
 id: paragraph.procedures.field_issue_number
 field_name: field_issue_number
 entity_type: paragraph
@@ -16,14 +15,5 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:
-  handler: 'default:taxonomy_term'
-  handler_settings:
-    target_bundles:
-      issue_number: issue_number
-    sort:
-      field: name
-      direction: asc
-    auto_create: false
-    auto_create_bundle: ''
-field_type: entity_reference
+settings: {  }
+field_type: string

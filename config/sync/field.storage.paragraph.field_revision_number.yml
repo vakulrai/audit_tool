@@ -1,16 +1,17 @@
-uuid: 64727c28-b3f3-406c-8eef-c448f0eadc78
+uuid: c345c001-a364-4dea-ae44-6024ad93f398
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
-    - taxonomy
 id: paragraph.field_revision_number
 field_name: field_revision_number
 entity_type: paragraph
-type: entity_reference
+type: string
 settings:
-  target_type: taxonomy_term
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
 module: core
 locked: false
 cardinality: 1

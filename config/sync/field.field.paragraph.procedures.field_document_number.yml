@@ -1,23 +1,19 @@
-uuid: 4c4c28a8-bbb2-4771-bbae-f876f6bb870c
+uuid: 8a126c14-9a37-44ec-92ab-f14d01acbd43
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_s_no
+    - field.storage.paragraph.field_document_number
     - paragraphs.paragraphs_type.procedures
-id: paragraph.procedures.field_s_no
-field_name: field_s_no
+id: paragraph.procedures.field_document_number
+field_name: field_document_number
 entity_type: paragraph
 bundle: procedures
-label: 'S no.'
+label: 'Document Number'
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:
-  min: 0
-  max: null
-  prefix: ''
-  suffix: ''
-field_type: integer
+settings: {  }
+field_type: string

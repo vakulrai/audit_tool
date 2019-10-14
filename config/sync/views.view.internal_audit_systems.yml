@@ -15,7 +15,7 @@ dependencies:
     - field.storage.node.field_section_type
     - field.storage.node.field_service_product
     - field.storage.node.field_start_date
-    - field.storage.paragraph.field_number
+    - field.storage.paragraph.field_document_number
     - node.type.assembly
     - node.type.business_process
     - node.type.customers_manual
@@ -1187,10 +1187,10 @@ display:
     display_options:
       display_extenders: {  }
       fields:
-        field_number:
-          id: field_number
-          table: paragraph__field_number
-          field: field_number
+        field_document_number:
+          id: field_document_number
+          table: paragraph__field_document_number
+          field: field_document_number
           relationship: field_create_procedure
           group_type: group
           admin_label: ''
@@ -1236,10 +1236,9 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: number_integer
+          type: string
           settings:
-            thousand_separator: ''
-            prefix_suffix: true
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1314,15 +1313,6 @@ display:
         groups:
           1: AND
       relationships:
-        field_create_procedure:
-          id: field_create_procedure
-          table: node__field_create_procedure
-          field: field_create_procedure
-          relationship: none
-          group_type: group
-          admin_label: 'field_create_procedure: Paragraph'
-          required: false
-          plugin_id: standard
         field_refere:
           id: field_refere
           table: node__field_refere
@@ -1332,11 +1322,20 @@ display:
           admin_label: 'field_refere: Content'
           required: false
           plugin_id: standard
+        field_create_procedure:
+          id: field_create_procedure
+          table: node__field_create_procedure
+          field: field_create_procedure
+          relationship: none
+          group_type: group
+          admin_label: 'field_create_procedure: Paragraph'
+          required: false
+          plugin_id: standard
       style:
         type: entity_reference
         options:
           search_fields:
-            field_number: field_number
+            field_document_number: field_document_number
       display_description: ''
       arguments:
         nid:
@@ -1387,7 +1386,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.paragraph.field_number'
+        - 'config:field.storage.paragraph.field_document_number'
   entity_reference_5:
     display_plugin: entity_reference
     id: entity_reference_5
