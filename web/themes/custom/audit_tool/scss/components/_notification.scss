@@ -1,9 +1,11 @@
 .notification-wrapper {
   #block-audit-tool-mainpagecontent {
+    .view-content{
       float: left;
       background: $white;
-      padding: 0px 0 15px;
+      padding: 0;
       width: 100%;
+    }
       .table-responsive {
         padding: 0px;
         margin-bottom: 30px;
@@ -45,7 +47,6 @@
       }
       .pagination {
         margin-bottom: 0px;
-        margin-left: 15px;
       }
     }
 }

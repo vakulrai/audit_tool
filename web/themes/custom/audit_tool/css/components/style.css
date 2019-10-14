@@ -428,7 +428,7 @@ legend,
   font-size: 12px;
 }
 
-#block-audit-tool-mainpagecontent .content form {
+#block-audit-tool-mainpagecontent {
   background: #ffffff 0 0 no-repeat padding-box;
   border: 1px solid #F2F4F6;
   border-radius: 4px;
@@ -490,7 +490,7 @@ legend,
   display: none;
 }
 
-#edit-delete, #edit-cancel {
+#edit-delete {
   margin: 0 10px;
   background: #8B90FA;
   color: #ffffff;
@@ -498,7 +498,7 @@ legend,
   display: inline-block;
   padding: 7px 20px;
 }
-#edit-delete:hover, #edit-cancel:hover {
+#edit-delete:hover {
   text-decoration: none;
   background: #676deb;
 }
@@ -611,29 +611,6 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 .radio .js-form-type-radio input {
   margin-top: 0px;
-}
-
-.pagination-region {
-  margin-top: 56px;
-  width: 100%;
-  float: left;
-}
-.pagination-region .pagination li {
-  border: 1px solid #D6DADF;
-  border-radius: 4px;
-}
-.pagination-region .pagination li a {
-  color: #9BA6B3;
-}
-.pagination-region .pagination li:first-child .page-link, .pagination-region .pagination li:last-child .page-link {
-  background: #5D62E6 0% 0% no-repeat padding-box;
-  border-radius: 4px;
-  color: #ffffff;
-}
-.pagination-region .pagination li.active .page-link {
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  border: 1px solid #5D62E6;
-  color: #5D62E6;
 }
 
 .node-unit-edit-form .field-group-fieldset {
@@ -1244,10 +1221,10 @@ table#field-location-values tbody tr td div .form-check-input {
   background-color: #5D62E6;
   background-image: url(/themes/custom/audit_tool/images/plus-icon-color.png);
 }
-.add-content-listing #block-audit-tool-mainpagecontent .view-content {
+.add-content-listing #block-audit-tool-mainpagecontent {
   float: left;
-  background: #ffffff;
-  padding: 0;
+  background: none;
+  padding: 0px;
   width: 100%;
 }
 .add-content-listing #block-audit-tool-mainpagecontent .table-responsive {
@@ -2227,7 +2204,6 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 
 .sidebar #block-audit-tool-manageexternalaudit.block, .sidebar #block-audit-tool-auditplanningsubmenuformr.block,
-.sidebar #block-audit-tool-gotounitdetailpage,
 .sidebar #block-addbusinessprocess.block, .sidebar #block-adddepartment, .sidebar #block-addsections,
 .sidebar #block-audit-tool-auditplanningsubmenuforauditor, .sidebar #block-auiditcriteriamenu, .sidebar #block-audit-tool-preaudit {
   padding: 0;
@@ -2235,14 +2211,12 @@ table#field-location-values tbody tr td div .form-check-input {
   margin: 0;
 }
 .sidebar #block-audit-tool-manageexternalaudit.block ul li, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li,
-.sidebar #block-audit-tool-gotounitdetailpage ul li,
 .sidebar #block-addbusinessprocess.block ul li, .sidebar #block-adddepartment ul li, .sidebar #block-addsections ul li,
 .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li, .sidebar #block-auiditcriteriamenu ul li, .sidebar #block-audit-tool-preaudit ul li {
   background: #f8f9fa;
   width: 100%;
 }
 .sidebar #block-audit-tool-manageexternalaudit.block ul li a, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a,
-.sidebar #block-audit-tool-gotounitdetailpage ul li a,
 .sidebar #block-addbusinessprocess.block ul li a, .sidebar #block-adddepartment ul li a, .sidebar #block-addsections ul li a,
 .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li a, .sidebar #block-auiditcriteriamenu ul li a, .sidebar #block-audit-tool-preaudit ul li a {
   color: #7E8E9D;
@@ -2252,14 +2226,12 @@ table#field-location-values tbody tr td div .form-check-input {
   text-transform: uppercase;
 }
 .sidebar #block-audit-tool-manageexternalaudit.block ul li a:hover, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a:hover,
-.sidebar #block-audit-tool-gotounitdetailpage ul li a:hover,
 .sidebar #block-addbusinessprocess.block ul li a:hover, .sidebar #block-adddepartment ul li a:hover, .sidebar #block-addsections ul li a:hover,
 .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li a:hover, .sidebar #block-auiditcriteriamenu ul li a:hover, .sidebar #block-audit-tool-preaudit ul li a:hover {
   text-decoration: none;
   color: #7E8E9D;
 }
 .sidebar #block-audit-tool-manageexternalaudit.block ul.nav, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul.nav,
-.sidebar #block-audit-tool-gotounitdetailpage ul.nav,
 .sidebar #block-addbusinessprocess.block ul.nav, .sidebar #block-adddepartment ul.nav, .sidebar #block-addsections ul.nav,
 .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul.nav, .sidebar #block-auiditcriteriamenu ul.nav, .sidebar #block-audit-tool-preaudit ul.nav {
   margin: 0px;
@@ -2340,10 +2312,10 @@ table#field-location-values tbody tr td div .form-check-input {
   margin-left: 0px;
 }
 
-.document-records-wrapper #block-audit-tool-mainpagecontent .view-content {
+.document-records-wrapper #block-audit-tool-mainpagecontent {
   float: left;
-  background: #ffffff;
-  padding: 0;
+  background: none;
+  padding: 0px;
   width: 100%;
 }
 .document-records-wrapper #block-audit-tool-mainpagecontent .table-responsive {
@@ -2552,10 +2524,10 @@ table#field-location-values tbody tr td div .form-check-input {
   padding-left: 15px;
 }
 
-.notification-wrapper #block-audit-tool-mainpagecontent .view-content {
+.notification-wrapper #block-audit-tool-mainpagecontent {
   float: left;
   background: #ffffff;
-  padding: 0;
+  padding: 0px 0 15px;
   width: 100%;
 }
 .notification-wrapper #block-audit-tool-mainpagecontent .table-responsive {
@@ -2595,6 +2567,7 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 .notification-wrapper #block-audit-tool-mainpagecontent .pagination {
   margin-bottom: 0px;
+  margin-left: 15px;
 }
 
 .node-planned-events-edit-form {
@@ -2695,10 +2668,10 @@ table#field-location-values tbody tr td div .form-check-input {
   margin-left: 6px;
 }
 
-.business-process-wrapper #block-audit-tool-mainpagecontent .view-content {
+.business-process-wrapper #block-audit-tool-mainpagecontent {
   float: left;
   background: #ffffff;
-  padding: 0;
+  padding: 0px 0 0px;
   width: 100%;
 }
 .business-process-wrapper #block-audit-tool-mainpagecontent .table-responsive {
@@ -2737,6 +2710,7 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 .business-process-wrapper #block-audit-tool-mainpagecontent .pagination {
   margin-bottom: 0px;
+  margin-left: 15px;
 }
 
 .audit-business-process .node-business-process-form .table-responsive .paragraphs-subform .field--type-string {
@@ -2855,22 +2829,10 @@ table#field-location-values tbody tr td div .form-check-input {
   width: 100%;
 }
 
-#edit-field-business-process-effective-wrapper {
-  clear: both;
-}
-
-[id^=field-business-process-efficienc-add-more-wrapper--] .js-form-item {
-  float: none;
-}
-
-[id^=field-business-process-effective-add-more-wrapper] .js-form-item {
-  float: none;
-}
-
-.department-listing-wrapper #block-audit-tool-mainpagecontent .view-content {
+.department-listing-wrapper #block-audit-tool-mainpagecontent {
   float: left;
   background: #ffffff;
-  padding: 0;
+  padding: 0px 0 0px;
   width: 100%;
 }
 .department-listing-wrapper #block-audit-tool-mainpagecontent .table-responsive {
@@ -2909,6 +2871,7 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 .department-listing-wrapper #block-audit-tool-mainpagecontent .pagination {
   margin-bottom: 0px;
+  margin-left: 15px;
 }
 
 .add-section-wrapper .node-section-form #edit-field-select-department-type-wrapper {
@@ -2918,7 +2881,7 @@ table#field-location-values tbody tr td div .form-check-input {
   margin-top: 5px;
 }
 
-.action-listing-wrapper #block-audit-tool-mainpagecontent .view-content {
+.action-listing-wrapper #block-audit-tool-mainpagecontent {
   float: left;
   background: #ffffff;
   padding: 0;
@@ -2960,6 +2923,7 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 .action-listing-wrapper #block-audit-tool-mainpagecontent .pagination {
   margin-bottom: 0px;
+  margin-left: 15px;
 }
 
 .audit-business-process .node-business-process-form .table-responsive .paragraphs-subform .field--type-string {
@@ -3042,9 +3006,9 @@ table#field-location-values tbody tr td div .form-check-input {
   padding: 0px;
 }
 
-.user-listing-all-wrapper #block-audit-tool-mainpagecontent .view-content {
+.user-listing-all-wrapper #block-audit-tool-mainpagecontent {
   float: left;
-  background: #ffffff;
+  background: none;
   padding: 0;
   width: 100%;
 }
@@ -3696,10 +3660,10 @@ table#field-location-values tbody tr td div .form-check-input {
   margin-left: 0px;
 }
 
-.user-scolre-wrapper #block-audit-tool-mainpagecontent .view-content {
+.user-scolre-wrapper #block-audit-tool-mainpagecontent {
   float: left;
-  background: #ffffff;
-  padding: 0;
+  background: none;
+  padding: 0px;
   width: 100%;
 }
 .user-scolre-wrapper #block-audit-tool-mainpagecontent .table-responsive {
@@ -3784,6 +3748,7 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 .planned-audit-listing-details #block-audit-tool-views-block-planned-audit-listing-audit-details .pagination {
   margin-bottom: 0px;
+  margin-left: 15px;
 }
 
 #block-audit-tool-preauditblock {

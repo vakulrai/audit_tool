@@ -1,9 +1,11 @@
 .business-process-wrapper {
   #block-audit-tool-mainpagecontent {
+    .view-content{
       float: left;
       background: $white;
-      padding: 0px 0 0px;
+      padding: 0;
       width: 100%;
+    }
       .table-responsive {
         padding: 0px;
         background: #fff;
@@ -44,7 +46,6 @@
       }
       .pagination {
         margin-bottom: 0px;
-        margin-left: 15px;
       }
     }
 }
@@ -190,4 +191,20 @@
   float: left;
   width: 100%;
 }
+}
+
+// Busniess Add more wrapper css
+#edit-field-business-process-effective-wrapper{
+  clear: both;
+}
+[id^=field-business-process-efficienc-add-more-wrapper--]{
+  .js-form-item{
+    float: none;
+  }
+}
+
+[id^=field-business-process-effective-add-more-wrapper]{
+  .js-form-item{
+    float: none;
+  }
 }

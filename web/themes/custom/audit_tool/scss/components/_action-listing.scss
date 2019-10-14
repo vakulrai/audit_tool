@@ -1,9 +1,11 @@
 .action-listing-wrapper {
   #block-audit-tool-mainpagecontent {
+    .view-content{
       float: left;
       background: $white;
       padding: 0;
       width: 100%;
+    }
       .table-responsive {
         padding: 0px;
         background: #fff;
@@ -44,7 +46,6 @@
       }
       .pagination {
         margin-bottom: 0px;
-        margin-left: 15px;
       }
     }
 }
