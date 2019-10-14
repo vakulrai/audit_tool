@@ -16,7 +16,7 @@ provider: null
 plugin: pre_audit_block
 settings:
   id: pre_audit_block
-  label: 'PRE AUDIT'
+  label: 'PRE AUDIT DETAILS'
   provider: aps_pre_audit
   label_display: '0'
 visibility:

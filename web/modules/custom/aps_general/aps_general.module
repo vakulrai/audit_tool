@@ -128,25 +128,29 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     if($user_role == 'mr_admin'){
       $form['field_deputy_mr']['#access'] = FALSE;
     }
+    $form['field_time_g']['widget'][0]['value']['#title'] = t('Start Time (e.g. 08:30:20 AM)');
+    $form['field_time_g']['widget'][0]['end_value']['#title'] = t('Start Time (e.g. 08:30:20 PM)');
     $form['field_time_g']['widget'][0]['value']['#attributes']['title'] = 'Time (e.g. 08:30:20 AM)';
     $form['field_time_g']['widget'][0]['end_value']['#attributes']['title'] = 'Time (e.g. 08:30:20 PM)';
+
+    $form['field_time_s1']['widget'][0]['value']['#title'] = t('Start Time (e.g. 08:30:20 AM)');
+    $form['field_time_s1']['widget'][0]['end_value']['#title'] = t('Start Time (e.g. 08:30:20 PM)');
     $form['field_time_s1']['widget'][0]['value']['#attributes']['title'] = 'Time (e.g. 08:30:20 AM)';
     $form['field_time_s1']['widget'][0]['end_value']['#attributes']['title'] = 'Time (e.g. 08:30:20 PM)';
+
+    $form['field_time_s3']['widget'][0]['value']['#title'] = t('Start Time (e.g. 08:30:20 AM)');
+    $form['field_time_s3']['widget'][0]['end_value']['#title'] = t('Start Time (e.g. 08:30:20 PM)');
     $form['field_time_s3']['widget'][0]['value']['#attributes']['title'] = 'Time (e.g. 08:30:20 AM)';
     $form['field_time_s3']['widget'][0]['end_value']['#attributes']['title'] = 'Time (e.g. 08:30:20 PM)';
+
+    $form['field_time_s4']['widget'][0]['value']['#title'] = t('Start Time (e.g. 08:30:20 AM)');
+    $form['field_time_s4']['widget'][0]['end_value']['#title'] = t('Start Time (e.g. 08:30:20 PM)');
     $form['field_time_s4']['widget'][0]['value']['#attributes']['title'] = 'Time (e.g. 08:30:20 AM)';
     $form['field_time_s4']['widget'][0]['end_value']['#attributes']['title'] = 'Time (e.g. 08:30:20 PM)';
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'aps_general_unit_edit_page_redirect';
       }
-    }
-  }
-  if($form_id == 'node_process_form'){
-    if($id = \Drupal::request()->query->get('unit_ref')){
-      $node_object = Node::load($id);
-      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
-      $form['field_refere']['#access'] = FALSE;
     }
   }
   //Condition for Procedure Add form
@@ -210,9 +214,9 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   elseif ($form_id == 'node_business_process_edit_form') {//Edit form
     $form['field_refere']['#access'] = FALSE;
   }
-
   //Condition for Department Add form
   if($form_id == 'node_department_form'){
+    $form['title']['widget'][0]['value']['#title'] = t('Department Name');
     $form['field_refere']['#access'] = FALSE;
     if($id = \Drupal::request()->query->get('id')){
       $node_object = Node::load($id);
@@ -235,11 +239,16 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     );
   }
   elseif ($form_id == 'node_department_edit_form') {//Edit form
+    $form['title']['widget'][0]['value']['#title'] = t('Section Name');
     $form['field_refere']['#access'] = FALSE;
   }
   //Condition for Section Add form
   if($form_id == 'node_process_form' || $form_id == 'node_process_edit_form'){
+    $form['title']['widget'][0]['value']['#title'] = t('Process Name');
     if($unit_ref= \Drupal::request()->query->get('id')){
+      $node_object = Node::load($unit_ref);
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
+      $form['field_refere']['#access'] = FALSE;
       $unit_ref_object = Node::load($unit_ref);
       $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
       foreach ($unit_refernced_shift as $key => $value) {
@@ -249,9 +258,15 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       }
       $form['field_shift']['widget']['#options'] = $selected_option;
     }
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'aps_process_page_redirect';
+      }
+    }
   }
   //Condition for Section Add form
   if($form_id == 'node_section_form'){
+    $form['title']['widget'][0]['value']['#title'] = t('Section Name');
     $form['field_refere']['#access'] = FALSE;
     if($unit_ref= \Drupal::request()->query->get('id')){
       $unit_ref_object = Node::load($unit_ref);
@@ -286,6 +301,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
   }
   elseif ($form_id == 'node_section_edit_form') {//Edit form
+    $form['title']['widget'][0]['#title'] = t('Section Name');
     unset($form['field_assembly']['widget']['#options']['_none']);
     $form['field_refere']['#access'] = FALSE;
     foreach (array_keys($form['actions']) as $action) {
@@ -1110,6 +1126,10 @@ function aps_general_preprocess_block(&$variables) {
       $variables['content']['#title'] = 'Edit User: ' . $variables['content']['#title']['#markup'];
     }
   }
+
+  if ($route_name == 'entity.node.edit_form' && 'page_title_block' == $variables['plugin_id'] && $variables['content']['#title']->getArguments()['@type'] == 'Planned Events') {
+    $variables['content']['#title'] = t('Reschedule Audit');
+  }
   if ($route_name == 'eck.entity.add' && 'page_title_block' == $variables['plugin_id'] && $variables['content']['#title']->getArguments()['%label'] == 'Parts') {
     $variables['content']['#title'] = t('Add Products');
   }
@@ -1628,6 +1648,11 @@ function aps_general_preprocess_breadcrumb(&$variables) {
   if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'department'){
     $variables['breadcrumb'][1] = ['text' => t('Department')];
     $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.department_listing',['arg_0' => $node_id->field_refere->target_id]);
+  }
+
+  if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $nid_id_type == 'planned_events'){
+    $variables['breadcrumb'][1] = ['text' => t('Planned Events')];
+    unset($variables['breadcrumb'][1]['url']);
   }
 
   if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'section'){
@@ -2155,7 +2180,7 @@ function aps_general_link_alter(&$variables) {
     $id = $uri[1];
     if($id){
       $variables['url']->setRouteParameter('id', $id);
-      $variables['url']->setRouteParameter('unit_ref', $id);
+      $variables['url']->setRouteParameter('unit_reference', $id);
     }
   }
   if ($cleanLinkText == 'Add Supplier') {
@@ -2284,6 +2309,15 @@ function add_section(array $form, \Drupal\Core\Form\FormStateInterface $form_sta
   $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
   $id = \Drupal::request()->query->get('id');
   $response = Url::fromRoute('node.add',['node_type' => 'department', 'id' => $id]);
+  $form_state->setRedirectUrl($response);
+}
+
+/**
+ * Callback method after department form submits.
+ */
+function aps_process_page_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $unit_ref = \Drupal::request()->query->get('id');
+  $response = Url::fromRoute('view.registered_unit_listing.process_list',['arg_0' => $unit_ref]);
   $form_state->setRedirectUrl($response);
 }
 

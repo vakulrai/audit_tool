@@ -453,6 +453,9 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     // $form['field_auditor']['widget']['#options'] = getAuditorList($key_to_check, 'auditor');
     // $form['field_select_auditee']['widget']['#options'] = getAuditorList($key_to_check, 'auditee');
     // $form['field_other_users']['widget']['#options'] = getAuditorList($key_to_check, 'auditee-others');
+    if ($user_role != 'mr_admin' && $user_role != 'administrator') {
+      $form['title']['#disabled'] = TRUE;
+    }
     if($user_role == 'mr_admin'){
       // $form['field_select_auditee']['#disabled'] = TRUE;
       // $form['field_auditor']['#disabled'] = TRUE;

@@ -9,7 +9,7 @@ id: node.business_process.field_name
 field_name: field_name
 entity_type: node
 bundle: business_process
-label: Name
+label: 'Business Process Name'
 description: ''
 required: false
 translatable: false

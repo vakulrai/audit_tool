@@ -9,7 +9,7 @@ id: node.unit.field_total_members
 field_name: field_total_members
 entity_type: node
 bundle: unit
-label: 'Total Members'
+label: 'Total Employees in the Unit'
 description: ''
 required: false
 translatable: false
