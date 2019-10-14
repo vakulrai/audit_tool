@@ -665,7 +665,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     //     'select[name="field_type"]' => ['value' => 'service'],
     //   ],
     // ];
-    $form['field_refere']['#access'] = FALSE;
+    // $form['field_refere']['#access'] = FALSE;
   }
   if($form_id == 'holidays_holidays_form'){
     $form['field_unit_reference']['#access'] = FALSE;
@@ -2095,6 +2095,14 @@ function aps_general_link_alter(&$variables) {
       $variables['url'] = $url;
     }
   }
+  if ($cleanLinkText == 'Suppliers') {
+    $id = $uri[1];
+    if($id){
+      $url = Url::fromRoute('view.supplier_listing.page_1',['arg_0' => $id]);
+      unset($variables['url']);
+      $variables['url'] = $url;
+    }
+  }
   if ($cleanLinkText == 'Add Section') {
     $id = $uri[1];
     if($id){
@@ -2107,6 +2115,13 @@ function aps_general_link_alter(&$variables) {
     if($id){
       $variables['url']->setRouteParameter('id', $id);
       $variables['url']->setRouteParameter('unit_ref', $id);
+    }
+  }
+  if ($cleanLinkText == 'Add Supplier') {
+    $id = $uri[1];
+    if($id){
+      $variables['url']->setRouteParameter('id', $id);
+      $variables['url']->setRouteParameter('unit_reference', $id);
     }
   }
 

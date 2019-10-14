@@ -1,0 +1,8 @@
+uuid: b8718739-557b-46f3-b8d2-a20231a8f91d
+langcode: en
+status: true
+dependencies: {  }
+id: add-supplier
+label: 'Add Supplier'
+description: ''
+locked: false
