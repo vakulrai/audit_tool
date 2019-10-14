@@ -82,15 +82,17 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       pager:
-        type: mini
+        type: full
         options:
-          items_per_page: 20
+          items_per_page: 10
           offset: 0
           id: 0
           total_pages: null
           tags:
             previous: Prev
             next: Next
+            first: '« First'
+            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -99,6 +101,7 @@ display:
             items_per_page_options_all_label: ' All '
             offset: false
             offset_label: Offset
+          quantity: 9
       style:
         type: table
         options:
@@ -4567,7 +4570,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          operator: '='
+          operator: contains
           value: ''
           group: 1
           exposed: true
@@ -4584,12 +4587,15 @@ display:
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              qa_staff_member: '0'
+              qa_top_contributor: '0'
               executive: '0'
               auditor: '0'
               auditee: '0'
               mr_admin: '0'
+              group_mr: '0'
             placeholder: ''
-            autocomplete_filter: 1
+            autocomplete_filter: 0
             autocomplete_min_chars: '0'
             autocomplete_items: '10'
             autocomplete_field: title
@@ -5389,7 +5395,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Auditor
+          label: 'Auditor Name'
           exclude: false
           alter:
             alter_text: false
@@ -5452,7 +5458,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Select Auditee'
+          label: 'Auditee Name'
           exclude: false
           alter:
             alter_text: false
@@ -5826,7 +5832,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          operator: '='
+          operator: contains
           value: ''
           group: 1
           exposed: true
@@ -5843,16 +5849,20 @@ display:
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              qa_staff_member: '0'
+              qa_top_contributor: '0'
               executive: '0'
               auditor: '0'
               auditee: '0'
+              mr_admin: '0'
+              group_mr: '0'
             placeholder: ''
-            autocomplete_filter: 1
+            autocomplete_filter: 0
             autocomplete_min_chars: '0'
             autocomplete_items: '10'
             autocomplete_field: title
-            autocomplete_raw_suggestion: 1
-            autocomplete_raw_dropdown: 1
+            autocomplete_raw_suggestion: 0
+            autocomplete_raw_dropdown: 0
             autocomplete_dependent: 0
           is_grouped: false
           group_info:
@@ -7347,7 +7357,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          operator: '='
+          operator: contains
           value: ''
           group: 1
           exposed: true
@@ -7364,10 +7374,13 @@ display:
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              qa_staff_member: '0'
+              qa_top_contributor: '0'
               executive: '0'
               auditor: '0'
               auditee: '0'
               mr_admin: '0'
+              group_mr: '0'
             placeholder: ''
             autocomplete_filter: 0
             autocomplete_min_chars: '0'

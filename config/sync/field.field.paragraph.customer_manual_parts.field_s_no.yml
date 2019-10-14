@@ -9,7 +9,7 @@ id: paragraph.customer_manual_parts.field_s_no
 field_name: field_s_no
 entity_type: paragraph
 bundle: customer_manual_parts
-label: 'Product Number'
+label: 'Part Number'
 description: ''
 required: false
 translatable: true

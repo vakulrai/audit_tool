@@ -128,6 +128,14 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     if($user_role == 'mr_admin'){
       $form['field_deputy_mr']['#access'] = FALSE;
     }
+    $form['field_time_g']['widget'][0]['value']['#attributes']['title'] = 'Time (e.g. 08:30:20 AM)';
+    $form['field_time_g']['widget'][0]['end_value']['#attributes']['title'] = 'Time (e.g. 08:30:20 PM)';
+    $form['field_time_s1']['widget'][0]['value']['#attributes']['title'] = 'Time (e.g. 08:30:20 AM)';
+    $form['field_time_s1']['widget'][0]['end_value']['#attributes']['title'] = 'Time (e.g. 08:30:20 PM)';
+    $form['field_time_s3']['widget'][0]['value']['#attributes']['title'] = 'Time (e.g. 08:30:20 AM)';
+    $form['field_time_s3']['widget'][0]['end_value']['#attributes']['title'] = 'Time (e.g. 08:30:20 PM)';
+    $form['field_time_s4']['widget'][0]['value']['#attributes']['title'] = 'Time (e.g. 08:30:20 AM)';
+    $form['field_time_s4']['widget'][0]['end_value']['#attributes']['title'] = 'Time (e.g. 08:30:20 PM)';
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'aps_general_unit_edit_page_redirect';
@@ -382,7 +390,6 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
   elseif ($form_id == 'node_manufacturing_process_edit_form') {//Edit form
     $form['field_refere']['#access'] = FALSE;
   }
-
   if($form_id == 'user_register_form'){
     $form['account']['notify']['#default_value'] = 1;
     $form['account']['notify']['#access'] = FALSE;
@@ -494,7 +501,8 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     }
   }
   elseif($form_id == 'user_form'){
-    $form['account']['roles']['#access'] = FALSE;
+    unset($form['account']['roles']['#options']['group_mr']);
+    unset($form['account']['roles']['#options']['mr_admin']);
     $form['field_unit']['#disabled'] = 1;
     $form['field_assigned']['#disabled'] = 1;
     $form['field_reference_id']['#disabled'] = 1;
@@ -1053,7 +1061,7 @@ function aps_general_preprocess_block(&$variables) {
   $route_name = \Drupal::routeMatch()->getRouteName();
   if ($route_name == 'user.admin_create') {
     if ('page_title_block' == $variables['plugin_id']) {
-      $variables['content']['#title'] = 'Create ' . $type;
+      $variables['content']['#title'] = 'Create ' . ucfirst($type);
     }
   }
   if ($route_name == 'entity.user.edit_form') {
@@ -1061,7 +1069,11 @@ function aps_general_preprocess_block(&$variables) {
       $variables['content']['#title'] = 'Edit User: ' . $variables['content']['#title']['#markup'];
     }
   }
+  if ($route_name == 'eck.entity.add' && 'page_title_block' == $variables['plugin_id'] && $variables['content']['#title']->getArguments()['%label'] == 'Parts') {
+    $variables['content']['#title'] = t('Add Products');
+  }
 }
+
 /**
  * Implements  hook_preprocess_page().
  */
@@ -1193,7 +1205,9 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     unset($data['tabs'][0]['user.pass']);
   }
   if(strpos($current_uri, 'node/add/procedures?') !== FALSE) {
-    unset($data['tabs']);
+    unset($data['tabs'][0]['aps_pre_audit.manuals:csv_operations']);
+    unset($data['tabs'][0]['aps_pre_audit.manuals:customer_listing']);
+    unset($data['tabs'][0]['aps_pre_audit.manuals:add_customer']);
   }
   
   //Tabs alter for Audit criteria.
@@ -1508,7 +1522,6 @@ function aps_general_preprocess_breadcrumb(&$variables) {
     $nid_id_type = $node_id->bundle();
     $nid_id = $node_id->id();
   }
-  
   if(\Drupal::routeMatch()->getRouteName() == 'user.admin_create'){
     if(\Drupal::request()->query->get('type') == 'mr'){
       $variables['breadcrumb'][1]['text'] = t('Register Deputy MR');
@@ -1566,15 +1579,22 @@ function aps_general_preprocess_breadcrumb(&$variables) {
     $variables['breadcrumb'][1] = ['text' => t('Business Processes Listing')];
     $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.bp',['arg_0' => $node_id->field_refere->target_id]);
   }
+  if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'unit'){
+    $variables['breadcrumb'][1] = ['text' => t('Unit')];
+    unset($variables['breadcrumb'][1]['url']);
+  }
 
   if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'department'){
-    $variables['breadcrumb'][1] = ['text' => t('Department Listing')];
+    $variables['breadcrumb'][1] = ['text' => t('Department')];
     $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.department_listing',['arg_0' => $node_id->field_refere->target_id]);
   }
 
   if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'section'){
-    $variables['breadcrumb'][1] = ['text' => t('Section Listing')];
+    $variables['breadcrumb'][1] = ['text' => t('Section')];
     $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.section_list',['arg_0' => $node_id->field_refere->target_id]);
+  }
+  if(\Drupal::routeMatch()->getRouteName() == 'eck.entity.add'){
+    $variables['breadcrumb'][1]['text'] = t('Add Product');
   }
   
 }

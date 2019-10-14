@@ -45,7 +45,7 @@
           var month_range = 12 - nowDate.getMonth();
           startDate.setDate(nowDate.getMonth() - 11 + month_range); // One day in the past
           endDate.setMonth(nowDate.getMonth() + month_range); // one month into the future
-          return { start: startDate, end: endDate };
+          return { end: endDate };
         },
         eventSources: [
           base_url+'/generate-events/'+unit_id,

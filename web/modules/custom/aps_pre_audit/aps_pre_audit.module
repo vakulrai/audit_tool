@@ -108,9 +108,7 @@ function aps_pre_audit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
       // }
     }
   }
-  if($form['#id'] == 'views-exposed-form-planned-audit-listing-planned-audit' || $form['#id'] == 'views-exposed-form-planned-audit-listing-mr-page'|| $form['#id'] == 'views-exposed-form-planned-audit-listing-listing-auditee'){
-    $form['title']['#autocomplete_route_name'] = 'aps_pre_audit.title_list';
-  }
+
   if($form_id == 'node_pre_audit_records_form' || $form_id == 'node_pre_audit_records_edit_form'){
     $current_user = \Drupal::currentUser();
     $roles = $current_user->getRoles();
