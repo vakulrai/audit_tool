@@ -45,6 +45,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
+  // dump($form['field_list_of_process']);
 	if($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form'){
     $form['#prefix'] = '<div id="location-list">';
     $form['#suffix'] = '</div>';
@@ -70,6 +71,11 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_other_users']['#attributes'] = ['id' => ['auditee-other']];
     $form['field_select_from_others']['#attributes'] = ['id' => ['select-other']];
    // $form['field_location_customer']['#attributes'] = ['id' => ['location-list']];
+    $form['field_start_date']['widget'][0]['value']['#title'] = t('Start Time (e.g. 20/02/2019 08:30:20 AM)');
+    $form['field_start_date']['widget'][0]['value']['#attributes']['title'] = 'Time (e.g. 20/02/2019 08:30:20 AM)';
+    $form['field_end_date']['widget'][0]['value']['#title'] = t('Start Time (e.g. 20/02/2019 08:30:20 AM)');
+    $form['field_end_date']['widget'][0]['value']['#attributes']['title'] = 'Time (e.g. 20/02/2019 08:30:20 AM)';
+
     $get_department_options = getDepartmenttypeUnderunit('department', $id);
     $form['field_department']['widget']['#options'] = $get_department_options;
     $get_section_from_department = getsectionDropdownOptionsfromDept($key);
@@ -80,6 +86,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     else {
       $get_process_from_section = getProcessfromOptionfromsection($key);
     }
+    // dump($get_section_from_department);
     $form['field_list_of_process']['widget']['#options'] = $get_process_from_section;
     if(!empty($form_state->getValues())){
       $customer_array = $form_state->getValue('field_customer_list')[0];
@@ -342,8 +349,8 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       $form['field_end_date']['widget'][0]['value']['#default_value'] = $end_date_timestamp_object;
       $form['field_time']['widget'][0]['value']['#default_value'] = $start_date_timestamp_object;
       $form['field_time']['widget'][0]['end_value']['#default_value'] = $end_date_timestamp_object;
-      $form['title']['widget'][0]['value']['#default_value'] = $title;
-      $form['title']['#disabled'] = TRUE;
+      // $form['title']['widget'][0]['value']['#default_value'] = $title;
+      // $form['title']['#disabled'] = TRUE;
       
       //Alter the internal audit field
       //  $form['field_audit_type']['widget']['#ajax'] = [
@@ -1139,6 +1146,9 @@ function releaseAuditCallback(&$form, \Drupal\Core\Form\FormStateInterface &$for
 function save_user_data(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
   global $base_url;
   $form_values = $form_state->getValues();
+  // print_r(array_keys($form_values));
+  // print_r($form_values['field_list_of_process']);
+  // die();
   $id = \Drupal::request()->query->get('unit_reference');
   $node = \Drupal::routeMatch()->getParameter('node');
   $event_id = (int)$node->id();

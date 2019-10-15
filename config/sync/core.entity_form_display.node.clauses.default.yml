@@ -18,15 +18,7 @@ bundle: clauses
 mode: default
 content:
   field_clause_:
-    weight: 104
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_clause_title:
-    weight: 105
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -34,7 +26,7 @@ content:
     type: string_textfield
     region: content
   field_refere:
-    weight: 101
+    weight: 3
     settings:
       match_operator: CONTAINS
       size: 60
@@ -43,7 +35,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_standard_name:
-    weight: 102
+    weight: 4
     settings:
       size: 60
       placeholder: ''
@@ -51,7 +43,7 @@ content:
     type: string_textfield
     region: content
   field_standard_title:
-    weight: 103
+    weight: 5
     settings:
       size: 60
       placeholder: ''
@@ -60,7 +52,7 @@ content:
     region: content
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 2
     settings: {  }
     region: content
     third_party_settings: {  }
@@ -75,6 +67,7 @@ content:
 hidden:
   body: true
   created: true
+  field_clause_title: true
   path: true
   promote: true
   status: true

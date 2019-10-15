@@ -1665,10 +1665,10 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_clause_title:
-          id: field_clause_title
-          table: node__field_clause_title
-          field: field_clause_title
+        title:
+          id: title
+          table: node_field_data
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
@@ -1727,6 +1727,8 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          entity_type: node
+          entity_field: title
           plugin_id: field
     cache_metadata:
       max-age: -1
@@ -1738,6 +1740,5 @@ display:
         - 'user.node_grants:view'
       tags:
         - 'config:field.storage.node.field_clause_'
-        - 'config:field.storage.node.field_clause_title'
         - 'config:field.storage.node.field_standard_name'
         - 'config:field.storage.node.field_standard_title'

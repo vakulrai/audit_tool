@@ -67,12 +67,12 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       $type = 0;
     }
     if($user_role == 'auditor' || $user_role == 'mr_admin'){
-      $links['records'] = [
-        'title' => 'Records',
-        'route_name' => 'view.planned_audit_listing.document_list_records',
-        'base_route' => 'view.planned_audit_listing.document_list_ia',
-        'route_parameters' => ['unit_reference' => $id],
-      ] + $base_plugin_definition;
+      // $links['records'] = [
+      //   'title' => 'Records',
+      //   'route_name' => 'view.planned_audit_listing.document_list_records',
+      //   'base_route' => 'view.planned_audit_listing.document_list_ia',
+      //   'route_parameters' => ['unit_reference' => $id],
+      // ] + $base_plugin_definition;
 
       $links['manuals'] = [
         'title' => 'Manuals',
@@ -163,14 +163,14 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
     ] + $base_plugin_definition;
 
     $links['external_audit_detail_list'] = [
-      'title' => 'External Audit Details Listing',
+      'title' => 'External Audit Details',
       'route_name' => 'view.external_audit_listing.details',
       'base_route' => 'view.external_audit_listing.details',
       'route_parameters' => ['unit_reference' => $id],
     ] + $base_plugin_definition;
 
     $links['external_audit_standard_list'] = [
-      'title' => 'External Audit Standard Listing',
+      'title' => 'External Audit Standard',
       'route_name' => 'view.external_audit_listing.standards',
       'base_route' => 'view.external_audit_listing.standards',
       'route_parameters' => ['unit_reference' => $id],

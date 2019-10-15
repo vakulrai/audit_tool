@@ -679,6 +679,7 @@ function aps_general_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     $form['field_location']['widget']['add_more']['#value'] = new TranslatableMarkup("@type", array(
        '@type' => 'Add Locations',
     ));
+    $form['field_refere']['#access'] = FALSE;
     // $form['field_manufactured_products']['#states'] = [
     //   'visible' => [
     //     'select[name="field_type"]' => ['value' => 'manufactured'],
@@ -1278,7 +1279,7 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     $url = Url::fromRoute('view.external_audit_listing.standards');
     $url->setRouteParameter('unit_reference', \Drupal::request()->query->get('unit_reference'));
     $data['tabs'][0]['aps_pre_audit.manuals:external_audit_standard_list']['#link']['url'] = $url;
-    $data['tabs'][0]['aps_pre_audit.manuals:external_audit_standard_list']['#link']['title'] = 'External Audit Standard Listing';
+    $data['tabs'][0]['aps_pre_audit.manuals:external_audit_standard_list']['#link']['title'] = 'External Audit Standard';
     $data['tabs'][0]['aps_pre_audit.manuals:external_audit_detail_list']['#active'] = TRUE;
     ksort($data['tabs'][0]);
   }
@@ -1287,7 +1288,7 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
     $url = Url::fromRoute('view.external_audit_listing.details');
     $url->setRouteParameter('unit_reference', \Drupal::request()->query->get('unit_reference'));
     $data['tabs'][0]['aps_pre_audit.manuals:external_audit_detail_list']['#link']['url'] = $url;
-    $data['tabs'][0]['aps_pre_audit.manuals:external_audit_detail_list']['#link']['title'] = 'External Audit Details Listing';
+    $data['tabs'][0]['aps_pre_audit.manuals:external_audit_detail_list']['#link']['title'] = 'External Audit Details';
     $data['tabs'][0]['aps_pre_audit.manuals:external_audit_standard_list']['#active'] = TRUE;
     ksort($data['tabs'][0]);
   }
@@ -1652,8 +1653,7 @@ function aps_general_preprocess_breadcrumb(&$variables) {
     $variables['breadcrumb'][1] = ['text' => t('Unit')];
     unset($variables['breadcrumb'][1]['url']);
   }
-
-  if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'department'){
+  if((\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' || \Drupal::routeMatch()->getRouteName() == 'entity.node.delete_form') && $user_role == 'mr_admin' && $nid_id_type == 'department'){
     $variables['breadcrumb'][1] = ['text' => t('Department')];
     $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.department_listing',['arg_0' => $node_id->field_refere->target_id]);
   }
@@ -1667,6 +1667,15 @@ function aps_general_preprocess_breadcrumb(&$variables) {
     $variables['breadcrumb'][1] = ['text' => t('Section')];
     $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.section_list',['arg_0' => $node_id->field_refere->target_id]);
   }
+  if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'supplier'){
+    $variables['breadcrumb'][1] = ['text' => t('Supplier')];
+    $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.supplier_listing.page_1',['arg_0' => $node_id->field_refere->target_id]);
+  }
+  if(\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' && $user_role == 'mr_admin' && $nid_id_type == 'process'){
+    $variables['breadcrumb'][1] = ['text' => t('Process')];
+    $variables['breadcrumb'][1]['url'] =  Url::fromRoute('view.registered_unit_listing.process_list',['arg_0' => $node_id->field_refere->target_id]);
+  }
+
   if(\Drupal::routeMatch()->getRouteName() == 'eck.entity.add'){
     $variables['breadcrumb'][1]['text'] = t('Add Product');
   }
@@ -2017,6 +2026,8 @@ function aps_general_link_alter(&$variables) {
   if ($cleanLinkText == 'Role Registration') {
     $id = $uri[1];
     if($id){
+      $url =Url::fromUserInput('/user-listing-all/'.$id);
+      $variables['url'] = $url;
       $variables['url']->setRouteParameter('unit_reference', $id);
     }
   }

@@ -21,13 +21,12 @@ bundle: department
 mode: default
 content:
   field_department_head:
-    weight: 2
+    weight: 1
     settings:
-      match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: string_textfield
     region: content
   field_file:
     type: media_library_widget
@@ -52,7 +51,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_select_business_process:
-    weight: 1
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
