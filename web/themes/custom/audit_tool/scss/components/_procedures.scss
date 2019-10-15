@@ -113,7 +113,7 @@
     }
 
     .field--name-field-procedure-document {
-      text-align: center;
+      text-align: left;
     }
 
     .paragraph-type-top {
@@ -122,9 +122,20 @@
       }
     }
 
-    .field--type-datetime, .field--name-field-revision-number, .field--name-field-revision-date {
+    .field--type-datetime, .field--name-field-revision-date {
       float: left;
-      width: 33%;
+      width: 25%;
+      fieldset {
+        width: 100%;
+        input {
+          width: 100%;
+        }
+      }
+    }
+
+    .field--name-field-revision-number {
+      float: none;
+      width: 25%;
       fieldset {
         width: 100%;
         input {

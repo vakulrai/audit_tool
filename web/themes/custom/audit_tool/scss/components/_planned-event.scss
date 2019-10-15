@@ -1,8 +1,11 @@
 .node-planned-events-edit-form {
-  max-width: 550px;
  .js-form-wrapper {
     padding-left: 0px;
     padding-right: 0px;
+    .field--type-list-string, #audit-type, .field--name-field-department, #section, #process-list{
+      width: 20%;
+     float: left;
+    }
   }
 
   #edit-field-shift--wrapper, #select-other {

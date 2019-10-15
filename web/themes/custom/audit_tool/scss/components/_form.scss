@@ -730,3 +730,87 @@
     }
   }
 }
+
+
+/***********************  customer-manual-parts Form *******************************/
+
+.customer-manual-parts-form{
+  #edit-field-add-parts-wrapper{
+    table {
+      thead {
+        tr {
+          padding: 0 15px ;
+          th {
+            background: $grey-bg;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            border-bottom: 1px solid transparent;
+
+            h4 {
+              color: $black;
+              font-size: 11px;
+              font-weight: bold;
+              margin: 0px;
+            }
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          background: none;
+          td.field-multiple-drag {
+            display: none;
+          }
+          td {
+            padding: 0px;
+            .js-form-wrapper {
+              padding: 0px;
+            }
+             fieldset {
+               .form-group {
+                 .form-group {
+                  float: left;
+                  width: 25%;
+                  padding: 0 15px;
+                }
+              }
+              .form-group {
+                .js-form-type-select {
+                  width: 100%;
+                  padding: 0px;
+                  margin-top: 5px;
+                }
+              }
+            }
+            .paragraph-type-top {
+              padding: 30px 15px 0;
+            }
+
+            .paragraphs-subform {
+              .field--name-field-score, .field--name-field-functions-qualified  {
+                float: left;
+                width: 50%;
+              }
+              .field--name-field-score {
+                margin-top: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  #edit-field-add-parts-0-subform{
+    .field--type-string, .field--type-integer{
+      margin: 0px;
+      padding: 15px;
+      width: 25%;
+      float: left;
+    }
+  }
+  #edit-field-reference-id-wrapper{
+    width: 30%;
+  }
+}
