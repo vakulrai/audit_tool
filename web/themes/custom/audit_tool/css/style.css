@@ -1204,6 +1204,65 @@ table#field-location-values tbody tr td div .form-check-input {
   margin-left: 0px;
 }
 
+/***********************  customer-manual-parts Form *******************************/
+.customer-manual-parts-form #edit-field-add-parts-wrapper table thead tr {
+  padding: 0 15px;
+}
+.customer-manual-parts-form #edit-field-add-parts-wrapper table thead tr th {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid transparent;
+}
+.customer-manual-parts-form #edit-field-add-parts-wrapper table thead tr th h4 {
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0px;
+}
+.customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr {
+  background: none;
+}
+.customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td.field-multiple-drag {
+  display: none;
+}
+.customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td {
+  padding: 0px;
+}
+.customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td .js-form-wrapper {
+  padding: 0px;
+}
+.customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td fieldset .form-group .form-group {
+  float: left;
+  width: 25%;
+  padding: 0 15px;
+}
+.customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td fieldset .form-group .js-form-type-select {
+  width: 100%;
+  padding: 0px;
+  margin-top: 5px;
+}
+.customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td .paragraph-type-top {
+  padding: 30px 15px 0;
+}
+.customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td .paragraphs-subform .field--name-field-score, .customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+  float: left;
+  width: 50%;
+}
+.customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td .paragraphs-subform .field--name-field-score {
+  margin-top: 5px;
+}
+.customer-manual-parts-form #edit-field-add-parts-0-subform .field--type-string, .customer-manual-parts-form #edit-field-add-parts-0-subform .field--type-integer {
+  margin: 0px;
+  padding: 15px;
+  width: 25%;
+  float: left;
+}
+.customer-manual-parts-form #edit-field-reference-id-wrapper {
+  width: 30%;
+}
+
 .add-content-listing .block-superfish {
   float: left;
   width: 100%;
@@ -1281,45 +1340,45 @@ table#field-location-values tbody tr td div .form-check-input {
   border: none;
 }
 
-.page-planned-listing #block-audit-tool-mainpagecontent, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent {
+.page-planned-listing #block-audit-tool-mainpagecontent, .page-planned-listing #block-audit-tool-views-block-customer-manual-listing-manual, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent, .user-listing-auditor-wrapper #block-audit-tool-views-block-customer-manual-listing-manual {
   float: left;
   background: none;
   padding: 0px;
   width: 100%;
   border: none;
 }
-.page-planned-listing #block-audit-tool-mainpagecontent .views-element-container, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .views-element-container {
+.page-planned-listing #block-audit-tool-mainpagecontent .views-element-container, .page-planned-listing #block-audit-tool-views-block-customer-manual-listing-manual .views-element-container, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .views-element-container, .user-listing-auditor-wrapper #block-audit-tool-views-block-customer-manual-listing-manual .views-element-container {
   padding: 0px;
 }
-.page-planned-listing #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form {
+.page-planned-listing #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form, .page-planned-listing #block-audit-tool-views-block-customer-manual-listing-manual .views-element-container .views-exposed-form, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form, .user-listing-auditor-wrapper #block-audit-tool-views-block-customer-manual-listing-manual .views-element-container .views-exposed-form {
   background: #ffffff;
   padding: 15px;
   margin-bottom: 15px;
 }
-.page-planned-listing #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form .form-type-select, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form .form-type-select {
+.page-planned-listing #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form .form-type-select, .page-planned-listing #block-audit-tool-views-block-customer-manual-listing-manual .views-element-container .views-exposed-form .form-type-select, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .views-element-container .views-exposed-form .form-type-select, .user-listing-auditor-wrapper #block-audit-tool-views-block-customer-manual-listing-manual .views-element-container .views-exposed-form .form-type-select {
   margin-top: 5px;
 }
-.page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table {
+.page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table, .page-planned-listing #block-audit-tool-views-block-customer-manual-listing-manual .view-content .table-responsive table, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table, .user-listing-auditor-wrapper #block-audit-tool-views-block-customer-manual-listing-manual .view-content .table-responsive table {
   padding: 0px;
   margin: 0px;
 }
-.page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr {
+.page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr, .page-planned-listing #block-audit-tool-views-block-customer-manual-listing-manual .view-content .table-responsive table thead tr, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr, .user-listing-auditor-wrapper #block-audit-tool-views-block-customer-manual-listing-manual .view-content .table-responsive table thead tr {
   border: none;
 }
-.page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr th, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr th {
+.page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr th, .page-planned-listing #block-audit-tool-views-block-customer-manual-listing-manual .view-content .table-responsive table thead tr th, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table thead tr th, .user-listing-auditor-wrapper #block-audit-tool-views-block-customer-manual-listing-manual .view-content .table-responsive table thead tr th {
   background: #f8f9fa;
   border: none;
   font: Bold 11px/15px Open Sans;
   color: #23272D;
 }
-.page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr {
+.page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr, .page-planned-listing #block-audit-tool-views-block-customer-manual-listing-manual .view-content .table-responsive table tbody tr, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr, .user-listing-auditor-wrapper #block-audit-tool-views-block-customer-manual-listing-manual .view-content .table-responsive table tbody tr {
   background: #ffffff;
   border-bottom: 2px solid #f8f9fa;
 }
-.page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr:hover, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr:hover {
+.page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr:hover, .page-planned-listing #block-audit-tool-views-block-customer-manual-listing-manual .view-content .table-responsive table tbody tr:hover, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr:hover, .user-listing-auditor-wrapper #block-audit-tool-views-block-customer-manual-listing-manual .view-content .table-responsive table tbody tr:hover {
   background: #EBECFF;
 }
-.page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr td, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr td {
+.page-planned-listing #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr td, .page-planned-listing #block-audit-tool-views-block-customer-manual-listing-manual .view-content .table-responsive table tbody tr td, .user-listing-auditor-wrapper #block-audit-tool-mainpagecontent .view-content .table-responsive table tbody tr td, .user-listing-auditor-wrapper #block-audit-tool-views-block-customer-manual-listing-manual .view-content .table-responsive table tbody tr td {
   font-size: 13px;
   line-height: 19px;
   font-weight: Semibold;
@@ -1657,19 +1716,29 @@ table#field-location-values tbody tr td div .form-check-input {
   width: 25%;
 }
 .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-procedure-document {
-  text-align: center;
+  text-align: left;
 }
 .procedures-wrapper #edit-field-create-procedure-wrapper .paragraph-type-top .paragraph-type-title {
   margin-top: 20px;
 }
-.procedures-wrapper #edit-field-create-procedure-wrapper .field--type-datetime, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-number, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-date {
+.procedures-wrapper #edit-field-create-procedure-wrapper .field--type-datetime, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-date {
   float: left;
-  width: 33%;
+  width: 25%;
 }
-.procedures-wrapper #edit-field-create-procedure-wrapper .field--type-datetime fieldset, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-number fieldset, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-date fieldset {
+.procedures-wrapper #edit-field-create-procedure-wrapper .field--type-datetime fieldset, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-date fieldset {
   width: 100%;
 }
-.procedures-wrapper #edit-field-create-procedure-wrapper .field--type-datetime fieldset input, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-number fieldset input, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-date fieldset input {
+.procedures-wrapper #edit-field-create-procedure-wrapper .field--type-datetime fieldset input, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-date fieldset input {
+  width: 100%;
+}
+.procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-number {
+  float: none;
+  width: 25%;
+}
+.procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-number fieldset {
+  width: 100%;
+}
+.procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-number fieldset input {
   width: 100%;
 }
 .procedures-wrapper #edit-field-create-procedure-wrapper .field--type-datetime label, .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-date label {
@@ -2227,6 +2296,9 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 
 .sidebar #block-audit-tool-manageexternalaudit.block, .sidebar #block-audit-tool-auditplanningsubmenuformr.block,
+.sidebar #block-addprocess,
+.sidebar #block-addsupplier,
+.sidebar #block-adddocument,
 .sidebar #block-audit-tool-gotounitdetailpage,
 .sidebar #block-addbusinessprocess.block, .sidebar #block-adddepartment, .sidebar #block-addsections,
 .sidebar #block-audit-tool-auditplanningsubmenuforauditor, .sidebar #block-auiditcriteriamenu, .sidebar #block-audit-tool-preaudit {
@@ -2235,6 +2307,9 @@ table#field-location-values tbody tr td div .form-check-input {
   margin: 0;
 }
 .sidebar #block-audit-tool-manageexternalaudit.block ul li, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li,
+.sidebar #block-addprocess ul li,
+.sidebar #block-addsupplier ul li,
+.sidebar #block-adddocument ul li,
 .sidebar #block-audit-tool-gotounitdetailpage ul li,
 .sidebar #block-addbusinessprocess.block ul li, .sidebar #block-adddepartment ul li, .sidebar #block-addsections ul li,
 .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li, .sidebar #block-auiditcriteriamenu ul li, .sidebar #block-audit-tool-preaudit ul li {
@@ -2242,6 +2317,9 @@ table#field-location-values tbody tr td div .form-check-input {
   width: 100%;
 }
 .sidebar #block-audit-tool-manageexternalaudit.block ul li a, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a,
+.sidebar #block-addprocess ul li a,
+.sidebar #block-addsupplier ul li a,
+.sidebar #block-adddocument ul li a,
 .sidebar #block-audit-tool-gotounitdetailpage ul li a,
 .sidebar #block-addbusinessprocess.block ul li a, .sidebar #block-adddepartment ul li a, .sidebar #block-addsections ul li a,
 .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li a, .sidebar #block-auiditcriteriamenu ul li a, .sidebar #block-audit-tool-preaudit ul li a {
@@ -2252,6 +2330,9 @@ table#field-location-values tbody tr td div .form-check-input {
   text-transform: uppercase;
 }
 .sidebar #block-audit-tool-manageexternalaudit.block ul li a:hover, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul li a:hover,
+.sidebar #block-addprocess ul li a:hover,
+.sidebar #block-addsupplier ul li a:hover,
+.sidebar #block-adddocument ul li a:hover,
 .sidebar #block-audit-tool-gotounitdetailpage ul li a:hover,
 .sidebar #block-addbusinessprocess.block ul li a:hover, .sidebar #block-adddepartment ul li a:hover, .sidebar #block-addsections ul li a:hover,
 .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul li a:hover, .sidebar #block-auiditcriteriamenu ul li a:hover, .sidebar #block-audit-tool-preaudit ul li a:hover {
@@ -2259,6 +2340,9 @@ table#field-location-values tbody tr td div .form-check-input {
   color: #7E8E9D;
 }
 .sidebar #block-audit-tool-manageexternalaudit.block ul.nav, .sidebar #block-audit-tool-auditplanningsubmenuformr.block ul.nav,
+.sidebar #block-addprocess ul.nav,
+.sidebar #block-addsupplier ul.nav,
+.sidebar #block-adddocument ul.nav,
 .sidebar #block-audit-tool-gotounitdetailpage ul.nav,
 .sidebar #block-addbusinessprocess.block ul.nav, .sidebar #block-adddepartment ul.nav, .sidebar #block-addsections ul.nav,
 .sidebar #block-audit-tool-auditplanningsubmenuforauditor ul.nav, .sidebar #block-auiditcriteriamenu ul.nav, .sidebar #block-audit-tool-preaudit ul.nav {
@@ -2597,12 +2681,13 @@ table#field-location-values tbody tr td div .form-check-input {
   margin-bottom: 0px;
 }
 
-.node-planned-events-edit-form {
-  max-width: 550px;
-}
 .node-planned-events-edit-form .js-form-wrapper {
   padding-left: 0px;
   padding-right: 0px;
+}
+.node-planned-events-edit-form .js-form-wrapper .field--type-list-string, .node-planned-events-edit-form .js-form-wrapper #audit-type, .node-planned-events-edit-form .js-form-wrapper .field--name-field-department, .node-planned-events-edit-form .js-form-wrapper #section, .node-planned-events-edit-form .js-form-wrapper #process-list {
+  width: 20%;
+  float: left;
 }
 .node-planned-events-edit-form #edit-field-shift--wrapper, .node-planned-events-edit-form #select-other {
   padding-left: 15px;
@@ -4009,6 +4094,7 @@ table#field-location-values tbody tr td div .form-check-input {
   border: none;
 }
 .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td .js-form-wrapper {
+  font-size: 22px;
   padding: 0px;
 }
 .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td fieldset {
@@ -4025,10 +4111,6 @@ table#field-location-values tbody tr td div .form-check-input {
   width: 100%;
   padding: 0px;
   margin-top: 5px;
-}
-.customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td .paragraph-type-top {
-  padding: 15px 0px 0;
-  margin-top: 20px;
 }
 .customer-manual-parts .customer-manual-parts-parts-form .table-responsive table tbody tr td .paragraphs-subform #answer-efficient {
   padding-right: 0px;
