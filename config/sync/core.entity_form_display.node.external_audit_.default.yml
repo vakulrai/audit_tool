@@ -3,41 +3,30 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.external_audit_.body
     - field.field.node.external_audit_.field__lead_auditor
     - field.field.node.external_audit_.field_audit_cycle
     - field.field.node.external_audit_.field_audit_month
     - field.field.node.external_audit_.field_audit_type_external
     - field.field.node.external_audit_.field_auditor_s_name
-    - field.field.node.external_audit_.field_certification_std
+    - field.field.node.external_audit_.field_certification_body
+    - field.field.node.external_audit_.field_certification_standard
     - field.field.node.external_audit_.field_decision
     - field.field.node.external_audit_.field_issue_date
     - field.field.node.external_audit_.field_next_due_date
     - field.field.node.external_audit_.field_refere
     - field.field.node.external_audit_.field_scope
-    - field.field.node.external_audit_.field_score
+    - field.field.node.external_audit_.field_scores
     - field.field.node.external_audit_.field_validity
     - node.type.external_audit_
   module:
     - aps_general
     - content_moderation
     - datetime
-    - text
-    - yearonly
 id: node.external_audit_.default
 targetEntityType: node
 bundle: external_audit_
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 2
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-    third_party_settings: {  }
-    region: content
   field__lead_auditor:
     weight: 12
     settings:
@@ -47,13 +36,13 @@ content:
     type: string_textfield
     region: content
   field_audit_cycle:
-    weight: 5
+    weight: 6
     settings: {  }
     third_party_settings: {  }
-    type: yearonly_default
+    type: options_select
     region: content
   field_audit_month:
-    weight: 10
+    weight: 7
     settings:
       size: 60
       placeholder: ''
@@ -61,7 +50,7 @@ content:
     type: month_only_widget
     region: content
   field_audit_type_external:
-    weight: 6
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -74,17 +63,29 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_certification_std:
-    weight: 1
-    settings: {  }
+  field_certification_body:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: options_select
+    type: string_textfield
+    region: content
+  field_certification_standard:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_decision:
-    weight: 7
-    settings: {  }
+    weight: 9
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: options_select
+    type: string_textfield
     region: content
   field_issue_date:
     weight: 3
@@ -108,12 +109,14 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_scope:
-    weight: 9
-    settings: {  }
+    weight: 10
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: options_select
+    type: string_textfield
     region: content
-  field_score:
+  field_scores:
     weight: 8
     settings:
       placeholder: ''

@@ -1,15 +1,15 @@
-uuid: e511d89d-67cd-4efd-9d5b-43a634044b89
+uuid: c79319f1-bf66-4892-8c8e-99f8a312673c
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_decision
+    - field.storage.node.field_certification_standard
     - node.type.external_audit_
-id: node.external_audit_.field_decision
-field_name: field_decision
+id: node.external_audit_.field_certification_standard
+field_name: field_certification_standard
 entity_type: node
 bundle: external_audit_
-label: Decision
+label: 'Certification Standard'
 description: ''
 required: false
 translatable: false

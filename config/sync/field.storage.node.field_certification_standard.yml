@@ -1,16 +1,17 @@
-uuid: df8294fe-530b-4a39-93c9-e49e47281848
+uuid: 738c3897-5f61-4c87-bb1f-eeb9a7dc411c
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_score
-field_name: field_score
+id: node.field_certification_standard
+field_name: field_certification_standard
 entity_type: node
-type: integer
+type: string
 settings:
-  unsigned: false
-  size: normal
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
 module: core
 locked: false
 cardinality: 1

@@ -1,17 +1,16 @@
-uuid: 2f54dc2c-2c7a-4095-9bff-acce6f30efc3
+uuid: 045dbfb1-dbad-4e69-8c35-1d825feb69c7
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_scope
-field_name: field_scope
+id: node.field_scores
+field_name: field_scores
 entity_type: node
-type: string
+type: decimal
 settings:
-  max_length: 255
-  is_ascii: false
-  case_sensitive: false
+  precision: 10
+  scale: 2
 module: core
 locked: false
 cardinality: 1

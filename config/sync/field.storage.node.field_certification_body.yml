@@ -1,16 +1,17 @@
-uuid: 7b2324af-9ca5-49a4-b0f4-f925f751bd9b
+uuid: 4bc4b865-6324-4cdd-9b9c-b695ebc4656a
 langcode: en
 status: true
 dependencies:
   module:
     - node
-    - taxonomy
-id: node.field_certification_std
-field_name: field_certification_std
+id: node.field_certification_body
+field_name: field_certification_body
 entity_type: node
-type: entity_reference
+type: string
 settings:
-  target_type: taxonomy_term
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
 module: core
 locked: false
 cardinality: 1

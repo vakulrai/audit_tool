@@ -1,4 +1,4 @@
-uuid: ebace4ff-aad3-4ffb-824c-927c0d56f92e
+uuid: 0d8e4654-1d7d-4c0e-8eff-a2a9b8411016
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     - field.storage.node.field_audit_cycle
     - node.type.external_audit_
   module:
-    - yearonly
+    - options
 id: node.external_audit_.field_audit_cycle
 field_name: field_audit_cycle
 entity_type: node
@@ -17,7 +17,5 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:
-  yearonly_from: '2000'
-  yearonly_to: now
-field_type: yearonly
+settings: {  }
+field_type: list_integer

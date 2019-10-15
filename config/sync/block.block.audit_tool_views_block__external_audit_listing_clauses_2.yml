@@ -1,6 +1,6 @@
 uuid: 4b1c8cca-a6e3-4497-8bf5-09e657fe5d1c
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - views.view.external_audit_listing

@@ -1,11 +1,10 @@
-uuid: 6a693546-735d-4ce8-b8e8-9baade6d87ad
+uuid: b9240377-25ff-41c7-b828-088a71061997
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_scope
     - node.type.external_audit_
-    - taxonomy.vocabulary.scope
 id: node.external_audit_.field_scope
 field_name: field_scope
 entity_type: node
@@ -16,14 +15,5 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:
-  handler: 'default:taxonomy_term'
-  handler_settings:
-    target_bundles:
-      scope: scope
-    sort:
-      field: name
-      direction: asc
-    auto_create: false
-    auto_create_bundle: ''
-field_type: entity_reference
+settings: {  }
+field_type: string

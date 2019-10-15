@@ -162,6 +162,20 @@ class PreauditDerivative extends DeriverBase implements ContainerDeriverInterfac
       'route_parameters' => ['unit_reference' => $id],
     ] + $base_plugin_definition;
 
+    $links['external_audit_detail_list'] = [
+      'title' => 'External Audit Details Listing',
+      'route_name' => 'view.external_audit_listing.details',
+      'base_route' => 'view.external_audit_listing.details',
+      'route_parameters' => ['unit_reference' => $id],
+    ] + $base_plugin_definition;
+
+    $links['external_audit_standard_list'] = [
+      'title' => 'External Audit Standard Listing',
+      'route_name' => 'view.external_audit_listing.standards',
+      'base_route' => 'view.external_audit_listing.standards',
+      'route_parameters' => ['unit_reference' => $id],
+    ] + $base_plugin_definition;
+
     $links['systems'] = [
       'title' => 'Systems',
       'route_name' => 'node.add',

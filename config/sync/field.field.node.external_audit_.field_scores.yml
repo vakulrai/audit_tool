@@ -1,12 +1,12 @@
-uuid: d6260775-3c4f-46db-b078-e0d3509eb4fd
+uuid: 88ce12b3-42ba-4a5f-b8f7-cdf0b88469f9
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_score
+    - field.storage.node.field_scores
     - node.type.external_audit_
-id: node.external_audit_.field_score
-field_name: field_score
+id: node.external_audit_.field_scores
+field_name: field_scores
 entity_type: node
 bundle: external_audit_
 label: Score
@@ -16,8 +16,8 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  min: 0
-  max: null
+  min: null
+  max: !!float 100
   prefix: ''
   suffix: ''
-field_type: integer
+field_type: decimal

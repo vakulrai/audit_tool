@@ -4,27 +4,41 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.external_audit_.body
+    - field.field.node.external_audit_.field__lead_auditor
+    - field.field.node.external_audit_.field_audit_month
+    - field.field.node.external_audit_.field_audit_type_external
+    - field.field.node.external_audit_.field_auditor_s_name
+    - field.field.node.external_audit_.field_certification_body
+    - field.field.node.external_audit_.field_certification_standard
+    - field.field.node.external_audit_.field_decision
+    - field.field.node.external_audit_.field_issue_date
+    - field.field.node.external_audit_.field_next_due_date
+    - field.field.node.external_audit_.field_refere
+    - field.field.node.external_audit_.field_scope
+    - field.field.node.external_audit_.field_validity
     - node.type.external_audit_
   module:
-    - text
     - user
 id: node.external_audit_.teaser
 targetEntityType: node
 bundle: external_audit_
 mode: teaser
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 101
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    region: content
   links:
     weight: 100
     settings: {  }
     third_party_settings: {  }
     region: content
-hidden: {  }
+hidden:
+  field__lead_auditor: true
+  field_audit_month: true
+  field_audit_type_external: true
+  field_auditor_s_name: true
+  field_certification_body: true
+  field_certification_standard: true
+  field_decision: true
+  field_issue_date: true
+  field_next_due_date: true
+  field_refere: true
+  field_scope: true
+  field_validity: true

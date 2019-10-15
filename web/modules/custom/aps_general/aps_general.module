@@ -1132,6 +1132,9 @@ function aps_general_preprocess_block(&$variables) {
   if ($route_name == 'entity.node.edit_form' && 'page_title_block' == $variables['plugin_id'] && $variables['content']['#title']->getArguments()['@type'] == 'Planned Events') {
     $variables['content']['#title'] = t('Reschedule Audit');
   }
+  if ($route_name == 'node.add' && 'page_title_block' == $variables['plugin_id'] && $variables['content']['#title']->getArguments()['@name'] == 'Clauses') {
+    // $variables['content']['#title'] = '';
+  }
   if ($route_name == 'eck.entity.add' && 'page_title_block' == $variables['plugin_id'] && $variables['content']['#title']->getArguments()['%label'] == 'Parts') {
     $variables['content']['#title'] = t('Add Products');
   }
@@ -1270,7 +1273,24 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   if(strpos($current_uri, 'node/add/procedures?') !== FALSE) {
     unset($data['tabs'][0]);
   }
-  
+  if ($route_name == 'view.external_audit_listing.details') {
+    $data['tabs'][0]['aps_pre_audit.manuals:external_audit_standard_list'] = $data['tabs'][0]['aps_pre_audit.manuals:external_audit_detail_list'];
+    $url = Url::fromRoute('view.external_audit_listing.standards');
+    $url->setRouteParameter('unit_reference', \Drupal::request()->query->get('unit_reference'));
+    $data['tabs'][0]['aps_pre_audit.manuals:external_audit_standard_list']['#link']['url'] = $url;
+    $data['tabs'][0]['aps_pre_audit.manuals:external_audit_standard_list']['#link']['title'] = 'External Audit Standard Listing';
+    $data['tabs'][0]['aps_pre_audit.manuals:external_audit_detail_list']['#active'] = TRUE;
+    ksort($data['tabs'][0]);
+  }
+  if ($route_name == 'view.external_audit_listing.standards') {
+    $data['tabs'][0]['aps_pre_audit.manuals:external_audit_detail_list'] = $data['tabs'][0]['aps_pre_audit.manuals:external_audit_standard_list'];
+    $url = Url::fromRoute('view.external_audit_listing.details');
+    $url->setRouteParameter('unit_reference', \Drupal::request()->query->get('unit_reference'));
+    $data['tabs'][0]['aps_pre_audit.manuals:external_audit_detail_list']['#link']['url'] = $url;
+    $data['tabs'][0]['aps_pre_audit.manuals:external_audit_detail_list']['#link']['title'] = 'External Audit Details Listing';
+    $data['tabs'][0]['aps_pre_audit.manuals:external_audit_standard_list']['#active'] = TRUE;
+    ksort($data['tabs'][0]);
+  }
   //Tabs alter for Audit criteria.
   if($route_name == 'eck.entity.add'){  
     if($uri[2] == 'audit_criteria'){
@@ -1326,28 +1346,12 @@ function aps_general_menu_local_tasks_alter(&$data, $route_name, $root_path) {
   //Tabs alter for content types.
   if(isset($uri[2])){
     if (stripos(strtolower($uri[2]), 'external_audit_?') !== false) {
-      unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
-      unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
-      unset($data['tabs'][0]['aps_pre_audit.manuals:add_procedures']);
-      unset($data['tabs'][0]['aps_general.manual']);
-      unset($data['tabs'][0]['aps_general.manual_product']);
-      unset($data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']);
-      unset($data['tabs'][0]['aps_pre_audit.manuals:audit_list']);
-      unset($data['tabs'][0]['aps_pre_audit.manuals:systems']);
-      $data['tabs'][0]['aps_pre_audit.manuals:external_audit_systems']['#active'] = TRUE;
+      unset($data['tabs'][0]);
     }
     if (stripos(strtolower($uri[2]), 'clauses?') !== false) {
       $link = Url::fromUserInput('/node/add/'.$uri[2]);
       if ($link) {
-        unset($data['tabs'][0]['aps_audit_criteria.process_setting']);
-        unset($data['tabs'][0]['aps_audit_criteria.product_setting']);
-        unset($data['tabs'][0]['aps_pre_audit.manuals:add_procedures']);
-        unset($data['tabs'][0]['aps_general.manual']);
-        unset($data['tabs'][0]['aps_general.manual_product']);
-        unset($data['tabs'][0]['aps_pre_audit.manuals:procedure_listing']);
-        unset($data['tabs'][0]['aps_pre_audit.manuals:audit_list']);
-        unset($data['tabs'][0]['aps_pre_audit.manuals:systems']);
-        $data['tabs'][0]['aps_pre_audit.manuals:external_audit_clauses']['#active'] = TRUE;
+        unset($data['tabs'][0]);
       }
     }
     elseif ($uri[2] == 'unit') {
@@ -1769,7 +1773,9 @@ function aps_general_link_alter(&$variables) {
   if ($cleanLinkText == 'External Audit Details') {
     $id = $uri[1];
     if($id){
-      $variables['url']->setRouteParameter('unit_reference', $id);
+      $url = Url::fromRoute('view.external_audit_listing.details');
+      $url->setRouteParameter('unit_reference', $id);
+      $variables['url'] = $url;
     }
   }
 
@@ -2179,6 +2185,20 @@ function aps_general_link_alter(&$variables) {
     if($id){
       $variables['url']->setRouteParameter('id', $id);
       $variables['url']->setRouteParameter('unit_ref', $id);
+    }
+  }
+  if ($cleanLinkText == 'Add External Audit Standards') {
+    $id = \Drupal::request()->query->get('unit_reference');
+    if($id){
+      $variables['url']->setRouteParameter('id', $id);
+      $variables['url']->setRouteParameter('unit_reference', $id);
+    }
+  }
+  if ($cleanLinkText == 'Add External Audit Details') {
+    $id = \Drupal::request()->query->get('unit_reference');
+    if($id){
+      $variables['url']->setRouteParameter('id', $id);
+      $variables['url']->setRouteParameter('unit_reference', $id);
     }
   }
   if ($cleanLinkText == 'Add Document') {

@@ -1,6 +1,6 @@
 uuid: 5ef7119e-bfe9-4ae6-b98e-0be97416b6ce
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.manage-external-audit

@@ -1,0 +1,30 @@
+uuid: f14442d4-7539-491a-83e4-0d050baf29e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.add-external-audits
+  module:
+    - system
+  theme:
+    - audit_tool
+id: addexternalaudits
+theme: audit_tool
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'system_menu_block:add-external-audits'
+settings:
+  id: 'system_menu_block:add-external-audits'
+  label: 'Add External Audits'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  request_path:
+    id: request_path
+    pages: "/external-audit-standards\r\n/external-audit-details"
+    negate: false
+    context_mapping: {  }

@@ -1,6 +1,6 @@
 uuid: 89e45452-6df4-4638-8b05-f2d0039b9cfd
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.add-standards
