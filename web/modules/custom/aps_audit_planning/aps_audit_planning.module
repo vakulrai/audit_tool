@@ -79,7 +79,9 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $get_department_options = getDepartmenttypeUnderunit('department', $id);
     $form['field_department']['widget']['#options'] = $get_department_options;
     $get_section_from_department = getsectionDropdownOptionsfromDept($key);
-    $form['field_sections']['widget']['#options'] = $get_section_from_department;
+    if ($form_id != 'node_planned_events_edit_form') {
+      $form['field_sections']['widget']['#options'] = $get_section_from_department;
+    }
     if ($id = \Drupal::request()->query->get('unit_reference')) {
       $get_process_from_section = getProcessforCustomerLine($id);
     }
@@ -447,6 +449,12 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     ];
   }
   if ($form_id == 'node_planned_events_edit_form'){
+    $form['field_sections']['#disabled'] = TRUE;
+    $form['field_list_of_process']['#disabled'] = TRUE;
+    $form['field_sections']['#disabled'] = TRUE;
+    $form['field_department']['#disabled'] = TRUE;
+    $form['field_audit_type']['#disabled'] = TRUE;
+    $form['field_internal_audit_type']['#disabled'] = TRUE;
     // $node = \Drupal::routeMatch()->getParameter('node');
     // $event_id = (int)$node->id();
     // $node_data_obj = Node::load($event_id);
