@@ -31,6 +31,7 @@ content:
     region: content
 hidden:
   field__lead_auditor: true
+  field_audit_cycle: true
   field_audit_month: true
   field_audit_type_external: true
   field_auditor_s_name: true
@@ -41,4 +42,5 @@ hidden:
   field_next_due_date: true
   field_refere: true
   field_scope: true
+  field_scores: true
   field_validity: true

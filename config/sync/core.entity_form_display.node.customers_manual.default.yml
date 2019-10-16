@@ -110,6 +110,15 @@ content:
           bundle: customers_manual
     type: link_default
     region: content
+  field_refere:
+    type: entity_reference_autocomplete
+    weight: 7
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_upload_type:
     weight: 2
     settings: {  }
@@ -182,7 +191,6 @@ content:
 hidden:
   body: true
   created: true
-  field_refere: true
   field_sr_no: true
   path: true
   promote: true

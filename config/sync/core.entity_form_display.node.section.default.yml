@@ -46,13 +46,12 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_section_head:
-    weight: 2
+    weight: 26
     settings:
-      match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: string_textfield
     region: content
   field_select_department_type:
     weight: 1

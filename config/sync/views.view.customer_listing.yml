@@ -22,6 +22,7 @@ dependencies:
     - node.type.pre_audit_manuals
     - node.type.pre_audit_records
     - node.type.procedures
+    - node.type.process
     - node.type.qanda
     - node.type.section
     - node.type.supplier
@@ -292,16 +293,15 @@ display:
           admin_label: ''
           operator: 'not in'
           value:
-            all: all
             assembly: assembly
             auditor_report: auditor_report
             business_process: business_process
+            internal_audit: internal_audit
             clauses: clauses
             customers_manual: customers_manual
             department: department
             external_audit_: external_audit_
             home_page: home_page
-            internal_audit: internal_audit
             manufacturing_process: manufacturing_process
             pages: pages
             planned_events: planned_events
@@ -310,6 +310,7 @@ display:
             pre_audit_records: pre_audit_records
             answers: answers
             procedures: procedures
+            process: process
             qanda: qanda
             section: section
             supplier: supplier
