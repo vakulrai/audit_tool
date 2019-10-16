@@ -136,7 +136,9 @@
     .field--name-field-revision-number {
       float: none;
       width: 25%;
+      clear: both;
       fieldset {
+        padding: 0px;
         width: 100%;
         input {
           width: 100%;
@@ -241,6 +243,20 @@
           }
         }
       }
+    }
+  }
+}
+#edit-field-create-procedure-wrapper{
+  padding: 0px;
+  #field-create-procedure-0-item-wrapper{
+    #edit-field-create-procedure-0, #edit-field-create-procedure-0-subform{
+      padding: 0px;
+    }
+    .media-library-widget, .field--name-field-document-number{
+      padding: 0px;
+    }
+    #edit-field-create-procedure-0-subform-field-title-wrapper{
+      padding: 0px;
     }
   }
 }

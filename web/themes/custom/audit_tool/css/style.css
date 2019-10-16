@@ -640,34 +640,40 @@ table#field-location-values tbody tr td div .form-check-input {
   padding-left: 15px;
   padding-right: 15px;
 }
-.node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper, .node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address {
+.node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address,
+.node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper {
   float: left;
   width: 100%;
   clear: both;
-  padding: 0px;
+  padding: 0;
 }
-.node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper .js-form-item-field-address-0-address-address-line2, .node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper .js-form-item-field-address-0-address-locality, .node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address .js-form-item-field-address-0-address-address-line2, .node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address .js-form-item-field-address-0-address-locality {
+.node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address .js-form-item-field-address-0-address-address-line2,
+.node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address .js-form-item-field-address-0-address-locality,
+.node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper .js-form-item-field-address-0-address-address-line2,
+.node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper .js-form-item-field-address-0-address-locality {
   float: left;
   width: 25%;
 }
-.node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper .js-form-item-field-address-0-address-address-line1, .node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address .js-form-item-field-address-0-address-address-line1 {
+.node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address .js-form-item-field-address-0-address-address-line1,
+.node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper .js-form-item-field-address-0-address-address-line1 {
   width: 50%;
   float: left;
   padding-right: 15px;
 }
-.node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper #edit-field-address-0-address-country-code, .node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address #edit-field-address-0-address-country-code {
+.node-unit-edit-form #edit-field-address-wrapper #edit-field-address-0-address #edit-field-address-0-address-country-code,
+.node-unit-edit-form #edit-field-address-wrapper .fieldset-wrapper #edit-field-address-0-address-country-code {
   float: left;
   width: 25%;
-  padding-left: 0px;
+  padding-left: 0;
   padding-top: 5px;
 }
 .node-unit-edit-form #edit-field-address-wrapper .js-form-item-field-address-0-address-country-code {
-  padding: 0px;
+  padding: 0;
 }
 .node-unit-edit-form fieldset {
-  padding-left: 0px;
-  padding-right: 0px;
-  margin-bottom: 0px;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 0;
 }
 .node-unit-edit-form .field--name-field-field-months-for-the-audit .checkbox {
   display: flex;
@@ -678,11 +684,11 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 
 #edit-field-address-wrapper {
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 0;
+  padding-right: 0;
 }
 #edit-field-address-wrapper #edit-field-address-0 {
-  padding: 0px;
+  padding: 0;
 }
 #edit-field-address-wrapper #edit-field-address-0 legend {
   background: #f8f9fa;
@@ -696,14 +702,14 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 
 #edit-title-wrapper {
-  padding: 0px;
+  padding: 0;
 }
 #edit-title-wrapper fieldset {
   margin-bottom: 15px;
 }
 
 #edit-field-remote-address-wrapper {
-  padding: 0px;
+  padding: 0;
 }
 #edit-field-remote-address-wrapper table thead tr th {
   background: #f8f9fa;
@@ -716,7 +722,7 @@ table#field-location-values tbody tr td div .form-check-input {
   color: #000000;
   font-size: 11px;
   font-weight: bold;
-  margin: 0px;
+  margin: 0;
 }
 #edit-field-remote-address-wrapper table tbody tr {
   background: none;
@@ -725,10 +731,10 @@ table#field-location-values tbody tr td div .form-check-input {
   display: none;
 }
 #edit-field-remote-address-wrapper table tbody tr td {
-  padding: 0px;
+  padding: 0;
 }
 #edit-field-remote-address-wrapper table tbody tr td .js-form-wrapper {
-  padding: 0px;
+  padding: 0;
 }
 #edit-field-remote-address-wrapper table tbody tr td fieldset .form-group .form-group {
   float: left;
@@ -737,7 +743,7 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 #edit-field-remote-address-wrapper table tbody tr td fieldset .form-group .js-form-type-select {
   width: 100%;
-  padding: 0px;
+  padding: 0;
   margin-top: 5px;
 }
 
@@ -768,7 +774,7 @@ table#field-location-values tbody tr td div .form-check-input {
   padding-left: 5px;
 }
 #edit-field-shift-wrapper .fieldset-wrapper .form-check-input {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 #edit-field-time-g-wrapper {
@@ -777,7 +783,9 @@ table#field-location-values tbody tr td div .form-check-input {
   width: 100%;
 }
 
-#edit-field-sales-turnover-wrapper, #edit-field-frequency-wrapper, #edit-field-total-members-wrapper {
+#edit-field-frequency-wrapper,
+#edit-field-sales-turnover-wrapper,
+#edit-field-total-members-wrapper {
   float: left;
   width: 30%;
   min-height: 110px;
@@ -801,7 +809,7 @@ table#field-location-values tbody tr td div .form-check-input {
   margin-right: 12px;
 }
 #edit-field-field-months-for-the-audit-wrapper #edit-field-field-months-for-the-audit--wrapper .js-form-type-checkbox .form-check-input {
-  margin-top: 0px;
+  margin-top: 0;
 }
 #edit-field-field-months-for-the-audit-wrapper #edit-field-field-months-for-the-audit--wrapper .js-form-type-checkbox .form-check {
   padding-left: 5px;
@@ -811,13 +819,14 @@ table#field-location-values tbody tr td div .form-check-input {
 .user-register-form #edit-account {
   clear: both;
 }
-.user-register-form #edit-account .form-item-name, .user-register-form #edit-account .form-item-mail {
+.user-register-form #edit-account .form-item-mail,
+.user-register-form #edit-account .form-item-name {
   float: left;
   width: 50%;
 }
 .user-register-form #edit-account .form-type-password-confirm {
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 0;
+  padding-right: 0;
   clear: both;
   width: 100%;
 }
@@ -829,7 +838,9 @@ table#field-location-values tbody tr td div .form-check-input {
 .user-register-form #edit-account #edit-pass--description {
   display: none;
 }
-.user-register-form #edit-field-department-wrapper, .user-register-form #auditor-section, .user-register-form #edit-field-phone-wrapper {
+.user-register-form #auditor-section,
+.user-register-form #edit-field-department-wrapper,
+.user-register-form #edit-field-phone-wrapper {
   display: inline-block;
   width: 30%;
   vertical-align: top;
@@ -841,7 +852,7 @@ table#field-location-values tbody tr td div .form-check-input {
   display: block;
 }
 .user-register-form #edit-field-phone-wrapper .js-form-type-select {
-  padding: 0px;
+  padding: 0;
   display: inline-block;
   vertical-align: bottom;
 }
@@ -878,7 +889,7 @@ table#field-location-values tbody tr td div .form-check-input {
   color: #000000;
   font-size: 11px;
   font-weight: bold;
-  margin: 0px;
+  margin: 0;
 }
 .user-register-form #edit-field-functions-wrapper table tbody tr {
   background: none;
@@ -887,10 +898,10 @@ table#field-location-values tbody tr td div .form-check-input {
   display: none;
 }
 .user-register-form #edit-field-functions-wrapper table tbody tr td {
-  padding: 0px;
+  padding: 0;
 }
 .user-register-form #edit-field-functions-wrapper table tbody tr td .js-form-wrapper {
-  padding: 0px;
+  padding: 0;
 }
 .user-register-form #edit-field-functions-wrapper table tbody tr td fieldset .form-group .form-group {
   float: left;
@@ -899,13 +910,14 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 .user-register-form #edit-field-functions-wrapper table tbody tr td fieldset .form-group .js-form-type-select {
   width: 100%;
-  padding: 0px;
+  padding: 0;
   margin-top: 5px;
 }
 .user-register-form #edit-field-functions-wrapper table tbody tr td .paragraph-type-top {
   padding: 30px 15px 0;
 }
-.user-register-form #edit-field-functions-wrapper table tbody tr td .paragraphs-subform .field--name-field-score, .user-register-form #edit-field-functions-wrapper table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+.user-register-form #edit-field-functions-wrapper table tbody tr td .paragraphs-subform .field--name-field-functions-qualified,
+.user-register-form #edit-field-functions-wrapper table tbody tr td .paragraphs-subform .field--name-field-score {
   float: left;
   width: 50%;
 }
@@ -932,7 +944,7 @@ table#field-location-values tbody tr td div .form-check-input {
   color: #000000;
   font-size: 11px;
   font-weight: bold;
-  margin: 0px;
+  margin: 0;
 }
 .holidays-holidays-edit-form table tbody tr {
   background: none;
@@ -943,11 +955,11 @@ table#field-location-values tbody tr td div .form-check-input {
   display: none;
 }
 .holidays-holidays-edit-form table tbody tr td {
-  padding: 0px;
+  padding: 0;
   border: none;
 }
 .holidays-holidays-edit-form table tbody tr td .js-form-wrapper {
-  padding: 0px;
+  padding: 0;
 }
 .holidays-holidays-edit-form table tbody tr td fieldset .form-group .form-group {
   float: left;
@@ -956,20 +968,22 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 .holidays-holidays-edit-form table tbody tr td fieldset .form-group .js-form-type-select {
   width: 100%;
-  padding: 0px;
+  padding: 0;
   margin-top: 5px;
 }
 .holidays-holidays-edit-form table tbody tr td .paragraph-type-top {
   padding: 15px 15px 0;
 }
-.holidays-holidays-edit-form table tbody tr td .paragraphs-subform .field--name-field-score, .holidays-holidays-edit-form table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+.holidays-holidays-edit-form table tbody tr td .paragraphs-subform .field--name-field-functions-qualified,
+.holidays-holidays-edit-form table tbody tr td .paragraphs-subform .field--name-field-score {
   float: left;
   width: 50%;
 }
 .holidays-holidays-edit-form table tbody tr td .paragraphs-subform .field--name-field-score {
   margin-top: 5px;
 }
-.holidays-holidays-edit-form .paragraphs-subform .field--type-datetime, .holidays-holidays-edit-form .paragraphs-subform .field--type-string {
+.holidays-holidays-edit-form .paragraphs-subform .field--type-datetime,
+.holidays-holidays-edit-form .paragraphs-subform .field--type-string {
   float: left;
   width: 50%;
 }
@@ -998,7 +1012,7 @@ table#field-location-values tbody tr td div .form-check-input {
   padding-left: 5px;
 }
 #edit-field-shift--wrapper .fieldset-wrapper .form-check-input {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 /*********************** Planned Events Form *******************************/
@@ -1009,25 +1023,28 @@ table#field-location-values tbody tr td div .form-check-input {
   max-width: 500px;
 }
 .node-planned-events-form fieldset .fieldset-wrapper div {
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 0;
+  padding-right: 0;
 }
 .node-planned-events-form fieldset .fieldset-wrapper div fieldset {
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 0;
+  padding-right: 0;
 }
-.node-planned-events-form #planning-dates #edit-field-start-date-wrapper fieldset:first-child, .node-planned-events-form #planning-dates #edit-field-end-date-wrapper fieldset:first-child, .node-planned-events-form #planning-dates #edit-field-suggested-date-wrapper fieldset:first-child, .node-planned-events-form #planning-dates #edit-field-tolerance-wrapper fieldset:first-child {
-  padding-left: 0px;
+.node-planned-events-form #planning-dates #edit-field-end-date-wrapper fieldset:first-child,
+.node-planned-events-form #planning-dates #edit-field-start-date-wrapper fieldset:first-child,
+.node-planned-events-form #planning-dates #edit-field-suggested-date-wrapper fieldset:first-child,
+.node-planned-events-form #planning-dates #edit-field-tolerance-wrapper fieldset:first-child {
+  padding-left: 0;
 }
 .node-planned-events-form #planning-dates #edit-field-suggested-date-wrapper .form-type-date {
   margin-right: 15px;
 }
 .node-planned-events-form #edit-submit {
-  margin-left: 0px;
+  margin-left: 0;
 }
 .node-planned-events-form #edit-field-select-mr-wrapper fieldset {
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 0;
+  padding-right: 0;
 }
 .node-planned-events-form #edit-field-select-from-others--wrapper .fieldset-wrapper {
   margin-left: 20px;
@@ -1045,7 +1062,7 @@ table#field-location-values tbody tr td div .form-check-input {
   color: #000000;
   font-size: 11px;
   font-weight: bold;
-  margin: 0px;
+  margin: 0;
 }
 .node-planned-events-form #user-details table tbody tr {
   background: none;
@@ -1055,10 +1072,10 @@ table#field-location-values tbody tr td div .form-check-input {
   display: none;
 }
 .node-planned-events-form #user-details table tbody tr td {
-  padding: 0px;
+  padding: 0;
 }
 .node-planned-events-form #user-details table tbody tr td .js-form-wrapper {
-  padding: 0px;
+  padding: 0;
 }
 .node-planned-events-form #user-details table tbody tr td fieldset {
   padding-top: 10px;
@@ -1070,13 +1087,14 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 .node-planned-events-form #user-details table tbody tr td fieldset .form-group .js-form-type-select {
   width: 100%;
-  padding: 0px;
+  padding: 0;
   margin-top: 5px;
 }
 .node-planned-events-form #user-details table tbody tr td .paragraph-type-top {
   padding: 15px 15px 0;
 }
-.node-planned-events-form #user-details table tbody tr td .paragraphs-subform .field--name-field-score, .node-planned-events-form #user-details table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+.node-planned-events-form #user-details table tbody tr td .paragraphs-subform .field--name-field-functions-qualified,
+.node-planned-events-form #user-details table tbody tr td .paragraphs-subform .field--name-field-score {
   float: left;
   width: 50%;
 }
@@ -1095,8 +1113,7 @@ table#field-location-values tbody tr td div .form-check-input {
   padding: 0 1.5em;
   margin-bottom: 30px;
   background: #fff;
-  padding: 10px;
-  padding-bottom: 0;
+  padding: 10px 10px 0;
 }
 
 .media-library-widget__toggle-weight {
@@ -1116,7 +1133,7 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 
 #edit-submit {
-  margin-left: 0px;
+  margin-left: 0;
 }
 
 .holidays-holidays-form table thead tr {
@@ -1132,13 +1149,13 @@ table#field-location-values tbody tr td div .form-check-input {
   color: #000000;
   font-size: 11px;
   font-weight: bold;
-  margin: 0px;
+  margin: 0;
 }
 .holidays-holidays-form table thead tr th h4 {
   color: #000000;
   font-size: 11px;
   font-weight: bold;
-  margin: 0px;
+  margin: 0;
 }
 .holidays-holidays-form table tbody tr {
   background: none;
@@ -1148,15 +1165,15 @@ table#field-location-values tbody tr td div .form-check-input {
   display: none;
 }
 .holidays-holidays-form table tbody tr td {
-  padding: 0px;
+  padding: 0;
 }
 .holidays-holidays-form table tbody tr td .js-form-wrapper {
-  padding: 0px;
+  padding: 0;
 }
 .holidays-holidays-form table tbody tr td fieldset {
   padding-top: 10px;
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 0;
+  padding-right: 0;
 }
 .holidays-holidays-form table tbody tr td fieldset .form-group .form-group {
   float: left;
@@ -1165,20 +1182,23 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 .holidays-holidays-form table tbody tr td fieldset .form-group .js-form-type-select {
   width: 100%;
-  padding: 0px;
+  padding: 0;
   margin-top: 5px;
 }
 .holidays-holidays-form table tbody tr td .paragraph-type-top {
-  padding: 15px 0px 0;
+  padding: 15px 0 0;
 }
-.holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-datetime, .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-string {
+.holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-datetime,
+.holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-string {
   float: left;
   width: 50%;
 }
-.holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-datetime fieldset, .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-string fieldset {
+.holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-datetime fieldset,
+.holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-string fieldset {
   width: 100%;
 }
-.holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-datetime fieldset input, .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-string fieldset input {
+.holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-datetime fieldset input,
+.holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-string fieldset input {
   width: 100%;
 }
 .holidays-holidays-form table tbody tr td .paragraphs-subform .field--name-field-score {
@@ -1188,20 +1208,20 @@ table#field-location-values tbody tr td div .form-check-input {
   padding-right: 15px;
 }
 .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-datetime label {
-  margin-bottom: 0px;
+  margin-bottom: 0;
   margin-top: 15px;
 }
 .holidays-holidays-form table tbody tr td .paragraphs-subform .field--type-string {
   padding-left: 15px;
 }
 .holidays-holidays-form table tbody tr td div {
-  padding-top: 0px;
+  padding-top: 0;
 }
 .holidays-holidays-form table tbody tr td div .form-check-input {
   margin-left: 10px;
 }
 .holidays-holidays-form .paragraphs-dropbutton-wrapper input {
-  margin-left: 0px;
+  margin-left: 0;
 }
 
 /***********************  customer-manual-parts Form *******************************/
@@ -1219,7 +1239,7 @@ table#field-location-values tbody tr td div .form-check-input {
   color: #000000;
   font-size: 11px;
   font-weight: bold;
-  margin: 0px;
+  margin: 0;
 }
 .customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr {
   background: none;
@@ -1228,10 +1248,10 @@ table#field-location-values tbody tr td div .form-check-input {
   display: none;
 }
 .customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td {
-  padding: 0px;
+  padding: 0;
 }
 .customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td .js-form-wrapper {
-  padding: 0px;
+  padding: 0;
 }
 .customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td fieldset .form-group .form-group {
   float: left;
@@ -1240,27 +1260,57 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 .customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td fieldset .form-group .js-form-type-select {
   width: 100%;
-  padding: 0px;
+  padding: 0;
   margin-top: 5px;
 }
 .customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td .paragraph-type-top {
   padding: 30px 15px 0;
 }
-.customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td .paragraphs-subform .field--name-field-score, .customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td .paragraphs-subform .field--name-field-functions-qualified {
+.customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td .paragraphs-subform .field--name-field-functions-qualified,
+.customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td .paragraphs-subform .field--name-field-score {
   float: left;
   width: 50%;
 }
 .customer-manual-parts-form #edit-field-add-parts-wrapper table tbody tr td .paragraphs-subform .field--name-field-score {
   margin-top: 5px;
 }
-.customer-manual-parts-form #edit-field-add-parts-0-subform .field--type-string, .customer-manual-parts-form #edit-field-add-parts-0-subform .field--type-integer {
-  margin: 0px;
+.customer-manual-parts-form #edit-field-add-parts-0-subform .field--type-integer,
+.customer-manual-parts-form #edit-field-add-parts-0-subform .field--type-string {
+  margin: 0;
   padding: 15px;
   width: 25%;
   float: left;
 }
 .customer-manual-parts-form #edit-field-reference-id-wrapper {
   width: 30%;
+}
+
+/******************** Add process Form ***************/
+.add-process-page .node-process-form #edit-field-type--wrapper {
+  padding: 0;
+}
+.add-process-page .node-process-form #edit-field-type--wrapper .js-form-type-radio {
+  width: 50%;
+  float: left;
+}
+.add-process-page .node-process-form #edit-field-section-wrapper,
+.add-process-page .node-process-form #edit-field-shift-wrapper {
+  padding: 0;
+}
+.add-process-page .node-process-form #edit-field-documents-wrapper {
+  clear: both;
+}
+.add-process-page .node-process-form #edit-field-documents-wrapper #edit-field-documents {
+  color: #9BA6B3;
+  font-size: 12px;
+}
+.add-process-page .node-process-form #edit-field-documents-wrapper #edit-field-documents .form-type-managed-file {
+  padding: 0;
+  margin-top: 15px;
+}
+.add-process-page .node-process-form #edit-field-documents-wrapper #edit-field-documents #edit-field-documents-0-upload {
+  color: #9BA6B3;
+  font-size: 12px;
 }
 
 .add-content-listing .block-superfish {
@@ -1734,8 +1784,10 @@ table#field-location-values tbody tr td div .form-check-input {
 .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-number {
   float: none;
   width: 25%;
+  clear: both;
 }
 .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-number fieldset {
+  padding: 0px;
   width: 100%;
 }
 .procedures-wrapper #edit-field-create-procedure-wrapper .field--name-field-revision-number fieldset input {
@@ -1823,6 +1875,19 @@ table#field-location-values tbody tr td div .form-check-input {
 }
 .procedures-wrapper #edit-field-refere-wrapper table tbody tr td div .form-check-input {
   margin-left: 10px;
+}
+
+#edit-field-create-procedure-wrapper {
+  padding: 0px;
+}
+#edit-field-create-procedure-wrapper #field-create-procedure-0-item-wrapper #edit-field-create-procedure-0, #edit-field-create-procedure-wrapper #field-create-procedure-0-item-wrapper #edit-field-create-procedure-0-subform {
+  padding: 0px;
+}
+#edit-field-create-procedure-wrapper #field-create-procedure-0-item-wrapper .media-library-widget, #edit-field-create-procedure-wrapper #field-create-procedure-0-item-wrapper .field--name-field-document-number {
+  padding: 0px;
+}
+#edit-field-create-procedure-wrapper #field-create-procedure-0-item-wrapper #edit-field-create-procedure-0-subform-field-title-wrapper {
+  padding: 0px;
 }
 
 .audit-criteria-add-wrapper .audit-criteria-systems-form fieldset > legend {
