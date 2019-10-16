@@ -3594,7 +3594,7 @@ display:
           group_type: group
           admin_label: ''
           label: 'Audit Type'
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -3721,7 +3721,7 @@ display:
           group_type: group
           admin_label: ''
           label: 'End Date'
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -3786,7 +3786,7 @@ display:
           group_type: group
           admin_label: ''
           label: 'Remaining Days'
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -4065,7 +4065,7 @@ display:
           group_type: group
           admin_label: ''
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -7066,11 +7066,11 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
+          label: Reschedule
           exclude: false
           alter:
             alter_text: true
-            text: "{% if  'Passed' in remainingday_event|render %}\r\n    <a href=\"#\"></a><br>\r\n{% else %}\r\n    <a href=\"/node/{{nid}}/edit?schedule_type=reschedule&unit_reference={{nid_1}}\">RESCHEDULE</a><br>\r\n{% endif %}\r\n{{remainingday_event}}"
+            text: "{% if  'Passed' in remainingday_event|render or  'Submitted' in remainingday_event|render %}\r\n    <a href=\"#\"></a>\r\n{% else %}\r\n    <a href=\"/node/{{nid}}/edit?schedule_type=reschedule&unit_reference={{nid_1}}\">RESCHEDULE</a><br>\r\n{% endif %}\r\n{{remainingday_event}}"
             make_link: false
             path: ''
             absolute: false
@@ -7119,7 +7119,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
+          label: 'Audit State'
           exclude: false
           alter:
             alter_text: false
@@ -7231,7 +7231,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
+          label: Report
           exclude: false
           alter:
             alter_text: true

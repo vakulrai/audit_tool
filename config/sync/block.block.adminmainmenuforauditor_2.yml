@@ -1,6 +1,6 @@
 uuid: e07e13c2-ee71-4efa-b49d-2ef791c54782
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.admin-main-menu-for-auditor

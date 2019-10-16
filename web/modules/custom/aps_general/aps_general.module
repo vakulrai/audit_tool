@@ -7,8 +7,6 @@
 
 use Drupal\node\Entity\NodeType;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Cache\Cache;
-use Drupal\Core\Cache\Cache;
 use Drupal\views\Views;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
