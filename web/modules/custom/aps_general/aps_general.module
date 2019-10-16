@@ -318,6 +318,7 @@ function aps_general_form_alter(&$form, FormStateInterface $form_state, $form_id
     if ($unit_ref = \Drupal::request()->query->get('unit_reference')) {
       $unit_ref_object = Node::load($unit_ref);
       $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
       }
