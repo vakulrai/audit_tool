@@ -6,6 +6,7 @@ dependencies:
     - system.menu.add-external-audits
   module:
     - system
+    - user
   theme:
     - audit_tool
 id: addexternalaudits
@@ -28,3 +29,11 @@ visibility:
     pages: "/external-audit-standards\r\n/external-audit-details"
     negate: false
     context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      mr_admin: mr_admin
+      group_mr: group_mr
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

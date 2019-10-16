@@ -2172,7 +2172,6 @@ function aps_general_link_alter(&$variables) {
       $variables['url']->setRouteParameter('unit_ref', $id);
     }
   }
-
   if ($cleanLinkText == 'Section') {
     $id = $uri[1];
     if ($id) {
@@ -2247,10 +2246,12 @@ function aps_general_link_alter(&$variables) {
       if ($user_role == 'mr_admin') {
         $user_unit = $user->field_reference_id->target_id;
       }
-      $url = Url::fromRoute('entity.node.edit_form', ['node' => $user_unit]);
-      $url->setRouteParameter('destination', $current_uri);
-      unset($variables['url']);
-      $variables['url'] = $url;
+      if (is_int($user_unit)) {
+        $url = Url::fromRoute('entity.node.edit_form', ['node' => $user_unit]);
+        $url->setRouteParameter('destination', $current_uri);
+        unset($variables['url']);
+        $variables['url'] = $url;
+      }
     }
   }
 }
