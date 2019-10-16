@@ -317,7 +317,7 @@ function aps_general_form_alter(&$form, FormStateInterface $form_state, $form_id
     if ($unit_ref = \Drupal::request()->query->get('unit_reference')) {
       $unit_ref_object = Node::load($unit_ref);
       $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
-      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
+      $form['field_refere']['widget'][0]['target_id']['#default_value'] = $unit_ref_object;
       $form['field_refere']['#access'] = FALSE;
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
@@ -2493,7 +2493,8 @@ function aps_general_procedures_page_redirect(array $form, FormStateInterface $f
 function aps_ext_audit_page_redirect(array $form, FormStateInterface $form_state) {
   $current_uri_destination = trim(\Drupal::request()->getRequestUri(), '/');
   $id = \Drupal::request()->query->get('unit_reference');
-  $response = Url::fromRoute('node.add', ['node_type' => 'external_audit_', 'id' => $id]);
+  $response = Url::fromRoute('view.external_audit_listing.details');
+  $response->setRouteParameter('unit_reference', $id);
   $form_state->setRedirectUrl($response);
 }
 
