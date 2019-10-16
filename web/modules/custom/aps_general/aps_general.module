@@ -90,12 +90,14 @@ function aps_general_form_alter(&$form, FormStateInterface $form_state, $form_id
   }
   $form['moderation_state']['#access'] = FALSE;
   if ($form_id == 'node_unit_form') {
+    $form['title']['widget'][0]['value']['#title'] = t('Unit name');
     $form['field_total_mandays']['#access'] = FALSE;
     $form['field_updated_mandays']['#access'] = FALSE;
     if ($user_role == 'mr_admin') {
       $form['field_deputy_mr']['#access'] = FALSE;
     }
     if ($user_role == 'group_mr') {
+      $form['field_remote_address']['#access'] = FALSE;
       $entity_type_id = 'node';
       $bundle = 'unit';
       foreach (\Drupal::entityManager()->getFieldDefinitions($entity_type_id, $bundle) as $field_name => $field_definition) {
@@ -108,9 +110,7 @@ function aps_general_form_alter(&$form, FormStateInterface $form_state, $form_id
           }
         }
       }
-      $form['field_remote_address']['#access'] = FALSE;
     }
-    $form['title']['widget'][0]['value']['#title'] = t('Unit name');
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'aps_general_unit_page_redirect';

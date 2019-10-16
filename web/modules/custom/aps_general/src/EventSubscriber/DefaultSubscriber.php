@@ -86,7 +86,7 @@ class DefaultSubscriber implements EventSubscriberInterface {
         }
       }
       elseif($user_role == 'mr_admin') {
-        if($route_name == 'entity.user.canonical' || $current_path == '/node/1'){
+        if($route_name == 'entity.user.canonical' || $current_path == '/node/963'){
           $user_object = User::load($uid);
           $response = new RedirectResponse('/unit-registration-view/'.$user_object->field_unit->target_id);
           $response->send();
