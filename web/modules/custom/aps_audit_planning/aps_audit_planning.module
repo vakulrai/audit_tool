@@ -1,37 +1,37 @@
 <?php
 
+/**
+ * @file
+ */
+
+use Drupal\node\NodeInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
-use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\user\Entity\User;
 use Drupal\paragraphs\Entity\Paragraph;
-use Drupal\Component\Datetime\DateTimePlus;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Field\FieldFilteredMarkup;
-use Drupal\Core\Ajax\ChangedCommand;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Ajax\AppendCommand;
 use Drupal\Core\Url;
 use Drupal\Core\Render\Markup;
 
-
 /**
-* Implements hook_mail().
-*/
+ * Implements hook_mail().
+ */
 function aps_audit_planning_mail($key, &$message, $params) {
- $options = [
-   'langcode' => $message['langcode'],
- ];
- switch ($key) {
-   case 'audit-planning':
-     $message['from'] = \Drupal::config('system.site')->get('mail');
-     $message['subject'] = $params['subject'];
-     $message['body'] = $params['body'];
-     $message['message'] = $params['message'];
-     break;
- }
+  $options = [
+    'langcode' => $message['langcode'],
+  ];
+  switch ($key) {
+    case 'audit-planning':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = $params['subject'];
+      $message['body'] = $params['body'];
+      $message['message'] = $params['message'];
+      break;
+  }
 }
 
 /**
@@ -45,8 +45,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
   foreach ($roles as $key => $value) {
     $user_role = $value;
   }
-  // dump($form['field_list_of_process']);
-	if($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form'){
+  if ($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form') {
     $form['#prefix'] = '<div id="location-list">';
     $form['#suffix'] = '</div>';
     $form['field_report_reference']['#access'] = FALSE;
@@ -58,7 +57,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_pre_audit_status']['#access'] = FALSE;
     $form['field_refere']['#access'] = FALSE;
     $form['field_selected_auditee']['#access'] = FALSE;
-    //$form['field_checklist']['#disabled'] = TRUE;
+    // $form['field_checklist']['#disabled'] = TRUE;.
     $form['#cache']['max-age'] = 0;
     $form['field_sections']['#attributes'] = ['id' => ['section']];
     $form['field_list_of_process']['#attributes'] = ['id' => ['process-list']];
@@ -70,10 +69,10 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_select_auditee']['#attributes'] = ['id' => ['auditee-list']];
     $form['field_other_users']['#attributes'] = ['id' => ['auditee-other']];
     $form['field_select_from_others']['#attributes'] = ['id' => ['select-other']];
-   // $form['field_location_customer']['#attributes'] = ['id' => ['location-list']];
+    // $form['field_location_customer']['#attributes'] = ['id' => ['location-list']];.
     $form['field_start_date']['widget'][0]['value']['#title'] = t('Start Time (e.g. 20/02/2019 08:30:20 AM)');
     $form['field_start_date']['widget'][0]['value']['#attributes']['title'] = 'Time (e.g. 20/02/2019 08:30:20 AM)';
-    $form['field_end_date']['widget'][0]['value']['#title'] = t('Start Time (e.g. 20/02/2019 08:30:20 AM)');
+    $form['field_end_date']['widget'][0]['value']['#title'] = t('End Time (e.g. 20/02/2019 08:30:20 AM)');
     $form['field_end_date']['widget'][0]['value']['#attributes']['title'] = 'Time (e.g. 20/02/2019 08:30:20 AM)';
 
     $get_department_options = getDepartmenttypeUnderunit('department', $id);
@@ -88,16 +87,16 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     else {
       $get_process_from_section = getProcessfromOptionfromsection($key);
     }
-    // dump($get_section_from_department);
     $form['field_list_of_process']['widget']['#options'] = $get_process_from_section;
-    if(!empty($form_state->getValues())){
+    if (!empty($form_state->getValues())) {
       $customer_array = $form_state->getValue('field_customer_list')[0];
       $supplier_array = $form_state->getValue('field_supplier_name_list')[0];
       $value = $form_state->getValue('field_internal_audit_type')[0]['value'];
-      if(!empty($customer_array) || !empty($supplier_array)){
-        if(!empty($customer_array)){
+      if (!empty($customer_array) || !empty($supplier_array)) {
+        if (!empty($customer_array)) {
           $key = $customer_array['target_id'];
-        } else {
+        }
+        else {
           $key = $supplier_array['target_id'];
         }
         $node = Node::load($key);
@@ -106,7 +105,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
         $location_data[strtolower($location_options)] = $location_options;
         $customer_data[strtolower($customer_name)] = $customer_name;
       }
-      if($value === 'process'){
+      if ($value === 'process') {
         $form['field_sections']['widget']['#ajax'] = [
           'callback' => 'getProcessfromsection',
           'wrapper' => 'process-list',
@@ -120,7 +119,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     //   'callback' => 'changeAuditeeOptions',
     //   'wrapper' => 'auditee',
     //   'event' => 'change',
-    // ];
+    // ];.
     $form['field_department']['widget']['#ajax'] = [
       'callback' => 'getSectionfromdepartment',
       'wrapper' => 'section',
@@ -134,7 +133,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_customer_list']['widget']['#ajax'] = [
       'callback' => 'getlocationFromcustomer',
       'wrapper' => 'location-list',
-      'event' => 'change',       
+      'event' => 'change',
     ];
     $form['field_list_of_process']['widget']['#ajax'] = [
       'callback' => 'getAuditorfromProcess',
@@ -158,17 +157,17 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     ];
 
     $element_dept = $form_state->getTriggeringElement();
-    if($element_dept){
-      if(count($element_dept['#value']) >= 0){
+    if ($element_dept) {
+      if (count($element_dept['#value']) >= 0) {
         $key = $element_dept['#value'];
-        if($element_dept['#field_name'] == 'field_list_of_systems'){
+        if ($element_dept['#field_name'] == 'field_list_of_systems') {
           $form['field_auditor']['widget']['#required'] = TRUE;
           $form['field_auditor']['widget']['#options'] = getAuditorList($key, 'auditor');
           $form['field_select_auditee']['widget']['#required'] = TRUE;
           $form['field_select_auditee']['widget']['#options'] = getAuditorList($key, 'auditee');
           $form['field_other_users']['widget']['#options'] = getAuditorList($key, 'auditee-others');
         }
-        elseif($element_dept['#field_name'] == 'field_list_of_process'){
+        elseif ($element_dept['#field_name'] == 'field_list_of_process') {
           $form['field_auditor']['widget']['#required'] = TRUE;
           $form['field_auditor']['widget']['#options'] = getAuditorList($key, 'auditor');
           $form['field_select_auditee']['widget']['#options'] = getAuditorList($key, 'auditee');
@@ -177,13 +176,12 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
         }
       }
     }
-    
+
     // $form['field_list_of_systems']['widget']['#ajax'] = [
     //   'callback' => 'getChecklist',
     //   'wrapper' => 'checklist',
     //   'event' => 'change',
-    // ];
-    
+    // ];.
     $form['field_auditor']['#states'] = [
       'visible' => [
         'select[name="field_audit_type"]' => ['value' => 'internal'],
@@ -196,10 +194,10 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_select_from_others']['#states'] = [
       'visible' => [
         ['select[name="field_list_of_systems"]' => ['!value' => '_none']]
-        ,'or',
+        , 'or',
         ['select[name="field_list_of_process"]' => ['!value' => '_none']]
-        ,'or',
-        ['select[name="field_list_of_product"]' => ['!value' => '_none']]
+        , 'or',
+        ['select[name="field_list_of_product"]' => ['!value' => '_none']],
       ],
       // 'invisible' => [
       //   [
@@ -229,7 +227,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       //     ,'or',
       //     ['select[name="field_audit_type"]' => ['value' => '_none']]
       //   ]
-      // ],
+      // ],.
     ];
 
     $form['field_select_mr']['#states'] = [
@@ -252,10 +250,10 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     $form['field_select_auditee']['#states'] = [
       'visible' => [
         ['select[name="field_list_of_systems"]' => ['!value' => '_none']]
-        ,'or',
+        , 'or',
         ['select[name="field_list_of_process"]' => ['!value' => '_none']]
-        ,'or',
-        ['select[name="field_list_of_product"]' => ['!value' => '_none']]
+        , 'or',
+        ['select[name="field_list_of_product"]' => ['!value' => '_none']],
       ],
       // 'invisible' => [
       //   [
@@ -285,13 +283,13 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       //     ,'or',
       //     ['select[name="field_audit_type"]' => ['value' => '_none']]
       //   ]
-      // ],
+      // ],.
       'required' => [
         ['select[name="field_list_of_systems"]' => ['!value' => '_none']]
-        ,'or',
+        , 'or',
         ['select[name="field_list_of_process"]' => ['!value' => '_none']]
-        ,'or',
-        ['select[name="field_list_of_product"]' => ['!value' => '_none']]
+        , 'or',
+        ['select[name="field_list_of_product"]' => ['!value' => '_none']],
       ],
     ];
 
@@ -306,83 +304,78 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       '#markup' => '',
       '#type' => 'container',
     ];
-    
-    if($id){
+
+    if ($id) {
       $unit_ref_object = Node::load($id);
       $unit_refernced_shift = $unit_ref_object->field_shift->getValue();
       foreach ($unit_refernced_shift as $key => $value) {
         $def_values[$value['target_id']] = $value['target_id'];
         $title = $form['field_shift']['widget']['#options'][$value['target_id']];
-        $selected_option[$value['target_id']] = $title; 
+        $selected_option[$value['target_id']] = $title;
       }
       $form['field_shift']['widget']['#options'] = $selected_option;
       $form['field_shift']['widget']['#default_value'] = $def_values;
       $form['field_shift']['widget']['#disabled'] = TRUE;
     }
     $form['field_refere']['#access'] = FALSE;
-	}
+  }
 
-  if($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form'){
-    if($start_date = \Drupal::request()->query->get('field_start_date') && $end_date = \Drupal::request()->query->get('field_end_date')){
+  if ($form_id == 'node_planned_events_form' || $form_id == 'node_planned_events_edit_form') {
+    if ($start_date = \Drupal::request()->query->get('field_start_date') && $end_date = \Drupal::request()->query->get('field_end_date')) {
       $start_date = \Drupal::request()->query->get('field_start_date');
       $end_date = \Drupal::request()->query->get('field_end_date');
       $title = \Drupal::request()->query->get('title');
-      $get_user_timezone =  drupal_get_user_timezone();
-      
-      //Logic to set start date as first date of current month.
+      $get_user_timezone = drupal_get_user_timezone();
+
+      // Logic to set start date as first date of current month.
       // $start_date_array = explode('-', $start_date);
       // $format_for_first_day = 'Y-'. $start_date_array[1] . '-01';
       // $format_for_last_day = 'Y-m-t';
       // $start_date = date($format_for_first_day);
       // $end_date= date($format_for_last_day);
-
-      $start_date_obj = new \DateTime($start_date , new \DateTimeZone('UTC'));
+      $start_date_obj = new \DateTime($start_date, new \DateTimeZone('UTC'));
       $start_date_obj->setTimezone(new \DateTimeZone($get_user_timezone));
       $start_date_timestamp = $start_date_obj->getTimestamp();
       $start_date_timestamp_object = DrupalDateTime::createFromTimestamp($start_date_timestamp, $get_user_timezone);
 
-      $end_date_obj = new \DateTime($end_date , new \DateTimeZone('UTC'));
+      $end_date_obj = new \DateTime($end_date, new \DateTimeZone('UTC'));
       $end_date_obj->setTimezone(new \DateTimeZone($get_user_timezone));
       $end_date_timestamp = $end_date_obj->getTimestamp();
       $end_date_timestamp_object = DrupalDateTime::createFromTimestamp($end_date_timestamp, $get_user_timezone);
 
-      //Alter the start and end date.
+      // Alter the start and end date.
       $form['field_start_date']['widget'][0]['value']['#default_value'] = $start_date_timestamp_object;
       $form['field_end_date']['widget'][0]['value']['#default_value'] = $end_date_timestamp_object;
       $form['field_time']['widget'][0]['value']['#default_value'] = $start_date_timestamp_object;
       $form['field_time']['widget'][0]['end_value']['#default_value'] = $end_date_timestamp_object;
       // $form['title']['widget'][0]['value']['#default_value'] = $title;
-      // $form['title']['#disabled'] = TRUE;
-      
-      //Alter the internal audit field
+      // $form['title']['#disabled'] = TRUE;.
+      // Alter the internal audit field
       //  $form['field_audit_type']['widget']['#ajax'] = [
       //   'callback' => 'getAuditSubCategory',
       //   'wrapper' => 'audit-type',
       //   'event' => 'change',
-      // ];
-
-      //Alter for shift field.
+      // ];.
+      // Alter for shift field.
       // $form['field_select_audit']['widget']['#ajax'] = [
       //   'callback' => 'getShift',
       //   'wrapper' => 'shift',
       //   'event' => 'change',
-      // ];
-
-      //Alter if = system is selected
+      // ];.
+      // Alter if = system is selected
       // $form['field_internal_audit_type']['widget']['#ajax'] = [
       //   'callback' => 'getProcedures',
       //   'wrapper' => 'details',
       //   'event' => 'change',
       // ];
-      // // $form['field_internal_audit_type']['widget']['#disabled'] = TRUE;
-
+      // // $form['field_internal_audit_type']['widget']['#disabled'] = TRUE;.
       // $form['field_internal_audit_type']['audit_type_details'] = [
       //   '#attributes' => ['id' => 'details'],
       //   '#markup' => '',
       //   '#type' => 'container',
-      // ];
+      // ];.
     }
-    if($user_role == 'auditor' || $user_role == 'auditee'){
+    if ($user_role == 'auditor' || $user_role == 'auditee') {
       $entity_type_id = 'node';
       $bundle = 'planned_events';
       foreach (\Drupal::entityManager()->getFieldDefinitions($entity_type_id, $bundle) as $field_name => $field_definition) {
@@ -390,45 +383,45 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
           $bundleFields[$field_name]['type'] = $field_definition->getType();
           $bundleFields[$field_name]['label'] = $field_definition->getLabel();
           $form[$field_name]['#disabled'] = TRUE;
-          if($field_name == 'field_suggested_date' || $field_name == 'moderation_state'){
+          if ($field_name == 'field_suggested_date' || $field_name == 'moderation_state') {
             $form[$field_name]['#disabled'] = FALSE;
           }
         }
       }
     }
   }
-  if($form_id == 'node_planned_events_form'){
+  if ($form_id == 'node_planned_events_form') {
     $form['title']['widget'][0]['value']['#default_value'] = 'Audit Reference';
     $form['title']['#access'] = FALSE;
-    //$form['field_checklist']['#disabled'] = TRUE;
+    // $form['field_checklist']['#disabled'] = TRUE;.
     $form['field_audit_reasons']['#access'] = FALSE;
     $form['field_proceed_with_audit']['#access'] = FALSE;
-    if($id = \Drupal::request()->query->get('unit_reference')){
+    if ($id = \Drupal::request()->query->get('unit_reference')) {
       $node_object = Node::load($id);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
-    // $form['field_suggested_date']['#access'] = FALSE;
+    // $form['field_suggested_date']['#access'] = FALSE;.
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'planned_event_redirect';
       }
     }
-    if($user_role == 'mr_admin'){
-      $submit_functions =  $form['#validate'];
+    if ($user_role == 'mr_admin') {
+      $submit_functions = $form['#validate'];
       array_unshift($submit_functions, 'planned_audit_frequency_check');
       $form['#validate'] = $submit_functions;
     }
-    if($user_role == 'mr_admin'){
+    if ($user_role == 'mr_admin') {
       $form['field_audit_reasons']['#access'] = FALSE;
       $form['field_proceed_with_audit']['#access'] = FALSE;
       $form['field_suggested_date']['#access'] = FALSE;
     }
   }
-  if($form['#id'] == 'views-exposed-form-customer-manual-parts-product-listing'){
-     $form['title']['#autocomplete_route_name'] = 'aps_audit_planning.title_list';
+  if ($form['#id'] == 'views-exposed-form-customer-manual-parts-product-listing') {
+    $form['title']['#autocomplete_route_name'] = 'aps_audit_planning.title_list';
   }
-  if($form_id == 'node_procedures_form'){
-    if($id = \Drupal::request()->query->get('id')){
+  if ($form_id == 'node_procedures_form') {
+    if ($id = \Drupal::request()->query->get('id')) {
       $node_object = Node::load($id);
       $form['field_refere']['widget'][0]['target_id']['#default_value'] = $node_object;
     }
@@ -448,7 +441,7 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
       'event' => 'change',
     ];
   }
-  if ($form_id == 'node_planned_events_edit_form'){
+  if ($form_id == 'node_planned_events_edit_form') {
     $form['field_sections']['#disabled'] = TRUE;
     $form['field_list_of_process']['#disabled'] = TRUE;
     $form['field_sections']['#disabled'] = TRUE;
@@ -469,18 +462,17 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     // }
     // if($field_){
     //   $key_to_check = $node_data_obj->$field_->target_id;
-    // }
-    
+    // }.
     // $form['field_auditor']['widget']['#options'] = getAuditorList($key_to_check, 'auditor');
     // $form['field_select_auditee']['widget']['#options'] = getAuditorList($key_to_check, 'auditee');
-    // $form['field_other_users']['widget']['#options'] = getAuditorList($key_to_check, 'auditee-others');
+    // $form['field_other_users']['widget']['#options'] = getAuditorList($key_to_check, 'auditee-others');.
     if ($user_role != 'mr_admin' && $user_role != 'administrator') {
       $form['title']['#disabled'] = TRUE;
     }
-    if($user_role == 'mr_admin'){
+    if ($user_role == 'mr_admin') {
       // $form['field_select_auditee']['#disabled'] = TRUE;
       // $form['field_auditor']['#disabled'] = TRUE;
-      // $form['field_other_users']['#disabled'] = TRUE;
+      // $form['field_other_users']['#disabled'] = TRUE;.
       $form['field_audit_reasons']['#access'] = FALSE;
       $form['field_proceed_with_audit']['#access'] = FALSE;
       $form['field_suggested_date']['#access'] = FALSE;
@@ -490,36 +482,37 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
         }
       }
     }
-    if($user_role == 'auditor' || $user_role == 'auditee'){
+    if ($user_role == 'auditor' || $user_role == 'auditee') {
       $form['field_audit_reasons']['#access'] = FALSE;
       $form['field_proceed_with_audit']['#access'] = FALSE;
     }
     $form['field_shift']['widget']['#options'] = $form['field_shift']['widget']['#options'];
     $form['field_unit_reference']['#access'] = FALSE;
     $schedule_type = \Drupal::request()->query->get('schedule_type');
-    if($schedule_type == 'reschedule'){
+    if ($schedule_type == 'reschedule') {
       $config_factory = \Drupal::configFactory();
       $config = $config_factory->getEditable('aps_audit_planning.mandaysettings');
       $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
       $uri = explode('/', $current_uri);
       $query = \Drupal::database()->select('content_moderation_state_field_data', 'n');
-      $query->fields('n',['content_entity_revision_id', 'moderation_state']);
+      $query->fields('n', ['content_entity_revision_id', 'moderation_state']);
       $query->condition('n.moderation_state', 'release_audit');
       $query->condition('n.content_entity_id', $uri[1]);
       $vid = $query->execute()->fetchAll();
       $node_revison_load = node_revision_load($vid[0]->content_entity_revision_id);
       $update_mandays_from_rev = $node_revison_load->field_total_mandays->value;
-      $audit_type =  $node_revison_load->field_internal_audit_type->value;
-      if($audit_type = 'systems'){
+      $audit_type = $node_revison_load->field_internal_audit_type->value;
+      if ($audit_type = 'systems') {
         $config_to_use = 'system_mandays_updated';
-      }elseif ($audit_type = 'process') {
+      }
+      elseif ($audit_type = 'process') {
         $config_to_use = 'process_mandays_updated';
       }
       elseif ($audit_type = 'product') {
-       $config_to_use = 'product_mandays_updated';
+        $config_to_use = 'product_mandays_updated';
       }
       $get_mandays_from_config = $config->get($config_to_use);
-      $config->set($config_to_use,  $get_mandays_from_config + $update_mandays_from_rev);
+      $config->set($config_to_use, $get_mandays_from_config + $update_mandays_from_rev);
       $config->save();
       $form['moderation_state']['widget'][0]['state']['#default_value'] = 'reschedule';
       foreach (array_keys($form['actions']) as $action) {
@@ -530,47 +523,60 @@ function aps_audit_planning_form_alter(&$form, FormStateInterface $form_state, $
     }
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
     $uri = explode('/', $current_uri);
-    if(is_numeric($uri[1])){
-      $node_object = Node::load($uri[1]);
-      if($node_object->get('moderation_state')->value == 'scheduled' || $node_object->get('moderation_state')->value == 'reschedule'){
-        if($schedule_type == ''){
-          $form['actions']['release_audit'] = array(
-          '#type' => 'submit',
-          '#weight' => 999,
-          '#limit_validation_errors' => array() ,
-          '#button_type' => 'submit',
-          '#submit' => array(
-            'releaseAuditCallback'
-          ),
-          '#attributes' => [
-            'class' => [
-              'use-ajax',
-            ],
-          ],
-          '#value' => t('Release Audit') ,
-        );
-        }
-      }
-    }
+    // if(is_numeric($uri[1])){
+    //   $node_object = Node::load($uri[1]);
+    //   if($node_object->get('moderation_state')->value == 'scheduled' || $node_object->get('moderation_state')->value == 'reschedule'){
+    //     if($schedule_type == ''){
+    //       $form['actions']['release_audit'] = array(
+    //       '#type' => 'submit',
+    //       '#weight' => 999,
+    //       '#limit_validation_errors' => array() ,
+    //       '#button_type' => 'submit',
+    //       '#submit' => array(
+    //         'releaseAuditCallback'
+    //       ),
+    //       '#attributes' => [
+    //         'class' => [
+    //           'use-ajax',
+    //         ],
+    //       ],
+    //       '#value' => t('Release Audit') ,
+    //     );
+    //     }
+    //   }
+    // }.
   }
 }
 
+/**
+ *
+ */
 function getSectionfromdepartment(array $form, FormStateInterface $form_state) {
-  if(count($form_state->getValue('field_department')) >= 0){
-  	$department_array = $form_state->getValue('field_department')[0];
-  	$key = $department_array['target_id'];
+  if (count($form_state->getValue('field_department')) >= 0) {
+    $department_array = $form_state->getValue('field_department')[0];
+    $key = $department_array['target_id'];
     $form['field_sections']['widget']['#options'] = getSectionDropdownOptions($key);
-   }
-   return $form['field_sections'];
+  }
+  return $form['field_sections'];
 }
 
+/**
+ *
+ */
 function getlocationFromcustomer(array $form, FormStateInterface $form_state) {
-  return $form;  
-}
-function sectionajaxrunvalidate(array $form, FormStateInterface $form_state){
   return $form;
 }
 
+/**
+ *
+ */
+function sectionajaxrunvalidate(array $form, FormStateInterface $form_state) {
+  return $form;
+}
+
+/**
+ *
+ */
 function getProcessforCustomerLine($unit_reference) {
   $query = \Drupal::entityQuery('node');
   $query->condition('type', 'process');
@@ -584,126 +590,148 @@ function getProcessforCustomerLine($unit_reference) {
   return $entity_title;
 }
 
-
+/**
+ *
+ */
 function getProcessfromsection(array $form, FormStateInterface $form_state) {
-  if(count($form_state->getValue('field_sections')) >= 0){
-  $department_array = $form_state->getValue('field_sections')[0];
-  $key = $department_array['target_id'];
-  $form['field_list_of_process']['widget']['#options'] = getProcessfromOptionsection($key);
- }
- return $form['field_list_of_process'];
+  if (count($form_state->getValue('field_sections')) >= 0) {
+    $department_array = $form_state->getValue('field_sections')[0];
+    $key = $department_array['target_id'];
+    $form['field_list_of_process']['widget']['#options'] = getProcessfromOptionsection($key);
+  }
+  return $form['field_list_of_process'];
 }
 
+/**
+ *
+ */
 function getAuditorfromProcess(array $form, FormStateInterface $form_state) {
   $ajax_response = new AjaxResponse();
   $form_values = $form_state->getUserInput();
-  $ajax_response->addCommand(new HtmlCommand('#auditor-list',$form['field_auditor']['widget']));
+  $ajax_response->addCommand(new HtmlCommand('#auditor-list', $form['field_auditor']['widget']));
   $ajax_response->addCommand(new AppendCommand('#auditor-list', '<div id="user-details" data-drupal-selector="edit-user-details" class="js-form-wrapper form-group col-auto"></div>'));
-  $ajax_response->addCommand(new HtmlCommand('#auditee-list',$form['field_select_auditee']['widget']));
-  $ajax_response->addCommand(new HtmlCommand('#auditee-other',$form['field_other_users']['widget']));
-  if($form_values['field_list_of_process'] != '_none'){
-    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'removeAttr', array('disabled')));
-    $ajax_response->addCommand(new InvokeCommand('#auditor-list select', 'removeAttr', array('disabled')));
-    $ajax_response->addCommand(new InvokeCommand('#auditee-other select', 'removeAttr', array('disabled')));
+  $ajax_response->addCommand(new HtmlCommand('#auditee-list', $form['field_select_auditee']['widget']));
+  $ajax_response->addCommand(new HtmlCommand('#auditee-other', $form['field_other_users']['widget']));
+  if ($form_values['field_list_of_process'] != '_none') {
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'removeAttr', ['disabled']));
+    $ajax_response->addCommand(new InvokeCommand('#auditor-list select', 'removeAttr', ['disabled']));
+    $ajax_response->addCommand(new InvokeCommand('#auditee-other select', 'removeAttr', ['disabled']));
   }
-  if($form_values['field_list_of_systems'] != '_none' || $form_values['field_list_of_process'] != '_none'){
-    $ajax_response->addCommand(new InvokeCommand('#select-other input', 'removeAttr' , ['checked']));
+  if ($form_values['field_list_of_systems'] != '_none' || $form_values['field_list_of_process'] != '_none') {
+    $ajax_response->addCommand(new InvokeCommand('#select-other input', 'removeAttr', ['checked']));
   }
   return $ajax_response;
 }
 
+/**
+ *
+ */
 function getAuditorfromProcedure(array $form, FormStateInterface $form_state) {
   $ajax_response = new AjaxResponse();
   $form_values = $form_state->getUserInput();
-  $ajax_response->addCommand(new HtmlCommand('#auditor-list',$form['field_auditor']['widget']));
-   $ajax_response->addCommand(new AppendCommand('#auditor-list', '<div id="user-details" data-drupal-selector="edit-user-details" class="js-form-wrapper form-group col-auto"></div>'));
-  $ajax_response->addCommand(new HtmlCommand('#auditee-list',$form['field_select_auditee']['widget']));
-  $ajax_response->addCommand(new HtmlCommand('#auditee-other',$form['field_other_users']['widget']));
-  if($form_values['field_list_of_systems'] != '_none'){
-    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'removeAttr', array('disabled')));
-    $ajax_response->addCommand(new InvokeCommand('#auditor-list select', 'removeAttr', array('disabled')));
-    $ajax_response->addCommand(new InvokeCommand('#auditee-other select', 'removeAttr', array('disabled')));
+  $ajax_response->addCommand(new HtmlCommand('#auditor-list', $form['field_auditor']['widget']));
+  $ajax_response->addCommand(new AppendCommand('#auditor-list', '<div id="user-details" data-drupal-selector="edit-user-details" class="js-form-wrapper form-group col-auto"></div>'));
+  $ajax_response->addCommand(new HtmlCommand('#auditee-list', $form['field_select_auditee']['widget']));
+  $ajax_response->addCommand(new HtmlCommand('#auditee-other', $form['field_other_users']['widget']));
+  if ($form_values['field_list_of_systems'] != '_none') {
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'removeAttr', ['disabled']));
+    $ajax_response->addCommand(new InvokeCommand('#auditor-list select', 'removeAttr', ['disabled']));
+    $ajax_response->addCommand(new InvokeCommand('#auditee-other select', 'removeAttr', ['disabled']));
   }
-  if($form_values['field_list_of_systems'] != '_none' || $form_values['field_list_of_process'] != '_none'){
-    $ajax_response->addCommand(new InvokeCommand('#select-other input', 'removeAttr' , ['checked']));
+  if ($form_values['field_list_of_systems'] != '_none' || $form_values['field_list_of_process'] != '_none') {
+    $ajax_response->addCommand(new InvokeCommand('#select-other input', 'removeAttr', ['checked']));
   }
   return $ajax_response;
 }
 
+/**
+ *
+ */
 function emptyFieldItem(array $form, FormStateInterface $form_state) {
   $ajax_response = new AjaxResponse();
   $form_values = $form_state->getUserInput();
-  if($form_values['field_select_from_others']['value'] == 1){
-    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'val' , ['_none']));
-    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'attr', array('disabled', true)));
-    $ajax_response->addCommand(new InvokeCommand('#auditee-list', 'removeAttr', array('required')));
-    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'removeAttr', array('required')));
+  if ($form_values['field_select_from_others']['value'] == 1) {
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'val', ['_none']));
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'attr', ['disabled', TRUE]));
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list', 'removeAttr', ['required']));
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'removeAttr', ['required']));
   }
-  else{
-    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'attr', array('disabled', false)));
-     $ajax_response->addCommand(new InvokeCommand('#auditee-list', 'attr', array('required', true)));
-     $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'attr', array('required', true)));
+  else {
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'attr', ['disabled', FALSE]));
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list', 'attr', ['required', TRUE]));
+    $ajax_response->addCommand(new InvokeCommand('#auditee-list select', 'attr', ['required', TRUE]));
   }
 
-  if($form_values['field_list_of_systems'] == '_none' || $form_values['field_list_of_process'] == '_none'){
-    $ajax_response->addCommand(new InvokeCommand('#select-other input', 'removeAttr' , ['checked']));
+  if ($form_values['field_list_of_systems'] == '_none' || $form_values['field_list_of_process'] == '_none') {
+    $ajax_response->addCommand(new InvokeCommand('#select-other input', 'removeAttr', ['checked']));
   }
   return $ajax_response;
 }
 
-
+/**
+ *
+ */
 function getChecklist(array $form, FormStateInterface $form_state) {
-  if(count($form_state->getValue('field_list_of_systems'))){
+  if (count($form_state->getValue('field_list_of_systems'))) {
     $system_array = $form_state->getValue('field_list_of_systems')[0];
     $key = $system_array['target_id'];
     $form['field_checklist']['widget']['#options'] = getChecklistData($key);
-   }
-   return $form['field_checklist'];
+  }
+  return $form['field_checklist'];
 }
 
+/**
+ *
+ */
 function changeAuditeeOptions(array $form, FormStateInterface $form_state) {
-  if(count($form_state->getValue('field_audit_type'))){
+  if (count($form_state->getValue('field_audit_type'))) {
     $audit_array = $form_state->getValue('field_audit_type')[0];
     $key = $audit_array['value'];
-    if($key == 'external' || $key == 'supplier' || $key == 'customer'){
+    if ($key == 'external' || $key == 'supplier' || $key == 'customer') {
       $form['field_select_auditee']['widget']['#title'] = 'Select MR';
     }
     $form['field_select_auditee']['widget']['#options'] = getMRlist($key);
     $form['field_select_auditee']['widget']['#default_value'] = '_none';
-   }
-   return $form['field_select_auditee'];
+  }
+  return $form['field_select_auditee'];
 }
 
-// function disableAuditorfield(array $form, FormStateInterface $form_state) {
-
-//   if(count($form_state->getValue('field_audit_type'))){
-//     $audit_array = $form_state->getValue('field_audit_type')[0];
-//     $key = $audit_array['value'];
-//     if($key == 'internal' || $key == 'supplier' || $key == 'customer'){
-//       $form['field_auditor']['widget']['#required'] = FALSE;
-//     }
-//    }
-//    return $form['field_auditor'];
-// }
-
+/**
+ * Function disableAuditorfield(array $form, FormStateInterface $form_state) {
+ * if(count($form_state->getValue('field_audit_type'))){
+ * $audit_array = $form_state->getValue('field_audit_type')[0];
+ * $key = $audit_array['value'];
+ * if($key == 'internal' || $key == 'supplier' || $key == 'customer'){
+ * $form['field_auditor']['widget']['#required'] = FALSE;
+ * }
+ * }
+ * return $form['field_auditor'];
+ * }.
+ */
 function getSectionfromdepartmentProcedure(array $form, FormStateInterface $form_state) {
-  if(count($form_state->getValue('field_department'))){
+  if (count($form_state->getValue('field_department'))) {
     $department_array = $form_state->getValue('field_department')[0];
     $key = $department_array['target_id'];
     $form['field_section_type']['widget']['#options'] = getSectionDropdownOptions($key);
-   }
-   return $form['field_section_type'];
+  }
+  return $form['field_section_type'];
 }
 
+/**
+ *
+ */
 function getSectionfromdepartmentDept(array $form, FormStateInterface $form_state) {
-  if(count($form_state->getValue('field_business_process'))){
+  if (count($form_state->getValue('field_business_process'))) {
     $department_array = $form_state->getValue('field_business_process')[0];
     $key = $department_array['target_id'];
     $form['field_department']['widget']['#options'] = getDeptDropdownOptions($key);
-   }
-   return $form['field_department'];
+  }
+  return $form['field_department'];
 }
 
+/**
+ *
+ */
 function getAuditSubCategory(array $form, FormStateInterface $form_state) {
   // $ajax_response = new AjaxResponse();
   // if(count($form_state->getValue('field_audit_type'))){
@@ -714,11 +742,14 @@ function getAuditSubCategory(array $form, FormStateInterface $form_state) {
   // if($form_state->getValue('field_audit_type')[0]['value'] == ''){
   //    $ajax_response->addCommand(new InvokeCommand('#edit-field-internal-audit-type', 'attr', array('disabled', true)));
   // }
-  // return $ajax_response;
+  // return $ajax_response;.
 }
 
+/**
+ *
+ */
 function getProcedures(array $form, FormStateInterface $form_state) {
-  if(count($form_state->getValue('field_internal_audit_type'))){
+  if (count($form_state->getValue('field_internal_audit_type'))) {
     $type = $form_state->getValue('field_internal_audit_type')[0]['value'];
     switch ($type) {
       case 'systems':
@@ -735,31 +766,34 @@ function getProcedures(array $form, FormStateInterface $form_state) {
         $url = '/internal-audit-product-export';
         $options = getAuditOPtions($type, $url);
         break;
-      
+
       default:
 
         break;
     }
 
-    $form['audit_type_details'] = array(
-        '#type' => 'fieldset', 
-        '#title' => t('Audit Details'), 
-        '#attributes' => ['id' => 'details'], 
-        '#collapsible' => TRUE, 
-        '#collapsed' => FALSE,
-      );
+    $form['audit_type_details'] = [
+      '#type' => 'fieldset',
+      '#title' => t('Audit Details'),
+      '#attributes' => ['id' => 'details'],
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+    ];
 
-    $form['audit_type_details']['details'] = array(
+    $form['audit_type_details']['details'] = [
       '#type' => 'select',
       '#options' => $options,
       '#required' => TRUE,
-      '#title' => t('List of '. $type),
-      );
+      '#title' => t('List of ' . $type),
+    ];
   }
 
   return $form['audit_type_details'];
 }
 
+/**
+ *
+ */
 function getShift(array $form, FormStateInterface $form_state) {
   // $ajax_response = new AjaxResponse();
   // $vid = 'shift';
@@ -781,13 +815,16 @@ function getShift(array $form, FormStateInterface $form_state) {
   //     $ajax_response->addCommand(new InvokeCommand('#'.$id, 'attr', array('checked', true)));
   //    }
   //  }
-  //  return $ajax_response;
+  //  return $ajax_response;.
 }
 
+/**
+ *
+ */
 function getUserINfo(array $form, FormStateInterface $form_state) {
   // $ajax_response = new AjaxResponse();
   $user_score = '';
-  if($form_state->getValue('field_auditor')[0]){
+  if ($form_state->getValue('field_auditor')[0]) {
     $user_array = $form_state->getValue('field_auditor')[0];
     $uid = $user_array['target_id'];
     $user_object = User::load($uid);
@@ -796,87 +833,93 @@ function getUserINfo(array $form, FormStateInterface $form_state) {
       $count_values = count($value);
       $property = isset($value[0]['value']) ? 'value' : 'target_id';
       if (!empty($value[0][$property])) {
-        if($count_values > 1){
+        if ($count_values > 1) {
           foreach ($value as $no => $name) {
             $profile[$key][$no] = $value[$no][$property];
           }
         }
-        else{
+        else {
           $profile[$key] = $value[0][$property];
         }
       }
     }
-    if($profile['field_functions']){
+    if ($profile['field_functions']) {
       $score = Paragraph::load($profile['field_functions'])->get('field_score')->value;
       $function = Paragraph::load($profile['field_functions'])->get('field_functions_qualified')->value;
-      $user_score = '<b>Function Name: </b>'.$function.'<br> <b>Score: </b>'.$score.'</br>-------------<br>';
+      $user_score = '<b>Function Name: </b>' . $function . '<br> <b>Score: </b>' . $score . '</br>-------------<br>';
     }
-    else{
+    else {
       $user_score = "Not Available";
     }
 
-    $form['user_details'] = array(
-      '#type' => 'fieldset', 
-      '#title' => t('User Details'), 
-       '#attributes' => ['id' => 'user-details'], 
-      '#collapsible' => TRUE, 
+    $form['user_details'] = [
+      '#type' => 'fieldset',
+      '#title' => t('User Details'),
+      '#attributes' => ['id' => 'user-details'],
+      '#collapsible' => TRUE,
       '#collapsed' => FALSE,
-    );
+    ];
 
-    $form['user_details']['data'] = array(
+    $form['user_details']['data'] = [
       '#type' => 'table',
-      '#header' => array(
-          t('Name'),
-          t('Score'),
-          t('Verify'),
-      ),
-    );
+      '#header' => [
+        t('Name'),
+        t('Score'),
+        t('Verify'),
+      ],
+    ];
 
-   $form['user_details']['data'][0]['name'] = array(
+    $form['user_details']['data'][0]['name'] = [
       '#type' => 'item',
       '#title' => t('Name'),
       '#markup' => $profile['name'],
       '#title_display' => 'invisible',
-    );
-    $form['user_details']['data'][0]['score'] = array(
+    ];
+    $form['user_details']['data'][0]['score'] = [
       '#type' => 'item',
       '#title' => t('Score'),
       '#markup' => $user_score,
       '#title_display' => 'invisible',
-    );
-    $form['user_details']['data'][0]['verify'] = array(
+    ];
+    $form['user_details']['data'][0]['verify'] = [
       '#type' => 'checkbox',
       '#required' => TRUE,
       '#title' => t('Verify'),
       '#title_display' => 'invisible',
-    );
-   }
-   return $form['user_details'];
+    ];
+  }
+  return $form['user_details'];
 }
 
+/**
+ *
+ */
 function getSectionDropdownOptions($key = '') {
-	if($key){
-	  $query = \Drupal::database()->select('node_field_data', 'n');
-	  $query->join('node__field_select_department_type', 'rf', 'n.nid = rf.entity_id');
-	  $query->fields('rf',['entity_id', 'bundle']);
-	  $query->condition('rf.bundle', 'section');
-	  $query->condition('rf.field_select_department_type_target_id', $key);
-	  $nids = $query->execute()->fetchAll();
-	}
-    $entity_title['_none'] = "- None -";
-    foreach ($nids as $entity) {
-      $node_object = Node::load($entity->entity_id);
-      $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
-    }
-    return $entity_title;
+  if ($key) {
+    $query = \Drupal::database()->select('node_field_data', 'n');
+    $query->join('node__field_select_department_type', 'rf', 'n.nid = rf.entity_id');
+    $query->fields('rf', ['entity_id', 'bundle']);
+    $query->condition('rf.bundle', 'section');
+    $query->condition('rf.field_select_department_type_target_id', $key);
+    $nids = $query->execute()->fetchAll();
   }
+  $entity_title['_none'] = "- None -";
+  foreach ($nids as $entity) {
+    $node_object = Node::load($entity->entity_id);
+    $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
+  }
+  return $entity_title;
+}
 
+/**
+ *
+ */
 function getProcessfromOptionsection($key = '') {
-  if($key){
-      $query = \Drupal::entityQuery('node');
-      $query->condition('type', 'process');
-      $query->condition('field_section', $key);
-      $nids = $query->execute();
+  if ($key) {
+    $query = \Drupal::entityQuery('node');
+    $query->condition('type', 'process');
+    $query->condition('field_section', $key);
+    $nids = $query->execute();
     // $query = \Drupal::database()->select('node_field_data', 'n');
     // $query->join('node__field_select_section', 'rf', 'n.nid = rf.entity_id');
     // $query->fields('rf',['entity_id', 'bundle']);
@@ -892,40 +935,46 @@ function getProcessfromOptionsection($key = '') {
   return $entity_title;
 }
 
+/**
+ *
+ */
 function getDeptDropdownOptions($key = '') {
-  if($key){
+  if ($key) {
     $query = \Drupal::database()->select('node_field_data', 'n');
     $query->join('node__field_refere', 'rf', 'n.nid = rf.field_refere_target_id');
-    $query->fields('rf',['entity_id', 'bundle']);
+    $query->fields('rf', ['entity_id', 'bundle']);
     $query->condition('rf.bundle', 'department');
     $query->condition('rf.field_refere_target_id', $key);
     $nids = $query->execute()->fetchAll();
   }
-    
-    $entity_title['_none'] = "- None -";
-    foreach ($nids as $entity) {
-      $node_object = Node::load($entity->entity_id);
-      $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
-    }
-    return $entity_title;
+
+  $entity_title['_none'] = "- None -";
+  foreach ($nids as $entity) {
+    $node_object = Node::load($entity->entity_id);
+    $entity_title[$node_object->get('nid')->value] = $node_object->get('title')->value;
+  }
+  return $entity_title;
 }
 
-function getAuditorList($key = '',$type =NULL) {
+/**
+ *
+ */
+function getAuditorList($key = '', $type = NULL) {
   $auditor_list = [];
   $section_list = [];
   $auditor_list['_none'] = '-None-';
-  if($key == '_none'){
+  if ($key == '_none') {
     $check_key = FALSE;
     return $auditor_list;
   }
-  else{
+  else {
     $check_key = TRUE;
   }
-  
-  if($type == 'auditor' && $check_key == TRUE){
-    if($key){
+
+  if ($type == 'auditor' && $check_key == TRUE) {
+    if ($key) {
       $node_object = Node::load($key);
-      if($node_object->bundle() == 'assembly'){
+      if ($node_object->bundle() == 'assembly') {
         $section_reference = $node_object->field_select_section->target_id;
         $department_refe = Node::load($section_reference)->field_select_department_type->target_id;
       }
@@ -941,7 +990,7 @@ function getAuditorList($key = '',$type =NULL) {
       $query = \Drupal::entityQuery('user');
       $query->condition('field_sections', $section_reference);
       $query->condition('roles', 'auditor');
-      $section_users = $query->execute();  
+      $section_users = $query->execute();
 
       $users = \Drupal::entityQuery('user');
       $users->condition('field_reference_id', $unit_reference);
@@ -955,9 +1004,9 @@ function getAuditorList($key = '',$type =NULL) {
     }
   }
   elseif ($type == 'auditee'&& $check_key == TRUE) {
-    if($key){
+    if ($key) {
       $node_object = Node::load($key);
-      if($node_object->bundle() == 'assembly'){
+      if ($node_object->bundle() == 'assembly') {
         $section_reference = $node_object->field_select_section->target_id;
         $department_refe = Node::load($section_reference)->field_select_department_type->target_id;
       }
@@ -978,7 +1027,7 @@ function getAuditorList($key = '',$type =NULL) {
       $users->condition('field_department', $department_refe);
       $users->condition('roles', 'auditee');
       $users_list = $users->execute();
-  
+
       $user_data = array_merge($users_list, $section_users);
       foreach ($section_users as $user_id => $user_value) {
         $auditor_list[$user_value] = User::load($user_value)->name->value;
@@ -987,9 +1036,9 @@ function getAuditorList($key = '',$type =NULL) {
     $auditor_list = array_unique($auditor_list);
   }
   elseif ($type == 'auditee-others' && $check_key == TRUE) {
-    if($key){
+    if ($key) {
       $node_object = Node::load($key);
-      if($node_object->bundle() == 'assembly'){
+      if ($node_object->bundle() == 'assembly') {
         $section_reference = $node_object->field_select_section->target_id;
         $department_refe = Node::load($section_reference)->field_select_department_type->target_id;
       }
@@ -1012,7 +1061,7 @@ function getAuditorList($key = '',$type =NULL) {
       $users_list = $users->execute();
 
       $user_data = array_diff($users_list, $section_users);
-      
+
       foreach ($user_data as $user_id => $user_value) {
         $auditor_list[$user_value] = User::load($user_value)->name->value;
       }
@@ -1022,11 +1071,14 @@ function getAuditorList($key = '',$type =NULL) {
   return $auditor_list;
 }
 
+/**
+ *
+ */
 function getAuditOPtions($type, $url) {
   global $base_url;
-  if($type){
+  if ($type) {
     $client = \Drupal::httpClient();
-    $request = $client->get($base_url.$url);
+    $request = $client->get($base_url . $url);
     $response = $request->getBody();
     $data = json_decode($response);
     foreach ($data as $key => $value) {
@@ -1036,36 +1088,42 @@ function getAuditOPtions($type, $url) {
   return $options;
 }
 
-function getChecklistData($key){
+/**
+ *
+ */
+function getChecklistData($key) {
   $data = [];
   $query = \Drupal::database()->select('node__field_list_of_systems', 'cm');
-  $query->fields('cm',['field_list_of_systems_target_id', 'entity_id']);
+  $query->fields('cm', ['field_list_of_systems_target_id', 'entity_id']);
   $query->condition('cm.bundle', 'internal_audit');
   $query->condition('cm.field_list_of_systems_target_id', $key);
   $nids = $query->execute()->fetchAll();
   foreach ($nids as $key => $value) {
-     $title = Node::load($value->entity_id);
-     $data[$value->entity_id] = $title->title->value;
+    $title = Node::load($value->entity_id);
+    $data[$value->entity_id] = $title->title->value;
   }
   return $data;
 }
 
-function getMRlist($select_value){
+/**
+ *
+ */
+function getMRlist($select_value) {
   $route_name = \Drupal::routeMatch()->getRouteName();
-  if($route_name == 'entity.node.edit_form'){
+  if ($route_name == 'entity.node.edit_form') {
     $node = \Drupal::routeMatch()->getParameter('node');
-    if ($node instanceof \Drupal\node\NodeInterface) {
+    if ($node instanceof NodeInterface) {
       $nid = $node->id();
       $unit_reference = $node->field_refere->target_id;
     }
   }
-  else{
+  else {
     $unit_reference = \Drupal::request()->query->get('unit_reference');
   }
 
   $data = [];
   $user_count_query = \Drupal::database()->select('user__field_reference_id', 'n');
-  $user_count_query->fields('n', ['field_reference_id_target_id','entity_id']);
+  $user_count_query->fields('n', ['field_reference_id_target_id', 'entity_id']);
   $user_count_query->condition('n.bundle', 'user');
   $user_count_query->condition('n.field_reference_id_target_id', $unit_reference);
   $users = $user_count_query->execute()->fetchAll();
@@ -1073,13 +1131,13 @@ function getMRlist($select_value){
   $data['_none'] = "- None -";
   foreach ($users as $key => $value) {
     $mr_user = User::load($value->entity_id);
-    if($select_value == 'internal' || $select_value == ''){
-       if($mr_user->roles->target_id == 'auditee'){
-         $data[$mr_user->uid->value] = $mr_user->name->value;
-       }
+    if ($select_value == 'internal' || $select_value == '') {
+      if ($mr_user->roles->target_id == 'auditee') {
+        $data[$mr_user->uid->value] = $mr_user->name->value;
+      }
     }
-    else{
-      if($mr_user->roles->target_id == 'mr_admin'){
+    else {
+      if ($mr_user->roles->target_id == 'mr_admin') {
         $data[$mr_user->uid->value] = $mr_user->name->value;
       }
     }
@@ -1087,8 +1145,11 @@ function getMRlist($select_value){
   return $data;
 }
 
-function releaseAuditCallback(&$form, \Drupal\Core\Form\FormStateInterface &$form_state){
-  if($unit_reference = \Drupal::request()->query->get('unit_reference')){
+/**
+ *
+ */
+function releaseAuditCallback(&$form, FormStateInterface &$form_state) {
+  if ($unit_reference = \Drupal::request()->query->get('unit_reference')) {
     $form_input_values = $form_state->getUserInput();
     $response = new AjaxResponse();
     $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
@@ -1100,32 +1161,32 @@ function releaseAuditCallback(&$form, \Drupal\Core\Form\FormStateInterface &$for
     $config = $node_storage->load(key($mandays_settings_id));
     $field_start_date = timestampFromDate($form_input_values['field_start_date'][0]['value']['date']);
     $field_end_date = timestampFromDate($form_input_values['field_end_date'][0]['value']['date']);
-    if($uri[1]){
+    if ($uri[1]) {
       $node_object = Node::load($uri[1]);
       $node_object->set('field_start_date', $field_start_date);
       $node_object->set('field_end_date', $field_end_date);
       $node_object->set('moderation_state', 'release_audit');
     }
 
-    if($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'systems'){
-      $date_difference =  abs($field_end_date - $field_start_date);
-      $years = floor($date_difference / (365*60*60*24));
-      $months = floor(($date_difference - $years * 365*60*60*24) / (30*60*60*24));
-      $total_mandays = floor(($date_difference - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24)); 
+    if ($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'systems') {
+      $date_difference = abs($field_end_date - $field_start_date);
+      $years = floor($date_difference / (365 * 60 * 60 * 24));
+      $months = floor(($date_difference - $years * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
+      $total_mandays = floor(($date_difference - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
       $get_system_mandays_from_unit = $config->get('field_system_mandays_updated')->value;
-      if($get_system_mandays_from_unit >= $total_mandays ){
+      if ($get_system_mandays_from_unit >= $total_mandays) {
         $node_object->set('field_total_mandays', $total_mandays);
-        $config->set('field_system_mandays_updated',  $get_system_mandays_from_unit - $total_mandays);
+        $config->set('field_system_mandays_updated', $get_system_mandays_from_unit - $total_mandays);
       }
-      else{
+      else {
         $node_object->set('field_total_mandays', 0);
         $config->set('field_system_mandays_updated', 0);
       }
     }
     elseif ($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'process') {
       $unit_reference = $node_object->field_refere->target_id;
-      $get_total_process_assembly = count(getAuditOPtions('process','/rest-export-system/'.$unit_reference.'?type[]=assembly'));
-      $get_total_process_manufacturing = count(getAuditOPtions('process','/rest-export-system/'.$unit_reference.'?type[]=manufacturing_process'));
+      $get_total_process_assembly = count(getAuditOPtions('process', '/rest-export-system/' . $unit_reference . '?type[]=assembly'));
+      $get_total_process_manufacturing = count(getAuditOPtions('process', '/rest-export-system/' . $unit_reference . '?type[]=manufacturing_process'));
       $total_process_mandays = getMandaysFromAuditType('process', $get_total_process_manufacturing, $get_total_process_assembly, NULL);
       $config->set('field_process_mandays_standard', $total_process_mandays);
       $config->set('field_process_mandays_updated', $total_process_mandays);
@@ -1135,7 +1196,7 @@ function releaseAuditCallback(&$form, \Drupal\Core\Form\FormStateInterface &$for
     elseif ($form_input_values['field_audit_type'] == 'internal' && $form_input_values['field_internal_audit_type'] == 'product') {
       $unit_reference = $node_object->field_refere->target_id;
       $query = \Drupal::database()->select('customer_manual_parts__field_reference_id', 'cm');
-      $query->fields('cm',['field_reference_id_target_id', 'entity_id']);
+      $query->fields('cm', ['field_reference_id_target_id', 'entity_id']);
       $query->condition('cm.field_reference_id_target_id', $unit_reference);
       $nids = $query->execute()->fetchAll();
       $get_total_product = count($nids);
@@ -1151,7 +1212,10 @@ function releaseAuditCallback(&$form, \Drupal\Core\Form\FormStateInterface &$for
   }
 }
 
-function save_user_data(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+/**
+ *
+ */
+function save_user_data(array $form, FormStateInterface $form_state) {
   global $base_url;
   $form_values = $form_state->getValues();
   // print_r(array_keys($form_values));
@@ -1159,68 +1223,74 @@ function save_user_data(array $form, \Drupal\Core\Form\FormStateInterface $form_
   // die();
   $id = \Drupal::request()->query->get('unit_reference');
   $node = \Drupal::routeMatch()->getParameter('node');
-  $event_id = (int)$node->id();
-  if($form_values['field_select_from_others']['value'] == 1){
+  $event_id = (int) $node->id();
+  if ($form_values['field_select_from_others']['value'] == 1) {
     $curent_nid = Node::load($event_id);
     $curent_nid->set('field_selected_auditee', $form_values['field_other_users'][0]['target_id']);
     $curent_nid->save();
   }
-  else{
+  else {
     $curent_nid = Node::load($event_id);
     $curent_nid->set('field_selected_auditee', $form_values['field_select_auditee'][0]['target_id']);
     $curent_nid->save();
   }
-  $response = Url::fromUserInput('/audit-planning/'.$id);
+  $response = Url::fromUserInput('/audit-planning/' . $id);
   $form_state->setRedirectUrl($response);
 }
 
-function planned_event_redirect(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
-  //Send Mail to the Assigned Auditee And auditor About the audit.
+/**
+ *
+ */
+function planned_event_redirect(array $form, FormStateInterface $form_state) {
+  // Send Mail to the Assigned Auditee And auditor About the audit.
   global $base_url;
   $form_values = $form_state->getValues();
   $id = \Drupal::request()->query->get('unit_reference');
-  if($form_values['field_select_from_others']['value'] == 1){
+  if ($form_values['field_select_from_others']['value'] == 1) {
     $curent_nid = Node::load($form_values['nid']);
     $curent_nid->set('field_selected_auditee', $form_values['field_other_users'][0]['target_id']);
     $curent_nid->save();
   }
-  else{
+  else {
     $curent_nid = Node::load($form_values['nid']);
     $curent_nid->set('field_selected_auditee', $form_values['field_select_auditee'][0]['target_id']);
     $curent_nid->save();
   }
-  if(count($form_values['field_auditor']) > 0){
+  if (count($form_values['field_auditor']) > 0) {
     $auditor = User::load($form_values['field_auditor'][0]['target_id']);
     $user_load[$form_values['field_auditor'][0]['target_id']] = $auditor->mail->value;
   }
-  if(count($form_values['field_select_auditee']) > 0){
+  if (count($form_values['field_select_auditee']) > 0) {
     $auditee = User::load($form_values['field_select_auditee'][0]['target_id']);
     $user_load[$form_values['field_select_auditee'][0]['target_id']] = $auditee->mail->value;
   }
-  if(count($form_values['field_department']) > 0){
+  if (count($form_values['field_department']) > 0) {
     $department = User::load($form_values['field_department'][0]['target_id']);
     $user_load[$form_values['field_department'][0]['target_id']] = $department->mail->value;
   }
-  if(count($form_values['field_sections']) > 0){
+  if (count($form_values['field_sections']) > 0) {
     $sections = User::load($form_values['field_sections'][0]['target_id']);
     $user_load[$form_values['field_sections'][0]['target_id']] = $sections->mail->value;
   }
   $url_options = ['node' => $form_values['nid']];
-  $audit_link = $base_url.Url::fromUserInput('/planned-audit-listing/'.$id)->toString();
+  $audit_link = $base_url . Url::fromUserInput('/planned-audit-listing/' . $id)->toString();
   $message = 'Hi,
-    You have been Assigned an Audit, Please Check your Dashboard or Go to the following Url ('.$audit_link.') form Browser, After Login.
+    You have been Assigned an Audit, Please Check your Dashboard or Go to the following Url (' . $audit_link . ') form Browser, After Login.
   ';
   $subject = 'Audit Planning';
   foreach ($user_load as $user => $mails) {
     sendEmail('aps_audit_planning', 'audit-planning', $mails, $message, $subject);
-    notify($user, $id , $message);
+    notify($user, $id, $message);
   }
   $id = \Drupal::request()->query->get('unit_reference');
-  $response = Url::fromUserInput('/audit-planning/'.$id);
+  $response = Url::fromUserInput('/audit-planning/' . $id);
   $form_state->setRedirectUrl($response);
 }
 
-function notify_on_reschedule(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+/**
+ *
+ */
+function notify_on_reschedule(array $form, FormStateInterface $form_state) {
   global $base_url;
   $unit_reference = \Drupal::request()->query->get('unit_reference');
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
@@ -1228,11 +1298,11 @@ function notify_on_reschedule(array $form, \Drupal\Core\Form\FormStateInterface 
   $uid = \Drupal::currentUser()->id();
   $current_user_detail = User::load($uid);
   $current_node_detail = Node::load($uri[1]);
-  $user_timezone =  drupal_get_user_timezone();
+  $user_timezone = drupal_get_user_timezone();
   $get_current_timestamp = getCurrentTimestamp($user_timezone);
   $notifictaion_insert = \Drupal::database()->insert('notifications');
-  $reschedule_link = $base_url.Url::fromRoute('entity.node.edit_form',['node' => $uri[1], 'unit_reference' => $unit_reference])->toString();
-  $message = 'Following Audit has been requested to Reschedule By: <b>'.$current_user_detail->name->value.'</b><br> Follow the Audit action link.'.'<a href="'.$reschedule_link.'">Link</a>';
+  $reschedule_link = $base_url . Url::fromRoute('entity.node.edit_form', ['node' => $uri[1], 'unit_reference' => $unit_reference])->toString();
+  $message = 'Following Audit has been requested to Reschedule By: <b>' . $current_user_detail->name->value . '</b><br> Follow the Audit action link.' . '<a href="' . $reschedule_link . '">Link</a>';
   $notifictaion_insert->fields([
     'nid' => $uri[1],
     'uid' => $current_node_detail->getOwner()->id(),
@@ -1243,23 +1313,29 @@ function notify_on_reschedule(array $form, \Drupal\Core\Form\FormStateInterface 
   $notifictaion_insert->execute();
 }
 
-function timestampFromDate($date){
-  $user_timezone =  drupal_get_user_timezone();
-  $start_date_obj = new \DateTime($date , new \DateTimeZone('UTC'));
+/**
+ *
+ */
+function timestampFromDate($date) {
+  $user_timezone = drupal_get_user_timezone();
+  $start_date_obj = new \DateTime($date, new \DateTimeZone('UTC'));
   $start_date_obj->setTimezone(new \DateTimeZone($user_timezone));
   $start_date_timestamp = $start_date_obj->getTimestamp();
   return $start_date_timestamp;
 }
 
-function planned_audit_frequency_check(array $form, \Drupal\Core\Form\FormStateInterface $form_state){
+/**
+ *
+ */
+function planned_audit_frequency_check(array $form, FormStateInterface $form_state) {
   $form_values = $form_state->getUserInput();
   $unit_reference = \Drupal::request()->query->get('unit_reference');
-  if (isset($unit_reference)){
+  if (isset($unit_reference)) {
     $frequency_of_events = Node::load($unit_reference)->field_frequency->value;
   }
-  if (isset($frequency_of_events) && $frequency_of_events != 0){
-    if ($form_values['field_audit_type'] == 'internal'){
-      if($form_values['field_internal_audit_type'] == 'systems'){
+  if (isset($frequency_of_events) && $frequency_of_events != 0) {
+    if ($form_values['field_audit_type'] == 'internal') {
+      if ($form_values['field_internal_audit_type'] == 'systems') {
         $query_to_make = 'systems';
       }
       elseif ($form_values['field_internal_audit_type'] == 'process') {
@@ -1268,9 +1344,9 @@ function planned_audit_frequency_check(array $form, \Drupal\Core\Form\FormStateI
       elseif ($form_values['field_internal_audit_type'] == 'product') {
         $query_to_make = 'product';
       }
-      $check_count = count(getAuditOPtions($query_to_make,'/get-plannedaudit/'.$unit_reference.'?field_internal_audit_type_value='.$query_to_make));
-      if($check_count == $frequency_of_events){
-        $form_state->setError($form, Markup::create('You have reached the limit for Planning: <b>'.$query_to_make.'</b> Audit.'));
+      $check_count = count(getAuditOPtions($query_to_make, '/get-plannedaudit/' . $unit_reference . '?field_internal_audit_type_value=' . $query_to_make));
+      if ($check_count == $frequency_of_events) {
+        $form_state->setError($form, Markup::create('You have reached the limit for Planning: <b>' . $query_to_make . '</b> Audit.'));
       }
     }
   }
