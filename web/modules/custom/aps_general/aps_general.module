@@ -2246,7 +2246,7 @@ function aps_general_link_alter(&$variables) {
       if ($user_role == 'mr_admin') {
         $user_unit = $user->field_reference_id->target_id;
       }
-      if (is_int($user_unit)) {
+      if (is_numeric($user_unit)) {
         $url = Url::fromRoute('entity.node.edit_form', ['node' => $user_unit]);
         $url->setRouteParameter('destination', $current_uri);
         unset($variables['url']);
