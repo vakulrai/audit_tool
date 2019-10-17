@@ -2605,15 +2605,15 @@ function getTidByName($name = NULL, $vid = NULL) {
 function get_location_from_unit(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable) {
   $current_uri = trim(\Drupal::request()->getRequestUri(), '/');
   $uri = explode('/', $current_uri);
+  $options = [];
   if (\Drupal::request()->query->get('id') && stripos(strtolower($uri[2]), 'department?') !== FALSE || stripos(strtolower($uri[2]), 'section?') !== FALSE) {
     $address_option = [];
     $id = \Drupal::request()->query->get('id');
     $node_object = Node::load($id);
     foreach ($node_object->field_remote_address->getValue() as $key => $value) {
-      $support_locations[] = $value['locality'];
+      $options[$value['locality']] = $value['locality'];
     }
-    $field_address[] = $node_object->field_address->locality;
-    $options = array_merge($field_address, $support_locations);
+    $options[$node_object->field_address->locality] = $node_object->field_address->locality;
   }
   else {
     $node = \Drupal::routeMatch()->getParameter('node');
@@ -2625,10 +2625,9 @@ function get_location_from_unit(FieldStorageConfig $definition, ContentEntityInt
       $id = \Drupal::request()->query->get('id');
       $node_object = Node::load($id);
       foreach ($node_object->field_remote_address->getValue() as $key => $value) {
-        $support_locations[] = $value['locality'];
+        $options[$value['locality']] = $value['locality'];
       }
-      $field_address[] = $node_object->field_address->locality;
-      $options = array_merge($field_address, $support_locations);
+      $options[$value['locality']] = $node_object->field_address->locality;
     }
     else {
       $options = [];
