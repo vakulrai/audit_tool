@@ -29,6 +29,7 @@ dependencies:
     - user.role.auditee
     - user.role.auditor
     - user.role.authenticated
+    - user.role.group_mr
     - user.role.mr_admin
     - workflows.workflow.workflow_for_audit_planning
   module:
@@ -5977,6 +5978,7 @@ display:
         options:
           role:
             mr_admin: mr_admin
+            group_mr: group_mr
       footer:
         area:
           id: area

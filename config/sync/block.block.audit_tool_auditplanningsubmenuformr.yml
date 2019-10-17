@@ -73,7 +73,7 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '/audit-planning/*'
+    pages: "/audit-planning/*\r\n/planned-mr-audit-listing/*"
     negate: false
     context_mapping: {  }
   user_role:
